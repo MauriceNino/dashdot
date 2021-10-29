@@ -2,7 +2,7 @@ import { FC } from "react";
 import ParallaxTilt from "react-parallax-tilt";
 import styled from "styled-components";
 
-const TiltContainer = styled(ParallaxTilt)<ChartContainerProps>`
+const TiltContainer = styled(ParallaxTilt)<GlassPaneProps>`
   display: flex;
   min-width: 400px;
   min-height: 300px;
@@ -22,11 +22,11 @@ const TiltContainer = styled(ParallaxTilt)<ChartContainerProps>`
   }
 `;
 
-type ChartContainerProps = {
+type GlassPaneProps = {
   grow?: number;
 };
 
-const ChartContainer: FC<ChartContainerProps> = (props) => {
+const GlassPane: FC<GlassPaneProps> = (props) => {
   return (
     <TiltContainer
       transitionSpeed={1500}
@@ -39,4 +39,4 @@ const ChartContainer: FC<ChartContainerProps> = (props) => {
   );
 };
 
-export default ChartContainer;
+export default GlassPane;
