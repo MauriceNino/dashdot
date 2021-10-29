@@ -2,22 +2,29 @@
 import { linearGradientDef } from "@nivo/core";
 import { Datum, ResponsiveLine, Serie } from "@nivo/line";
 import { FC, useEffect, useState } from "react";
+import { useTheme } from "styled-components";
 
 const getRandomValue = (x: number, y: number = 50): Datum => {
-  const newY = y + (Math.random() * 20 - 11);
+  const rand = Math.random() * 20;
+  const newY = y + (rand - (y < 50 ? 6 : 14));
+
   return {
     x: x,
     y: newY > 100 ? 100 : newY < 0 ? 0 : newY,
   };
 };
 
+const INITIAL_DATA: Serie[] = [
+  {
+    id: "1",
+    data: new Array(20).fill(0).map((_, i) => getRandomValue(i)),
+  },
+];
+
 const Chart: FC = () => {
-  const [data, setData] = useState<Serie[]>([
-    {
-      id: "1",
-      data: new Array(20).fill(0).map((_, i) => getRandomValue(i)),
-    },
-  ]);
+  const theme = useTheme();
+
+  const [data, setData] = useState<Serie[]>(INITIAL_DATA);
 
   useEffect(() => {
     const intervalHandle = setInterval(() => {
@@ -50,19 +57,19 @@ const Chart: FC = () => {
 
   return (
     <ResponsiveLine
-      isInteractive={false}
-      animate={false}
       data={data}
       curve="monotoneX"
+      enablePoints={false}
+      isInteractive={false}
+      animate={false}
       enableGridX={false}
       enableGridY={false}
-      enableArea={true}
-      enablePoints={false}
       yScale={{
         type: "linear",
         min: 0,
         max: 100,
       }}
+      enableArea={true}
       defs={[
         linearGradientDef("gradientA", [
           { offset: 0, color: "inherit" },
@@ -70,6 +77,7 @@ const Chart: FC = () => {
         ]),
       ]}
       fill={[{ match: "*", id: "gradientA" }]}
+      colors={{ scheme: theme.dark ? "pastel1" : "dark2" }}
     />
   );
 };
