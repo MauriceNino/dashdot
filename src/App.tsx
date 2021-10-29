@@ -14,10 +14,20 @@ const Container = styled.div`
   width: 100vw;
   padding-bottom: 5vh;
   background: radial-gradient(
-    circle at center left,
-    ${({ theme }) => theme.colors.primary} -10%,
-    ${({ theme }) => theme.colors.secondary} 90%
-  );
+      circle at 10% 10%,
+      ${({ theme }) => theme.colors.primary} 10%,
+      transparent 10.5%
+    ),
+    radial-gradient(
+      circle at 110% 90%,
+      ${({ theme }) => theme.colors.secondary} 30%,
+      transparent 30.5%
+    ),
+    linear-gradient(
+      290deg,
+      ${({ theme }) => theme.colors.primary} 0%,
+      ${({ theme }) => theme.colors.secondary} 40%
+    );
 
   transition: background 0.5s ease;
 `;
