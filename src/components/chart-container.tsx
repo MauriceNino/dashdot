@@ -27,11 +27,9 @@ type ChartContainerProps = {
 
 const ChartContainer: FC<ChartContainerProps> = (props) => {
   return (
-    <Container
-      tiltMaxAngleX={4}
-      tiltMaxAngleY={4}
-      grow={props.grow ?? 1}
-    ></Container>
+    <Container tiltMaxAngleX={4} tiltMaxAngleY={4} grow={props.grow ?? 1}>
+      {props.children}
+    </Container>
   );
 };
 

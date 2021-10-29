@@ -1,5 +1,6 @@
 import { default as styled, ThemeProvider } from "styled-components";
 import { useColorScheme } from "use-color-scheme";
+import Chart from "./components/chart";
 import ChartContainer from "./components/chart-container";
 import { darkTheme, lightTheme } from "./theme/theme";
 
@@ -33,7 +34,11 @@ function App() {
       <Container>
         <FlexContainer>
           <ChartContainer />
-          <ChartContainer grow={2} />
+          <ChartContainer grow={2}>
+            <div style={{ height: "100%", width: "100%", padding: "20px" }}>
+              <Chart />
+            </div>
+          </ChartContainer>
           <ChartContainer />
         </FlexContainer>
       </Container>
