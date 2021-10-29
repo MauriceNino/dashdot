@@ -5,6 +5,7 @@ import GlassPane from "./components/glass-pane";
 import { darkTheme, lightTheme } from "./theme/theme";
 import CpuWidget from "./widgets/cpu";
 import RamWidget from "./widgets/ram";
+import ServerWidget from "./widgets/server";
 import StorageWidget from "./widgets/storage";
 
 const Container = styled.div`
@@ -60,7 +61,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <Container style={antTheme}>
         <FlexContainer>
-          <GlassPane grow={1} />
+          <GlassPane grow={1}>
+            <ServerWidget />
+          </GlassPane>
           <GlassPane grow={2}>
             <CpuWidget />
           </GlassPane>
