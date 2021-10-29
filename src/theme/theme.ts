@@ -19,14 +19,14 @@ type Theme = {
 const lightTheme: Theme = {
   dark: false,
   colors: {
-    primary: "#56e3e8",
-    secondary: "#e683da",
+    primary: "#c4f3f5",
+    secondary: "#eac5ed",
     error: "#f44336",
 
     surface: "#fafafa",
     background: "#fafafa",
 
-    text: "#212121",
+    text: "#404040",
 
     cpuPrimary: "#52d7ff",
     ramPrimary: "#ff526f",
