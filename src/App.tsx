@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { default as styled, ThemeProvider } from "styled-components";
 import { useColorScheme } from "use-color-scheme";
-import ChartContainer from "./components/chart-container";
+import GlassPane from "./components/glass-pane";
 import { darkTheme, lightTheme } from "./theme/theme";
 import CpuWidget from "./widgets/cpu";
 import RamWidget from "./widgets/ram";
@@ -50,16 +50,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <Container style={antTheme}>
         <FlexContainer>
-          <ChartContainer grow={1} />
-          <ChartContainer grow={2}>
+          <GlassPane grow={1} />
+          <GlassPane grow={2}>
             <CpuWidget />
-          </ChartContainer>
-          <ChartContainer grow={1.5}>
+          </GlassPane>
+          <GlassPane grow={1.5}>
             <RamWidget />
-          </ChartContainer>
-          <ChartContainer grow={1.5}>
+          </GlassPane>
+          <GlassPane grow={1.5}>
             <StorageWidget />
-          </ChartContainer>
+          </GlassPane>
         </FlexContainer>
       </Container>
     </ThemeProvider>
