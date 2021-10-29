@@ -11,15 +11,14 @@ type Theme = {
     background: string;
 
     text: string;
-    border: string;
   };
 };
 
 const lightTheme: Theme = {
   dark: false,
   colors: {
-    primary: "#00bcd4",
-    secondary: "#ff9800",
+    primary: "#00c5d4",
+    secondary: "#c400ff",
     error: "#f44336",
     warning: "#ffeb3b",
     success: "#4caf50",
@@ -28,24 +27,22 @@ const lightTheme: Theme = {
     background: "#fafafa",
 
     text: "#212121",
-    border: "#bdbdbd",
   },
 };
 
 const darkTheme: Theme = {
   dark: false,
   colors: {
-    primary: "#00bcd4",
-    secondary: "#ff9800",
-    error: "#f44336",
-    warning: "#ffeb3b",
-    success: "#4caf50",
+    primary: "#0086d4",
+    secondary: "#9a28bd",
+    error: lightTheme.colors.error,
+    warning: lightTheme.colors.warning,
+    success: lightTheme.colors.success,
 
     surface: "#212121",
     background: "#212121",
 
     text: "#fafafa",
-    border: "#bdbdbd",
   },
 };
 

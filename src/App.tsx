@@ -1,12 +1,28 @@
 import { default as styled, ThemeProvider } from "styled-components";
 import { useColorScheme } from "use-color-scheme";
+import ChartContainer from "./components/chart-container";
 import { darkTheme, lightTheme } from "./theme/theme";
 
 const Container = styled.div`
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100vh;
   width: 100vw;
-  background-color: ${({ theme }) => theme.colors.background};
+  padding-bottom: 5vh;
+  background: radial-gradient(
+    circle at left top,
+    ${({ theme }) => theme.colors.primary} -10%,
+    ${({ theme }) => theme.colors.secondary} 90%
+  );
+`;
+
+const FlexContainer = styled.div`
+  width: 90vw;
+  min-height: 90vh;
+  margin: 5vh auto 0 auto;
+
+  display: flex;
+  flex-flow: row wrap;
 `;
 
 function App() {
@@ -14,7 +30,13 @@ function App() {
 
   return (
     <ThemeProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
-      <Container></Container>
+      <Container>
+        <FlexContainer>
+          <ChartContainer />
+          <ChartContainer grow={2} />
+          <ChartContainer />
+        </FlexContainer>
+      </Container>
     </ThemeProvider>
   );
 }
