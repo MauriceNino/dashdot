@@ -1,11 +1,15 @@
 import { faMemory } from "@fortawesome/free-solid-svg-icons";
 import { FC } from "react";
-import Chart from "../components/chart";
+import { useTheme } from "styled-components";
 import HardwareInfoContainer from "../components/hardware-info-container";
 
 const RamWidget: FC = () => {
+  const theme = useTheme();
+
   return (
     <HardwareInfoContainer
+      color={theme.colors.ramPrimary}
+      chartData={[]}
       heading="Memory"
       infos={[
         {
@@ -26,9 +30,7 @@ const RamWidget: FC = () => {
         },
       ]}
       icon={faMemory}
-    >
-      <Chart />
-    </HardwareInfoContainer>
+    />
   );
 };
 

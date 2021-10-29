@@ -14,10 +14,12 @@ const Container = styled.div`
   width: 100vw;
   padding-bottom: 5vh;
   background: radial-gradient(
-    circle at left top,
+    circle at center left,
     ${({ theme }) => theme.colors.primary} -10%,
     ${({ theme }) => theme.colors.secondary} 90%
   );
+
+  transition: background 0.5s ease;
 `;
 
 const FlexContainer = styled.div`

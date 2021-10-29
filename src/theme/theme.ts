@@ -4,13 +4,15 @@ type Theme = {
     primary: string;
     secondary: string;
     error: string;
-    warning: string;
-    success: string;
 
     surface: string;
     background: string;
 
     text: string;
+
+    cpuPrimary: string;
+    ramPrimary: string;
+    storagePrimary: string;
   };
 };
 
@@ -20,29 +22,33 @@ const lightTheme: Theme = {
     primary: "#56e3e8",
     secondary: "#e683da",
     error: "#f44336",
-    warning: "#ffeb3b",
-    success: "#4caf50",
 
     surface: "#fafafa",
     background: "#fafafa",
 
     text: "#212121",
+
+    cpuPrimary: "#52d7ff",
+    ramPrimary: "#ff526f",
+    storagePrimary: "#49e37a",
   },
 };
 
 const darkTheme: Theme = {
   dark: false,
   colors: {
-    primary: "#0086d4",
-    secondary: "#9a28bd",
+    primary: "#775a9e",
+    secondary: "#434047",
     error: lightTheme.colors.error,
-    warning: lightTheme.colors.warning,
-    success: lightTheme.colors.success,
 
     surface: "#212121",
     background: "#212121",
 
     text: "#fafafa",
+
+    cpuPrimary: "#2259b3",
+    ramPrimary: "#c43148",
+    storagePrimary: "#22b352",
   },
 };
 

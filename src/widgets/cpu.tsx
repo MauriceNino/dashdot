@@ -1,8 +1,7 @@
 import { faMicrochip } from "@fortawesome/free-solid-svg-icons";
 import { Switch } from "antd";
 import { FC } from "react";
-import styled from "styled-components";
-import Chart from "../components/chart";
+import styled, { useTheme } from "styled-components";
 import HardwareInfoContainer from "../components/hardware-info-container";
 import ThemedText from "../components/text";
 
@@ -19,8 +18,12 @@ const CpuSwitchContainer = styled.div`
 `;
 
 const CpuWidget: FC = () => {
+  const theme = useTheme();
+
   return (
     <HardwareInfoContainer
+      color={theme.colors.cpuPrimary}
+      chartData={[]}
       heading="Processor"
       infos={[
         {
@@ -55,9 +58,7 @@ const CpuWidget: FC = () => {
           <Switch defaultChecked={false} onChange={() => {}} />
         </CpuSwitchContainer>
       }
-    >
-      <Chart />
-    </HardwareInfoContainer>
+    />
   );
 };
 
