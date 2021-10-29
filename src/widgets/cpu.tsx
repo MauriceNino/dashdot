@@ -21,6 +21,7 @@ const CpuSwitchContainer = styled.div`
 const CpuWidget: FC = () => {
   return (
     <HardwareInfoContainer
+      heading="Processor"
       infos={[
         {
           label: "Brand",

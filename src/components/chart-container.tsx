@@ -17,8 +17,6 @@ const TiltContainer = styled(ParallaxTilt)<ChartContainerProps>`
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.text}33;
 
-  transform-style: preserve-3d;
-
   &:hover {
     z-index: 2;
   }
@@ -35,7 +33,6 @@ const ChartContainer: FC<ChartContainerProps> = (props) => {
       tiltMaxAngleX={4}
       tiltMaxAngleY={4}
       grow={props.grow ?? 1}
-      // perspective={1000}
     >
       {props.children}
     </TiltContainer>

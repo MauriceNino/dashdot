@@ -7,16 +7,13 @@ import ThemedText from "./text";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-
   width: 100%;
-  transform-style: preserve-3d;
 `;
 
 const ChartArea = styled.div`
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
-  transform-style: preserve-3d;
 `;
 
 const ChartContainer = styled.div`
@@ -32,8 +29,6 @@ const ChartContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   box-shadow: -13px -13px 35px 0px rgba(0, 0, 0, 0.15);
-
-  transform: translateZ(30px);
 `;
 
 const InfoContainer = styled.div`
@@ -43,7 +38,6 @@ const InfoContainer = styled.div`
   width: 300px;
   min-width: 300px;
   flex-grow: 0 !important;
-  transform: translateZ(10px);
 `;
 
 const InfoIcon = styled.div`
@@ -59,12 +53,17 @@ const InfoIcon = styled.div`
 
   background-color: ${(props) => props.theme.colors.primary};
   border-radius: 10px;
-  transform: translateZ(100px);
   box-shadow: 13px 13px 35px 0px rgba(0, 0, 0, 0.15);
 
   svg {
     color: ${(props) => props.theme.colors.text};
   }
+`;
+
+const InfoHeading = styled(ThemedText)`
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 30px 30px 10px 30px;
 `;
 
 const InfoTextContainer = styled.div`
@@ -80,18 +79,19 @@ const InfoTextRow = styled.div`
 const InfoTextLabel = styled(ThemedText)`
   display: table-cell;
   width: auto;
-  font-size: 14px;
+  font-size: 0.8rem;
   padding-bottom: 10px;
 `;
 
 const InfoTextValue = styled(ThemedText)`
   display: table-cell;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   padding-bottom: 10px;
 `;
 
 type HardwareInfoProps = {
+  heading: string;
   infos: {
     label: string;
     value: string;
@@ -107,6 +107,8 @@ const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
         <InfoIcon>
           <FontAwesomeIcon icon={props.icon} size="2x" />
         </InfoIcon>
+
+        <InfoHeading>{props.heading}</InfoHeading>
 
         <InfoTextContainer>
           {props.infos.map((info) => (
