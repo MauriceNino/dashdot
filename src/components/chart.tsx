@@ -2,7 +2,6 @@
 import { linearGradientDef } from "@nivo/core";
 import { Datum, ResponsiveLine, Serie } from "@nivo/line";
 import { FC, useEffect, useState } from "react";
-import { useTheme } from "styled-components";
 
 const getRandomValue = (x: number, y: number = 50): Datum => {
   const rand = Math.random() * 20;
@@ -21,9 +20,12 @@ const INITIAL_DATA: Serie[] = [
   },
 ];
 
-const Chart: FC = () => {
-  const theme = useTheme();
+type ChartProps = {
+  color: string;
+  data: Serie[];
+};
 
+const Chart: FC<ChartProps> = (props) => {
   const [data, setData] = useState<Serie[]>(INITIAL_DATA);
 
   useEffect(() => {
@@ -77,7 +79,7 @@ const Chart: FC = () => {
         ]),
       ]}
       fill={[{ match: "*", id: "gradientA" }]}
-      colors={{ scheme: theme.dark ? "pastel1" : "dark2" }}
+      colors={props.color}
     />
   );
 };

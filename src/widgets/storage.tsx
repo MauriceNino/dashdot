@@ -1,11 +1,14 @@
 import { faHdd } from "@fortawesome/free-solid-svg-icons";
 import { FC } from "react";
-import Chart from "../components/chart";
+import { useTheme } from "styled-components";
 import HardwareInfoContainer from "../components/hardware-info-container";
 
 const StorageWidget: FC = () => {
+  const theme = useTheme();
   return (
     <HardwareInfoContainer
+      color={theme.colors.storagePrimary}
+      chartData={[]}
       heading="Storage"
       infos={[
         {
@@ -30,9 +33,7 @@ const StorageWidget: FC = () => {
         },
       ]}
       icon={faHdd}
-    >
-      <Chart />
-    </HardwareInfoContainer>
+    />
   );
 };
 

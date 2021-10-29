@@ -1,7 +1,9 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Serie } from "@nivo/line";
 import { FC } from "react";
 import styled from "styled-components";
+import Chart from "./chart";
 import ThemedText from "./text";
 
 const Container = styled.div`
@@ -29,6 +31,8 @@ const ChartContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   box-shadow: -13px -13px 35px 0px rgba(0, 0, 0, 0.15);
+
+  transition: background-color 0.3s ease;
 `;
 
 const InfoContainer = styled.div`
@@ -40,7 +44,7 @@ const InfoContainer = styled.div`
   flex-grow: 0 !important;
 `;
 
-const InfoIcon = styled.div`
+const InfoIcon = styled.div<HardwareInfoProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,9 +55,11 @@ const InfoIcon = styled.div`
   top: -10px;
   left: 20px;
 
-  background-color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.color};
   border-radius: 10px;
   box-shadow: 13px 13px 35px 0px rgba(0, 0, 0, 0.15);
+
+  transition: background-color 0.5s ease;
 
   svg {
     color: ${(props) => props.theme.colors.text};
@@ -91,6 +97,7 @@ const InfoTextValue = styled(ThemedText)`
 `;
 
 type HardwareInfoProps = {
+  color: string;
   heading: string;
   infos: {
     label: string;
@@ -98,13 +105,14 @@ type HardwareInfoProps = {
   }[];
   icon: IconProp;
   extraContent?: JSX.Element;
+  chartData: Serie[];
 };
 
 const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
   return (
     <Container>
       <InfoContainer>
-        <InfoIcon>
+        <InfoIcon {...props}>
           <FontAwesomeIcon icon={props.icon} size="2x" />
         </InfoIcon>
 
@@ -123,7 +131,9 @@ const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
       {props.extraContent}
 
       <ChartArea>
-        <ChartContainer>{props.children}</ChartContainer>
+        <ChartContainer>
+          <Chart data={props.chartData} color={props.color} />
+        </ChartContainer>
       </ChartArea>
     </Container>
   );
