@@ -29,9 +29,21 @@ const FlexContainer = styled.div`
 function App() {
   const { scheme } = useColorScheme();
 
+  const theme = useMemo(
+    () => (scheme === "dark" ? darkTheme : lightTheme),
+    [scheme]
+  );
+  const antTheme = useMemo(
+    () =>
+      ({
+        "--ant-primary-color": theme.colors.primary,
+      } as React.CSSProperties),
+    [theme]
+  );
+
   return (
-    <ThemeProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
-      <Container>
+    <ThemeProvider theme={theme}>
+      <Container style={antTheme}>
         <FlexContainer>
           <ChartContainer />
           <ChartContainer grow={2}>
