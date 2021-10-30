@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
+import SkeletonContent from "./skeleton-content";
 import ThemedText from "./text";
 
 export const InfoTextContainer = styled.div<{ noPadding?: boolean }>`
@@ -30,7 +31,7 @@ const InfoTextValue = styled(ThemedText)`
 export type InfoTableProps = {
   infos: {
     label: string;
-    value: string;
+    value?: string;
   }[];
   className?: string;
 };
@@ -41,7 +42,9 @@ const InfoTable: FC<InfoTableProps> = (props) => {
       {props.infos.map((info, i) => (
         <InfoTextRow key={i.toString() + info.label}>
           <InfoTextLabel>{info.label}</InfoTextLabel>
-          <InfoTextValue>{info.value}</InfoTextValue>
+          <InfoTextValue>
+            <SkeletonContent>{info.value}</SkeletonContent>
+          </InfoTextValue>
         </InfoTextRow>
       ))}
     </InfoTextContainer>

@@ -29,7 +29,7 @@ const ChartContainer = styled.div`
 
   padding: 25px 0;
 
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.surface};
   border-radius: 10px;
   box-shadow: -13px -13px 35px 0px rgba(0, 0, 0, 0.15);
 

@@ -16,9 +16,11 @@ import {
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
 import { Button, Switch } from "antd";
-import { FC } from "react";
+import { OsInfo } from "dashdot-shared";
+import { FC, useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import InfoTable from "../components/info-table";
+import SkeletonContent from "../components/skeleton-content";
 import ThemedText from "../components/text";
 import { useSetting } from "../services/settings";
 
@@ -111,6 +113,10 @@ const StyledInfoTable = styled(InfoTable)`
   flex-shrink: 1;
 `;
 
+const ServerIconContainer = styled.div`
+  margin-left: 20px;
+`;
+
 const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, "icon">> = ({
   os,
   ...iconProps
@@ -143,19 +149,76 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, "icon">> = ({
   }
 
   return (
-    <FontAwesomeIcon
-      color={theme.colors.text}
-      style={{
-        marginLeft: 20,
-      }}
-      {...iconProps}
-      icon={icon}
-    />
+    <FontAwesomeIcon color={theme.colors.text} {...iconProps} icon={icon} />
   );
 };
 
-const ServerWidget: FC = () => {
+const ServerWidget: FC<Partial<OsInfo>> = (props) => {
   const [darkMode, setDarkMode] = useSetting("darkMode");
+  const [uptime, setUptime] = useState(0);
+
+  const days = Math.floor(uptime / (24 * 60 * 60));
+  const hours = Math.floor((uptime % (24 * 60 * 60)) / (60 * 60));
+  const minutes = Math.floor((uptime % (60 * 60)) / 60);
+  const seconds = Math.floor(uptime % 60);
+
+  const dateInfos = [
+    {
+      label: "",
+      value: `${days} days`,
+      amount: days,
+    },
+    {
+      label: "",
+      value: `${hours} hours`,
+      amount: hours,
+    },
+    {
+      label: "",
+      value: `${minutes} minutes`,
+      amount: minutes,
+    },
+    {
+      label: "",
+      value: `${seconds} seconds`,
+      amount: seconds,
+    },
+  ].reduce((acc, cur) => {
+    if (acc.length > 0) {
+      acc.push(cur);
+    } else if (cur.amount > 0) {
+      acc.push(cur);
+    }
+
+    return acc;
+  }, [] as { label: string; value: string }[]);
+
+  if (dateInfos[0]) {
+    dateInfos[0].label = "Up since";
+  } else {
+    dateInfos[0] = {
+      label: "Up since",
+      value: "",
+    };
+  }
+
+  // Client-side calculation of uptime
+  useEffect(() => {
+    const uptime = props.uptime ?? 0;
+
+    let interval: any;
+    if (uptime > 0) {
+      const startTime = Date.now();
+
+      setUptime(uptime);
+      interval = setInterval(() => {
+        const passedTime = (Date.now() - startTime) / 1000;
+        setUptime(uptime + passedTime);
+      }, 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [props.uptime]);
 
   return (
     <Container>
@@ -180,34 +243,28 @@ const ServerWidget: FC = () => {
       </Heading>
 
       <ContentContainer>
-        <ServerIcon os="ubuntu" size="7x" />
+        <ServerIconContainer>
+          <SkeletonContent width={120} height={120} borderRadius="15px">
+            {props.distro != null && props.platform != null && (
+              <ServerIcon
+                os={(props.distro + props.platform).toLowerCase()}
+                size="7x"
+              />
+            )}
+          </SkeletonContent>
+        </ServerIconContainer>
 
         <StyledInfoTable
           infos={[
             {
-              label: "Name",
-              value: "Testserver",
-            },
-            {
               label: "OS",
-              value: "Ubuntu 21.0",
+              value: `${props.distro ?? ""} ${props.release ?? ""}`,
             },
             {
-              label: "Uptime",
-              value: "127 days",
+              label: "Arch",
+              value: props.arch,
             },
-            {
-              label: "",
-              value: "21 hours",
-            },
-            {
-              label: "",
-              value: "5 minutes",
-            },
-            {
-              label: "",
-              value: "21 seconds",
-            },
+            ...dateInfos,
           ]}
         />
       </ContentContainer>
