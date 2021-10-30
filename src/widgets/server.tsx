@@ -1,8 +1,24 @@
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faApple,
+  faCentos,
+  faFedora,
+  faGithub,
+  faLinux,
+  faRedhat,
+  faSuse,
+  faUbuntu,
+  faWindows,
+  IconDefinition,
+} from "@fortawesome/free-brands-svg-icons";
+import { faServer } from "@fortawesome/free-solid-svg-icons";
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from "@fortawesome/react-fontawesome";
 import { Button, Switch } from "antd";
 import { FC } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
+import InfoTable from "../components/info-table";
 import ThemedText from "../components/text";
 import { useSetting } from "../services/settings";
 
@@ -43,6 +59,7 @@ const Appendix = styled.span`
 const ServerName = styled.span`
   font-weight: bold;
   text-decoration: underline;
+  text-decoration-color: ${(props) => props.theme.colors.primary};
   position: relative;
   bottom: -5px;
 `;
@@ -66,10 +83,76 @@ const ButtonsContainer = styled.div`
 
 const Link = styled(Button)`
   border: none;
+
+  &:active {
+    > svg {
+      color: ${(props) => props.theme.colors.primary};
+    }
+  }
   > svg {
     color: ${(props) => props.theme.colors.text};
   }
 `;
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 40px;
+
+  flex-grow: 1;
+`;
+
+const StyledInfoTable = styled(InfoTable)`
+  padding: 0;
+  max-width: 400px;
+  flex-grow: 1;
+  flex-shrink: 1;
+`;
+
+const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, "icon">> = ({
+  os,
+  ...iconProps
+}) => {
+  const theme = useTheme();
+
+  let icon: IconDefinition = faServer;
+
+  if (os.includes("ubuntu")) {
+    icon = faUbuntu;
+  } else if (os.includes("suse")) {
+    icon = faSuse;
+  } else if (os.includes("redhat")) {
+    icon = faRedhat;
+  } else if (os.includes("fedora")) {
+    icon = faFedora;
+  } else if (os.includes("centos")) {
+    icon = faCentos;
+  } else if (os.includes("linux")) {
+    icon = faLinux;
+  } else if (os.includes("win")) {
+    icon = faWindows;
+  } else if (
+    os.includes("mac") ||
+    os.includes("osx") ||
+    os.includes("darwin") ||
+    os.includes("apple")
+  ) {
+    icon = faApple;
+  }
+
+  return (
+    <FontAwesomeIcon
+      color={theme.colors.text}
+      style={{
+        marginLeft: 20,
+      }}
+      {...iconProps}
+      icon={icon}
+    />
+  );
+};
 
 const ServerWidget: FC = () => {
   const [darkMode, setDarkMode] = useSetting("darkMode");
@@ -95,6 +178,39 @@ const ServerWidget: FC = () => {
         <Appendix>dash.</Appendix>
         <ServerName>{window.location.hostname}</ServerName>
       </Heading>
+
+      <ContentContainer>
+        <ServerIcon os="ubuntu" size="7x" />
+
+        <StyledInfoTable
+          infos={[
+            {
+              label: "Name",
+              value: "Testserver",
+            },
+            {
+              label: "OS",
+              value: "Ubuntu 21.0",
+            },
+            {
+              label: "Uptime",
+              value: "127 days",
+            },
+            {
+              label: "",
+              value: "21 hours",
+            },
+            {
+              label: "",
+              value: "5 minutes",
+            },
+            {
+              label: "",
+              value: "21 seconds",
+            },
+          ]}
+        />
+      </ContentContainer>
     </Container>
   );
 };

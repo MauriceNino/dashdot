@@ -4,6 +4,7 @@ import { Serie } from "@nivo/line";
 import { FC } from "react";
 import styled from "styled-components";
 import Chart from "./chart";
+import InfoTable, { InfoTableProps } from "./info-table";
 import ThemedText from "./text";
 
 const Container = styled.div`
@@ -72,41 +73,13 @@ const InfoHeading = styled(ThemedText)`
   margin: 30px 30px 10px 30px;
 `;
 
-const InfoTextContainer = styled.div`
-  display: table;
-  padding: 30px;
-  color: ${(props) => props.theme.colors.text};
-`;
-
-const InfoTextRow = styled.div`
-  display: table-row;
-`;
-
-const InfoTextLabel = styled(ThemedText)`
-  display: table-cell;
-  width: auto;
-  font-size: 0.8rem;
-  padding-bottom: 10px;
-`;
-
-const InfoTextValue = styled(ThemedText)`
-  display: table-cell;
-  font-size: 1rem;
-  font-weight: bold;
-  padding-bottom: 10px;
-`;
-
 type HardwareInfoProps = {
   color: string;
   heading: string;
-  infos: {
-    label: string;
-    value: string;
-  }[];
   icon: IconProp;
   extraContent?: JSX.Element;
   chartData: Serie[];
-};
+} & InfoTableProps;
 
 const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
   return (
@@ -118,14 +91,7 @@ const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
 
         <InfoHeading>{props.heading}</InfoHeading>
 
-        <InfoTextContainer>
-          {props.infos.map((info) => (
-            <InfoTextRow key={info.label}>
-              <InfoTextLabel>{info.label}</InfoTextLabel>
-              <InfoTextValue>{info.value}</InfoTextValue>
-            </InfoTextRow>
-          ))}
-        </InfoTextContainer>
+        <InfoTable infos={props.infos} />
       </InfoContainer>
 
       {props.extraContent}
