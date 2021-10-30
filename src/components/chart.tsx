@@ -2,6 +2,7 @@
 import { linearGradientDef } from "@nivo/core";
 import { Datum, ResponsiveLine, Serie } from "@nivo/line";
 import { FC, useEffect, useState } from "react";
+import ThemedText from "./text";
 
 const getRandomValue = (x: number, y: number = 50): Datum => {
   const rand = Math.random() * 20;
@@ -33,7 +34,7 @@ const Chart: FC<ChartProps> = (props) => {
       setData((oldData) => {
         const oldValues = [...oldData[0].data];
         const lastOldValue = oldValues[oldValues.length - 1];
-        if (oldValues.length > 20) {
+        if (oldValues.length >= 20) {
           oldValues.shift();
         }
 
@@ -59,10 +60,19 @@ const Chart: FC<ChartProps> = (props) => {
 
   return (
     <ResponsiveLine
+      isInteractive={true}
+      enableSlices="x"
+      sliceTooltip={(props) => {
+        const point = props.slice.points[0];
+        return (
+          <ThemedText>
+            {Math.round((point.data.y as number) * 100) / 100} %
+          </ThemedText>
+        );
+      }}
       data={data}
       curve="monotoneX"
       enablePoints={false}
-      isInteractive={false}
       animate={false}
       enableGridX={false}
       enableGridY={false}
