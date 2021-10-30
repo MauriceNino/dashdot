@@ -10308,6 +10308,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-content-loader@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-6.0.3.tgz#32e28ca7120e0a2552fc26655d0d4448cc1fc0c5"
+  integrity sha512-CIRgTHze+ls+jGDIfCitw27YkW2XcaMpsYORTUdBxsMFiKuUYMnlvY76dZE4Lsaa9vFXVw+41ieBEK7SJt0nug==
+
 react-dev-utils@^11.0.3:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.4.tgz#a7ccb60257a1ca2e0efe7a83e38e6700d17aa37a"

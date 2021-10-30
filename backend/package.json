@@ -8,11 +8,13 @@
     "build": "tsc"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dashdot-shared": "../shared",
     "express": "^4.17.1",
     "systeminformation": "^5.9.9"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/node": "^16.11.6",
     "nodemon": "^2.0.14",

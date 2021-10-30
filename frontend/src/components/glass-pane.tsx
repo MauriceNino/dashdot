@@ -14,7 +14,7 @@ const TiltContainer = styled(ParallaxTilt)<GlassPaneProps>`
   flex-grow: 1;
 
   backdrop-filter: blur(20px);
-  background-color: ${({ theme }) => theme.colors.background}44;
+  background-color: ${({ theme }) => theme.colors.surface}44;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.text}33;
 

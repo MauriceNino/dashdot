@@ -26,6 +26,7 @@
     "dashdot-shared": "../shared",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
+    "react-content-loader": "^6.0.3",
     "react-dom": "^17.0.2",
     "react-parallax-tilt": "^1.5.73",
     "react-scripts": "4.0.3",

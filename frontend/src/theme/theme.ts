@@ -42,7 +42,7 @@ const darkTheme: Theme = {
     error: lightTheme.colors.error,
 
     surface: "#212121",
-    background: "#212121",
+    background: "#4f4f4f",
 
     text: "#fafafa",
 

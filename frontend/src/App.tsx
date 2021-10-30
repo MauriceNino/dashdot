@@ -5,6 +5,7 @@ import {
   ThemeProvider,
 } from "styled-components";
 import { useColorScheme } from "use-color-scheme";
+import { useOsInfo } from "./api/os-info";
 import GlassPane from "./components/glass-pane";
 import { useSetting } from "./services/settings";
 import { darkTheme, lightTheme } from "./theme/theme";
@@ -84,12 +85,14 @@ function App() {
     [theme]
   );
 
+  const osInfo = useOsInfo();
+
   return (
     <ThemeProvider theme={theme}>
       <Container style={antTheme}>
         <FlexContainer>
           <GlassPane grow={1}>
-            <ServerWidget />
+            <ServerWidget {...osInfo.data} />
           </GlassPane>
           <GlassPane grow={2}>
             <CpuWidget />
