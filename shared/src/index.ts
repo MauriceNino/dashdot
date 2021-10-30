@@ -5,7 +5,10 @@ export type CpuInfo = {
   cores: number;
   threads: number;
 };
-export type CpuLoad = {};
+export type CpuLoad = {
+  core: number;
+  load: number;
+}[];
 
 export type RamInfo = {
   total: number;
@@ -15,7 +18,7 @@ export type RamInfo = {
     clockSpeed?: number;
   }[];
 };
-export type RamLoad = {};
+export type RamLoad = number;
 
 export type StorageInfo = {
   layout: {
@@ -24,7 +27,7 @@ export type StorageInfo = {
     size: number;
   }[];
 };
-export type StorageLoad = {};
+export type StorageLoad = number;
 
 export type OsInfo = {
   platform: string;

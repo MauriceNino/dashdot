@@ -3,12 +3,20 @@ import { HardwareInfo } from "dashdot-shared";
 import express, { Response } from "express";
 import http from "http";
 import path from "path";
+import { Server } from "socket.io";
+import { cpuObs, ramObs } from "./dynamic-info";
 import { getStaticServerInfo } from "./static-info";
 
 const app = express();
 app.use(cors());
-
 app.use(express.static(path.join(__dirname, "../../frontend/build")));
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "../../frontend/build")));
@@ -21,8 +29,26 @@ app.get("/system-info", async (_, res: Response<HardwareInfo>) => {
   res.send(await getStaticServerInfo());
 });
 
+// Send current system status
+io.on("connection", (socket) => {
+  console.log("user connected");
+
+  const cpuSub = cpuObs.subscribe(async (cpu) => {
+    socket.emit("cpu-load", await cpu);
+  });
+
+  const ramSub = ramObs.subscribe(async (ram) => {
+    socket.emit("ram-load", await ram);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+    cpuSub.unsubscribe();
+    ramSub.unsubscribe();
+  });
+});
+
 // Launch the server
-const server = http.createServer(app);
 server.listen(3001, () => {
   console.log("listening on *:3001");
 });

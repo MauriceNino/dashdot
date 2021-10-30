@@ -34,8 +34,8 @@ export const getStaticServerInfo = async (): Promise<HardwareInfo> => {
     const ram: RamInfo = {
       total: memInfo.total,
       layout: memLayout.map(({ manufacturer, type, clockSpeed }) => ({
-        manufacturer,
-        type,
+        manufacturer: manufacturer || "Unknown",
+        type: type || "Unknown",
         clockSpeed: clockSpeed ?? undefined,
       })),
     };

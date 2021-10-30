@@ -2,7 +2,8 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Serie } from "@nivo/line";
 import { FC } from "react";
-import styled from "styled-components";
+import { SwapSpinner } from "react-spinners-kit";
+import styled, { useTheme } from "styled-components";
 import Chart from "./chart";
 import InfoTable, { InfoTableProps } from "./info-table";
 import ThemedText from "./text";
@@ -20,6 +21,10 @@ const ChartArea = styled.div`
 `;
 
 const ChartContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: 80%;
   width: 100%;
 
@@ -82,6 +87,10 @@ type HardwareInfoProps = {
 } & InfoTableProps;
 
 const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
+  const theme = useTheme();
+
+  console.log(props.chartData);
+
   return (
     <Container>
       <InfoContainer>
@@ -98,7 +107,15 @@ const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
 
       <ChartArea>
         <ChartContainer>
-          <Chart data={props.chartData} color={props.color} />
+          {props.chartData.length > 0 && props.chartData[0].data.length > 1 ? (
+            <Chart data={props.chartData} color={props.color} />
+          ) : (
+            <SwapSpinner
+              size={70}
+              color={theme.colors.background}
+              loading={true}
+            />
+          )}
         </ChartContainer>
       </ChartArea>
     </Container>
