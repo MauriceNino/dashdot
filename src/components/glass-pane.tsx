@@ -6,10 +6,11 @@ const TiltContainer = styled(ParallaxTilt)<GlassPaneProps>`
   display: flex;
   min-width: 400px;
   min-height: 300px;
-  height: calc(45vh - 30px);
-  margin: 15px;
 
-  flex-basis: calc(${(props) => (props.grow ?? 1) * 33}% - 60px);
+  height: calc(45vh - 50px);
+  margin: 20px 20px;
+
+  flex-basis: calc(${(props) => (props.grow ?? 1) * 33}% - 100px);
   flex-grow: 1;
 
   backdrop-filter: blur(20px);
