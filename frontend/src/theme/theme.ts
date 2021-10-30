@@ -24,7 +24,7 @@ const lightTheme: Theme = {
     error: "#f44336",
 
     surface: "#fafafa",
-    background: "#fafafa",
+    background: "#d9d9d9",
 
     text: "#404040",
 
