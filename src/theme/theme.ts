@@ -19,8 +19,8 @@ type Theme = {
 const lightTheme: Theme = {
   dark: false,
   colors: {
-    primary: "#c4f3f5",
-    secondary: "#eac5ed",
+    primary: "#5ee2ff",
+    secondary: "#f5a4e3",
     error: "#f44336",
 
     surface: "#fafafa",
@@ -35,7 +35,7 @@ const lightTheme: Theme = {
 };
 
 const darkTheme: Theme = {
-  dark: false,
+  dark: true,
   colors: {
     primary: "#775a9e",
     secondary: "#434047",
