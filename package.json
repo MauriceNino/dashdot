@@ -1,0 +1,11 @@
+{
+  "name": "dashdot",
+  "version": "1.0.0",
+  "repository": "https://github.com/MauriceNino/dashdot",
+  "author": "MauriceNino <mauriceprivat98@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "(cd ./shared && yarn build) && (cd ./frontend && yarn build) && (cd ./backend && yarn build)",
+    "start": "(cd ./backend && yarn start)"
+  }
+}
