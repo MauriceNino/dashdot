@@ -30,16 +30,20 @@ export const useSetting = <T extends keyof Settings = keyof Settings>(
     () => getSettings(key) ?? initialValue
   );
 
-  useEffect(() => {
-    ALL_DISPATCHES[key] = ALL_DISPATCHES[key] ?? [];
-    ALL_DISPATCHES[key]!.push(setLocalValue);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const setSetting = (newValue: Settings[T]) => {
     ALL_DISPATCHES[key]!.forEach((dispatch) => dispatch(newValue));
     setSettings(key, newValue);
   };
+
+  useEffect(() => {
+    ALL_DISPATCHES[key] = ALL_DISPATCHES[key] ?? [];
+    ALL_DISPATCHES[key]!.push(setLocalValue);
+
+    if (initialValue !== undefined) {
+      setSetting(initialValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return [localValue, setSetting];
 };
