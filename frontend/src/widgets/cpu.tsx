@@ -1,5 +1,6 @@
 import { faMicrochip } from "@fortawesome/free-solid-svg-icons";
 import { Switch } from "antd";
+import { CpuInfo } from "dashdot-shared";
 import { FC } from "react";
 import styled, { useTheme } from "styled-components";
 import HardwareInfoContainer from "../components/hardware-info-container";
@@ -17,7 +18,7 @@ const CpuSwitchContainer = styled.div`
   gap: 15px;
 `;
 
-const CpuWidget: FC = () => {
+const CpuWidget: FC<Partial<CpuInfo>> = (props) => {
   const theme = useTheme();
 
   return (
@@ -28,27 +29,23 @@ const CpuWidget: FC = () => {
       infos={[
         {
           label: "Brand",
-          value: "Intel",
+          value: props.manufacturer,
         },
         {
           label: "Model",
-          value: "i7-8700K",
+          value: props.brand,
         },
         {
           label: "Cores",
-          value: "8",
+          value: props.cores?.toString(),
         },
         {
           label: "Threads",
-          value: "16",
+          value: props.threads?.toString(),
         },
         {
           label: "Frequency",
-          value: "3.4 GHz",
-        },
-        {
-          label: "Cache",
-          value: "32 MB",
+          value: props.speed ? `${props.speed} GHz` : "",
         },
       ]}
       icon={faMicrochip}

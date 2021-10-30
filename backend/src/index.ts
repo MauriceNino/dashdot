@@ -1,5 +1,11 @@
 import cors from "cors";
-import { OsInfo } from "dashdot-shared";
+import {
+  CpuInfo,
+  HardwareInfo,
+  OsInfo,
+  RamInfo,
+  StorageInfo,
+} from "dashdot-shared";
 import express, { Response } from "express";
 import http from "http";
 import path from "path";
@@ -17,18 +23,57 @@ app.get("/", (_, res) => {
 });
 
 // Send general system information
-app.get("/system-info", async (_, res: Response<OsInfo>) => {
-  const osInfo = await si.osInfo();
-  const time = await si.time();
+app.get("/system-info", async (_, res: Response<HardwareInfo>) => {
+  const [osInfo, timeInfo, cpuInfo, memInfo, memLayout, diskLayout] =
+    await Promise.all([
+      si.osInfo(),
+      si.time(),
+      si.cpu(),
+      si.mem(),
+      si.memLayout(),
+      si.diskLayout(),
+    ]);
 
-  res.send({
+  const os: OsInfo = {
     arch: osInfo.arch,
     distro: osInfo.distro,
     kernel: osInfo.kernel,
     platform: osInfo.platform,
     release: osInfo.release,
 
-    uptime: +time.uptime,
+    uptime: +timeInfo.uptime,
+  };
+
+  const cpu: CpuInfo = {
+    manufacturer: cpuInfo.manufacturer,
+    brand: cpuInfo.brand,
+    speed: cpuInfo.speed,
+    cores: cpuInfo.physicalCores,
+    threads: cpuInfo.cores,
+  };
+
+  const ram: RamInfo = {
+    total: memInfo.total,
+    layout: memLayout.map(({ manufacturer, type, clockSpeed }) => ({
+      manufacturer,
+      type,
+      clockSpeed: clockSpeed ?? undefined,
+    })),
+  };
+
+  const storage: StorageInfo = {
+    layout: diskLayout.map(({ size, type, name }) => ({
+      size,
+      type,
+      name,
+    })),
+  };
+
+  res.send({
+    os,
+    cpu,
+    ram,
+    storage,
   });
 });
 
