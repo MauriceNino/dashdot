@@ -1,0 +1,12 @@
+{
+  "name": "dashdot-shared",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+	"files": [
+		"dist/**/*"
+	],
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"No Tests\" && exit 1"
+  }
+}
