@@ -1,11 +1,16 @@
 import { faMemory } from "@fortawesome/free-solid-svg-icons";
-import { RamInfo } from "dashdot-shared";
+import { RamInfo, RamLoad } from "dashdot-shared";
 import { FC } from "react";
 import { useTheme } from "styled-components";
 import HardwareInfoContainer from "../components/hardware-info-container";
 import { removeDuplicates } from "../utils/array-utils";
+import { byteToGb } from "../utils/calculations";
 
-const RamWidget: FC<Partial<RamInfo>> = (props) => {
+type RamWidgetProps = {
+  load: RamLoad[];
+} & Partial<RamInfo>;
+
+const RamWidget: FC<RamWidgetProps> = (props) => {
   const theme = useTheme();
 
   const manufacturer = removeDuplicates(
@@ -21,7 +26,15 @@ const RamWidget: FC<Partial<RamInfo>> = (props) => {
   return (
     <HardwareInfoContainer
       color={theme.colors.ramPrimary}
-      chartData={[]}
+      chartData={[
+        {
+          id: "cpu",
+          data: props.load.map((load, i) => ({
+            x: i,
+            y: (byteToGb(load) / byteToGb(props.total ?? 1)) * 100,
+          })),
+        },
+      ]}
       heading="Memory"
       infos={[
         {
@@ -30,9 +43,7 @@ const RamWidget: FC<Partial<RamInfo>> = (props) => {
         },
         {
           label: "Size",
-          value: props.total
-            ? `${Math.round(props.total / 1000000000)} GB`
-            : "",
+          value: props.total ? `${byteToGb(props.total)} GB` : "",
         },
         {
           label: "Type" + (memCount > 1 ? "(s)" : ""),

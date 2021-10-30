@@ -1,4 +1,6 @@
-import { useMemo } from "react";
+import { CpuLoad, RamLoad } from "dashdot-shared";
+import { useEffect, useMemo, useState } from "react";
+import io from "socket.io-client";
 import {
   default as styled,
   DefaultTheme,
@@ -86,7 +88,32 @@ function App() {
   );
 
   const osInfo = useOsInfo();
-  console.log(osInfo);
+
+  const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
+  const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
+  useEffect(() => {
+    const socket = io("http://localhost:3001");
+
+    socket.on("cpu-load", (data) => {
+      setCpuLoad((oldData) => {
+        if (oldData.length > 20) {
+          return [...oldData.slice(1), data];
+        } else {
+          return [...oldData, data];
+        }
+      });
+    });
+
+    socket.on("ram-load", (data) => {
+      setRamLoad((oldData) => {
+        if (oldData.length > 20) {
+          return [...oldData.slice(1), data];
+        } else {
+          return [...oldData, data];
+        }
+      });
+    });
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -96,10 +123,10 @@ function App() {
             <ServerWidget {...osInfo.data?.os} />
           </GlassPane>
           <GlassPane grow={2}>
-            <CpuWidget {...osInfo.data?.cpu} />
+            <CpuWidget {...osInfo.data?.cpu} load={cpuLoad} />
           </GlassPane>
           <GlassPane grow={1.5}>
-            <RamWidget {...osInfo.data?.ram} />
+            <RamWidget {...osInfo.data?.ram} load={ramLoad} />
           </GlassPane>
           <GlassPane grow={1.5}>
             <StorageWidget {...osInfo.data?.storage} />

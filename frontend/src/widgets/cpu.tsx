@@ -1,6 +1,7 @@
 import { faMicrochip } from "@fortawesome/free-solid-svg-icons";
+import { Datum } from "@nivo/line";
 import { Switch } from "antd";
-import { CpuInfo } from "dashdot-shared";
+import { CpuInfo, CpuLoad } from "dashdot-shared";
 import { FC } from "react";
 import styled, { useTheme } from "styled-components";
 import HardwareInfoContainer from "../components/hardware-info-container";
@@ -18,13 +19,33 @@ const CpuSwitchContainer = styled.div`
   gap: 15px;
 `;
 
-const CpuWidget: FC<Partial<CpuInfo>> = (props) => {
+type CpuWidgetProps = {
+  load: CpuLoad[];
+} & Partial<CpuInfo>;
+
+const CpuWidget: FC<CpuWidgetProps> = (props) => {
   const theme = useTheme();
+
+  const chartData: Datum[] = props.load.reduce((acc, curr, i) => {
+    const avgLoad =
+      curr.reduce((acc, curr) => acc + curr.load, 0) / curr.length;
+
+    acc.push({
+      x: i,
+      y: avgLoad,
+    });
+    return acc;
+  }, [] as Datum[]);
 
   return (
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
-      chartData={[]}
+      chartData={[
+        {
+          id: "cpu",
+          data: chartData,
+        },
+      ]}
       heading="Processor"
       infos={[
         {
