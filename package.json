@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "(cd ./shared && yarn build) && (cd ./frontend && yarn build) && (cd ./backend && yarn build)",
-    "start": "(cd ./backend && yarn start)"
+    "start": "(cd ./backend && yarn start)",
+    "dev": "(trap 'kill 0' SIGINT; (cd ./frontend && yarn run dev) & (cd ./backend && yarn run dev))"
   }
 }
