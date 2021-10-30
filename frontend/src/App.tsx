@@ -86,22 +86,23 @@ function App() {
   );
 
   const osInfo = useOsInfo();
+  console.log(osInfo);
 
   return (
     <ThemeProvider theme={theme}>
       <Container style={antTheme}>
         <FlexContainer>
           <GlassPane grow={1}>
-            <ServerWidget {...osInfo.data} />
+            <ServerWidget {...osInfo.data?.os} />
           </GlassPane>
           <GlassPane grow={2}>
-            <CpuWidget />
+            <CpuWidget {...osInfo.data?.cpu} />
           </GlassPane>
           <GlassPane grow={1.5}>
-            <RamWidget />
+            <RamWidget {...osInfo.data?.ram} />
           </GlassPane>
           <GlassPane grow={1.5}>
-            <StorageWidget />
+            <StorageWidget {...osInfo.data?.storage} />
           </GlassPane>
         </FlexContainer>
       </Container>
