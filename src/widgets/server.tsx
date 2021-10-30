@@ -4,6 +4,7 @@ import { Button, Switch } from "antd";
 import { FC } from "react";
 import styled from "styled-components";
 import ThemedText from "../components/text";
+import { useSetting } from "../services/settings";
 
 const Container = styled.div`
   flex: 1;
@@ -65,9 +66,14 @@ const ButtonsContainer = styled.div`
 
 const Link = styled(Button)`
   border: none;
+  > svg {
+    color: ${(props) => props.theme.colors.text};
+  }
 `;
 
 const ServerWidget: FC = () => {
+  const [darkMode, setDarkMode] = useSetting("darkMode");
+
   return (
     <Container>
       <ButtonsContainer>
@@ -82,7 +88,7 @@ const ServerWidget: FC = () => {
 
       <ThemeSwitchContainer>
         <ThemedText>Dark Mode</ThemedText>
-        <Switch defaultChecked={false} onChange={() => {}} />
+        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
       </ThemeSwitchContainer>
 
       <Heading>

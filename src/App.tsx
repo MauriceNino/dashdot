@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { default as styled, ThemeProvider } from "styled-components";
 import { useColorScheme } from "use-color-scheme";
 import GlassPane from "./components/glass-pane";
+import { useSetting } from "./services/settings";
 import { darkTheme, lightTheme } from "./theme/theme";
 import CpuWidget from "./widgets/cpu";
 import RamWidget from "./widgets/ram";
@@ -44,15 +45,14 @@ const FlexContainer = styled.div`
 
 function App() {
   const { scheme } = useColorScheme();
+  const [darkMode] = useSetting("darkMode", scheme === "dark");
 
-  const theme = useMemo(
-    () => (scheme === "dark" ? darkTheme : lightTheme),
-    [scheme]
-  );
+  const theme = useMemo(() => (darkMode ? darkTheme : lightTheme), [darkMode]);
   const antTheme = useMemo(
     () =>
       ({
         "--ant-primary-color": theme.colors.primary,
+        "--ant-primary-color-hover": theme.colors.primary,
       } as React.CSSProperties),
     [theme]
   );
