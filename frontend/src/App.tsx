@@ -1,4 +1,4 @@
-import { CpuLoad, RamLoad } from "dashdot-shared";
+import { CpuLoad, RamLoad, StorageLoad } from "dashdot-shared";
 import { useEffect, useMemo, useState } from "react";
 import io from "socket.io-client";
 import {
@@ -91,6 +91,8 @@ function App() {
 
   const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
   const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
+  const [storageLoad, setStorageLoad] = useState<StorageLoad>();
+
   useEffect(() => {
     const socket = io("http://localhost:3001");
 
@@ -115,7 +117,7 @@ function App() {
     });
 
     socket.on("storage-load", (data) => {
-      console.log(data);
+      setStorageLoad(data);
     });
   }, []);
 
@@ -133,7 +135,7 @@ function App() {
             <RamWidget {...osInfo.data?.ram} load={ramLoad} />
           </GlassPane>
           <GlassPane grow={1.5}>
-            <StorageWidget {...osInfo.data?.storage} />
+            <StorageWidget {...osInfo.data?.storage} load={storageLoad} />
           </GlassPane>
         </FlexContainer>
       </Container>
