@@ -9,6 +9,7 @@ import {
 import { useColorScheme } from "use-color-scheme";
 import { useOsInfo } from "./api/os-info";
 import GlassPane from "./components/glass-pane";
+import { BACKEND_URL } from "./config/config";
 import { useSetting } from "./services/settings";
 import { darkTheme, lightTheme } from "./theme/theme";
 import CpuWidget from "./widgets/cpu";
@@ -94,7 +95,7 @@ function App() {
   const [storageLoad, setStorageLoad] = useState<StorageLoad>();
 
   useEffect(() => {
-    const socket = io("http://localhost:3001");
+    const socket = io(BACKEND_URL);
 
     socket.on("cpu-load", (data) => {
       setCpuLoad((oldData) => {
