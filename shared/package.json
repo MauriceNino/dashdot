@@ -2,10 +2,13 @@
   "name": "dashdot-shared",
   "version": "1.0.0",
   "main": "dist/index.js",
-	"files": [
-		"dist/**/*"
-	],
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "build": "tsc && (cd ../frontend && yarn add ../shared) && (cd ../backend && yarn add ../shared)"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4"
   }
 }
