@@ -1,10 +1,10 @@
 import { faMicrochip } from "@fortawesome/free-solid-svg-icons";
 //@ts-ignore
 import { linearGradientDef } from "@nivo/core";
-import { Datum, ResponsiveLine } from "@nivo/line";
+import { Datum, ResponsiveLine, Serie } from "@nivo/line";
 import { Switch } from "antd";
 import { CpuInfo, CpuLoad } from "dashdot-shared";
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import HardwareInfoContainer from "../components/hardware-info-container";
 import ThemedText from "../components/text";
@@ -28,21 +28,64 @@ type CpuWidgetProps = {
 const CpuWidget: FC<CpuWidgetProps> = (props) => {
   const theme = useTheme();
 
-  const chartData: Datum[] = props.load.reduce((acc, curr, i) => {
-    const avgLoad =
-      curr.reduce((acc, curr) => acc + curr.load, 0) / curr.length;
+  const [showThreads, setShowThreads] = useState(false);
 
-    acc.push({
-      x: i,
-      y: avgLoad,
-    });
-    return acc;
-  }, [] as Datum[]);
+  // TODO: calculate the chart values only once per time-frame
+  let chartData: Serie[] = [];
+
+  if (showThreads) {
+    const coresWithValues = props.load.reduce(
+      (acc, curr) => {
+        curr.forEach(({ load, core }) => {
+          if (acc[core])
+            acc[core] = acc[core].concat({
+              x: acc[core].length,
+              y: load,
+            });
+          else
+            acc[core] = [
+              {
+                x: 0,
+                y: load,
+              },
+            ];
+        });
+
+        return acc;
+      },
+      {} as {
+        [key: number]: Datum[];
+      }
+    );
+
+    chartData = Object.entries(coresWithValues).map(([key, value]) => ({
+      id: key,
+      data: value,
+    }));
+  } else {
+    const chartValues: Datum[] = props.load.reduce((acc, curr, i) => {
+      const avgLoad =
+        curr.reduce((acc, curr) => acc + curr.load, 0) / curr.length;
+
+      acc.push({
+        x: i,
+        y: avgLoad,
+      });
+      return acc;
+    }, [] as Datum[]);
+
+    chartData = [
+      {
+        id: "cpu",
+        data: chartValues,
+      },
+    ];
+  }
 
   return (
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
-      contentLoaded={chartData.length > 1}
+      contentLoaded={chartData.some((serie) => serie.data.length > 1)}
       heading="Processor"
       infos={[
         {
@@ -70,7 +113,10 @@ const CpuWidget: FC<CpuWidgetProps> = (props) => {
       extraContent={
         <CpuSwitchContainer>
           <ThemedText>Show All Cores</ThemedText>
-          <Switch defaultChecked={false} onChange={() => {}} />
+          <Switch
+            checked={showThreads}
+            onChange={() => setShowThreads(!showThreads)}
+          />
         </CpuSwitchContainer>
       }
     >
@@ -78,6 +124,7 @@ const CpuWidget: FC<CpuWidgetProps> = (props) => {
         isInteractive={true}
         enableSlices="x"
         sliceTooltip={(props) => {
+          //TODO: correct calculation for multi-core
           const point = props.slice.points[0];
           return (
             <ThemedText>
@@ -85,12 +132,7 @@ const CpuWidget: FC<CpuWidgetProps> = (props) => {
             </ThemedText>
           );
         }}
-        data={[
-          {
-            id: "cpu",
-            data: chartData,
-          },
-        ]}
+        data={chartData}
         curve="monotoneX"
         enablePoints={false}
         animate={false}
