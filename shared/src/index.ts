@@ -27,7 +27,10 @@ export type StorageInfo = {
     size: number;
   }[];
 };
-export type StorageLoad = number;
+export type StorageLoad = {
+  free: number;
+  used: number;
+};
 
 export type OsInfo = {
   platform: string;

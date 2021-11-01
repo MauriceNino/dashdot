@@ -1,5 +1,7 @@
 import { faMicrochip } from "@fortawesome/free-solid-svg-icons";
-import { Datum } from "@nivo/line";
+//@ts-ignore
+import { linearGradientDef } from "@nivo/core";
+import { Datum, ResponsiveLine } from "@nivo/line";
 import { Switch } from "antd";
 import { CpuInfo, CpuLoad } from "dashdot-shared";
 import { FC } from "react";
@@ -40,12 +42,7 @@ const CpuWidget: FC<CpuWidgetProps> = (props) => {
   return (
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
-      chartData={[
-        {
-          id: "cpu",
-          data: chartData,
-        },
-      ]}
+      contentLoaded={chartData.length > 1}
       heading="Processor"
       infos={[
         {
@@ -76,7 +73,45 @@ const CpuWidget: FC<CpuWidgetProps> = (props) => {
           <Switch defaultChecked={false} onChange={() => {}} />
         </CpuSwitchContainer>
       }
-    />
+    >
+      <ResponsiveLine
+        isInteractive={true}
+        enableSlices="x"
+        sliceTooltip={(props) => {
+          const point = props.slice.points[0];
+          return (
+            <ThemedText>
+              {Math.round((point.data.y as number) * 100) / 100} %
+            </ThemedText>
+          );
+        }}
+        data={[
+          {
+            id: "cpu",
+            data: chartData,
+          },
+        ]}
+        curve="monotoneX"
+        enablePoints={false}
+        animate={false}
+        enableGridX={false}
+        enableGridY={false}
+        yScale={{
+          type: "linear",
+          min: 0,
+          max: 100,
+        }}
+        enableArea={true}
+        defs={[
+          linearGradientDef("gradientA", [
+            { offset: 0, color: "inherit" },
+            { offset: 100, color: "inherit", opacity: 0 },
+          ]),
+        ]}
+        fill={[{ match: "*", id: "gradientA" }]}
+        colors={theme.colors.cpuPrimary}
+      />
+    </HardwareInfoContainer>
   );
 };
 

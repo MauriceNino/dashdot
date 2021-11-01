@@ -4,6 +4,7 @@ import { FC } from "react";
 import { useTheme } from "styled-components";
 import HardwareInfoContainer from "../components/hardware-info-container";
 import { removeDuplicates } from "../utils/array-utils";
+import { byteToGb } from "../utils/calculations";
 
 const StorageWidget: FC<Partial<StorageInfo>> = (props) => {
   const theme = useTheme();
@@ -17,7 +18,7 @@ const StorageWidget: FC<Partial<StorageInfo>> = (props) => {
   return (
     <HardwareInfoContainer
       color={theme.colors.storagePrimary}
-      chartData={[]}
+      contentLoaded={false}
       heading="Storage"
       infos={[
         {
@@ -26,7 +27,7 @@ const StorageWidget: FC<Partial<StorageInfo>> = (props) => {
         },
         {
           label: "Capacity",
-          value: size ? `${Math.round(size / 1000000000)} GB` : "",
+          value: size ? `${byteToGb(size)} GB` : "",
         },
         {
           label: "Type" + (diskCount > 1 ? "(s)" : ""),

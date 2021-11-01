@@ -4,7 +4,7 @@ import express, { Response } from "express";
 import http from "http";
 import path from "path";
 import { Server } from "socket.io";
-import { cpuObs, ramObs } from "./dynamic-info";
+import { cpuObs, ramObs, storageObs } from "./dynamic-info";
 import { getStaticServerInfo } from "./static-info";
 
 const app = express();
@@ -34,17 +34,22 @@ io.on("connection", (socket) => {
   console.log("user connected");
 
   const cpuSub = cpuObs.subscribe(async (cpu) => {
-    socket.emit("cpu-load", await cpu);
+    socket.emit("cpu-load", cpu);
   });
 
   const ramSub = ramObs.subscribe(async (ram) => {
-    socket.emit("ram-load", await ram);
+    socket.emit("ram-load", ram);
+  });
+
+  const storageSub = storageObs.subscribe(async (storage) => {
+    socket.emit("storage-load", storage);
   });
 
   socket.on("disconnect", () => {
     console.log("user disconnected");
     cpuSub.unsubscribe();
     ramSub.unsubscribe();
+    storageSub.unsubscribe();
   });
 });
 

@@ -96,7 +96,7 @@ function App() {
 
     socket.on("cpu-load", (data) => {
       setCpuLoad((oldData) => {
-        if (oldData.length > 20) {
+        if (oldData.length >= 20) {
           return [...oldData.slice(1), data];
         } else {
           return [...oldData, data];
@@ -106,12 +106,16 @@ function App() {
 
     socket.on("ram-load", (data) => {
       setRamLoad((oldData) => {
-        if (oldData.length > 20) {
+        if (oldData.length >= 20) {
           return [...oldData.slice(1), data];
         } else {
           return [...oldData, data];
         }
       });
+    });
+
+    socket.on("storage-load", (data) => {
+      console.log(data);
     });
   }, []);
 
