@@ -1,6 +1,7 @@
 import axios from "axios";
 import { HardwareInfo } from "dashdot-shared";
 import { useEffect, useState } from "react";
+import { BACKEND_URL } from "../config/config";
 import { HttpResponse } from "./types";
 
 export const useOsInfo = () => {
@@ -10,7 +11,7 @@ export const useOsInfo = () => {
 
   useEffect(() => {
     axios
-      .get<HardwareInfo>("http://localhost:3001/system-info")
+      .get<HardwareInfo>(`${BACKEND_URL}/system-info`)
       .then((result) =>
         setOsInfo({
           loading: false,

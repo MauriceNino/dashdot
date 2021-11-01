@@ -61,6 +61,8 @@ export const getStaticServerInfo = async (): Promise<HardwareInfo> => {
       ram,
       storage,
     };
+
+    console.log("Static Server Info Gathered: ", INFO_SAVE);
   }
 
   return {
