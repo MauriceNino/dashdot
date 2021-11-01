@@ -11,9 +11,15 @@ let INFO_SAVE: HardwareInfo | null = null;
 
 export const getStaticServerInfo = async (): Promise<HardwareInfo> => {
   if (!INFO_SAVE) {
-    const [osInfo, cpuInfo, memInfo, memLayout, diskLayout] = await Promise.all(
-      [si.osInfo(), si.cpu(), si.mem(), si.memLayout(), si.diskLayout()]
-    );
+    const [osInfo, cpuInfo, memInfo, memLayout, diskLayout, diskIO] =
+      await Promise.all([
+        si.osInfo(),
+        si.cpu(),
+        si.mem(),
+        si.memLayout(),
+        si.diskLayout(),
+        si.disksIO(),
+      ]);
 
     const os: Omit<OsInfo, "uptime"> = {
       arch: osInfo.arch,

@@ -1,10 +1,8 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Serie } from "@nivo/line";
 import { FC } from "react";
 import { SwapSpinner } from "react-spinners-kit";
 import styled, { useTheme } from "styled-components";
-import Chart from "./chart";
 import InfoTable, { InfoTableProps } from "./info-table";
 import ThemedText from "./text";
 
@@ -83,13 +81,11 @@ type HardwareInfoProps = {
   heading: string;
   icon: IconProp;
   extraContent?: JSX.Element;
-  chartData: Serie[];
+  contentLoaded: boolean;
 } & InfoTableProps;
 
 const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
   const theme = useTheme();
-
-  console.log(props.chartData);
 
   return (
     <Container>
@@ -107,8 +103,8 @@ const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
 
       <ChartArea>
         <ChartContainer>
-          {props.chartData.length > 0 && props.chartData[0].data.length > 1 ? (
-            <Chart data={props.chartData} color={props.color} />
+          {props.contentLoaded ? (
+            props.children
           ) : (
             <SwapSpinner
               size={70}
