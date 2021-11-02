@@ -4,8 +4,8 @@ import {
   OsInfo,
   RamInfo,
   StorageInfo,
-} from "dashdot-shared";
-import si from "systeminformation";
+} from 'dashdot-shared';
+import si from 'systeminformation';
 
 let INFO_SAVE: HardwareInfo | null = null;
 
@@ -21,7 +21,7 @@ export const getStaticServerInfo = async (): Promise<HardwareInfo> => {
         si.disksIO(),
       ]);
 
-    const os: Omit<OsInfo, "uptime"> = {
+    const os: Omit<OsInfo, 'uptime'> = {
       arch: osInfo.arch,
       distro: osInfo.distro,
       kernel: osInfo.kernel,
@@ -40,8 +40,8 @@ export const getStaticServerInfo = async (): Promise<HardwareInfo> => {
     const ram: RamInfo = {
       total: memInfo.total,
       layout: memLayout.map(({ manufacturer, type, clockSpeed }) => ({
-        manufacturer: manufacturer || "Unknown",
-        type: type || "Unknown",
+        manufacturer: manufacturer || 'Unknown',
+        type: type || 'Unknown',
         clockSpeed: clockSpeed ?? undefined,
       })),
     };
@@ -62,7 +62,7 @@ export const getStaticServerInfo = async (): Promise<HardwareInfo> => {
       storage,
     };
 
-    console.log("Static Server Info Gathered: ", INFO_SAVE);
+    console.log('Static Server Info Gathered: ', INFO_SAVE);
   }
 
   return {

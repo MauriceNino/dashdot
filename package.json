@@ -9,6 +9,11 @@
     "build-shared": "(cd ./shared && yarn build)",
     "start": "(cd ./backend && yarn start)",
     "dev": "(trap 'kill 0' SIGINT; (cd ./frontend && yarn run dev) & (cd ./backend && yarn run dev))",
-    "install": "(cd ./shared && yarn) && (cd ./frontend && yarn) && (cd ./backend && yarn)"
+    "install": "(cd ./shared && yarn) && (cd ./frontend && yarn) && (cd ./backend && yarn)",
+    "prettier:check": "prettier --check .",
+    "prettier:format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "2.4.1"
   }
 }

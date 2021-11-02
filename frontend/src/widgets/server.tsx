@@ -9,20 +9,20 @@ import {
   faUbuntu,
   faWindows,
   IconDefinition,
-} from "@fortawesome/free-brands-svg-icons";
-import { faServer } from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-brands-svg-icons';
+import { faServer } from '@fortawesome/free-solid-svg-icons';
 import {
   FontAwesomeIcon,
   FontAwesomeIconProps,
-} from "@fortawesome/react-fontawesome";
-import { Button, Switch } from "antd";
-import { OsInfo } from "dashdot-shared";
-import { FC, useEffect, useState } from "react";
-import styled, { useTheme } from "styled-components";
-import InfoTable from "../components/info-table";
-import SkeletonContent from "../components/skeleton-content";
-import ThemedText from "../components/text";
-import { useSetting } from "../services/settings";
+} from '@fortawesome/react-fontawesome';
+import { Button, Switch } from 'antd';
+import { OsInfo } from 'dashdot-shared';
+import { FC, useEffect, useState } from 'react';
+import styled, { useTheme } from 'styled-components';
+import InfoTable from '../components/info-table';
+import SkeletonContent from '../components/skeleton-content';
+import ThemedText from '../components/text';
+import { useSetting } from '../services/settings';
 
 const Container = styled.div`
   flex: 1;
@@ -61,7 +61,7 @@ const Appendix = styled.span`
 const ServerName = styled.span`
   font-weight: bold;
   text-decoration: underline;
-  text-decoration-color: ${(props) => props.theme.colors.primary};
+  text-decoration-color: ${props => props.theme.colors.primary};
   position: relative;
   bottom: -5px;
 `;
@@ -88,11 +88,11 @@ const Link = styled(Button)`
 
   &:active {
     > svg {
-      color: ${(props) => props.theme.colors.primary};
+      color: ${props => props.theme.colors.primary};
     }
   }
   > svg {
-    color: ${(props) => props.theme.colors.text};
+    color: ${props => props.theme.colors.text};
   }
 `;
 
@@ -117,7 +117,7 @@ const ServerIconContainer = styled.div`
   margin-left: 20px;
 `;
 
-const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, "icon">> = ({
+const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
   os,
   ...iconProps
 }) => {
@@ -125,26 +125,26 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, "icon">> = ({
 
   let icon: IconDefinition = faServer;
 
-  if (os.includes("ubuntu")) {
+  if (os.includes('ubuntu')) {
     icon = faUbuntu;
-  } else if (os.includes("suse")) {
+  } else if (os.includes('suse')) {
     icon = faSuse;
-  } else if (os.includes("redhat")) {
+  } else if (os.includes('redhat')) {
     icon = faRedhat;
-  } else if (os.includes("fedora")) {
+  } else if (os.includes('fedora')) {
     icon = faFedora;
-  } else if (os.includes("centos")) {
+  } else if (os.includes('centos')) {
     icon = faCentos;
-  } else if (os.includes("linux")) {
+  } else if (os.includes('linux')) {
     icon = faLinux;
   } else if (
-    os.includes("mac") ||
-    os.includes("osx") ||
-    os.includes("darwin") ||
-    os.includes("apple")
+    os.includes('mac') ||
+    os.includes('osx') ||
+    os.includes('darwin') ||
+    os.includes('apple')
   ) {
     icon = faApple;
-  } else if (os.includes("win")) {
+  } else if (os.includes('win')) {
     icon = faWindows;
   }
 
@@ -153,8 +153,8 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, "icon">> = ({
   );
 };
 
-const ServerWidget: FC<Partial<OsInfo>> = (props) => {
-  const [darkMode, setDarkMode] = useSetting("darkMode");
+const ServerWidget: FC<Partial<OsInfo>> = props => {
+  const [darkMode, setDarkMode] = useSetting('darkMode');
   const [uptime, setUptime] = useState(0);
 
   const days = Math.floor(uptime / (24 * 60 * 60));
@@ -164,22 +164,22 @@ const ServerWidget: FC<Partial<OsInfo>> = (props) => {
 
   const dateInfos = [
     {
-      label: "",
+      label: '',
       value: `${days} days`,
       amount: days,
     },
     {
-      label: "",
+      label: '',
       value: `${hours} hours`,
       amount: hours,
     },
     {
-      label: "",
+      label: '',
       value: `${minutes} minutes`,
       amount: minutes,
     },
     {
-      label: "",
+      label: '',
       value: `${seconds} seconds`,
       amount: seconds,
     },
@@ -194,11 +194,11 @@ const ServerWidget: FC<Partial<OsInfo>> = (props) => {
   }, [] as { label: string; value: string }[]);
 
   if (dateInfos[0]) {
-    dateInfos[0].label = "Up since";
+    dateInfos[0].label = 'Up since';
   } else {
     dateInfos[0] = {
-      label: "Up since",
-      value: "",
+      label: 'Up since',
+      value: '',
     };
   }
 
@@ -225,10 +225,10 @@ const ServerWidget: FC<Partial<OsInfo>> = (props) => {
       <ButtonsContainer>
         <Link
           ghost
-          shape="circle"
+          shape='circle'
           icon={<FontAwesomeIcon icon={faGithub} />}
-          href="https://github.com/MauriceNino/dashdot"
-          target="_blank"
+          href='https://github.com/MauriceNino/dashdot'
+          target='_blank'
         />
       </ButtonsContainer>
 
@@ -244,11 +244,11 @@ const ServerWidget: FC<Partial<OsInfo>> = (props) => {
 
       <ContentContainer>
         <ServerIconContainer>
-          <SkeletonContent width={120} height={120} borderRadius="15px">
+          <SkeletonContent width={120} height={120} borderRadius='15px'>
             {props.distro != null && props.platform != null && (
               <ServerIcon
                 os={(props.distro + props.platform).toLowerCase()}
-                size="7x"
+                size='7x'
               />
             )}
           </SkeletonContent>
@@ -257,11 +257,11 @@ const ServerWidget: FC<Partial<OsInfo>> = (props) => {
         <StyledInfoTable
           infos={[
             {
-              label: "OS",
-              value: `${props.distro ?? ""} ${props.release ?? ""}`,
+              label: 'OS',
+              value: `${props.distro ?? ''} ${props.release ?? ''}`,
             },
             {
-              label: "Arch",
+              label: 'Arch',
               value: props.arch,
             },
             ...dateInfos,

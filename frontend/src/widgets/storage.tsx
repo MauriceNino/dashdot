@@ -1,23 +1,23 @@
-import { faHdd } from "@fortawesome/free-solid-svg-icons";
-import { ResponsivePie } from "@nivo/pie";
-import { StorageInfo, StorageLoad } from "dashdot-shared";
-import { FC } from "react";
-import { useTheme } from "styled-components";
-import HardwareInfoContainer from "../components/hardware-info-container";
-import ThemedText from "../components/text";
-import { removeDuplicates } from "../utils/array-utils";
-import { byteToGb } from "../utils/calculations";
+import { faHdd } from '@fortawesome/free-solid-svg-icons';
+import { ResponsivePie } from '@nivo/pie';
+import { StorageInfo, StorageLoad } from 'dashdot-shared';
+import { FC } from 'react';
+import { useTheme } from 'styled-components';
+import HardwareInfoContainer from '../components/hardware-info-container';
+import ThemedText from '../components/text';
+import { removeDuplicates } from '../utils/array-utils';
+import { byteToGb } from '../utils/calculations';
 
 type StorageWidgetProps = {
   load?: StorageLoad;
 } & Partial<StorageInfo>;
 
-const StorageWidget: FC<StorageWidgetProps> = (props) => {
+const StorageWidget: FC<StorageWidgetProps> = props => {
   const theme = useTheme();
 
   const size = props.layout?.reduce((acc, cur) => acc + cur.size, 0);
-  const name = removeDuplicates(props.layout?.map((l) => l.name)).join(", ");
-  const type = removeDuplicates(props.layout?.map((l) => l.type)).join(", ");
+  const name = removeDuplicates(props.layout?.map(l => l.name)).join(', ');
+  const type = removeDuplicates(props.layout?.map(l => l.type)).join(', ');
 
   const diskCount = props.layout?.length ?? 0;
 
@@ -25,18 +25,18 @@ const StorageWidget: FC<StorageWidgetProps> = (props) => {
     <HardwareInfoContainer
       color={theme.colors.storagePrimary}
       contentLoaded={props.load != null}
-      heading="Storage"
+      heading='Storage'
       infos={[
         {
-          label: "Model" + (diskCount > 1 ? "(s)" : ""),
+          label: 'Model' + (diskCount > 1 ? '(s)' : ''),
           value: name,
         },
         {
-          label: "Capacity",
-          value: size ? `${byteToGb(size)} GB` : "",
+          label: 'Capacity',
+          value: size ? `${byteToGb(size)} GB` : '',
         },
         {
-          label: "Type" + (diskCount > 1 ? "(s)" : ""),
+          label: 'Type' + (diskCount > 1 ? '(s)' : ''),
           value: type,
         },
       ]}
@@ -45,11 +45,11 @@ const StorageWidget: FC<StorageWidgetProps> = (props) => {
       <ResponsivePie
         data={[
           {
-            id: "Used",
+            id: 'Used',
             value: props.load?.used,
           },
           {
-            id: "Free",
+            id: 'Free',
             value: props.load?.free,
           },
         ]}
@@ -60,15 +60,15 @@ const StorageWidget: FC<StorageWidgetProps> = (props) => {
         activeOuterRadiusOffset={8}
         arcLinkLabelsTextColor={theme.colors.text}
         arcLinkLabelsThickness={2}
-        arcLinkLabelsColor={{ from: "color" }}
+        arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsSkipAngle={10}
         arcLabelsTextColor={{
-          from: "color",
-          modifiers: [[theme.dark ? "brighter" : "darker", 3]],
+          from: 'color',
+          modifiers: [[theme.dark ? 'brighter' : 'darker', 3]],
         }}
-        arcLabel={(data) => `${byteToGb(data.value)} GB`}
+        arcLabel={data => `${byteToGb(data.value)} GB`}
         colors={[theme.colors.storagePrimary, theme.colors.background]}
-        tooltip={(props) => {
+        tooltip={props => {
           const value = props.datum.value;
           return (
             <ThemedText>
