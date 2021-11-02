@@ -1,5 +1,5 @@
-import { Dispatch, useEffect, useState } from "react";
-import store from "store";
+import { Dispatch, useEffect, useState } from 'react';
+import store from 'store';
 
 type Settings = {
   darkMode?: boolean;
@@ -31,7 +31,7 @@ export const useSetting = <T extends keyof Settings = keyof Settings>(
   );
 
   const setSetting = (newValue: Settings[T]) => {
-    ALL_DISPATCHES[key]!.forEach((dispatch) => dispatch(newValue));
+    ALL_DISPATCHES[key]!.forEach(dispatch => dispatch(newValue));
     setStoreSetting(key, newValue);
   };
 

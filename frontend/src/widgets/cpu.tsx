@@ -1,13 +1,13 @@
-import { faMicrochip } from "@fortawesome/free-solid-svg-icons";
+import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
 //@ts-ignore
-import { linearGradientDef } from "@nivo/core";
-import { Datum, ResponsiveLine, Serie } from "@nivo/line";
-import { Switch } from "antd";
-import { CpuInfo, CpuLoad } from "dashdot-shared";
-import { FC, useState } from "react";
-import styled, { useTheme } from "styled-components";
-import HardwareInfoContainer from "../components/hardware-info-container";
-import ThemedText from "../components/text";
+import { linearGradientDef } from '@nivo/core';
+import { Datum, ResponsiveLine, Serie } from '@nivo/line';
+import { Switch } from 'antd';
+import { CpuInfo, CpuLoad } from 'dashdot-shared';
+import { FC, useState } from 'react';
+import styled, { useTheme } from 'styled-components';
+import HardwareInfoContainer from '../components/hardware-info-container';
+import ThemedText from '../components/text';
 
 const CpuSwitchContainer = styled.div`
   position: absolute;
@@ -25,7 +25,7 @@ type CpuWidgetProps = {
   load: CpuLoad[];
 } & Partial<CpuInfo>;
 
-const CpuWidget: FC<CpuWidgetProps> = (props) => {
+const CpuWidget: FC<CpuWidgetProps> = props => {
   const theme = useTheme();
 
   const [showThreads, setShowThreads] = useState(false);
@@ -76,7 +76,7 @@ const CpuWidget: FC<CpuWidgetProps> = (props) => {
 
     chartData = [
       {
-        id: "cpu",
+        id: 'cpu',
         data: chartValues,
       },
     ];
@@ -85,28 +85,28 @@ const CpuWidget: FC<CpuWidgetProps> = (props) => {
   return (
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
-      contentLoaded={chartData.some((serie) => serie.data.length > 1)}
-      heading="Processor"
+      contentLoaded={chartData.some(serie => serie.data.length > 1)}
+      heading='Processor'
       infos={[
         {
-          label: "Brand",
+          label: 'Brand',
           value: props.manufacturer,
         },
         {
-          label: "Model",
+          label: 'Model',
           value: props.brand,
         },
         {
-          label: "Cores",
+          label: 'Cores',
           value: props.cores?.toString(),
         },
         {
-          label: "Threads",
+          label: 'Threads',
           value: props.threads?.toString(),
         },
         {
-          label: "Frequency",
-          value: props.speed ? `${props.speed} GHz` : "",
+          label: 'Frequency',
+          value: props.speed ? `${props.speed} GHz` : '',
         },
       ]}
       icon={faMicrochip}
@@ -122,8 +122,8 @@ const CpuWidget: FC<CpuWidgetProps> = (props) => {
     >
       <ResponsiveLine
         isInteractive={true}
-        enableSlices="x"
-        sliceTooltip={(props) => {
+        enableSlices='x'
+        sliceTooltip={props => {
           //TODO: correct calculation for multi-core
           const point = props.slice.points[0];
           return (
@@ -133,24 +133,24 @@ const CpuWidget: FC<CpuWidgetProps> = (props) => {
           );
         }}
         data={chartData}
-        curve="monotoneX"
+        curve='monotoneX'
         enablePoints={false}
         animate={false}
         enableGridX={false}
         enableGridY={false}
         yScale={{
-          type: "linear",
+          type: 'linear',
           min: 0,
           max: 100,
         }}
         enableArea={true}
         defs={[
-          linearGradientDef("gradientA", [
-            { offset: 0, color: "inherit" },
-            { offset: 100, color: "inherit", opacity: 0 },
+          linearGradientDef('gradientA', [
+            { offset: 0, color: 'inherit' },
+            { offset: 100, color: 'inherit', opacity: 0 },
           ]),
         ]}
-        fill={[{ match: "*", id: "gradientA" }]}
+        fill={[{ match: '*', id: 'gradientA' }]}
         colors={theme.colors.cpuPrimary}
       />
     </HardwareInfoContainer>

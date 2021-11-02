@@ -1,21 +1,21 @@
-import { CpuLoad, RamLoad, StorageLoad } from "dashdot-shared";
-import { useEffect, useMemo, useState } from "react";
-import io from "socket.io-client";
+import { CpuLoad, RamLoad, StorageLoad } from 'dashdot-shared';
+import { useEffect, useMemo, useState } from 'react';
+import io from 'socket.io-client';
 import {
   default as styled,
   DefaultTheme,
   ThemeProvider,
-} from "styled-components";
-import { useColorScheme } from "use-color-scheme";
-import { useOsInfo } from "./api/os-info";
-import GlassPane from "./components/glass-pane";
-import { BACKEND_URL } from "./config/config";
-import { useSetting } from "./services/settings";
-import { darkTheme, lightTheme } from "./theme/theme";
-import CpuWidget from "./widgets/cpu";
-import RamWidget from "./widgets/ram";
-import ServerWidget from "./widgets/server";
-import StorageWidget from "./widgets/storage";
+} from 'styled-components';
+import { useColorScheme } from 'use-color-scheme';
+import { useOsInfo } from './api/os-info';
+import GlassPane from './components/glass-pane';
+import { BACKEND_URL } from './config/config';
+import { useSetting } from './services/settings';
+import { darkTheme, lightTheme } from './theme/theme';
+import CpuWidget from './widgets/cpu';
+import RamWidget from './widgets/ram';
+import ServerWidget from './widgets/server';
+import StorageWidget from './widgets/storage';
 
 const getLightGradient = (theme: DefaultTheme) => `
 radial-gradient(
@@ -76,14 +76,14 @@ const FlexContainer = styled.div`
 
 function App() {
   const { scheme } = useColorScheme();
-  const [darkMode] = useSetting("darkMode", scheme === "dark");
+  const [darkMode] = useSetting('darkMode', scheme === 'dark');
 
   const theme = useMemo(() => (darkMode ? darkTheme : lightTheme), [darkMode]);
   const antTheme = useMemo(
     () =>
       ({
-        "--ant-primary-color": theme.colors.primary,
-        "--ant-primary-color-hover": theme.colors.primary,
+        '--ant-primary-color': theme.colors.primary,
+        '--ant-primary-color-hover': theme.colors.primary,
       } as React.CSSProperties),
     [theme]
   );
@@ -97,8 +97,8 @@ function App() {
   useEffect(() => {
     const socket = io(BACKEND_URL);
 
-    socket.on("cpu-load", (data) => {
-      setCpuLoad((oldData) => {
+    socket.on('cpu-load', data => {
+      setCpuLoad(oldData => {
         if (oldData.length >= 20) {
           return [...oldData.slice(1), data];
         } else {
@@ -107,8 +107,8 @@ function App() {
       });
     });
 
-    socket.on("ram-load", (data) => {
-      setRamLoad((oldData) => {
+    socket.on('ram-load', data => {
+      setRamLoad(oldData => {
         if (oldData.length >= 20) {
           return [...oldData.slice(1), data];
         } else {
@@ -117,7 +117,7 @@ function App() {
       });
     });
 
-    socket.on("storage-load", (data) => {
+    socket.on('storage-load', data => {
       setStorageLoad(data);
     });
   }, []);

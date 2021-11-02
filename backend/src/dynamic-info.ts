@@ -1,6 +1,6 @@
-import { CpuLoad, RamLoad, StorageLoad } from "dashdot-shared";
-import { interval, mergeMap, ReplaySubject } from "rxjs";
-import si from "systeminformation";
+import { CpuLoad, RamLoad, StorageLoad } from 'dashdot-shared';
+import { interval, mergeMap, ReplaySubject } from 'rxjs';
+import si from 'systeminformation';
 
 // READING CPU INFO
 const getCpuInfo = async (): Promise<CpuLoad> => {

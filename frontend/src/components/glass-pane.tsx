@@ -1,6 +1,6 @@
-import { FC } from "react";
-import ParallaxTilt from "react-parallax-tilt";
-import styled from "styled-components";
+import { FC } from 'react';
+import ParallaxTilt from 'react-parallax-tilt';
+import styled from 'styled-components';
 
 const TiltContainer = styled(ParallaxTilt)<GlassPaneProps>`
   display: flex;
@@ -10,7 +10,7 @@ const TiltContainer = styled(ParallaxTilt)<GlassPaneProps>`
   height: calc(45vh - 50px);
   margin: 20px 20px;
 
-  flex-basis: calc(${(props) => (props.grow ?? 1) * 33}% - 100px);
+  flex-basis: calc(${props => (props.grow ?? 1) * 33}% - 100px);
   flex-grow: 1;
 
   backdrop-filter: blur(20px);
@@ -27,7 +27,7 @@ type GlassPaneProps = {
   grow?: number;
 };
 
-const GlassPane: FC<GlassPaneProps> = (props) => {
+const GlassPane: FC<GlassPaneProps> = props => {
   return (
     <TiltContainer
       transitionSpeed={1500}

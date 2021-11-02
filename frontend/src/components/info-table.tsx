@@ -1,12 +1,12 @@
-import { FC } from "react";
-import styled from "styled-components";
-import SkeletonContent from "./skeleton-content";
-import ThemedText from "./text";
+import { FC } from 'react';
+import styled from 'styled-components';
+import SkeletonContent from './skeleton-content';
+import ThemedText from './text';
 
 export const InfoTextContainer = styled.div<{ noPadding?: boolean }>`
   display: table;
   padding: 30px;
-  color: ${(props) => props.theme.colors.text};
+  color: ${props => props.theme.colors.text};
 `;
 
 const InfoTextRow = styled.div`
@@ -36,7 +36,7 @@ export type InfoTableProps = {
   className?: string;
 };
 
-const InfoTable: FC<InfoTableProps> = (props) => {
+const InfoTable: FC<InfoTableProps> = props => {
   return (
     <InfoTextContainer className={props.className}>
       {props.infos.map((info, i) => (

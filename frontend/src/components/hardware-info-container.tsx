@@ -1,10 +1,10 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC } from "react";
-import { SwapSpinner } from "react-spinners-kit";
-import styled, { useTheme } from "styled-components";
-import InfoTable, { InfoTableProps } from "./info-table";
-import ThemedText from "./text";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FC } from 'react';
+import { SwapSpinner } from 'react-spinners-kit';
+import styled, { useTheme } from 'styled-components';
+import InfoTable, { InfoTableProps } from './info-table';
+import ThemedText from './text';
 
 const Container = styled.div`
   display: flex;
@@ -59,14 +59,14 @@ const InfoIcon = styled.div<HardwareInfoProps>`
   top: -10px;
   left: 20px;
 
-  background-color: ${(props) => props.color};
+  background-color: ${props => props.color};
   border-radius: 10px;
   box-shadow: 13px 13px 35px 0px rgba(0, 0, 0, 0.15);
 
   transition: background-color 0.5s ease;
 
   svg {
-    color: ${(props) => props.theme.colors.text};
+    color: ${props => props.theme.colors.text};
   }
 `;
 
@@ -84,14 +84,14 @@ type HardwareInfoProps = {
   contentLoaded: boolean;
 } & InfoTableProps;
 
-const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
+const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
   const theme = useTheme();
 
   return (
     <Container>
       <InfoContainer>
         <InfoIcon {...props}>
-          <FontAwesomeIcon icon={props.icon} size="2x" />
+          <FontAwesomeIcon icon={props.icon} size='2x' />
         </InfoIcon>
 
         <InfoHeading>{props.heading}</InfoHeading>

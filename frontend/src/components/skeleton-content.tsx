@@ -1,6 +1,6 @@
-import { FC } from "react";
-import ContentLoader from "react-content-loader";
-import { useTheme } from "styled-components";
+import { FC } from 'react';
+import ContentLoader from 'react-content-loader';
+import { useTheme } from 'styled-components';
 
 type SkeletonContentProps = {
   height?: number;
@@ -8,7 +8,7 @@ type SkeletonContentProps = {
   borderRadius?: string;
 };
 
-const SkeletonContent: FC<SkeletonContentProps> = (props) => {
+const SkeletonContent: FC<SkeletonContentProps> = props => {
   const theme = useTheme();
   const height = props.height ?? 13;
   const width = props.height ?? 150;
@@ -18,9 +18,9 @@ const SkeletonContent: FC<SkeletonContentProps> = (props) => {
 
   if (child == null) {
     isFilled = false;
-  } else if (typeof child === "string") {
+  } else if (typeof child === 'string') {
     isFilled = child.trim().length > 0;
-  } else if (typeof child === "boolean") {
+  } else if (typeof child === 'boolean') {
     isFilled = child;
   }
 
@@ -31,14 +31,14 @@ const SkeletonContent: FC<SkeletonContentProps> = (props) => {
       ) : (
         <ContentLoader
           style={{
-            borderRadius: props.borderRadius ?? "3px",
+            borderRadius: props.borderRadius ?? '3px',
           }}
           width={width}
           height={height}
           backgroundColor={theme.colors.background}
           foregroundColor={theme.colors.surface}
         >
-          <rect x="0" y="0" rx="2" ry="2" width="140" height={height} />
+          <rect x='0' y='0' rx='2' ry='2' width='140' height={height} />
         </ContentLoader>
       )}
     </>
