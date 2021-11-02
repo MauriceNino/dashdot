@@ -2,6 +2,7 @@
   "name": "dashdot-backend",
   "version": "1.0.0",
   "main": "dist/index.js",
+  "private": true,
   "scripts": {
     "start": "node .",
     "dev": "nodemon ./src/index.ts",

@@ -26,7 +26,7 @@ In case you want to financially support this project, you can [donate here](http
 
 Choose one of the following three ways to get your dashboard up and running
 
-## Docker
+## Docker (TBD)
 
 Images are hosted on docker.io, so you can easily use them with `docker` or other container engines
 
@@ -34,12 +34,12 @@ Images are hosted on docker.io, so you can easily use them with `docker` or othe
 docker container run -it --name dashboard dashdot
 ```
 
-## Node
+## Node (TBD - problems with yarn)
 
 The package is hosted as an executable on npmjs.com, so you can run it via `npx`
 
 ```bash
-npx dashdot
+npx dashdot-cli
 ```
 
 ## Git
@@ -67,7 +67,7 @@ When done, you can run the dashboard by executing:
 yarn start
 ```
 
-# Configuration
+# Configuration (TBD)
 
 The configuration is done via environment variables, so to change the config, you have to either set the environment variables in your docker image (or during startup), or provide a `.env` file.
 
