@@ -1,15 +1,24 @@
 {
-  "name": "dashdot",
-  "version": "1.0.0",
+  "name": "dashdot-cli",
+  "version": "1.0.1",
   "repository": "https://github.com/MauriceNino/dashdot",
   "author": "MauriceNino <mauriceprivat98@gmail.com>",
   "license": "MIT",
+  "bin": "cli.js",
+  "files": [
+    "frontend/build/**/*",
+    "backend/dist/**/*",
+    "shared/dist/**/*",
+    "cli.js"
+  ],
   "scripts": {
     "build": "(cd ./shared && yarn build) && (cd ./frontend && yarn build) && (cd ./backend && yarn build)",
-    "build-shared": "(cd ./shared && yarn build)",
-    "start": "(cd ./backend && yarn start)",
-    "dev": "(trap 'kill 0' SIGINT; (cd ./frontend && yarn run dev) & (cd ./backend && yarn run dev))",
     "install": "(cd ./shared && yarn) && (cd ./frontend && yarn) && (cd ./backend && yarn)",
+    "start": "(cd ./backend && yarn start)",
+
+    "build-shared": "(cd ./shared && yarn build)",
+    "dev": "(trap 'kill 0' SIGINT; (cd ./frontend && yarn run dev) & (cd ./backend && yarn run dev))",
+    
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write ."
   },
