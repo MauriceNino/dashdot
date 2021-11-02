@@ -137,8 +137,6 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, "icon">> = ({
     icon = faCentos;
   } else if (os.includes("linux")) {
     icon = faLinux;
-  } else if (os.includes("win")) {
-    icon = faWindows;
   } else if (
     os.includes("mac") ||
     os.includes("osx") ||
@@ -146,6 +144,8 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, "icon">> = ({
     os.includes("apple")
   ) {
     icon = faApple;
+  } else if (os.includes("win")) {
+    icon = faWindows;
   }
 
   return (
