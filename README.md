@@ -26,12 +26,12 @@ In case you want to financially support this project, you can [donate here](http
 
 Choose one of the following three ways to get your dashboard up and running
 
-## Docker (TBD)
+## Docker
 
 Images are hosted on docker.io, so you can easily use them with `docker` or other container engines
 
 ```bash
-docker container run -it --name dashboard dashdot
+docker container run -it --name dashboard mauricenino/dashdot
 ```
 
 ## Node (TBD - problems with yarn)
