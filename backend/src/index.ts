@@ -31,8 +31,6 @@ app.get('/system-info', async (_, res: Response<HardwareInfo>) => {
 
 // Send current system status
 io.on('connection', socket => {
-  console.log('user connected');
-
   const cpuSub = cpuObs.subscribe(async cpu => {
     socket.emit('cpu-load', cpu);
   });
@@ -46,7 +44,6 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected');
     cpuSub.unsubscribe();
     ramSub.unsubscribe();
     storageSub.unsubscribe();

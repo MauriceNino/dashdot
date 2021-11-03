@@ -37,7 +37,7 @@ export const ramObs = createBufferedInterval(
   20,
   1000,
   async (): Promise<RamLoad> => {
-    return (await si.mem()).used;
+    return (await si.mem()).active;
   }
 );
 
@@ -46,10 +46,8 @@ export const storageObs = createBufferedInterval(
   1000 * 60,
   async (): Promise<StorageLoad> => {
     const data = await si.fsSize();
+    const root = data.find(d => d.mount === '/');
 
-    return {
-      free: data.reduce((acc, cur) => acc + cur.available, 0),
-      used: data.reduce((acc, cur) => acc + cur.used, 0),
-    };
+    return root?.used!;
   }
 );

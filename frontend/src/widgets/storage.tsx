@@ -19,6 +19,9 @@ const StorageWidget: FC<StorageWidgetProps> = props => {
   const name = removeDuplicates(props.layout?.map(l => l.name));
   const type = removeDuplicates(props.layout?.map(l => l.type));
 
+  const used = props.load;
+  const available = (size ?? 0) - (used ?? 0);
+
   return (
     <HardwareInfoContainer
       color={theme.colors.storagePrimary}
@@ -44,11 +47,11 @@ const StorageWidget: FC<StorageWidgetProps> = props => {
         data={[
           {
             id: 'Used',
-            value: props.load?.used,
+            value: used,
           },
           {
             id: 'Free',
-            value: props.load?.free,
+            value: available,
           },
         ]}
         margin={{ top: 40, bottom: 40 }}
