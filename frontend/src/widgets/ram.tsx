@@ -17,15 +17,9 @@ type RamWidgetProps = {
 const RamWidget: FC<RamWidgetProps> = props => {
   const theme = useTheme();
 
-  const manufacturer = removeDuplicates(
-    props.layout?.map(l => l.manufacturer)
-  ).join(', ');
-  const type = removeDuplicates(props.layout?.map(l => l.type)).join(', ');
-  const clockSpeed = removeDuplicates(
-    props.layout?.map(l => l.clockSpeed)
-  ).join(', ');
-
-  const memCount = props.layout?.length ?? 0;
+  const manufacturer = removeDuplicates(props.layout?.map(l => l.manufacturer));
+  const type = removeDuplicates(props.layout?.map(l => l.type));
+  const clockSpeed = removeDuplicates(props.layout?.map(l => l.clockSpeed));
 
   const chartData = props.load.map((load, i) => ({
     x: i,
@@ -39,20 +33,20 @@ const RamWidget: FC<RamWidgetProps> = props => {
       heading='Memory'
       infos={[
         {
-          label: 'Brand' + (memCount > 1 ? '(s)' : ''),
-          value: manufacturer,
+          label: 'Brand' + (manufacturer.length > 1 ? '(s)' : ''),
+          value: manufacturer.join(', '),
         },
         {
           label: 'Size',
           value: props.total ? `${byteToGb(props.total)} GB` : '',
         },
         {
-          label: 'Type' + (memCount > 1 ? '(s)' : ''),
-          value: type,
+          label: 'Type' + (type.length > 1 ? '(s)' : ''),
+          value: type.join(', '),
         },
         {
-          label: 'Speed' + (memCount > 1 ? '(s)' : ''),
-          value: clockSpeed,
+          label: 'Speed' + (clockSpeed.length > 1 ? '(s)' : ''),
+          value: clockSpeed.join(', '),
         },
       ]}
       icon={faMemory}

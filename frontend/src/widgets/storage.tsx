@@ -16,10 +16,8 @@ const StorageWidget: FC<StorageWidgetProps> = props => {
   const theme = useTheme();
 
   const size = props.layout?.reduce((acc, cur) => acc + cur.size, 0);
-  const name = removeDuplicates(props.layout?.map(l => l.name)).join(', ');
-  const type = removeDuplicates(props.layout?.map(l => l.type)).join(', ');
-
-  const diskCount = props.layout?.length ?? 0;
+  const name = removeDuplicates(props.layout?.map(l => l.name));
+  const type = removeDuplicates(props.layout?.map(l => l.type));
 
   return (
     <HardwareInfoContainer
@@ -28,16 +26,16 @@ const StorageWidget: FC<StorageWidgetProps> = props => {
       heading='Storage'
       infos={[
         {
-          label: 'Model' + (diskCount > 1 ? '(s)' : ''),
-          value: name,
+          label: 'Model' + (name.length > 1 ? '(s)' : ''),
+          value: name.join(', '),
         },
         {
           label: 'Capacity',
           value: size ? `${byteToGb(size)} GB` : '',
         },
         {
-          label: 'Type' + (diskCount > 1 ? '(s)' : ''),
-          value: type,
+          label: 'Type' + (type.length > 1 ? '(s)' : ''),
+          value: type.join(''),
         },
       ]}
       icon={faHdd}
