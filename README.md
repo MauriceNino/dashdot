@@ -14,6 +14,7 @@ It is intended to be used for smaller VPS and private servers.
 
 ---
 
+- [Preview](#Preview)
 - [Installation](#Installation)
 - [Configuration](#Configuration)
 - [Contributing](#Contributing)
@@ -21,6 +22,12 @@ It is intended to be used for smaller VPS and private servers.
 **dash.** is a open-source project, so any contribution is highly appreciated. If you are interested in further developing this project, have a look at the [Contributing](#Contributing) section of this readme.
 
 In case you want to financially support this project, you can [donate here](https://paypal.me/itsMaurice).
+
+# Preview
+
+Darkmode | Lightmode
+-- | --
+<img src="_doc/screenshot_darkmode.png" alt="screenshot of the darkmode"> | <img src="_doc/screenshot_lightmode.png" alt="screenshot of the lightmode">
 
 # Installation
 
