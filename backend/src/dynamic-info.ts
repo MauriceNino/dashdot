@@ -1,42 +1,55 @@
 import { CpuLoad, RamLoad, StorageLoad } from 'dashdot-shared';
-import { interval, mergeMap, ReplaySubject } from 'rxjs';
+import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import si from 'systeminformation';
 
-// READING CPU INFO
-const getCpuInfo = async (): Promise<CpuLoad> => {
-  const cpuLoad = (await si.currentLoad()).cpus;
+const createBufferedInterval = <R>(
+  bufferSize: number,
+  intervalMs: number,
+  factory: () => Promise<R>
+): Observable<R> => {
+  const buffer = new ReplaySubject<R>(bufferSize);
 
-  return cpuLoad.map((load, i) => ({
-    load: load.load,
-    core: i,
-  }));
+  // Instantly load first value
+  factory()
+    .then(value => buffer.next(value))
+    .catch(err => buffer.error(err));
+
+  // Load values every intervalMs
+  interval(intervalMs).pipe(mergeMap(factory)).subscribe(buffer);
+
+  return buffer.asObservable();
 };
 
-const cpuBuffer = new ReplaySubject(20);
-interval(1000).pipe(mergeMap(getCpuInfo)).subscribe(cpuBuffer);
-export const cpuObs = cpuBuffer.asObservable();
+export const cpuObs = createBufferedInterval(
+  20,
+  1000,
+  async (): Promise<CpuLoad> => {
+    const cpuLoad = (await si.currentLoad()).cpus;
 
-// READING RAM INFO
-const getRamInfo = async (): Promise<RamLoad> => {
-  return (await si.mem()).used;
-};
+    return cpuLoad.map((load, i) => ({
+      load: load.load,
+      core: i,
+    }));
+  }
+);
 
-const ramBuffer = new ReplaySubject(20);
-interval(1000).pipe(mergeMap(getRamInfo)).subscribe(ramBuffer);
-export const ramObs = ramBuffer.asObservable();
+export const ramObs = createBufferedInterval(
+  20,
+  1000,
+  async (): Promise<RamLoad> => {
+    return (await si.mem()).used;
+  }
+);
 
-// READING STORAGE INFO
-const getStorageInfo = async (): Promise<StorageLoad> => {
-  const data = await si.fsSize();
+export const storageObs = createBufferedInterval(
+  20,
+  1000 * 60,
+  async (): Promise<StorageLoad> => {
+    const data = await si.fsSize();
 
-  return {
-    free: data.reduce((acc, cur) => acc + cur.available, 0),
-    used: data.reduce((acc, cur) => acc + cur.used, 0),
-  };
-};
-
-const storageBuffer = new ReplaySubject(1);
-interval(1000 * 60)
-  .pipe(mergeMap(getStorageInfo))
-  .subscribe(storageBuffer);
-export const storageObs = storageBuffer.asObservable();
+    return {
+      free: data.reduce((acc, cur) => acc + cur.available, 0),
+      used: data.reduce((acc, cur) => acc + cur.used, 0),
+    };
+  }
+);
