@@ -107,14 +107,14 @@ const ContentContainer = styled.div`
 `;
 
 const StyledInfoTable = styled(InfoTable)`
-  padding: 0;
+  padding: 5px;
   max-width: 400px;
   flex-grow: 1;
   flex-shrink: 1;
 `;
 
 const ServerIconContainer = styled.div`
-  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
@@ -243,17 +243,6 @@ const ServerWidget: FC<Partial<OsInfo>> = props => {
       </Heading>
 
       <ContentContainer>
-        <ServerIconContainer>
-          <SkeletonContent width={120} height={120} borderRadius='15px'>
-            {props.distro != null && props.platform != null && (
-              <ServerIcon
-                os={(props.distro + props.platform).toLowerCase()}
-                size='7x'
-              />
-            )}
-          </SkeletonContent>
-        </ServerIconContainer>
-
         <StyledInfoTable
           infos={[
             {
@@ -267,6 +256,17 @@ const ServerWidget: FC<Partial<OsInfo>> = props => {
             ...dateInfos,
           ]}
         />
+
+        <ServerIconContainer>
+          <SkeletonContent width={120} height={120} borderRadius='15px'>
+            {props.distro != null && props.platform != null && (
+              <ServerIcon
+                os={(props.distro + props.platform).toLowerCase()}
+                size='7x'
+              />
+            )}
+          </SkeletonContent>
+        </ServerIconContainer>
       </ContentContainer>
     </Container>
   );
