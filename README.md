@@ -34,7 +34,7 @@ Images are hosted on docker.io, so you can easily use them with `docker` or othe
 docker container run -it --name dashboard mauricenino/dashdot
 ```
 
-## Node (TBD - problems with yarn)
+## Node
 
 The package is hosted as an executable on npmjs.com, so you can run it via `npx`
 
