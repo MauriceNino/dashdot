@@ -140,8 +140,8 @@ const CpuWidget: FC<CpuWidgetProps> = props => {
         enableGridY={false}
         yScale={{
           type: 'linear',
-          min: 0,
-          max: 100,
+          min: -5,
+          max: 105,
         }}
         enableArea={true}
         defs={[
