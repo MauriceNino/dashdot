@@ -1,4 +1,4 @@
-<h1 align="center">dash. - a modern server dashboard</h1>
+<h1><img src="_doc/banner_muted.png" alt="dash. - a modern server dashboard"></h1>
 <p align="center">
   <b>dash.</b> (or <b>dashdot</b>) is a modern server dashboard, developed with a simple, but performant stack and designed with glassmorphism in mind. <br>
 <br>
