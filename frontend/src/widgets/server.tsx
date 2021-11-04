@@ -22,6 +22,7 @@ import styled, { useTheme } from 'styled-components';
 import InfoTable from '../components/info-table';
 import SkeletonContent from '../components/skeleton-content';
 import ThemedText from '../components/text';
+import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';
 
 const Container = styled.div`
@@ -158,6 +159,7 @@ type ServerWidgetProps = {
 } & Partial<OsInfo>;
 
 const ServerWidget: FC<ServerWidgetProps> = props => {
+  const isMobile = useIsMobile();
   const [darkMode, setDarkMode] = useSetting('darkMode');
   const [uptime, setUptime] = useState(0);
 
@@ -267,16 +269,18 @@ const ServerWidget: FC<ServerWidgetProps> = props => {
           ]}
         />
 
-        <ServerIconContainer>
-          <SkeletonContent width={120} height={120} borderRadius='15px'>
-            {props.distro != null && props.platform != null && (
-              <ServerIcon
-                os={(props.distro + props.platform).toLowerCase()}
-                size='7x'
-              />
-            )}
-          </SkeletonContent>
-        </ServerIconContainer>
+        {!isMobile && (
+          <ServerIconContainer>
+            <SkeletonContent width={120} height={120} borderRadius='15px'>
+              {props.distro != null && props.platform != null && (
+                <ServerIcon
+                  os={(props.distro + props.platform).toLowerCase()}
+                  size='7x'
+                />
+              )}
+            </SkeletonContent>
+          </ServerIconContainer>
+        )}
       </ContentContainer>
     </Container>
   );
