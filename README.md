@@ -7,9 +7,9 @@ It is intended to be used for smaller VPS and private servers.
 <p align="center">
   <a href="https://dash.mauz.io">Live Demo</a>
  |
-  <a href="#">Docker Image</a>
+  <a href="https://hub.docker.com/repository/docker/mauricenino/dashdot">Docker Image</a>
  |
-  <a href="#">Node Package</a>
+  <a href="https://www.npmjs.com/package/dashdot-cli">Node Package</a>
 </p>
 
 ---
