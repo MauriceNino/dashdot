@@ -1,4 +1,4 @@
-<h1><img src="_doc/banner_muted.png" alt="dash. - a modern server dashboard"></h1>
+<h1><img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/banner_muted.png?raw=true" alt="dash. - a modern server dashboard"></h1>
 <p align="center">
   <b>dash.</b> (or <b>dashdot</b>) is a modern server dashboard, developed with a simple, but performant stack and designed with glassmorphism in mind. <br>
 <br>
@@ -27,7 +27,7 @@ In case you want to financially support this project, you can [donate here](http
 
 Darkmode | Lightmode
 -- | --
-<img src="_doc/screenshot_darkmode.png" alt="screenshot of the darkmode"> | <img src="_doc/screenshot_lightmode.png" alt="screenshot of the lightmode">
+<img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/screenshot_darkmode.png?raw=true" alt="screenshot of the darkmode"> | <img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/screenshot_lightmode.png?raw=true" alt="screenshot of the lightmode">
 
 # Installation
 
