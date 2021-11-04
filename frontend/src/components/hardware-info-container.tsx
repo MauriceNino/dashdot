@@ -3,31 +3,40 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FC } from 'react';
 import { SwapSpinner } from 'react-spinners-kit';
 import styled, { useTheme } from 'styled-components';
+import { useIsMobile } from '../services/mobile';
 import InfoTable, { InfoTableProps } from './info-table';
 import ThemedText from './text';
 
-const Container = styled.div`
+const Container = styled.div<{ mobile: boolean }>`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
 `;
 
-const ChartArea = styled.div`
+const ContentContainer = styled.div<{ mobile: boolean }>`
+  display: flex;
+  flex-direction: ${({ mobile }) => (mobile ? 'column-reverse' : 'row')};
+  flex: 1 1 auto;
+  ${({ mobile }) => mobile && 'padding: 20px 0'};
+`;
+
+const ChartArea = styled.div<{ mobile: boolean }>`
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
+  ${({ mobile }) => mobile && `height: 200px;`}
 `;
 
-const ChartContainer = styled.div`
+const ChartContainer = styled.div<{ mobile: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  height: 80%;
+  height: ${({ mobile }) => (mobile ? '100%' : '110%')};
   width: 100%;
 
-  position: absolute;
-  bottom: -10px;
+  position: ${({ mobile }) => (mobile ? 'relative' : 'absolute')};
+  bottom: ${({ mobile }) => (mobile ? '0' : '-10px')};
   right: -10px;
 
   background-color: ${({ theme }) => theme.colors.surface};
@@ -85,35 +94,40 @@ type HardwareInfoProps = {
 
 const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
   const theme = useTheme();
+  const isMobile = useIsMobile();
 
   return (
-    <Container>
-      <InfoContainer>
+    <>
+      <Container mobile={isMobile}>
         <InfoIcon {...props}>
           <FontAwesomeIcon icon={props.icon} size='2x' />
         </InfoIcon>
 
-        <InfoHeading>{props.heading}</InfoHeading>
+        <ContentContainer mobile={isMobile}>
+          <InfoContainer>
+            <InfoHeading>{props.heading}</InfoHeading>
 
-        <InfoTable infosLoading={props.infosLoading} infos={props.infos} />
-      </InfoContainer>
+            <InfoTable infosLoading={props.infosLoading} infos={props.infos} />
+          </InfoContainer>
 
-      {props.extraContent}
+          {props.extraContent}
 
-      <ChartArea>
-        <ChartContainer>
-          {props.contentLoaded ? (
-            props.children
-          ) : (
-            <SwapSpinner
-              size={70}
-              color={theme.colors.background}
-              loading={true}
-            />
-          )}
-        </ChartContainer>
-      </ChartArea>
-    </Container>
+          <ChartArea mobile={isMobile}>
+            <ChartContainer mobile={isMobile}>
+              {props.contentLoaded ? (
+                props.children
+              ) : (
+                <SwapSpinner
+                  size={70}
+                  color={theme.colors.background}
+                  loading={true}
+                />
+              )}
+            </ChartContainer>
+          </ChartArea>
+        </ContentContainer>
+      </Container>
+    </>
   );
 };
 

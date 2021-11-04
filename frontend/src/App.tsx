@@ -10,6 +10,7 @@ import { useColorScheme } from 'use-color-scheme';
 import { useOsInfo } from './api/os-info';
 import GlassPane from './components/glass-pane';
 import { BACKEND_URL } from './config/config';
+import { MobileContextProvider } from './services/mobile';
 import { useSetting } from './services/settings';
 import { darkTheme, lightTheme } from './theme/theme';
 import CpuWidget from './widgets/cpu';
@@ -124,34 +125,36 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container style={antTheme}>
-        <FlexContainer>
-          <GlassPane grow={1}>
-            <ServerWidget loading={osInfo.loading} {...osInfo.data?.os} />
-          </GlassPane>
-          <GlassPane grow={2}>
-            <CpuWidget
-              loading={osInfo.loading}
-              {...osInfo.data?.cpu}
-              load={cpuLoad}
-            />
-          </GlassPane>
-          <GlassPane grow={1.5}>
-            <RamWidget
-              loading={osInfo.loading}
-              {...osInfo.data?.ram}
-              load={ramLoad}
-            />
-          </GlassPane>
-          <GlassPane grow={1.5}>
-            <StorageWidget
-              loading={osInfo.loading}
-              {...osInfo.data?.storage}
-              load={storageLoad}
-            />
-          </GlassPane>
-        </FlexContainer>
-      </Container>
+      <MobileContextProvider>
+        <Container style={antTheme}>
+          <FlexContainer>
+            <GlassPane grow={1}>
+              <ServerWidget loading={osInfo.loading} {...osInfo.data?.os} />
+            </GlassPane>
+            <GlassPane grow={2}>
+              <CpuWidget
+                loading={osInfo.loading}
+                {...osInfo.data?.cpu}
+                load={cpuLoad}
+              />
+            </GlassPane>
+            <GlassPane grow={1.5}>
+              <RamWidget
+                loading={osInfo.loading}
+                {...osInfo.data?.ram}
+                load={ramLoad}
+              />
+            </GlassPane>
+            <GlassPane grow={1.5}>
+              <StorageWidget
+                loading={osInfo.loading}
+                {...osInfo.data?.storage}
+                load={storageLoad}
+              />
+            </GlassPane>
+          </FlexContainer>
+        </Container>
+      </MobileContextProvider>
     </ThemeProvider>
   );
 }

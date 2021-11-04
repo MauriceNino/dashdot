@@ -25,9 +25,6 @@ const SkeletonContent: FC<SkeletonContentProps> = props => {
 
   let isFilled = !props.loading ?? !isEmptyContent;
 
-  console.log('isFilled', isFilled);
-  console.log('isEmptyContent', isEmptyContent);
-
   return (
     <>
       {isFilled ? (

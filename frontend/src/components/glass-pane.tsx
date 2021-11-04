@@ -1,14 +1,18 @@
 import { FC } from 'react';
 import ParallaxTilt from 'react-parallax-tilt';
 import styled from 'styled-components';
+import { useIsMobile } from '../services/mobile';
 
-const TiltContainer = styled(ParallaxTilt)<GlassPaneProps>`
+type SCProps = GlassPaneProps & { mobile: boolean };
+
+const TiltContainer = styled(ParallaxTilt)<SCProps>`
   display: flex;
-  min-width: 400px;
+  min-width: ${({ mobile }) => (mobile ? '300px' : '400px')};
+
   min-height: 300px;
 
-  height: calc(45vh - 50px);
-  margin: 20px 20px;
+  ${({ mobile }) => !mobile && 'height: calc(45vh - 50px);'}
+  margin: 20px;
 
   flex-basis: calc(${props => (props.grow ?? 1) * 33}% - 100px);
   flex-grow: 1;
@@ -28,8 +32,11 @@ type GlassPaneProps = {
 };
 
 const GlassPane: FC<GlassPaneProps> = props => {
+  const isMobile = useIsMobile();
+
   return (
     <TiltContainer
+      mobile={isMobile}
       transitionSpeed={1500}
       tiltMaxAngleX={4}
       tiltMaxAngleY={4}
