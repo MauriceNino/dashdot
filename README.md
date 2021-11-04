@@ -39,7 +39,7 @@ Images are hosted on [docker.io](https://hub.docker.com/repository/docker/mauric
 
 ```bash
 > docker container run -it \
-  --port 3001:3001 \
+  -p 3001:3001 \
   --name dashboard \
   mauricenino/dashdot
 ```
@@ -52,7 +52,7 @@ You can pass them by specifying them in your custom Dockerfile, or via the `--en
 ```bash
 > docker container run -it \
   --env DASHDOT_PORT 80 \
-  --port 3001:80 \
+  -p 3001:80 \
   --name dashboard \
   mauricenino/dashdot
 ```
