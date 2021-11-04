@@ -1,8 +1,19 @@
 {
   "name": "dashdot-cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
+  "description": "dash. - a modern server dashboard",
   "repository": "https://github.com/MauriceNino/dashdot",
+	"homepage": "https://github.com/MauriceNino/dashdot#readme",
   "author": "MauriceNino <mauriceprivat98@gmail.com>",
+	"bugs": {
+		"url": "https://github.com/MauriceNino/dashdot/issues"
+	},
+	"keywords": [
+		"monitoring",
+		"dashboard",
+		"server",
+		"glassmorphism"
+	],
   "license": "MIT",
   "bin": "cli/index.js",
   "files": [
