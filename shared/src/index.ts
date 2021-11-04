@@ -13,7 +13,7 @@ export type CpuLoad = {
 export type RamInfo = {
   total: number;
   layout: {
-    type: string;
+    type?: string;
     manufacturer?: string;
     clockSpeed?: number;
   }[];

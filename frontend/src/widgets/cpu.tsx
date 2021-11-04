@@ -23,6 +23,7 @@ const CpuSwitchContainer = styled.div`
 
 type CpuWidgetProps = {
   load: CpuLoad[];
+  loading: boolean;
 } & Partial<CpuInfo>;
 
 const CpuWidget: FC<CpuWidgetProps> = props => {
@@ -87,6 +88,7 @@ const CpuWidget: FC<CpuWidgetProps> = props => {
       color={theme.colors.cpuPrimary}
       contentLoaded={chartData.some(serie => serie.data.length > 1)}
       heading='Processor'
+      infosLoading={props.loading}
       infos={[
         {
           label: 'Brand',

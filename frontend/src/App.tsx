@@ -127,16 +127,28 @@ function App() {
       <Container style={antTheme}>
         <FlexContainer>
           <GlassPane grow={1}>
-            <ServerWidget {...osInfo.data?.os} />
+            <ServerWidget loading={osInfo.loading} {...osInfo.data?.os} />
           </GlassPane>
           <GlassPane grow={2}>
-            <CpuWidget {...osInfo.data?.cpu} load={cpuLoad} />
+            <CpuWidget
+              loading={osInfo.loading}
+              {...osInfo.data?.cpu}
+              load={cpuLoad}
+            />
           </GlassPane>
           <GlassPane grow={1.5}>
-            <RamWidget {...osInfo.data?.ram} load={ramLoad} />
+            <RamWidget
+              loading={osInfo.loading}
+              {...osInfo.data?.ram}
+              load={ramLoad}
+            />
           </GlassPane>
           <GlassPane grow={1.5}>
-            <StorageWidget {...osInfo.data?.storage} load={storageLoad} />
+            <StorageWidget
+              loading={osInfo.loading}
+              {...osInfo.data?.storage}
+              load={storageLoad}
+            />
           </GlassPane>
         </FlexContainer>
       </Container>

@@ -80,6 +80,7 @@ type HardwareInfoProps = {
   icon: IconProp;
   extraContent?: JSX.Element;
   contentLoaded: boolean;
+  infosLoading: boolean;
 } & InfoTableProps;
 
 const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
@@ -94,7 +95,7 @@ const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
 
         <InfoHeading>{props.heading}</InfoHeading>
 
-        <InfoTable infos={props.infos} />
+        <InfoTable infosLoading={props.infosLoading} infos={props.infos} />
       </InfoContainer>
 
       {props.extraContent}

@@ -17,7 +17,7 @@ import {
 } from '@fortawesome/react-fontawesome';
 import { Button, Switch } from 'antd';
 import { OsInfo } from 'dashdot-shared';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import InfoTable from '../components/info-table';
 import SkeletonContent from '../components/skeleton-content';
@@ -63,7 +63,7 @@ const ServerName = styled.span`
   text-decoration: underline;
   text-decoration-color: ${props => props.theme.colors.primary};
   position: relative;
-  bottom: -5px;
+  bottom: -3px;
 `;
 
 const ThemeSwitchContainer = styled.div`
@@ -153,7 +153,11 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
   );
 };
 
-const ServerWidget: FC<Partial<OsInfo>> = props => {
+type ServerWidgetProps = {
+  loading: boolean;
+} & Partial<OsInfo>;
+
+const ServerWidget: FC<ServerWidgetProps> = props => {
   const [darkMode, setDarkMode] = useSetting('darkMode');
   const [uptime, setUptime] = useState(0);
 
@@ -220,6 +224,11 @@ const ServerWidget: FC<Partial<OsInfo>> = props => {
     return () => clearInterval(interval);
   }, [props.uptime]);
 
+  const domain = useMemo(
+    () => window.location.hostname.split('.').slice(-2).join('.'),
+    []
+  );
+
   return (
     <Container>
       <ButtonsContainer>
@@ -239,11 +248,12 @@ const ServerWidget: FC<Partial<OsInfo>> = props => {
 
       <Heading>
         <Appendix>dash.</Appendix>
-        <ServerName>{window.location.hostname}</ServerName>
+        <ServerName>{domain}</ServerName>
       </Heading>
 
       <ContentContainer>
         <StyledInfoTable
+          infosLoading={props.loading}
           infos={[
             {
               label: 'OS',

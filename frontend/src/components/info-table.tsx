@@ -29,6 +29,7 @@ const InfoTextValue = styled(ThemedText)`
 `;
 
 export type InfoTableProps = {
+  infosLoading: boolean;
   infos: {
     label: string;
     value?: string;
@@ -43,7 +44,9 @@ const InfoTable: FC<InfoTableProps> = props => {
         <InfoTextRow key={i.toString() + info.label}>
           <InfoTextLabel>{info.label}</InfoTextLabel>
           <InfoTextValue>
-            <SkeletonContent>{info.value}</SkeletonContent>
+            <SkeletonContent loading={props.infosLoading}>
+              {info.value}
+            </SkeletonContent>
           </InfoTextValue>
         </InfoTextRow>
       ))}

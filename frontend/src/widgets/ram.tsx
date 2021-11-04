@@ -12,6 +12,7 @@ import { byteToGb } from '../utils/calculations';
 
 type RamWidgetProps = {
   load: RamLoad[];
+  loading: boolean;
 } & Partial<RamInfo>;
 
 const RamWidget: FC<RamWidgetProps> = props => {
@@ -19,7 +20,9 @@ const RamWidget: FC<RamWidgetProps> = props => {
 
   const manufacturer = removeDuplicates(props.layout?.map(l => l.manufacturer));
   const type = removeDuplicates(props.layout?.map(l => l.type));
-  const clockSpeed = removeDuplicates(props.layout?.map(l => l.clockSpeed));
+  const clockSpeed = removeDuplicates(
+    props.layout?.map(l => l.clockSpeed).filter(c => c !== 0)
+  );
 
   const chartData = props.load.map((load, i) => ({
     x: i,
@@ -31,6 +34,7 @@ const RamWidget: FC<RamWidgetProps> = props => {
       color={theme.colors.ramPrimary}
       contentLoaded={chartData.length > 1}
       heading='Memory'
+      infosLoading={props.loading}
       infos={[
         {
           label: 'Brand' + (manufacturer.length > 1 ? '(s)' : ''),

@@ -6,6 +6,7 @@ type SkeletonContentProps = {
   height?: number;
   width?: number;
   borderRadius?: string;
+  loading?: boolean;
 };
 
 const SkeletonContent: FC<SkeletonContentProps> = props => {
@@ -14,20 +15,27 @@ const SkeletonContent: FC<SkeletonContentProps> = props => {
   const width = props.height ?? 150;
 
   const child = props.children;
-  let isFilled = true;
+  let isEmptyContent = false;
 
   if (child == null) {
-    isFilled = false;
+    isEmptyContent = true;
   } else if (typeof child === 'string') {
-    isFilled = child.trim().length > 0;
-  } else if (typeof child === 'boolean') {
-    isFilled = child;
+    isEmptyContent = child.trim().length === 0;
   }
+
+  let isFilled = !props.loading ?? !isEmptyContent;
+
+  console.log('isFilled', isFilled);
+  console.log('isEmptyContent', isEmptyContent);
 
   return (
     <>
       {isFilled ? (
-        child
+        isEmptyContent ? (
+          '/'
+        ) : (
+          child
+        )
       ) : (
         <ContentLoader
           style={{
