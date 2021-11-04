@@ -38,7 +38,10 @@ Choose one of the following three ways to get your dashboard up and running
 Images are hosted on [docker.io](https://hub.docker.com/repository/docker/mauricenino/dashdot), so you can easily use them with `docker` or other container engines
 
 ```bash
-docker container run -it -p 3001:3001 --name dashboard mauricenino/dashdot
+> docker container run -it \
+  --port 3001:3001 \
+  --name dashboard \
+  mauricenino/dashdot
 ```
 
 **Configuration**
@@ -47,7 +50,11 @@ You can configure your Docker-installed dashboard via environment variables insi
 You can pass them by specifying them in your custom Dockerfile, or via the `--env` flag.
 
 ```bash
-> docker container run -it --env DASHDOT_PORT 80 -p 3001:80 --name dashboard mauricenino/dashdot
+> docker container run -it \
+  --env DASHDOT_PORT 80 \
+  --port 3001:80 \
+  --name dashboard \
+  mauricenino/dashdot
 ```
 
 To read more about configuration options, you cam visit [the configuration section](#Configuration).
@@ -57,7 +64,7 @@ To read more about configuration options, you cam visit [the configuration secti
 The package is hosted as an executable on [npmjs.com](https://www.npmjs.com/package/dashdot-cli), so you can run it via `npx`
 
 ```bash
-npx dashdot-cli
+> npx dashdot-cli
 ```
 
 **Configuration**
@@ -86,13 +93,13 @@ To download the repository and run it yourself, there are a few steps necessary:
 If you have not already installed yarn, install it now:
 
 ```bash
-npm i -g yarn
+> npm i -g yarn
 ```
 
 After that, download and build the project (might take a few minutes)
 
 ```bash
-git clone https://github.com/MauriceNino/dashdot \
+> git clone https://github.com/MauriceNino/dashdot \
   && cd dashdot \
   && yarn \
   && yarn build
@@ -101,7 +108,7 @@ git clone https://github.com/MauriceNino/dashdot \
 When done, you can run the dashboard by executing:
 
 ```bash
-yarn start
+> yarn start
 ```
 
 **Configuration**
