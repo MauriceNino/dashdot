@@ -35,19 +35,49 @@ Choose one of the following three ways to get your dashboard up and running
 
 ## Docker
 
-Images are hosted on docker.io, so you can easily use them with `docker` or other container engines
+Images are hosted on [docker.io](https://hub.docker.com/repository/docker/mauricenino/dashdot), so you can easily use them with `docker` or other container engines
 
 ```bash
-docker container run -it --name dashboard mauricenino/dashdot
+docker container run -it -p 3001:3001 --name dashboard mauricenino/dashdot
 ```
+
+**Configuration**
+
+You can configure your Docker-installed dashboard via environment variables inside the container. 
+You can pass them by specifying them in your custom Dockerfile, or via the `--env` flag.
+
+```bash
+> docker container run -it --env DASHDOT_PORT 80 -p 3001:80 --name dashboard mauricenino/dashdot
+```
+
+To read more about configuration options, you cam visit [the configuration section](#Configuration).
 
 ## Node
 
-The package is hosted as an executable on npmjs.com, so you can run it via `npx`
+The package is hosted as an executable on [npmjs.com](https://www.npmjs.com/package/dashdot-cli), so you can run it via `npx`
 
 ```bash
 npx dashdot-cli
 ```
+
+**Configuration**
+
+You can configure your Node-installed dashboard via environment variables, or by passing command-line arguments.
+Alternatively, you can also pass your config via CLI arguments.
+
+
+```bash
+> export DASHDOT_PORT=80
+> npx dashdot-cli
+```
+
+or
+
+```bash
+> npx dashdot-cli DASHDOT_PORT=80
+```
+
+To read more about configuration options, you cam visit [the configuration section](#Configuration).
 
 ## Git
 
@@ -55,13 +85,13 @@ To download the repository and run it yourself, there are a few steps necessary:
 
 If you have not already installed yarn, install it now:
 
-```
+```bash
 npm i -g yarn
 ```
 
 After that, download and build the project (might take a few minutes)
 
-```
+```bash
 git clone https://github.com/MauriceNino/dashdot \
   && cd dashdot \
   && yarn \
@@ -70,19 +100,30 @@ git clone https://github.com/MauriceNino/dashdot \
 
 When done, you can run the dashboard by executing:
 
-```
+```bash
 yarn start
 ```
 
-# Configuration (TBD)
+**Configuration**
 
-The configuration is done via environment variables, so to change the config, you have to either set the environment variables in your docker image (or during startup), or provide a `.env` file.
+You can configure your Git-installed dashboard via environment variables. 
+
+```bash
+> export DASHDOT_PORT=80
+> yarn start
+```
+
+To read more about configuration options, you cam visit [the configuration section](#Configuration).
+
+# Configuration Options
 
 The following configuration options are available.
 
+If you dont know how to set them, look up the section for your type of installment (Docker, Node or Git).
+
 Variable | Description | Default Value
 -- | -- | --
-DASHDOT_PORT | The port where the express backend is running | 3001
+DASHDOT_PORT | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | 3001
 
 # Contributing
 

@@ -4,6 +4,7 @@
 # production
 **/dist
 **/build
+cli/*.js
 
 # misc
 **.DS_Store

@@ -4,7 +4,7 @@
   "repository": "https://github.com/MauriceNino/dashdot",
   "author": "MauriceNino <mauriceprivat98@gmail.com>",
   "license": "MIT",
-  "bin": "cli.js",
+  "bin": "cli/index.js",
   "files": [
     "frontend/build/**/*",
     "frontend/package.json",
@@ -15,20 +15,20 @@
     "shared/dist/**/*",
     "shared/package.json",
     "shared/yarn.lock",
-    "cli.js"
+    "cli/index.js"
   ],
   "scripts": {
-    "build": "(cd ./shared && yarn build) && (cd ./frontend && yarn build) && (cd ./backend && yarn build)",
+    "build": "tsc && (cd ./shared && yarn build) && (cd ./frontend && yarn build) && (cd ./backend && yarn build)",
     "install": "(cd ./shared && yarn --ignore-scripts) && (cd ./frontend && yarn --ignore-scripts) && (cd ./backend && yarn --ignore-scripts)",
     "start": "(cd ./backend && yarn start)",
-
     "build-shared": "(cd ./shared && yarn build)",
     "dev": "(trap 'kill 0' SIGINT; (cd ./frontend && yarn run dev) & (cd ./backend && yarn run dev))",
-    
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write ."
   },
   "devDependencies": {
-    "prettier": "2.4.1"
+    "@types/node": "^16.11.6",
+    "prettier": "2.4.1",
+    "typescript": "^4.4.4"
   }
 }
