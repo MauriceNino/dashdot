@@ -10,6 +10,7 @@ import { byteToGb } from '../utils/calculations';
 
 type StorageWidgetProps = {
   load?: StorageLoad;
+  loading: boolean;
 } & Partial<StorageInfo>;
 
 const StorageWidget: FC<StorageWidgetProps> = props => {
@@ -27,6 +28,7 @@ const StorageWidget: FC<StorageWidgetProps> = props => {
       color={theme.colors.storagePrimary}
       contentLoaded={props.load != null}
       heading='Storage'
+      infosLoading={props.loading}
       infos={[
         {
           label: 'Model' + (name.length > 1 ? '(s)' : ''),

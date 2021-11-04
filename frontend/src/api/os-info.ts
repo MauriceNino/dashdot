@@ -2,7 +2,12 @@ import axios from 'axios';
 import { HardwareInfo } from 'dashdot-shared';
 import { useEffect, useState } from 'react';
 import { BACKEND_URL } from '../config/config';
-import { HttpResponse } from './types';
+
+export type HttpResponse<T> = {
+  loading: boolean;
+  data?: T;
+  error?: any;
+};
 
 export const useOsInfo = () => {
   const [osInfo, setOsInfo] = useState<HttpResponse<HardwareInfo>>({
