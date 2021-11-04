@@ -107,7 +107,8 @@ const ContentContainer = styled.div`
   flex-grow: 1;
 `;
 
-const StyledInfoTable = styled(InfoTable)`
+const StyledInfoTable = styled(InfoTable)<{ mobile: boolean }>`
+  margin-top: ${props => (props.mobile ? '25px' : '0')};
   padding: 5px;
   max-width: 400px;
   flex-grow: 1;
@@ -255,6 +256,7 @@ const ServerWidget: FC<ServerWidgetProps> = props => {
 
       <ContentContainer>
         <StyledInfoTable
+          mobile={isMobile}
           infosLoading={props.loading}
           infos={[
             {

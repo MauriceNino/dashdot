@@ -37,6 +37,7 @@ const GlassPane: FC<GlassPaneProps> = props => {
   return (
     <TiltContainer
       mobile={isMobile}
+      tiltEnable={!isMobile}
       transitionSpeed={1500}
       tiltMaxAngleX={4}
       tiltMaxAngleY={4}

@@ -10,7 +10,7 @@ import { useColorScheme } from 'use-color-scheme';
 import { useOsInfo } from './api/os-info';
 import GlassPane from './components/glass-pane';
 import { BACKEND_URL } from './config/config';
-import { MobileContextProvider } from './services/mobile';
+import { MobileContextProvider, useIsMobile } from './services/mobile';
 import { useSetting } from './services/settings';
 import { darkTheme, lightTheme } from './theme/theme';
 import CpuWidget from './widgets/cpu';
@@ -66,10 +66,10 @@ const Container = styled.div`
   transition: background 0.5s ease;
 `;
 
-const FlexContainer = styled.div`
-  width: 90vw;
-  min-height: 90vh;
-  margin: 5vh auto 0 auto;
+const FlexContainer = styled.div<{ mobile: boolean }>`
+  width: ${({ mobile }) => (mobile ? '96vw' : '90vw')};
+  min-height: ${({ mobile }) => (mobile ? '96vh' : '90vh')};
+  margin: ${({ mobile }) => (mobile ? '2vh' : '5vh')} auto 0 auto;
 
   display: flex;
   flex-flow: row wrap;
@@ -78,6 +78,7 @@ const FlexContainer = styled.div`
 function App() {
   const { scheme } = useColorScheme();
   const [darkMode] = useSetting('darkMode', scheme === 'dark');
+  const isMobile = useIsMobile();
 
   const theme = useMemo(() => (darkMode ? darkTheme : lightTheme), [darkMode]);
   const antTheme = useMemo(
@@ -127,7 +128,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <MobileContextProvider>
         <Container style={antTheme}>
-          <FlexContainer>
+          <FlexContainer mobile={isMobile}>
             <GlassPane grow={1}>
               <ServerWidget loading={osInfo.loading} {...osInfo.data?.os} />
             </GlassPane>
