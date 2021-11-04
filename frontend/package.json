@@ -2,6 +2,7 @@
   "name": "dashdot-frontend",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "react-scripts start",
     "build": "react-scripts build"
