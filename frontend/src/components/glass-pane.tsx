@@ -9,7 +9,7 @@ const TiltContainer = styled(ParallaxTilt)<SCProps>`
   display: flex;
   min-width: ${({ mobile }) => (mobile ? '300px' : '400px')};
 
-  min-height: 300px;
+  min-height: 360px;
 
   ${({ mobile }) => !mobile && 'height: calc(45vh - 50px);'}
   margin: 20px;
