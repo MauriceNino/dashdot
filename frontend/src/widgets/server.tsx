@@ -101,7 +101,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   column-gap: 40px;
 
   flex-grow: 1;
