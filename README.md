@@ -1,22 +1,37 @@
-<h1><img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/banner_muted.png?raw=true" alt="dash. - a modern server dashboard"></h1>
+<h1>
+  <img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/banner_muted.png?raw=true" alt="dash. - a modern server dashboard">
+</h1>
+
+<div align="center">
+  <a href="https://drone.mauz.io/MauriceNino/dashdot" target="_blank">
+    <img src="https://drone.mauz.io/api/badges/MauriceNino/dashdot/status.svg">
+  </a>
+</div>
+
+<br/>
+<br/>
+
 <p align="center">
   <b>dash.</b> (or <b>dashdot</b>) is a modern server dashboard, developed with a simple, but performant stack and designed with glassmorphism in mind. <br>
 <br>
 It is intended to be used for smaller VPS and private servers.
 </p>
 <p align="center">
-  <a href="https://dash.mauz.io">Live Demo</a>
+  <a href="https://dash.mauz.io" target="_blank">Live Demo</a>
  |
-  <a href="https://hub.docker.com/repository/docker/mauricenino/dashdot">Docker Image</a>
+  <a href="https://hub.docker.com/repository/docker/mauricenino/dashdot" target="_blank">Docker Image</a>
  |
-  <a href="https://www.npmjs.com/package/dashdot-cli">Node Package</a>
+  <a href="https://www.npmjs.com/package/dashdot-cli" target="_blank">Node Package</a>
 </p>
 
 ---
 
+
+## Content
+
 - [Preview](#Preview)
 - [Installation](#Installation)
-- [Configuration](#Configuration)
+- [Configuration](#Configuration-Options)
 - [Contributing](#Contributing)
 
 **dash.** is a open-source project, so any contribution is highly appreciated. If you are interested in further developing this project, have a look at the [Contributing](#Contributing) section of this readme.

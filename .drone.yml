@@ -1,0 +1,72 @@
+---
+kind: pipeline
+type: docker
+name: CI
+
+steps:
+  - name: build & test
+    image: node:lts-alpine
+    commands:
+      - yarn --frozen-lockfile
+      - yarn run prettier:check
+      - yarn run build
+  - name: update server files
+    image: alpine/git
+    when:
+      branch: master
+    volumes:
+      - name: server
+        path: /server
+    commands:
+      - cd /server/_repos/dashdot
+      - git pull --rebase
+  - name: deploy to server
+    image: docker/compose
+    when:
+      branch: master
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+      - name: server
+        path: /server
+    commands:
+      - cd /server
+      - ./start.sh dashdot --build
+  - name: deploy to dockerhub
+    image: docker/compose
+    when:
+      branch: master
+    environment:
+      DOCKER_ACCESS_KEY:
+        from_secret: DOCKER_ACCESS_KEY
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+      - name: server
+        path: /server
+    commands:
+      - cd /server/_repos/dashdot
+      - docker image build -t mauricenino/dashdot .
+      - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
+      - docker push mauricenino/dashdot:latest
+      - |
+        docker tag mauricenino/dashdot mauricenino/dashdot:$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
+      - |
+        docker push mauricenino/dashdot:$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
+      - docker logout
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+  - name: server
+    host:
+      path: /server
+
+---
+kind: secret
+name: DOCKER_ACCESS_KEY
+data: ysbzIhceuQjxnBZ7kRt63CswtG85WTCiCBFPCM8wmV9qBQTS9kGPktIqw1wevm1O0U2l1pTWl7wt2e7D+a462Q==
+---
+kind: signature
+hmac: 85fa073b514a06882630f283de167aaec752acffd9f420f9b166dc3cd1ad7c11
