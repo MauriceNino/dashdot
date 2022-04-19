@@ -15,14 +15,12 @@ services:
       - ./shared:/app/shared
 
   backend:
-    image: node:16-alpine
-    command: yarn run dev
-    working_dir: /app/backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.dev
     stdin_open: true
     tty: true
     restart: unless-stopped
-    depends_on:
-      - db
     ports:
       - '3001:3001'
     volumes:
