@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 <h1>
   <img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/banner_muted.png?raw=true" alt="dash. - a modern server dashboard">
 </h1>
@@ -20,12 +21,10 @@ It is intended to be used for smaller VPS and private servers.
   <a href="https://dash.mauz.io" target="_blank">Live Demo</a>
  |
   <a href="https://hub.docker.com/repository/docker/mauricenino/dashdot" target="_blank">Docker Image</a>
- |
-  <a href="https://www.npmjs.com/package/dashdot-cli" target="_blank">Node Package</a>
 </p>
 
----
-
+# 
+<!-- markdownlint-enable -->
 
 ## Content
 
@@ -34,7 +33,9 @@ It is intended to be used for smaller VPS and private servers.
 - [Configuration](#Configuration-Options)
 - [Contributing](#Contributing)
 
-**dash.** is a open-source project, so any contribution is highly appreciated. If you are interested in further developing this project, have a look at the [Contributing](#Contributing) section of this readme.
+**dash.** is a open-source project, so any contribution is highly appreciated.
+If you are interested in further developing this project, have a look at the
+[Contributing](#Contributing) section of this readme.
 
 In case you want to financially support this project, you can [donate here](https://paypal.me/itsMaurice).
 
@@ -42,15 +43,19 @@ In case you want to financially support this project, you can [donate here](http
 
 Darkmode | Lightmode
 -- | --
+<!-- markdownlint-disable -->
 <img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/screenshot_darkmode.png?raw=true" alt="screenshot of the darkmode"> | <img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/screenshot_lightmode.png?raw=true" alt="screenshot of the lightmode">
+<!-- markdownlint-enable -->
 
 # Installation
 
-Choose one of the following three ways to get your dashboard up and running
+You can run dashdot from a docker container, or build it yourself.
 
 ## Docker
 
-Images are hosted on [docker.io](https://hub.docker.com/repository/docker/mauricenino/dashdot), so you can easily use them with `docker` or other container engines
+Images are hosted on
+[docker.io](https://hub.docker.com/repository/docker/mauricenino/dashdot),
+so you can easily use them with `docker` or other container engines
 
 ```bash
 > docker container run -it \
@@ -59,10 +64,10 @@ Images are hosted on [docker.io](https://hub.docker.com/repository/docker/mauric
   mauricenino/dashdot
 ```
 
-**Configuration**
-
-You can configure your Docker-installed dashboard via environment variables inside the container. 
-You can pass them by specifying them in your custom Dockerfile, or via the `--env` flag.
+You can configure your Docker-installed dashboard via environment variables
+inside the container.
+You can pass them by specifying them in your custom Dockerfile, or via the
+`--env` flag.
 
 ```bash
 > docker container run -it \
@@ -70,33 +75,6 @@ You can pass them by specifying them in your custom Dockerfile, or via the `--en
   -p 3001:80 \
   --name dashboard \
   mauricenino/dashdot
-```
-
-To read more about configuration options, you cam visit [the configuration section](#Configuration).
-
-## Node
-
-The package is hosted as an executable on [npmjs.com](https://www.npmjs.com/package/dashdot-cli), so you can run it via `npx`
-
-```bash
-> npx dashdot-cli
-```
-
-**Configuration**
-
-You can configure your Node-installed dashboard via environment variables, or by passing command-line arguments.
-Alternatively, you can also pass your config via CLI arguments.
-
-
-```bash
-> export DASHDOT_PORT=80
-> npx dashdot-cli
-```
-
-or
-
-```bash
-> npx dashdot-cli DASHDOT_PORT=80
 ```
 
 To read more about configuration options, you cam visit [the configuration section](#Configuration).
@@ -126,22 +104,21 @@ When done, you can run the dashboard by executing:
 > yarn start
 ```
 
-**Configuration**
-
-You can configure your Git-installed dashboard via environment variables. 
+You can configure your Git-installed dashboard via environment variables.
 
 ```bash
 > export DASHDOT_PORT=80
 > yarn start
 ```
 
-To read more about configuration options, you cam visit [the configuration section](#Configuration).
+To read more about configuration options, you cam visit [the configuration section](#Configuration-Options).
 
 # Configuration Options
 
 The following configuration options are available.
 
-If you dont know how to set them, look up the section for your type of installment (Docker, Node or Git).
+If you dont know how to set them, look up the section for your type of installment
+(Docker or Git).
 
 Variable | Description | Default Value
 -- | -- | --
@@ -149,24 +126,31 @@ DASHDOT_PORT | The port where the express backend is running (the backend serves
 
 # Contributing
 
-The simplest way of contributing is to create [a new issue](https://github.com/MauriceNino/dashdot/issues) with a feature-request or bug-report.
+The simplest way of contributing is to create
+[a new issue](https://github.com/MauriceNino/dashdot/issues) with a
+feature-request or bug-report.
 
-If you are able to, you can also create a [pull request](https://github.com/MauriceNino/dashdot/pulls) to add the wanted features or fix the found bug.
+If you are able to, you can also create a
+[pull request](https://github.com/MauriceNino/dashdot/pulls) to add the wanted
+features or fix the found bug.
 
-To start working on this project, you can start by going through the Install - Git guide, but omit the `yarn start` part.
-When done, you can run the project in dev-mode using `yarn run dev`. This will start the express backend using `nodemon` and the react frontend using `create-react-app`.
+To start working on this project, you can start by going through the
+Install - Git guide, but omit the `yarn start` part.
+When done, you can run the project in dev-mode using `yarn run dev`.
+This will start the express backend using `nodemon` and the
+react frontend using `create-react-app`.
 
 ## Stack for contributing
 
 - [Typescript](https://github.com/microsoft/TypeScript)
 - [Socket.io](https://github.com/socketio/socket.io)
 
-**Backend**
+### Backend
 
 - [Express](https://github.com/expressjs/express)
 - [Rxjs](https://github.com/ReactiveX/rxjs)
 
-**Frontend**
+### Frontend
 
 - [React](https://github.com/facebook/react)
 - [Styled Components](https://github.com/styled-components/styled-components)
