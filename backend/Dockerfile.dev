@@ -1,0 +1,9 @@
+FROM node:16-alpine
+
+WORKDIR /app/backend
+
+RUN apk update && apk add lsblk
+
+EXPOSE 3001
+
+CMD ["yarn", "run", "dev"]
