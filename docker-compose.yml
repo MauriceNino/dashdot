@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+  frontend:
+    image: node:16-alpine
+    command: yarn run dev
+    working_dir: /app/frontend
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/app/frontend
+      - ./shared:/app/shared
+
+  backend:
+    image: node:16-alpine
+    command: yarn run dev
+    working_dir: /app/backend
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./backend:/app/backend
+      - ./common:/app/common
+      - /var/run/docker.sock:/var/run/docker.sock
