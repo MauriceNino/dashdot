@@ -1,6 +1,6 @@
 {
   "name": "dashdot-cli",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "dash. - a modern server dashboard",
   "repository": "https://github.com/MauriceNino/dashdot",
   "homepage": "https://github.com/MauriceNino/dashdot#readme",
@@ -33,7 +33,7 @@
     "install": "(cd ./shared && yarn --ignore-scripts) && (cd ./frontend && yarn --ignore-scripts) && (cd ./backend && yarn --ignore-scripts)",
     "start": "(cd ./backend && yarn start)",
     "build-shared": "(cd ./shared && yarn build)",
-    "dev": "(trap 'kill 0' SIGINT; (cd ./frontend && yarn run dev) & (cd ./backend && yarn run dev))",
+    "dev": "docker-compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write ."
   },
