@@ -1,6 +1,6 @@
 import { faHdd } from '@fortawesome/free-solid-svg-icons';
 import { ResponsivePie } from '@nivo/pie';
-import { StorageInfo, StorageLoad } from 'dashdot-shared';
+import { Config, StorageInfo, StorageLoad } from 'dashdot-shared';
 import { FC } from 'react';
 import { useTheme } from 'styled-components';
 import HardwareInfoContainer from '../components/hardware-info-container';
@@ -11,24 +11,40 @@ import { byteToGb } from '../utils/calculations';
 type StorageWidgetProps = {
   load?: StorageLoad;
   loading: boolean;
-} & Partial<StorageInfo>;
+  data?: StorageInfo;
+  override?: Config['override'];
+};
 
-const StorageWidget: FC<StorageWidgetProps> = props => {
+const StorageWidget: FC<StorageWidgetProps> = ({
+  load,
+  loading,
+  data,
+  override,
+}) => {
   const theme = useTheme();
 
-  const size = props.layout?.reduce((acc, cur) => acc + cur.size, 0);
-  const name = removeDuplicates(props.layout?.map(l => l.name));
-  const type = removeDuplicates(props.layout?.map(l => l.type));
+  const size =
+    override?.storage_capacity ??
+    data?.layout?.reduce((acc, cur) => acc + cur.size, 0);
+  const name = removeDuplicates(
+    override?.storage_model
+      ? [override?.storage_model]
+      : data?.layout?.map(l => l.name)
+  );
+  const type = removeDuplicates(
+    override?.storage_type
+      ? [override?.storage_type]
+      : data?.layout?.map(l => l.type)
+  );
 
-  const used = props.load;
-  const available = (size ?? 0) - (used ?? 0);
+  const available = (size ?? 0) - (load ?? 0);
 
   return (
     <HardwareInfoContainer
       color={theme.colors.storagePrimary}
-      contentLoaded={props.load != null}
+      contentLoaded={load != null}
       heading='Storage'
-      infosLoading={props.loading}
+      infosLoading={loading}
       infos={[
         {
           label: 'Model' + (name.length > 1 ? '(s)' : ''),
@@ -49,7 +65,7 @@ const StorageWidget: FC<StorageWidgetProps> = props => {
         data={[
           {
             id: 'Used',
-            value: used,
+            value: load,
           },
           {
             id: 'Free',
