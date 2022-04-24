@@ -3,7 +3,7 @@ import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
 import { linearGradientDef } from '@nivo/core';
 import { Datum, ResponsiveLine, Serie } from '@nivo/line';
 import { Switch } from 'antd';
-import { CpuInfo, CpuLoad } from 'dashdot-shared';
+import { Config, CpuInfo, CpuLoad } from 'dashdot-shared';
 import { FC, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import HardwareInfoContainer from '../components/hardware-info-container';
@@ -24,9 +24,11 @@ const CpuSwitchContainer = styled.div`
 type CpuWidgetProps = {
   load: CpuLoad[];
   loading: boolean;
-} & Partial<CpuInfo>;
+  data?: CpuInfo;
+  override?: Config['override'];
+};
 
-const CpuWidget: FC<CpuWidgetProps> = props => {
+const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, override }) => {
   const theme = useTheme();
 
   const [showThreads, setShowThreads] = useState(false);
@@ -35,19 +37,19 @@ const CpuWidget: FC<CpuWidgetProps> = props => {
   let chartData: Serie[] = [];
 
   if (showThreads) {
-    const coresWithValues = props.load.reduce(
+    const coresWithValues = load.reduce(
       (acc, curr) => {
-        curr.forEach(({ load, core }) => {
+        curr.forEach(({ load: l, core }) => {
           if (acc[core])
             acc[core] = acc[core].concat({
               x: acc[core].length,
-              y: load,
+              y: l,
             });
           else
             acc[core] = [
               {
                 x: 0,
-                y: load,
+                y: l,
               },
             ];
         });
@@ -64,7 +66,7 @@ const CpuWidget: FC<CpuWidgetProps> = props => {
       data: value,
     }));
   } else {
-    const chartValues: Datum[] = props.load.reduce((acc, curr, i) => {
+    const chartValues: Datum[] = load.reduce((acc, curr, i) => {
       const avgLoad =
         curr.reduce((acc, curr) => acc + curr.load, 0) / curr.length;
 
@@ -88,27 +90,30 @@ const CpuWidget: FC<CpuWidgetProps> = props => {
       color={theme.colors.cpuPrimary}
       contentLoaded={chartData.some(serie => serie.data.length > 1)}
       heading='Processor'
-      infosLoading={props.loading}
+      infosLoading={loading}
       infos={[
         {
           label: 'Brand',
-          value: props.manufacturer,
+          value: override?.cpu_brand ?? data?.manufacturer,
         },
         {
           label: 'Model',
-          value: props.brand,
+          value: override?.cpu_model ?? data?.brand,
         },
         {
           label: 'Cores',
-          value: props.cores?.toString(),
+          value: (override?.cpu_cores ?? data?.cores)?.toString(),
         },
         {
           label: 'Threads',
-          value: props.threads?.toString(),
+          value: (override?.cpu_threads ?? data?.threads)?.toString(),
         },
         {
           label: 'Frequency',
-          value: props.speed ? `${props.speed} GHz` : '',
+          value:
+            override?.cpu_frequency || data?.speed
+              ? `${override?.cpu_frequency ?? data?.speed} GHz`
+              : '',
         },
       ]}
       icon={faMicrochip}

@@ -44,3 +44,29 @@ export type HardwareInfo = {
   ram: RamInfo;
   storage: StorageInfo;
 };
+
+export type Config = {
+  port: number;
+  override: {
+    distro?: string;
+    release?: string;
+    arch?: string;
+    platform?: string;
+    cpu_brand?: string;
+    cpu_model?: string;
+    cpu_cores?: number;
+    cpu_threads?: number;
+    cpu_frequency?: number;
+    ram_brand?: string;
+    ram_size?: number;
+    ram_type?: string;
+    ram_speed?: number;
+    storage_model?: string;
+    storage_capacity?: number;
+    storage_type?: string;
+  };
+};
+
+export type ServerInfo = HardwareInfo & {
+  config: Config;
+};
