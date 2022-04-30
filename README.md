@@ -76,6 +76,7 @@ You can pass them by specifying them in your custom Dockerfile, or via the
 > docker container run -it \
   -p 80:3001 \
   --privileged \
+  --env DASHDOT_DISABLE_TILT "true" \
   --env DASHDOT_OVERRIDE_DISTRO "Ubuntu" \
   --name dashdot \
   mauricenino/dashdot
@@ -128,6 +129,7 @@ If you dont know how to set them, look up the section for your type of installme
 Variable | Description | Type | Default Value
 -- | -- | -- | --
 DASHDOT_PORT | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`
+DASHDOT_DISABLE_TILT | If you want to disable the tilt effect when hovering over the widgets with your mouse | boolean | false
 DASHDOT_OVERRIDE_DISTRO | The distro of the host OS (shown in field "OS" and used for image) | string |
 DASHDOT_OVERRIDE_RELEASE | The release version of the host OS (shown in field "OS") | string |
 DASHDOT_OVERRIDE_PLATFORM | The platform (e.g. "darwin") of the host OS (used for image) | string |
