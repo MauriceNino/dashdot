@@ -7,7 +7,7 @@ import {
   ThemeProvider,
 } from 'styled-components';
 import { useColorScheme } from 'use-color-scheme';
-import { useOsInfo } from './api/os-info';
+import { useServerInfo } from './api/os-info';
 import GlassPane from './components/glass-pane';
 import { BACKEND_URL } from './config/config';
 import { MobileContextProvider, useIsMobile } from './services/mobile';
@@ -90,7 +90,12 @@ function App() {
     [theme]
   );
 
-  const osInfo = useOsInfo();
+  const serverInfo = useServerInfo();
+  const osData = serverInfo.data?.os;
+  const cpuData = serverInfo.data?.cpu;
+  const ramData = serverInfo.data?.ram;
+  const storageData = serverInfo.data?.storage;
+  const override = serverInfo.data?.config.override;
 
   const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
   const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
@@ -130,27 +135,34 @@ function App() {
         <Container style={antTheme}>
           <FlexContainer mobile={isMobile}>
             <GlassPane grow={1}>
-              <ServerWidget loading={osInfo.loading} {...osInfo.data?.os} />
+              <ServerWidget
+                loading={serverInfo.loading}
+                data={osData}
+                override={override}
+              />
             </GlassPane>
             <GlassPane grow={2}>
               <CpuWidget
-                loading={osInfo.loading}
-                {...osInfo.data?.cpu}
+                loading={serverInfo.loading}
+                data={cpuData}
                 load={cpuLoad}
+                override={override}
               />
             </GlassPane>
             <GlassPane grow={1.5}>
               <RamWidget
-                loading={osInfo.loading}
-                {...osInfo.data?.ram}
+                loading={serverInfo.loading}
+                data={ramData}
                 load={ramLoad}
+                override={override}
               />
             </GlassPane>
             <GlassPane grow={1.5}>
               <StorageWidget
-                loading={osInfo.loading}
-                {...osInfo.data?.storage}
+                loading={serverInfo.loading}
+                data={storageData}
                 load={storageLoad}
+                override={override}
               />
             </GlassPane>
           </FlexContainer>

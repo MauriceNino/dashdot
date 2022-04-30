@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { HardwareInfo } from 'dashdot-shared';
+import { ServerInfo } from 'dashdot-shared';
 import { useEffect, useState } from 'react';
 import { BACKEND_URL } from '../config/config';
 
@@ -9,27 +9,27 @@ export type HttpResponse<T> = {
   error?: any;
 };
 
-export const useOsInfo = () => {
-  const [osInfo, setOsInfo] = useState<HttpResponse<HardwareInfo>>({
+export const useServerInfo = () => {
+  const [serverInfo, setServerInfo] = useState<HttpResponse<ServerInfo>>({
     loading: true,
   });
 
   useEffect(() => {
     axios
-      .get<HardwareInfo>(`${BACKEND_URL}/system-info`)
+      .get<ServerInfo>(`${BACKEND_URL}/system-info`)
       .then(result =>
-        setOsInfo({
+        setServerInfo({
           loading: false,
           data: result.data,
         })
       )
       .catch(error =>
-        setOsInfo({
+        setServerInfo({
           loading: false,
           error: error,
         })
       );
   }, []);
 
-  return osInfo;
+  return serverInfo;
 };
