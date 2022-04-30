@@ -25,6 +25,7 @@ services:
     environment:
       - DASHDOT_OVERRIDE_DISTRO=Test Server
       - DASHDOT_OVERRIDE_RELEASE=0.0.0
+      - DASHDOT_DISABLE_TILT=true
     ports:
       - '3001:3001'
     volumes:

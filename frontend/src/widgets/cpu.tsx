@@ -25,11 +25,12 @@ type CpuWidgetProps = {
   load: CpuLoad[];
   loading: boolean;
   data?: CpuInfo;
-  override?: Config['override'];
+  config?: Config;
 };
 
-const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, override }) => {
+const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
   const theme = useTheme();
+  const override = config?.override;
 
   const [showThreads, setShowThreads] = useState(false);
 

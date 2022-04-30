@@ -14,11 +14,12 @@ type RamWidgetProps = {
   load: RamLoad[];
   loading: boolean;
   data?: RamInfo;
-  override?: Config['override'];
+  config?: Config;
 };
 
-const RamWidget: FC<RamWidgetProps> = ({ load, loading, data, override }) => {
+const RamWidget: FC<RamWidgetProps> = ({ load, loading, data, config }) => {
   const theme = useTheme();
+  const override = config?.override;
 
   const manufacturer = removeDuplicates(
     override?.ram_brand

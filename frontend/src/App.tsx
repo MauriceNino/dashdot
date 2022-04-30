@@ -95,7 +95,7 @@ function App() {
   const cpuData = serverInfo.data?.cpu;
   const ramData = serverInfo.data?.ram;
   const storageData = serverInfo.data?.storage;
-  const override = serverInfo.data?.config.override;
+  const config = serverInfo.data?.config;
 
   const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
   const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
@@ -134,35 +134,35 @@ function App() {
       <MobileContextProvider>
         <Container style={antTheme}>
           <FlexContainer mobile={isMobile}>
-            <GlassPane grow={1}>
+            <GlassPane grow={1} disableTilt={config?.disable_tilt}>
               <ServerWidget
                 loading={serverInfo.loading}
                 data={osData}
-                override={override}
+                config={config}
               />
             </GlassPane>
-            <GlassPane grow={2}>
+            <GlassPane grow={2} disableTilt={config?.disable_tilt}>
               <CpuWidget
                 loading={serverInfo.loading}
                 data={cpuData}
                 load={cpuLoad}
-                override={override}
+                config={config}
               />
             </GlassPane>
-            <GlassPane grow={1.5}>
+            <GlassPane grow={1.5} disableTilt={config?.disable_tilt}>
               <RamWidget
                 loading={serverInfo.loading}
                 data={ramData}
                 load={ramLoad}
-                override={override}
+                config={config}
               />
             </GlassPane>
-            <GlassPane grow={1.5}>
+            <GlassPane grow={1.5} disableTilt={config?.disable_tilt}>
               <StorageWidget
                 loading={serverInfo.loading}
                 data={storageData}
                 load={storageLoad}
-                override={override}
+                config={config}
               />
             </GlassPane>
           </FlexContainer>

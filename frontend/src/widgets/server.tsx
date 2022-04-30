@@ -158,14 +158,15 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
 type ServerWidgetProps = {
   loading: boolean;
   data?: OsInfo;
-  override?: Config['override'];
+  config?: Config;
 };
 
-const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, override }) => {
+const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
   const isMobile = useIsMobile();
   const [darkMode, setDarkMode] = useSetting('darkMode');
   const [uptime, setUptime] = useState(0);
 
+  const override = config?.override;
   const days = Math.floor(uptime / (24 * 60 * 60));
   const hours = Math.floor((uptime % (24 * 60 * 60)) / (60 * 60));
   const minutes = Math.floor((uptime % (60 * 60)) / 60);
