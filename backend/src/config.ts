@@ -10,6 +10,7 @@ const numOrUndefined = (val: string | undefined): number | undefined => {
 export const CONFIG: Config = {
   port: +(process.env.DASHDOT_PORT ?? 3001),
   disable_tilt: process.env.DASHDOT_DISABLE_TILT === 'true',
+  disable_host: process.env.DASHDOT_DISABLE_HOST === 'true',
   override: {
     os: process.env.DASHDOT_OVERRIDE_OS,
     arch: process.env.DASHDOT_OVERRIDE_ARCH,

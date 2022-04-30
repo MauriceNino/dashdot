@@ -67,6 +67,10 @@ const ServerName = styled.span`
   bottom: -3px;
 `;
 
+const StandaloneAppendix = styled(ServerName)`
+  font-size: 3rem;
+`;
+
 const ThemeSwitchContainer = styled.div`
   position: absolute;
   right: 25px;
@@ -256,8 +260,14 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
       </ThemeSwitchContainer>
 
       <Heading>
-        <Appendix>dash.</Appendix>
-        <ServerName>{domain}</ServerName>
+        {config?.disable_host ? (
+          <StandaloneAppendix>dash.</StandaloneAppendix>
+        ) : (
+          <>
+            <Appendix>dash.</Appendix>
+            <ServerName>{domain}</ServerName>
+          </>
+        )}
       </Heading>
 
       <ContentContainer>
