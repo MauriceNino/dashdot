@@ -21,23 +21,24 @@ const RamWidget: FC<RamWidgetProps> = ({ load, loading, data, config }) => {
   const theme = useTheme();
   const override = config?.override;
 
-  const manufacturer = removeDuplicates(
+  const brands = removeDuplicates(
     override?.ram_brand
       ? [override?.ram_brand]
-      : data?.layout?.map(l => l.manufacturer)
+      : data?.layout?.map(l => l.brand)
   );
-  const type = removeDuplicates(
+  const size = override?.ram_size ?? data?.size;
+  const types = removeDuplicates(
     override?.ram_type ? [override?.ram_type] : data?.layout?.map(l => l.type)
   );
-  const clockSpeed = removeDuplicates(
-    override?.ram_speed
-      ? [override?.ram_speed]
-      : data?.layout?.map(l => l.clockSpeed).filter(c => c !== 0)
-  );
+  const frequencies = removeDuplicates(
+    override?.ram_frequency
+      ? [override?.ram_frequency]
+      : data?.layout?.map(l => l.frequency).filter(c => c !== 0)
+  ).map(s => `${s} MHz`);
 
   const chartData = load.map((load, i) => ({
     x: i,
-    y: (byteToGb(load) / byteToGb(data?.total ?? 1)) * 100,
+    y: (byteToGb(load) / byteToGb(data?.size ?? 1)) * 100,
   })) as Datum[];
 
   return (
@@ -48,23 +49,20 @@ const RamWidget: FC<RamWidgetProps> = ({ load, loading, data, config }) => {
       infosLoading={loading}
       infos={[
         {
-          label: 'Brand' + (manufacturer.length > 1 ? '(s)' : ''),
-          value: manufacturer.join(', '),
+          label: brands.length > 1 ? 'Brands' : 'Brand',
+          value: brands.join(', '),
         },
         {
           label: 'Size',
-          value:
-            override?.ram_size || data?.total
-              ? `${byteToGb(override?.ram_size ?? data?.total ?? 0)} GB`
-              : '',
+          value: size ? `${byteToGb(size)} GB` : '',
         },
         {
-          label: 'Type' + (type.length > 1 ? '(s)' : ''),
-          value: type.join(', '),
+          label: types.length > 1 ? 'Types' : 'Type',
+          value: types.join(', '),
         },
         {
-          label: 'Speed' + (clockSpeed.length > 1 ? '(s)' : ''),
-          value: clockSpeed.join(', '),
+          label: frequencies.length > 1 ? 'Frequencies' : 'Frequency',
+          value: frequencies.join(', '),
         },
       ]}
       icon={faMemory}

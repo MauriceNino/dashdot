@@ -26,25 +26,36 @@ const StorageWidget: FC<StorageWidgetProps> = ({
   let infos: { label: string; value?: string }[];
 
   if (data?.layout && data.layout.length > 1) {
-    infos = data.layout.map((s, i) => ({
-      label: `Drive ${i + 1}`,
-      value: `${s.vendor} ${s.type} (${byteToGb(s.size)} GB)`,
-    }));
+    infos = data.layout.map((s, i) => {
+      //@ts-ignore
+      const brand = override?.[`storage_brand_${i + 1}`] ?? s.brand;
+      //@ts-ignore
+      const type = override?.[`storage_type_${i + 1}`] ?? s.type;
+      //@ts-ignore
+      const size = override?.[`storage_size_${i + 1}`] ?? s.size;
+
+      console.log(override);
+
+      return {
+        label: `Drive ${i + 1}`,
+        value: `${brand} ${type} (${byteToGb(size)} GB)`,
+      };
+    });
   } else {
-    const vendor = override?.storage_vendor_1 ?? data?.layout[0].vendor;
-    const capacity = byteToGb(
-      override?.storage_capacity_1 ?? data?.layout[0].size ?? 0
+    const brand = override?.storage_brand_1 ?? data?.layout[0].brand;
+    const size = byteToGb(
+      override?.storage_size_1 ?? data?.layout[0].size ?? 0
     );
     const type = override?.storage_type_1 ?? data?.layout[0].type;
 
     infos = [
       {
-        label: 'Vendor',
-        value: vendor,
+        label: 'Brand',
+        value: brand,
       },
       {
-        label: 'Capacity',
-        value: capacity ? `${capacity} GB` : '',
+        label: 'Size',
+        value: size ? `${size} GB` : '',
       },
       {
         label: 'Type',
@@ -53,9 +64,8 @@ const StorageWidget: FC<StorageWidgetProps> = ({
     ];
   }
 
-  const allCapacity =
-    data?.layout.reduce((acc, s) => (acc = acc + s.size), 0) ?? 0;
-  const available = allCapacity - (load ?? 0);
+  const size = data?.layout.reduce((acc, s) => (acc = acc + s.size), 0) ?? 0;
+  const available = size - (load ?? 0);
 
   return (
     <HardwareInfoContainer
