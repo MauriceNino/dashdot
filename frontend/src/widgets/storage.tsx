@@ -11,23 +11,24 @@ type StorageWidgetProps = {
   load?: StorageLoad;
   loading: boolean;
   data?: StorageInfo;
-  override?: Config['override'];
+  config?: Config;
 };
 
 const StorageWidget: FC<StorageWidgetProps> = ({
   load,
   loading,
   data,
-  override,
+  config,
 }) => {
   const theme = useTheme();
+  const override = config?.override;
 
   let infos: { label: string; value?: string }[];
 
   if (data?.layout && data.layout.length > 1) {
     infos = data.layout.map((s, i) => ({
       label: `Drive ${i + 1}`,
-      value: `${s.vendor} ${s.type} (${byteToGb(s.size)})`,
+      value: `${s.vendor} ${s.type} (${byteToGb(s.size)} GB)`,
     }));
   } else {
     const vendor = override?.storage_vendor_1 ?? data?.layout[0].vendor;

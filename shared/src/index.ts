@@ -47,6 +47,7 @@ export type HardwareInfo = {
 
 export type Config = {
   port: number;
+  disable_tilt: boolean;
   override: {
     distro?: string;
     release?: string;
