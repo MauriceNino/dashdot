@@ -20,7 +20,7 @@ It is intended to be used for smaller VPS and private servers.
 <p align="center">
   <a href="https://dash.mauz.io" target="_blank">Live Demo</a>
  |
-  <a href="https://hub.docker.com/repository/docker/mauricenino/dashdot" target="_blank">Docker Image</a>
+  <a href="https://hub.docker.com/r/mauricenino/dashdot" target="_blank">Docker Image</a>
 </p>
 
 # 
