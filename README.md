@@ -130,6 +130,7 @@ Variable | Description | Type | Default Value
 -- | -- | -- | --
 DASHDOT_PORT | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`
 DASHDOT_DISABLE_TILT | If you want to disable the tilt effect when hovering over the widgets with your mouse | boolean | false
+DASHDOT_DISABLE_HOST | If you want to hide the host part in the server widget (e.g. `dash.mauz.io` -> `dash.`) | boolean | false
 DASHDOT_OVERRIDE_OS | | string |
 DASHDOT_OVERRIDE_ARCH | | string |
 DASHDOT_OVERRIDE_CPU_BRAND | | string |

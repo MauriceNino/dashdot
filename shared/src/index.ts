@@ -48,6 +48,7 @@ export type HardwareInfo = {
 export type Config = {
   port: number;
   disable_tilt: boolean;
+  disable_host: boolean;
   override: {
     os?: string;
     arch?: string;
