@@ -7,7 +7,6 @@ import {
   StorageInfo,
 } from 'dashdot-shared';
 import si from 'systeminformation';
-import util from 'util';
 import { CONFIG } from './config';
 
 let INFO_SAVE: HardwareInfo | null = null;
@@ -58,16 +57,6 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
       ram,
       storage,
     };
-
-    console.log(
-      'Static Server Info Gathered: ',
-      util.inspect(INFO_SAVE, { showHidden: false, depth: null, colors: true })
-    );
-
-    console.log(
-      'Config',
-      util.inspect(CONFIG, { showHidden: false, depth: null, colors: true })
-    );
   }
 
   return {
