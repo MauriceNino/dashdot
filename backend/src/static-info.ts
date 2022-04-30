@@ -45,10 +45,10 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
     };
 
     const storage: StorageInfo = {
-      layout: diskLayout.map(({ size, type, name }) => ({
+      layout: diskLayout.map(({ size, type, vendor }) => ({
         size,
         type,
-        name,
+        vendor,
       })),
     };
 
@@ -62,6 +62,11 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
     console.log(
       'Static Server Info Gathered: ',
       util.inspect(INFO_SAVE, { showHidden: false, depth: null, colors: true })
+    );
+
+    console.log(
+      'Config',
+      util.inspect(CONFIG, { showHidden: false, depth: null, colors: true })
     );
   }
 

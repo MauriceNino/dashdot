@@ -23,10 +23,30 @@ export const CONFIG: Config = {
     ram_size: numOrUndefined(process.env.DASHDOT_OVERRIDE_RAM_SIZE),
     ram_type: process.env.DASHDOT_OVERRIDE_RAM_TYPE,
     ram_speed: numOrUndefined(process.env.DASHDOT_OVERRIDE_RAM_SPEED),
-    storage_model: process.env.DASHDOT_OVERRIDE_STORAGE_MODEL,
-    storage_capacity: numOrUndefined(
-      process.env.DASHDOT_OVERRIDE_STORAGE_CAPACITY
+    storage_vendor_1: process.env.DASHDOT_OVERRIDE_STORAGE_VENDOR_1,
+    storage_capacity_1: numOrUndefined(
+      process.env.DASHDOT_OVERRIDE_STORAGE_CAPACITY_1
     ),
-    storage_type: process.env.DASHDOT_OVERRIDE_STORAGE_TYPE,
+    storage_type_1: process.env.DASHDOT_OVERRIDE_STORAGE_TYPE_1,
+    storage_vendor_2: process.env.DASHDOT_OVERRIDE_STORAGE_VENDOR_1,
+    storage_capacity_2: numOrUndefined(
+      process.env.DASHDOT_OVERRIDE_STORAGE_CAPACITY_1
+    ),
+    storage_type_2: process.env.DASHDOT_OVERRIDE_STORAGE_TYPE_1,
+    storage_vendor_3: process.env.DASHDOT_OVERRIDE_STORAGE_VENDOR_1,
+    storage_capacity_3: numOrUndefined(
+      process.env.DASHDOT_OVERRIDE_STORAGE_CAPACITY_1
+    ),
+    storage_type_3: process.env.DASHDOT_OVERRIDE_STORAGE_TYPE_1,
+    storage_vendor_4: process.env.DASHDOT_OVERRIDE_STORAGE_VENDOR_1,
+    storage_capacity_4: numOrUndefined(
+      process.env.DASHDOT_OVERRIDE_STORAGE_CAPACITY_1
+    ),
+    storage_type_4: process.env.DASHDOT_OVERRIDE_STORAGE_TYPE_1,
+    storage_vendor_5: process.env.DASHDOT_OVERRIDE_STORAGE_VENDOR_1,
+    storage_capacity_5: numOrUndefined(
+      process.env.DASHDOT_OVERRIDE_STORAGE_CAPACITY_1
+    ),
+    storage_type_5: process.env.DASHDOT_OVERRIDE_STORAGE_TYPE_1,
   },
 };

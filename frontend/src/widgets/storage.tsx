@@ -5,7 +5,6 @@ import { FC } from 'react';
 import { useTheme } from 'styled-components';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
-import { removeDuplicates } from '../utils/array-utils';
 import { byteToGb } from '../utils/calculations';
 
 type StorageWidgetProps = {
@@ -23,21 +22,39 @@ const StorageWidget: FC<StorageWidgetProps> = ({
 }) => {
   const theme = useTheme();
 
-  const size =
-    override?.storage_capacity ??
-    data?.layout?.reduce((acc, cur) => acc + cur.size, 0);
-  const name = removeDuplicates(
-    override?.storage_model
-      ? [override?.storage_model]
-      : data?.layout?.map(l => l.name)
-  );
-  const type = removeDuplicates(
-    override?.storage_type
-      ? [override?.storage_type]
-      : data?.layout?.map(l => l.type)
-  );
+  let infos: { label: string; value?: string }[];
 
-  const available = (size ?? 0) - (load ?? 0);
+  if (data?.layout && data.layout.length > 1) {
+    infos = data.layout.map((s, i) => ({
+      label: `Drive ${i + 1}`,
+      value: `${s.vendor} ${s.type} (${byteToGb(s.size)})`,
+    }));
+  } else {
+    const vendor = override?.storage_vendor_1 ?? data?.layout[0].vendor;
+    const capacity = byteToGb(
+      override?.storage_capacity_1 ?? data?.layout[0].size ?? 0
+    );
+    const type = override?.storage_type_1 ?? data?.layout[0].type;
+
+    infos = [
+      {
+        label: 'Vendor',
+        value: vendor,
+      },
+      {
+        label: 'Capacity',
+        value: capacity ? `${capacity} GB` : '',
+      },
+      {
+        label: 'Type',
+        value: type,
+      },
+    ];
+  }
+
+  const allCapacity =
+    data?.layout.reduce((acc, s) => (acc = acc + s.size), 0) ?? 0;
+  const available = allCapacity - (load ?? 0);
 
   return (
     <HardwareInfoContainer
@@ -45,20 +62,7 @@ const StorageWidget: FC<StorageWidgetProps> = ({
       contentLoaded={load != null}
       heading='Storage'
       infosLoading={loading}
-      infos={[
-        {
-          label: 'Model' + (name.length > 1 ? '(s)' : ''),
-          value: name.join(', '),
-        },
-        {
-          label: 'Capacity',
-          value: size ? `${byteToGb(size)} GB` : '',
-        },
-        {
-          label: 'Type' + (type.length > 1 ? '(s)' : ''),
-          value: type.join(''),
-        },
-      ]}
+      infos={infos}
       icon={faHdd}
     >
       <ResponsivePie

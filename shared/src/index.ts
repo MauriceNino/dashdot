@@ -23,7 +23,7 @@ export type RamLoad = number;
 export type StorageInfo = {
   layout: {
     type: string;
-    name: string;
+    vendor: string;
     size: number;
   }[];
 };
@@ -61,9 +61,21 @@ export type Config = {
     ram_size?: number;
     ram_type?: string;
     ram_speed?: number;
-    storage_model?: string;
-    storage_capacity?: number;
-    storage_type?: string;
+    storage_vendor_1?: string;
+    storage_capacity_1?: number;
+    storage_type_1?: string;
+    storage_vendor_2?: string;
+    storage_capacity_2?: number;
+    storage_type_2?: string;
+    storage_vendor_3?: string;
+    storage_capacity_3?: number;
+    storage_type_3?: string;
+    storage_vendor_4?: string;
+    storage_capacity_4?: number;
+    storage_type_4?: string;
+    storage_vendor_5?: string;
+    storage_capacity_5?: number;
+    storage_type_5?: string;
   };
 };
 
