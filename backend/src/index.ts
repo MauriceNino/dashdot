@@ -4,6 +4,7 @@ import express, { Response } from 'express';
 import http from 'http';
 import path from 'path';
 import { Server } from 'socket.io';
+import util from 'util';
 import { CONFIG } from './config';
 import { cpuObs, ramObs, storageObs } from './dynamic-info';
 import { getStaticServerInfo } from './static-info';
@@ -52,6 +53,15 @@ io.on('connection', socket => {
 });
 
 // Launch the server
-server.listen(CONFIG.port, () => {
+server.listen(CONFIG.port, async () => {
   console.log('listening on *:' + CONFIG.port);
+
+  console.log(
+    'Static Server Info:',
+    util.inspect(await getStaticServerInfo(), {
+      showHidden: false,
+      depth: null,
+      colors: true,
+    })
+  );
 });

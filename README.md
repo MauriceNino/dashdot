@@ -59,10 +59,13 @@ so you can easily use them with `docker` or other container engines
 
 ```bash
 > docker container run -it \
-  -p 3001:3001 \
-  --name dashboard \
+  -p 80:3001 \
+  --privileged \
+  --name dashdot \
   mauricenino/dashdot
 ```
+
+> Note: The `--privileged` flag is needed to correctly determine the memory info.
 
 You can configure your Docker-installed dashboard via environment variables
 inside the container.
@@ -71,9 +74,10 @@ You can pass them by specifying them in your custom Dockerfile, or via the
 
 ```bash
 > docker container run -it \
-  --env DASHDOT_PORT 80 \
-  -p 3001:80 \
-  --name dashboard \
+  -p 80:3001 \
+  --privileged \
+  --env DASHDOT_OVERRIDE_DISTRO "Ubuntu" \
+  --name dashdot \
   mauricenino/dashdot
 ```
 
@@ -101,13 +105,13 @@ After that, download and build the project (might take a few minutes)
 When done, you can run the dashboard by executing:
 
 ```bash
-> yarn start
+> sudo yarn start
 ```
 
 You can configure your Git-installed dashboard via environment variables.
 
 ```bash
-> export DASHDOT_PORT=80
+> export DASHDOT_OVERRIDE_DISTRO="Ubuntu"
 > yarn start
 ```
 
@@ -122,6 +126,7 @@ If you dont know how to set them, look up the section for your type of installme
 
 Variable | Description | Type | Default Value
 -- | -- | -- | --
+<!-- markdownlint-disable -->
 DASHDOT_PORT | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`
 DASHDOT_OVERRIDE_DISTRO | The distro of the host OS (shown in field "OS" and used for image) | string |
 DASHDOT_OVERRIDE_RELEASE | The release version of the host OS (shown in field "OS") | string |
@@ -139,6 +144,7 @@ DASHDOT_OVERRIDE_RAM_SPEED | | number |
 DASHDOT_OVERRIDE_STORAGE_VENDOR_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
 DASHDOT_OVERRIDE_STORAGE_CAPACITY_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | number |
 DASHDOT_OVERRIDE_STORAGE_TYPE_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
+<!-- markdownlint-enable -->
 
 # Contributing
 
