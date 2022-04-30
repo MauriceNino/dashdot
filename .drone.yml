@@ -19,6 +19,7 @@ steps:
         path: /server
     commands:
       - cd /server/_repos/dashdot
+      - git config --global --add safe.directory /server/_repos/dashdot
       - git pull --rebase
   - name: deploy to server
     image: docker/compose
@@ -69,4 +70,4 @@ name: DOCKER_ACCESS_KEY
 data: ysbzIhceuQjxnBZ7kRt63CswtG85WTCiCBFPCM8wmV9qBQTS9kGPktIqw1wevm1O0U2l1pTWl7wt2e7D+a462Q==
 ---
 kind: signature
-hmac: 85fa073b514a06882630f283de167aaec752acffd9f420f9b166dc3cd1ad7c11
+hmac: 68a4df553345aca6b534a936b65b63eba342fb3abc2c252200075042ab8c8e60
