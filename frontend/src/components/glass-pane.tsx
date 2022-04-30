@@ -29,6 +29,7 @@ const TiltContainer = styled(ParallaxTilt)<SCProps>`
 
 type GlassPaneProps = {
   grow?: number;
+  disableTilt?: boolean;
 };
 
 const GlassPane: FC<GlassPaneProps> = props => {
@@ -37,7 +38,7 @@ const GlassPane: FC<GlassPaneProps> = props => {
   return (
     <TiltContainer
       mobile={isMobile}
-      tiltEnable={!isMobile}
+      tiltEnable={!props.disableTilt && !isMobile}
       transitionSpeed={1500}
       tiltMaxAngleX={4}
       tiltMaxAngleY={4}
