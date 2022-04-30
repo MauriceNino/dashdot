@@ -16,7 +16,7 @@ import {
   FontAwesomeIconProps,
 } from '@fortawesome/react-fontawesome';
 import { Button, Switch } from 'antd';
-import { OsInfo } from 'dashdot-shared';
+import { Config, OsInfo } from 'dashdot-shared';
 import { FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import InfoTable from '../components/info-table';
@@ -157,9 +157,11 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
 
 type ServerWidgetProps = {
   loading: boolean;
-} & Partial<OsInfo>;
+  data?: OsInfo;
+  override?: Config['override'];
+};
 
-const ServerWidget: FC<ServerWidgetProps> = props => {
+const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, override }) => {
   const isMobile = useIsMobile();
   const [darkMode, setDarkMode] = useSetting('darkMode');
   const [uptime, setUptime] = useState(0);
@@ -211,7 +213,7 @@ const ServerWidget: FC<ServerWidgetProps> = props => {
 
   // Client-side calculation of uptime
   useEffect(() => {
-    const uptime = props.uptime ?? 0;
+    const uptime = data?.uptime ?? 0;
 
     let interval: any;
     if (uptime > 0) {
@@ -225,12 +227,14 @@ const ServerWidget: FC<ServerWidgetProps> = props => {
     }
 
     return () => clearInterval(interval);
-  }, [props.uptime]);
+  }, [data?.uptime]);
 
   const domain = useMemo(
     () => window.location.hostname.split('.').slice(-2).join('.'),
     []
   );
+  const distro = override?.distro ?? data?.distro ?? '';
+  const platform = override?.platform ?? data?.platform ?? '';
 
   return (
     <Container>
@@ -257,15 +261,15 @@ const ServerWidget: FC<ServerWidgetProps> = props => {
       <ContentContainer>
         <StyledInfoTable
           mobile={isMobile}
-          infosLoading={props.loading}
+          infosLoading={loading}
           infos={[
             {
               label: 'OS',
-              value: `${props.distro ?? ''} ${props.release ?? ''}`,
+              value: `${distro} ${override?.release ?? data?.release ?? ''}`,
             },
             {
               label: 'Arch',
-              value: props.arch,
+              value: override?.arch ?? data?.arch,
             },
             ...dateInfos,
           ]}
@@ -274,11 +278,8 @@ const ServerWidget: FC<ServerWidgetProps> = props => {
         {!isMobile && (
           <ServerIconContainer>
             <SkeletonContent width={120} height={120} borderRadius='15px'>
-              {props.distro != null && props.platform != null && (
-                <ServerIcon
-                  os={(props.distro + props.platform).toLowerCase()}
-                  size='7x'
-                />
+              {distro != null && platform != null && (
+                <ServerIcon os={(distro + platform).toLowerCase()} size='7x' />
               )}
             </SkeletonContent>
           </ServerIconContainer>

@@ -120,9 +120,25 @@ The following configuration options are available.
 If you dont know how to set them, look up the section for your type of installment
 (Docker or Git).
 
-Variable | Description | Default Value
--- | -- | --
-DASHDOT_PORT | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | 3001
+Variable | Description | Type | Default Value
+-- | -- | -- | --
+DASHDOT_PORT | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`
+DASHDOT_OVERRIDE_DISTRO | The distro of the host OS (shown in field "OS" and used for image) | string |
+DASHDOT_OVERRIDE_RELEASE | The release version of the host OS (shown in field "OS") | string |
+DASHDOT_OVERRIDE_PLATFORM | The platform (e.g. "darwin") of the host OS (used for image) | string |
+DASHDOT_OVERRIDE_ARCH | | string |
+DASHDOT_OVERRIDE_CPU_BRAND | | string |
+DASHDOT_OVERRIDE_CPU_MODEL | | string |
+DASHDOT_OVERRIDE_CPU_CORES | | number |
+DASHDOT_OVERRIDE_CPU_THREADS | | number |
+DASHDOT_OVERRIDE_CPU_FREQUENCY | | number |
+DASHDOT_OVERRIDE_RAM_BRAND | | string |
+DASHDOT_OVERRIDE_RAM_SIZE | | number |
+DASHDOT_OVERRIDE_RAM_TYPE | | string |
+DASHDOT_OVERRIDE_RAM_SPEED | | number |
+DASHDOT_OVERRIDE_STORAGE_VENDOR_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
+DASHDOT_OVERRIDE_STORAGE_CAPACITY_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | number |
+DASHDOT_OVERRIDE_STORAGE_TYPE_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
 
 # Contributing
 

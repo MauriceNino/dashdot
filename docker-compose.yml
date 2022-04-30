@@ -21,9 +21,11 @@ services:
     stdin_open: true
     tty: true
     restart: unless-stopped
+    environment:
+      - DASHDOT_OVERRIDE_DISTRO=Test Server
+      - DASHDOT_OVERRIDE_RELEASE=0.0.0
     ports:
       - '3001:3001'
     volumes:
       - ./backend:/app/backend
       - ./common:/app/common
-      - /var/run/docker.sock:/var/run/docker.sock

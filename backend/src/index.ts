@@ -4,7 +4,7 @@ import express, { Response } from 'express';
 import http from 'http';
 import path from 'path';
 import { Server } from 'socket.io';
-import { DASHDOT_PORT } from './config';
+import { CONFIG } from './config';
 import { cpuObs, ramObs, storageObs } from './dynamic-info';
 import { getStaticServerInfo } from './static-info';
 
@@ -52,6 +52,6 @@ io.on('connection', socket => {
 });
 
 // Launch the server
-server.listen(DASHDOT_PORT, () => {
-  console.log('listening on *:' + DASHDOT_PORT);
+server.listen(CONFIG.port, () => {
+  console.log('listening on *:' + CONFIG.port);
 });
