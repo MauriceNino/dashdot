@@ -21,6 +21,7 @@ services:
     stdin_open: true
     tty: true
     restart: unless-stopped
+    privileged: true
     environment:
       - DASHDOT_OVERRIDE_DISTRO=Test Server
       - DASHDOT_OVERRIDE_RELEASE=0.0.0
