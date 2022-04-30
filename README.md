@@ -136,9 +136,9 @@ DASHDOT_OVERRIDE_RAM_BRAND | | string |
 DASHDOT_OVERRIDE_RAM_SIZE | | number |
 DASHDOT_OVERRIDE_RAM_TYPE | | string |
 DASHDOT_OVERRIDE_RAM_SPEED | | number |
-DASHDOT_OVERRIDE_STORAGE_MODEL | | string |
-DASHDOT_OVERRIDE_STORAGE_CAPACITY | | number |
-DASHDOT_OVERRIDE_STORAGE_TYPE | | string |
+DASHDOT_OVERRIDE_STORAGE_VENDOR_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
+DASHDOT_OVERRIDE_STORAGE_CAPACITY_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | number |
+DASHDOT_OVERRIDE_STORAGE_TYPE_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
 
 # Contributing
 

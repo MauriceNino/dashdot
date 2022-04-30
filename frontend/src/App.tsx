@@ -144,11 +144,6 @@ function App() {
             <GlassPane grow={2}>
               <CpuWidget
                 loading={serverInfo.loading}
-                // manufacturer={override?.cpu_brand ?? cpuData?.manufacturer}
-                // brand={override?.cpu_model ?? cpuData?.brand}
-                // cores={override?.cpu_cores ?? cpuData?.cores}
-                // threads={override?.cpu_threads ?? cpuData?.threads}
-                // speed={override?.cpu_frequency ?? cpuData?.speed}
                 data={cpuData}
                 load={cpuLoad}
                 override={override}
