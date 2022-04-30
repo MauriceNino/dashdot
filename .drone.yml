@@ -4,37 +4,24 @@ type: docker
 name: CI
 
 steps:
-  - name: build & test
+  - name: test
     image: node:lts-alpine
     commands:
-      - yarn --frozen-lockfile
+      - yarn --ignore-scripts --frozen-lockfile
       - yarn run prettier:check
-      - yarn run build
-  - name: update server files
-    image: alpine/git
+  - name: build
+    image: docker:dind
     when:
-      branch: master
-    volumes:
-      - name: server
-        path: /server
-    commands:
-      - cd /server/_repos/dashdot
-      - git config --global --add safe.directory /server/_repos/dashdot
-      - git pull --rebase
-  - name: deploy to server
-    image: docker/compose
-    when:
-      branch: master
+      branch:
+        exclude:
+          - master
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
-      - name: server
-        path: /server
     commands:
-      - cd /server
-      - ./start.sh dashdot --build
-  - name: deploy to dockerhub
-    image: docker/compose
+      - docker image build -t mauricenino/dashdot .
+  - name: build & deploy to dockerhub
+    image: crazymax/docker:latest
     when:
       branch: master
     environment:
@@ -43,18 +30,30 @@ steps:
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
+    commands:
+      - |
+        sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json > package.version
+      - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
+      - docker buildx create --name builder --driver docker-container --buildkitd-flags '--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host' --use
+      - docker buildx inspect --bootstrap --builder builder
+      - docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64/v8 -t mauricenino/dashdot:latest -t mauricenino/dashdot:$(cat package.version) -o type=registry .
+      - docker logout
+  - name: update & deploy server files
+    image: docker/compose
+    when:
+      branch: master
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
       - name: server
         path: /server
     commands:
       - cd /server/_repos/dashdot
-      - docker image build -t mauricenino/dashdot .
-      - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
-      - docker push mauricenino/dashdot:latest
-      - |
-        docker tag mauricenino/dashdot mauricenino/dashdot:$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
-      - |
-        docker push mauricenino/dashdot:$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
-      - docker logout
+      - apk add git
+      - git config --global --add safe.directory /server/_repos/dashdot
+      - git pull --rebase
+      - cd /server
+      - ./start.sh dashdot --build
 
 volumes:
   - name: dockersock
@@ -70,4 +69,4 @@ name: DOCKER_ACCESS_KEY
 data: ysbzIhceuQjxnBZ7kRt63CswtG85WTCiCBFPCM8wmV9qBQTS9kGPktIqw1wevm1O0U2l1pTWl7wt2e7D+a462Q==
 ---
 kind: signature
-hmac: 68a4df553345aca6b534a936b65b63eba342fb3abc2c252200075042ab8c8e60
+hmac: d5223b7c83523091360162a99c42dd1be14cb94a4747cbf92a331c537913a01f
