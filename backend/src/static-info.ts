@@ -27,27 +27,27 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
     };
 
     const cpu: CpuInfo = {
-      manufacturer: cpuInfo.manufacturer,
-      brand: cpuInfo.brand,
-      speed: cpuInfo.speed,
+      brand: cpuInfo.manufacturer,
+      model: cpuInfo.brand,
       cores: cpuInfo.physicalCores,
       threads: cpuInfo.cores,
+      frequency: cpuInfo.speed,
     };
 
     const ram: RamInfo = {
-      total: memInfo.total,
+      size: memInfo.total,
       layout: memLayout.map(({ manufacturer, type, clockSpeed }) => ({
-        manufacturer: manufacturer,
+        brand: manufacturer,
         type: type,
-        clockSpeed: clockSpeed ?? undefined,
+        frequency: clockSpeed ?? undefined,
       })),
     };
 
     const storage: StorageInfo = {
       layout: diskLayout.map(({ size, type, vendor }) => ({
+        brand: vendor,
         size,
         type,
-        vendor,
       })),
     };
 
