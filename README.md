@@ -130,9 +130,7 @@ Variable | Description | Type | Default Value
 -- | -- | -- | --
 DASHDOT_PORT | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`
 DASHDOT_DISABLE_TILT | If you want to disable the tilt effect when hovering over the widgets with your mouse | boolean | false
-DASHDOT_OVERRIDE_DISTRO | The distro of the host OS (shown in field "OS" and used for image) | string |
-DASHDOT_OVERRIDE_RELEASE | The release version of the host OS (shown in field "OS") | string |
-DASHDOT_OVERRIDE_PLATFORM | The platform (e.g. "darwin") of the host OS (used for image) | string |
+DASHDOT_OVERRIDE_OS | | string |
 DASHDOT_OVERRIDE_ARCH | | string |
 DASHDOT_OVERRIDE_CPU_BRAND | | string |
 DASHDOT_OVERRIDE_CPU_MODEL | | string |
@@ -142,9 +140,9 @@ DASHDOT_OVERRIDE_CPU_FREQUENCY | | number |
 DASHDOT_OVERRIDE_RAM_BRAND | | string |
 DASHDOT_OVERRIDE_RAM_SIZE | | number |
 DASHDOT_OVERRIDE_RAM_TYPE | | string |
-DASHDOT_OVERRIDE_RAM_SPEED | | number |
-DASHDOT_OVERRIDE_STORAGE_VENDOR_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
-DASHDOT_OVERRIDE_STORAGE_CAPACITY_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | number |
+DASHDOT_OVERRIDE_RAM_FREQUENCY | | number |
+DASHDOT_OVERRIDE_STORAGE_BRAND_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
+DASHDOT_OVERRIDE_STORAGE_SIZE_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | number |
 DASHDOT_OVERRIDE_STORAGE_TYPE_[1 - 5] | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
 <!-- markdownlint-enable -->
 

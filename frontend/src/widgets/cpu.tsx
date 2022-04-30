@@ -86,6 +86,8 @@ const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
     ];
   }
 
+  const frequency = override?.cpu_frequency ?? data?.frequency;
+
   return (
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
@@ -95,7 +97,7 @@ const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
       infos={[
         {
           label: 'Brand',
-          value: override?.cpu_brand ?? data?.manufacturer,
+          value: override?.cpu_brand ?? data?.brand,
         },
         {
           label: 'Model',
@@ -111,10 +113,7 @@ const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
         },
         {
           label: 'Frequency',
-          value:
-            override?.cpu_frequency || data?.speed
-              ? `${override?.cpu_frequency ?? data?.speed} GHz`
-              : '',
+          value: frequency ? `${frequency} GHz` : '',
         },
       ]}
       icon={faMicrochip}
