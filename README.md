@@ -41,9 +41,9 @@ In case you want to financially support this project, you can [donate here](http
 
 # Preview
 
+<!-- markdownlint-disable -->
 Darkmode | Lightmode
 -- | --
-<!-- markdownlint-disable -->
 <img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/screenshot_darkmode.png?raw=true" alt="screenshot of the darkmode"> | <img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/screenshot_lightmode.png?raw=true" alt="screenshot of the lightmode">
 <!-- markdownlint-enable -->
 
@@ -124,9 +124,9 @@ The following configuration options are available.
 If you dont know how to set them, look up the section for your type of installment
 (Docker or Git).
 
+<!-- markdownlint-disable -->
 Variable | Description | Type | Default Value
 -- | -- | -- | --
-<!-- markdownlint-disable -->
 DASHDOT_PORT | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`
 DASHDOT_OVERRIDE_DISTRO | The distro of the host OS (shown in field "OS" and used for image) | string |
 DASHDOT_OVERRIDE_RELEASE | The release version of the host OS (shown in field "OS") | string |
