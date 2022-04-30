@@ -234,8 +234,9 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
     () => window.location.hostname.split('.').slice(-2).join('.'),
     []
   );
-  const distro = override?.distro ?? data?.distro ?? '';
-  const platform = override?.platform ?? data?.platform ?? '';
+  const distro = data?.distro ?? '';
+  const platform = data?.platform ?? '';
+  const os = override?.os ?? `${distro} ${data?.release ?? ''}`;
 
   return (
     <Container>
@@ -266,7 +267,7 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
           infos={[
             {
               label: 'OS',
-              value: `${distro} ${override?.release ?? data?.release ?? ''}`,
+              value: os,
             },
             {
               label: 'Arch',
@@ -279,8 +280,11 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
         {!isMobile && (
           <ServerIconContainer>
             <SkeletonContent width={120} height={120} borderRadius='15px'>
-              {distro != null && platform != null && (
-                <ServerIcon os={(distro + platform).toLowerCase()} size='7x' />
+              {(override?.os || (distro != null && platform != null)) && (
+                <ServerIcon
+                  os={(override?.os ?? distro + platform).toLowerCase()}
+                  size='7x'
+                />
               )}
             </SkeletonContent>
           </ServerIconContainer>
