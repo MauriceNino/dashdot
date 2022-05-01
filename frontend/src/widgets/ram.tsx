@@ -33,7 +33,7 @@ const RamWidget: FC<RamWidgetProps> = ({ load, loading, data, config }) => {
   const frequencies = removeDuplicates(
     override?.ram_frequency
       ? [override?.ram_frequency]
-      : data?.layout?.map(l => l.frequency).filter(c => c !== 0)
+      : data?.layout?.map(l => l.frequency).filter(c => c && c !== 0)
   ).map(s => `${s} MHz`);
 
   const chartData = load.map((load, i) => ({
