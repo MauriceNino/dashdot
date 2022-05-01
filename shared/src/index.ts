@@ -49,6 +49,19 @@ export type Config = {
   port: number;
   disable_tilt: boolean;
   disable_host: boolean;
+  os_widget_enable: boolean;
+  os_widget_grow: number;
+  cpu_widget_enable: boolean;
+  cpu_widget_grow: number;
+  cpu_shown_datapoints: number;
+  cpu_poll_interval: number;
+  ram_widget_enable: boolean;
+  ram_widget_grow: number;
+  ram_shown_datapoints: number;
+  ram_poll_interval: number;
+  storage_widget_enable: boolean;
+  storage_widget_grow: number;
+  storage_poll_interval: number;
   override: {
     os?: string;
     arch?: string;
