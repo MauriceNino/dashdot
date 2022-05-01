@@ -159,24 +159,26 @@ features or fix the found bug.
 
 To start working on this project, you can start by going through the
 Install - Git guide, but omit the `yarn start` part.
+
 When done, you can run the project in dev-mode using `yarn run dev`.
-This will start the express backend using `nodemon` and the
-react frontend using `create-react-app`.
+This will start the frontend and backend separately using docker-compose
+(docker & docker-compose will be needed).
 
-## Stack for contributing
+Development is done on the `dev` branch, so please use that as the base branch
+in your work.
 
-- [Typescript](https://github.com/microsoft/TypeScript)
-- [Socket.io](https://github.com/socketio/socket.io)
-
-### Backend
+## Backend
 
 - [Express](https://github.com/expressjs/express)
 - [Rxjs](https://github.com/ReactiveX/rxjs)
+- [Socket.io](https://github.com/socketio/socket.io)
+- [Typescript](https://github.com/microsoft/TypeScript)
 
-### Frontend
+## Frontend
 
 - [React](https://github.com/facebook/react)
 - [Styled Components](https://github.com/styled-components/styled-components)
 - [Antd](https://github.com/ant-design/ant-design/)
 - [Nivo](https://github.com/plouc/nivo)
 - [Fontawesome](https://github.com/FortAwesome/Font-Awesome)
+- [Typescript](https://github.com/microsoft/TypeScript)
