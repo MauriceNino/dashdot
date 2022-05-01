@@ -1,6 +1,7 @@
 import { CpuLoad, RamLoad, StorageLoad } from 'dashdot-shared';
 import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import si from 'systeminformation';
+import { CONFIG } from './config';
 
 const createBufferedInterval = <R>(
   bufferSize: number,
@@ -21,8 +22,8 @@ const createBufferedInterval = <R>(
 };
 
 export const cpuObs = createBufferedInterval(
-  20,
-  1000,
+  CONFIG.cpu_shown_datapoints,
+  CONFIG.cpu_poll_interval,
   async (): Promise<CpuLoad> => {
     const cpuLoad = (await si.currentLoad()).cpus;
 
@@ -34,16 +35,16 @@ export const cpuObs = createBufferedInterval(
 );
 
 export const ramObs = createBufferedInterval(
-  20,
-  1000,
+  CONFIG.ram_shown_datapoints,
+  CONFIG.ram_poll_interval,
   async (): Promise<RamLoad> => {
     return (await si.mem()).active;
   }
 );
 
 export const storageObs = createBufferedInterval(
-  20,
-  1000 * 60,
+  1,
+  CONFIG.storage_poll_interval,
   async (): Promise<StorageLoad> => {
     const data = await si.fsSize();
     const root = data.find(d => d.mount === '/');

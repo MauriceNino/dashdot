@@ -1,5 +1,5 @@
 import { CpuLoad, RamLoad, StorageLoad } from 'dashdot-shared';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import {
   default as styled,
@@ -100,13 +100,18 @@ function App() {
   const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
   const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
   const [storageLoad, setStorageLoad] = useState<StorageLoad>();
+  const configRef = useRef(config);
+
+  useEffect(() => {
+    configRef.current = config;
+  }, [config]);
 
   useEffect(() => {
     const socket = io(BACKEND_URL);
 
     socket.on('cpu-load', data => {
       setCpuLoad(oldData => {
-        if (oldData.length >= 20) {
+        if (oldData.length >= (configRef.current?.cpu_shown_datapoints ?? 0)) {
           return [...oldData.slice(1), data];
         } else {
           return [...oldData, data];
@@ -116,7 +121,7 @@ function App() {
 
     socket.on('ram-load', data => {
       setRamLoad(oldData => {
-        if (oldData.length >= 20) {
+        if (oldData.length >= (configRef.current?.ram_shown_datapoints ?? 0)) {
           return [...oldData.slice(1), data];
         } else {
           return [...oldData, data];
@@ -134,37 +139,57 @@ function App() {
       <MobileContextProvider>
         <Container style={antTheme}>
           <FlexContainer mobile={isMobile}>
-            <GlassPane grow={1} disableTilt={config?.disable_tilt}>
-              <ServerWidget
-                loading={serverInfo.loading}
-                data={osData}
-                config={config}
-              />
-            </GlassPane>
-            <GlassPane grow={2} disableTilt={config?.disable_tilt}>
-              <CpuWidget
-                loading={serverInfo.loading}
-                data={cpuData}
-                load={cpuLoad}
-                config={config}
-              />
-            </GlassPane>
-            <GlassPane grow={1.5} disableTilt={config?.disable_tilt}>
-              <RamWidget
-                loading={serverInfo.loading}
-                data={ramData}
-                load={ramLoad}
-                config={config}
-              />
-            </GlassPane>
-            <GlassPane grow={1.5} disableTilt={config?.disable_tilt}>
-              <StorageWidget
-                loading={serverInfo.loading}
-                data={storageData}
-                load={storageLoad}
-                config={config}
-              />
-            </GlassPane>
+            {config?.os_widget_enable && (
+              <GlassPane
+                grow={config?.os_widget_grow}
+                disableTilt={config?.disable_tilt}
+              >
+                <ServerWidget
+                  loading={serverInfo.loading}
+                  data={osData}
+                  config={config}
+                />
+              </GlassPane>
+            )}
+            {config?.cpu_widget_enable && (
+              <GlassPane
+                grow={config?.cpu_widget_grow}
+                disableTilt={config?.disable_tilt}
+              >
+                <CpuWidget
+                  loading={serverInfo.loading}
+                  data={cpuData}
+                  load={cpuLoad}
+                  config={config}
+                />
+              </GlassPane>
+            )}
+            {config?.ram_widget_enable && (
+              <GlassPane
+                grow={config?.ram_widget_grow}
+                disableTilt={config?.disable_tilt}
+              >
+                <RamWidget
+                  loading={serverInfo.loading}
+                  data={ramData}
+                  load={ramLoad}
+                  config={config}
+                />
+              </GlassPane>
+            )}
+            {config?.storage_widget_enable && (
+              <GlassPane
+                grow={config?.storage_widget_grow}
+                disableTilt={config?.disable_tilt}
+              >
+                <StorageWidget
+                  loading={serverInfo.loading}
+                  data={storageData}
+                  load={storageLoad}
+                  config={config}
+                />
+              </GlassPane>
+            )}
           </FlexContainer>
         </Container>
       </MobileContextProvider>
