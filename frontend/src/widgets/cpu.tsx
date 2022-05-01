@@ -101,7 +101,7 @@ const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
         },
         {
           label: 'Model',
-          value: override?.cpu_model ?? data?.brand,
+          value: override?.cpu_model ?? data?.model,
         },
         {
           label: 'Cores',
