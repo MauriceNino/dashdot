@@ -9,18 +9,23 @@ steps:
     commands:
       - yarn --ignore-scripts --frozen-lockfile
       - yarn run prettier:check
-  - name: build
-    image: docker:dind
+  - name: build & deploy to dockerhub (dev)
+    image: crazymax/docker:latest
     when:
-      branch:
-        exclude:
-          - master
+      branch: dev
+    environment:
+      DOCKER_ACCESS_KEY:
+        from_secret: DOCKER_ACCESS_KEY
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
-      - docker image build -t mauricenino/dashdot .
-  - name: build & deploy to dockerhub
+      - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
+      - docker buildx create --name builder --driver docker-container --buildkitd-flags '--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host' --use
+      - docker buildx inspect --bootstrap --builder builder
+      - docker buildx build --platform linux/amd64 -t mauricenino/dashdot:dev -o type=registry .
+      - docker logout
+  - name: build & deploy to dockerhub (production)
     image: crazymax/docker:latest
     when:
       branch: master
@@ -69,4 +74,4 @@ name: DOCKER_ACCESS_KEY
 data: ysbzIhceuQjxnBZ7kRt63CswtG85WTCiCBFPCM8wmV9qBQTS9kGPktIqw1wevm1O0U2l1pTWl7wt2e7D+a462Q==
 ---
 kind: signature
-hmac: d5223b7c83523091360162a99c42dd1be14cb94a4747cbf92a331c537913a01f
+hmac: ab46a0af899f7aeadea193981a7bf314e5fca11f1ab240d12147e5a58f1580b4
