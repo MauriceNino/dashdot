@@ -42,11 +42,11 @@ const StorageWidget: FC<StorageWidgetProps> = ({
       };
     });
   } else {
-    const brand = override?.storage_brand_1 ?? data?.layout[0].brand;
+    const brand = override?.storage_brand_1 ?? data?.layout[0]?.brand;
     const size = byteToGb(
-      override?.storage_size_1 ?? data?.layout[0].size ?? 0
+      override?.storage_size_1 ?? data?.layout[0]?.size ?? 0
     );
-    const type = override?.storage_type_1 ?? data?.layout[0].type;
+    const type = override?.storage_type_1 ?? data?.layout[0]?.type;
 
     infos = [
       {

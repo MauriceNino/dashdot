@@ -8,11 +8,7 @@ type SCProps = GlassPaneProps & { mobile: boolean };
 const TiltContainer = styled(ParallaxTilt)<SCProps>`
   display: flex;
   min-width: ${({ mobile }) => (mobile ? '300px' : '400px')};
-
   min-height: 360px;
-
-  ${({ mobile }) => !mobile && 'height: calc(45vh - 50px);'}
-  margin: 20px;
 
   flex-basis: calc(${props => (props.grow ?? 1) * 33}% - 100px);
   flex-grow: 1;

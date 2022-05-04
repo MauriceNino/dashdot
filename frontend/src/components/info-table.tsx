@@ -13,12 +13,13 @@ const InfoTextRow = styled.div`
   display: table-row;
 `;
 
-const InfoTextLabel = styled(ThemedText)`
+export const InfoTextLabel = styled(ThemedText)`
   display: table-cell;
   width: auto;
   font-size: 0.8rem;
   padding-bottom: 10px;
   padding-right: 15px;
+  white-space: nowrap;
 `;
 
 const InfoTextValue = styled(ThemedText)`
