@@ -19,7 +19,7 @@ import { Button, Switch } from 'antd';
 import { Config, OsInfo } from 'dashdot-shared';
 import { FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
-import InfoTable from '../components/info-table';
+import InfoTable, { InfoTextLabel } from '../components/info-table';
 import SkeletonContent from '../components/skeleton-content';
 import ThemedText from '../components/text';
 import { useIsMobile } from '../services/mobile';
@@ -117,6 +117,10 @@ const StyledInfoTable = styled(InfoTable)<{ mobile: boolean }>`
   max-width: 400px;
   flex-grow: 1;
   flex-shrink: 1;
+
+  ${InfoTextLabel} {
+    width: 1px;
+  }
 `;
 
 const ServerIconContainer = styled.div`
@@ -175,46 +179,6 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
   const hours = Math.floor((uptime % (24 * 60 * 60)) / (60 * 60));
   const minutes = Math.floor((uptime % (60 * 60)) / 60);
   const seconds = Math.floor(uptime % 60);
-
-  const dateInfos = [
-    {
-      label: '',
-      value: `${days} days`,
-      amount: days,
-    },
-    {
-      label: '',
-      value: `${hours} hours`,
-      amount: hours,
-    },
-    {
-      label: '',
-      value: `${minutes} minutes`,
-      amount: minutes,
-    },
-    {
-      label: '',
-      value: `${seconds} seconds`,
-      amount: seconds,
-    },
-  ].reduce((acc, cur) => {
-    if (acc.length > 0) {
-      acc.push(cur);
-    } else if (cur.amount > 0) {
-      acc.push(cur);
-    }
-
-    return acc;
-  }, [] as { label: string; value: string }[]);
-
-  if (dateInfos[0]) {
-    dateInfos[0].label = 'Up since';
-  } else {
-    dateInfos[0] = {
-      label: 'Up since',
-      value: '',
-    };
-  }
 
   // Client-side calculation of uptime
   useEffect(() => {
@@ -283,7 +247,10 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
               label: 'Arch',
               value: override?.arch ?? data?.arch,
             },
-            ...dateInfos,
+            {
+              label: 'Up Since',
+              value: `${days}d ${hours}h ${minutes}m ${seconds}s`,
+            },
           ]}
         />
 

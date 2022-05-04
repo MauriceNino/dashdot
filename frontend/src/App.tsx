@@ -67,12 +67,13 @@ const Container = styled.div`
 `;
 
 const FlexContainer = styled.div<{ mobile: boolean }>`
-  width: ${({ mobile }) => (mobile ? '96vw' : '90vw')};
-  min-height: ${({ mobile }) => (mobile ? '96vh' : '90vh')};
-  margin: ${({ mobile }) => (mobile ? '2vh' : '5vh')} auto 0 auto;
+  width: ${({ mobile }) => (mobile ? '96vw' : '88vw')};
+  min-height: ${({ mobile }) => (mobile ? '96vh' : '88vh')};
+  margin: ${({ mobile }) => (mobile ? '2vh' : '6vh')} auto 0 auto;
 
   display: flex;
   flex-flow: row wrap;
+  gap: 50px;
 `;
 
 function App() {
