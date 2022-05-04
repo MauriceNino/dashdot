@@ -2,7 +2,7 @@ FROM node:16-alpine
 
 WORKDIR /app/backend
 
-RUN apk update && apk add lsblk && apk add dmidecode
+RUN apk update && apk add lsblk && apk add dmidecode && apk add util-linux
 
 EXPOSE 3001
 
