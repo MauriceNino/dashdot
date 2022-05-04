@@ -13,7 +13,7 @@ const InfoTextRow = styled.div`
   display: table-row;
 `;
 
-export const InfoTextLabel = styled(ThemedText)`
+const InfoTextLabel = styled(ThemedText)`
   display: table-cell;
   width: auto;
   font-size: 0.8rem;

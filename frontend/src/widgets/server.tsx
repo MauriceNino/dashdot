@@ -19,7 +19,7 @@ import { Button, Switch } from 'antd';
 import { Config, OsInfo } from 'dashdot-shared';
 import { FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
-import InfoTable, { InfoTextLabel } from '../components/info-table';
+import InfoTable from '../components/info-table';
 import SkeletonContent from '../components/skeleton-content';
 import ThemedText from '../components/text';
 import { useIsMobile } from '../services/mobile';
@@ -37,7 +37,8 @@ const Container = styled.div`
 const Heading = styled(ThemedText)`
   width: 100%;
   max-width: 100%;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 
   display: flex;
   flex-flow: row wrap;
@@ -117,10 +118,6 @@ const StyledInfoTable = styled(InfoTable)<{ mobile: boolean }>`
   max-width: 400px;
   flex-grow: 1;
   flex-shrink: 1;
-
-  ${InfoTextLabel} {
-    width: 1px;
-  }
 `;
 
 const ServerIconContainer = styled.div`
@@ -206,6 +203,46 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
   const platform = data?.platform ?? '';
   const os = override?.os ?? `${distro} ${data?.release ?? ''}`;
 
+  const dateInfos = [
+    {
+      label: '',
+      value: `${days} days`,
+      amount: days,
+    },
+    {
+      label: '',
+      value: `${hours} hours`,
+      amount: hours,
+    },
+    {
+      label: '',
+      value: `${minutes} minutes`,
+      amount: minutes,
+    },
+    {
+      label: '',
+      value: `${seconds} seconds`,
+      amount: seconds,
+    },
+  ].reduce((acc, cur) => {
+    if (acc.length > 0) {
+      acc.push(cur);
+    } else if (cur.amount > 0) {
+      acc.push(cur);
+    }
+
+    return acc;
+  }, [] as { label: string; value: string }[]);
+
+  if (dateInfos[0]) {
+    dateInfos[0].label = 'Up since';
+  } else {
+    dateInfos[0] = {
+      label: 'Up since',
+      value: '',
+    };
+  }
+
   return (
     <Container>
       <ButtonsContainer>
@@ -247,10 +284,7 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
               label: 'Arch',
               value: override?.arch ?? data?.arch,
             },
-            {
-              label: 'Up Since',
-              value: `${days}d ${hours}h ${minutes}m ${seconds}s`,
-            },
+            ...dateInfos,
           ]}
         />
 
