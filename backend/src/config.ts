@@ -13,19 +13,24 @@ export const CONFIG: Config = {
   port: numOrUndefined(penv('PORT')) ?? 3001,
   disable_tilt: penv('DISABLE_TILT') === 'true',
   disable_host: penv('DISABLE_HOST') === 'true',
+
   os_widget_enable: penv('OS_WIDGET_ENABLE') !== 'false',
   os_widget_grow: numOrUndefined(penv('OS_WIDGET_GROW')) ?? 1,
+
   cpu_widget_enable: penv('CPU_WIDGET_ENABLE') !== 'false',
   cpu_widget_grow: numOrUndefined(penv('CPU_WIDGET_GROW')) ?? 2,
   cpu_shown_datapoints: numOrUndefined(penv('CPU_SHOWN_DATAPOINTS')) ?? 20,
   cpu_poll_interval: numOrUndefined(penv('CPU_POLL_INTERVAL')) ?? 1000,
+
   ram_widget_enable: penv('RAM_WIDGET_ENABLE') !== 'false',
   ram_widget_grow: numOrUndefined(penv('RAM_WIDGET_GROW')) ?? 1.5,
   ram_shown_datapoints: numOrUndefined(penv('RAM_SHOWN_DATAPOINTS')) ?? 20,
   ram_poll_interval: numOrUndefined(penv('RAM_POLL_INTERVAL')) ?? 1000,
+
   storage_widget_enable: penv('STORAGE_WIDGET_ENABLE') !== 'false',
   storage_widget_grow: numOrUndefined(penv('STORAGE_WIDGET_GROW')) ?? 1.5,
   storage_poll_interval: numOrUndefined(penv('STORAGE_POLL_INTERVAL')) ?? 60000,
+
   override: {
     os: penv('OVERRIDE_OS'),
     arch: penv('OVERRIDE_ARCH'),
