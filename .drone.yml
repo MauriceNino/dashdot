@@ -21,10 +21,22 @@ steps:
         path: /var/run/docker.sock
     commands:
       - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
-      - docker buildx create --name builder --driver docker-container --buildkitd-flags '--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host' --use
+      - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
       - docker buildx build --platform linux/amd64 -t mauricenino/dashdot:dev -o type=registry .
       - docker logout
+  - name: update & deploy server files (dev)
+    image: docker/compose
+    when:
+      branch: dev
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+      - name: server
+        path: /server
+    commands:
+      - docker image pull mauricenino/dashdot:dev
+      - cd /server && ./start.sh dashdot-dev
   - name: build & deploy to dockerhub (production)
     image: crazymax/docker:latest
     when:
@@ -39,7 +51,7 @@ steps:
       - |
         sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json > package.version
       - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
-      - docker buildx create --name builder --driver docker-container --buildkitd-flags '--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host' --use
+      - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
       - docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64/v8 -t mauricenino/dashdot:latest -t mauricenino/dashdot:$(cat package.version) -o type=registry .
       - docker logout
@@ -53,12 +65,8 @@ steps:
       - name: server
         path: /server
     commands:
-      - cd /server/_repos/dashdot
-      - apk add git
-      - git config --global --add safe.directory /server/_repos/dashdot
-      - git pull --rebase
-      - cd /server
-      - ./start.sh dashdot --build
+      - docker image pull mauricenino/dashdot:latest
+      - cd /server && ./start.sh dashdot
 
 volumes:
   - name: dockersock
@@ -74,4 +82,4 @@ name: DOCKER_ACCESS_KEY
 data: ysbzIhceuQjxnBZ7kRt63CswtG85WTCiCBFPCM8wmV9qBQTS9kGPktIqw1wevm1O0U2l1pTWl7wt2e7D+a462Q==
 ---
 kind: signature
-hmac: ab46a0af899f7aeadea193981a7bf314e5fca11f1ab240d12147e5a58f1580b4
+hmac: e1ac69bd24326fb87f31643b7601c3b1a73b7f1555a91f85471ec7485cada0d4
