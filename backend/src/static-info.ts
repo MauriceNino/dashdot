@@ -9,6 +9,13 @@ import {
 import si from 'systeminformation';
 import { CONFIG } from './config';
 
+const normalizeCpuModel = (cpuModel: string) => {
+  return cpuModel
+    .replace(/Processor/g, '')
+    .replace(/[A-Za-z0-9]*-Core/g, '')
+    .trim();
+};
+
 let INFO_SAVE: HardwareInfo | null = null;
 
 export const getStaticServerInfo = async (): Promise<ServerInfo> => {
@@ -28,7 +35,7 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
 
     const cpu: CpuInfo = {
       brand: cpuInfo.manufacturer,
-      model: cpuInfo.brand,
+      model: normalizeCpuModel(cpuInfo.brand),
       cores: cpuInfo.physicalCores,
       threads: cpuInfo.cores,
       frequency: cpuInfo.speed,
