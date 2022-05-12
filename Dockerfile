@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . ./
 
-RUN apk update && apk add lsblk && apk add dmidecode
+RUN apk update && apk add lsblk && apk add dmidecode && apk add util-linux
 RUN yarn --frozen-lockfile && yarn build
 
 EXPOSE 3001

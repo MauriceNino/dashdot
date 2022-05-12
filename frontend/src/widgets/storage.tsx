@@ -34,19 +34,17 @@ const StorageWidget: FC<StorageWidgetProps> = ({
       //@ts-ignore
       const size = override?.[`storage_size_${i + 1}`] ?? s.size;
 
-      console.log(override);
-
       return {
         label: `Drive ${i + 1}`,
         value: `${brand} ${type} (${byteToGb(size)} GB)`,
       };
     });
   } else {
-    const brand = override?.storage_brand_1 ?? data?.layout[0].brand;
+    const brand = override?.storage_brand_1 ?? data?.layout[0]?.brand;
     const size = byteToGb(
-      override?.storage_size_1 ?? data?.layout[0].size ?? 0
+      override?.storage_size_1 ?? data?.layout[0]?.size ?? 0
     );
-    const type = override?.storage_type_1 ?? data?.layout[0].type;
+    const type = override?.storage_type_1 ?? data?.layout[0]?.type;
 
     infos = [
       {

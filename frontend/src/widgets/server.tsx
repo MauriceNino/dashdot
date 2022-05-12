@@ -37,7 +37,8 @@ const Container = styled.div`
 const Heading = styled(ThemedText)`
   width: 100%;
   max-width: 100%;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 
   display: flex;
   flex-flow: row wrap;
@@ -176,6 +177,32 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
   const minutes = Math.floor((uptime % (60 * 60)) / 60);
   const seconds = Math.floor(uptime % 60);
 
+  // Client-side calculation of uptime
+  useEffect(() => {
+    const uptime = data?.uptime ?? 0;
+
+    let interval: any;
+    if (uptime > 0) {
+      const startTime = Date.now();
+
+      setUptime(uptime);
+      interval = setInterval(() => {
+        const passedTime = (Date.now() - startTime) / 1000;
+        setUptime(uptime + passedTime);
+      }, 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [data?.uptime]);
+
+  const domain = useMemo(
+    () => window.location.hostname.split('.').slice(-2).join('.'),
+    []
+  );
+  const distro = data?.distro ?? '';
+  const platform = data?.platform ?? '';
+  const os = override?.os ?? `${distro} ${data?.release ?? ''}`;
+
   const dateInfos = [
     {
       label: '',
@@ -215,32 +242,6 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
       value: '',
     };
   }
-
-  // Client-side calculation of uptime
-  useEffect(() => {
-    const uptime = data?.uptime ?? 0;
-
-    let interval: any;
-    if (uptime > 0) {
-      const startTime = Date.now();
-
-      setUptime(uptime);
-      interval = setInterval(() => {
-        const passedTime = (Date.now() - startTime) / 1000;
-        setUptime(uptime + passedTime);
-      }, 1000);
-    }
-
-    return () => clearInterval(interval);
-  }, [data?.uptime]);
-
-  const domain = useMemo(
-    () => window.location.hostname.split('.').slice(-2).join('.'),
-    []
-  );
-  const distro = data?.distro ?? '';
-  const platform = data?.platform ?? '';
-  const os = override?.os ?? `${distro} ${data?.release ?? ''}`;
 
   return (
     <Container>
