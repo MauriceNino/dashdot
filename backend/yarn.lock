@@ -1238,10 +1238,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-systeminformation@^5.9.9:
-  version "5.9.9"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.9.9.tgz#aa8234a138363bd988f438fed3273370f79d7e30"
-  integrity sha512-xciy6NKCLfs4dqMD1Tdlo7v1/g0NfdA1EKsIptUQjlcVvpwHyjifAbNOF7ppFezGSMXxYE8me+l2+RlFF4lyTg==
+systeminformation@^5.11.14:
+  version "5.11.14"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.11.14.tgz#21fcb6f05d33e17d69c236b9c1b3d9c53d1d2b3a"
+  integrity sha512-m8CJx3fIhKohanB0ExTk5q53uI1J0g5B09p77kU+KxnxRVpADVqTAwCg1PFelqKsj4LHd+qmVnumb511Hg4xow==
 
 to-readable-stream@^1.0.0:
   version "1.0.0"
