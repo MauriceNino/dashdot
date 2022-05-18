@@ -150,13 +150,13 @@ Variable | Description | Type | Default Value
 `DASHDOT_OVERRIDE_CPU_MODEL` | | string |
 `DASHDOT_OVERRIDE_CPU_CORES` | | number |
 `DASHDOT_OVERRIDE_CPU_THREADS` | | number |
-`DASHDOT_OVERRIDE_CPU_FREQUENCY` | | number |
+`DASHDOT_OVERRIDE_CPU_FREQUENCY` | Number needs to be passed in GHz (e.g. `2.8`) | number |
 `DASHDOT_OVERRIDE_RAM_BRAND` | | string |
-`DASHDOT_OVERRIDE_RAM_SIZE` | | number |
+`DASHDOT_OVERRIDE_RAM_SIZE` | Number needs to be passed in bytes (e.g. `34359738368` for 32 GB, because it is `32 * 1024 * 1024 * 1024`) | number |
 `DASHDOT_OVERRIDE_RAM_TYPE` | | string |
 `DASHDOT_OVERRIDE_RAM_FREQUENCY` | | number |
 `DASHDOT_OVERRIDE_STORAGE_BRAND_[1-5]` | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
-`DASHDOT_OVERRIDE_STORAGE_SIZE_[1-5]` | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | number |
+`DASHDOT_OVERRIDE_STORAGE_SIZE_[1-5]` | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives. Number needs to be passed in bytes (e.g. `34359738368` for 32 GB, because it is `32 * 1024 * 1024 * 1024`) | number |
 `DASHDOT_OVERRIDE_STORAGE_TYPE_[1-5]` | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives | string |
 <!-- markdownlint-enable -->
 
