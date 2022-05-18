@@ -26,10 +26,11 @@ services:
     restart: unless-stopped
     privileged: true
     environment:
-      - DASHDOT_OVERRIDE_OS=Ubuntu 1.2.3
       - DASHDOT_DISABLE_TILT=true
+      - DASHDOT_ENABLE_CPU_TEMPS=true
     ports:
       - '3001:3001'
     volumes:
       - ./backend:/app/backend
-      - ./common:/app/common
+      - ./shared:/app/shared
+      - /etc/os-release:/etc/os-release:ro

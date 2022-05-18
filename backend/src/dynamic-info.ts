@@ -1,7 +1,8 @@
 import { CpuLoad, RamLoad, StorageLoad } from 'dashdot-shared';
 import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
-import si from 'systeminformation';
+import si, { Systeminformation } from 'systeminformation';
 import { CONFIG } from './config';
+import { getStaticServerInfo } from './static-info';
 
 const createBufferedInterval = <R>(
   bufferSize: number,
@@ -25,10 +26,20 @@ export const cpuObs = createBufferedInterval(
   CONFIG.cpu_shown_datapoints,
   CONFIG.cpu_poll_interval,
   async (): Promise<CpuLoad> => {
-    const cpuLoad = (await si.currentLoad()).cpus;
+    const staticInfo = await getStaticServerInfo();
+    const loads = (await si.currentLoad()).cpus;
 
-    return cpuLoad.map((load, i) => ({
-      load: load.load,
+    let temps: Systeminformation.CpuTemperatureData['cores'] = [];
+    if (CONFIG.enable_cpu_temps) {
+      const threadsPerCore = staticInfo.cpu.threads / staticInfo.cpu.cores;
+      temps = (await si.cpuTemperature()).cores.flatMap(temp =>
+        Array(threadsPerCore).fill(temp)
+      );
+    }
+
+    return loads.map(({ load }, i) => ({
+      load,
+      temp: temps[i],
       core: i,
     }));
   }
