@@ -65,6 +65,9 @@ and are available for both AMD64 and ARM devices.
 ```
 
 > Note: The `--privileged` flag is needed to correctly determine the memory info.
+<!-- -->
+> Note: If you want to display the host OS information, you need to create a volume
+> mount for `/etc/os-release:/etc/os-release:ro`
 
 You can configure your Docker-installed dashboard via environment variables
 inside the container.
