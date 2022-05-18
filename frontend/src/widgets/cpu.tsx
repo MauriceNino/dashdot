@@ -8,6 +8,7 @@ import { FC, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
+import { toFixedCommas } from '../utils/calculations';
 
 const CpuSwitchContainer = styled.div`
   position: absolute;
@@ -19,6 +20,14 @@ const CpuSwitchContainer = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 15px;
+`;
+
+const TempContainer = styled.div`
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  z-index: 2;
+  color: ${({ theme }) => theme.colors.text}AA;
 `;
 
 type CpuWidgetProps = {
@@ -88,6 +97,10 @@ const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
 
   const frequency = override?.cpu_frequency ?? data?.frequency;
 
+  const averageTemp =
+    load[load.length - 1]?.reduce((acc, { temp }) => acc + (temp ?? 0), 0) /
+    load[load.length - 1]?.length;
+
   return (
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
@@ -127,6 +140,11 @@ const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
         </CpuSwitchContainer>
       }
     >
+      {config?.enable_cpu_temps && (
+        <TempContainer>
+          Ø: {toFixedCommas(averageTemp, 1) || '?'} °C
+        </TempContainer>
+      )}
       <ResponsiveLine
         isInteractive={true}
         enableSlices='x'

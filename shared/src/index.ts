@@ -8,6 +8,7 @@ export type CpuInfo = {
 export type CpuLoad = {
   core: number;
   load: number;
+  temp: number;
 }[];
 
 export type RamInfo = {
@@ -49,6 +50,7 @@ export type Config = {
   port: number;
   disable_tilt: boolean;
   disable_host: boolean;
+  enable_cpu_temps: boolean;
   os_widget_enable: boolean;
   os_widget_grow: number;
   cpu_widget_enable: boolean;
