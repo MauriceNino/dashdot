@@ -64,6 +64,15 @@ const Container = styled.div`
     theme.dark ? getDarkGradient(theme) : getLightGradient(theme)};
 
   transition: background 0.5s ease;
+
+  .ant-switch {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: unset;
+  }
+
+  .ant-switch-checked {
+    background: var(--ant-primary-color);
+  }
 `;
 
 const FlexContainer = styled.div<{ mobile: boolean }>`

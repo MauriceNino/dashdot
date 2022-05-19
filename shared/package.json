@@ -8,7 +8,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build": "tsc && (cd ../frontend && yarn add ../shared) && (cd ../backend && yarn add ../shared)"
+    "build": "tsc -b"
   },
   "devDependencies": {
     "typescript": "^4.4.4"

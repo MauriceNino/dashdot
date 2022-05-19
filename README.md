@@ -60,14 +60,17 @@ and are available for both AMD64 and ARM devices.
 ```bash
 > docker container run -it \
   -p 80:3001 \
+  -v /etc/os-release:/etc/os-release:ro \
   --privileged \
   mauricenino/dashdot
 ```
 
 > Note: The `--privileged` flag is needed to correctly determine the memory info.
 <!-- -->
-> Note: If you want to display the host OS information, you need to create a volume
-> mount for `/etc/os-release:/etc/os-release:ro`
+> Note: The volume mount on `/etc/os-release:/etc/os-release:ro` is for the
+> dashboard to show the OS version of the host instead of the OS of the docker
+> container (which is running on Alpine Linux). If you wish to show the docker
+> container OS instead, just remove this line.
 
 You can configure your Docker-installed dashboard via environment variables
 inside the container.
@@ -77,6 +80,7 @@ or via the `--env` flag.
 ```bash
 > docker container run -it \
   -p 80:3001 \
+  -v /etc/os-release:/etc/os-release:ro \
   --privileged \
   --env DASHDOT_DISABLE_TILT "true" \
   --env DASHDOT_OVERRIDE_DISTRO "Ubuntu" \
@@ -99,10 +103,10 @@ If you have not already installed yarn, install it now:
 After that, download and build the project (might take a few minutes)
 
 ```bash
-> git clone https://github.com/MauriceNino/dashdot \
-  && cd dashdot \
-  && yarn \
-  && yarn build
+> git clone https://github.com/MauriceNino/dashdot &&\
+  cd dashdot &&\
+  yarn &&\
+  yarn build
 ```
 
 When done, you can run the dashboard by executing:
@@ -174,10 +178,24 @@ If you are able to, you can also create a
 [pull request](https://github.com/MauriceNino/dashdot/pulls) to add the wanted
 features or fix the found bug yourself. Any contribution is highly appreciated!
 
-To start working on this project, you can start by going through the
-Install - Git guide, but instead of running `yarn start`, you can run the
-project in dev-mode using `yarn run dev`. This will start the frontend and
-backend separately using docker-compose (docker & docker-compose will be needed).
+To start working on this project, run the following series of commands:
+
+```bash
+> git clone https://github.com/MauriceNino/dashdot &&\
+  cd dashdot &&\
+  yarn &&\
+  yarn build
+```
+
+After that, you might need to restart Visual Studio Code, because otherwise there
+can be some errors with Typescript.
+
+When you are done with all that, you can start a dev server using `docker-compose`
+with:
+
+```bash
+> yarn run dev
+```
 
 > Note: Development is done on the `dev` branch, so please use that as the base branch
 in your work.

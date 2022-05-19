@@ -11,6 +11,7 @@
 # production
 **/dist
 **/build
+**/tsconfig.tsbuildinfo
 cli/*.js
 
 # misc

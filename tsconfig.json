@@ -1,12 +1,16 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "rootDir": "./cli",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
-  },
-  "files": ["cli/index.ts"]
+  "references": [
+    {
+      "path": "./shared"
+    },
+    {
+      "path": "./frontend"
+    },
+    {
+      "path": "./backend"
+    }
+  ],
+  "files": [],
+  "include": [],
+  "exclude": ["**/node_modules"]
 }
