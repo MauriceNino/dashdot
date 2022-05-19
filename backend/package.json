@@ -5,13 +5,13 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "build": "tsc -b",
     "start": "node .",
-    "dev": "nodemon ./src/index.ts",
-    "build": "tsc"
+    "dev": "nodemon ./src/index.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dashdot-shared": "../shared",
+    "dashdot-shared": "1.0.0",
     "express": "^4.17.1",
     "rxjs": "^7.4.0",
     "socket.io": "^4.3.1",

@@ -7,6 +7,7 @@ type SkeletonContentProps = {
   width?: number;
   borderRadius?: string;
   loading?: boolean;
+  children?: React.ReactNode;
 };
 
 const SkeletonContent: FC<SkeletonContentProps> = props => {

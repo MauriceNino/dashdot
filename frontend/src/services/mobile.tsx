@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 const isMobileFunc = (): boolean => {
   if (typeof window !== 'undefined') {
@@ -9,7 +15,9 @@ const isMobileFunc = (): boolean => {
 
 export const MobileContext = createContext<boolean>(isMobileFunc());
 
-export const MobileContextProvider: React.FC = ({ children }) => {
+export const MobileContextProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [isMobile, setIsMobile] = useState(isMobileFunc());
 
   useEffect(() => {

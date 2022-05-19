@@ -3,9 +3,8 @@
   "version": "1.6.0",
   "description": "dash. - a modern server dashboard",
   "scripts": {
-    "build": "tsc && (cd ./shared && yarn build) && (cd ./frontend && yarn build) && (cd ./backend && yarn build)",
+    "build": "tsc -b && (cd ./frontend && yarn build)",
     "start": "(cd ./backend && yarn start)",
-    "build-shared": "(cd ./shared && yarn build)",
     "dev": "docker-compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write ."

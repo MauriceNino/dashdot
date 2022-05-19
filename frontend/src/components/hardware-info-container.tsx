@@ -91,6 +91,7 @@ type HardwareInfoProps = {
   extraContent?: JSX.Element;
   contentLoaded: boolean;
   infosLoading: boolean;
+  children?: React.ReactNode;
 } & InfoTableProps;
 
 const HardwareInfoContainer: FC<HardwareInfoProps> = props => {

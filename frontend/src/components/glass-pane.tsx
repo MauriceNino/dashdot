@@ -26,6 +26,7 @@ const TiltContainer = styled(ParallaxTilt)<SCProps>`
 type GlassPaneProps = {
   grow?: number;
   disableTilt?: boolean;
+  children?: React.ReactNode;
 };
 
 const GlassPane: FC<GlassPaneProps> = props => {
