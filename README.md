@@ -138,7 +138,7 @@ Variable | Description | Type | Default Value
 `DASHDOT_PORT` | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`
 `DASHDOT_DISABLE_TILT` | If you want to disable the tilt effect when hovering over the widgets with your mouse | boolean | `false`
 `DASHDOT_DISABLE_HOST` | If you want to hide the host part in the server widget (e.g. `dash.mauz.io` -> `dash.`) | boolean | `false`
-`DASHDOT_ENABLE_CPU_TEMPS` | If you want to show the CPU temperature in the graph. This will probably not work on a VPS, so you need to try it on your own if this works. For home servers it might work just fine | boolean | `true`
+`DASHDOT_ENABLE_CPU_TEMPS` | If you want to show the CPU temperature in the graph. This will probably not work on a VPS, so you need to try it on your own if this works. For home servers it might work just fine | boolean | `false`
 `DASHDOT_OS_WIDGET_ENABLE` | To show/hide the OS widget | boolean | `true`
 `DASHDOT_OS_WIDGET_GROW` | To adjust the relative size of the OS widget | number | `1`
 `DASHDOT_CPU_WIDGET_ENABLE` | To show/hide the Processor widget | boolean | `true`
