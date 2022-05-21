@@ -1,0 +1,20 @@
+name: Feature Request
+description: File a feature request
+title: '[Feature] '
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to fill out this feature request!
+  - type: textarea
+    id: describe-the-feature
+    attributes:
+      label: Description of the feature
+      description: Please describe in full detail, what you would like as a feature in dash.. Feel free to add any pictures or details to make it as clear as possible.
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: If there is anything else you want to note?
