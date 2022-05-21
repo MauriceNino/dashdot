@@ -11,7 +11,7 @@ const penv = (key: string): string | undefined => process.env[`DASHDOT_${key}`];
 
 export const CONFIG: Config = {
   port: numOrUndefined(penv('PORT')) ?? 3001,
-  disable_tilt: penv('DISABLE_TILT') === 'true',
+  enable_tilt: penv('ENABLE_TILT') === 'true',
   disable_host: penv('DISABLE_HOST') === 'true',
   enable_cpu_temps: penv('ENABLE_CPU_TEMPS') === 'true',
 

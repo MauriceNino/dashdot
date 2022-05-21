@@ -48,7 +48,7 @@ export type HardwareInfo = {
 
 export type Config = {
   port: number;
-  disable_tilt: boolean;
+  enable_tilt: boolean;
   disable_host: boolean;
   enable_cpu_temps: boolean;
   os_widget_enable: boolean;
