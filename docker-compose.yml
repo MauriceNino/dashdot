@@ -8,8 +8,6 @@ services:
     image: node:16-alpine
     working_dir: /app/frontend
     command: yarn run dev
-    stdin_open: true
-    tty: true
     restart: unless-stopped
     ports:
       - '3000:3000'
@@ -22,8 +20,6 @@ services:
       dockerfile: backend/Dockerfile.dev
     working_dir: /app/backend
     command: yarn run dev
-    stdin_open: true
-    tty: true
     restart: unless-stopped
     privileged: true
     environment:
@@ -33,3 +29,11 @@ services:
     volumes:
       - ./:/app
       - /etc/os-release:/etc/os-release:ro
+
+  shared:
+    image: node:16-alpine
+    working_dir: /app/shared
+    command: yarn run dev
+    restart: unless-stopped
+    volumes:
+      - ./:/app
