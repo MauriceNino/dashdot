@@ -153,7 +153,7 @@ function App() {
             {config?.os_widget_enable && (
               <GlassPane
                 grow={config?.os_widget_grow}
-                disableTilt={config?.disable_tilt}
+                enableTilt={config?.enable_tilt}
               >
                 <ServerWidget
                   loading={serverInfo.loading}
@@ -165,7 +165,7 @@ function App() {
             {config?.cpu_widget_enable && (
               <GlassPane
                 grow={config?.cpu_widget_grow}
-                disableTilt={config?.disable_tilt}
+                enableTilt={config?.enable_tilt}
               >
                 <CpuWidget
                   loading={serverInfo.loading}
@@ -178,7 +178,7 @@ function App() {
             {config?.ram_widget_enable && (
               <GlassPane
                 grow={config?.ram_widget_grow}
-                disableTilt={config?.disable_tilt}
+                enableTilt={config?.enable_tilt}
               >
                 <RamWidget
                   loading={serverInfo.loading}
@@ -191,7 +191,7 @@ function App() {
             {config?.storage_widget_enable && (
               <GlassPane
                 grow={config?.storage_widget_grow}
-                disableTilt={config?.disable_tilt}
+                enableTilt={config?.enable_tilt}
               >
                 <StorageWidget
                   loading={serverInfo.loading}

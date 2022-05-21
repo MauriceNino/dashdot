@@ -138,7 +138,7 @@ If you don't know how to set them, look up the section for your type of installm
 Variable | Description | Type | Default Value
 -- | -- | -- | --
 `DASHDOT_PORT` | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`
-`DASHDOT_DISABLE_TILT` | If you want to disable the tilt effect when hovering over the widgets with your mouse | boolean | `false`
+`DASHDOT_ENABLE_TILT` | If you want to enable a [parallax tilt effect](https://github.com/mkosir/react-parallax-tilt) when hovering the widgets | boolean | `false`
 <!-- markdownlint-enable -->
 
 ## OS Widget
