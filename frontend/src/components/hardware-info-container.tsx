@@ -24,7 +24,7 @@ const ChartArea = styled.div<{ mobile: boolean }>`
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
-  ${({ mobile }) => mobile && `height: 200px;`}
+  ${({ mobile }) => mobile && `height: 270px;`}
 `;
 
 const ChartContainer = styled.div<{ mobile: boolean }>`
