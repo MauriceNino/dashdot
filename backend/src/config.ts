@@ -12,12 +12,13 @@ const penv = (key: string): string | undefined => process.env[`DASHDOT_${key}`];
 export const CONFIG: Config = {
   port: numOrUndefined(penv('PORT')) ?? 3001,
   enable_tilt: penv('ENABLE_TILT') === 'true',
-  disable_host: penv('DISABLE_HOST') === 'true',
-  enable_cpu_temps: penv('ENABLE_CPU_TEMPS') === 'true',
+  widget_order: penv('WIDGET_ORDER') ?? 'os,cpu,ram,storage',
 
+  disable_host: penv('DISABLE_HOST') === 'true',
   os_widget_enable: penv('OS_WIDGET_ENABLE') !== 'false',
   os_widget_grow: numOrUndefined(penv('OS_WIDGET_GROW')) ?? 1,
 
+  enable_cpu_temps: penv('ENABLE_CPU_TEMPS') === 'true',
   cpu_widget_enable: penv('CPU_WIDGET_ENABLE') !== 'false',
   cpu_widget_grow: numOrUndefined(penv('CPU_WIDGET_GROW')) ?? 2,
   cpu_shown_datapoints: numOrUndefined(penv('CPU_SHOWN_DATAPOINTS')) ?? 20,
