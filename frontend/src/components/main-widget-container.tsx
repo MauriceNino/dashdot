@@ -12,9 +12,9 @@ import ServerWidget from '../widgets/server';
 import StorageWidget from '../widgets/storage';
 
 const FlexContainer = styled.div<{ mobile: boolean }>`
-  width: ${({ mobile }) => (mobile ? '96vw' : '88vw')};
-  min-height: ${({ mobile }) => (mobile ? '96vh' : '86vh')};
-  margin: ${({ mobile }) => (mobile ? '2vh' : '7vh')} auto 0 auto;
+  width: ${({ mobile }) => (mobile ? 'calc(100vw - 50px)' : '88vw')};
+  min-height: ${({ mobile }) => (mobile ? 'calc(100vh - 50px)' : '86vh')};
+  margin: ${({ mobile }) => (mobile ? '50px' : '7vh')} auto 0 auto;
 
   display: flex;
   flex-flow: row wrap;
