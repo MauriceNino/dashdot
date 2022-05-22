@@ -137,11 +137,11 @@ If you don't know how to set them, look up the section for your type of installm
 
 <!-- markdownlint-disable -->
 
-| Variable               | Description                                                                                                             | Type    | Default Value        |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------- | -------------------- |
-| `DASHDOT_PORT`         | The port where the express backend is running (the backend serves the frontend, so it is the same port for both)        | number  | `3001`               |
-| `DASHDOT_ENABLE_TILT`  | If you want to enable a [parallax tilt effect](https://github.com/mkosir/react-parallax-tilt) when hovering the widgets | boolean | `false`              |
-| `DASHDOT_WIDGET_ORDER` | Change the order of the elements in the list, to change the position on the page                                        | string  | `os,cpu,ram,storage` |
+| Variable               | Description                                                                                                             | Type    | Default Value                |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------- | ---------------------------- |
+| `DASHDOT_PORT`         | The port where the express backend is running (the backend serves the frontend, so it is the same port for both)        | number  | `3001`                       |
+| `DASHDOT_ENABLE_TILT`  | If you want to enable a [parallax tilt effect](https://github.com/mkosir/react-parallax-tilt) when hovering the widgets | boolean | `false`                      |
+| `DASHDOT_WIDGET_ORDER` | Change the order of the elements in the list, to change the position on the page                                        | string  | `os,cpu,storage,ram,network` |
 
 <!-- markdownlint-enable -->
 
@@ -149,11 +149,12 @@ If you don't know how to set them, look up the section for your type of installm
 
 <!-- markdownlint-disable -->
 
-| Variable                   | Description                                                                             | Type    | Default Value |
-| -------------------------- | --------------------------------------------------------------------------------------- | ------- | ------------- |
-| `DASHDOT_DISABLE_HOST`     | If you want to hide the host part in the server widget (e.g. `dash.mauz.io` -> `dash.`) | boolean | `false`       |
-| `DASHDOT_OS_WIDGET_ENABLE` | To show/hide the OS widget                                                              | boolean | `true`        |
-| `DASHDOT_OS_WIDGET_GROW`   | To adjust the relative size of the OS widget                                            | number  | `1`           |
+| Variable                      | Description                                                                             | Type    | Default Value |
+| ----------------------------- | --------------------------------------------------------------------------------------- | ------- | ------------- |
+| `DASHDOT_DISABLE_HOST`        | If you want to hide the host part in the server widget (e.g. `dash.mauz.io` -> `dash.`) | boolean | `false`       |
+| `DASHDOT_OS_WIDGET_ENABLE`    | To show/hide the OS widget                                                              | boolean | `true`        |
+| `DASHDOT_OS_WIDGET_GROW`      | To adjust the relative size of the OS widget                                            | number  | `1.5`         |
+| `DASHDOT_OS_WIDGET_MIN_WIDTH` | To adjust the minimum width of the OS widget (in px)                                    | number  | `300`         |
 
 <!-- markdownlint-enable -->
 
@@ -161,42 +162,60 @@ If you don't know how to set them, look up the section for your type of installm
 
 <!-- markdownlint-disable -->
 
-| Variable                    | Description                                                                                                                                                                           | Type    | Default Value |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------- |
-| `DASHDOT_ENABLE_CPU_TEMPS`  | If you want to show the CPU temperature in the graph. This will probably not work on a VPS, so you need to try it on your own if this works. For home servers it might work just fine | boolean | `false`       |
-| `DASHDOT_CPU_WIDGET_ENABLE` | To show/hide the Processor widget                                                                                                                                                     | boolean | `true`        |
-| `DASHDOT_CPU_WIDGET_GROW`   | To adjust the relative size of the Processor widget                                                                                                                                   | number  | `2`           |
-| `DASHDOT_CPU_DATAPOINTS`    | The amount of datapoints in the Processor graph                                                                                                                                       | number  | `20`          |
-| `DASHDOT_CPU_POLL_INTERVAL` | Read the Processor load every x milliseconds                                                                                                                                          | number  | `1000`        |
+| Variable                       | Description                                                                                                                                                                           | Type    | Default Value |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------- |
+| `DASHDOT_ENABLE_CPU_TEMPS`     | If you want to show the CPU temperature in the graph. This will probably not work on a VPS, so you need to try it on your own if this works. For home servers it might work just fine | boolean | `false`       |
+| `DASHDOT_CPU_WIDGET_ENABLE`    | To show/hide the Processor widget                                                                                                                                                     | boolean | `true`        |
+| `DASHDOT_CPU_WIDGET_GROW`      | To adjust the relative size of the Processor widget                                                                                                                                   | number  | `4`           |
+| `DASHDOT_CPU_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Processor widget (in px)                                                                                                                           | number  | `500`         |
+| `DASHDOT_CPU_DATAPOINTS`       | The amount of datapoints in the Processor graph                                                                                                                                       | number  | `20`          |
+| `DASHDOT_CPU_POLL_INTERVAL`    | Read the Processor load every x milliseconds                                                                                                                                          | number  | `1000`        |
 
 <!-- markdownlint-enable -->
 
-### RAM Widget
+## Storage Widget
 
 <!-- markdownlint-disable -->
 
-| Variable                    | Description                                      | Type    | Default Value |
-| --------------------------- | ------------------------------------------------ | ------- | ------------- |
-| `DASHDOT_RAM_WIDGET_ENABLE` | To show/hide the Memory widget                   | boolean | `true`        |
-| `DASHDOT_RAM_WIDGET_GROW`   | To adjust the relative size of the Memory widget | number  | `1.5`         |
-| `DASHDOT_RAM_DATAPOINTS`    | The amount of datapoints in the Memory graph     | number  | `20`          |
-| `DASHDOT_RAM_POLL_INTERVAL` | Read the Memory load every x milliseconds        | number  | `1000`        |
+| Variable                           | Description                                               | Type    | Default Value |
+| ---------------------------------- | --------------------------------------------------------- | ------- | ------------- |
+| `DASHDOT_STORAGE_WIDGET_ENABLE`    | To show/hide the Storage widget                           | boolean | `true`        |
+| `DASHDOT_STORAGE_WIDGET_GROW`      | To adjust the relative size of the Storage widget         | number  | `3.5`         |
+| `DASHDOT_STORAGE_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Storage widget (in px) | number  | `500`         |
+| `DASHDOT_STORAGE_POLL_INTERVAL`    | Read the Storage load every x milliseconds                | number  | `60000`       |
 
 <!-- markdownlint-enable -->
 
-### Storage Widget
+## RAM Widget
 
 <!-- markdownlint-disable -->
 
-| Variable                        | Description                                       | Type    | Default Value |
-| ------------------------------- | ------------------------------------------------- | ------- | ------------- |
-| `DASHDOT_STORAGE_WIDGET_ENABLE` | To show/hide the Storage widget                   | boolean | `true`        |
-| `DASHDOT_STORAGE_WIDGET_GROW`   | To adjust the relative size of the Storage widget | number  | `1.5`         |
-| `DASHDOT_STORAGE_POLL_INTERVAL` | Read the Storage load every x milliseconds        | number  | `60000`       |
+| Variable                       | Description                                              | Type    | Default Value |
+| ------------------------------ | -------------------------------------------------------- | ------- | ------------- |
+| `DASHDOT_RAM_WIDGET_ENABLE`    | To show/hide the Memory widget                           | boolean | `true`        |
+| `DASHDOT_RAM_WIDGET_GROW`      | To adjust the relative size of the Memory widget         | number  | `4`           |
+| `DASHDOT_RAM_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Memory widget (in px) | number  | `500`         |
+| `DASHDOT_RAM_DATAPOINTS`       | The amount of datapoints in the Memory graph             | number  | `20`          |
+| `DASHDOT_RAM_POLL_INTERVAL`    | Read the Memory load every x milliseconds                | number  | `1000`        |
 
 <!-- markdownlint-enable -->
 
-### Overrides
+## Network Widget
+
+<!-- markdownlint-disable -->
+
+| Variable                           | Description                                               | Type    | Default Value |
+| ---------------------------------- | --------------------------------------------------------- | ------- | ------------- |
+| `DASHDOT_NETWORK_WIDGET_ENABLE`    | To show/hide the Network widget                           | boolean | `true`        |
+| `DASHDOT_NETWORK_WIDGET_GROW`      | To adjust the relative size of the Network widget         | number  | `6`           |
+| `DASHDOT_NETWORK_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Network widget (in px) | number  | `500`         |
+| `DASHDOT_NETWORK_DATAPOINTS_UP`    | The amount of datapoints in the Network (Upload) graph    | number  | `10`          |
+| `DASHDOT_NETWORK_DATAPOINTS_DOWN`  | The amount of datapoints in the Network (Download) graph  | number  | `10`          |
+| `DASHDOT_NETWORK_POLL_INTERVAL`    | Read the Network load every x milliseconds                | number  | `1000`        |
+
+<!-- markdownlint-enable -->
+
+## Overrides
 
 Override specific fields, by providing your desired value with the following options.
 

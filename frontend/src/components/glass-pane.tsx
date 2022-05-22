@@ -7,11 +7,10 @@ type SCProps = GlassPaneProps & { mobile: boolean };
 
 const TiltContainer = styled(ParallaxTilt)<SCProps>`
   display: flex;
-  min-width: ${({ mobile }) => (mobile ? '300px' : '400px')};
+  min-width: ${({ minWidth }) => minWidth}px;
   min-height: 360px;
 
-  flex-basis: calc(${props => (props.grow ?? 1) * 33}% - 100px);
-  flex-grow: 1;
+  flex-grow: ${props => props.grow ?? 1};
 
   backdrop-filter: blur(20px);
   background-color: ${({ theme }) => theme.colors.surface}44;
@@ -25,6 +24,7 @@ const TiltContainer = styled(ParallaxTilt)<SCProps>`
 
 type GlassPaneProps = {
   grow?: number;
+  minWidth?: number;
   enableTilt?: boolean;
   children?: React.ReactNode;
 };
@@ -40,6 +40,7 @@ const GlassPane: FC<GlassPaneProps> = props => {
       tiltMaxAngleX={4}
       tiltMaxAngleY={4}
       grow={props.grow ?? 1}
+      minWidth={props.minWidth ?? 350}
     >
       {props.children}
     </TiltContainer>

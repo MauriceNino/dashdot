@@ -20,7 +20,6 @@ import { Config, OsInfo } from 'dashdot-shared';
 import { FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import InfoTable from '../components/info-table';
-import SkeletonContent from '../components/skeleton-content';
 import ThemedText from '../components/text';
 import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';
@@ -288,7 +287,7 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
           ]}
         />
 
-        {!isMobile && (
+        {/* {!isMobile && (
           <ServerIconContainer>
             <SkeletonContent width={120} height={120} borderRadius='15px'>
               {(override?.os || (distro != null && platform != null)) && (
@@ -299,7 +298,7 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
               )}
             </SkeletonContent>
           </ServerIconContainer>
-        )}
+        )} */}
       </ContentContainer>
     </Container>
   );
