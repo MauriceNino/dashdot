@@ -76,35 +76,47 @@ export const MainWidgetContainer: FC = () => {
   const configs = {
     os: {
       grow: config.os_widget_grow,
+      minWidth: config.os_widget_min_width,
       enabled: config.os_widget_enable,
       Widget: ServerWidget,
       data: osData,
     },
     cpu: {
       grow: config.cpu_widget_grow,
+      minWidth: config.cpu_widget_min_width,
       enabled: config.cpu_widget_enable,
       Widget: CpuWidget,
       data: cpuData,
       load: cpuLoad,
     },
-    ram: {
-      grow: config.ram_widget_grow,
-      enabled: config.ram_widget_enable,
-      Widget: RamWidget,
-      data: ramData,
-      load: ramLoad,
-    },
     storage: {
       grow: config.storage_widget_grow,
+      minWidth: config.storage_widget_min_width,
       enabled: config.storage_widget_enable,
       Widget: StorageWidget,
       data: storageData,
       load: storageLoad,
     },
+    ram: {
+      grow: config.ram_widget_grow,
+      minWidth: config.ram_widget_min_width,
+      enabled: config.ram_widget_enable,
+      Widget: RamWidget,
+      data: ramData,
+      load: ramLoad,
+    },
+    network: {
+      grow: config.network_widget_grow,
+      minWidth: config.network_widget_min_width,
+      enabled: config.network_widget_enable,
+      Widget: RamWidget,
+      data: ramData,
+      load: ramLoad,
+    },
   };
 
   const widgetOrderArr = (
-    config.widget_order.split(',') as ('os' | 'cpu' | 'ram' | 'storage')[]
+    config.widget_order.split(',') as (keyof typeof configs)[]
   ).filter(widget => configs[widget].enabled);
 
   return (
@@ -116,6 +128,7 @@ export const MainWidgetContainer: FC = () => {
           <GlassPane
             key={widget}
             grow={currentConfig.grow}
+            minWidth={currentConfig.minWidth}
             enableTilt={config?.enable_tilt}
           >
             <currentConfig.Widget

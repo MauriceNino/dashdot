@@ -56,24 +56,36 @@ export type Config = {
   disable_host: boolean;
   os_widget_enable: boolean;
   os_widget_grow: number;
+  os_widget_min_width: number;
 
   // CPU Widget
   enable_cpu_temps: boolean;
   cpu_widget_enable: boolean;
   cpu_widget_grow: number;
+  cpu_widget_min_width: number;
   cpu_shown_datapoints: number;
   cpu_poll_interval: number;
-
-  // RAM Widget
-  ram_widget_enable: boolean;
-  ram_widget_grow: number;
-  ram_shown_datapoints: number;
-  ram_poll_interval: number;
 
   // Storage Widget
   storage_widget_enable: boolean;
   storage_widget_grow: number;
+  storage_widget_min_width: number;
   storage_poll_interval: number;
+
+  // RAM Widget
+  ram_widget_enable: boolean;
+  ram_widget_grow: number;
+  ram_widget_min_width: number;
+  ram_shown_datapoints: number;
+  ram_poll_interval: number;
+
+  // Network Widget
+  network_widget_enable: boolean;
+  network_widget_grow: number;
+  network_widget_min_width: number;
+  network_shown_datapoints_up: number;
+  network_shown_datapoints_down: number;
+  network_poll_interval: number;
 
   // Overrides
   override: {

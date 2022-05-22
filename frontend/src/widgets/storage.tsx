@@ -85,7 +85,7 @@ const StorageWidget: FC<StorageWidgetProps> = ({
             value: available,
           },
         ]}
-        margin={{ top: 40, bottom: 40 }}
+        margin={{ top: 40, bottom: 40, left: 40, right: 40 }}
         innerRadius={0.5}
         padAngle={0.7}
         cornerRadius={10}
