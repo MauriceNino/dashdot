@@ -30,6 +30,17 @@ export type StorageInfo = {
 };
 export type StorageLoad = number;
 
+export type NetworkInfo = {
+  interfaceSpeed: number;
+  speedDown: number;
+  speedUp: number;
+  type: string;
+};
+export type NetworkLoad = {
+  up: number;
+  down: number;
+};
+
 export type OsInfo = {
   platform: string;
   distro: string;
@@ -44,6 +55,7 @@ export type HardwareInfo = {
   cpu: CpuInfo;
   ram: RamInfo;
   storage: StorageInfo;
+  network: NetworkInfo;
 };
 
 export type Config = {
