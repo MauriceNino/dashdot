@@ -1,10 +1,12 @@
 import { CpuLoad, RamLoad, StorageLoad } from 'dashdot-shared';
 import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import si, { Systeminformation } from 'systeminformation';
+import util from 'util';
 import { CONFIG } from './config';
 import { getStaticServerInfo } from './static-info';
 
 const createBufferedInterval = <R>(
+  name: string,
   bufferSize: number,
   intervalMs: number,
   factory: () => Promise<R>
@@ -13,7 +15,18 @@ const createBufferedInterval = <R>(
 
   // Instantly load first value
   factory()
-    .then(value => buffer.next(value))
+    .then(value => {
+      console.log(
+        `First measurement [${name}]:`,
+        util.inspect(value, {
+          showHidden: false,
+          depth: null,
+          colors: true,
+        })
+      );
+
+      buffer.next(value);
+    })
     .catch(err => buffer.error(err));
 
   // Load values every intervalMs
@@ -23,6 +36,7 @@ const createBufferedInterval = <R>(
 };
 
 export const cpuObs = createBufferedInterval(
+  'CPU',
   CONFIG.cpu_shown_datapoints,
   CONFIG.cpu_poll_interval,
   async (): Promise<CpuLoad> => {
@@ -46,6 +60,7 @@ export const cpuObs = createBufferedInterval(
 );
 
 export const ramObs = createBufferedInterval(
+  'RAM',
   CONFIG.ram_shown_datapoints,
   CONFIG.ram_poll_interval,
   async (): Promise<RamLoad> => {
@@ -54,6 +69,7 @@ export const ramObs = createBufferedInterval(
 );
 
 export const storageObs = createBufferedInterval(
+  'Storage',
   1,
   CONFIG.storage_poll_interval,
   async (): Promise<StorageLoad> => {
