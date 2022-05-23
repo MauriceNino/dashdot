@@ -37,7 +37,8 @@ It is intended to be used for smaller VPS and private servers.
 If you are interested in further developing this project, have a look at the
 [Contributing](#Contributing) section of this README.
 
-In case you want to financially support this project, you can [donate here](https://paypal.me/itsMaurice).
+In case you want to financially support this project, you can visit my
+[GitHub Sponsors](https://github.com/sponsors/MauriceNino), or my [Ko-Fi](https://ko-fi.com/mauricenino).
 
 # Preview
 
