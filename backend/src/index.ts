@@ -7,7 +7,7 @@ import { Server } from 'socket.io';
 import util from 'util';
 import { CONFIG } from './config';
 import { cpuObs, ramObs, storageObs } from './dynamic-info';
-import { getStaticServerInfo } from './static-info';
+import { getStaticServerInfo, runSpeedTest } from './static-info';
 
 const app = express();
 app.use(cors());
@@ -64,4 +64,6 @@ server.listen(CONFIG.port, async () => {
       colors: true,
     })
   );
+
+  await runSpeedTest();
 });

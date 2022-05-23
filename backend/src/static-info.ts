@@ -1,12 +1,14 @@
 import {
   CpuInfo,
   HardwareInfo,
+  NetworkInfo,
   OsInfo,
   RamInfo,
   ServerInfo,
   StorageInfo,
 } from 'dashdot-shared';
 import si from 'systeminformation';
+import { SpeedUnits, UniversalSpeedtest } from 'universal-speedtest';
 import { CONFIG } from './config';
 
 const normalizeCpuModel = (cpuModel: string) => {
@@ -20,9 +22,15 @@ let INFO_SAVE: HardwareInfo | null = null;
 
 export const getStaticServerInfo = async (): Promise<ServerInfo> => {
   if (!INFO_SAVE) {
-    const [osInfo, cpuInfo, memInfo, memLayout, diskLayout] = await Promise.all(
-      [si.osInfo(), si.cpu(), si.mem(), si.memLayout(), si.diskLayout()]
-    );
+    const [osInfo, cpuInfo, memInfo, memLayout, diskLayout, networkInfo] =
+      await Promise.all([
+        si.osInfo(),
+        si.cpu(),
+        si.mem(),
+        si.memLayout(),
+        si.diskLayout(),
+        si.networkInterfaces(),
+      ]);
 
     const os: OsInfo = {
       arch: osInfo.arch,
@@ -58,11 +66,22 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
       })),
     };
 
+    //@ts-ignore
+    const defaultNet = networkInfo.find(net => net.default)!;
+
+    const network: NetworkInfo = {
+      interfaceSpeed: defaultNet.speed,
+      speedDown: 0,
+      speedUp: 0,
+      type: defaultNet.type,
+    };
+
     INFO_SAVE = {
       os,
       cpu,
       ram,
       storage,
+      network,
     };
   }
 
@@ -74,4 +93,19 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
     },
     config: CONFIG,
   };
+};
+
+export const runSpeedTest = async () => {
+  console.log('Running speed-test (this may take a few minutes)...');
+  const universalSpeedtest = new UniversalSpeedtest({
+    measureUpload: true,
+    downloadUnit: SpeedUnits.MBps,
+  });
+
+  const speed = await universalSpeedtest.runSpeedtestNet();
+
+  INFO_SAVE!.network.speedDown = speed.downloadSpeed ?? 0;
+  INFO_SAVE!.network.speedUp = speed.uploadSpeed ?? 0;
+
+  console.log(speed);
 };
