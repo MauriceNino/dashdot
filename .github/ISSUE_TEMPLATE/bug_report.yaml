@@ -34,6 +34,19 @@ body:
         - Chrome
         - Safari
         - Microsoft Edge
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: Where is your instance running?
+      multiple: true
+      options:
+        - Linux Server
+        - Windows Server
+        - Desktop PC (Windows)
+        - Desktop PC (Linux)
+        - Desktop PC (Mac OS)
+        - Raspberry Pi
+        - Other (Please specify below)
   - type: textarea
     id: extra
     attributes:
