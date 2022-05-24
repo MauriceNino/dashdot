@@ -45,7 +45,7 @@ steps:
   - name: build & deploy to dockerhub (production)
     image: crazymax/docker:latest
     when:
-      branch: master
+      branch: main
     environment:
       DOCKER_ACCESS_KEY:
         from_secret: DOCKER_ACCESS_KEY
@@ -63,7 +63,7 @@ steps:
   - name: update & deploy server files
     image: docker/compose
     when:
-      branch: master
+      branch: main
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
@@ -87,4 +87,4 @@ name: DOCKER_ACCESS_KEY
 data: ysbzIhceuQjxnBZ7kRt63CswtG85WTCiCBFPCM8wmV9qBQTS9kGPktIqw1wevm1O0U2l1pTWl7wt2e7D+a462Q==
 ---
 kind: signature
-hmac: f1537a64544672cb38a835935051fc1cf89df9db1353aea864460623802fd68a
+hmac: 76a88bd33136591c34c71236cb2b6af09766b9a08b6f3a68622ffc23f79b3d77
