@@ -11,6 +11,17 @@ steps:
       - yarn --immutable --immutable-cache --check-cache
       - yarn run prettier:check
 
+  # FEATURE BUILD (LOCAL) #
+  - name: build
+    when:
+      branch:
+        exclude:
+          - main
+          - dev
+    image: node:lts-alpine
+    commands:
+      - yarn build
+
   # DEV BUILD #
   - name: build & deploy to dockerhub (dev)
     image: crazymax/docker:latest
@@ -87,4 +98,4 @@ name: DOCKER_ACCESS_KEY
 data: ysbzIhceuQjxnBZ7kRt63CswtG85WTCiCBFPCM8wmV9qBQTS9kGPktIqw1wevm1O0U2l1pTWl7wt2e7D+a462Q==
 ---
 kind: signature
-hmac: 76a88bd33136591c34c71236cb2b6af09766b9a08b6f3a68622ffc23f79b3d77
+hmac: 6652f1b5cdba28ff805c2efceb859f9a8fed1fc095d0c503f875e15c8c0e43b9
