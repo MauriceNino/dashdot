@@ -1,6 +1,6 @@
 {
   "name": "dashdot-cli",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "dash. - a modern server dashboard",
   "scripts": {
     "build": "tsc -b && (cd ./frontend && yarn build)",
