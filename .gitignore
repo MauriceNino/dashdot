@@ -12,7 +12,6 @@
 **/dist
 **/build
 **/tsconfig.tsbuildinfo
-cli/*.js
 
 # misc
 **.DS_Store
