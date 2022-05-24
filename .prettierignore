@@ -1,5 +1,8 @@
 # dependencies
 **/node_modules
+.pnp.cjs
+.pnp.loader.mjs
+.yarn
 
 # production
 **/dist
@@ -7,5 +10,3 @@
 
 # misc
 **.DS_Store
-
-**/*.md
