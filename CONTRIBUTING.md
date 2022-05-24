@@ -1,4 +1,3 @@
-
 # Contributing
 
 The simplest way of contributing is to create
@@ -31,4 +30,4 @@ with:
 ```
 
 > Note: Development is done on the `dev` branch, so please use that as the base branch
-in your work.
+> in your work.
