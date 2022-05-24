@@ -37,7 +37,8 @@ It is intended to be used for smaller VPS and private servers.
 If you are interested in further developing this project, have a look at the
 [Contributing](#Contributing) section of this README.
 
-In case you want to financially support this project, you can [donate here](https://paypal.me/itsMaurice).
+In case you want to financially support this project, you can visit my
+[GitHub Sponsors](https://github.com/sponsors/MauriceNino), or my [Ko-Fi](https://ko-fi.com/mauricenino).
 
 # Preview
 
@@ -60,14 +61,17 @@ and are available for both AMD64 and ARM devices.
 ```bash
 > docker container run -it \
   -p 80:3001 \
+  -v /etc/os-release:/etc/os-release:ro \
   --privileged \
   mauricenino/dashdot
 ```
 
 > Note: The `--privileged` flag is needed to correctly determine the memory info.
 <!-- -->
-> Note: If you want to display the host OS information, you need to create a volume
-> mount for `/etc/os-release:/etc/os-release:ro`
+> Note: The volume mount on `/etc/os-release:/etc/os-release:ro` is for the
+> dashboard to show the OS version of the host instead of the OS of the docker
+> container (which is running on Alpine Linux). If you wish to show the docker
+> container OS instead, just remove this line.
 
 You can configure your Docker-installed dashboard via environment variables
 inside the container.
@@ -77,6 +81,7 @@ or via the `--env` flag.
 ```bash
 > docker container run -it \
   -p 80:3001 \
+  -v /etc/os-release:/etc/os-release:ro \
   --privileged \
   --env DASHDOT_DISABLE_TILT "true" \
   --env DASHDOT_OVERRIDE_DISTRO "Ubuntu" \
@@ -99,10 +104,10 @@ If you have not already installed yarn, install it now:
 After that, download and build the project (might take a few minutes)
 
 ```bash
-> git clone https://github.com/MauriceNino/dashdot \
-  && cd dashdot \
-  && yarn \
-  && yarn build
+> git clone https://github.com/MauriceNino/dashdot &&\
+  cd dashdot &&\
+  yarn &&\
+  yarn build
 ```
 
 When done, you can run the dashboard by executing:
@@ -128,26 +133,66 @@ The following configuration options are available.
 If you don't know how to set them, look up the section for your type of installment
 (Docker or Git).
 
+## General
+
 <!-- markdownlint-disable -->
 Variable | Description | Type | Default Value
 -- | -- | -- | --
 `DASHDOT_PORT` | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`
-`DASHDOT_DISABLE_TILT` | If you want to disable the tilt effect when hovering over the widgets with your mouse | boolean | `false`
+`DASHDOT_ENABLE_TILT` | If you want to enable a [parallax tilt effect](https://github.com/mkosir/react-parallax-tilt) when hovering the widgets | boolean | `false`
+`DASHDOT_WIDGET_ORDER` | Change the order of the elements in the list, to change the position on the page | string | `os,cpu,ram,storage`
+<!-- markdownlint-enable -->
+
+## OS Widget
+
+<!-- markdownlint-disable -->
+Variable | Description | Type | Default Value
+-- | -- | -- | --
 `DASHDOT_DISABLE_HOST` | If you want to hide the host part in the server widget (e.g. `dash.mauz.io` -> `dash.`) | boolean | `false`
-`DASHDOT_ENABLE_CPU_TEMP` | If you want to show the CPU temperature in the graph. This will probably not work on a VPS, so you need to try it on your own if this works. For home servers it might work just fine | boolean | `true`
 `DASHDOT_OS_WIDGET_ENABLE` | To show/hide the OS widget | boolean | `true`
 `DASHDOT_OS_WIDGET_GROW` | To adjust the relative size of the OS widget | number | `1`
+<!-- markdownlint-enable -->
+
+## CPU Widget
+
+<!-- markdownlint-disable -->
+Variable | Description | Type | Default Value
+-- | -- | -- | --
+`DASHDOT_ENABLE_CPU_TEMPS` | If you want to show the CPU temperature in the graph. This will probably not work on a VPS, so you need to try it on your own if this works. For home servers it might work just fine | boolean | `false`
 `DASHDOT_CPU_WIDGET_ENABLE` | To show/hide the Processor widget | boolean | `true`
 `DASHDOT_CPU_WIDGET_GROW` | To adjust the relative size of the Processor widget | number | `2`
 `DASHDOT_CPU_DATAPOINTS` | The amount of datapoints in the Processor graph | number | `20`
 `DASHDOT_CPU_POLL_INTERVAL` | Read the Processor load every x milliseconds | number | `1000`
+<!-- markdownlint-enable -->
+
+## RAM Widget
+
+<!-- markdownlint-disable -->
+Variable | Description | Type | Default Value
+-- | -- | -- | --
 `DASHDOT_RAM_WIDGET_ENABLE` | To show/hide the Memory widget | boolean | `true`
 `DASHDOT_RAM_WIDGET_GROW` | To adjust the relative size of the Memory widget | number | `1.5`
 `DASHDOT_RAM_DATAPOINTS` | The amount of datapoints in the Memory graph | number | `20`
 `DASHDOT_RAM_POLL_INTERVAL` | Read the Memory load every x milliseconds | number | `1000`
+<!-- markdownlint-enable -->
+
+## Storage Widget
+
+<!-- markdownlint-disable -->
+Variable | Description | Type | Default Value
+-- | -- | -- | --
 `DASHDOT_STORAGE_WIDGET_ENABLE` | To show/hide the Storage widget | boolean | `true`
 `DASHDOT_STORAGE_WIDGET_GROW` | To adjust the relative size of the Storage widget | number | `1.5`
 `DASHDOT_STORAGE_POLL_INTERVAL` | Read the Storage load every x milliseconds | number | `60000`
+<!-- markdownlint-enable -->
+
+## Overrides
+
+Override specific fields, by providing your desired value with the following options.
+
+<!-- markdownlint-disable -->
+Variable | Description | Type | Default Value
+-- | -- | -- | --
 `DASHDOT_OVERRIDE_OS` | | string |
 `DASHDOT_OVERRIDE_ARCH` | | string |
 `DASHDOT_OVERRIDE_CPU_BRAND` | | string |
@@ -174,10 +219,24 @@ If you are able to, you can also create a
 [pull request](https://github.com/MauriceNino/dashdot/pulls) to add the wanted
 features or fix the found bug yourself. Any contribution is highly appreciated!
 
-To start working on this project, you can start by going through the
-Install - Git guide, but instead of running `yarn start`, you can run the
-project in dev-mode using `yarn run dev`. This will start the frontend and
-backend separately using docker-compose (docker & docker-compose will be needed).
+To start working on this project, run the following series of commands:
+
+```bash
+> git clone https://github.com/MauriceNino/dashdot &&\
+  cd dashdot &&\
+  yarn &&\
+  yarn build
+```
+
+After that, you might need to restart Visual Studio Code, because otherwise there
+can be some errors with Typescript.
+
+When you are done with all that, you can start a dev server using `docker-compose`
+with:
+
+```bash
+> yarn run dev
+```
 
 > Note: Development is done on the `dev` branch, so please use that as the base branch
 in your work.

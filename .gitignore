@@ -1,9 +1,17 @@
 # dependencies
 **/node_modules
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # production
 **/dist
 **/build
+**/tsconfig.tsbuildinfo
 cli/*.js
 
 # misc

@@ -1,38 +1,10 @@
 {
   "name": "dashdot-cli",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "dash. - a modern server dashboard",
-  "repository": "https://github.com/MauriceNino/dashdot",
-  "homepage": "https://github.com/MauriceNino/dashdot#readme",
-  "author": "MauriceNino <mauriceprivat98@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/MauriceNino/dashdot/issues"
-  },
-  "keywords": [
-    "monitoring",
-    "dashboard",
-    "server",
-    "glassmorphism"
-  ],
-  "license": "MIT",
-  "bin": "cli/index.js",
-  "files": [
-    "frontend/build/**/*",
-    "frontend/package.json",
-    "frontend/yarn.lock",
-    "backend/dist/**/*",
-    "backend/package.json",
-    "backend/yarn.lock",
-    "shared/dist/**/*",
-    "shared/package.json",
-    "shared/yarn.lock",
-    "cli/index.js"
-  ],
   "scripts": {
-    "build": "tsc && (cd ./shared && yarn build) && (cd ./frontend && yarn build) && (cd ./backend && yarn build)",
-    "install": "(cd ./shared && yarn --ignore-scripts) && (cd ./frontend && yarn --ignore-scripts) && (cd ./backend && yarn --ignore-scripts)",
+    "build": "tsc -b && (cd ./frontend && yarn build)",
     "start": "(cd ./backend && yarn start)",
-    "build-shared": "(cd ./shared && yarn build)",
     "dev": "docker-compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write ."
@@ -41,5 +13,24 @@
     "@types/node": "^16.11.6",
     "prettier": "2.4.1",
     "typescript": "^4.4.4"
-  }
+  },
+  "workspaces": [
+    "shared",
+    "frontend",
+    "backend"
+  ],
+  "repository": "https://github.com/MauriceNino/dashdot",
+  "homepage": "https://github.com/MauriceNino/dashdot#readme",
+  "author": "MauriceNino <mauriceprivat98@gmail.com>",
+  "license": "MIT",
+  "packageManager": "yarn@3.2.1",
+  "bugs": {
+    "url": "https://github.com/MauriceNino/dashdot/issues"
+  },
+  "keywords": [
+    "monitoring",
+    "dashboard",
+    "server",
+    "glassmorphism"
+  ]
 }
