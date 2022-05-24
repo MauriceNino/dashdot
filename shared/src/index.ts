@@ -47,23 +47,35 @@ export type HardwareInfo = {
 };
 
 export type Config = {
+  // General
   port: number;
-  disable_tilt: boolean;
+  enable_tilt: boolean;
+  widget_order: string;
+
+  // OS Widget
   disable_host: boolean;
-  enable_cpu_temps: boolean;
   os_widget_enable: boolean;
   os_widget_grow: number;
+
+  // CPU Widget
+  enable_cpu_temps: boolean;
   cpu_widget_enable: boolean;
   cpu_widget_grow: number;
   cpu_shown_datapoints: number;
   cpu_poll_interval: number;
+
+  // RAM Widget
   ram_widget_enable: boolean;
   ram_widget_grow: number;
   ram_shown_datapoints: number;
   ram_poll_interval: number;
+
+  // Storage Widget
   storage_widget_enable: boolean;
   storage_widget_grow: number;
   storage_poll_interval: number;
+
+  // Overrides
   override: {
     os?: string;
     arch?: string;
