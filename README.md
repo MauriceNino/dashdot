@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 <h1>
-  <img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/banner_muted.png?raw=true" alt="dash. - a modern server dashboard">
+  <img src="https://github.com/MauriceNino/dashdot/blob/main/_doc/banner_muted.png?raw=true" alt="dash. - a modern server dashboard">
 </h1>
 
 <div align="center">
@@ -45,7 +45,7 @@ In case you want to financially support this project, you can visit my
 <!-- markdownlint-disable -->
 Darkmode | Lightmode
 -- | --
-<img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/screenshot_darkmode.png?raw=true" alt="screenshot of the darkmode"> | <img src="https://github.com/MauriceNino/dashdot/blob/master/_doc/screenshot_lightmode.png?raw=true" alt="screenshot of the lightmode">
+<img src="https://github.com/MauriceNino/dashdot/blob/main/_doc/screenshot_darkmode.png?raw=true" alt="screenshot of the darkmode"> | <img src="https://github.com/MauriceNino/dashdot/blob/main/_doc/screenshot_lightmode.png?raw=true" alt="screenshot of the lightmode">
 <!-- markdownlint-enable -->
 
 # Installation
