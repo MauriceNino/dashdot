@@ -16,7 +16,7 @@
     "@nivo/line": "^0.74.0",
     "@nivo/pie": "^0.74.0",
     "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
+    "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.20.5",
     "axios": "^0.24.0",
