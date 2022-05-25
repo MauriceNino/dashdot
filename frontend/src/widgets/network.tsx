@@ -26,6 +26,12 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
   const theme = useTheme();
   const override = config?.override;
 
+  const type = override?.network_type ?? data?.type;
+  const speedUp = override?.network_speed_up ?? data?.speedUp;
+  const speedDown = override?.network_speed_down ?? data?.speedDown;
+  const interfaceSpeed =
+    override?.network_interface_speed ?? data?.interfaceSpeed;
+
   const chartDataDown = load.map((load, i) => ({
     x: i,
     y: load.down,
@@ -35,6 +41,15 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
     y: load.up,
   })) as Datum[];
 
+  const maxUp = Math.max(
+    speedUp ?? 0 / 8,
+    ...chartDataUp.map(u => u.y as number)
+  );
+  const maxDown = Math.max(
+    speedDown ?? 0 / 8,
+    ...chartDataDown.map(d => d.y as number)
+  );
+
   return (
     <HardwareInfoContainer
       color={theme.colors.networkPrimary}
@@ -43,20 +58,20 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
       infos={[
         {
           label: 'Type',
-          value: data?.type,
+          value: type,
         },
         {
           label: 'Speed (Up)',
-          value: data?.speedUp ? bpsPrettyPrint(data?.speedUp) : undefined,
+          value: speedUp ? bpsPrettyPrint(speedUp) : undefined,
         },
         {
           label: 'Speed (Down)',
-          value: data?.speedDown ? bpsPrettyPrint(data?.speedDown) : undefined,
+          value: speedDown ? bpsPrettyPrint(speedDown) : undefined,
         },
         {
           label: 'Network Speed',
-          value: data?.interfaceSpeed
-            ? bpsPrettyPrint(data?.interfaceSpeed * 1000 * 1000)
+          value: interfaceSpeed
+            ? bpsPrettyPrint(interfaceSpeed * 1000 * 1000)
             : undefined,
         },
       ]}
@@ -87,8 +102,8 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
             data?.speedUp
               ? {
                   type: 'linear',
-                  min: (data.speedUp / 8) * -0.05,
-                  max: data.speedUp / 8,
+                  min: maxUp * -0.05,
+                  max: maxUp,
                 }
               : undefined
           }
@@ -129,8 +144,8 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
             data?.speedDown
               ? {
                   type: 'linear',
-                  min: (data.speedDown / 8) * -0.05,
-                  max: data.speedDown / 8,
+                  min: maxDown * -0.05,
+                  max: maxDown,
                 }
               : undefined
           }

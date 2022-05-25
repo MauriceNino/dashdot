@@ -209,8 +209,7 @@ If you don't know how to set them, look up the section for your type of installm
 | `DASHDOT_NETWORK_WIDGET_ENABLE`    | To show/hide the Network widget                           | boolean | `true`        |
 | `DASHDOT_NETWORK_WIDGET_GROW`      | To adjust the relative size of the Network widget         | number  | `6`           |
 | `DASHDOT_NETWORK_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Network widget (in px) | number  | `500`         |
-| `DASHDOT_NETWORK_DATAPOINTS_UP`    | The amount of datapoints in the Network (Upload) graph    | number  | `10`          |
-| `DASHDOT_NETWORK_DATAPOINTS_DOWN`  | The amount of datapoints in the Network (Download) graph  | number  | `10`          |
+| `DASHDOT_NETWORK_DATAPOINTS`       | The amount of datapoints in each of the Network graphs    | number  | `10`          |
 | `DASHDOT_NETWORK_POLL_INTERVAL`    | Read the Network load every x milliseconds                | number  | `1000`        |
 
 <!-- markdownlint-enable -->
@@ -221,21 +220,25 @@ Override specific fields, by providing your desired value with the following opt
 
 <!-- markdownlint-disable -->
 
-| Variable                               | Description                                                                                                                                                           | Type   | Default Value |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------------- |
-| `DASHDOT_OVERRIDE_OS`                  |                                                                                                                                                                       | string |
-| `DASHDOT_OVERRIDE_ARCH`                |                                                                                                                                                                       | string |
-| `DASHDOT_OVERRIDE_CPU_BRAND`           |                                                                                                                                                                       | string |
-| `DASHDOT_OVERRIDE_CPU_MODEL`           |                                                                                                                                                                       | string |
-| `DASHDOT_OVERRIDE_CPU_CORES`           |                                                                                                                                                                       | number |
-| `DASHDOT_OVERRIDE_CPU_THREADS`         |                                                                                                                                                                       | number |
-| `DASHDOT_OVERRIDE_CPU_FREQUENCY`       | Number needs to be passed in GHz (e.g. `2.8`)                                                                                                                         | number |
-| `DASHDOT_OVERRIDE_RAM_BRAND`           |                                                                                                                                                                       | string |
-| `DASHDOT_OVERRIDE_RAM_SIZE`            | Number needs to be passed in bytes (e.g. `34359738368` for 32 GB, because it is `32 * 1024 * 1024 * 1024`)                                                            | number |
-| `DASHDOT_OVERRIDE_RAM_TYPE`            |                                                                                                                                                                       | string |
-| `DASHDOT_OVERRIDE_RAM_FREQUENCY`       |                                                                                                                                                                       | number |
-| `DASHDOT_OVERRIDE_STORAGE_BRAND_[1-5]` | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives                                                                                                             | string |
-| `DASHDOT_OVERRIDE_STORAGE_SIZE_[1-5]`  | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives. Number needs to be passed in bytes (e.g. `34359738368` for 32 GB, because it is `32 * 1024 * 1024 * 1024`) | number |
-| `DASHDOT_OVERRIDE_STORAGE_TYPE_[1-5]`  | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives                                                                                                             | string |
+| Variable                                   | Description                                                                                                                                                           | Type   | Default Value |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------------- |
+| `DASHDOT_OVERRIDE_OS`                      |                                                                                                                                                                       | string |
+| `DASHDOT_OVERRIDE_ARCH`                    |                                                                                                                                                                       | string |
+| `DASHDOT_OVERRIDE_CPU_BRAND`               |                                                                                                                                                                       | string |
+| `DASHDOT_OVERRIDE_CPU_MODEL`               |                                                                                                                                                                       | string |
+| `DASHDOT_OVERRIDE_CPU_CORES`               |                                                                                                                                                                       | number |
+| `DASHDOT_OVERRIDE_CPU_THREADS`             |                                                                                                                                                                       | number |
+| `DASHDOT_OVERRIDE_CPU_FREQUENCY`           | Number needs to be passed in GHz (e.g. `2.8`)                                                                                                                         | number |
+| `DASHDOT_OVERRIDE_RAM_BRAND`               |                                                                                                                                                                       | string |
+| `DASHDOT_OVERRIDE_RAM_SIZE`                | Number needs to be passed in bytes (e.g. `34359738368` for 32 GB, because it is `32 * 1024 * 1024 * 1024`)                                                            | number |
+| `DASHDOT_OVERRIDE_RAM_TYPE`                |                                                                                                                                                                       | string |
+| `DASHDOT_OVERRIDE_RAM_FREQUENCY`           |                                                                                                                                                                       | number |
+| `DASHDOT_OVERRIDE_NETWORK_TYPE`            |                                                                                                                                                                       | string |
+| `DASHDOT_OVERRIDE_NETWORK_SPEED_UP`        | Number needs to be passed in bit (e.g. `100000000` for 100 Mb/s, because it is `100 * 1000 * 1000`)                                                                   | number |
+| `DASHDOT_OVERRIDE_NETWORK_SPEED_DOWN`      | Number needs to be passed in bit (e.g. `100000000` for 100 Mb/s, because it is `100 * 1000 * 1000`)                                                                   | number |
+| `DASHDOT_OVERRIDE_NETWORK_INTERFACE_SPEED` | Number needs to be passed in Megabit (e.g. `10000` for 10 GB/s, because it is `10 * 1000`)                                                                            | number |
+| `DASHDOT_OVERRIDE_STORAGE_BRAND_[1-5]`     | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives                                                                                                             | string |
+| `DASHDOT_OVERRIDE_STORAGE_SIZE_[1-5]`      | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives. Number needs to be passed in bytes (e.g. `34359738368` for 32 GB, because it is `32 * 1024 * 1024 * 1024`) | number |
+| `DASHDOT_OVERRIDE_STORAGE_TYPE_[1-5]`      | Use a suffix of 1, 2, 3, 4 or 5 for the respective drives                                                                                                             | string |
 
 <!-- markdownlint-enable -->
