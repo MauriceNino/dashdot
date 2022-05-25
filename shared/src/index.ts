@@ -111,6 +111,10 @@ export type Config = {
     ram_size?: number;
     ram_type?: string;
     ram_frequency?: number;
+    network_type?: string;
+    network_speed_up?: number;
+    network_speed_down?: number;
+    network_interface_speed?: number;
     storage_brand_1?: string;
     storage_size_1?: number;
     storage_type_1?: string;
