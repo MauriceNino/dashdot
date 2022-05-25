@@ -69,7 +69,7 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
           value: speedDown ? bpsPrettyPrint(speedDown) : undefined,
         },
         {
-          label: 'Network Speed',
+          label: 'Interface Speed',
           value: interfaceSpeed
             ? bpsPrettyPrint(interfaceSpeed * 1000 * 1000)
             : undefined,

@@ -60,11 +60,18 @@ To read more about configuration options, you can visit [the configuration secti
 > docker container run -it \
   -p 80:3001 \
   -v /etc/os-release:/etc/os-release:ro \
+  --net="host" \
   --privileged \
+  --env DASHDOT_PORT="80" \
   mauricenino/dashdot
 ```
 
 > Note: The `--privileged` flag is needed to correctly determine the memory info.
+
+<!-- -->
+
+> Note: The `--net="host"` flag is needed to correctly determine the network info.
+> The port can still be changed with the `DASHDOT_PORT` environment variable.
 
 <!-- -->
 
@@ -90,8 +97,9 @@ services:
     image: mauricenino/dashdot:latest
     restart: unless-stopped
     privileged: true
-    ports:
-      - '80:3001'
+    network_mode: host
+    environment:
+      DASHDOT_PORT: '80'
     volumes:
       - /etc/os-release:/etc/os-release:ro
 ```
