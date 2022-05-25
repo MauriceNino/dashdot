@@ -3,6 +3,7 @@ import { HardwareInfo } from 'dashdot-shared';
 import express, { Response } from 'express';
 import http from 'http';
 import path from 'path';
+import { interval, mergeMap } from 'rxjs';
 import { Server } from 'socket.io';
 import util from 'util';
 import { CONFIG } from './config';
@@ -70,5 +71,18 @@ server.listen(CONFIG.port, async () => {
     })
   );
 
-  await runSpeedTest();
+  console.log('Running speed-test (this may take a few minutes)...');
+
+  console.log(
+    util.inspect(await runSpeedTest(), {
+      showHidden: false,
+      depth: null,
+      colors: true,
+    })
+  );
+
+  // Run speed test every CONFIG.speed_test_interval minutes
+  interval(CONFIG.speed_test_interval * 60 * 1000)
+    .pipe(mergeMap(async () => await runSpeedTest()))
+    .subscribe();
 });

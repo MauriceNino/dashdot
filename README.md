@@ -212,13 +212,14 @@ If you don't know how to set them, look up the section for your type of installm
 
 <!-- markdownlint-disable -->
 
-| Variable                           | Description                                               | Type    | Default Value |
-| ---------------------------------- | --------------------------------------------------------- | ------- | ------------- |
-| `DASHDOT_NETWORK_WIDGET_ENABLE`    | To show/hide the Network widget                           | boolean | `true`        |
-| `DASHDOT_NETWORK_WIDGET_GROW`      | To adjust the relative size of the Network widget         | number  | `6`           |
-| `DASHDOT_NETWORK_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Network widget (in px) | number  | `500`         |
-| `DASHDOT_NETWORK_DATAPOINTS`       | The amount of datapoints in each of the Network graphs    | number  | `10`          |
-| `DASHDOT_NETWORK_POLL_INTERVAL`    | Read the Network load every x milliseconds                | number  | `1000`        |
+| Variable                           | Description                                                           | Type    | Default Value |
+| ---------------------------------- | --------------------------------------------------------------------- | ------- | ------------- |
+| `DASHDOT_SPEED_TEST_INTERVAL`      | At which interval the network speed-test should be rerun (in minutes) | number  | `60`          |
+| `DASHDOT_NETWORK_WIDGET_ENABLE`    | To show/hide the Network widget                                       | boolean | `true`        |
+| `DASHDOT_NETWORK_WIDGET_GROW`      | To adjust the relative size of the Network widget                     | number  | `6`           |
+| `DASHDOT_NETWORK_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Network widget (in px)             | number  | `500`         |
+| `DASHDOT_NETWORK_DATAPOINTS`       | The amount of datapoints in each of the Network graphs                | number  | `10`          |
+| `DASHDOT_NETWORK_POLL_INTERVAL`    | Read the Network load every x milliseconds                            | number  | `1000`        |
 
 <!-- markdownlint-enable -->
 

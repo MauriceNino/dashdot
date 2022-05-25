@@ -96,7 +96,6 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
 };
 
 export const runSpeedTest = async () => {
-  console.log('Running speed-test (this may take a few minutes)...');
   const universalSpeedtest = new UniversalSpeedtest({
     measureUpload: true,
     downloadUnit: SpeedUnits.bps,
@@ -108,5 +107,5 @@ export const runSpeedTest = async () => {
   INFO_SAVE!.network.speedDown = speed.downloadSpeed ?? 0;
   INFO_SAVE!.network.speedUp = speed.uploadSpeed ?? 0;
 
-  console.log(speed);
+  return speed;
 };

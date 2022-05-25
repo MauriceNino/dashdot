@@ -92,6 +92,7 @@ export type Config = {
   ram_poll_interval: number;
 
   // Network Widget
+  speed_test_interval: number;
   network_widget_enable: boolean;
   network_widget_grow: number;
   network_widget_min_width: number;
