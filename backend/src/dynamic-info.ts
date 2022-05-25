@@ -1,4 +1,4 @@
-import { CpuLoad, RamLoad, StorageLoad } from 'dashdot-shared';
+import { CpuLoad, NetworkLoad, RamLoad, StorageLoad } from 'dashdot-shared';
 import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import si, { Systeminformation } from 'systeminformation';
 import util from 'util';
@@ -77,5 +77,19 @@ export const storageObs = createBufferedInterval(
     const root = data.find(d => d.mount === '/');
 
     return root?.used!;
+  }
+);
+
+export const netowrkObs = createBufferedInterval(
+  'Network',
+  CONFIG.network_shown_datapoints,
+  CONFIG.network_poll_interval,
+  async (): Promise<NetworkLoad> => {
+    const data = (await si.networkStats())[0];
+
+    return {
+      up: data.tx_sec ?? 0,
+      down: data.rx_sec ?? 0,
+    };
   }
 );

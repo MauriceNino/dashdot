@@ -3,6 +3,7 @@ import { ResponsivePie } from '@nivo/pie';
 import { Config, StorageInfo, StorageLoad } from 'dashdot-shared';
 import { FC } from 'react';
 import { useTheme } from 'styled-components';
+import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
 import { byteToGb } from '../utils/calculations';
@@ -14,7 +15,7 @@ type StorageWidgetProps = {
   config?: Config;
 };
 
-const StorageWidget: FC<StorageWidgetProps> = ({
+export const StorageWidget: FC<StorageWidgetProps> = ({
   load,
   loading,
   data,
@@ -68,49 +69,48 @@ const StorageWidget: FC<StorageWidgetProps> = ({
   return (
     <HardwareInfoContainer
       color={theme.colors.storagePrimary}
-      contentLoaded={load != null}
       heading='Storage'
       infosLoading={loading}
       infos={infos}
       icon={faHdd}
     >
-      <ResponsivePie
-        data={[
-          {
-            id: 'Used',
-            value: load,
-          },
-          {
-            id: 'Free',
-            value: available,
-          },
-        ]}
-        margin={{ top: 40, bottom: 40 }}
-        innerRadius={0.5}
-        padAngle={0.7}
-        cornerRadius={10}
-        activeOuterRadiusOffset={8}
-        arcLinkLabelsTextColor={theme.colors.text}
-        arcLinkLabelsThickness={2}
-        arcLinkLabelsColor={{ from: 'color' }}
-        arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{
-          from: 'color',
-          modifiers: [[theme.dark ? 'brighter' : 'darker', 3]],
-        }}
-        arcLabel={data => `${byteToGb(data.value)} GB`}
-        colors={[theme.colors.storagePrimary, theme.colors.background]}
-        tooltip={props => {
-          const value = props.datum.value;
-          return (
-            <ThemedText>
-              {props.datum.id}: {byteToGb(value)} GB
-            </ThemedText>
-          );
-        }}
-      />
+      <ChartContainer contentLoaded={load != null}>
+        <ResponsivePie
+          data={[
+            {
+              id: 'Used',
+              value: load,
+            },
+            {
+              id: 'Free',
+              value: available,
+            },
+          ]}
+          margin={{ top: 40, bottom: 40, left: 40, right: 40 }}
+          innerRadius={0.5}
+          padAngle={0.7}
+          cornerRadius={10}
+          activeOuterRadiusOffset={8}
+          arcLinkLabelsTextColor={theme.colors.text}
+          arcLinkLabelsThickness={2}
+          arcLinkLabelsColor={{ from: 'color' }}
+          arcLabelsSkipAngle={10}
+          arcLabelsTextColor={{
+            from: 'color',
+            modifiers: [[theme.dark ? 'brighter' : 'darker', 3]],
+          }}
+          arcLabel={data => `${byteToGb(data.value)} GB`}
+          colors={[theme.colors.storagePrimary, theme.colors.background]}
+          tooltip={props => {
+            const value = props.datum.value;
+            return (
+              <ThemedText>
+                {props.datum.id}: {byteToGb(value)} GB
+              </ThemedText>
+            );
+          }}
+        />
+      </ChartContainer>
     </HardwareInfoContainer>
   );
 };
-
-export default StorageWidget;

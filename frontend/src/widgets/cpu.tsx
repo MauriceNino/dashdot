@@ -6,9 +6,9 @@ import { Switch } from 'antd';
 import { Config, CpuInfo, CpuLoad } from 'dashdot-shared';
 import { FC, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
+import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
-import { toFixedCommas } from '../utils/calculations';
 
 const CpuSwitchContainer = styled.div`
   position: absolute;
@@ -37,7 +37,12 @@ type CpuWidgetProps = {
   config?: Config;
 };
 
-const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
+export const CpuWidget: FC<CpuWidgetProps> = ({
+  load,
+  loading,
+  data,
+  config,
+}) => {
   const theme = useTheme();
   const override = config?.override;
 
@@ -104,7 +109,6 @@ const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
   return (
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
-      contentLoaded={chartData.some(serie => serie.data.length > 1)}
       heading='Processor'
       infosLoading={loading}
       infos={[
@@ -140,46 +144,46 @@ const CpuWidget: FC<CpuWidgetProps> = ({ load, loading, data, config }) => {
         </CpuSwitchContainer>
       }
     >
-      {config?.enable_cpu_temps && (
-        <TempContainer>
-          Ø: {toFixedCommas(averageTemp, 1) || '?'} °C
-        </TempContainer>
-      )}
-      <ResponsiveLine
-        isInteractive={true}
-        enableSlices='x'
-        sliceTooltip={props => {
-          //TODO: correct calculation for multi-core
-          const point = props.slice.points[0];
-          return (
-            <ThemedText>
-              {Math.round((point.data.y as number) * 100) / 100} %
-            </ThemedText>
-          );
-        }}
-        data={chartData}
-        curve='monotoneX'
-        enablePoints={false}
-        animate={false}
-        enableGridX={false}
-        enableGridY={false}
-        yScale={{
-          type: 'linear',
-          min: -5,
-          max: 105,
-        }}
-        enableArea={true}
-        defs={[
-          linearGradientDef('gradientA', [
-            { offset: 0, color: 'inherit' },
-            { offset: 100, color: 'inherit', opacity: 0 },
-          ]),
-        ]}
-        fill={[{ match: '*', id: 'gradientA' }]}
-        colors={theme.colors.cpuPrimary}
-      />
+      <ChartContainer
+        contentLoaded={chartData.some(serie => serie.data.length > 1)}
+      >
+        {config?.enable_cpu_temps && (
+          <TempContainer>Ø: {averageTemp.toFixed(1) || '?'} °C</TempContainer>
+        )}
+        <ResponsiveLine
+          isInteractive={true}
+          enableSlices='x'
+          sliceTooltip={props => {
+            //TODO: correct calculation for multi-core
+            const point = props.slice.points[0];
+            return (
+              <ThemedText>
+                {Math.round((point.data.y as number) * 100) / 100} %
+              </ThemedText>
+            );
+          }}
+          data={chartData}
+          curve='monotoneX'
+          enablePoints={false}
+          animate={false}
+          enableGridX={false}
+          enableGridY={false}
+          yScale={{
+            type: 'linear',
+            min: -5,
+            max: 105,
+          }}
+          enableArea={true}
+          defs={[
+            linearGradientDef('gradientA', [
+              { offset: 0, color: 'inherit' },
+              { offset: 100, color: 'inherit', opacity: 0 },
+            ]),
+          ]}
+          fill={[{ match: '*', id: 'gradientA' }]}
+          colors={theme.colors.cpuPrimary}
+        />
+      </ChartContainer>
     </HardwareInfoContainer>
   );
 };
-
-export default CpuWidget;

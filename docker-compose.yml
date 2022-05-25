@@ -24,8 +24,7 @@ services:
     privileged: true
     environment:
       - DASHDOT_ENABLE_CPU_TEMPS=true
-    ports:
-      - '3001:3001'
+    network_mode: host
     volumes:
       - ./:/app
       - /etc/os-release:/etc/os-release:ro
