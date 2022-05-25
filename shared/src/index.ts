@@ -30,6 +30,17 @@ export type StorageInfo = {
 };
 export type StorageLoad = number;
 
+export type NetworkInfo = {
+  interfaceSpeed: number;
+  speedDown: number;
+  speedUp: number;
+  type: string;
+};
+export type NetworkLoad = {
+  up: number;
+  down: number;
+};
+
 export type OsInfo = {
   platform: string;
   distro: string;
@@ -44,6 +55,7 @@ export type HardwareInfo = {
   cpu: CpuInfo;
   ram: RamInfo;
   storage: StorageInfo;
+  network: NetworkInfo;
 };
 
 export type Config = {
@@ -56,24 +68,36 @@ export type Config = {
   disable_host: boolean;
   os_widget_enable: boolean;
   os_widget_grow: number;
+  os_widget_min_width: number;
 
   // CPU Widget
   enable_cpu_temps: boolean;
   cpu_widget_enable: boolean;
   cpu_widget_grow: number;
+  cpu_widget_min_width: number;
   cpu_shown_datapoints: number;
   cpu_poll_interval: number;
-
-  // RAM Widget
-  ram_widget_enable: boolean;
-  ram_widget_grow: number;
-  ram_shown_datapoints: number;
-  ram_poll_interval: number;
 
   // Storage Widget
   storage_widget_enable: boolean;
   storage_widget_grow: number;
+  storage_widget_min_width: number;
   storage_poll_interval: number;
+
+  // RAM Widget
+  ram_widget_enable: boolean;
+  ram_widget_grow: number;
+  ram_widget_min_width: number;
+  ram_shown_datapoints: number;
+  ram_poll_interval: number;
+
+  // Network Widget
+  speed_test_interval: number;
+  network_widget_enable: boolean;
+  network_widget_grow: number;
+  network_widget_min_width: number;
+  network_shown_datapoints: number;
+  network_poll_interval: number;
 
   // Overrides
   override: {
@@ -88,6 +112,10 @@ export type Config = {
     ram_size?: number;
     ram_type?: string;
     ram_frequency?: number;
+    network_type?: string;
+    network_speed_up?: number;
+    network_speed_down?: number;
+    network_interface_speed?: number;
     storage_brand_1?: string;
     storage_size_1?: number;
     storage_type_1?: string;
