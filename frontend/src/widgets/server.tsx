@@ -36,8 +36,8 @@ const Container = styled.div`
 const Heading = styled(ThemedText)`
   width: 100%;
   max-width: 100%;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: 45px;
+  margin-bottom: 15px;
 
   display: flex;
   flex-flow: row wrap;
@@ -65,6 +65,7 @@ const ServerName = styled.span`
   text-decoration-color: ${props => props.theme.colors.primary};
   position: relative;
   bottom: -3px;
+  margin-top: 15px;
 `;
 
 const StandaloneAppendix = styled(ServerName)`
@@ -101,26 +102,19 @@ const Link = styled(Button)`
   }
 `;
 
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  column-gap: 40px;
-
-  flex-grow: 1;
-`;
-
 const StyledInfoTable = styled(InfoTable)<{ mobile: boolean }>`
-  margin-top: ${props => (props.mobile ? '25px' : '0')};
-  padding: 5px;
-  max-width: 400px;
-  flex-grow: 1;
-  flex-shrink: 1;
+  width: 100%;
+  padding: 30px 5px ${({ mobile }) => (mobile ? 20 : 5)}px 5px;
 `;
 
-const ServerIconContainer = styled.div`
-  margin-right: 20px;
+const SFontAwesomeIcon = styled(FontAwesomeIcon)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 17rem;
+  opacity: 0.05;
+  z-index: -5;
 `;
 
 const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
@@ -155,7 +149,7 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
   }
 
   return (
-    <FontAwesomeIcon color={theme.colors.text} {...iconProps} icon={icon} />
+    <SFontAwesomeIcon color={theme.colors.text} {...iconProps} icon={icon} />
   );
 };
 
@@ -274,36 +268,26 @@ export const ServerWidget: FC<ServerWidgetProps> = ({
         )}
       </Heading>
 
-      <ContentContainer>
-        <StyledInfoTable
-          mobile={isMobile}
-          infosLoading={loading}
-          infos={[
-            {
-              label: 'OS',
-              value: os,
-            },
-            {
-              label: 'Arch',
-              value: override?.arch ?? data?.arch,
-            },
-            ...dateInfos,
-          ]}
-        />
+      <StyledInfoTable
+        mobile={isMobile}
+        infosLoading={loading}
+        infos={[
+          {
+            label: 'OS',
+            value: os,
+          },
+          {
+            label: 'Arch',
+            value: override?.arch ?? data?.arch,
+          },
+          ...dateInfos,
+        ]}
+      />
 
-        {/* {!isMobile && (
-          <ServerIconContainer>
-            <SkeletonContent width={120} height={120} borderRadius='15px'>
-              {(override?.os || (distro != null && platform != null)) && (
-                <ServerIcon
-                  os={(override?.os ?? distro + platform).toLowerCase()}
-                  size='7x'
-                />
-              )}
-            </SkeletonContent>
-          </ServerIconContainer>
-        )} */}
-      </ContentContainer>
+      <ServerIcon
+        os={(override?.os ?? distro + platform).toLowerCase()}
+        size='2x'
+      />
     </Container>
   );
 };
