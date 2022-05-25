@@ -32,7 +32,7 @@ const lightTheme: Theme = {
     cpuPrimary: '#52d7ff',
     ramPrimary: '#ff526f',
     storagePrimary: '#49e37a',
-    networkPrimary: '#f5cb44',
+    networkPrimary: '#ffd745',
   },
 };
 
@@ -51,7 +51,7 @@ const darkTheme: Theme = {
     cpuPrimary: '#2259b3',
     ramPrimary: '#c43148',
     storagePrimary: '#22b352',
-    networkPrimary: '#c9bc24',
+    networkPrimary: '#e9c235',
   },
 };
 

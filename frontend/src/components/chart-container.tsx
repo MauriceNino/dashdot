@@ -9,7 +9,7 @@ const Container = styled.div<{ mobile: boolean }>`
   flex: 1 1 0;
   min-width: 0;
   background-color: ${({ theme }) => theme.colors.surface};
-  border-radius: 10px;
+  border-radius: 25px;
   box-shadow: -13px -13px 35px 0px rgba(0, 0, 0, 0.15);
 
   transition: background-color 0.3s ease;

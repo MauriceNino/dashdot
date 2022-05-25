@@ -13,14 +13,14 @@ import { ServerWidget } from '../widgets/server';
 import { StorageWidget } from '../widgets/storage';
 
 const FlexContainer = styled.div<{ mobile: boolean }>`
-  width: ${({ mobile }) => (mobile ? 'calc(100vw - 50px)' : '88vw')};
+  width: ${({ mobile }) => (mobile ? 'calc(100vw - 50px)' : '92vw')};
   min-height: ${({ mobile }) => (mobile ? 'calc(100vh - 50px)' : '86vh')};
   margin: ${({ mobile }) => (mobile ? '50px' : '7vh')} auto 0 auto;
 
   display: flex;
   flex-flow: row wrap;
   column-gap: 40px;
-  row-gap: 50px;
+  row-gap: 70px;
 `;
 
 export const MainWidgetContainer: FC = () => {
