@@ -102,10 +102,14 @@ export const runSpeedTest = async () => {
     uploadUnit: SpeedUnits.bps,
   });
 
-  const speed = await universalSpeedtest.runSpeedtestNet();
+  try {
+    const speed = await universalSpeedtest.runSpeedtestNet();
 
-  INFO_SAVE!.network.speedDown = speed.downloadSpeed ?? 0;
-  INFO_SAVE!.network.speedUp = speed.uploadSpeed ?? 0;
+    INFO_SAVE!.network.speedDown = speed.downloadSpeed ?? 0;
+    INFO_SAVE!.network.speedUp = speed.uploadSpeed ?? 0;
 
-  return speed;
+    return speed;
+  } catch (e) {
+    return e;
+  }
 };
