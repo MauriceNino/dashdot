@@ -1,4 +1,4 @@
-import { CpuLoad, RamLoad, StorageLoad } from 'dashdot-shared';
+import { CpuLoad, NetworkLoad, RamLoad, StorageLoad } from 'dashdot-shared';
 import { FC, useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import { default as styled } from 'styled-components';
@@ -6,10 +6,11 @@ import { useServerInfo } from '../api/os-info';
 import GlassPane from '../components/glass-pane';
 import { BACKEND_URL } from '../config/config';
 import { useIsMobile } from '../services/mobile';
-import CpuWidget from '../widgets/cpu';
-import RamWidget from '../widgets/ram';
-import ServerWidget from '../widgets/server';
-import StorageWidget from '../widgets/storage';
+import { CpuWidget } from '../widgets/cpu';
+import { NetworkWidget } from '../widgets/network';
+import { RamWidget } from '../widgets/ram';
+import { ServerWidget } from '../widgets/server';
+import { StorageWidget } from '../widgets/storage';
 
 const FlexContainer = styled.div<{ mobile: boolean }>`
   width: ${({ mobile }) => (mobile ? 'calc(100vw - 50px)' : '88vw')};
@@ -29,11 +30,13 @@ export const MainWidgetContainer: FC = () => {
   const osData = serverInfo.data?.os;
   const cpuData = serverInfo.data?.cpu;
   const ramData = serverInfo.data?.ram;
+  const networkData = serverInfo.data?.network;
   const storageData = serverInfo.data?.storage;
   const config = serverInfo.data?.config;
 
   const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
   const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
+  const [networkLoad, setNetworkLoad] = useState<NetworkLoad[]>([]);
   const [storageLoad, setStorageLoad] = useState<StorageLoad>();
   const configRef = useRef(config);
 
@@ -57,6 +60,18 @@ export const MainWidgetContainer: FC = () => {
     socket.on('ram-load', data => {
       setRamLoad(oldData => {
         if (oldData.length >= (configRef.current?.ram_shown_datapoints ?? 0)) {
+          return [...oldData.slice(1), data];
+        } else {
+          return [...oldData, data];
+        }
+      });
+    });
+
+    socket.on('network-load', data => {
+      setNetworkLoad(oldData => {
+        if (
+          oldData.length >= (configRef.current?.network_shown_datapoints ?? 0)
+        ) {
           return [...oldData.slice(1), data];
         } else {
           return [...oldData, data];
@@ -109,9 +124,9 @@ export const MainWidgetContainer: FC = () => {
       grow: config.network_widget_grow,
       minWidth: config.network_widget_min_width,
       enabled: config.network_widget_enable,
-      Widget: RamWidget,
-      data: ramData,
-      load: ramLoad,
+      Widget: NetworkWidget,
+      data: networkData,
+      load: networkLoad,
     },
   };
 

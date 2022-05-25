@@ -6,7 +6,7 @@ import path from 'path';
 import { Server } from 'socket.io';
 import util from 'util';
 import { CONFIG } from './config';
-import { cpuObs, ramObs, storageObs } from './dynamic-info';
+import { cpuObs, netowrkObs, ramObs, storageObs } from './dynamic-info';
 import { getStaticServerInfo, runSpeedTest } from './static-info';
 
 const app = express();
@@ -45,10 +45,15 @@ io.on('connection', socket => {
     socket.emit('storage-load', storage);
   });
 
+  const networkSub = netowrkObs.subscribe(async network => {
+    socket.emit('network-load', network);
+  });
+
   socket.on('disconnect', () => {
     cpuSub.unsubscribe();
     ramSub.unsubscribe();
     storageSub.unsubscribe();
+    networkSub.unsubscribe();
   });
 });
 

@@ -99,7 +99,8 @@ export const runSpeedTest = async () => {
   console.log('Running speed-test (this may take a few minutes)...');
   const universalSpeedtest = new UniversalSpeedtest({
     measureUpload: true,
-    downloadUnit: SpeedUnits.MBps,
+    downloadUnit: SpeedUnits.bps,
+    uploadUnit: SpeedUnits.bps,
   });
 
   const speed = await universalSpeedtest.runSpeedtestNet();

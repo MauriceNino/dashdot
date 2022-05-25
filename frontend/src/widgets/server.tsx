@@ -165,7 +165,11 @@ type ServerWidgetProps = {
   config?: Config;
 };
 
-const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
+export const ServerWidget: FC<ServerWidgetProps> = ({
+  loading,
+  data,
+  config,
+}) => {
   const isMobile = useIsMobile();
   const [darkMode, setDarkMode] = useSetting('darkMode');
   const [uptime, setUptime] = useState(0);
@@ -303,5 +307,3 @@ const ServerWidget: FC<ServerWidgetProps> = ({ loading, data, config }) => {
     </Container>
   );
 };
-
-export default ServerWidget;

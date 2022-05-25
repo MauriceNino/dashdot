@@ -95,8 +95,7 @@ export type Config = {
   network_widget_enable: boolean;
   network_widget_grow: number;
   network_widget_min_width: number;
-  network_shown_datapoints_up: number;
-  network_shown_datapoints_down: number;
+  network_shown_datapoints: number;
   network_poll_interval: number;
 
   // Overrides
