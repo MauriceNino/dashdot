@@ -7,14 +7,14 @@ type SCProps = GlassPaneProps & { mobile: boolean };
 
 const TiltContainer = styled(ParallaxTilt)<SCProps>`
   display: flex;
-  min-width: ${({ minWidth }) => minWidth}px;
+  min-width: ${({ minWidth, mobile }) => (mobile ? 0 : minWidth)}px;
   min-height: 360px;
 
   flex-grow: ${props => props.grow ?? 1};
 
   backdrop-filter: blur(20px);
   background-color: ${({ theme }) => theme.colors.surface}44;
-  border-radius: 10px;
+  border-radius: 25px;
   border: 1px solid ${({ theme }) => theme.colors.text}33;
 
   &:hover {
