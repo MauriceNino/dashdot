@@ -4,6 +4,7 @@ import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 
 const Container = styled.div<{ mobile: boolean }>`
+  position: relative;
   display: flex;
 
   flex: 1 1 0;
