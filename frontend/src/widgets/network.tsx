@@ -4,11 +4,19 @@ import { linearGradientDef } from '@nivo/core';
 import { Datum, ResponsiveLine } from '@nivo/line';
 import { Config, NetworkInfo, NetworkLoad } from 'dashdot-shared';
 import { FC } from 'react';
-import { useTheme } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
-import { bpsPrettyPrint, bytePrettyPrint } from '../utils/calculations';
+import { bpsPrettyPrint } from '../utils/calculations';
+
+const ModeContainer = styled.div`
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  z-index: 2;
+  color: ${({ theme }) => theme.colors.text}AA;
+`;
 
 type NetworkWidgetProps = {
   load: NetworkLoad[];
@@ -42,11 +50,11 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
   })) as Datum[];
 
   const maxUp = Math.max(
-    speedUp ?? 0 / 8,
+    (speedUp ?? 0) / 8,
     ...chartDataUp.map(u => u.y as number)
   );
   const maxDown = Math.max(
-    speedDown ?? 0 / 8,
+    (speedDown ?? 0) / 8,
     ...chartDataDown.map(d => d.y as number)
   );
 
@@ -78,13 +86,16 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
       icon={faNetworkWired}
     >
       <ChartContainer contentLoaded={chartDataUp.length > 1}>
+        <ModeContainer>↑</ModeContainer>
         <ResponsiveLine
           isInteractive={true}
           enableSlices='x'
           sliceTooltip={props => {
             const point = props.slice.points[0];
             return (
-              <ThemedText>{bytePrettyPrint(point.data.y as number)}</ThemedText>
+              <ThemedText>
+                {bpsPrettyPrint((point.data.y as number) * 8)}
+              </ThemedText>
             );
           }}
           data={[
@@ -98,15 +109,11 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
           animate={false}
           enableGridX={false}
           enableGridY={false}
-          yScale={
-            data?.speedUp
-              ? {
-                  type: 'linear',
-                  min: maxUp * -0.05,
-                  max: maxUp,
-                }
-              : undefined
-          }
+          yScale={{
+            type: 'linear',
+            min: maxUp * -0.1,
+            max: maxUp * 1.1,
+          }}
           enableArea={true}
           defs={[
             linearGradientDef('gradientA', [
@@ -120,13 +127,16 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
       </ChartContainer>
 
       <ChartContainer contentLoaded={chartDataDown.length > 1}>
+        <ModeContainer>↓</ModeContainer>
         <ResponsiveLine
           isInteractive={true}
           enableSlices='x'
           sliceTooltip={props => {
             const point = props.slice.points[0];
             return (
-              <ThemedText>{bytePrettyPrint(point.data.y as number)}</ThemedText>
+              <ThemedText>
+                {bpsPrettyPrint((point.data.y as number) * 8)}
+              </ThemedText>
             );
           }}
           data={[
@@ -140,15 +150,11 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
           animate={false}
           enableGridX={false}
           enableGridY={false}
-          yScale={
-            data?.speedDown
-              ? {
-                  type: 'linear',
-                  min: maxDown * -0.05,
-                  max: maxDown,
-                }
-              : undefined
-          }
+          yScale={{
+            type: 'linear',
+            min: maxDown * -0.1,
+            max: maxDown * 1.1,
+          }}
           enableArea={true}
           defs={[
             linearGradientDef('gradientA', [
