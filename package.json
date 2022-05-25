@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc -b && (cd ./frontend && yarn build)",
     "start": "(cd ./backend && yarn start)",
-    "dev": "docker-compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
+    "start-dev": "docker-compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
+    "dev": "DEFAULT_INTERFACE_PATH=$(readlink -f /sys/class/net/$(ip addr show | awk '/inet.*brd/{print $NF; exit}')) yarn run start-dev",
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write ."
   },

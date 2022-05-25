@@ -57,12 +57,11 @@ To read more about configuration options, you can visit [the configuration secti
 # Config options can optionally passed using the --env flag.
 # e.g: --env DASHDOT_ENABLE_CPU_TEMPS "true"
 
-> docker container run -it \
+docker container run -it \
   -p 80:3001 \
   -v /etc/os-release:/etc/os-release:ro \
-  --net="host" \
+  --mount type=bind,source=$(readlink -f /sys/class/net/$(ip addr show | awk '/inet.*brd/{print $NF; exit}')),destination=/mnt/eth0 \
   --privileged \
-  --env DASHDOT_PORT="80" \
   mauricenino/dashdot
 ```
 
@@ -70,8 +69,12 @@ To read more about configuration options, you can visit [the configuration secti
 
 <!-- -->
 
-> Note: The `--net="host"` flag is needed to correctly determine the network info.
-> The port can still be changed with the `DASHDOT_PORT` environment variable.
+> Note: The `--mount` flag is needed to correctly determine the network info.
+> If the source part does not correctly resolve for you, you can manually get the
+> path by executing `readlink -f /sys/class/net/DEFAULT_INTERFACE`, where the default
+> interface is mostly named "eth0". If you don't want to use this flag, you can instead
+> use `--network host`, but then you will not be able to use custom docker networking
+> any more.
 
 <!-- -->
 
@@ -97,11 +100,20 @@ services:
     image: mauricenino/dashdot:latest
     restart: unless-stopped
     privileged: true
-    network_mode: host
-    environment:
-      DASHDOT_PORT: '80'
+    ports:
+      - '80:3001'
     volumes:
       - /etc/os-release:/etc/os-release:ro
+      - type: bind
+        source: ${DEFAULT_INTERFACE_PATH}
+        target: /mnt/eth0
+```
+
+After setting up your `docker-compose.yml` file, you have to run the following
+command to start the dashboard:
+
+```bash
+DEFAULT_INTERFACE_PATH=$(readlink -f /sys/class/net/$(ip addr show | awk '/inet.*brd/{print $NF; exit}')) docker-compose up
 ```
 
 ### Git
@@ -111,13 +123,13 @@ To download the repository and run it yourself, there are a few steps necessary:
 If you have not already installed yarn, install it now:
 
 ```bash
-> npm i -g yarn
+npm i -g yarn
 ```
 
 After that, download and build the project (might take a few minutes)
 
 ```bash
-> git clone https://github.com/MauriceNino/dashdot &&\
+git clone https://github.com/MauriceNino/dashdot &&\
   cd dashdot &&\
   yarn &&\
   yarn build
@@ -129,7 +141,7 @@ When done, you can run the dashboard by executing:
 # Config options can optionally passed using environment variables.
 # e.g: export DASHDOT_PORT="8080"
 
-> sudo yarn start
+sudo yarn start
 ```
 
 To read more about configuration options, you can visit [the configuration section](#Configuration-Options).
