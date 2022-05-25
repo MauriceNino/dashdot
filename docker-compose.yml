@@ -24,10 +24,14 @@ services:
     privileged: true
     environment:
       - DASHDOT_ENABLE_CPU_TEMPS=true
-    network_mode: host
+    ports:
+      - '3001:3001'
     volumes:
       - ./:/app
       - /etc/os-release:/etc/os-release:ro
+      - type: bind
+        source: ${DEFAULT_INTERFACE_PATH}
+        target: /mnt/eth0
 
   shared:
     image: node:16-alpine

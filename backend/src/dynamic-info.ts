@@ -1,9 +1,13 @@
+import { exec as cexec } from 'child_process';
 import { CpuLoad, NetworkLoad, RamLoad, StorageLoad } from 'dashdot-shared';
+import fs from 'fs';
 import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import si, { Systeminformation } from 'systeminformation';
 import util from 'util';
 import { CONFIG } from './config';
 import { getStaticServerInfo } from './static-info';
+
+const exec = util.promisify(cexec);
 
 const createBufferedInterval = <R>(
   name: string,
@@ -80,16 +84,35 @@ export const storageObs = createBufferedInterval(
   }
 );
 
+let [lastRx, lastTx] = [0, 0];
+
 export const netowrkObs = createBufferedInterval(
   'Network',
   CONFIG.network_shown_datapoints,
   CONFIG.network_poll_interval,
   async (): Promise<NetworkLoad> => {
-    const data = (await si.networkStats())[0];
+    if (fs.existsSync('/mnt/eth0/')) {
+      const { stdout } = await exec(
+        `cat /mnt/eth0/statistics/rx_bytes;cat /mnt/eth0/statistics/tx_bytes;`
+      );
+      const [rx, tx] = stdout.split('\n').map(Number);
 
-    return {
-      up: data.tx_sec ?? 0,
-      down: data.rx_sec ?? 0,
-    };
+      const result = {
+        up: tx - lastTx,
+        down: rx - lastRx,
+      };
+
+      lastRx = rx;
+      lastTx = tx;
+
+      return result;
+    } else {
+      const data = (await si.networkStats())[0];
+
+      return {
+        up: data.tx_sec,
+        down: data.rx_sec,
+      };
+    }
   }
 );
