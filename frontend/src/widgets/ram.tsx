@@ -9,7 +9,7 @@ import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
 import { removeDuplicates } from '../utils/array-utils';
-import { byteToGb } from '../utils/calculations';
+import { bytePrettyPrint, toCommas } from '../utils/calculations';
 
 type RamWidgetProps = {
   load: RamLoad[];
@@ -38,7 +38,7 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
 
   const chartData = load.map((load, i) => ({
     x: i,
-    y: (byteToGb(load) / byteToGb(data?.size ?? 1)) * 100,
+    y: (load / (data?.size ?? 1)) * 100,
   })) as Datum[];
 
   return (
@@ -52,7 +52,7 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
         },
         {
           label: 'Size',
-          value: size ? `${byteToGb(size)} GB` : '',
+          value: size ? `${bytePrettyPrint(size)}` : '',
         },
         {
           label: types.length > 1 ? 'Types' : 'Type',
@@ -65,16 +65,19 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
       ]}
       icon={faMemory}
     >
-      <ChartContainer contentLoaded={chartData.length > 1}>
+      <ChartContainer
+        contentLoaded={chartData.length > 1}
+        statText={`%: ${(chartData[chartData.length - 1]?.y as number)?.toFixed(
+          1
+        )} (${bytePrettyPrint(load[load.length - 1] ?? 0)})`}
+      >
         <ResponsiveLine
           isInteractive={true}
           enableSlices='x'
           sliceTooltip={props => {
             const point = props.slice.points[0];
             return (
-              <ThemedText>
-                {Math.round((point.data.y as number) * 100) / 100} %
-              </ThemedText>
+              <ThemedText>{toCommas(point.data.y as number, 2)} %</ThemedText>
             );
           }}
           data={[

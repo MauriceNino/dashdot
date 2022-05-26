@@ -3,10 +3,11 @@ import { SwapSpinner } from 'react-spinners-kit';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 
-const Container = styled.div<{
+type ContainerProps = {
   mobile: boolean;
   edges: [boolean, boolean, boolean, boolean];
-}>`
+};
+const Container = styled.div<ContainerProps>`
   position: relative;
   display: flex;
 
@@ -23,6 +24,7 @@ const Container = styled.div<{
   justify-content: center;
 
   > div {
+    overflow: hidden;
     position: absolute;
     border-radius: ${({ edges: [top, right, bottom, left] }) =>
       `${top ? '25px' : '10px'} ${right ? '25px' : '10px'} ${
@@ -43,9 +45,19 @@ const Container = styled.div<{
   }
 `;
 
+const StatText = styled.div`
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  z-index: 2;
+  color: ${({ theme }) => theme.colors.text}AA;
+  white-space: nowrap;
+`;
+
 type ChartContainerProps = {
   contentLoaded: boolean;
   edges?: [boolean, boolean, boolean, boolean];
+  statText?: string;
   children: React.ReactNode;
 };
 
@@ -59,7 +71,10 @@ export const ChartContainer: FC<ChartContainerProps> = props => {
       edges={props.edges ?? [true, true, true, true]}
     >
       {props.contentLoaded ? (
-        props.children
+        <>
+          <StatText>{props.statText}</StatText>
+          {props.children}
+        </>
       ) : (
         <SwapSpinner size={70} color={theme.colors.background} loading={true} />
       )}
