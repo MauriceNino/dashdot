@@ -10,14 +10,12 @@ import { byteToGb } from '../utils/calculations';
 
 type StorageWidgetProps = {
   load?: StorageLoad;
-  loading: boolean;
   data?: StorageInfo;
   config?: Config;
 };
 
 export const StorageWidget: FC<StorageWidgetProps> = ({
   load,
-  loading,
   data,
   config,
 }) => {
@@ -70,7 +68,6 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
     <HardwareInfoContainer
       color={theme.colors.storagePrimary}
       heading='Storage'
-      infosLoading={loading}
       infos={infos}
       icon={faHdd}
     >

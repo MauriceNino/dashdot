@@ -3,6 +3,7 @@ import store from 'store';
 
 type Settings = {
   darkMode?: boolean;
+  multiCore?: boolean;
 };
 
 export const setStoreSetting = <T extends keyof Settings = keyof Settings>(

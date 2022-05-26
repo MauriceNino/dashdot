@@ -13,17 +13,11 @@ import { byteToGb } from '../utils/calculations';
 
 type RamWidgetProps = {
   load: RamLoad[];
-  loading: boolean;
   data?: RamInfo;
   config?: Config;
 };
 
-export const RamWidget: FC<RamWidgetProps> = ({
-  load,
-  loading,
-  data,
-  config,
-}) => {
+export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
   const theme = useTheme();
   const override = config?.override;
 
@@ -51,7 +45,6 @@ export const RamWidget: FC<RamWidgetProps> = ({
     <HardwareInfoContainer
       color={theme.colors.ramPrimary}
       heading='Memory'
-      infosLoading={loading}
       infos={[
         {
           label: brands.length > 1 ? 'Brands' : 'Brand',

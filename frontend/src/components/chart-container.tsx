@@ -3,19 +3,32 @@ import { SwapSpinner } from 'react-spinners-kit';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 
-const Container = styled.div<{ mobile: boolean }>`
+const Container = styled.div<{
+  mobile: boolean;
+  edges: [boolean, boolean, boolean, boolean];
+}>`
   position: relative;
   display: flex;
 
-  flex: 1 1 0;
   min-width: 0;
   background-color: ${({ theme }) => theme.colors.surface};
-  border-radius: 25px;
+  border-radius: ${({ edges: [top, right, bottom, left] }) =>
+    `${top ? '25px' : '10px'} ${right ? '25px' : '10px'} ${
+      bottom ? '25px' : '10px'
+    } ${left ? '25px' : '10px'}`};
   z-index: auto;
 
   transition: background-color 0.3s ease;
   align-items: center;
   justify-content: center;
+
+  > div {
+    position: absolute;
+    border-radius: ${({ edges: [top, right, bottom, left] }) =>
+      `${top ? '25px' : '10px'} ${right ? '25px' : '10px'} ${
+        bottom ? '25px' : '10px'
+      } ${left ? '25px' : '10px'}`};
+  }
 
   &:before {
     content: '';
@@ -32,6 +45,7 @@ const Container = styled.div<{ mobile: boolean }>`
 
 type ChartContainerProps = {
   contentLoaded: boolean;
+  edges?: [boolean, boolean, boolean, boolean];
   children: React.ReactNode;
 };
 
@@ -40,7 +54,10 @@ export const ChartContainer: FC<ChartContainerProps> = props => {
   const isMobile = useIsMobile();
 
   return (
-    <Container mobile={isMobile}>
+    <Container
+      mobile={isMobile}
+      edges={props.edges ?? [true, true, true, true]}
+    >
       {props.contentLoaded ? (
         props.children
       ) : (

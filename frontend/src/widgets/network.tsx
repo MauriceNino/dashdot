@@ -20,14 +20,12 @@ const ModeContainer = styled.div`
 
 type NetworkWidgetProps = {
   load: NetworkLoad[];
-  loading: boolean;
   data?: NetworkInfo;
   config?: Config;
 };
 
 export const NetworkWidget: FC<NetworkWidgetProps> = ({
   load,
-  loading,
   data,
   config,
 }) => {
@@ -60,9 +58,9 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
 
   return (
     <HardwareInfoContainer
+      columns={2}
       color={theme.colors.networkPrimary}
       heading='Network'
-      infosLoading={loading}
       infos={[
         {
           label: 'Type',
