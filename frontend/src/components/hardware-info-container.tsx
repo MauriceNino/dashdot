@@ -1,8 +1,7 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FC } from 'react';
-import { SwapSpinner } from 'react-spinners-kit';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 import InfoTable, { InfoTableProps } from './info-table';
 import ThemedText from './text';
@@ -25,25 +24,18 @@ const ChartArea = styled.div<{ mobile: boolean }>`
   flex: 1 1 auto;
   min-width: 0;
   ${({ mobile }) => mobile && `height: 270px;`}
-`;
 
-const ChartContainer = styled.div<{ mobile: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  > div {
+    display: flex;
+    gap: 20px;
 
-  height: ${({ mobile }) => (mobile ? '100%' : '110%')};
-  width: 100%;
+    height: ${({ mobile }) => (mobile ? '100%' : '110%')};
+    width: 100%;
 
-  position: ${({ mobile }) => (mobile ? 'relative' : 'absolute')};
-  bottom: ${({ mobile }) => (mobile ? '0' : '-10px')};
-  right: -10px;
-
-  background-color: ${({ theme }) => theme.colors.surface};
-  border-radius: 10px;
-  box-shadow: -13px -13px 35px 0px rgba(0, 0, 0, 0.15);
-
-  transition: background-color 0.3s ease;
+    position: ${({ mobile }) => (mobile ? 'relative' : 'absolute')};
+    bottom: ${({ mobile }) => (mobile ? '0' : '-10px')};
+    right: -10px;
+  }
 `;
 
 const InfoContainer = styled.div`
@@ -89,13 +81,11 @@ type HardwareInfoProps = {
   heading: string;
   icon: IconProp;
   extraContent?: JSX.Element;
-  contentLoaded: boolean;
   infosLoading: boolean;
   children?: React.ReactNode;
 } & InfoTableProps;
 
 const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
-  const theme = useTheme();
   const isMobile = useIsMobile();
 
   return (
@@ -115,17 +105,7 @@ const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
           {props.extraContent}
 
           <ChartArea mobile={isMobile}>
-            <ChartContainer mobile={isMobile}>
-              {props.contentLoaded ? (
-                props.children
-              ) : (
-                <SwapSpinner
-                  size={70}
-                  color={theme.colors.background}
-                  loading={true}
-                />
-              )}
-            </ChartContainer>
+            <div>{props.children}</div>
           </ChartArea>
         </ContentContainer>
       </Container>
