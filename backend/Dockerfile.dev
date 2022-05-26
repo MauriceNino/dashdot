@@ -1,5 +1,9 @@
 FROM node:16-alpine
 
-RUN apk update && apk add lsblk && apk add dmidecode && apk add util-linux
+WORKDIR /app
+
+RUN \
+  apk update &&\
+  apk add lsblk dmidecode util-linux lm-sensors speedtest-cli
 
 EXPOSE 3001
