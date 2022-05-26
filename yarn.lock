@@ -5776,7 +5776,7 @@ __metadata:
     react: 18.1.0
     react-content-loader: 6.2.0
     react-dom: 18.1.0
-    react-parallax-tilt: 1.7.35
+    react-parallax-tilt: 1.7.36
     react-scripts: 5.0.1
     react-spinners-kit: 1.9.1
     sass: 1.52.1
@@ -12527,13 +12527,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-parallax-tilt@npm:1.7.35":
-  version: 1.7.35
-  resolution: "react-parallax-tilt@npm:1.7.35"
+"react-parallax-tilt@npm:1.7.36":
+  version: 1.7.36
+  resolution: "react-parallax-tilt@npm:1.7.36"
   peerDependencies:
     react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 1fb3595a28cbb12948d5ef0b4ec18aa6505f017408471a7b06a7d511559e4baeb1d0e03c07c45e0abe817e6d6ba9f6afec5b6dafc3482f3da0e59a942f0bf5c4
+  checksum: 5fa6bcc4020752b21fb57b83f639427bb87a632775d62df67b9678be2709b2402d9b787a16a13c068c05fcb7665970042140065cf26d2c79912d2a76d34075f0
   languageName: node
   linkType: hard
 
