@@ -1,4 +1,9 @@
 {
-  "extends": ["config:base"],
-  "baseBranches": ["dev"]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", ":disableDependencyDashboard"],
+  "baseBranches": ["dev"],
+  "commitMessage": "{{{commitMessagePrefix}}} {{{commitMessageAction}}} {{{commitMessageTopic}}} {{{commitMessageExtra}}} {{{commitMessageSuffix}}}",
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "upgrade",
+  "commitMessageTopic": "{{depName}}"
 }
