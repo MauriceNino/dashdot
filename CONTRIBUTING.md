@@ -1,4 +1,3 @@
-
 # Contributing
 
 The simplest way of contributing is to create
@@ -14,7 +13,7 @@ features or fix the found bug yourself. Any contribution is highly appreciated!
 To start working on this project, run the following series of commands:
 
 ```bash
-> git clone https://github.com/MauriceNino/dashdot &&\
+git clone https://github.com/MauriceNino/dashdot &&\
   cd dashdot &&\
   yarn &&\
   yarn build
@@ -27,8 +26,8 @@ When you are done with all that, you can start a dev server using `docker-compos
 with:
 
 ```bash
-> yarn run dev
+yarn run dev
 ```
 
 > Note: Development is done on the `dev` branch, so please use that as the base branch
-in your work.
+> in your work.
