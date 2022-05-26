@@ -2,11 +2,11 @@ FROM node:16-alpine
 
 WORKDIR /app
 
-COPY . ./
-
 RUN \
   apk update &&\
-  apk add lsblk dmidecode util-linux lm-sensors
+  apk add lsblk dmidecode util-linux lm-sensors speedtest-cli
+
+COPY . ./
 
 RUN \
   yarn --immutable --immutable-cache &&\

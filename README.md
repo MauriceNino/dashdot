@@ -144,6 +144,9 @@ When done, you can run the dashboard by executing:
 sudo yarn start
 ```
 
+> Note: To measure network speed, it is suggested to install the `speedtest-cli`
+> package on your machine (e.g. `sudo apt install speedtest-cli` on Ubuntu).
+
 To read more about configuration options, you can visit [the configuration section](#Configuration-Options).
 
 ## Configuration Options

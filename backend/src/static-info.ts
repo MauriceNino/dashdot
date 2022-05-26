@@ -1,3 +1,4 @@
+import { exec as cexec } from 'child_process';
 import {
   CpuInfo,
   HardwareInfo,
@@ -9,7 +10,10 @@ import {
 } from 'dashdot-shared';
 import si from 'systeminformation';
 import { SpeedUnits, UniversalSpeedtest } from 'universal-speedtest';
+import util from 'util';
 import { CONFIG } from './config';
+
+const exec = util.promisify(cexec);
 
 const normalizeCpuModel = (cpuModel: string) => {
   return cpuModel
@@ -96,19 +100,31 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
 };
 
 export const runSpeedTest = async () => {
-  const universalSpeedtest = new UniversalSpeedtest({
-    measureUpload: true,
-    downloadUnit: SpeedUnits.bps,
-    uploadUnit: SpeedUnits.bps,
-  });
-
   try {
-    const speed = await universalSpeedtest.runSpeedtestNet();
+    const { stdout, stderr } = await exec('which speedtest');
 
-    INFO_SAVE!.network.speedDown = speed.downloadSpeed ?? 0;
-    INFO_SAVE!.network.speedUp = speed.uploadSpeed ?? 0;
+    if (stderr === '' && stdout.trim() !== '') {
+      const { stdout } = await exec('speedtest --json');
+      const json = JSON.parse(stdout);
 
-    return speed;
+      INFO_SAVE!.network.speedDown = json.download ?? 0;
+      INFO_SAVE!.network.speedUp = json.upload ?? 0;
+
+      return json;
+    } else {
+      const universalSpeedtest = new UniversalSpeedtest({
+        measureUpload: true,
+        downloadUnit: SpeedUnits.bps,
+        uploadUnit: SpeedUnits.bps,
+      });
+
+      const speed = await universalSpeedtest.runSpeedtestNet();
+
+      INFO_SAVE!.network.speedDown = speed.downloadSpeed ?? 0;
+      INFO_SAVE!.network.speedUp = speed.uploadSpeed ?? 0;
+
+      return speed;
+    }
   } catch (e) {
     return e;
   }
