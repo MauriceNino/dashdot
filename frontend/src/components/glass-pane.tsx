@@ -1,11 +1,12 @@
-import { FC } from 'react';
-import ParallaxTilt from 'react-parallax-tilt';
+import { motion } from 'framer-motion';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 
 type SCProps = GlassPaneProps & { mobile: boolean };
 
-const TiltContainer = styled(ParallaxTilt)<SCProps>`
+const TiltContainer = styled.div<SCProps>`
+  position: relative;
   display: flex;
   min-width: ${({ minWidth, mobile }) => (mobile ? 0 : minWidth)}px;
   min-height: 360px;
@@ -29,22 +30,25 @@ type GlassPaneProps = {
   children?: React.ReactNode;
 };
 
-const GlassPane: FC<GlassPaneProps> = props => {
-  const isMobile = useIsMobile();
+const GlassPane = motion(
+  forwardRef<HTMLDivElement, GlassPaneProps>((props, ref) => {
+    const isMobile = useIsMobile();
 
-  return (
-    <TiltContainer
-      mobile={isMobile}
-      tiltEnable={props.enableTilt && !isMobile}
-      transitionSpeed={1500}
-      tiltMaxAngleX={4}
-      tiltMaxAngleY={4}
-      grow={props.grow ?? 1}
-      minWidth={props.minWidth ?? 350}
-    >
-      {props.children}
-    </TiltContainer>
-  );
-};
+    return (
+      <TiltContainer
+        ref={ref}
+        mobile={isMobile}
+        // tiltEnable={props.enableTilt && !isMobile}
+        // transitionSpeed={1500}
+        // tiltMaxAngleX={4}
+        // tiltMaxAngleY={4}
+        grow={props.grow ?? 1}
+        minWidth={props.minWidth ?? 350}
+      >
+        {props.children}
+      </TiltContainer>
+    );
+  })
+);
 
 export default GlassPane;

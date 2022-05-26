@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { motion } from 'framer-motion';
+import { forwardRef } from 'react';
 import { SwapSpinner } from 'react-spinners-kit';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
@@ -61,23 +62,30 @@ type ChartContainerProps = {
   children: React.ReactNode;
 };
 
-export const ChartContainer: FC<ChartContainerProps> = props => {
-  const theme = useTheme();
-  const isMobile = useIsMobile();
+export const ChartContainer = motion(
+  forwardRef<HTMLDivElement, ChartContainerProps>((props, ref) => {
+    const theme = useTheme();
+    const isMobile = useIsMobile();
 
-  return (
-    <Container
-      mobile={isMobile}
-      edges={props.edges ?? [true, true, true, true]}
-    >
-      {props.contentLoaded ? (
-        <>
-          <StatText>{props.statText}</StatText>
-          {props.children}
-        </>
-      ) : (
-        <SwapSpinner size={70} color={theme.colors.background} loading={true} />
-      )}
-    </Container>
-  );
-};
+    return (
+      <Container
+        ref={ref}
+        mobile={isMobile}
+        edges={props.edges ?? [true, true, true, true]}
+      >
+        {props.contentLoaded ? (
+          <>
+            <StatText>{props.statText}</StatText>
+            {props.children}
+          </>
+        ) : (
+          <SwapSpinner
+            size={70}
+            color={theme.colors.background}
+            loading={true}
+          />
+        )}
+      </Container>
+    );
+  })
+);
