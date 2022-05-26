@@ -4,19 +4,11 @@ import { linearGradientDef } from '@nivo/core';
 import { Datum, ResponsiveLine } from '@nivo/line';
 import { Config, NetworkInfo, NetworkLoad } from 'dashdot-shared';
 import { FC } from 'react';
-import styled, { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
 import { bpsPrettyPrint } from '../utils/calculations';
-
-const ModeContainer = styled.div`
-  position: absolute;
-  left: 25px;
-  top: 25px;
-  z-index: 2;
-  color: ${({ theme }) => theme.colors.text}AA;
-`;
 
 type NetworkWidgetProps = {
   load: NetworkLoad[];
@@ -83,8 +75,12 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
       ]}
       icon={faNetworkWired}
     >
-      <ChartContainer contentLoaded={chartDataUp.length > 1}>
-        <ModeContainer>↑</ModeContainer>
+      <ChartContainer
+        contentLoaded={chartDataUp.length > 1}
+        statText={`↑ ${bpsPrettyPrint(
+          (chartDataUp[chartDataUp.length - 1]?.y ?? 0) as number
+        )}`}
+      >
         <ResponsiveLine
           isInteractive={true}
           enableSlices='x'
@@ -124,8 +120,12 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
         />
       </ChartContainer>
 
-      <ChartContainer contentLoaded={chartDataDown.length > 1}>
-        <ModeContainer>↓</ModeContainer>
+      <ChartContainer
+        contentLoaded={chartDataDown.length > 1}
+        statText={`↓ ${bpsPrettyPrint(
+          (chartDataDown[chartDataDown.length - 1]?.y ?? 0) as number
+        )}`}
+      >
         <ResponsiveLine
           isInteractive={true}
           enableSlices='x'

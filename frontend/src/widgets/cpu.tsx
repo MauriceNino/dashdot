@@ -10,6 +10,7 @@ import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
 import { useSetting } from '../services/settings';
+import { toCommas } from '../utils/calculations';
 
 const getColumnsForCores = (cores: number): number => {
   let columns = 1;
@@ -38,7 +39,7 @@ const CpuSwitchContainer = styled.div`
 
 const TempContainer = styled.div`
   position: absolute;
-  left: 25px;
+  right: 25px;
   top: 25px;
   z-index: 2;
   color: ${({ theme }) => theme.colors.text}AA;
@@ -162,6 +163,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
     >
       {chartData.map((chart, chartI) => (
         <ChartContainer
+          key={chartI.toString() + multiCore?.toString()}
           contentLoaded={chart.some(serie => serie.data.length > 1)}
           edges={
             multiCore
@@ -173,26 +175,32 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
                 ]
               : undefined
           }
+          statText={
+            multiCore
+              ? undefined
+              : `%: ${(
+                  chart[0].data[chart[0].data.length - 1]?.y as number
+                )?.toFixed(1)}`
+          }
         >
-          {config?.enable_cpu_temps && (
-            <TempContainer>
-              {`Ø: ${
-                (multiCore
-                  ? latestLoad[chartI].temp
-                  : averageTemp.toFixed(1)) || '?'
-              } °C`}
-            </TempContainer>
-          )}
+          {config?.enable_cpu_temps &&
+            !multiCore &&
+            chart.some(serie => serie.data.length > 1) && (
+              <TempContainer>
+                {`Ø: ${
+                  (multiCore
+                    ? latestLoad[chartI].temp
+                    : averageTemp.toFixed(1)) || '?'
+                } °C`}
+              </TempContainer>
+            )}
           <ResponsiveLine
             isInteractive={true}
             enableSlices='x'
             sliceTooltip={props => {
-              //TODO: correct calculation for multi-core
               const point = props.slice.points[0];
               return (
-                <ThemedText>
-                  {Math.round((point.data.y as number) * 100) / 100} %
-                </ThemedText>
+                <ThemedText>{toCommas(point.data.y as number, 2)} %</ThemedText>
               );
             }}
             data={chart}
