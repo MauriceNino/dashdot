@@ -24,6 +24,7 @@ services:
     privileged: true
     environment:
       - DASHDOT_ENABLE_CPU_TEMPS=true
+      - DASHDOT_ENABLE_TILT=true
     ports:
       - '3001:3001'
     volumes:
