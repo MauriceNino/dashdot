@@ -5,7 +5,7 @@ version: '3.5'
 
 services:
   frontend:
-    image: node:16-alpine
+    image: node:18-alpine
     working_dir: /app/frontend
     command: yarn run dev
     restart: unless-stopped
@@ -35,7 +35,7 @@ services:
         target: /mnt/eth0
 
   shared:
-    image: node:16-alpine
+    image: node:18-alpine
     working_dir: /app/shared
     command: yarn run dev
     restart: unless-stopped
