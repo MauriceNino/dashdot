@@ -11,11 +11,23 @@ const Container = styled.div<{ mobile: boolean }>`
   min-width: 0;
   background-color: ${({ theme }) => theme.colors.surface};
   border-radius: 25px;
-  box-shadow: -13px -13px 35px 0px rgba(0, 0, 0, 0.15);
+  z-index: auto;
 
   transition: background-color 0.3s ease;
   align-items: center;
   justify-content: center;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: inherit;
+    box-shadow: -13px -13px 35px 0px rgba(0, 0, 0, 0.15);
+    z-index: -1;
+  }
 `;
 
 type ChartContainerProps = {
