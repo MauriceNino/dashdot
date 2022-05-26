@@ -154,16 +154,11 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
 };
 
 type ServerWidgetProps = {
-  loading: boolean;
   data?: OsInfo;
   config?: Config;
 };
 
-export const ServerWidget: FC<ServerWidgetProps> = ({
-  loading,
-  data,
-  config,
-}) => {
+export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
   const isMobile = useIsMobile();
   const [darkMode, setDarkMode] = useSetting('darkMode');
   const [uptime, setUptime] = useState(0);
@@ -270,7 +265,6 @@ export const ServerWidget: FC<ServerWidgetProps> = ({
 
       <StyledInfoTable
         mobile={isMobile}
-        infosLoading={loading}
         infos={[
           {
             label: 'OS',

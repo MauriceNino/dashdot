@@ -4,11 +4,25 @@ import { linearGradientDef } from '@nivo/core';
 import { Datum, ResponsiveLine, Serie } from '@nivo/line';
 import { Switch } from 'antd';
 import { Config, CpuInfo, CpuLoad } from 'dashdot-shared';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
+import { useSetting } from '../services/settings';
+
+const getColumnsForCores = (cores: number): number => {
+  let columns = 1;
+  for (let i = 0; i < cores - 1; i++) {
+    if (cores % i === 0) {
+      columns = i;
+
+      if (columns >= cores / i) return columns;
+    }
+  }
+
+  return columns;
+};
 
 const CpuSwitchContainer = styled.div`
   position: absolute;
@@ -28,30 +42,25 @@ const TempContainer = styled.div`
   top: 25px;
   z-index: 2;
   color: ${({ theme }) => theme.colors.text}AA;
+  white-space: nowrap;
 `;
 
 type CpuWidgetProps = {
   load: CpuLoad[];
-  loading: boolean;
   data?: CpuInfo;
   config?: Config;
 };
 
-export const CpuWidget: FC<CpuWidgetProps> = ({
-  load,
-  loading,
-  data,
-  config,
-}) => {
+export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
   const theme = useTheme();
   const override = config?.override;
+  const latestLoad = load[load.length - 1];
 
-  const [showThreads, setShowThreads] = useState(false);
+  const [multiCore, setMulticore] = useSetting('multiCore', false);
 
-  // TODO: calculate the chart values only once per time-frame
-  let chartData: Serie[] = [];
+  let chartData: Serie[][] = [];
 
-  if (showThreads) {
+  if (multiCore) {
     const coresWithValues = load.reduce(
       (acc, curr) => {
         curr.forEach(({ load: l, core }) => {
@@ -76,10 +85,12 @@ export const CpuWidget: FC<CpuWidgetProps> = ({
       }
     );
 
-    chartData = Object.entries(coresWithValues).map(([key, value]) => ({
-      id: key,
-      data: value,
-    }));
+    chartData = Object.entries(coresWithValues).map(([_, value]) => [
+      {
+        id: 'cpu',
+        data: value,
+      },
+    ]);
   } else {
     const chartValues: Datum[] = load.reduce((acc, curr, i) => {
       const avgLoad =
@@ -93,24 +104,29 @@ export const CpuWidget: FC<CpuWidgetProps> = ({
     }, [] as Datum[]);
 
     chartData = [
-      {
-        id: 'cpu',
-        data: chartValues,
-      },
+      [
+        {
+          id: 'cpu',
+          data: chartValues,
+        },
+      ],
     ];
   }
 
   const frequency = override?.cpu_frequency ?? data?.frequency;
 
   const averageTemp =
-    load[load.length - 1]?.reduce((acc, { temp }) => acc + (temp ?? 0), 0) /
-    load[load.length - 1]?.length;
+    latestLoad?.reduce((acc, { temp }) => acc + (temp ?? 0), 0) /
+    latestLoad?.length;
+
+  const columns = getColumnsForCores(latestLoad?.length ?? 1);
 
   return (
     <HardwareInfoContainer
+      columns={multiCore ? columns : 1}
+      gap={8}
       color={theme.colors.cpuPrimary}
       heading='Processor'
-      infosLoading={loading}
       infos={[
         {
           label: 'Brand',
@@ -138,52 +154,70 @@ export const CpuWidget: FC<CpuWidgetProps> = ({
         <CpuSwitchContainer>
           <ThemedText>Show All Cores</ThemedText>
           <Switch
-            checked={showThreads}
-            onChange={() => setShowThreads(!showThreads)}
+            checked={multiCore}
+            onChange={() => setMulticore(!multiCore)}
           />
         </CpuSwitchContainer>
       }
     >
-      <ChartContainer
-        contentLoaded={chartData.some(serie => serie.data.length > 1)}
-      >
-        {config?.enable_cpu_temps && (
-          <TempContainer>Ø: {averageTemp.toFixed(1) || '?'} °C</TempContainer>
-        )}
-        <ResponsiveLine
-          isInteractive={true}
-          enableSlices='x'
-          sliceTooltip={props => {
-            //TODO: correct calculation for multi-core
-            const point = props.slice.points[0];
-            return (
-              <ThemedText>
-                {Math.round((point.data.y as number) * 100) / 100} %
-              </ThemedText>
-            );
-          }}
-          data={chartData}
-          curve='monotoneX'
-          enablePoints={false}
-          animate={false}
-          enableGridX={false}
-          enableGridY={false}
-          yScale={{
-            type: 'linear',
-            min: -5,
-            max: 105,
-          }}
-          enableArea={true}
-          defs={[
-            linearGradientDef('gradientA', [
-              { offset: 0, color: 'inherit' },
-              { offset: 100, color: 'inherit', opacity: 0 },
-            ]),
-          ]}
-          fill={[{ match: '*', id: 'gradientA' }]}
-          colors={theme.colors.cpuPrimary}
-        />
-      </ChartContainer>
+      {chartData.map((chart, chartI) => (
+        <ChartContainer
+          contentLoaded={chart.some(serie => serie.data.length > 1)}
+          edges={
+            multiCore
+              ? [
+                  chartI === 0,
+                  chartI === columns - 1,
+                  chartI === chartData.length - 1,
+                  chartI === chartData.length - columns,
+                ]
+              : undefined
+          }
+        >
+          {config?.enable_cpu_temps && (
+            <TempContainer>
+              {`Ø: ${
+                (multiCore
+                  ? latestLoad[chartI].temp
+                  : averageTemp.toFixed(1)) || '?'
+              } °C`}
+            </TempContainer>
+          )}
+          <ResponsiveLine
+            isInteractive={true}
+            enableSlices='x'
+            sliceTooltip={props => {
+              //TODO: correct calculation for multi-core
+              const point = props.slice.points[0];
+              return (
+                <ThemedText>
+                  {Math.round((point.data.y as number) * 100) / 100} %
+                </ThemedText>
+              );
+            }}
+            data={chart}
+            curve='monotoneX'
+            enablePoints={false}
+            animate={false}
+            enableGridX={false}
+            enableGridY={false}
+            yScale={{
+              type: 'linear',
+              min: -5,
+              max: 105,
+            }}
+            enableArea={true}
+            defs={[
+              linearGradientDef('gradientA', [
+                { offset: 0, color: 'inherit' },
+                { offset: 100, color: 'inherit', opacity: 0 },
+              ]),
+            ]}
+            fill={[{ match: '*', id: 'gradientA' }]}
+            colors={theme.colors.cpuPrimary}
+          />
+        </ChartContainer>
+      ))}
     </HardwareInfoContainer>
   );
 };
