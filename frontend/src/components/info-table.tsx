@@ -42,7 +42,11 @@ const InfoTable: FC<InfoTableProps> = props => {
       {props.infos.map((info, i) => (
         <InfoTextRow key={i.toString() + info.label}>
           <InfoTextLabel>{info.label}</InfoTextLabel>
-          <InfoTextValue>{info.value}</InfoTextValue>
+          <InfoTextValue>
+            {info.value == null || info.value.trim().length === 0
+              ? '/'
+              : info.value}
+          </InfoTextValue>
         </InfoTextRow>
       ))}
     </InfoTextContainer>
