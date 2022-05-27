@@ -72,17 +72,22 @@ server.listen(CONFIG.port, async () => {
   );
 
   console.log('Running speed-test (this may take a few minutes)...');
-
-  console.log(
-    util.inspect(await runSpeedTest(), {
-      showHidden: false,
-      depth: null,
-      colors: true,
-    })
-  );
+  try {
+    console.log(
+      util.inspect(await runSpeedTest(), {
+        showHidden: false,
+        depth: null,
+        colors: true,
+      })
+    );
+  } catch (e) {
+    console.error(e);
+  }
 
   // Run speed test every CONFIG.speed_test_interval minutes
   interval(CONFIG.speed_test_interval * 60 * 1000)
     .pipe(mergeMap(async () => await runSpeedTest()))
-    .subscribe();
+    .subscribe({
+      error: e => console.error(e),
+    });
 });
