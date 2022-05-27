@@ -7,6 +7,10 @@ steps:
   # TESTING #
   - name: test
     image: node:lts-alpine
+    when:
+      event:
+        - push
+        - pull_request
     commands:
       - yarn --immutable --immutable-cache --check-cache
       - yarn run prettier:check
@@ -14,6 +18,9 @@ steps:
   # FEATURE BUILD (LOCAL) #
   - name: build
     when:
+      event:
+        - push
+        - pull_request
       branch:
         exclude:
           - main
@@ -26,6 +33,7 @@ steps:
   - name: build & deploy to dockerhub (dev)
     image: crazymax/docker:latest
     when:
+      event: push
       branch: dev
     environment:
       DOCKER_ACCESS_KEY:
@@ -42,6 +50,7 @@ steps:
   - name: update & deploy server files (dev)
     image: docker/compose
     when:
+      event: push
       branch: dev
     volumes:
       - name: dockersock
@@ -56,6 +65,7 @@ steps:
   - name: build & deploy to dockerhub (production)
     image: crazymax/docker:latest
     when:
+      event: push
       branch: main
     environment:
       DOCKER_ACCESS_KEY:
@@ -74,6 +84,7 @@ steps:
   - name: update & deploy server files
     image: docker/compose
     when:
+      event: push
       branch: main
     volumes:
       - name: dockersock
@@ -83,6 +94,18 @@ steps:
     commands:
       - docker image pull mauricenino/dashdot:latest
       - cd /server && ./start.sh dashdot
+
+  # CREATE RELEASE NOTES #
+  - name: create release notes
+    image: timbru31/node-alpine-git:latest
+    when:
+      event: tag
+    environment:
+      GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
+    commands:
+      - yarn --immutable --immutable-cache
+      - yarn semantic-release
 
 volumes:
   - name: dockersock
@@ -97,5 +120,9 @@ kind: secret
 name: DOCKER_ACCESS_KEY
 data: ysbzIhceuQjxnBZ7kRt63CswtG85WTCiCBFPCM8wmV9qBQTS9kGPktIqw1wevm1O0U2l1pTWl7wt2e7D+a462Q==
 ---
+kind: secret
+name: GITHUB_TOKEN
+data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
+---
 kind: signature
-hmac: de28f0f0b84d41af121f1b8ff2a2a2853c08fb91cf99fe6df2301984b3d92d35
+hmac: fc361404994598fbd2600378ac66c4e32cdba60e0da6874bdbdb6476ec994d6d
