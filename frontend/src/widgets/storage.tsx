@@ -6,18 +6,16 @@ import { useTheme } from 'styled-components';
 import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
-import { byteToGb } from '../utils/calculations';
+import { bytePrettyPrint } from '../utils/calculations';
 
 type StorageWidgetProps = {
   load?: StorageLoad;
-  loading: boolean;
   data?: StorageInfo;
   config?: Config;
 };
 
 export const StorageWidget: FC<StorageWidgetProps> = ({
   load,
-  loading,
   data,
   config,
 }) => {
@@ -37,14 +35,12 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
 
       return {
         label: `Drive ${i + 1}`,
-        value: `${brand} ${type} (${byteToGb(size)} GB)`,
+        value: `${brand} ${type} (${bytePrettyPrint(size)})`,
       };
     });
   } else {
     const brand = override?.storage_brand_1 ?? data?.layout[0]?.brand;
-    const size = byteToGb(
-      override?.storage_size_1 ?? data?.layout[0]?.size ?? 0
-    );
+    const size = override?.storage_size_1 ?? data?.layout[0]?.size;
     const type = override?.storage_type_1 ?? data?.layout[0]?.type;
 
     infos = [
@@ -54,7 +50,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       },
       {
         label: 'Size',
-        value: size ? `${size} GB` : '',
+        value: size ? bytePrettyPrint(size) : '',
       },
       {
         label: 'Type',
@@ -70,7 +66,6 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
     <HardwareInfoContainer
       color={theme.colors.storagePrimary}
       heading='Storage'
-      infosLoading={loading}
       infos={infos}
       icon={faHdd}
     >
@@ -99,13 +94,13 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
             from: 'color',
             modifiers: [[theme.dark ? 'brighter' : 'darker', 3]],
           }}
-          arcLabel={data => `${byteToGb(data.value)} GB`}
+          arcLabel={data => bytePrettyPrint(data.value)}
           colors={[theme.colors.storagePrimary, theme.colors.background]}
           tooltip={props => {
             const value = props.datum.value;
             return (
               <ThemedText>
-                {props.datum.id}: {byteToGb(value)} GB
+                {props.datum.id}: {bytePrettyPrint(value)}
               </ThemedText>
             );
           }}

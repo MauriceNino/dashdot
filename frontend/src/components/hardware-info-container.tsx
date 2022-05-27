@@ -1,6 +1,6 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 import InfoTable, { InfoTableProps } from './info-table';
@@ -19,15 +19,25 @@ const ContentContainer = styled.div<{ mobile: boolean }>`
   ${({ mobile }) => mobile && 'padding: 20px 0'};
 `;
 
-const ChartArea = styled.div<{ mobile: boolean }>`
+type ChartAreaProps = {
+  mobile: boolean;
+  columns: number;
+  gap: number;
+  items: number;
+};
+const ChartArea = styled.div<ChartAreaProps>`
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
   ${({ mobile }) => mobile && `height: 270px;`}
 
   > div {
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(${({ columns }) => columns}, 1fr);
+    grid-auto-flow: row;
+    gap: ${({ gap }) => gap}px;
+    justify-items: stretch;
+    align-items: stretch;
 
     height: ${({ mobile }) => (mobile ? '100%' : '110%')};
     width: 100%;
@@ -81,12 +91,14 @@ type HardwareInfoProps = {
   heading: string;
   icon: IconProp;
   extraContent?: JSX.Element;
-  infosLoading: boolean;
+  columns?: number;
+  gap?: number;
   children?: React.ReactNode;
 } & InfoTableProps;
 
 const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
   const isMobile = useIsMobile();
+  const childrenLength = React.Children.count(props.children);
 
   return (
     <>
@@ -99,12 +111,17 @@ const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
           <InfoContainer>
             <InfoHeading>{props.heading}</InfoHeading>
 
-            <InfoTable infosLoading={props.infosLoading} infos={props.infos} />
+            <InfoTable infos={props.infos} />
           </InfoContainer>
 
           {props.extraContent}
 
-          <ChartArea mobile={isMobile}>
+          <ChartArea
+            mobile={isMobile}
+            columns={props.columns ?? 1}
+            gap={props.gap ?? 20}
+            items={childrenLength}
+          >
             <div>{props.children}</div>
           </ChartArea>
         </ContentContainer>

@@ -147,7 +147,6 @@ export const MainWidgetContainer: FC = () => {
             enableTilt={config?.enable_tilt}
           >
             <currentConfig.Widget
-              loading={serverInfo.loading}
               // @ts-ignore
               data={currentConfig.data}
               // @ts-ignore
