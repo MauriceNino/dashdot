@@ -3,23 +3,61 @@ import { SwapSpinner } from 'react-spinners-kit';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 
-const Container = styled.div<{ mobile: boolean }>`
+type ContainerProps = {
+  mobile: boolean;
+  edges: [boolean, boolean, boolean, boolean];
+};
+const Container = styled.div<ContainerProps>`
   position: relative;
   display: flex;
 
-  flex: 1 1 0;
   min-width: 0;
   background-color: ${({ theme }) => theme.colors.surface};
-  border-radius: 25px;
-  box-shadow: -13px -13px 35px 0px rgba(0, 0, 0, 0.15);
+  border-radius: ${({ edges: [top, right, bottom, left] }) =>
+    `${top ? '25px' : '10px'} ${right ? '25px' : '10px'} ${
+      bottom ? '25px' : '10px'
+    } ${left ? '25px' : '10px'}`};
+  z-index: auto;
 
   transition: background-color 0.3s ease;
   align-items: center;
   justify-content: center;
+
+  > div {
+    overflow: hidden;
+    position: absolute;
+    border-radius: ${({ edges: [top, right, bottom, left] }) =>
+      `${top ? '25px' : '10px'} ${right ? '25px' : '10px'} ${
+        bottom ? '25px' : '10px'
+      } ${left ? '25px' : '10px'}`};
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: inherit;
+    box-shadow: -13px -13px 35px 0px rgba(0, 0, 0, 0.15);
+    z-index: -1;
+  }
+`;
+
+const StatText = styled.div`
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  z-index: 2;
+  color: ${({ theme }) => theme.colors.text}AA;
+  white-space: nowrap;
 `;
 
 type ChartContainerProps = {
   contentLoaded: boolean;
+  edges?: [boolean, boolean, boolean, boolean];
+  statText?: string;
   children: React.ReactNode;
 };
 
@@ -28,9 +66,15 @@ export const ChartContainer: FC<ChartContainerProps> = props => {
   const isMobile = useIsMobile();
 
   return (
-    <Container mobile={isMobile}>
+    <Container
+      mobile={isMobile}
+      edges={props.edges ?? [true, true, true, true]}
+    >
       {props.contentLoaded ? (
-        props.children
+        <>
+          <StatText>{props.statText}</StatText>
+          {props.children}
+        </>
       ) : (
         <SwapSpinner size={70} color={theme.colors.background} loading={true} />
       )}
