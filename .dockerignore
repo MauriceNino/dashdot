@@ -23,4 +23,5 @@
 **.prettierrc.json
 **.prettierignore
 **.drone.yml
+**.releaserc.json
 **/*.md
