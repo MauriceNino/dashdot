@@ -5775,7 +5775,7 @@ __metadata:
     dashdot-shared: 1.0.0
     react: 18.1.0
     react-dom: 18.1.0
-    react-parallax-tilt: 1.7.36
+    react-parallax-tilt: 1.7.37
     react-scripts: 5.0.1
     react-spinners-kit: 1.9.1
     sass: 1.52.1
@@ -12517,13 +12517,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-parallax-tilt@npm:1.7.36":
-  version: 1.7.36
-  resolution: "react-parallax-tilt@npm:1.7.36"
+"react-parallax-tilt@npm:1.7.37":
+  version: 1.7.37
+  resolution: "react-parallax-tilt@npm:1.7.37"
   peerDependencies:
     react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 5fa6bcc4020752b21fb57b83f639427bb87a632775d62df67b9678be2709b2402d9b787a16a13c068c05fcb7665970042140065cf26d2c79912d2a76d34075f0
+  checksum: 3a29ee52026dabf3711e5c10152cf652e1bccc7715c9fbd95a79467ad11ea0ef8a16503c85a80ec236f4ccc1b38553732a39c97511f1a5b2b121b293d1ea9b48
   languageName: node
   linkType: hard
 
