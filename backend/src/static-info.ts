@@ -100,32 +100,28 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
 };
 
 export const runSpeedTest = async () => {
-  try {
-    const { stdout, stderr } = await exec('which speedtest');
+  const { stdout, stderr } = await exec('which speedtest');
 
-    if (stderr === '' && stdout.trim() !== '') {
-      const { stdout } = await exec('speedtest --json');
-      const json = JSON.parse(stdout);
+  if (stderr === '' && stdout.trim() !== '') {
+    const { stdout } = await exec('speedtest --json');
+    const json = JSON.parse(stdout);
 
-      INFO_SAVE!.network.speedDown = json.download ?? 0;
-      INFO_SAVE!.network.speedUp = json.upload ?? 0;
+    INFO_SAVE!.network.speedDown = json.download ?? 0;
+    INFO_SAVE!.network.speedUp = json.upload ?? 0;
 
-      return json;
-    } else {
-      const universalSpeedtest = new UniversalSpeedtest({
-        measureUpload: true,
-        downloadUnit: SpeedUnits.bps,
-        uploadUnit: SpeedUnits.bps,
-      });
+    return json;
+  } else {
+    const universalSpeedtest = new UniversalSpeedtest({
+      measureUpload: true,
+      downloadUnit: SpeedUnits.bps,
+      uploadUnit: SpeedUnits.bps,
+    });
 
-      const speed = await universalSpeedtest.runSpeedtestNet();
+    const speed = await universalSpeedtest.runSpeedtestNet();
 
-      INFO_SAVE!.network.speedDown = speed.downloadSpeed ?? 0;
-      INFO_SAVE!.network.speedUp = speed.uploadSpeed ?? 0;
+    INFO_SAVE!.network.speedDown = speed.downloadSpeed ?? 0;
+    INFO_SAVE!.network.speedUp = speed.uploadSpeed ?? 0;
 
-      return speed;
-    }
-  } catch (e) {
-    return e;
+    return speed;
   }
 };
