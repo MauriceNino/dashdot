@@ -1,4 +1,5 @@
 import { CpuLoad, NetworkLoad, RamLoad, StorageLoad } from 'dashdot-shared';
+import { motion, Variants } from 'framer-motion';
 import { FC, useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import { default as styled } from 'styled-components';
@@ -12,7 +13,26 @@ import { RamWidget } from '../widgets/ram';
 import { ServerWidget } from '../widgets/server';
 import { StorageWidget } from '../widgets/storage';
 
-const FlexContainer = styled.div<{ mobile: boolean }>`
+const containerVariants = {
+  animate: {
+    transition: {
+      staggerChildren: 0.06,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  initial: {
+    opacity: 0,
+    scale: 0.9,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+  },
+};
+
+const FlexContainer = styled(motion.div)<{ mobile: boolean }>`
   width: ${({ mobile }) => (mobile ? 'calc(100vw - 50px)' : '92vw')};
   min-height: ${({ mobile }) => (mobile ? 'calc(100vh - 50px)' : '86vh')};
   margin: ${({ mobile }) => (mobile ? '50px' : '7vh')} auto 0 auto;
@@ -20,7 +40,7 @@ const FlexContainer = styled.div<{ mobile: boolean }>`
   display: flex;
   flex-flow: row wrap;
   column-gap: 40px;
-  row-gap: 70px;
+  row-gap: ${({ mobile }) => (mobile ? '40px' : '70px')};
 `;
 
 export const MainWidgetContainer: FC = () => {
@@ -135,13 +155,21 @@ export const MainWidgetContainer: FC = () => {
   ).filter(widget => configs[widget].enabled);
 
   return (
-    <FlexContainer mobile={isMobile}>
+    <FlexContainer
+      mobile={isMobile}
+      variants={containerVariants}
+      initial='initial'
+      animate='animate'
+      exit='exit'
+    >
       {widgetOrderArr.map(widget => {
         const currentConfig = configs[widget];
 
         return (
           <GlassPane
             key={widget}
+            variants={itemVariants}
+            layoutId={`widget_${widget}`}
             grow={currentConfig.grow}
             minWidth={currentConfig.minWidth}
             enableTilt={config?.enable_tilt}

@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { motion } from 'framer-motion';
+import { forwardRef } from 'react';
 import { SwapSpinner } from 'react-spinners-kit';
 import ReactVirtualizedAutoSizer from 'react-virtualized-auto-sizer';
 import styled, { useTheme } from 'styled-components';
@@ -62,31 +63,38 @@ type ChartContainerProps = {
   children: (size: { width: number; height: number }) => React.ReactNode;
 };
 
-export const ChartContainer: FC<ChartContainerProps> = props => {
-  const theme = useTheme();
-  const isMobile = useIsMobile();
+export const ChartContainer = motion(
+  forwardRef<HTMLDivElement, ChartContainerProps>((props, ref) => {
+    const theme = useTheme();
+    const isMobile = useIsMobile();
 
-  return (
-    <Container
-      mobile={isMobile}
-      edges={props.edges ?? [true, true, true, true]}
-    >
-      {props.contentLoaded ? (
-        <>
-          <StatText>{props.statText}</StatText>
-          <ReactVirtualizedAutoSizer
-            style={{
-              height: '100%',
-              width: '100%',
-              overflow: 'hidden',
-            }}
-          >
-            {props.children}
-          </ReactVirtualizedAutoSizer>
-        </>
-      ) : (
-        <SwapSpinner size={70} color={theme.colors.background} loading={true} />
-      )}
-    </Container>
-  );
-};
+    return (
+      <Container
+        ref={ref}
+        mobile={isMobile}
+        edges={props.edges ?? [true, true, true, true]}
+      >
+        {props.contentLoaded ? (
+          <>
+            <StatText>{props.statText}</StatText>
+            <ReactVirtualizedAutoSizer
+              style={{
+                height: '100%',
+                width: '100%',
+                overflow: 'hidden',
+              }}
+            >
+              {props.children}
+            </ReactVirtualizedAutoSizer>
+          </>
+        ) : (
+          <SwapSpinner
+            size={70}
+            color={theme.colors.background}
+            loading={true}
+          />
+        )}
+      </Container>
+    );
+  })
+);

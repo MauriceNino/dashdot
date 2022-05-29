@@ -3,6 +3,7 @@ import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
 import { Datum } from '@nivo/line';
 import { Switch } from 'antd';
 import { Config, CpuInfo, CpuLoad } from 'dashdot-shared';
+import { Variants } from 'framer-motion';
 import { FC } from 'react';
 import { Tooltip, YAxis } from 'recharts';
 import styled, { useTheme } from 'styled-components';
@@ -11,6 +12,25 @@ import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
 import { useSetting } from '../services/settings';
+
+const containerVariants = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  initial: {
+    opacity: 0,
+    scale: 0.8,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+  },
+};
 
 const getColumnsForCores = (cores: number): number => {
   let columns = 1;
@@ -148,10 +168,16 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
           />
         </CpuSwitchContainer>
       }
+      layout
+      variants={containerVariants}
+      initial='initial'
+      animate='animate'
+      exit='exit'
     >
       {chartData.map((chart, chartI) => (
         <ChartContainer
           key={chartI.toString() + multiCore?.toString()}
+          variants={itemVariants}
           contentLoaded={chart.length > 1}
           edges={
             multiCore

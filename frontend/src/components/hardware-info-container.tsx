@@ -1,6 +1,7 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { FC } from 'react';
+import { motion } from 'framer-motion';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 import InfoTable, { InfoTableProps } from './info-table';
@@ -25,6 +26,7 @@ type ChartAreaProps = {
   gap: number;
   items: number;
 };
+
 const ChartArea = styled.div<ChartAreaProps>`
   position: relative;
   flex: 1 1 auto;
@@ -96,38 +98,40 @@ type HardwareInfoProps = {
   children?: React.ReactNode;
 } & InfoTableProps;
 
-const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
-  const isMobile = useIsMobile();
-  const childrenLength = React.Children.count(props.children);
+const HardwareInfoContainer = motion(
+  forwardRef<HTMLDivElement, HardwareInfoProps>((props, ref) => {
+    const isMobile = useIsMobile();
+    const childrenLength = React.Children.count(props.children);
 
-  return (
-    <>
-      <Container mobile={isMobile}>
-        <InfoIcon {...props}>
-          <FontAwesomeIcon icon={props.icon} size='2x' />
-        </InfoIcon>
+    return (
+      <>
+        <Container mobile={isMobile}>
+          <InfoIcon {...props}>
+            <FontAwesomeIcon icon={props.icon} size='2x' />
+          </InfoIcon>
 
-        <ContentContainer mobile={isMobile}>
-          <InfoContainer>
-            <InfoHeading>{props.heading}</InfoHeading>
+          <ContentContainer mobile={isMobile}>
+            <InfoContainer>
+              <InfoHeading>{props.heading}</InfoHeading>
 
-            <InfoTable infos={props.infos} />
-          </InfoContainer>
+              <InfoTable infos={props.infos} />
+            </InfoContainer>
 
-          {props.extraContent}
+            {props.extraContent}
 
-          <ChartArea
-            mobile={isMobile}
-            columns={props.columns ?? 1}
-            gap={props.gap ?? 20}
-            items={childrenLength}
-          >
-            <div>{props.children}</div>
-          </ChartArea>
-        </ContentContainer>
-      </Container>
-    </>
-  );
-};
-
+            <ChartArea
+              ref={ref}
+              mobile={isMobile}
+              columns={props.columns ?? 1}
+              gap={props.gap ?? 20}
+              items={childrenLength}
+            >
+              <div>{props.children}</div>
+            </ChartArea>
+          </ContentContainer>
+        </Container>
+      </>
+    );
+  })
+);
 export default HardwareInfoContainer;
