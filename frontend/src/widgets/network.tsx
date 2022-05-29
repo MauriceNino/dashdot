@@ -1,10 +1,11 @@
 import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 //@ts-ignore
-import { linearGradientDef } from '@nivo/core';
-import { Datum, ResponsiveLine } from '@nivo/line';
+import { Datum } from '@nivo/line';
 import { Config, NetworkInfo, NetworkLoad } from 'dashdot-shared';
 import { FC } from 'react';
+import { Tooltip, YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
+import { DefaultAreaChart } from '../components/chart-components';
 import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
@@ -81,43 +82,27 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
           (chartDataUp[chartDataUp.length - 1]?.y ?? 0) as number
         )}`}
       >
-        <ResponsiveLine
-          isInteractive={true}
-          enableSlices='x'
-          sliceTooltip={props => {
-            const point = props.slice.points[0];
-            return (
-              <ThemedText>
-                {bpsPrettyPrint((point.data.y as number) * 8)}
-              </ThemedText>
-            );
-          }}
-          data={[
-            {
-              id: 'network-up',
-              data: chartDataUp,
-            },
-          ]}
-          curve='monotoneX'
-          enablePoints={false}
-          animate={false}
-          enableGridX={false}
-          enableGridY={false}
-          yScale={{
-            type: 'linear',
-            min: maxUp * -0.1,
-            max: maxUp * 1.1,
-          }}
-          enableArea={true}
-          defs={[
-            linearGradientDef('gradientA', [
-              { offset: 0, color: 'inherit' },
-              { offset: 100, color: 'inherit', opacity: 0 },
-            ]),
-          ]}
-          fill={[{ match: '*', id: 'gradientA' }]}
-          colors={theme.colors.networkPrimary}
-        />
+        {size => (
+          <DefaultAreaChart
+            data={chartDataUp}
+            height={size.height}
+            width={size.width}
+            color={theme.colors.networkPrimary}
+          >
+            <YAxis
+              hide={true}
+              type='number'
+              domain={[maxUp * -0.1, maxUp * 1.1]}
+            />
+            <Tooltip
+              content={x => (
+                <ThemedText>
+                  {bpsPrettyPrint((x.payload?.[0]?.value as number) * 8)}
+                </ThemedText>
+              )}
+            />
+          </DefaultAreaChart>
+        )}
       </ChartContainer>
 
       <ChartContainer
@@ -126,43 +111,27 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
           (chartDataDown[chartDataDown.length - 1]?.y ?? 0) as number
         )}`}
       >
-        <ResponsiveLine
-          isInteractive={true}
-          enableSlices='x'
-          sliceTooltip={props => {
-            const point = props.slice.points[0];
-            return (
-              <ThemedText>
-                {bpsPrettyPrint((point.data.y as number) * 8)}
-              </ThemedText>
-            );
-          }}
-          data={[
-            {
-              id: 'network-down',
-              data: chartDataDown,
-            },
-          ]}
-          curve='monotoneX'
-          enablePoints={false}
-          animate={false}
-          enableGridX={false}
-          enableGridY={false}
-          yScale={{
-            type: 'linear',
-            min: maxDown * -0.1,
-            max: maxDown * 1.1,
-          }}
-          enableArea={true}
-          defs={[
-            linearGradientDef('gradientA', [
-              { offset: 0, color: 'inherit' },
-              { offset: 100, color: 'inherit', opacity: 0 },
-            ]),
-          ]}
-          fill={[{ match: '*', id: 'gradientA' }]}
-          colors={theme.colors.networkPrimary}
-        />
+        {size => (
+          <DefaultAreaChart
+            data={chartDataDown}
+            height={size.height}
+            width={size.width}
+            color={theme.colors.networkPrimary}
+          >
+            <YAxis
+              hide={true}
+              type='number'
+              domain={[maxDown * -0.1, maxDown * 1.1]}
+            />
+            <Tooltip
+              content={x => (
+                <ThemedText>
+                  {bpsPrettyPrint((x.payload?.[0]?.value as number) * 8)}
+                </ThemedText>
+              )}
+            />
+          </DefaultAreaChart>
+        )}
       </ChartContainer>
     </HardwareInfoContainer>
   );

@@ -1,15 +1,16 @@
 import { faMemory } from '@fortawesome/free-solid-svg-icons';
 //@ts-ignore
-import { linearGradientDef } from '@nivo/core';
-import { Datum, ResponsiveLine } from '@nivo/line';
+import { Datum } from '@nivo/line';
 import { Config, RamInfo, RamLoad } from 'dashdot-shared';
 import { FC } from 'react';
+import { Tooltip, YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
+import { DefaultAreaChart } from '../components/chart-components';
 import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
 import { removeDuplicates } from '../utils/array-utils';
-import { bytePrettyPrint, toCommas } from '../utils/calculations';
+import { bytePrettyPrint } from '../utils/calculations';
 
 type RamWidgetProps = {
   load: RamLoad[];
@@ -71,41 +72,23 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
           1
         )} (${bytePrettyPrint(load[load.length - 1] ?? 0)})`}
       >
-        <ResponsiveLine
-          isInteractive={true}
-          enableSlices='x'
-          sliceTooltip={props => {
-            const point = props.slice.points[0];
-            return (
-              <ThemedText>{toCommas(point.data.y as number, 2)} %</ThemedText>
-            );
-          }}
-          data={[
-            {
-              id: 'ram',
-              data: chartData,
-            },
-          ]}
-          curve='monotoneX'
-          enablePoints={false}
-          animate={false}
-          enableGridX={false}
-          enableGridY={false}
-          yScale={{
-            type: 'linear',
-            min: -5,
-            max: 105,
-          }}
-          enableArea={true}
-          defs={[
-            linearGradientDef('gradientA', [
-              { offset: 0, color: 'inherit' },
-              { offset: 100, color: 'inherit', opacity: 0 },
-            ]),
-          ]}
-          fill={[{ match: '*', id: 'gradientA' }]}
-          colors={theme.colors.ramPrimary}
-        />
+        {size => (
+          <DefaultAreaChart
+            data={chartData}
+            height={size.height}
+            width={size.width}
+            color={theme.colors.ramPrimary}
+          >
+            <YAxis hide={true} type='number' domain={[-5, 105]} />
+            <Tooltip
+              content={x => (
+                <ThemedText>
+                  {(x.payload?.[0]?.value as number)?.toFixed(2)} %
+                </ThemedText>
+              )}
+            />
+          </DefaultAreaChart>
+        )}
       </ChartContainer>
     </HardwareInfoContainer>
   );

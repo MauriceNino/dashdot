@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { SwapSpinner } from 'react-spinners-kit';
+import ReactVirtualizedAutoSizer from 'react-virtualized-auto-sizer';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 
@@ -58,7 +59,7 @@ type ChartContainerProps = {
   contentLoaded: boolean;
   edges?: [boolean, boolean, boolean, boolean];
   statText?: string;
-  children: React.ReactNode;
+  children: (size: { width: number; height: number }) => React.ReactNode;
 };
 
 export const ChartContainer: FC<ChartContainerProps> = props => {
@@ -73,7 +74,15 @@ export const ChartContainer: FC<ChartContainerProps> = props => {
       {props.contentLoaded ? (
         <>
           <StatText>{props.statText}</StatText>
-          {props.children}
+          <ReactVirtualizedAutoSizer
+            style={{
+              height: '100%',
+              width: '100%',
+              overflow: 'hidden',
+            }}
+          >
+            {props.children}
+          </ReactVirtualizedAutoSizer>
         </>
       ) : (
         <SwapSpinner size={70} color={theme.colors.background} loading={true} />

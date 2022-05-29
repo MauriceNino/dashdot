@@ -1,16 +1,16 @@
 import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
 //@ts-ignore
-import { linearGradientDef } from '@nivo/core';
-import { Datum, ResponsiveLine, Serie } from '@nivo/line';
+import { Datum } from '@nivo/line';
 import { Switch } from 'antd';
 import { Config, CpuInfo, CpuLoad } from 'dashdot-shared';
 import { FC } from 'react';
+import { Tooltip, YAxis } from 'recharts';
 import styled, { useTheme } from 'styled-components';
+import { DefaultAreaChart } from '../components/chart-components';
 import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
 import { useSetting } from '../services/settings';
-import { toCommas } from '../utils/calculations';
 
 const getColumnsForCores = (cores: number): number => {
   let columns = 1;
@@ -59,7 +59,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
 
   const [multiCore, setMulticore] = useSetting('multiCore', false);
 
-  let chartData: Serie[][] = [];
+  let chartData: Datum[][] = [];
 
   if (multiCore) {
     const coresWithValues = load.reduce(
@@ -86,12 +86,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       }
     );
 
-    chartData = Object.entries(coresWithValues).map(([_, value]) => [
-      {
-        id: 'cpu',
-        data: value,
-      },
-    ]);
+    chartData = Object.entries(coresWithValues).map(([_, value]) => value);
   } else {
     const chartValues: Datum[] = load.reduce((acc, curr, i) => {
       const avgLoad =
@@ -104,14 +99,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       return acc;
     }, [] as Datum[]);
 
-    chartData = [
-      [
-        {
-          id: 'cpu',
-          data: chartValues,
-        },
-      ],
-    ];
+    chartData = [chartValues];
   }
 
   const frequency = override?.cpu_frequency ?? data?.frequency;
@@ -164,7 +152,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       {chartData.map((chart, chartI) => (
         <ChartContainer
           key={chartI.toString() + multiCore?.toString()}
-          contentLoaded={chart.some(serie => serie.data.length > 1)}
+          contentLoaded={chart.length > 1}
           edges={
             multiCore
               ? [
@@ -178,52 +166,38 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
           statText={
             multiCore
               ? undefined
-              : `%: ${(
-                  chart[0].data[chart[0].data.length - 1]?.y as number
-                )?.toFixed(1)}`
+              : `%: ${(chart.at(-1)?.y as number)?.toFixed(1)}`
           }
         >
-          {config?.enable_cpu_temps &&
-            !multiCore &&
-            chart.some(serie => serie.data.length > 1) && (
-              <TempContainer>
-                {`Ø: ${
-                  (multiCore
-                    ? latestLoad[chartI].temp
-                    : averageTemp.toFixed(1)) || '?'
-                } °C`}
-              </TempContainer>
-            )}
-          <ResponsiveLine
-            isInteractive={true}
-            enableSlices='x'
-            sliceTooltip={props => {
-              const point = props.slice.points[0];
-              return (
-                <ThemedText>{toCommas(point.data.y as number, 2)} %</ThemedText>
-              );
-            }}
-            data={chart}
-            curve='monotoneX'
-            enablePoints={false}
-            animate={false}
-            enableGridX={false}
-            enableGridY={false}
-            yScale={{
-              type: 'linear',
-              min: -5,
-              max: 105,
-            }}
-            enableArea={true}
-            defs={[
-              linearGradientDef('gradientA', [
-                { offset: 0, color: 'inherit' },
-                { offset: 100, color: 'inherit', opacity: 0 },
-              ]),
-            ]}
-            fill={[{ match: '*', id: 'gradientA' }]}
-            colors={theme.colors.cpuPrimary}
-          />
+          {size => (
+            <>
+              {config?.enable_cpu_temps && !multiCore && chart.length > 1 && (
+                <TempContainer>
+                  {`Ø: ${
+                    (multiCore
+                      ? latestLoad[chartI].temp
+                      : averageTemp.toFixed(1)) || '?'
+                  } °C`}
+                </TempContainer>
+              )}
+
+              <DefaultAreaChart
+                data={chart}
+                height={size.height}
+                width={size.width}
+                color={theme.colors.cpuPrimary}
+              >
+                <YAxis hide={true} type='number' domain={[-5, 105]} />
+                <Tooltip
+                  content={x => (
+                    <ThemedText>
+                      {(x.payload?.[0]?.value as number)?.toFixed(2)} %
+                    </ThemedText>
+                  )}
+                />
+              </DefaultAreaChart>
+            </>
+          )}
         </ChartContainer>
       ))}
     </HardwareInfoContainer>
