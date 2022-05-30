@@ -3560,7 +3560,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qs@npm:*, @types/qs@npm:^6.9.7":
+"@types/qs@npm:*":
   version: 6.9.7
   resolution: "@types/qs@npm:6.9.7"
   checksum: 7fd6f9c25053e9b5bb6bc9f9f76c1d89e6c04f7707a7ba0e44cc01f17ef5284adb82f230f542c2d5557d69407c9a40f0f3515e8319afd14e1e16b5543ac6cdba
@@ -4332,16 +4332,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:4.20.6":
-  version: 4.20.6
-  resolution: "antd@npm:4.20.6"
+"antd@npm:4.20.7":
+  version: 4.20.7
+  resolution: "antd@npm:4.20.7"
   dependencies:
     "@ant-design/colors": ^6.0.0
     "@ant-design/icons": ^4.7.0
     "@ant-design/react-slick": ~0.28.1
     "@babel/runtime": ^7.12.5
     "@ctrl/tinycolor": ^3.4.0
-    "@types/qs": ^6.9.7
     classnames: ^2.2.6
     copy-to-clipboard: ^3.2.0
     lodash: ^4.17.21
@@ -4384,7 +4383,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 73fd7b420ec9508f919389570204550b2537b796739e8e1a4045b1f4bb6b649ea00ec8df70fa82c788588c0aa4f40e0bd019ebbf674841bb514aff84a00e0ea4
+  checksum: aa0ff43ff8347da5bf04c043488135c6b8901673bc4d8c458e6c4543b0b85b08564a827ba54779cc00f5512dc77b387d1ff836e03d2ab376946d1219f4f0ee15
   languageName: node
   linkType: hard
 
@@ -6458,7 +6457,7 @@ __metadata:
     "@types/react-virtualized-auto-sizer": 1.0.1
     "@types/store": 2.0.2
     "@types/styled-components": 5.1.25
-    antd: 4.20.6
+    antd: 4.20.7
     axios: 0.27.2
     dashdot-shared: 1.0.0
     framer-motion: 6.3.4

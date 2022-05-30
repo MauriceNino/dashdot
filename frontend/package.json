@@ -17,7 +17,7 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
     "@testing-library/user-event": "14.2.0",
-    "antd": "4.20.6",
+    "antd": "4.20.7",
     "axios": "0.27.2",
     "dashdot-shared": "1.0.0",
     "framer-motion": "6.3.4",
