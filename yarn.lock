@@ -6260,7 +6260,7 @@ __metadata:
     dashdot-shared: 1.0.0
     eslint: 8.16.0
     eslint-config-react-app: 7.0.1
-    framer-motion: 6.3.4
+    framer-motion: 6.3.5
     react: 18.1.0
     react-dom: 18.1.0
     react-is: 18.1.0
@@ -7969,9 +7969,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:6.3.4":
-  version: 6.3.4
-  resolution: "framer-motion@npm:6.3.4"
+"framer-motion@npm:6.3.5":
+  version: 6.3.5
+  resolution: "framer-motion@npm:6.3.5"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     framesync: 6.0.1
@@ -7985,7 +7985,7 @@ __metadata:
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: ea4ea22059f6723804f3890327e4f22c3ead564cbd54dc1df66ff6b010835202e42de0fe325f956074033359904206af72714f01c26859cb80279583908ae3e9
+  checksum: 56ce084d6f6b329dcdde0c47e6dbe49756435c796d8bda7163f2f10d294fd74beaa1ca4e4fbcf1a488f7e7aa578609bc3d560b184515ca62ede59711e66053b1
   languageName: node
   linkType: hard
 
