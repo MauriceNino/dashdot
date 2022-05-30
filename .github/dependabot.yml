@@ -6,3 +6,4 @@ updates:
     schedule:
       interval: 'daily'
     target-branch: 'dev'
+    open-pull-requests-limit: 0
