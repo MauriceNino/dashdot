@@ -15,7 +15,7 @@
     "express": "4.18.1",
     "rxjs": "7.5.5",
     "socket.io": "4.5.1",
-    "systeminformation": "5.11.15",
+    "systeminformation": "5.11.16",
     "universal-speedtest": "2.0.5"
   },
   "devDependencies": {
