@@ -1,11 +1,11 @@
 import { faHdd } from '@fortawesome/free-solid-svg-icons';
-import { ResponsivePie } from '@nivo/pie';
 import { Config, StorageInfo, StorageLoad } from 'dashdot-shared';
 import { FC } from 'react';
+import { Cell } from 'recharts';
 import { useTheme } from 'styled-components';
+import { DefaultPieChart } from '../components/chart-components';
 import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
-import ThemedText from '../components/text';
 import { bytePrettyPrint } from '../utils/calculations';
 
 type StorageWidgetProps = {
@@ -60,7 +60,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   }
 
   const size = data?.layout.reduce((acc, s) => (acc = acc + s.size), 0) ?? 0;
-  const available = size - (load ?? 0);
+  const available = Math.max(size - (load ?? 0), 1);
 
   return (
     <HardwareInfoContainer
@@ -70,42 +70,38 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       icon={faHdd}
     >
       <ChartContainer contentLoaded={load != null}>
-        {() => (
-          <ResponsivePie
+        {size => (
+          <DefaultPieChart
             data={[
               {
-                id: 'Used',
+                name: 'Used',
                 value: load,
               },
               {
-                id: 'Free',
+                name: 'Free',
                 value: available,
               },
             ]}
-            margin={{ top: 40, bottom: 40, left: 40, right: 40 }}
-            innerRadius={0.5}
-            padAngle={0.7}
-            cornerRadius={10}
-            activeOuterRadiusOffset={8}
-            arcLinkLabelsTextColor={theme.colors.text}
-            arcLinkLabelsThickness={2}
-            arcLinkLabelsColor={{ from: 'color' }}
-            arcLabelsSkipAngle={10}
-            arcLabelsTextColor={{
-              from: 'color',
-              modifiers: [[theme.dark ? 'brighter' : 'darker', 3]],
-            }}
-            arcLabel={data => bytePrettyPrint(data.value)}
-            colors={[theme.colors.storagePrimary, theme.colors.background]}
-            tooltip={props => {
-              const value = props.datum.value;
-              return (
-                <ThemedText>
-                  {props.datum.id}: {bytePrettyPrint(value)}
-                </ThemedText>
-              );
-            }}
-          />
+            width={size.width}
+            height={size.height}
+            color={theme.colors.storagePrimary}
+          >
+            <Cell
+              key='cell-used'
+              fill={theme.colors.storagePrimary}
+              style={{
+                transition: 'all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+              }}
+            />
+            <Cell
+              key='cell-free'
+              fill={theme.colors.text}
+              opacity={0.2}
+              style={{
+                transition: 'all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+              }}
+            />
+          </DefaultPieChart>
         )}
       </ChartContainer>
     </HardwareInfoContainer>
