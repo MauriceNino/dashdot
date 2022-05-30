@@ -12,8 +12,6 @@
     "@fortawesome/free-brands-svg-icons": "6.1.1",
     "@fortawesome/free-solid-svg-icons": "6.1.1",
     "@fortawesome/react-fontawesome": "0.1.18",
-    "@nivo/core": "0.79.0",
-    "@nivo/pie": "0.79.1",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
     "@testing-library/user-event": "14.2.0",
