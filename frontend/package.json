@@ -21,6 +21,7 @@
     "framer-motion": "6.3.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-is": "18.1.0",
     "react-scripts": "5.0.1",
     "react-spinners-kit": "1.9.1",
     "react-virtualized-auto-sizer": "1.0.6",
@@ -40,7 +41,9 @@
     "@types/react-dom": "18.0.5",
     "@types/react-virtualized-auto-sizer": "1.0.1",
     "@types/store": "2.0.2",
-    "@types/styled-components": "5.1.25"
+    "@types/styled-components": "5.1.25",
+    "eslint": "8.16.0",
+    "eslint-config-react-app": "7.0.1"
   },
   "eslintConfig": {
     "extends": [
