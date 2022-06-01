@@ -1,12 +1,10 @@
 # dependencies
-**/node_modules
-.pnp.cjs
-.pnp.loader.mjs
-.yarn
+/node_modules
+/.yarn
 
 # production
-**/dist
-**/build
+/dist
+/coverage
 
 # misc
 **.DS_Store
