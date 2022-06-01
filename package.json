@@ -42,7 +42,7 @@
     "react-spinners-kit": "1.9.1",
     "react-virtualized-auto-sizer": "1.0.6",
     "recharts": "2.1.10",
-    "regenerator-runtime": "0.13.7",
+    "regenerator-runtime": "0.13.9",
     "rxjs": "7.5.5",
     "sass": "1.52.1",
     "socket.io": "4.5.1",

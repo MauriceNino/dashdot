@@ -89,7 +89,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-test-renderer", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:18.1.0"],\
             ["react-virtualized-auto-sizer", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:1.0.6"],\
             ["recharts", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.1.10"],\
-            ["regenerator-runtime", "npm:0.13.7"],\
+            ["regenerator-runtime", "npm:0.13.9"],\
             ["rxjs", "npm:7.5.5"],\
             ["sass", "npm:1.52.1"],\
             ["semantic-release", "npm:19.0.2"],\
@@ -9265,7 +9265,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-test-renderer", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:18.1.0"],\
             ["react-virtualized-auto-sizer", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:1.0.6"],\
             ["recharts", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.1.10"],\
-            ["regenerator-runtime", "npm:0.13.7"],\
+            ["regenerator-runtime", "npm:0.13.9"],\
             ["rxjs", "npm:7.5.5"],\
             ["sass", "npm:1.52.1"],\
             ["semantic-release", "npm:19.0.2"],\
@@ -19136,13 +19136,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["regenerator-runtime", [\
-        ["npm:0.13.7", {\
-          "packageLocation": "./.yarn/cache/regenerator-runtime-npm-0.13.7-41bcbe64ea-52b66e6669.zip/node_modules/regenerator-runtime/",\
-          "packageDependencies": [\
-            ["regenerator-runtime", "npm:0.13.7"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:0.13.9", {\
           "packageLocation": "./.yarn/cache/regenerator-runtime-npm-0.13.9-6d02340eec-65ed455fe5.zip/node_modules/regenerator-runtime/",\
           "packageDependencies": [\
