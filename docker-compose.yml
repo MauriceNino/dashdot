@@ -4,28 +4,19 @@
 version: '3.5'
 
 services:
-  frontend:
-    image: node:18-alpine
-    working_dir: /app/frontend
-    command: yarn run dev
-    restart: unless-stopped
-    ports:
-      - '3000:3000'
-    volumes:
-      - ./:/app
-
-  backend:
+  dash:
     build:
       context: .
-      dockerfile: backend/Dockerfile.dev
-    working_dir: /app/backend
-    command: yarn run dev
+      dockerfile: Dockerfile.dev
+    working_dir: /app
+    tty: true
+    command: yarn run serve
     restart: unless-stopped
     privileged: true
     environment:
       - DASHDOT_ENABLE_CPU_TEMPS=true
-      - DASHDOT_ENABLE_TILT=true
     ports:
+      - '3000:3000'
       - '3001:3001'
     volumes:
       - ./:/app
@@ -33,11 +24,3 @@ services:
       - type: bind
         source: ${DEFAULT_INTERFACE_PATH}
         target: /mnt/eth0
-
-  shared:
-    image: node:18-alpine
-    working_dir: /app/shared
-    command: yarn run dev
-    restart: unless-stopped
-    volumes:
-      - ./:/app

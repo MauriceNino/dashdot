@@ -4,16 +4,31 @@ type: docker
 name: CI
 
 steps:
+  # DEPENDENCIES #
+  - name: dependencies
+    image: timbru31/node-alpine-git:latest
+    when:
+      event:
+        - push
+    commands:
+      - yarn --immutable --immutable-cache
+  - name: dependencies (pr)
+    image: timbru31/node-alpine-git:latest
+    when:
+      event:
+        - pull_request
+    commands:
+      - yarn --immutable --immutable-cache --check-cache
+
   # TESTING #
   - name: test
-    image: node:lts-alpine
+    image: timbru31/node-alpine-git:latest
     when:
       event:
         - push
         - pull_request
     commands:
-      - yarn --immutable --immutable-cache --check-cache
-      - yarn run prettier:check
+      - yarn test
 
   # FEATURE BUILD (LOCAL) #
   - name: build
@@ -25,7 +40,7 @@ steps:
         exclude:
           - main
           - dev
-    image: node:lts-alpine
+    image: timbru31/node-alpine-git:latest
     commands:
       - yarn build
 
@@ -104,7 +119,7 @@ steps:
       GITHUB_TOKEN:
         from_secret: GITHUB_TOKEN
     commands:
-      - yarn --immutable --immutable-cache
+      - yarn
       - yarn semantic-release
 
 volumes:
@@ -125,4 +140,6 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: fc361404994598fbd2600378ac66c4e32cdba60e0da6874bdbdb6476ec994d6d
+hmac: aad44e85ac79f42c116532462dae095370817085a468ac6487580a1279d2cc1b
+
+...
