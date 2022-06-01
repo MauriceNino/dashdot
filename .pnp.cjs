@@ -66,6 +66,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:0.27.2"],\
             ["babel-jest", "virtual:9cfa3b214edcb2752047eaa0a3c19524aeb3f3da4ed40a7dd33510df07a2f68352a8b2fe7e85e416189b159f17c580e8b6e917498e7f81a506c9f7870e1d1f8a#npm:27.5.1"],\
             ["babel-plugin-styled-components", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.0.7"],\
+            ["babel-plugin-syntax-jsx", "npm:6.18.0"],\
             ["core-js", "npm:3.22.8"],\
             ["cors", "npm:2.8.5"],\
             ["dotenv", "npm:16.0.1"],\
@@ -9276,6 +9277,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:0.27.2"],\
             ["babel-jest", "virtual:9cfa3b214edcb2752047eaa0a3c19524aeb3f3da4ed40a7dd33510df07a2f68352a8b2fe7e85e416189b159f17c580e8b6e917498e7f81a506c9f7870e1d1f8a#npm:27.5.1"],\
             ["babel-plugin-styled-components", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.0.7"],\
+            ["babel-plugin-syntax-jsx", "npm:6.18.0"],\
             ["core-js", "npm:3.22.8"],\
             ["cors", "npm:2.8.5"],\
             ["dotenv", "npm:16.0.1"],\
