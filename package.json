@@ -93,7 +93,7 @@
     "eslint-plugin-react-hooks": "4.5.0",
     "jest": "27.5.1",
     "nx": "14.1.9",
-    "prettier": "2.5.1",
+    "prettier": "2.6.2",
     "react-test-renderer": "18.1.0",
     "semantic-release": "19.0.2",
     "ts-jest": "27.1.4",
