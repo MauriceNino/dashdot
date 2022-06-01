@@ -1,5 +1,5 @@
 # dependencies
-**/node_modules
+/node_modules
 .yarn/*
 !.yarn/cache
 !.yarn/patches
@@ -9,19 +9,19 @@
 !.yarn/versions
 
 # production
-**/dist
-**/build
-**/tsconfig.tsbuildinfo
+/dist
 
 # misc
 **.DS_Store
+.github
+.vscode
 
-**.dockerignore
-**.gitignore
-**Dockerfile
-**Dockerfile.dev
-**.prettierrc.json
-**.prettierignore
-**.drone.yml
-**.releaserc.json
+.dockerignore
+.gitignore
+Dockerfile
+Dockerfile.dev
+.prettierrc.json
+.prettierignore
+.drone.yml
+.releaserc.json
 **/*.md

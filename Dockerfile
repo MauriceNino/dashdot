@@ -9,7 +9,7 @@ RUN \
 COPY . ./
 
 RUN \
-  yarn --immutable --immutable-cache &&\
+  yarn &&\
   yarn build
 
 EXPOSE 3001

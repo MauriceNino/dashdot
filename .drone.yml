@@ -12,8 +12,8 @@ steps:
         - push
         - pull_request
     commands:
-      - yarn --immutable --immutable-cache --check-cache
-      - yarn run prettier:check
+      - yarn
+      - yarn test
 
   # FEATURE BUILD (LOCAL) #
   - name: build
@@ -104,7 +104,7 @@ steps:
       GITHUB_TOKEN:
         from_secret: GITHUB_TOKEN
     commands:
-      - yarn --immutable --immutable-cache
+      - yarn
       - yarn semantic-release
 
 volumes:
@@ -125,4 +125,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: fc361404994598fbd2600378ac66c4e32cdba60e0da6874bdbdb6476ec994d6d
+hmac: a4737af76aefc8fa3cda614f3f3baf1b26bdac67cb87d57a8c7c26a0a85073be
