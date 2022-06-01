@@ -1,0 +1,11 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+RUN \
+  apk update &&\
+  apk add git lsblk dmidecode util-linux lm-sensors speedtest-cli &&\
+  git config --global --add safe.directory /app
+
+EXPOSE 3001
+EXPOSE 3000

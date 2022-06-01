@@ -13,7 +13,7 @@ steps:
         - pull_request
     commands:
       - yarn --immutable --immutable-cache --check-cache
-      - yarn run prettier:check
+      - yarn test
 
   # FEATURE BUILD (LOCAL) #
   - name: build
@@ -125,4 +125,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: fc361404994598fbd2600378ac66c4e32cdba60e0da6874bdbdb6476ec994d6d
+hmac: 5a3e107e7097eaee6a77634b060db420033fbe33c12e8b9a46cc9f62ae4982da
