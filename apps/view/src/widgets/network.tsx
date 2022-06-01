@@ -79,7 +79,7 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
       <ChartContainer
         contentLoaded={chartDataUp.length > 1}
         statText={`↑ ${bpsPrettyPrint(
-          (chartDataUp[chartDataUp.length - 1]?.y ?? 0) as number
+          ((chartDataUp[chartDataUp.length - 1]?.y as number) ?? 0) * 8
         )}`}
       >
         {size => (
@@ -97,7 +97,7 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
             <Tooltip
               content={x => (
                 <ThemedText>
-                  {bpsPrettyPrint((x.payload?.[0]?.value as number) * 8)}
+                  {bpsPrettyPrint(((x.payload?.[0]?.value as number) ?? 0) * 8)}
                 </ThemedText>
               )}
             />
@@ -108,7 +108,7 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
       <ChartContainer
         contentLoaded={chartDataDown.length > 1}
         statText={`↓ ${bpsPrettyPrint(
-          (chartDataDown[chartDataDown.length - 1]?.y ?? 0) as number
+          ((chartDataDown[chartDataDown.length - 1]?.y as number) ?? 0) * 8
         )}`}
       >
         {size => (
@@ -126,7 +126,7 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
             <Tooltip
               content={x => (
                 <ThemedText>
-                  {bpsPrettyPrint((x.payload?.[0]?.value as number) * 8)}
+                  {bpsPrettyPrint(((x.payload?.[0]?.value as number) ?? 0) * 8)}
                 </ThemedText>
               )}
             />
