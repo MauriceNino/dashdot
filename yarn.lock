@@ -5988,10 +5988,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.6.5":
-  version: 3.6.5
-  resolution: "core-js@npm:3.6.5"
-  checksum: b7fcf92f888bfe40f3f005e3f729e66aa49a3a9a797e8fb4d09d429c6abcd505781b2c03836858f0dc0159249d4b7a035fc763052c9c34adbc93b6f8a6a86305
+"core-js@npm:3.22.8":
+  version: 3.22.8
+  resolution: "core-js@npm:3.22.8"
+  checksum: c79bcfea37920a5da880ad1fc8336355e833c83998bb28cd45cc59eef4d9824dd8d59ccd24d6b18ff88f284d53d9eef021ddbd2b5ab1c6305b01e98c1402e510
   languageName: node
   linkType: hard
 
@@ -6438,7 +6438,7 @@ __metadata:
     axios: 0.27.2
     babel-jest: 27.5.1
     babel-plugin-styled-components: 1.10.7
-    core-js: 3.6.5
+    core-js: 3.22.8
     cors: 2.8.5
     dotenv: 16.0.1
     eslint: 8.12.0
