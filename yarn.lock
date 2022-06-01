@@ -4995,7 +4995,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-syntax-jsx@npm:^6.18.0":
+"babel-plugin-syntax-jsx@npm:6.18.0, babel-plugin-syntax-jsx@npm:^6.18.0":
   version: 6.18.0
   resolution: "babel-plugin-syntax-jsx@npm:6.18.0"
   checksum: 0c7ce5b81d6cfc01a7dd7a76a9a8f090ee02ba5c890310f51217ef1a7e6163fb7848994bbc14fd560117892e82240df9c7157ad0764da67ca5f2afafb73a7d27
@@ -6463,6 +6463,7 @@ __metadata:
     axios: 0.27.2
     babel-jest: 27.5.1
     babel-plugin-styled-components: 2.0.7
+    babel-plugin-syntax-jsx: 6.18.0
     core-js: 3.22.8
     cors: 2.8.5
     dotenv: 16.0.1
