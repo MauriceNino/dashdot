@@ -3275,6 +3275,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@semantic-release/changelog@npm:6.0.1":
+  version: 6.0.1
+  resolution: "@semantic-release/changelog@npm:6.0.1"
+  dependencies:
+    "@semantic-release/error": ^3.0.0
+    aggregate-error: ^3.0.0
+    fs-extra: ^9.0.0
+    lodash: ^4.17.4
+  peerDependencies:
+    semantic-release: ">=18.0.0"
+  checksum: a7c999f20297f229ebb32dc65f56c3aee237d941b478a1c75f5e904382c66fc4054bf3da93b1f5382e0b689147a825665500332f70807bfed952d312d2f501ac
+  languageName: node
+  linkType: hard
+
 "@semantic-release/commit-analyzer@npm:^9.0.2":
   version: 9.0.2
   resolution: "@semantic-release/commit-analyzer@npm:9.0.2"
@@ -7133,6 +7147,7 @@ __metadata:
     "@nrwl/tao": 14.1.9
     "@nrwl/web": 14.1.9
     "@nrwl/workspace": 14.1.9
+    "@semantic-release/changelog": 6.0.1
     "@testing-library/react": 13.1.1
     "@types/cors": 2.8.12
     "@types/express": 4.17.13

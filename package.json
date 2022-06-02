@@ -79,6 +79,7 @@
     "@nrwl/tao": "14.1.9",
     "@nrwl/web": "14.1.9",
     "@nrwl/workspace": "14.1.9",
+    "@semantic-release/changelog": "6.0.1",
     "@testing-library/react": "13.1.1",
     "@types/cors": "2.8.12",
     "@types/express": "4.17.13",
