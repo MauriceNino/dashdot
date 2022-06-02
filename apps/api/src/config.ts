@@ -41,7 +41,7 @@ export const CONFIG: Config = {
   network_widget_enable: penv('NETWORK_WIDGET_ENABLE') !== 'false',
   network_widget_grow: numNull(penv('NETWORK_WIDGET_GROW')) ?? 6,
   network_widget_min_width: numNull(penv('NETWORK_WIDGET_MIN_WIDTH')) ?? 500,
-  network_shown_datapoints: numNull(penv('NETWORK_SHOWN_DATAPOINTS')) ?? 10,
+  network_shown_datapoints: numNull(penv('NETWORK_SHOWN_DATAPOINTS')) ?? 20,
   network_poll_interval: numNull(penv('NETWORK_POLL_INTERVAL')) ?? 1000,
 
   override: {

@@ -29,5 +29,14 @@ with:
 yarn run dev
 ```
 
-> Note: Development is done on the `dev` branch, so please use that as the base branch
-> in your work.
+## Git
+
+Development is done on the `dev` branch, so please use that as the base branch in your work.
+
+This project uses semantic commit messages - if you are unsure on how to create a semantic commit message,
+you can check out the [Semantic Commit Message Standards](https://www.conventionalcommits.org/en/v1.0.0/),
+or run the interactive commit message creator, which will create the commit message for your:
+
+```bash
+yarn commit
+```
