@@ -60,7 +60,7 @@ steps:
       - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
       - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
-      - docker buildx build --platform linux/amd64 -t mauricenino/dashdot:dev -o type=registry .
+      - docker buildx build --platform linux/amd64 -t mauricenino/dashdot:dev --target prod -o type=registry .
       - docker logout
   - name: update & deploy server files (dev)
     image: docker/compose
@@ -88,7 +88,7 @@ steps:
     commands:
       - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
-      - docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64/v8 -t mauricenino/dashdot .
+      - docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64/v8 --target prod -t mauricenino/dashdot .
   - name: create release
     image: timbru31/node-alpine-git:latest
     when:
@@ -134,6 +134,6 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: e55608559b03786bcb131513bcd94268618d041e87daa4ddb1900f0599cc036f
+hmac: cac9bb800e2f457985f7d70513b8e3fa4bf447f3412f6f687f5979b15d487bc9
 
 ...
