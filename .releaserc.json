@@ -3,12 +3,6 @@
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    [
-      "@semantic-release-plus/docker",
-      {
-        "name": "mauricenino/dashdot"
-      }
-    ],
     "@semantic-release/changelog",
     "@semantic-release/github"
   ]

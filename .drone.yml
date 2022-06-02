@@ -86,15 +86,23 @@ steps:
       - cd /server && ./start.sh dashdot
 
   # PROD BUILD #
-  - name: build (production)
+  - name: build & release (dockerhub & github) (production)
     image: crazymax/docker:latest
     when:
       event: push
       branch: main
+    environment:
+      DOCKER_ACCESS_KEY:
+        from_secret: DOCKER_ACCESS_KEY
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
+      - apk add git nodejs yarn
+      - yarn semantic-release -d | sed -n 's/.*The next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p' > package.version
+      - 'echo "Next Version: $(cat package.version)"'
+      - '[ -s package.version ] || exit 1'
+      - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
       - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
       - docker buildx build
@@ -106,23 +114,9 @@ steps:
         --label org.opencontainers.image.url=https://github.com/MauriceNino/dashdot
         --label org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
         --label org.opencontainers.image.licenses=MIT
-        -t mauricenino/dashdot .
-  - name: release (dockerhub & github)
-    image: crazymax/docker:latest
-    when:
-      event: push
-      branch: main
-    volumes:
-      - name: dockersock
-        path: /var/run/docker.sock
-    environment:
-      DOCKER_USERNAME: mauricenino
-      DOCKER_PASSWORD:
-        from_secret: DOCKER_ACCESS_KEY
-      GITHUB_TOKEN:
-        from_secret: GITHUB_TOKEN
-    commands:
-      - apk add git nodejs yarn
+        -o type=registry
+        -t mauricenino/dashdot:$(cat package.version)
+        -t mauricenino/dashdot:latest .
       - yarn semantic-release
   - name: update & deploy server files
     image: docker/compose
@@ -169,4 +163,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: c16f3c872a9b22e71a16ba097f1354065e541d64ed91008684d50733a278a866
+hmac: 35e5b97515304285fb4aa7c8c0b1662296b00b47a0505fd02addf2d727a0112e
