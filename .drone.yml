@@ -45,7 +45,7 @@ steps:
       - yarn build
 
   # DEV BUILD #
-  - name: build & deploy to dockerhub (dev)
+  - name: build & release (dockerhub) (dev)
     image: crazymax/docker:latest
     when:
       event: push
@@ -89,11 +89,14 @@ steps:
       - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
       - docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64/v8 --target prod -t mauricenino/dashdot .
-  - name: create release
-    image: timbru31/node-alpine-git:latest
+  - name: release (dockerhub & github)
+    image: crazymax/docker:latest
     when:
       event: push
       branch: main
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
     environment:
       DOCKER_USERNAME: mauricenino
       DOCKER_PASSWORD:
@@ -101,7 +104,9 @@ steps:
       GITHUB_TOKEN:
         from_secret: GITHUB_TOKEN
     commands:
+      - apk add git nodejs yarn
       - yarn semantic-release
+      - docker logout
   - name: update & deploy server files
     image: docker/compose
     when:
@@ -127,13 +132,13 @@ volumes:
 ---
 kind: secret
 name: DOCKER_ACCESS_KEY
-data: ysbzIhceuQjxnBZ7kRt63CswtG85WTCiCBFPCM8wmV9qBQTS9kGPktIqw1wevm1O0U2l1pTWl7wt2e7D+a462Q==
+data: aRlMTaj5z6fMgCnFDDiLTPakLlcziQvZxw0K8k06ZsIdeGshKPMzMhl4+UoiC4rCaDtsnu0hmcXeIzqP83NQXw==
 ---
 kind: secret
 name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: cac9bb800e2f457985f7d70513b8e3fa4bf447f3412f6f687f5979b15d487bc9
+hmac: badf476af6aa54c38054b6a0d78af243a5fd9ec7c908c0c6f6e3abef87c2f443
 
 ...

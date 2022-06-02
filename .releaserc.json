@@ -1,13 +1,10 @@
 {
-  "branches": [
-    "main",
-    "dev"
-  ],
+  "branches": ["main", "dev"],
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     [
-      "semantic-release-docker",
+      "@semantic-release-plus/docker",
       {
         "name": "mauricenino/dashdot"
       }
