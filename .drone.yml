@@ -92,6 +92,8 @@ steps:
       event: push
       branch: main
     environment:
+      GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
       DOCKER_ACCESS_KEY:
         from_secret: DOCKER_ACCESS_KEY
     volumes:
@@ -163,4 +165,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: 35e5b97515304285fb4aa7c8c0b1662296b00b47a0505fd02addf2d727a0112e
+hmac: 5c734971fd12fa1465291bf7baac97999af12c9ca540c3e5ef4f44d3dc03ea11
