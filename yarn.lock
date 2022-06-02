@@ -6468,7 +6468,7 @@ __metadata:
     cors: 2.8.5
     dotenv: 16.0.1
     eslint: 8.16.0
-    eslint-config-prettier: 8.1.0
+    eslint-config-prettier: 8.5.0
     eslint-plugin-cypress: 2.12.1
     eslint-plugin-import: 2.26.0
     eslint-plugin-jsx-a11y: 6.5.1
@@ -7312,14 +7312,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:8.1.0":
-  version: 8.1.0
-  resolution: "eslint-config-prettier@npm:8.1.0"
+"eslint-config-prettier@npm:8.5.0":
+  version: 8.5.0
+  resolution: "eslint-config-prettier@npm:8.5.0"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: 277b42e4d5b4a65dc8224a26b082373b846f7b2148dc342fd69f9f00ea36f58affacf7bbade3f2512295f371620b3d57380e27de32e492632b516c310ce51c04
+  checksum: 0d0f5c32e7a0ad91249467ce71ca92394ccd343178277d318baf32063b79ea90216f4c81d1065d60f96366fdc60f151d4d68ae7811a58bd37228b84c2083f893
   languageName: node
   linkType: hard
 
