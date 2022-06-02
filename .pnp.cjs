@@ -72,7 +72,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["dotenv", "npm:16.0.1"],\
             ["eslint", "npm:8.12.0"],\
             ["eslint-config-prettier", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:8.1.0"],\
-            ["eslint-plugin-cypress", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.10.3"],\
+            ["eslint-plugin-cypress", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.12.1"],\
             ["eslint-plugin-import", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.26.0"],\
             ["eslint-plugin-jsx-a11y", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:6.5.1"],\
             ["eslint-plugin-react", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:7.29.4"],\
@@ -9283,7 +9283,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["dotenv", "npm:16.0.1"],\
             ["eslint", "npm:8.12.0"],\
             ["eslint-config-prettier", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:8.1.0"],\
-            ["eslint-plugin-cypress", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.10.3"],\
+            ["eslint-plugin-cypress", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.12.1"],\
             ["eslint-plugin-import", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.26.0"],\
             ["eslint-plugin-jsx-a11y", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:6.5.1"],\
             ["eslint-plugin-react", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:7.29.4"],\
@@ -10416,17 +10416,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["eslint-plugin-cypress", [\
-        ["npm:2.10.3", {\
-          "packageLocation": "./.yarn/cache/eslint-plugin-cypress-npm-2.10.3-3eedecb89d-4482acfb78.zip/node_modules/eslint-plugin-cypress/",\
+        ["npm:2.12.1", {\
+          "packageLocation": "./.yarn/cache/eslint-plugin-cypress-npm-2.12.1-6681f582fa-1f1c36e149.zip/node_modules/eslint-plugin-cypress/",\
           "packageDependencies": [\
-            ["eslint-plugin-cypress", "npm:2.10.3"]\
+            ["eslint-plugin-cypress", "npm:2.12.1"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.10.3", {\
-          "packageLocation": "./.yarn/__virtual__/eslint-plugin-cypress-virtual-e78ffe031c/0/cache/eslint-plugin-cypress-npm-2.10.3-3eedecb89d-4482acfb78.zip/node_modules/eslint-plugin-cypress/",\
+        ["virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.12.1", {\
+          "packageLocation": "./.yarn/__virtual__/eslint-plugin-cypress-virtual-5c97d15dd5/0/cache/eslint-plugin-cypress-npm-2.12.1-6681f582fa-1f1c36e149.zip/node_modules/eslint-plugin-cypress/",\
           "packageDependencies": [\
-            ["eslint-plugin-cypress", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.10.3"],\
+            ["eslint-plugin-cypress", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:2.12.1"],\
             ["@types/eslint", null],\
             ["eslint", "npm:8.12.0"],\
             ["globals", "npm:11.12.0"]\
