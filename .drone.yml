@@ -60,8 +60,17 @@ steps:
       - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
       - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
-      - docker buildx build --platform linux/amd64 -t mauricenino/dashdot:dev --target prod -o type=registry .
-      - docker logout
+      - docker buildx build
+        --platform linux/amd64
+        --target prod
+        --label org.opencontainers.image.title="dash."
+        --label org.opencontainers.image.description="dash. - a modern server dashboard"
+        --label org.opencontainers.image.authors="MauriceNino <mauriceprivat98@gmail.com>"
+        --label org.opencontainers.image.url=https://github.com/MauriceNino/dashdot
+        --label org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
+        --label org.opencontainers.image.licenses=MIT
+        -o type=registry
+        -t mauricenino/dashdot:dev .
   - name: update & deploy server files (dev)
     image: docker/compose
     when:
@@ -77,36 +86,38 @@ steps:
       - cd /server && ./start.sh dashdot
 
   # PROD BUILD #
-  - name: build (production)
+  - name: build & release (dockerhub & github) (production)
     image: crazymax/docker:latest
     when:
       event: push
       branch: main
-    volumes:
-      - name: dockersock
-        path: /var/run/docker.sock
-    commands:
-      - docker buildx create --name builder --driver docker-container --use
-      - docker buildx inspect --bootstrap --builder builder
-      - docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64/v8 --target prod -t mauricenino/dashdot .
-  - name: release (dockerhub & github)
-    image: crazymax/docker:latest
-    when:
-      event: push
-      branch: main
-    volumes:
-      - name: dockersock
-        path: /var/run/docker.sock
     environment:
-      DOCKER_USERNAME: mauricenino
-      DOCKER_PASSWORD:
+      DOCKER_ACCESS_KEY:
         from_secret: DOCKER_ACCESS_KEY
-      GITHUB_TOKEN:
-        from_secret: GITHUB_TOKEN
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
     commands:
       - apk add git nodejs yarn
+      - yarn semantic-release -d | sed -n 's/.*The next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p' > package.version
+      - 'echo "Next Version: $(cat package.version)"'
+      - '[ -s package.version ] || exit 1'
+      - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
+      - docker buildx create --name builder --driver docker-container --use
+      - docker buildx inspect --bootstrap --builder builder
+      - docker buildx build
+        --platform linux/amd64,linux/arm/v7,linux/arm64/v8
+        --target prod
+        --label org.opencontainers.image.title="dash."
+        --label org.opencontainers.image.description="dash. - a modern server dashboard"
+        --label org.opencontainers.image.authors="MauriceNino <mauriceprivat98@gmail.com>"
+        --label org.opencontainers.image.url=https://github.com/MauriceNino/dashdot
+        --label org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
+        --label org.opencontainers.image.licenses=MIT
+        -o type=registry
+        -t mauricenino/dashdot:$(cat package.version)
+        -t mauricenino/dashdot:latest .
       - yarn semantic-release
-      - docker logout
   - name: update & deploy server files
     image: docker/compose
     when:
@@ -120,6 +131,19 @@ steps:
     commands:
       - docker image pull mauricenino/dashdot:latest
       - cd /server && ./start.sh dashdot
+
+  # CLEANUP #
+  - name: cleanup
+    image: crazymax/docker:latest
+    when:
+      status:
+        - failure
+        - success
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker logout
 
 volumes:
   - name: dockersock
@@ -139,6 +163,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: badf476af6aa54c38054b6a0d78af243a5fd9ec7c908c0c6f6e3abef87c2f443
-
-...
+hmac: 35e5b97515304285fb4aa7c8c0b1662296b00b47a0505fd02addf2d727a0112e
