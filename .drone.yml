@@ -77,25 +77,31 @@ steps:
       - cd /server && ./start.sh dashdot
 
   # PROD BUILD #
-  - name: build & deploy to dockerhub (production)
+  - name: build (production)
     image: crazymax/docker:latest
     when:
       event: push
       branch: main
-    environment:
-      DOCKER_ACCESS_KEY:
-        from_secret: DOCKER_ACCESS_KEY
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
-      - |
-        sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json > package.version
-      - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
       - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
-      - docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64/v8 -t mauricenino/dashdot:latest -t mauricenino/dashdot:$(cat package.version) -o type=registry .
-      - docker logout
+      - docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64/v8 -t mauricenino/dashdot .
+  - name: create release
+    image: timbru31/node-alpine-git:latest
+    when:
+      event: push
+      branch: main
+    environment:
+      DOCKER_USERNAME: mauricenino
+      DOCKER_PASSWORD:
+        from_secret: DOCKER_ACCESS_KEY
+      GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
+    commands:
+      - yarn semantic-release
   - name: update & deploy server files
     image: docker/compose
     when:
@@ -109,18 +115,6 @@ steps:
     commands:
       - docker image pull mauricenino/dashdot:latest
       - cd /server && ./start.sh dashdot
-
-  # CREATE RELEASE NOTES #
-  - name: create release notes
-    image: timbru31/node-alpine-git:latest
-    when:
-      event: tag
-    environment:
-      GITHUB_TOKEN:
-        from_secret: GITHUB_TOKEN
-    commands:
-      - yarn
-      - yarn semantic-release
 
 volumes:
   - name: dockersock
@@ -140,6 +134,6 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: aad44e85ac79f42c116532462dae095370817085a468ac6487580a1279d2cc1b
+hmac: e55608559b03786bcb131513bcd94268618d041e87daa4ddb1900f0599cc036f
 
 ...
