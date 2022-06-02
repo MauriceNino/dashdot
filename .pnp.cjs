@@ -101,7 +101,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["systeminformation", "npm:5.11.16"],\
             ["ts-jest", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:28.0.3"],\
             ["ts-node", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:9.1.1"],\
-            ["tslib", "npm:2.3.0"],\
+            ["tslib", "npm:2.4.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"],\
             ["universal-speedtest", "npm:2.0.5"],\
             ["use-color-scheme", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:1.1.3"],\
@@ -9312,7 +9312,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["systeminformation", "npm:5.11.16"],\
             ["ts-jest", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:28.0.3"],\
             ["ts-node", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:9.1.1"],\
-            ["tslib", "npm:2.3.0"],\
+            ["tslib", "npm:2.4.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"],\
             ["universal-speedtest", "npm:2.0.5"],\
             ["use-color-scheme", "virtual:e366265e06cb0052de9843e162aed8f38f941946798fb2b9447cd30d16edd1324587ed3111ca8427d896dcdba42cf13e2b4150c8b851265ad3473321dcd67922#npm:1.1.3"],\
@@ -21420,13 +21420,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/tslib-npm-1.14.1-102499115e-dbe628ef87.zip/node_modules/tslib/",\
           "packageDependencies": [\
             ["tslib", "npm:1.14.1"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["npm:2.3.0", {\
-          "packageLocation": "./.yarn/cache/tslib-npm-2.3.0-277e75e108-8869694c26.zip/node_modules/tslib/",\
-          "packageDependencies": [\
-            ["tslib", "npm:2.3.0"]\
           ],\
           "linkType": "HARD"\
         }],\
