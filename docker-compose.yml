@@ -7,7 +7,8 @@ services:
   dash:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
+      target: dev
     working_dir: /app
     tty: true
     command: yarn run serve

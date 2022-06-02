@@ -15,13 +15,10 @@
 **.DS_Store
 .github
 .vscode
+**/*.md
 
+# docker
 .dockerignore
-.gitignore
 Dockerfile
 Dockerfile.dev
-.prettierrc.json
-.prettierignore
-.drone.yml
-.releaserc.json
-**/*.md
+docker-compose.yml
