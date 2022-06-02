@@ -3,6 +3,11 @@ kind: pipeline
 type: docker
 name: CI
 
+trigger:
+  event:
+    exclude:
+      - tag
+
 steps:
   # DEPENDENCIES #
   - name: dependencies
