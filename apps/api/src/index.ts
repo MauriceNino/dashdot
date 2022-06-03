@@ -8,6 +8,7 @@ import { inspect } from 'util';
 import { CONFIG } from './config';
 import { cpuObs, netowrkObs, ramObs, storageObs } from './dynamic-info';
 import { environment } from './environments/environment';
+import { setupNetworking } from './setup-networking';
 import { getStaticServerInfo, runSpeedTest } from './static-info';
 
 const app = express();
@@ -31,9 +32,6 @@ if (environment.production) {
 // Send general system information
 app.get('/system-info', async (_, res) => {
   res.send(await getStaticServerInfo());
-});
-app.get('/ping', async (_, res) => {
-  res.send('pong');
 });
 
 // Send current system status
@@ -74,6 +72,8 @@ server.listen(CONFIG.port, async () => {
       colors: true,
     })
   );
+
+  await setupNetworking();
 
   console.log('Running speed-test (this may take a few minutes)...');
   try {

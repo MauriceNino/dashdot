@@ -21,8 +21,7 @@
     "start": "node .",
     "build": "nx run-many --target=build --configuration=production --all=true --parallel=true",
     "serve": "nx run-many --target=serve --all=true --parallel=true",
-    "start-dev": "docker-compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
-    "dev": "DEFAULT_INTERFACE_PATH=$(readlink -f /sys/class/net/$(ip addr show | awk '/inet.*brd/{print $NF; exit}')) yarn run start-dev",
+    "dev": "docker-compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
     "test": "nx run-many --target=test --all=true --parallel=true",
     "postinstall": "husky install",
     "commit": "git-cz"

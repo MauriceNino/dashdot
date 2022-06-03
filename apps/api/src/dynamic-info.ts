@@ -1,10 +1,10 @@
 import { CpuLoad, NetworkLoad, RamLoad, StorageLoad } from '@dash/common';
 import { exec as cexec } from 'child_process';
-import * as fs from 'fs';
 import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import * as si from 'systeminformation';
 import { inspect, promisify } from 'util';
 import { CONFIG } from './config';
+import { NET_INTERFACE } from './setup-networking';
 import { getStaticServerInfo } from './static-info';
 
 const exec = promisify(cexec);
@@ -91,9 +91,10 @@ export const netowrkObs = createBufferedInterval(
   CONFIG.network_shown_datapoints,
   CONFIG.network_poll_interval,
   async (): Promise<NetworkLoad> => {
-    if (fs.existsSync('/mnt/eth0/')) {
+    if (NET_INTERFACE !== 'unknown') {
       const { stdout } = await exec(
-        `cat /mnt/eth0/statistics/rx_bytes;cat /mnt/eth0/statistics/tx_bytes;`
+        `cat /mnt/host_sys/class/net/${NET_INTERFACE}/statistics/rx_bytes;` +
+          `cat /mnt/host_sys/class/net/${NET_INTERFACE}/statistics/tx_bytes;`
       );
       const [rx, tx] = stdout.split('\n').map(Number);
 
