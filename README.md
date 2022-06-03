@@ -60,7 +60,7 @@ To read more about configuration options, you can visit [the configuration secti
 docker container run -it \
   -p 80:3001 \
   -v /etc/os-release:/etc/os-release:ro \
-  --mount type=bind,source=$(readlink -f /sys/class/net/$(ip addr show | awk '/inet.*brd/{print $NF; exit}')),destination=/mnt/eth0 \
+  -v /proc/1/ns/net:/mnt/host_ns_net:ro \
   --privileged \
   mauricenino/dashdot
 ```
@@ -69,19 +69,18 @@ docker container run -it \
 
 <!-- -->
 
-> Note: The `--mount` flag is needed to correctly determine the network info.
-> If the source part does not correctly resolve for you, you can manually get the
-> path by executing `readlink -f /sys/class/net/DEFAULT_INTERFACE`, where the default
-> interface is mostly named "eth0". If you don't want to use this flag, you can instead
-> use `--network host`, but then you will not be able to use custom docker networking
-> any more.
+> Note: The volume mount on `/proc/1/ns/net:/host_ns_net:ro` is needed to
+> correctly determine the network info. If you are not able to use this mount,
+> you will need to fall back to `--net host`, or you will only get the network
+> stats of the container instead of the host.
 
 <!-- -->
 
 > Note: The volume mount on `/etc/os-release:/etc/os-release:ro` is for the
 > dashboard to show the OS version of the host instead of the OS of the docker
 > container (which is running on Alpine Linux). If you wish to show the docker
-> container OS instead, just remove this line.
+> container OS instead, just remove this line. If you are not able to use this
+> mount, you can pass a custom OS with the `DASHDOT_OVERRIDE_OS` flag.
 
 ### Docker-Compose
 
@@ -104,16 +103,7 @@ services:
       - '80:3001'
     volumes:
       - /etc/os-release:/etc/os-release:ro
-      - type: bind
-        source: ${DEFAULT_INTERFACE_PATH}
-        target: /mnt/eth0
-```
-
-After setting up your `docker-compose.yml` file, you have to run the following
-command to start the dashboard:
-
-```bash
-DEFAULT_INTERFACE_PATH=$(readlink -f /sys/class/net/$(ip addr show | awk '/inet.*brd/{print $NF; exit}')) docker-compose up
+      - /proc/1/ns/net:/mnt/host_ns_net:ro
 ```
 
 ### Git
