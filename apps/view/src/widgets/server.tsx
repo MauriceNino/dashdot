@@ -25,6 +25,7 @@ import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';
 
 const Container = styled.div`
+  position: relative;
   flex: 1;
   max-width: 100%;
 
