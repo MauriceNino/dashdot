@@ -51,7 +51,7 @@
     "recharts": "2.1.10",
     "regenerator-runtime": "0.13.9",
     "rxjs": "7.5.5",
-    "sass": "1.52.1",
+    "sass": "1.52.2",
     "socket.io": "4.5.1",
     "socket.io-client": "4.5.1",
     "store": "2.0.12",
