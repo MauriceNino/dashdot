@@ -10,11 +10,12 @@ import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
 import { bpsPrettyPrint } from '../utils/calculations';
+import { toInfoTable } from '../utils/format';
 
 type NetworkWidgetProps = {
   load: NetworkLoad[];
-  data?: NetworkInfo;
-  config?: Config;
+  data: NetworkInfo;
+  config: Config;
 };
 
 export const NetworkWidget: FC<NetworkWidgetProps> = ({
@@ -23,13 +24,14 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
   config,
 }) => {
   const theme = useTheme();
-  const override = config?.override;
+  const override = config.override;
 
-  const type = override?.network_type ?? data?.type;
-  const speedUp = override?.network_speed_up ?? data?.speedUp;
-  const speedDown = override?.network_speed_down ?? data?.speedDown;
+  const type = override.network_type ?? data.type;
+  const speedUp = override.network_speed_up ?? data.speedUp;
+  const speedDown = override.network_speed_down ?? data.speedDown;
   const interfaceSpeed =
-    override?.network_interface_speed ?? data?.interfaceSpeed;
+    override.network_interface_speed ?? data.interfaceSpeed;
+  const publicIp = override.network_public_ip ?? data.publicIp;
 
   const chartDataDown = load.map((load, i) => ({
     x: i,
@@ -54,26 +56,40 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
       columns={2}
       color={theme.colors.networkPrimary}
       heading='Network'
-      infos={[
+      infos={toInfoTable(
+        config.network_label_list,
         {
-          label: 'Type',
-          value: type,
+          type: 'Type',
+          speed_up: 'Speed (Up)',
+          speed_down: 'Speed (Down)',
+          interface_speed: 'Interface Speed',
+          public_ip: 'Public IP',
         },
-        {
-          label: 'Speed (Up)',
-          value: speedUp ? bpsPrettyPrint(speedUp) : undefined,
-        },
-        {
-          label: 'Speed (Down)',
-          value: speedDown ? bpsPrettyPrint(speedDown) : undefined,
-        },
-        {
-          label: 'Interface Speed',
-          value: interfaceSpeed
-            ? bpsPrettyPrint(interfaceSpeed * 1000 * 1000)
-            : undefined,
-        },
-      ]}
+        [
+          {
+            key: 'type',
+            value: type,
+          },
+          {
+            key: 'speed_up',
+            value: speedUp ? bpsPrettyPrint(speedUp) : undefined,
+          },
+          {
+            key: 'speed_down',
+            value: speedDown ? bpsPrettyPrint(speedDown) : undefined,
+          },
+          {
+            key: 'interface_speed',
+            value: interfaceSpeed
+              ? bpsPrettyPrint(interfaceSpeed * 1000 * 1000)
+              : undefined,
+          },
+          {
+            key: 'public_ip',
+            value: publicIp,
+          },
+        ]
+      )}
       icon={faNetworkWired}
     >
       <ChartContainer

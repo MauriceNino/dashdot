@@ -16,25 +16,34 @@ export const CONFIG: Config = {
   widget_list: lst(penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network'),
 
   disable_host: penv('DISABLE_HOST') === 'true',
+  os_label_list: lst(penv('OS_LABEL_LIST') ?? 'os,arch,up_since'),
   os_widget_grow: numNull(penv('OS_WIDGET_GROW')) ?? 1.5,
   os_widget_min_width: numNull(penv('OS_WIDGET_MIN_WIDTH')) ?? 300,
 
   enable_cpu_temps: penv('ENABLE_CPU_TEMPS') === 'true',
+  cpu_label_list: lst(
+    penv('CPU_LABEL_LIST') ?? 'brand,model,cores,threads,frequency'
+  ),
   cpu_widget_grow: numNull(penv('CPU_WIDGET_GROW')) ?? 4,
   cpu_widget_min_width: numNull(penv('CPU_WIDGET_MIN_WIDTH')) ?? 500,
   cpu_shown_datapoints: numNull(penv('CPU_SHOWN_DATAPOINTS')) ?? 20,
   cpu_poll_interval: numNull(penv('CPU_POLL_INTERVAL')) ?? 1000,
 
+  storage_label_list: lst(penv('STORAGE_LABEL_LIST') ?? 'brand,size,type'),
   storage_widget_grow: numNull(penv('STORAGE_WIDGET_GROW')) ?? 3.5,
   storage_widget_min_width: numNull(penv('STORAGE_WIDGET_MIN_WIDTH')) ?? 500,
   storage_poll_interval: numNull(penv('STORAGE_POLL_INTERVAL')) ?? 60000,
 
+  ram_label_list: lst(penv('RAM_LABEL_LIST') ?? 'brand,size,type,frequency'),
   ram_widget_grow: numNull(penv('RAM_WIDGET_GROW')) ?? 4,
   ram_widget_min_width: numNull(penv('RAM_WIDGET_MIN_WIDTH')) ?? 500,
   ram_shown_datapoints: numNull(penv('RAM_SHOWN_DATAPOINTS')) ?? 20,
   ram_poll_interval: numNull(penv('RAM_POLL_INTERVAL')) ?? 1000,
 
   speed_test_interval: numNull(penv('SPEED_TEST_INTERVAL')) ?? 60,
+  network_label_list: lst(
+    penv('NETWORK_LABEL_LIST') ?? 'type,speed_up,speed_down,interface_speed'
+  ),
   network_widget_grow: numNull(penv('NETWORK_WIDGET_GROW')) ?? 6,
   network_widget_min_width: numNull(penv('NETWORK_WIDGET_MIN_WIDTH')) ?? 500,
   network_shown_datapoints: numNull(penv('NETWORK_SHOWN_DATAPOINTS')) ?? 20,
@@ -56,6 +65,7 @@ export const CONFIG: Config = {
     network_speed_up: numNull(penv('OVERRIDE_NETWORK_SPEED_UP')),
     network_speed_down: numNull(penv('OVERRIDE_NETWORK_SPEED_DOWN')),
     network_interface_speed: numNull(penv('OVERRIDE_NETWORK_INTERFACE_SPEED')),
+    network_public_ip: penv('OVERRIDE_NETWORK_PUBLIC_IP'),
     storage_brand_1: penv('OVERRIDE_STORAGE_BRAND_1'),
     storage_size_1: numNull(penv('OVERRIDE_STORAGE_SIZE_1')),
     storage_type_1: penv('OVERRIDE_STORAGE_TYPE_1'),
