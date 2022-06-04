@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { InfoTableArr } from '../utils/format';
 import ThemedText from './text';
 
 export const InfoTextContainer = styled.div<{ noPadding?: boolean }>`
@@ -16,23 +17,22 @@ const InfoTextLabel = styled(ThemedText)`
   display: table-cell;
   width: auto;
   font-size: 0.8rem;
-  padding-bottom: 10px;
+  padding-bottom: 3px;
   padding-right: 15px;
   white-space: nowrap;
 `;
 
 const InfoTextValue = styled(ThemedText)`
+  line-height: 1.5;
+  white-space: pre-wrap;
   display: table-cell;
   font-size: 1rem;
   font-weight: bold;
-  padding-bottom: 10px;
+  padding-bottom: 3px;
 `;
 
 export type InfoTableProps = {
-  infos: {
-    label: string;
-    value?: string;
-  }[];
+  infos: InfoTableArr;
   className?: string;
 };
 

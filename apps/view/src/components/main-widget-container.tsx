@@ -112,14 +112,12 @@ export const MainWidgetContainer: FC = () => {
     os: {
       grow: config.os_widget_grow,
       minWidth: config.os_widget_min_width,
-      enabled: config.os_widget_enable,
       Widget: ServerWidget,
       data: osData,
     },
     cpu: {
       grow: config.cpu_widget_grow,
       minWidth: config.cpu_widget_min_width,
-      enabled: config.cpu_widget_enable,
       Widget: CpuWidget,
       data: cpuData,
       load: cpuLoad,
@@ -127,7 +125,6 @@ export const MainWidgetContainer: FC = () => {
     storage: {
       grow: config.storage_widget_grow,
       minWidth: config.storage_widget_min_width,
-      enabled: config.storage_widget_enable,
       Widget: StorageWidget,
       data: storageData,
       load: storageLoad,
@@ -135,7 +132,6 @@ export const MainWidgetContainer: FC = () => {
     ram: {
       grow: config.ram_widget_grow,
       minWidth: config.ram_widget_min_width,
-      enabled: config.ram_widget_enable,
       Widget: RamWidget,
       data: ramData,
       load: ramLoad,
@@ -143,16 +139,11 @@ export const MainWidgetContainer: FC = () => {
     network: {
       grow: config.network_widget_grow,
       minWidth: config.network_widget_min_width,
-      enabled: config.network_widget_enable,
       Widget: NetworkWidget,
       data: networkData,
       load: networkLoad,
     },
   };
-
-  const widgetOrderArr = (
-    config.widget_order.split(',') as (keyof typeof configs)[]
-  ).filter(widget => configs[widget].enabled);
 
   return (
     <FlexContainer
@@ -162,7 +153,7 @@ export const MainWidgetContainer: FC = () => {
       animate='animate'
       exit='exit'
     >
-      {widgetOrderArr.map(widget => {
+      {config.widget_list.map(widget => {
         const currentConfig = configs[widget];
 
         return (

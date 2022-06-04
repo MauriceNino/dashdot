@@ -23,8 +23,10 @@ import InfoTable from '../components/info-table';
 import ThemedText from '../components/text';
 import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';
+import { toInfoTable } from '../utils/format';
 
 const Container = styled.div`
+  position: relative;
   flex: 1;
   max-width: 100%;
 
@@ -154,8 +156,8 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
 };
 
 type ServerWidgetProps = {
-  data?: OsInfo;
-  config?: Config;
+  data: OsInfo;
+  config: Config;
 };
 
 export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
@@ -163,7 +165,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
   const [darkMode, setDarkMode] = useSetting('darkMode');
   const [uptime, setUptime] = useState(0);
 
-  const override = config?.override;
+  const override = config.override;
   const days = Math.floor(uptime / (24 * 60 * 60));
   const hours = Math.floor((uptime % (24 * 60 * 60)) / (60 * 60));
   const minutes = Math.floor((uptime % (60 * 60)) / 60);
@@ -171,7 +173,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
 
   // Client-side calculation of uptime
   useEffect(() => {
-    const uptime = data?.uptime ?? 0;
+    const uptime = data.uptime ?? 0;
 
     let interval: any;
     if (uptime > 0) {
@@ -185,15 +187,12 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
     }
 
     return () => clearInterval(interval);
-  }, [data?.uptime]);
+  }, [data.uptime]);
 
   const domain = useMemo(
     () => window.location.hostname.split('.').slice(-2).join('.'),
     []
   );
-  const distro = data?.distro ?? '';
-  const platform = data?.platform ?? '';
-  const os = override?.os ?? `${distro} ${data?.release ?? ''}`;
 
   const dateInfos = [
     {
@@ -216,24 +215,23 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       value: `${seconds} seconds`,
       amount: seconds,
     },
-  ].reduce((acc, cur) => {
-    if (acc.length > 0) {
-      acc.push(cur);
-    } else if (cur.amount > 0) {
-      acc.push(cur);
-    }
-
-    return acc;
-  }, [] as { label: string; value: string }[]);
-
-  if (dateInfos[0]) {
-    dateInfos[0].label = 'Up since';
-  } else {
-    dateInfos[0] = {
-      label: 'Up since',
+  ].reduce(
+    (acc, cur) => ({
+      ...acc,
+      value: [acc.value, cur.amount || acc.value !== '' ? cur.value : undefined]
+        .join('\n')
+        .trim(),
+    }),
+    {
+      key: 'up_since',
       value: '',
-    };
-  }
+    }
+  );
+
+  const distro = data.distro;
+  const platform = data.platform;
+  const os = override.os ?? `${distro} ${data.release}`;
+  const arch = override.arch ?? data.arch;
 
   return (
     <Container>
@@ -265,21 +263,29 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
 
       <StyledInfoTable
         mobile={isMobile}
-        infos={[
+        infos={toInfoTable(
+          config.os_label_list,
           {
-            label: 'OS',
-            value: os,
+            os: 'OS',
+            arch: 'Arch',
+            up_since: 'Up since',
           },
-          {
-            label: 'Arch',
-            value: override?.arch ?? data?.arch,
-          },
-          ...dateInfos,
-        ]}
+          [
+            {
+              key: 'os',
+              value: os,
+            },
+            {
+              key: 'arch',
+              value: arch,
+            },
+            dateInfos,
+          ]
+        )}
       />
 
       <ServerIcon
-        os={(override?.os ?? distro + platform).toLowerCase()}
+        os={(override.os ?? distro + platform).toLowerCase()}
         size='2x'
       />
     </Container>
