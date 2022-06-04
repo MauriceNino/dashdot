@@ -12,6 +12,7 @@ import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
 import { useSetting } from '../services/settings';
+import { toInfoTable } from '../utils/format';
 
 const containerVariants = {
   animate: {
@@ -68,13 +69,13 @@ const TempContainer = styled.div`
 
 type CpuWidgetProps = {
   load: CpuLoad[];
-  data?: CpuInfo;
-  config?: Config;
+  data: CpuInfo;
+  config: Config;
 };
 
 export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
   const theme = useTheme();
-  const override = config?.override;
+  const override = config.override;
   const latestLoad = load[load.length - 1];
 
   const [multiCore, setMulticore] = useSetting('multiCore', false);
@@ -122,7 +123,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
     chartData = [chartValues];
   }
 
-  const frequency = override?.cpu_frequency ?? data?.frequency;
+  const frequency = override.cpu_frequency ?? data.frequency;
 
   const averageTemp =
     latestLoad?.reduce((acc, { temp }) => acc + (temp ?? 0), 0) /
@@ -136,28 +137,38 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       gap={8}
       color={theme.colors.cpuPrimary}
       heading='Processor'
-      infos={[
+      infos={toInfoTable(
+        config.cpu_label_list,
         {
-          label: 'Brand',
-          value: override?.cpu_brand ?? data?.brand,
+          brand: 'Brand',
+          model: 'Model',
+          cores: 'Cores',
+          threads: 'Threads',
+          frequency: 'Frequency',
         },
-        {
-          label: 'Model',
-          value: override?.cpu_model ?? data?.model,
-        },
-        {
-          label: 'Cores',
-          value: (override?.cpu_cores ?? data?.cores)?.toString(),
-        },
-        {
-          label: 'Threads',
-          value: (override?.cpu_threads ?? data?.threads)?.toString(),
-        },
-        {
-          label: 'Frequency',
-          value: frequency ? `${frequency} GHz` : '',
-        },
-      ]}
+        [
+          {
+            key: 'brand',
+            value: override.cpu_brand ?? data.brand,
+          },
+          {
+            key: 'model',
+            value: override.cpu_model ?? data.model,
+          },
+          {
+            key: 'cores',
+            value: (override.cpu_cores ?? data.cores)?.toString(),
+          },
+          {
+            key: 'threads',
+            value: (override.cpu_threads ?? data.threads)?.toString(),
+          },
+          {
+            key: 'frequency',
+            value: frequency ? `${frequency} GHz` : '',
+          },
+        ]
+      )}
       icon={faMicrochip}
       extraContent={
         <CpuSwitchContainer>
@@ -197,7 +208,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
         >
           {size => (
             <>
-              {config?.enable_cpu_temps && !multiCore && chart.length > 1 && (
+              {config.enable_cpu_temps && !multiCore && chart.length > 1 && (
                 <TempContainer>
                   {`Ø: ${
                     (multiCore
