@@ -35,6 +35,7 @@ export type NetworkInfo = {
   speedDown: number;
   speedUp: number;
   type: string;
+  publicIp: string;
 };
 export type NetworkLoad = {
   up: number;
@@ -62,30 +63,30 @@ export type Config = {
   // General
   port: number;
   enable_tilt: boolean;
-  widget_order: string;
+  widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network')[];
 
   // OS Widget
   disable_host: boolean;
-  os_widget_enable: boolean;
+  os_label_list: ('os' | 'arch' | 'up_since')[];
   os_widget_grow: number;
   os_widget_min_width: number;
 
   // CPU Widget
   enable_cpu_temps: boolean;
-  cpu_widget_enable: boolean;
+  cpu_label_list: ('brand' | 'model' | 'cores' | 'threads' | 'frequency')[];
   cpu_widget_grow: number;
   cpu_widget_min_width: number;
   cpu_shown_datapoints: number;
   cpu_poll_interval: number;
 
   // Storage Widget
-  storage_widget_enable: boolean;
+  storage_label_list: ('brand' | 'size' | 'type')[];
   storage_widget_grow: number;
   storage_widget_min_width: number;
   storage_poll_interval: number;
 
   // RAM Widget
-  ram_widget_enable: boolean;
+  ram_label_list: ('brand' | 'size' | 'type' | 'frequency')[];
   ram_widget_grow: number;
   ram_widget_min_width: number;
   ram_shown_datapoints: number;
@@ -93,7 +94,13 @@ export type Config = {
 
   // Network Widget
   speed_test_interval: number;
-  network_widget_enable: boolean;
+  network_label_list: (
+    | 'type'
+    | 'speed_up'
+    | 'speed_down'
+    | 'interface_speed'
+    | 'public_ip'
+  )[];
   network_widget_grow: number;
   network_widget_min_width: number;
   network_shown_datapoints: number;
@@ -116,6 +123,7 @@ export type Config = {
     network_speed_up?: number;
     network_speed_down?: number;
     network_interface_speed?: number;
+    network_public_ip?: string;
     storage_brand_1?: string;
     storage_size_1?: number;
     storage_type_1?: string;

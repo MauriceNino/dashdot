@@ -8,6 +8,7 @@ import InfoTable, { InfoTableProps } from './info-table';
 import ThemedText from './text';
 
 const Container = styled.div<{ mobile: boolean }>`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;

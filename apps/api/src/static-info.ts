@@ -78,6 +78,7 @@ export const getStaticServerInfo = async (): Promise<ServerInfo> => {
       speedDown: 0,
       speedUp: 0,
       type: defaultNet.type,
+      publicIp: '',
     };
 
     INFO_SAVE = {
@@ -106,8 +107,10 @@ export const runSpeedTest = async () => {
     const { stdout } = await exec('speedtest --json');
     const json = JSON.parse(stdout);
 
-    INFO_SAVE!.network.speedDown = json.download ?? 0;
-    INFO_SAVE!.network.speedUp = json.upload ?? 0;
+    INFO_SAVE!.network.speedDown =
+      json.download ?? INFO_SAVE!.network.speedDown;
+    INFO_SAVE!.network.speedUp = json.upload ?? INFO_SAVE!.network.speedUp;
+    INFO_SAVE!.network.publicIp = json.client.ip ?? INFO_SAVE!.network.publicIp;
 
     return json;
   } else {
@@ -119,8 +122,12 @@ export const runSpeedTest = async () => {
 
     const speed = await universalSpeedtest.runSpeedtestNet();
 
-    INFO_SAVE!.network.speedDown = speed.downloadSpeed ?? 0;
-    INFO_SAVE!.network.speedUp = speed.uploadSpeed ?? 0;
+    INFO_SAVE!.network.speedDown =
+      speed.downloadSpeed ?? INFO_SAVE!.network.speedDown;
+    INFO_SAVE!.network.speedUp =
+      speed.uploadSpeed ?? INFO_SAVE!.network.speedUp;
+    INFO_SAVE!.network.publicIp =
+      speed.client.ip ?? INFO_SAVE!.network.publicIp;
 
     return speed;
   }
