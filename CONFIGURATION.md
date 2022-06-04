@@ -9,10 +9,10 @@ If you don't know how to set them, look up the section for your type of installm
 
 <!-- markdownlint-disable -->
 
-| Variable               | Description                                                                                                      | Type   | Default Value                |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------- |
-| `DASHDOT_PORT`         | The port where the express backend is running (the backend serves the frontend, so it is the same port for both) | number | `3001`                       |
-| `DASHDOT_WIDGET_ORDER` | Change the order of the elements in the list, to change the position on the page                                 | string | `os,cpu,storage,ram,network` |
+| Variable              | Description                                                                                                                                                                                                         | Type   | Default Value                |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------- |
+| `DASHDOT_PORT`        | The port where the express backend is running (the backend serves the frontend, so it is the same port for both)                                                                                                    | number | `3001`                       |
+| `DASHDOT_WIDGET_LIST` | Change the order of the elements in the list, to change the position on the page, or remove an item from the list, to remove it from the page (The available options are: `os`, `cpu`, `storage`, `ram`, `network`) | string | `os,cpu,storage,ram,network` |
 
 <!-- markdownlint-enable -->
 
@@ -23,7 +23,6 @@ If you don't know how to set them, look up the section for your type of installm
 | Variable                      | Description                                                                             | Type    | Default Value |
 | ----------------------------- | --------------------------------------------------------------------------------------- | ------- | ------------- |
 | `DASHDOT_DISABLE_HOST`        | If you want to hide the host part in the server widget (e.g. `dash.mauz.io` -> `dash.`) | boolean | `false`       |
-| `DASHDOT_OS_WIDGET_ENABLE`    | To show/hide the OS widget                                                              | boolean | `true`        |
 | `DASHDOT_OS_WIDGET_GROW`      | To adjust the relative size of the OS widget                                            | number  | `1.5`         |
 | `DASHDOT_OS_WIDGET_MIN_WIDTH` | To adjust the minimum width of the OS widget (in px)                                    | number  | `300`         |
 
@@ -36,7 +35,6 @@ If you don't know how to set them, look up the section for your type of installm
 | Variable                       | Description                                                                                                                                                                           | Type    | Default Value |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------- |
 | `DASHDOT_ENABLE_CPU_TEMPS`     | If you want to show the CPU temperature in the graph. This will probably not work on a VPS, so you need to try it on your own if this works. For home servers it might work just fine | boolean | `false`       |
-| `DASHDOT_CPU_WIDGET_ENABLE`    | To show/hide the Processor widget                                                                                                                                                     | boolean | `true`        |
 | `DASHDOT_CPU_WIDGET_GROW`      | To adjust the relative size of the Processor widget                                                                                                                                   | number  | `4`           |
 | `DASHDOT_CPU_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Processor widget (in px)                                                                                                                           | number  | `500`         |
 | `DASHDOT_CPU_DATAPOINTS`       | The amount of datapoints in the Processor graph                                                                                                                                       | number  | `20`          |
@@ -48,12 +46,11 @@ If you don't know how to set them, look up the section for your type of installm
 
 <!-- markdownlint-disable -->
 
-| Variable                           | Description                                               | Type    | Default Value |
-| ---------------------------------- | --------------------------------------------------------- | ------- | ------------- |
-| `DASHDOT_STORAGE_WIDGET_ENABLE`    | To show/hide the Storage widget                           | boolean | `true`        |
-| `DASHDOT_STORAGE_WIDGET_GROW`      | To adjust the relative size of the Storage widget         | number  | `3.5`         |
-| `DASHDOT_STORAGE_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Storage widget (in px) | number  | `500`         |
-| `DASHDOT_STORAGE_POLL_INTERVAL`    | Read the Storage load every x milliseconds                | number  | `60000`       |
+| Variable                           | Description                                               | Type   | Default Value |
+| ---------------------------------- | --------------------------------------------------------- | ------ | ------------- |
+| `DASHDOT_STORAGE_WIDGET_GROW`      | To adjust the relative size of the Storage widget         | number | `3.5`         |
+| `DASHDOT_STORAGE_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Storage widget (in px) | number | `500`         |
+| `DASHDOT_STORAGE_POLL_INTERVAL`    | Read the Storage load every x milliseconds                | number | `60000`       |
 
 <!-- markdownlint-enable -->
 
@@ -61,13 +58,12 @@ If you don't know how to set them, look up the section for your type of installm
 
 <!-- markdownlint-disable -->
 
-| Variable                       | Description                                              | Type    | Default Value |
-| ------------------------------ | -------------------------------------------------------- | ------- | ------------- |
-| `DASHDOT_RAM_WIDGET_ENABLE`    | To show/hide the Memory widget                           | boolean | `true`        |
-| `DASHDOT_RAM_WIDGET_GROW`      | To adjust the relative size of the Memory widget         | number  | `4`           |
-| `DASHDOT_RAM_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Memory widget (in px) | number  | `500`         |
-| `DASHDOT_RAM_DATAPOINTS`       | The amount of datapoints in the Memory graph             | number  | `20`          |
-| `DASHDOT_RAM_POLL_INTERVAL`    | Read the Memory load every x milliseconds                | number  | `1000`        |
+| Variable                       | Description                                              | Type   | Default Value |
+| ------------------------------ | -------------------------------------------------------- | ------ | ------------- |
+| `DASHDOT_RAM_WIDGET_GROW`      | To adjust the relative size of the Memory widget         | number | `4`           |
+| `DASHDOT_RAM_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Memory widget (in px) | number | `500`         |
+| `DASHDOT_RAM_DATAPOINTS`       | The amount of datapoints in the Memory graph             | number | `20`          |
+| `DASHDOT_RAM_POLL_INTERVAL`    | Read the Memory load every x milliseconds                | number | `1000`        |
 
 <!-- markdownlint-enable -->
 
@@ -75,14 +71,13 @@ If you don't know how to set them, look up the section for your type of installm
 
 <!-- markdownlint-disable -->
 
-| Variable                           | Description                                                           | Type    | Default Value |
-| ---------------------------------- | --------------------------------------------------------------------- | ------- | ------------- |
-| `DASHDOT_SPEED_TEST_INTERVAL`      | At which interval the network speed-test should be rerun (in minutes) | number  | `60`          |
-| `DASHDOT_NETWORK_WIDGET_ENABLE`    | To show/hide the Network widget                                       | boolean | `true`        |
-| `DASHDOT_NETWORK_WIDGET_GROW`      | To adjust the relative size of the Network widget                     | number  | `6`           |
-| `DASHDOT_NETWORK_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Network widget (in px)             | number  | `500`         |
-| `DASHDOT_NETWORK_DATAPOINTS`       | The amount of datapoints in each of the Network graphs                | number  | `20`          |
-| `DASHDOT_NETWORK_POLL_INTERVAL`    | Read the Network load every x milliseconds                            | number  | `1000`        |
+| Variable                           | Description                                                           | Type   | Default Value |
+| ---------------------------------- | --------------------------------------------------------------------- | ------ | ------------- |
+| `DASHDOT_SPEED_TEST_INTERVAL`      | At which interval the network speed-test should be rerun (in minutes) | number | `60`          |
+| `DASHDOT_NETWORK_WIDGET_GROW`      | To adjust the relative size of the Network widget                     | number | `6`           |
+| `DASHDOT_NETWORK_WIDGET_MIN_WIDTH` | To adjust the minimum width of the Network widget (in px)             | number | `500`         |
+| `DASHDOT_NETWORK_DATAPOINTS`       | The amount of datapoints in each of the Network graphs                | number | `20`          |
+| `DASHDOT_NETWORK_POLL_INTERVAL`    | Read the Network load every x milliseconds                            | number | `1000`        |
 
 <!-- markdownlint-enable -->
 
