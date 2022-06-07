@@ -5,5 +5,12 @@
   "commitMessage": "{{{commitMessagePrefix}}} {{{commitMessageAction}}} {{{commitMessageTopic}}} {{{commitMessageExtra}}} {{{commitMessageSuffix}}}",
   "commitMessagePrefix": "chore(deps):",
   "commitMessageAction": "upgrade",
-  "commitMessageTopic": "{{depName}}"
+  "commitMessageTopic": "{{depName}}",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ]
 }
