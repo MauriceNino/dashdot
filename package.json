@@ -80,6 +80,7 @@
     "@nrwl/workspace": "14.1.9",
     "@semantic-release-plus/docker": "3.1.2",
     "@semantic-release/changelog": "6.0.1",
+    "@semantic-release/git": "10.0.1",
     "@testing-library/react": "13.1.1",
     "@types/cors": "2.8.12",
     "@types/express": "4.17.13",
