@@ -1,9 +1,9 @@
 # Configuration Options
 
-The following configuration options are available.
+The following configuration options are available and can be passed as environment variables.
 
 If you don't know how to set them, look up the section for your type of installment
-(Docker, Docker-Compose or Git).
+in the [INSTALL.md](./INSTALL.md).
 
 ## General
 
