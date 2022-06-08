@@ -41,7 +41,7 @@
     "core-js": "3.22.8",
     "cors": "2.8.5",
     "express": "4.18.1",
-    "framer-motion": "6.3.10",
+    "framer-motion": "6.3.11",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-is": "18.1.0",
