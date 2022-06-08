@@ -6,7 +6,6 @@ import { useTheme } from 'styled-components';
 import { DefaultPieChart } from '../components/chart-components';
 import { ChartContainer } from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
-import { useSetting } from '../services/settings';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
 
