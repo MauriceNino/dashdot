@@ -97,8 +97,8 @@ export const netowrkObs = createBufferedInterval(
   async (): Promise<NetworkLoad> => {
     if (NET_INTERFACE !== 'unknown') {
       const { stdout } = await exec(
-        `cat /mnt/host_sys/class/net/${NET_INTERFACE}/statistics/rx_bytes;` +
-          `cat /mnt/host_sys/class/net/${NET_INTERFACE}/statistics/tx_bytes;`
+        `cat /internal_mnt/host_sys/class/net/${NET_INTERFACE}/statistics/rx_bytes;` +
+          `cat /internal_mnt/host_sys/class/net/${NET_INTERFACE}/statistics/tx_bytes;`
       );
       const [rx, tx] = stdout.split('\n').map(Number);
 
