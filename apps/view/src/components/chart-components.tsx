@@ -1,7 +1,6 @@
 import { FC, useMemo, useState } from 'react';
 import { Area, AreaChart, Pie, PieChart, Sector } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import { bytePrettyPrint } from '../utils/calculations';
 import ThemedText from './text';
 
 type DefaultAreaChartProps = {
@@ -57,7 +56,8 @@ const HoverLabel = styled(ThemedText)<{ top: number; left: number }>`
 
 const renderLabel = (
   { cx, cy, midAngle, innerRadius, outerRadius, payload }: any,
-  theme: any
+  theme: any,
+  labelRenderer: (value: number) => string
 ) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const centerx = cx + radius * Math.cos((-midAngle * Math.PI) / 180);
@@ -75,7 +75,7 @@ const renderLabel = (
         pointerEvents: 'none',
       }}
     >
-      {bytePrettyPrint(value)}
+      {labelRenderer(value)}
     </text>
   ) : null;
 };
@@ -91,6 +91,7 @@ type DefaultPieChartProps = {
   color: string;
   children: React.ReactNode;
   data: any[];
+  labelRenderer: (value: number) => string;
 };
 export const DefaultPieChart: FC<DefaultPieChartProps> = ({
   data,
@@ -98,6 +99,7 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
   width,
   color,
   children,
+  labelRenderer,
 }) => {
   const id = useMemo(() => {
     return `pie-chart-${++globalId}`;
@@ -162,7 +164,7 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
           }}
           activeShape={renderActiveShape}
           labelLine={false}
-          label={props => renderLabel(props, theme)}
+          label={props => renderLabel(props, theme, labelRenderer)}
         >
           {children}
         </Pie>
