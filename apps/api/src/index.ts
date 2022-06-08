@@ -9,7 +9,7 @@ import { CONFIG } from './config';
 import { cpuObs, netowrkObs, ramObs, storageObs } from './dynamic-info';
 import { environment } from './environments/environment';
 import { setupNetworking } from './setup-networking';
-import { getStaticServerInfo, runSpeedTest } from './static-info';
+import { gatherStaticNetworkInfo, getStaticServerInfo } from './static-info';
 
 const app = express();
 const server = http.createServer(app);
@@ -74,11 +74,10 @@ server.listen(CONFIG.port, async () => {
   );
 
   await setupNetworking();
-
   console.log('Running speed-test (this may take a few minutes)...');
   try {
     console.log(
-      inspect(await runSpeedTest(), {
+      inspect(await gatherStaticNetworkInfo(), {
         showHidden: false,
         depth: null,
         colors: true,
@@ -90,7 +89,7 @@ server.listen(CONFIG.port, async () => {
 
   // Run speed test every CONFIG.speed_test_interval minutes
   interval(CONFIG.speed_test_interval * 60 * 1000)
-    .pipe(mergeMap(async () => await runSpeedTest()))
+    .pipe(mergeMap(async () => await gatherStaticNetworkInfo()))
     .subscribe({
       error: e => console.error(e),
     });

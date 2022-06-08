@@ -26,7 +26,7 @@ type GlassPaneProps = {
   children?: React.ReactNode;
 };
 
-const GlassPane = motion(
+export const GlassPane = motion(
   forwardRef<HTMLDivElement, GlassPaneProps>((props, ref) => {
     const isMobile = useIsMobile();
 
@@ -42,5 +42,3 @@ const GlassPane = motion(
     );
   })
 );
-
-export default GlassPane;

@@ -77,10 +77,16 @@ export const storageObs = createBufferedInterval(
   1,
   CONFIG.storage_poll_interval,
   async (): Promise<StorageLoad> => {
-    const data = await si.fsSize();
-    const root = data.find(d => d.mount === '/');
+    const [disks, sizes] = await Promise.all([si.diskLayout(), si.fsSize()]);
+    const devices = disks.map(({ device }) => device);
 
-    return root?.used ?? 0;
+    const filtered = sizes.filter(
+      ({ fs, mount }) =>
+        (devices.some(dev => fs.startsWith(dev)) || fs === 'overlay') &&
+        !mount.startsWith('/etc')
+    );
+
+    return filtered.reduce((acc, { used }) => acc + used, 0);
   }
 );
 
@@ -93,8 +99,8 @@ export const netowrkObs = createBufferedInterval(
   async (): Promise<NetworkLoad> => {
     if (NET_INTERFACE !== 'unknown') {
       const { stdout } = await exec(
-        `cat /mnt/host_sys/class/net/${NET_INTERFACE}/statistics/rx_bytes;` +
-          `cat /mnt/host_sys/class/net/${NET_INTERFACE}/statistics/tx_bytes;`
+        `cat /internal_mnt/host_sys/class/net/${NET_INTERFACE}/statistics/rx_bytes;` +
+          `cat /internal_mnt/host_sys/class/net/${NET_INTERFACE}/statistics/tx_bytes;`
       );
       const [rx, tx] = stdout.split('\n').map(Number);
 
