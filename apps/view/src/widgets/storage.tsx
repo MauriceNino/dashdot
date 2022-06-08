@@ -78,7 +78,10 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       infos={infos}
       icon={faHdd}
     >
-      <ChartContainer contentLoaded={load != null}>
+      <ChartContainer
+        statText={`%: ${(((load ?? 0) / size) * 100).toFixed(1)}`}
+        contentLoaded={load != null}
+      >
         {size => (
           <DefaultPieChart
             data={[
