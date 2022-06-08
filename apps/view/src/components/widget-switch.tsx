@@ -1,6 +1,6 @@
 import { Switch } from 'antd';
 import styled from 'styled-components';
-import ThemedText from './text';
+import { ThemedText } from './text';
 
 const SwitchContainer = styled.div`
   position: absolute;

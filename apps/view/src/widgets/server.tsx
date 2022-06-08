@@ -19,8 +19,8 @@ import {
 import { Button } from 'antd';
 import { FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
-import InfoTable from '../components/info-table';
-import ThemedText from '../components/text';
+import { InfoTable } from '../components/info-table';
+import { ThemedText } from '../components/text';
 import { WidgetSwitch } from '../components/widget-switch';
 import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';

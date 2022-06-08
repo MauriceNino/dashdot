@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { InfoTableArr } from '../utils/format';
-import ThemedText from './text';
+import { ThemedText } from './text';
 
 export const InfoTextContainer = styled.div<{ noPadding?: boolean }>`
   display: table;
@@ -36,7 +36,7 @@ export type InfoTableProps = {
   className?: string;
 };
 
-const InfoTable: FC<InfoTableProps> = props => {
+export const InfoTable: FC<InfoTableProps> = props => {
   return (
     <InfoTextContainer className={props.className}>
       {props.infos.map((info, i) => (
@@ -52,5 +52,3 @@ const InfoTable: FC<InfoTableProps> = props => {
     </InfoTextContainer>
   );
 };
-
-export default InfoTable;

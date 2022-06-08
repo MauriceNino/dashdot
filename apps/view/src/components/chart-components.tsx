@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from 'react';
 import { Area, AreaChart, Pie, PieChart, Sector } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import ThemedText from './text';
+import { ThemedText } from './text';
 
 type DefaultAreaChartProps = {
   height: number;
