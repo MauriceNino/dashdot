@@ -10,13 +10,23 @@ To read more about configuration options, you can visit the [CONFIGURATION.md](.
 
 docker container run -it \
   -p 80:3001 \
+  --privileged \
   -v /etc/os-release:/etc/os-release:ro \
   -v /proc/1/ns/net:/mnt/host_ns_net:ro \
-  --privileged \
+  -v /media:/mnt/host_media:ro \
+  -v /mnt:/mnt/host_mnt:ro \
   mauricenino/dashdot
 ```
 
 > Note: The `--privileged` flag is needed to correctly determine the memory and storage info.
+
+<!-- -->
+
+> Note: The volume mount on `/etc/os-release:/etc/os-release:ro` is for the
+> dashboard to show the OS version of the host instead of the OS of the docker
+> container (which is running on Alpine Linux). If you wish to show the docker
+> container OS instead, just remove this line. If you are not able to use this
+> mount, you can pass a custom OS with the `DASHDOT_OVERRIDE_OS` flag.
 
 <!-- -->
 
@@ -27,11 +37,9 @@ docker container run -it \
 
 <!-- -->
 
-> Note: The volume mount on `/etc/os-release:/etc/os-release:ro` is for the
-> dashboard to show the OS version of the host instead of the OS of the docker
-> container (which is running on Alpine Linux). If you wish to show the docker
-> container OS instead, just remove this line. If you are not able to use this
-> mount, you can pass a custom OS with the `DASHDOT_OVERRIDE_OS` flag.
+> Note: The volume mounts on `/media:/mnt/host_media:ro` and `/mnt:/mnt/host_mnt:ro`
+> are needed to read the usage stats of all drives. If your drives are mounted somewhere
+> else, you need to pass that drive path with the following format: `-v /{path}:/mnt/host_{path}:ro`.
 
 ## Docker-Compose
 
@@ -53,6 +61,8 @@ services:
     volumes:
       - /etc/os-release:/etc/os-release:ro
       - /proc/1/ns/net:/mnt/host_ns_net:ro
+      - /media:/mnt/host_media:ro
+      - /mnt:/mnt/host_mnt:ro
 ```
 
 ## From Source

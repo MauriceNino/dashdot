@@ -77,10 +77,14 @@ export const storageObs = createBufferedInterval(
   1,
   CONFIG.storage_poll_interval,
   async (): Promise<StorageLoad> => {
-    const data = await si.fsSize();
-    const root = data.find(d => d.mount === '/');
+    const [disks, sizes] = await Promise.all([si.diskLayout(), si.fsSize()]);
+    const devices = disks.map(({ device }) => device);
 
-    return root?.used ?? 0;
+    const filtered = sizes.filter(
+      ({ fs }) => devices.some(dev => fs.startsWith(dev)) || fs === 'overlay'
+    );
+
+    return filtered.reduce((acc, { used }) => acc + used, 0);
   }
 );
 
