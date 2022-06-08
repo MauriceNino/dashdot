@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { useIsMobile } from '../services/mobile';
-import InfoTable, { InfoTableProps } from './info-table';
-import ThemedText from './text';
+import { InfoTable, InfoTableProps } from './info-table';
+import { ThemedText } from './text';
 
 const Container = styled.div<{ mobile: boolean }>`
   position: relative;
@@ -99,7 +99,7 @@ type HardwareInfoProps = {
   children?: React.ReactNode;
 } & InfoTableProps;
 
-const HardwareInfoContainer = motion(
+export const HardwareInfoContainer = motion(
   forwardRef<HTMLDivElement, HardwareInfoProps>((props, ref) => {
     const isMobile = useIsMobile();
     const childrenLength = React.Children.count(props.children);
@@ -133,4 +133,3 @@ const HardwareInfoContainer = motion(
     );
   })
 );
-export default HardwareInfoContainer;

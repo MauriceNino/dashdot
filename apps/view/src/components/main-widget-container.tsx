@@ -4,7 +4,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import { default as styled } from 'styled-components';
 import { useServerInfo } from '../api/os-info';
-import GlassPane from '../components/glass-pane';
+import { GlassPane } from '../components/glass-pane';
 import { environment } from '../environments/environment';
 import { useIsMobile } from '../services/mobile';
 import { CpuWidget } from '../widgets/cpu';

@@ -5,7 +5,7 @@ import { Cell } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultPieChart } from '../components/chart-components';
 import { ChartContainer } from '../components/chart-container';
-import HardwareInfoContainer from '../components/hardware-info-container';
+import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
 
@@ -78,7 +78,10 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       infos={infos}
       icon={faHdd}
     >
-      <ChartContainer contentLoaded={load != null}>
+      <ChartContainer
+        statText={`%: ${(((load ?? 0) / size) * 100).toFixed(1)}`}
+        contentLoaded={load != null}
+      >
         {size => (
           <DefaultPieChart
             data={[
@@ -94,6 +97,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
             width={size.width}
             height={size.height}
             color={theme.colors.storagePrimary}
+            labelRenderer={val => bytePrettyPrint(val)}
           >
             <Cell
               key='cell-used'
