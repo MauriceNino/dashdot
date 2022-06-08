@@ -94,6 +94,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
             width={size.width}
             height={size.height}
             color={theme.colors.storagePrimary}
+            labelRenderer={val => bytePrettyPrint(val)}
           >
             <Cell
               key='cell-used'
