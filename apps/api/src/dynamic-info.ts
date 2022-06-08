@@ -92,7 +92,7 @@ export const storageObs = createBufferedInterval(
 
 let [lastRx, lastTx] = [0, 0];
 
-export const netowrkObs = createBufferedInterval(
+export const networkObs = createBufferedInterval(
   'Network',
   CONFIG.network_shown_datapoints,
   CONFIG.network_poll_interval,
