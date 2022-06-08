@@ -81,7 +81,9 @@ export const storageObs = createBufferedInterval(
     const devices = disks.map(({ device }) => device);
 
     const filtered = sizes.filter(
-      ({ fs }) => devices.some(dev => fs.startsWith(dev)) || fs === 'overlay'
+      ({ fs, mount }) =>
+        (devices.some(dev => fs.startsWith(dev)) || fs === 'overlay') &&
+        !mount.startsWith('/etc')
     );
 
     return filtered.reduce((acc, { used }) => acc + used, 0);
