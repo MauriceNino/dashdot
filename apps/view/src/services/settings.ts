@@ -2,8 +2,8 @@ import { Dispatch, useEffect, useState } from 'react';
 import store from 'store';
 
 type Settings = {
-  darkMode?: boolean;
-  multiCore?: boolean;
+  darkMode: boolean;
+  multiCore: boolean;
 };
 
 export const setStoreSetting = <T extends keyof Settings = keyof Settings>(
@@ -21,7 +21,10 @@ export const getStoreSetting = <T extends keyof Settings = keyof Settings>(
 
 const ALL_DISPATCHES: {
   [T in keyof Settings]: Dispatch<Settings[T]>[];
-} = {};
+} = {
+  darkMode: [],
+  multiCore: [],
+};
 
 export const useSetting = <T extends keyof Settings = keyof Settings>(
   key: T,
@@ -32,13 +35,12 @@ export const useSetting = <T extends keyof Settings = keyof Settings>(
   );
 
   const setSetting = (newValue: Settings[T]) => {
-    ALL_DISPATCHES[key]!.forEach(dispatch => dispatch(newValue));
+    ALL_DISPATCHES[key].forEach(dispatch => dispatch(newValue));
     setStoreSetting(key, newValue);
   };
 
   useEffect(() => {
-    ALL_DISPATCHES[key] = ALL_DISPATCHES[key] ?? [];
-    ALL_DISPATCHES[key]!.push(setLocalValue);
+    ALL_DISPATCHES[key].push(setLocalValue);
 
     if (initialValue !== undefined && getStoreSetting(key) === undefined) {
       setSetting(initialValue);

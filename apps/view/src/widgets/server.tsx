@@ -16,11 +16,12 @@ import {
   FontAwesomeIcon,
   FontAwesomeIconProps,
 } from '@fortawesome/react-fontawesome';
-import { Button, Switch } from 'antd';
+import { Button } from 'antd';
 import { FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import InfoTable from '../components/info-table';
 import ThemedText from '../components/text';
+import { WidgetSwitch } from '../components/widget-switch';
 import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';
 import { toInfoTable } from '../utils/format';
@@ -72,18 +73,6 @@ const ServerName = styled.span`
 
 const StandaloneAppendix = styled(ServerName)`
   font-size: 3rem;
-`;
-
-const ThemeSwitchContainer = styled.div`
-  position: absolute;
-  right: 25px;
-  top: 25px;
-  z-index: 2;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
 `;
 
 const ButtonsContainer = styled.div`
@@ -245,10 +234,11 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
         />
       </ButtonsContainer>
 
-      <ThemeSwitchContainer>
-        <ThemedText>Dark Mode</ThemedText>
-        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
-      </ThemeSwitchContainer>
+      <WidgetSwitch
+        label='Dark Mode'
+        checked={darkMode}
+        onChange={() => setDarkMode(!darkMode)}
+      />
 
       <Heading>
         {config?.disable_host ? (

@@ -2,7 +2,6 @@ import { Config, CpuInfo, CpuLoad } from '@dash/common';
 import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
 //@ts-ignore
 import { Datum } from '@nivo/line';
-import { Switch } from 'antd';
 import { Variants } from 'framer-motion';
 import { FC } from 'react';
 import { Tooltip, YAxis } from 'recharts';
@@ -11,6 +10,7 @@ import { DefaultAreaChart } from '../components/chart-components';
 import { ChartContainer } from '../components/chart-container';
 import HardwareInfoContainer from '../components/hardware-info-container';
 import ThemedText from '../components/text';
+import { WidgetSwitch } from '../components/widget-switch';
 import { useSetting } from '../services/settings';
 import { toInfoTable } from '../utils/format';
 
@@ -45,18 +45,6 @@ const getColumnsForCores = (cores: number): number => {
 
   return columns;
 };
-
-const CpuSwitchContainer = styled.div`
-  position: absolute;
-  right: 25px;
-  top: 25px;
-  z-index: 2;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-`;
 
 const TempContainer = styled.div`
   position: absolute;
@@ -171,13 +159,11 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       )}
       icon={faMicrochip}
       extraContent={
-        <CpuSwitchContainer>
-          <ThemedText>Show All Cores</ThemedText>
-          <Switch
-            checked={multiCore}
-            onChange={() => setMulticore(!multiCore)}
-          />
-        </CpuSwitchContainer>
+        <WidgetSwitch
+          label='Show All Cores'
+          checked={multiCore}
+          onChange={() => setMulticore(!multiCore)}
+        />
       }
       layout
       variants={containerVariants}
