@@ -5,7 +5,18 @@ WORKDIR /app
 
 RUN \
   apk update &&\
-  apk add git make clang build-base lsblk dmidecode util-linux lm-sensors speedtest-cli &&\
+  apk add \
+    git \
+    make \
+    clang \
+    build-base \
+    lsblk \
+    dmidecode \
+    util-linux \
+    lm-sensors \
+    speedtest-cli &&\
+  apk add -f \
+    raspberrypi &&\
   git config --global --add safe.directory /app
 
 # DEV #
