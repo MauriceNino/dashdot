@@ -116,11 +116,8 @@ export const gatherStaticNetworkInfo = async () => {
       const { stdout } = await exec(`cat ${NET_PATH}/speed`);
       const numValue = Number(stdout.trim());
 
-      if (isNaN(numValue) || numValue === -1) {
-        INFO_SAVE!.network.interfaceSpeed = 0;
-      } else {
-        INFO_SAVE!.network.interfaceSpeed = numValue * 1000 * 1000;
-      }
+      INFO_SAVE!.network.interfaceSpeed =
+        isNaN(numValue) || numValue === -1 ? 0 : numValue;
     }
   } else {
     const networkInfo = await si.networkInterfaces();
