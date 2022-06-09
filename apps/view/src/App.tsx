@@ -47,13 +47,12 @@ linear-gradient(
 )`;
 
 const Container = styled.div`
-  overflow-y: auto;
   overflow-x: hidden;
-  height: 100vh;
-  width: 100vw;
-  padding-bottom: 5vh;
+  width: 100%;
+  min-height: 100%;
   background: ${({ theme }) =>
     theme.dark ? getDarkGradient(theme) : getLightGradient(theme)};
+  background-attachment: fixed;
 
   transition: background 0.5s ease;
 
