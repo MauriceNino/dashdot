@@ -107,7 +107,7 @@ const SFontAwesomeIcon = styled(FontAwesomeIcon)`
   transform: translate(-50%, -50%);
   font-size: 17rem;
   opacity: 0.05;
-  z-index: -5;
+  pointer-events: none;
 `;
 
 const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
