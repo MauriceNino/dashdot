@@ -35,7 +35,8 @@ const itemVariants: Variants = {
 const FlexContainer = styled(motion.div)<{ mobile: boolean }>`
   width: ${({ mobile }) => (mobile ? 'calc(100vw - 50px)' : '92vw')};
   min-height: ${({ mobile }) => (mobile ? 'calc(100vh - 50px)' : '86vh')};
-  margin: ${({ mobile }) => (mobile ? '50px' : '7vh')} auto 0 auto;
+  margin: ${({ mobile }) => (mobile ? '50px' : '7vh')} auto
+    ${({ mobile }) => (mobile ? '50px' : '7vh')} auto;
 
   display: flex;
   flex-flow: row wrap;
