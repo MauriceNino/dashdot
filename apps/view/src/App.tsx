@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import {
-  default as styled,
+  createGlobalStyle,
   DefaultTheme,
   ThemeProvider,
 } from 'styled-components';
@@ -46,15 +46,25 @@ linear-gradient(
   ${theme.colors.secondary} 40%
 )`;
 
-const Container = styled.div`
-  overflow-x: hidden;
-  width: 100%;
-  min-height: 100%;
-  background: ${({ theme }) =>
-    theme.dark ? getDarkGradient(theme) : getLightGradient(theme)};
-  background-attachment: fixed;
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: ${({ theme }) => theme.colors.background};
 
-  transition: background 0.5s ease;
+    --ant-primary-color: ${({ theme }) => theme.colors.primary};
+    --ant-primary-color-hover: ${({ theme }) => theme.colors.primary};
+  }
+
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100%;
+
+    background: ${({ theme }) =>
+      theme.dark ? getDarkGradient(theme) : getLightGradient(theme)};
+
+    transition: background 0.5s ease;
+    background-attachment: fixed;
+  }
 
   .ant-switch {
     background-color: rgba(0, 0, 0, 0.25);
@@ -69,23 +79,14 @@ const Container = styled.div`
 export const App: FC = () => {
   const { scheme } = useColorScheme();
   const [darkMode] = useSetting('darkMode', scheme === 'dark');
-
   const theme = useMemo(() => (darkMode ? darkTheme : lightTheme), [darkMode]);
-  const antTheme = useMemo(
-    () =>
-      ({
-        '--ant-primary-color': theme.colors.primary,
-        '--ant-primary-color-hover': theme.colors.primary,
-      } as React.CSSProperties),
-    [theme]
-  );
+
   return (
     <ThemeProvider theme={theme}>
       <MobileContextProvider>
-        <Container style={antTheme}>
-          <MainWidgetContainer />
-        </Container>
+        <MainWidgetContainer />
       </MobileContextProvider>
+      <GlobalStyle />
     </ThemeProvider>
   );
 };
