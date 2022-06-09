@@ -17,6 +17,8 @@ import {
   FontAwesomeIconProps,
 } from '@fortawesome/react-fontawesome';
 import { Button } from 'antd';
+import { fromUrl, parseDomain, ParseResultType } from 'parse-domain';
+import { toUnicode } from 'punycode';
 import { FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { InfoTable } from '../components/info-table';
@@ -178,10 +180,17 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
     return () => clearInterval(interval);
   }, [data.uptime]);
 
-  const domain = useMemo(
-    () => window.location.hostname.split('.').slice(-2).join('.'),
-    []
-  );
+  const domain = useMemo(() => {
+    const href = window.location.href;
+    const result = parseDomain(fromUrl(href));
+
+    if (result.type === ParseResultType.Listed) {
+      const { domain, topLevelDomains } = result;
+      return [toUnicode(domain ?? ''), ...topLevelDomains].join('.');
+    } else {
+      return undefined;
+    }
+  }, []);
 
   const dateInfos = [
     {
@@ -241,7 +250,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       />
 
       <Heading>
-        {config?.disable_host ? (
+        {config?.disable_host || !domain ? (
           <StandaloneAppendix>dash.</StandaloneAppendix>
         ) : (
           <>
