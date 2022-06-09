@@ -4,7 +4,16 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
-    "@semantic-release/github",
+    [
+      "@semantic-release/github",
+      {
+        "successComment": ":tada: This issue has been resolved in version ${nextRelease.version}\n\nPlease check the [changelog](https://github.com/MauriceNino/dashdot/blob/main/CHANGELOG.md) for more details.",
+        "failComment": false,
+        "failTitle": false,
+        "labels": false,
+        "releasedLabels": false
+      }
+    ],
     [
       "@semantic-release/git",
       {

@@ -15,6 +15,7 @@ steps:
     when:
       event:
         - push
+        - custom
     commands:
       - yarn --immutable --immutable-cache
   - name: dependencies (pr)
@@ -32,6 +33,7 @@ steps:
       event:
         - push
         - pull_request
+        - custom
     commands:
       - yarn test
 
@@ -41,6 +43,7 @@ steps:
       event:
         - push
         - pull_request
+        - custom
       branch:
         exclude:
           - main
@@ -53,7 +56,9 @@ steps:
   - name: build & release (dockerhub) (dev)
     image: crazymax/docker:latest
     when:
-      event: push
+      event:
+        - push
+        - custom
       branch: dev
     environment:
       DOCKER_ACCESS_KEY:
@@ -79,7 +84,9 @@ steps:
   - name: update & deploy server files (dev)
     image: docker/compose
     when:
-      event: push
+      event:
+        - push
+        - custom
       branch: dev
     volumes:
       - name: dockersock
@@ -94,7 +101,9 @@ steps:
   - name: build & release (dockerhub & github) (production)
     image: crazymax/docker:latest
     when:
-      event: push
+      event:
+        - push
+        - custom
       branch: main
     environment:
       GITHUB_TOKEN:
@@ -128,7 +137,9 @@ steps:
   - name: update & deploy server files
     image: docker/compose
     when:
-      event: push
+      event:
+        - push
+        - custom
       branch: main
     volumes:
       - name: dockersock
@@ -170,4 +181,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: 5780f46081d84a8e92bfe5ce50f9972a8ebf56df02a2c206fa0ccf7b04b5040c
+hmac: 3ee60b6a34bee3cad12b877635a11c93b788e36dbf51b2099d82c6624ecc8ae6

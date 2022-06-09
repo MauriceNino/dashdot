@@ -48,16 +48,17 @@ export const cpuObs = createBufferedInterval(
     const loads = (await si.currentLoad()).cpus;
 
     let temps: si.Systeminformation.CpuTemperatureData['cores'] = [];
+    let mainTemp = 0;
     if (CONFIG.enable_cpu_temps) {
+      const siTemps = await si.cpuTemperature();
       const threadsPerCore = staticInfo.cpu.threads / staticInfo.cpu.cores;
-      temps = (await si.cpuTemperature()).cores.flatMap(temp =>
-        Array(threadsPerCore).fill(temp)
-      );
+      temps = siTemps.cores.flatMap(temp => Array(threadsPerCore).fill(temp));
+      mainTemp = siTemps.main; // AVG temp of all cores, in case no per-core data is found
     }
 
     return loads.map(({ load }, i) => ({
       load,
-      temp: temps[i],
+      temp: temps[i] ?? mainTemp,
       core: i,
     }));
   }
@@ -92,7 +93,7 @@ export const storageObs = createBufferedInterval(
 
 let [lastRx, lastTx] = [0, 0];
 
-export const netowrkObs = createBufferedInterval(
+export const networkObs = createBufferedInterval(
   'Network',
   CONFIG.network_shown_datapoints,
   CONFIG.network_poll_interval,

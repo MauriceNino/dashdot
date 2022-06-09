@@ -6,7 +6,7 @@ import { interval, mergeMap } from 'rxjs';
 import { Server } from 'socket.io';
 import { inspect } from 'util';
 import { CONFIG } from './config';
-import { cpuObs, netowrkObs, ramObs, storageObs } from './dynamic-info';
+import { cpuObs, networkObs, ramObs, storageObs } from './dynamic-info';
 import { environment } from './environments/environment';
 import { setupNetworking } from './setup-networking';
 import { gatherStaticNetworkInfo, getStaticServerInfo } from './static-info';
@@ -48,7 +48,7 @@ io.on('connection', socket => {
     socket.emit('storage-load', storage);
   });
 
-  const networkSub = netowrkObs.subscribe(async network => {
+  const networkSub = networkObs.subscribe(async network => {
     socket.emit('network-load', network);
   });
 
