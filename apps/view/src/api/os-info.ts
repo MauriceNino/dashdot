@@ -1,6 +1,6 @@
 import { ServerInfo } from '@dash/common';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { environment } from '../environments/environment';
 
 export type HttpResponse<T> = {
@@ -9,13 +9,17 @@ export type HttpResponse<T> = {
   error?: any;
 };
 
-export const useServerInfo = () => {
+export const useServerInfo = (): [
+  HttpResponse<ServerInfo>,
+  () => Promise<void>
+] => {
   const [serverInfo, setServerInfo] = useState<HttpResponse<ServerInfo>>({
     loading: true,
   });
 
-  useEffect(() => {
-    axios
+  const loadStaticData = useCallback(async () => {
+    setServerInfo({ loading: true });
+    await axios
       .get<ServerInfo>(`${environment.backendUrl}/system-info`)
       .then(result =>
         setServerInfo({
@@ -31,5 +35,9 @@ export const useServerInfo = () => {
       );
   }, []);
 
-  return serverInfo;
+  useEffect(() => {
+    loadStaticData();
+  }, [loadStaticData]);
+
+  return [serverInfo, loadStaticData];
 };

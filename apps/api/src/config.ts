@@ -12,7 +12,6 @@ const lst = (item: string): any[] => item.split(',');
 
 export const CONFIG: Config = {
   port: numNull(penv('PORT')) ?? 3001,
-  enable_tilt: penv('ENABLE_TILT') === 'true',
   widget_list: lst(penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network'),
 
   disable_host: penv('DISABLE_HOST') === 'true',

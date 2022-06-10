@@ -62,7 +62,6 @@ export type HardwareInfo = {
 export type Config = {
   // General
   port: number;
-  enable_tilt: boolean;
   widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network')[];
 
   // OS Widget

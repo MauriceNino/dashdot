@@ -57,7 +57,7 @@ const GlobalStyle = createGlobalStyle`
   #root {
     overflow-x: hidden;
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
 
     background: ${({ theme }) =>
       theme.dark ? getDarkGradient(theme) : getLightGradient(theme)};
@@ -73,6 +73,15 @@ const GlobalStyle = createGlobalStyle`
 
   .ant-switch-checked {
     background: var(--ant-primary-color);
+  }
+
+  .ant-btn {
+    background: ${({ theme }) => theme.colors.background};
+    border: none;
+
+    &:hover, &:focus, &:active {
+      background: var(--ant-primary-color);
+    }
   }
 `;
 
