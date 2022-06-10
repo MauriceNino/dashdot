@@ -31,11 +31,6 @@ if (environment.production) {
   });
 }
 
-// Send general system information
-app.get('/system-info', async (_, res) => {
-  res.send(getStaticServerInfo());
-});
-
 // Launch the server
 server.listen(CONFIG.port, async () => {
   console.log('listening on *:' + CONFIG.port);
@@ -43,6 +38,11 @@ server.listen(CONFIG.port, async () => {
   await setupNetworking();
   await loadStaticServerInfo();
   const obs = getDynamicServerInfo();
+
+  // Send general system information
+  app.get('/system-info', async (_, res) => {
+    res.send(getStaticServerInfo());
+  });
 
   // Send current system status
   io.on('connection', socket => {
