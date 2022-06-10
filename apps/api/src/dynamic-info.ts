@@ -79,13 +79,10 @@ export const getDynamicServerInfo = () => {
     1,
     CONFIG.storage_poll_interval,
     async (): Promise<StorageLoad> => {
-      const [disks, sizes] = await Promise.all([si.diskLayout(), si.fsSize()]);
-      const devices = disks.map(({ device }) => device);
+      const sizes = await si.fsSize();
 
       const filtered = sizes.filter(
-        ({ fs, mount }) =>
-          (devices.some(dev => fs.startsWith(dev)) || fs === 'overlay') &&
-          !mount.startsWith('/etc')
+        ({ fs, mount }) => mount.startsWith('/mnt/host_') || fs === 'overlay'
       );
 
       return filtered.reduce((acc, { used }) => acc + used, 0);
