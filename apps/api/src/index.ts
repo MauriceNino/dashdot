@@ -2,14 +2,16 @@ import * as cors from 'cors';
 import * as express from 'express';
 import * as http from 'http';
 import * as path from 'path';
-import { interval, mergeMap } from 'rxjs';
 import { Server } from 'socket.io';
-import { inspect } from 'util';
 import { CONFIG } from './config';
-import { cpuObs, networkObs, ramObs, storageObs } from './dynamic-info';
+import { getDynamicServerInfo } from './dynamic-info';
 import { environment } from './environments/environment';
 import { setupNetworking } from './setup-networking';
-import { gatherStaticNetworkInfo, getStaticServerInfo } from './static-info';
+import {
+  getStaticServerInfo,
+  loadStaticServerInfo,
+  runSpeedTest,
+} from './static-info';
 
 const app = express();
 const server = http.createServer(app);
@@ -31,68 +33,54 @@ if (environment.production) {
 
 // Send general system information
 app.get('/system-info', async (_, res) => {
-  res.send(await getStaticServerInfo());
-});
-
-// Send current system status
-io.on('connection', socket => {
-  const cpuSub = cpuObs.subscribe(async cpu => {
-    socket.emit('cpu-load', cpu);
-  });
-
-  const ramSub = ramObs.subscribe(async ram => {
-    socket.emit('ram-load', ram);
-  });
-
-  const storageSub = storageObs.subscribe(async storage => {
-    socket.emit('storage-load', storage);
-  });
-
-  const networkSub = networkObs.subscribe(async network => {
-    socket.emit('network-load', network);
-  });
-
-  socket.on('disconnect', () => {
-    cpuSub.unsubscribe();
-    ramSub.unsubscribe();
-    storageSub.unsubscribe();
-    networkSub.unsubscribe();
-  });
+  res.send(getStaticServerInfo());
 });
 
 // Launch the server
 server.listen(CONFIG.port, async () => {
   console.log('listening on *:' + CONFIG.port);
 
-  console.log(
-    'Static Server Info:',
-    inspect(await getStaticServerInfo(), {
-      showHidden: false,
-      depth: null,
-      colors: true,
-    })
-  );
-
   await setupNetworking();
-  console.log('Running speed-test (this may take a few minutes)...');
+  await loadStaticServerInfo();
+  const obs = getDynamicServerInfo();
+
+  // Send current system status
+  io.on('connection', socket => {
+    const cpuSub = obs.cpu.subscribe(cpu => {
+      socket.emit('cpu-load', cpu);
+    });
+
+    const ramSub = obs.ram.subscribe(ram => {
+      socket.emit('ram-load', ram);
+    });
+
+    const storageSub = obs.storage.subscribe(async storage => {
+      socket.emit('storage-load', storage);
+    });
+
+    const networkSub = obs.network.subscribe(async network => {
+      socket.emit('network-load', network);
+    });
+
+    socket.on('disconnect', () => {
+      cpuSub.unsubscribe();
+      ramSub.unsubscribe();
+      storageSub.unsubscribe();
+      networkSub.unsubscribe();
+    });
+  });
+
   try {
-    console.log(
-      inspect(await gatherStaticNetworkInfo(), {
-        showHidden: false,
-        depth: null,
-        colors: true,
-      })
-    );
+    console.log('Running speed-test (this may take a few minutes)...');
+    await runSpeedTest();
+    console.log('Speed-test completed successfully');
   } catch (e) {
-    console.error(e);
+    console.warn(e);
   }
 
-  // Run speed test every CONFIG.speed_test_interval minutes
-  interval(CONFIG.speed_test_interval * 60 * 1000)
-    .pipe(mergeMap(async () => await gatherStaticNetworkInfo()))
-    .subscribe({
-      error: e => console.error(e),
-    });
+  obs.speedTest.subscribe({
+    error: e => console.warn(e),
+  });
 });
 
 server.on('error', console.error);
