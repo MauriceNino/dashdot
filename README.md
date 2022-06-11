@@ -12,7 +12,9 @@
 <br/>
 
 <p align="center">
-  <b>dash.</b> (or <b>dashdot</b>) is a modern server dashboard, running on the latest tech, designed with glassmorphism in mind. It is intended to be used for smaller VPS and private servers.
+  <b>dash.</b> (or <b>dashdot</b>) is a modern server dashboard,
+  running on the latest tech, designed with glassmorphism in mind.
+  It is intended to be used for smaller VPS and private servers.
 </p>
 <br />
 <p align="center">

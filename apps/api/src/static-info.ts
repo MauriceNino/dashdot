@@ -1,17 +1,9 @@
-import {
-  CpuInfo,
-  HardwareInfo,
-  NetworkInfo,
-  OsInfo,
-  RamInfo,
-  ServerInfo,
-  StorageInfo,
-} from '@dash/common';
+import { HardwareInfo, ServerInfo } from '@dash/common';
 import { exec as cexec } from 'child_process';
 import * as fs from 'fs';
 import * as si from 'systeminformation';
 import { SpeedUnits, UniversalSpeedtest } from 'universal-speedtest';
-import { promisify } from 'util';
+import { inspect, promisify } from 'util';
 import { CONFIG } from './config';
 import { NET_INTERFACE } from './setup-networking';
 
@@ -24,76 +16,89 @@ const normalizeCpuModel = (cpuModel: string) => {
     .trim();
 };
 
-let INFO_SAVE: HardwareInfo | null = null;
+const STATIC_INFO: HardwareInfo = {
+  os: {
+    arch: '',
+    distro: '',
+    kernel: '',
+    platform: '',
+    release: '',
+    uptime: 0,
+  },
+  cpu: {
+    brand: '',
+    model: '',
+    cores: 0,
+    threads: 0,
+    frequency: 0,
+  },
+  ram: {
+    size: 0,
+    layout: [],
+  },
+  storage: {
+    layout: [],
+  },
+  network: {
+    interfaceSpeed: 0,
+    speedDown: 0,
+    speedUp: 0,
+    type: '',
+    publicIp: '',
+  },
+};
 
-export const getStaticServerInfo = async (): Promise<ServerInfo> => {
-  if (!INFO_SAVE) {
-    const [osInfo, cpuInfo, memInfo, memLayout, diskLayout] = await Promise.all(
-      [si.osInfo(), si.cpu(), si.mem(), si.memLayout(), si.diskLayout()]
-    );
+const loadOsInfo = async (): Promise<void> => {
+  const info = await si.osInfo();
 
-    const os: OsInfo = {
-      arch: osInfo.arch,
-      distro: osInfo.distro,
-      kernel: osInfo.kernel,
-      platform: osInfo.platform,
-      release: osInfo.release,
-      uptime: 0,
-    };
-
-    const cpu: CpuInfo = {
-      brand: cpuInfo.manufacturer,
-      model: normalizeCpuModel(cpuInfo.brand),
-      cores: cpuInfo.physicalCores,
-      threads: cpuInfo.cores,
-      frequency: cpuInfo.speed,
-    };
-
-    const ram: RamInfo = {
-      size: memInfo.total,
-      layout: memLayout.map(({ manufacturer, type, clockSpeed }) => ({
-        brand: manufacturer,
-        type: type,
-        frequency: clockSpeed ?? undefined,
-      })),
-    };
-
-    const storage: StorageInfo = {
-      layout: diskLayout.map(({ size, type, vendor }) => ({
-        brand: vendor,
-        size,
-        type,
-      })),
-    };
-
-    const network: NetworkInfo = {
-      interfaceSpeed: 0,
-      speedDown: 0,
-      speedUp: 0,
-      type: '',
-      publicIp: '',
-    };
-
-    INFO_SAVE = {
-      os,
-      cpu,
-      ram,
-      storage,
-      network,
-    };
-  }
-
-  return {
-    ...INFO_SAVE!,
-    os: {
-      ...INFO_SAVE!.os,
-      uptime: +si.time().uptime,
-    },
-    config: CONFIG,
+  STATIC_INFO.os = {
+    arch: info.arch,
+    distro: info.distro,
+    kernel: info.kernel,
+    platform: info.platform,
+    release: info.release,
+    uptime: 0,
   };
 };
 
-export const gatherStaticNetworkInfo = async () => {
+const loadCpuInfo = async (): Promise<void> => {
+  const info = await si.cpu();
+
+  STATIC_INFO.cpu = {
+    brand: info.brand,
+    model: normalizeCpuModel(info.model),
+    cores: info.physicalCores,
+    threads: info.cores,
+    frequency: info.speed,
+  };
+};
+
+const loadRamInfo = async (): Promise<void> => {
+  const [info, layout] = await Promise.all([si.mem(), si.memLayout()]);
+
+  STATIC_INFO.ram = {
+    size: info.total,
+    layout: layout.map(({ manufacturer, type, clockSpeed }) => ({
+      brand: manufacturer,
+      type: type,
+      frequency: clockSpeed ?? undefined,
+    })),
+  };
+};
+
+const loadStorageInfo = async (): Promise<void> => {
+  const info = await si.diskLayout();
+
+  STATIC_INFO.storage = {
+    layout: info.map(({ size, type, vendor }) => ({
+      brand: vendor,
+      size,
+      type,
+    })),
+  };
+};
+
+const loadNetworkInfo = async (): Promise<void> => {
   if (NET_INTERFACE !== 'unknown') {
     const NET_PATH = `/internal_mnt/host_sys/class/net/${NET_INTERFACE}`;
     const isWireless = fs.existsSync(`${NET_PATH}/wireless`);
@@ -101,7 +106,7 @@ export const gatherStaticNetworkInfo = async () => {
     const isBond = fs.existsSync(`${NET_PATH}/bonding`);
     const isTap = fs.existsSync(`${NET_PATH}/tun_flags`);
 
-    INFO_SAVE!.network.type = isWireless
+    STATIC_INFO.network.type = isWireless
       ? 'Wireless'
       : isBridge
       ? 'Bridge'
@@ -116,7 +121,7 @@ export const gatherStaticNetworkInfo = async () => {
       const { stdout } = await exec(`cat ${NET_PATH}/speed`);
       const numValue = Number(stdout.trim());
 
-      INFO_SAVE!.network.interfaceSpeed =
+      STATIC_INFO.network.interfaceSpeed =
         isNaN(numValue) || numValue === -1 ? 0 : numValue;
     }
   } else {
@@ -124,22 +129,23 @@ export const gatherStaticNetworkInfo = async () => {
     //@ts-ignore
     const defaultNet = networkInfo.find(net => net.default)!;
 
-    INFO_SAVE!.network.type = defaultNet.type;
-    INFO_SAVE!.network.interfaceSpeed = defaultNet.speed;
+    STATIC_INFO.network.type = defaultNet.type;
+    STATIC_INFO.network.interfaceSpeed = defaultNet.speed;
   }
+};
 
+export const runSpeedTest = async (): Promise<void> => {
   const { stdout, stderr } = await exec('which speedtest');
 
   if (stderr === '' && stdout.trim() !== '') {
     const { stdout } = await exec('speedtest --json');
     const json = JSON.parse(stdout);
 
-    INFO_SAVE!.network.speedDown =
-      json.download ?? INFO_SAVE!.network.speedDown;
-    INFO_SAVE!.network.speedUp = json.upload ?? INFO_SAVE!.network.speedUp;
-    INFO_SAVE!.network.publicIp = json.client.ip ?? INFO_SAVE!.network.publicIp;
-
-    return json;
+    STATIC_INFO.network.speedDown =
+      json.download ?? STATIC_INFO.network.speedDown;
+    STATIC_INFO.network.speedUp = json.upload ?? STATIC_INFO.network.speedUp;
+    STATIC_INFO.network.publicIp =
+      json.client.ip ?? STATIC_INFO.network.publicIp;
   } else {
     const universalSpeedtest = new UniversalSpeedtest({
       measureUpload: true,
@@ -149,13 +155,41 @@ export const gatherStaticNetworkInfo = async () => {
 
     const speed = await universalSpeedtest.runSpeedtestNet();
 
-    INFO_SAVE!.network.speedDown =
-      speed.downloadSpeed ?? INFO_SAVE!.network.speedDown;
-    INFO_SAVE!.network.speedUp =
-      speed.uploadSpeed ?? INFO_SAVE!.network.speedUp;
-    INFO_SAVE!.network.publicIp =
-      speed.client.ip ?? INFO_SAVE!.network.publicIp;
-
-    return speed;
+    STATIC_INFO.network.speedDown =
+      speed.downloadSpeed ?? STATIC_INFO.network.speedDown;
+    STATIC_INFO.network.speedUp =
+      speed.uploadSpeed ?? STATIC_INFO.network.speedUp;
+    STATIC_INFO.network.publicIp =
+      speed.client.ip ?? STATIC_INFO.network.publicIp;
   }
+};
+
+export const loadStaticServerInfo = async (): Promise<void> => {
+  await Promise.all([
+    loadOsInfo(),
+    loadCpuInfo(),
+    loadRamInfo(),
+    loadStorageInfo(),
+    loadNetworkInfo(),
+  ]);
+
+  console.log(
+    'Static Server Info:',
+    inspect(getStaticServerInfo(), {
+      showHidden: false,
+      depth: null,
+      colors: true,
+    })
+  );
+};
+
+export const getStaticServerInfo = (): ServerInfo => {
+  return {
+    ...STATIC_INFO,
+    os: {
+      ...STATIC_INFO.os,
+      uptime: +si.time().uptime,
+    },
+    config: CONFIG,
+  };
 };

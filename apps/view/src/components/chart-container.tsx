@@ -8,6 +8,7 @@ import { useIsMobile } from '../services/mobile';
 type ContainerProps = {
   mobile: boolean;
   edges: [boolean, boolean, boolean, boolean];
+  loading: boolean;
 };
 const Container = styled.div<ContainerProps>`
   position: relative;
@@ -27,11 +28,14 @@ const Container = styled.div<ContainerProps>`
 
   > div {
     overflow: hidden;
+    ${({ edges: [top, right, bottom, left], loading }) =>
+      !loading &&
+      `
     position: absolute;
-    border-radius: ${({ edges: [top, right, bottom, left] }) =>
-      `${top ? '25px' : '10px'} ${right ? '25px' : '10px'} ${
-        bottom ? '25px' : '10px'
-      } ${left ? '25px' : '10px'}`};
+    border-radius: ${`${top ? '25px' : '10px'} ${right ? '25px' : '10px'} ${
+      bottom ? '25px' : '10px'
+    } ${left ? '25px' : '10px'}`};
+    `}
   }
 
   &:before {
@@ -73,6 +77,7 @@ export const ChartContainer = motion(
         ref={ref}
         mobile={isMobile}
         edges={props.edges ?? [true, true, true, true]}
+        loading={!props.contentLoaded}
       >
         {props.contentLoaded ? (
           <>
