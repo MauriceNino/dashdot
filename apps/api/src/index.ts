@@ -72,8 +72,11 @@ server.listen(CONFIG.port, async () => {
 
   try {
     console.log('Running speed-test (this may take a few minutes)...');
-    await runSpeedTest();
-    console.log('Speed-test completed successfully');
+    const usedRunner = await runSpeedTest();
+    console.log(
+      `Speed-test completed successfully [${usedRunner}]`,
+      getStaticServerInfo().network
+    );
   } catch (e) {
     console.warn(e);
   }

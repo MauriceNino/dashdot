@@ -144,7 +144,9 @@ const commandExists = async (command: string): Promise<boolean> => {
 };
 
 export const runSpeedTest = async (): Promise<void> => {
+  let usedRunner;
   if (CONFIG.accept_ookla_eula && (await commandExists('speedtest_ookla'))) {
+    usedRunner = 'ookla';
     const { stdout } = await exec('speedtest_ookla -f json');
     const json = JSON.parse(stdout);
 
@@ -155,6 +157,7 @@ export const runSpeedTest = async (): Promise<void> => {
     STATIC_INFO.network.publicIp =
       json.interface.externalIp ?? STATIC_INFO.network.publicIp;
   } else if (await commandExists('speedtest')) {
+    usedRunner = 'speedtest-cli';
     const { stdout } = await exec('speedtest --json');
     const json = JSON.parse(stdout);
 
@@ -164,6 +167,7 @@ export const runSpeedTest = async (): Promise<void> => {
     STATIC_INFO.network.publicIp =
       json.client.ip ?? STATIC_INFO.network.publicIp;
   } else {
+    usedRunner = 'universal';
     const universalSpeedtest = new UniversalSpeedtest({
       measureUpload: true,
       downloadUnit: SpeedUnits.bps,
@@ -180,7 +184,7 @@ export const runSpeedTest = async (): Promise<void> => {
       speed.client.ip ?? STATIC_INFO.network.publicIp;
   }
 
-  console.log('Speed-test result:', STATIC_INFO.network);
+  return usedRunner;
 };
 
 export const loadStaticServerInfo = async (): Promise<void> => {
