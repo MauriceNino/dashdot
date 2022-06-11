@@ -138,7 +138,7 @@ export const runSpeedTest = async (): Promise<void> => {
   const { stdout, stderr } = await exec('which speedtest');
 
   if (stderr === '' && stdout.trim() !== '') {
-    const { stdout } = await exec('speedtest -f-json');
+    const { stdout } = await exec('speedtest -f json');
     const json = JSON.parse(stdout);
 
     STATIC_INFO.network.speedDown =
