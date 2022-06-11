@@ -134,11 +134,18 @@ const loadNetworkInfo = async (): Promise<void> => {
   }
 };
 
-export const runSpeedTest = async (): Promise<void> => {
-  const { stdout, stderr } = await exec('which speedtest');
+const commandExists = async (command: string): Promise<boolean> => {
+  try {
+    const { stdout, stderr } = await exec(`which ${command}`);
+    return stderr === '' && stdout.trim() !== '';
+  } catch (e) {
+    return false;
+  }
+};
 
-  if (stderr === '' && stdout.trim() !== '') {
-    const { stdout } = await exec('speedtest -f json');
+export const runSpeedTest = async (): Promise<void> => {
+  if (CONFIG.accept_ookla_eula && (await commandExists('speedtest_ookla'))) {
+    const { stdout } = await exec('speedtest_ookla -f json');
     const json = JSON.parse(stdout);
 
     STATIC_INFO.network.speedDown =
@@ -147,6 +154,15 @@ export const runSpeedTest = async (): Promise<void> => {
       json.upload.bandwidth * 8 ?? STATIC_INFO.network.speedUp;
     STATIC_INFO.network.publicIp =
       json.interface.externalIp ?? STATIC_INFO.network.publicIp;
+  } else if (await commandExists('speedtest')) {
+    const { stdout } = await exec('speedtest --json');
+    const json = JSON.parse(stdout);
+
+    STATIC_INFO.network.speedDown =
+      json.download ?? STATIC_INFO.network.speedDown;
+    STATIC_INFO.network.speedUp = json.upload ?? STATIC_INFO.network.speedUp;
+    STATIC_INFO.network.publicIp =
+      json.client.ip ?? STATIC_INFO.network.publicIp;
   } else {
     const universalSpeedtest = new UniversalSpeedtest({
       measureUpload: true,
@@ -163,6 +179,8 @@ export const runSpeedTest = async (): Promise<void> => {
     STATIC_INFO.network.publicIp =
       speed.client.ip ?? STATIC_INFO.network.publicIp;
   }
+
+  console.log('Speed-test result:', STATIC_INFO.network);
 };
 
 export const loadStaticServerInfo = async (): Promise<void> => {

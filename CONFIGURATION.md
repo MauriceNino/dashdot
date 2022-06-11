@@ -9,10 +9,11 @@ in the [INSTALL.md](./INSTALL.md).
 
 <!-- markdownlint-disable -->
 
-| Variable              | Description                                                                                                                                                                                                         | Type   | Default Value                |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------- |
-| `DASHDOT_PORT`        | The port where the express backend is running (the backend serves the frontend, so it is the same port for both)                                                                                                    | number | `3001`                       |
-| `DASHDOT_WIDGET_LIST` | Change the order of the elements in the list, to change the position on the page, or remove an item from the list, to remove it from the page (The available options are: `os`, `cpu`, `storage`, `ram`, `network`) | string | `os,cpu,storage,ram,network` |
+| Variable                    | Description                                                                                                                                                                                                                                                                                                        | Type    | Default Value                |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | ---------------------------- |
+| `DASHDOT_PORT`              | The port where the express backend is running (the backend serves the frontend, so it is the same port for both)                                                                                                                                                                                                   | number  | `3001`                       |
+| `DASHDOT_WIDGET_LIST`       | Change the order of the elements in the list, to change the position on the page, or remove an item from the list, to remove it from the page (The available options are: `os`, `cpu`, `storage`, `ram`, `network`)                                                                                                | string  | `os,cpu,storage,ram,network` |
+| `DASHDOT_ACCEPT_OOKLA_EULA` | Use the newer and more accurate `speedtest` tool from Ookla, instead of the old `speedtest-cli` for your speedtests. When passing this flag, you accept Ooklas [EULA](https://www.speedtest.net/about/eula), [TERMS](https://www.speedtest.net/about/terms) and [PRIVACY](https://www.speedtest.net/about/privacy) | boolean | `false`                      |
 
 <!-- markdownlint-enable -->
 

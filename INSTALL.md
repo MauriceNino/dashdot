@@ -74,7 +74,8 @@ To run this repository from source, you need to have the following installed:
 - [node.js](https://nodejs.org/) (recommended version 18.x)
 - [yarn](https://yarnpkg.com/)
 - [git](https://git-scm.com/)
-- [speedtest](https://www.speedtest.net/apps/cli)
+- [speedtest](https://www.speedtest.net/apps/cli) (recommended)
+- or alternatively: [speedtest-cli](https://github.com/sivel/speedtest-cli)
 
 ### Setup
 

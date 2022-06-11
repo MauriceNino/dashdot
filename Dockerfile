@@ -3,28 +3,38 @@ FROM node:18-alpine AS base
 
 WORKDIR /app
 
+ARG TARGETPLATFORM
+
 RUN \
   apk update &&\
   apk --no-cache add \
     lsblk \
     dmidecode \
     util-linux \
-    lm-sensors
-
-ARG TARGETPLATFORM
-RUN \
-  if [ "$TARGETPLATFORM" = "linux/amd64" ] ; \
-    then wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-x86_64.tgz \
-      | tar xmoz -C /bin speedtest && speedtest --accept-license --accept-gdpr > /dev/null ;  \
-  elif [ "$TARGETPLATFORM" = "linux/arm64" ] ; \
-    then wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-aarch64.tgz \
-      | tar xmoz -C /bin speedtest && speedtest --accept-license --accept-gdpr > /dev/null && \
-      apk --no-cache add raspberrypi ; \
-  elif [ "$TARGETPLATFORM" = "linux/arm/v7" ] ; \
-    then wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-armhf.tgz \
-      | tar xmoz -C /bin speedtest && speedtest --accept-license --accept-gdpr > /dev/null && \
-      apk --no-cache add raspberrypi ; \
-  fi 
+    lm-sensors \
+    speedtest-cli &&\
+  if [ "$TARGETPLATFORM" = "linux/amd64" ] || [ "$(uname -m)" = "x86_64" ]; \
+    then \
+      wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-x86_64.tgz \
+        | tar xmoz -C /bin speedtest &&\
+      mv /bin/speedtest /bin/speedtest_ookla &&\
+      speedtest_ookla --accept-license --accept-gdpr > /dev/null; \
+  elif [ "$TARGETPLATFORM" = "linux/arm64" ] || [ "$(uname -m)" = "aarch64" ]; \
+    then \
+      wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-aarch64.tgz \
+        | tar xmoz -C /bin speedtest &&\
+      mv /bin/speedtest /bin/speedtest_ookla &&\
+      speedtest_ookla --accept-license --accept-gdpr > /dev/null &&\
+      apk --no-cache add raspberrypi; \
+  elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; \
+    then \
+      wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-armhf.tgz \
+        | tar xmoz -C /bin speedtest &&\
+      mv /bin/speedtest /bin/speedtest_ookla &&\
+      speedtest_ookla --accept-license --accept-gdpr > /dev/null &&\
+      apk --no-cache add raspberrypi; \
+  else echo "Unsupported platform"; exit 1; \
+  fi
 
 # DEV #
 FROM base AS dev
