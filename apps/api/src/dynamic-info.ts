@@ -89,7 +89,7 @@ export const getDynamicServerInfo = () => {
     }
   );
 
-  let [lastRx, lastTx] = [0, 0];
+  let [lastRx, lastTx, lastTs] = [0, 0, 0];
 
   const networkObs = createBufferedInterval(
     'Network',
@@ -102,14 +102,23 @@ export const getDynamicServerInfo = () => {
             `cat /internal_mnt/host_sys/class/net/${NET_INTERFACE}/statistics/tx_bytes;`
         );
         const [rx, tx] = stdout.split('\n').map(Number);
+        const thisTs = performance.now();
+        const dividend = (thisTs - lastTs) / 1000;
 
-        const result = {
-          up: tx - lastTx,
-          down: rx - lastRx,
-        };
+        const result =
+          lastTs === 0
+            ? {
+                up: 0,
+                down: 0,
+              }
+            : {
+                up: (tx - lastTx) / dividend,
+                down: (rx - lastRx) / dividend,
+              };
 
         lastRx = rx;
         lastTx = tx;
+        lastTs = thisTs;
 
         return result;
       } else {
