@@ -9,8 +9,6 @@ services:
       context: .
       dockerfile: Dockerfile
       target: dev
-      args:
-        TARGETPLATFORM: linux/amd64         # or linux/arm64
     working_dir: /app
     tty: true
     command: yarn run serve
