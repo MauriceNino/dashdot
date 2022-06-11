@@ -138,14 +138,15 @@ export const runSpeedTest = async (): Promise<void> => {
   const { stdout, stderr } = await exec('which speedtest');
 
   if (stderr === '' && stdout.trim() !== '') {
-    const { stdout } = await exec('speedtest --json');
+    const { stdout } = await exec('speedtest -f-json');
     const json = JSON.parse(stdout);
 
     STATIC_INFO.network.speedDown =
-      json.download ?? STATIC_INFO.network.speedDown;
-    STATIC_INFO.network.speedUp = json.upload ?? STATIC_INFO.network.speedUp;
+      json.download.bandwidth * 8 ?? STATIC_INFO.network.speedDown;
+    STATIC_INFO.network.speedUp =
+      json.upload.bandwidth * 8 ?? STATIC_INFO.network.speedUp;
     STATIC_INFO.network.publicIp =
-      json.client.ip ?? STATIC_INFO.network.publicIp;
+      json.interface.externalIp ?? STATIC_INFO.network.publicIp;
   } else {
     const universalSpeedtest = new UniversalSpeedtest({
       measureUpload: true,

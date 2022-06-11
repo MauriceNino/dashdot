@@ -122,7 +122,7 @@ steps:
       - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
       - docker buildx build
-        --platform linux/amd64,linux/arm/v7,linux/arm64/v8
+        --platform linux/amd64,linux/arm/v7,linux/arm64
         --target prod
         --label org.opencontainers.image.title="dash."
         --label org.opencontainers.image.description="dash. - a modern server dashboard"
