@@ -56,7 +56,8 @@ const loadOsInfo = async (): Promise<void> => {
     distro: info.distro,
     kernel: info.kernel,
     platform: info.platform,
-    release: info.release,
+    release:
+      info.release === 'unknown' ? info.build || 'unknown' : info.release,
     uptime: 0,
   };
 };
