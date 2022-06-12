@@ -67,6 +67,7 @@ steps:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
+      - apk add git
       - echo $DOCKER_ACCESS_KEY | docker login -u mauricenino --password-stdin
       - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
@@ -79,6 +80,8 @@ steps:
         --label org.opencontainers.image.url=https://github.com/MauriceNino/dashdot
         --label org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
         --label org.opencontainers.image.licenses=MIT
+        --build-arg VERSION=0.0.0-dev
+        --build-arg BUILDHASH=$(git log -1 --format="%H")
         -o type=registry
         -t mauricenino/dashdot:dev .
   - name: update & deploy server files (dev)
@@ -130,6 +133,8 @@ steps:
         --label org.opencontainers.image.url=https://github.com/MauriceNino/dashdot
         --label org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
         --label org.opencontainers.image.licenses=MIT
+        --build-arg VERSION=$(cat package.version)
+        --build-arg BUILDHASH=$(git log -1 --format="%H")
         -o type=registry
         -t mauricenino/dashdot:$(cat package.version)
         -t mauricenino/dashdot:latest .
@@ -181,4 +186,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: 3ee60b6a34bee3cad12b877635a11c93b788e36dbf51b2099d82c6624ecc8ae6
+hmac: 01253b4a116ce79ff319d78836bb3963dcc2c6e33bcc1f33777e16204671f786

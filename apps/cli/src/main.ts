@@ -6,6 +6,11 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 const execp = promisify(exec);
+const execpnoerr = async (cmd: string): Promise<string> => {
+  return execp(cmd)
+    .then(({ stdout }) => stdout)
+    .catch(() => '');
+};
 
 const inspectObj = (obj: any): string => {
   return inspect(obj, {
@@ -25,24 +30,27 @@ yargs(hideBin(process.argv))
     async () => {
       const isDocker = existsSync('/.dockerenv');
       const isPodman = existsSync('/run/.containerenv');
-      const { stdout: yarnVersion } = await execp('yarn --version');
-      const { stdout: nodeVersion } = await execp('node --version');
-      const { stdout: dashVersion } = await execp(
-        'cat package.json | grep version'
-      );
+      const yarnVersion = await execpnoerr('yarn --version');
+      const nodeVersion = await execpnoerr('node --version');
+      const buildInfoJson = await execpnoerr('cat version.json');
+      const gitHash = await execpnoerr('git log -1 --format="%H"');
+
+      const buildInfo = JSON.parse(buildInfoJson || '{}');
+      const version = buildInfo.version ?? 'unknown';
+      const buildhash = buildInfo.buildhash ?? gitHash;
 
       console.log(
         `
 INFO
 =========
-In Docker: ${isDocker}
-In Podman: ${isPodman}
-
 Yarn: ${yarnVersion.trim()}
 Node: ${nodeVersion.trim()}
-Dash: ${dashVersion.replace(/"/g, '').split(':')[1].trim()}
+Dash: ${version}
 
 Cwd: ${process.cwd()}
+Hash: ${buildhash}
+In Docker: ${isDocker}
+In Podman: ${isPodman}
       `.trim()
       );
     }
