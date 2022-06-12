@@ -145,9 +145,9 @@ const commandExists = async (command: string): Promise<boolean> => {
 
 export const runSpeedTest = async (): Promise<void> => {
   let usedRunner;
-  if (CONFIG.accept_ookla_eula && (await commandExists('speedtest_ookla'))) {
+  if (CONFIG.accept_ookla_eula && (await commandExists('speedtest'))) {
     usedRunner = 'ookla';
-    const { stdout } = await exec('speedtest_ookla -f json');
+    const { stdout } = await exec('speedtest -f json');
     const json = JSON.parse(stdout);
 
     STATIC_INFO.network.speedDown =
@@ -156,9 +156,9 @@ export const runSpeedTest = async (): Promise<void> => {
       json.upload.bandwidth * 8 ?? STATIC_INFO.network.speedUp;
     STATIC_INFO.network.publicIp =
       json.interface.externalIp ?? STATIC_INFO.network.publicIp;
-  } else if (await commandExists('speedtest')) {
+  } else if (await commandExists('speedtest-cli')) {
     usedRunner = 'speedtest-cli';
-    const { stdout } = await exec('speedtest --json');
+    const { stdout } = await exec('speedtest-cli --json');
     const json = JSON.parse(stdout);
 
     STATIC_INFO.network.speedDown =
