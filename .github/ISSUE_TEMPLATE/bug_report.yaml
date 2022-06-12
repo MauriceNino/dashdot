@@ -24,6 +24,12 @@ body:
       label: Relevant log output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
       render: shell
+  - type: textarea
+    id: cli-info
+    attributes:
+      label: Info output of dashdot cli
+      description: If you are running docker, please execute `docker exec CONTAINER yarn cli info` and paste the output. If you are running from source, just execute `yarn cli info` and paste the output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
   - type: dropdown
     id: browsers
     attributes:
