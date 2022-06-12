@@ -3,7 +3,8 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "view": "apps/view",
-    "common": "libs/common"
+    "cli": "apps/cli",
+    "common": "libs/common",
+    "view": "apps/view"
   }
 }
