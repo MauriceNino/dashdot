@@ -3,6 +3,8 @@ FROM node:18-alpine AS base
 
 WORKDIR /app
 
+ARG TARGETPLATFORM
+
 RUN \
   apk update &&\
   apk --no-cache add \
@@ -11,9 +13,25 @@ RUN \
     util-linux \
     lm-sensors \
     speedtest-cli &&\
-  apk --no-cache add \
-    raspberrypi \
-    || true
+  if [ "$TARGETPLATFORM" = "linux/amd64" ] || [ "$(uname -m)" = "x86_64" ]; \
+    then \
+      wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-x86_64.tgz \
+        | tar xmoz -C /usr/bin speedtest &&\
+      speedtest --accept-license --accept-gdpr > /dev/null; \
+  elif [ "$TARGETPLATFORM" = "linux/arm64" ] || [ "$(uname -m)" = "aarch64" ]; \
+    then \
+      wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-aarch64.tgz \
+        | tar xmoz -C /usr/bin speedtest &&\
+      speedtest --accept-license --accept-gdpr > /dev/null &&\
+      apk --no-cache add raspberrypi; \
+  elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; \
+    then \
+      wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-armhf.tgz \
+        | tar xmoz -C /usr/bin speedtest &&\
+      speedtest --accept-license --accept-gdpr > /dev/null &&\
+      apk --no-cache add raspberrypi; \
+  else echo "Unsupported platform"; exit 1; \
+  fi
 
 # DEV #
 FROM base AS dev
