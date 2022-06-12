@@ -65,8 +65,8 @@ const loadCpuInfo = async (): Promise<void> => {
   const info = await si.cpu();
 
   STATIC_INFO.cpu = {
-    brand: info.brand,
-    model: normalizeCpuModel(info.model),
+    brand: info.manufacturer,
+    model: normalizeCpuModel(info.brand),
     cores: info.physicalCores,
     threads: info.cores,
     frequency: info.speed,
