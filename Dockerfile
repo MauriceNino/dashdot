@@ -36,6 +36,11 @@ RUN \
 # DEV #
 FROM base AS dev
 
+RUN \
+  apk --no-cache add \
+    git &&\
+  git config --global --add safe.directory /app
+
 EXPOSE 3001
 EXPOSE 3000
 
