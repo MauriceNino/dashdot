@@ -1,3 +1,23 @@
+# [3.2.0](https://github.com/MauriceNino/dashdot/compare/v3.1.3...v3.2.0) (2022-06-12)
+
+
+### Bug Fixes
+
+* **api:** calculate network speed in relation to time diff ([55ec6b2](https://github.com/MauriceNino/dashdot/commit/55ec6b22d0668a5f31ea3a959586d35423a2ed5c))
+* **api:** match any mounts that are present at /mnt/host_* ([810e5a6](https://github.com/MauriceNino/dashdot/commit/810e5a6dac7e71ee28fd388bb0570d0378bba7ea)), closes [#108](https://github.com/MauriceNino/dashdot/issues/108)
+
+
+### Features
+
+* **view:** show error widget when static data cant be loaded ([89d9fcc](https://github.com/MauriceNino/dashdot/commit/89d9fcc3ab976fc39e40f53a271984453298c0bd))
+
+## [3.1.3](https://github.com/MauriceNino/dashdot/compare/v3.1.2...v3.1.3) (2022-06-09)
+
+
+### Bug Fixes
+
+* reduced docker image size ([d29ed54](https://github.com/MauriceNino/dashdot/commit/d29ed546aa9b4273191c671282a5c1d9873e9d34))
+
 ## [3.1.2](https://github.com/MauriceNino/dashdot/compare/v3.1.1...v3.1.2) (2022-06-09)
 
 
