@@ -52,6 +52,9 @@ EXPOSE 3000
 # BUILD #
 FROM base as build
 
+ARG BUILDHASH
+ARG VERSION
+
 RUN \
   /bin/echo -e ">> installing dependencies (build)" &&\
   apk --no-cache add \
@@ -59,7 +62,8 @@ RUN \
     make \
     clang \
     build-base &&\
-  git config --global --add safe.directory /app
+  git config --global --add safe.directory /app &&\
+  /bin/echo -e "{\"version\":\"$VERSION\",\"buildhash\":\"$BUILDHASH\"}" > /app/version.json
 
 COPY . ./
 
@@ -71,6 +75,7 @@ RUN \
 FROM base as prod
 
 COPY --from=build /app/package.json .
+COPY --from=build /app/version.json .
 COPY --from=build /app/.yarn/releases/ .yarn/releases/
 COPY --from=build /app/dist/ dist/
 
