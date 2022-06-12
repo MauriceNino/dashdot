@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/MauriceNino/dashdot/compare/v3.2.0...v3.2.1) (2022-06-12)
+
+
+### Bug Fixes
+
+* **api:** invalid brand & model ([51f593e](https://github.com/MauriceNino/dashdot/commit/51f593e6b3b5e2f4c20f7ee43159ee83ccb6808d))
+
 # [3.2.0](https://github.com/MauriceNino/dashdot/compare/v3.1.3...v3.2.0) (2022-06-12)
 
 
