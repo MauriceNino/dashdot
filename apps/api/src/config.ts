@@ -13,6 +13,7 @@ const lst = (item: string): any[] => item.split(',');
 export const CONFIG: Config = {
   port: numNull(penv('PORT')) ?? 3001,
   widget_list: lst(penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network'),
+  accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
 
   disable_host: penv('DISABLE_HOST') === 'true',
   os_label_list: lst(penv('OS_LABEL_LIST') ?? 'os,arch,up_since'),
