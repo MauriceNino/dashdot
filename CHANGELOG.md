@@ -1,3 +1,34 @@
+## [3.3.1](https://github.com/MauriceNino/dashdot/compare/v3.3.0...v3.3.1) (2022-06-13)
+
+
+### Bug Fixes
+
+* **deps:** revert - upgrade systeminformation to v5.11.17 ([41f2150](https://github.com/MauriceNino/dashdot/commit/41f2150e401344f66b74ba2f0cc4078c4fbf8632)), closes [#114](https://github.com/MauriceNino/dashdot/issues/114)
+
+# [3.3.0](https://github.com/MauriceNino/dashdot/compare/v3.2.1...v3.3.0) (2022-06-13)
+
+
+### Bug Fixes
+
+* **api,docker:** fixed speedtest bugs ([dbfbc68](https://github.com/MauriceNino/dashdot/commit/dbfbc68fef77bf1296378e82db96722b46e77040))
+* **api,docker:** fixed speedtest install ([2ae1be2](https://github.com/MauriceNino/dashdot/commit/2ae1be2ed0f968e3a5b01b9d88e0067bf5af24d8))
+* **api,docker:** replaced speedtest-cli with speedtest ([3f1b5ac](https://github.com/MauriceNino/dashdot/commit/3f1b5ac7bc273455e38815beaae7442a6aca238f))
+* **api:** fixed release for Arch Linux ([168c759](https://github.com/MauriceNino/dashdot/commit/168c759a8bf52862d583d84643c339e143f137b8))
+
+
+### Features
+
+* **api:** add log output for speedtest runner ([26267b2](https://github.com/MauriceNino/dashdot/commit/26267b2668d90648c815938e313a8577b5d3bba5))
+* **cli:** add buildhash and version to info output ([c683ee4](https://github.com/MauriceNino/dashdot/commit/c683ee4c5969334b51b9abe9a100635cd7413023))
+* **cli:** add cli to better handle issues ([0c7944f](https://github.com/MauriceNino/dashdot/commit/0c7944fc55ed6cfb87397da4243e20555f06acd8))
+
+## [3.2.1](https://github.com/MauriceNino/dashdot/compare/v3.2.0...v3.2.1) (2022-06-12)
+
+
+### Bug Fixes
+
+* **api:** invalid brand & model ([51f593e](https://github.com/MauriceNino/dashdot/commit/51f593e6b3b5e2f4c20f7ee43159ee83ccb6808d))
+
 # [3.2.0](https://github.com/MauriceNino/dashdot/compare/v3.1.3...v3.2.0) (2022-06-12)
 
 

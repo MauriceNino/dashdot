@@ -58,7 +58,7 @@
     "socket.io-client": "4.5.1",
     "store": "2.0.12",
     "styled-components": "5.3.5",
-    "systeminformation": "5.11.17",
+    "systeminformation": "5.11.16",
     "tslib": "2.4.0",
     "universal-speedtest": "2.0.5",
     "use-color-scheme": "1.1.3",
