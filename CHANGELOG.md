@@ -1,3 +1,10 @@
+## [3.3.2](https://github.com/MauriceNino/dashdot/compare/v3.3.1...v3.3.2) (2022-06-13)
+
+
+### Bug Fixes
+
+* **view:** missing box-shadow on charts (firefox) ([02bf98b](https://github.com/MauriceNino/dashdot/commit/02bf98bf6ab52e409b86e4366654dd221b95ba01))
+
 ## [3.3.1](https://github.com/MauriceNino/dashdot/compare/v3.3.0...v3.3.1) (2022-06-13)
 
 
