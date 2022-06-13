@@ -1,3 +1,10 @@
+## [3.3.1](https://github.com/MauriceNino/dashdot/compare/v3.3.0...v3.3.1) (2022-06-13)
+
+
+### Bug Fixes
+
+* **deps:** revert - upgrade systeminformation to v5.11.17 ([41f2150](https://github.com/MauriceNino/dashdot/commit/41f2150e401344f66b74ba2f0cc4078c4fbf8632)), closes [#114](https://github.com/MauriceNino/dashdot/issues/114)
+
 # [3.3.0](https://github.com/MauriceNino/dashdot/compare/v3.2.1...v3.3.0) (2022-06-13)
 
 
