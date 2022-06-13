@@ -1,6 +1,6 @@
 {
   "name": "dashdot",
-  "version": "2.2.1",
+  "version": "0.0.0",
   "description": "dash. - a modern server dashboard",
   "license": "MIT",
   "private": true,
@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "start": "node .",
+    "cli": "node dist/apps/cli/main.js",
     "build": "nx run-many --target=build --configuration=production --all=true --parallel=true",
     "serve": "nx run-many --target=serve --all=true --parallel=true",
     "dev": "docker-compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
@@ -57,12 +58,13 @@
     "socket.io-client": "4.5.1",
     "store": "2.0.12",
     "styled-components": "5.3.5",
-    "systeminformation": "5.11.16",
+    "systeminformation": "5.11.17",
     "tslib": "2.4.0",
     "universal-speedtest": "2.0.5",
     "use-color-scheme": "1.1.3",
     "util": "0.12.4",
-    "web-vitals": "2.1.4"
+    "web-vitals": "2.1.4",
+    "yargs": "17.5.1"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",
