@@ -48,6 +48,8 @@ const ChartArea = styled.div<ChartAreaProps>`
     position: ${({ mobile }) => (mobile ? 'relative' : 'absolute')};
     bottom: ${({ mobile }) => (mobile ? '0' : '-10px')};
     right: -10px;
+
+    z-index: 1;
   }
 `;
 
