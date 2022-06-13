@@ -6595,10 +6595,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.22.8":
-  version: 3.22.8
-  resolution: "core-js@npm:3.22.8"
-  checksum: c79bcfea37920a5da880ad1fc8336355e833c83998bb28cd45cc59eef4d9824dd8d59ccd24d6b18ff88f284d53d9eef021ddbd2b5ab1c6305b01e98c1402e510
+"core-js@npm:3.23.0":
+  version: 3.23.0
+  resolution: "core-js@npm:3.23.0"
+  checksum: 4fcfec8133bd31ae34482bcdf891d8dcff4a64de656b82749c56d984b227cc107f755104aefb884b284f78d3e59fad24592de039ff7f78e60316cd4ade734af4
   languageName: node
   linkType: hard
 
@@ -7092,7 +7092,7 @@ __metadata:
     babel-plugin-styled-components: 2.0.7
     babel-plugin-syntax-jsx: 6.18.0
     commitizen: 4.2.4
-    core-js: 3.22.8
+    core-js: 3.23.0
     cors: 2.8.5
     dotenv: 16.0.1
     eslint: 8.17.0
@@ -7127,8 +7127,8 @@ __metadata:
     socket.io-client: 4.5.1
     store: 2.0.12
     styled-components: 5.3.5
-    systeminformation: 5.11.18
-    ts-jest: 28.0.4
+    systeminformation: 5.11.20
+    ts-jest: 28.0.5
     ts-node: 10.8.1
     tslib: 2.4.0
     typescript: 4.7.3
@@ -17201,12 +17201,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:5.11.18":
-  version: 5.11.18
-  resolution: "systeminformation@npm:5.11.18"
+"systeminformation@npm:5.11.20":
+  version: 5.11.20
+  resolution: "systeminformation@npm:5.11.20"
   bin:
     systeminformation: lib/cli.js
-  checksum: baa13286db65693c940a6a4524ceec3a848e90fb2163403526999bd79dd0abac76cfc8429fa9c10651c775f634648cfe18e1d9d77ac6c5c8b2fd5b462c288f50
+  checksum: 06d1a0aad0d0fef60a41643501eb9d2497a7feffecdfc1391fd26a10929248c01278c1704b93a2b3277cc1fe1a71a9fcb9f115b7e3f21250b19e424bc799e583
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
@@ -17520,9 +17520,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:28.0.4":
-  version: 28.0.4
-  resolution: "ts-jest@npm:28.0.4"
+"ts-jest@npm:28.0.5":
+  version: 28.0.5
+  resolution: "ts-jest@npm:28.0.5"
   dependencies:
     bs-logger: 0.x
     fast-json-stable-stringify: 2.x
@@ -17531,7 +17531,7 @@ __metadata:
     lodash.memoize: 4.x
     make-error: 1.x
     semver: 7.x
-    yargs-parser: ^20.x
+    yargs-parser: ^21.0.1
   peerDependencies:
     "@babel/core": ">=7.0.0-beta.0 <8"
     babel-jest: ^28.0.0
@@ -17546,7 +17546,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: 21028e1917f60f086e0af6d057039f31385ca0f5b85736dc19bdd670ccbb5675c7ecde2eb30a5d01fcccdc7a59054498db0c4419306fc5fab0a596e3cf001023
+  checksum: 53e05db5b7e1e4f4137c47594f902f5caf585ebc73dda67c4552c1ed784d4fde532c5693a61d877d9462290c7965233c2124050b0f00fd4c85cde9bb1a51c974
   languageName: node
   linkType: hard
 
@@ -18763,14 +18763,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs-parser@npm:21.0.1, yargs-parser@npm:^21.0.0":
+"yargs-parser@npm:21.0.1, yargs-parser@npm:^21.0.0, yargs-parser@npm:^21.0.1":
   version: 21.0.1
   resolution: "yargs-parser@npm:21.0.1"
   checksum: c3ea2ed12cad0377ce3096b3f138df8267edf7b1aa7d710cd502fe16af417bafe4443dd71b28158c22fcd1be5dfd0e86319597e47badf42ff83815485887323a
   languageName: node
   linkType: hard
 
-"yargs-parser@npm:^20.2.2, yargs-parser@npm:^20.2.3, yargs-parser@npm:^20.x":
+"yargs-parser@npm:^20.2.2, yargs-parser@npm:^20.2.3":
   version: 20.2.9
   resolution: "yargs-parser@npm:20.2.9"
   checksum: 8bb69015f2b0ff9e17b2c8e6bfe224ab463dd00ca211eece72a4cd8a906224d2703fb8a326d36fdd0e68701e201b2a60ed7cf81ce0fd9b3799f9fe7745977ae3
