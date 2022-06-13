@@ -7127,7 +7127,7 @@ __metadata:
     socket.io-client: 4.5.1
     store: 2.0.12
     styled-components: 5.3.5
-    systeminformation: 5.11.16
+    systeminformation: 5.11.18
     ts-jest: 28.0.4
     ts-node: 10.8.1
     tslib: 2.4.0
@@ -17201,12 +17201,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:5.11.16":
-  version: 5.11.16
-  resolution: "systeminformation@npm:5.11.16"
+"systeminformation@npm:5.11.18":
+  version: 5.11.18
+  resolution: "systeminformation@npm:5.11.18"
   bin:
     systeminformation: lib/cli.js
-  checksum: 4e4fb4c9c86c658c7e07a7661ac85a102bfb0a134f76cc5c5e7daf7ba13f9b43895d4ce4d80e55275a3395d254d20a84c53f036f1baececf5b94028ec93242c4
+  checksum: baa13286db65693c940a6a4524ceec3a848e90fb2163403526999bd79dd0abac76cfc8429fa9c10651c775f634648cfe18e1d9d77ac6c5c8b2fd5b462c288f50
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
