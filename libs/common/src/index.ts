@@ -63,6 +63,7 @@ export type Config = {
   // General
   port: number;
   widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network')[];
+  accept_ookla_eula: boolean;
 
   // OS Widget
   disable_host: boolean;

@@ -1,0 +1,50 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cli/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/cli",
+        "main": "apps/cli/src/main.ts",
+        "tsConfig": "apps/cli/tsconfig.json"
+      },
+      "configurations": {
+        "production": {
+          "externalDependencies": "none",
+          "optimization": true,
+          "inspect": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "cli:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cli/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/cli",
+        "command": "prettier --check ."
+      },
+      "dependsOn": [
+        {
+          "target": "lint",
+          "projects": "self"
+        }
+      ]
+    }
+  },
+  "tags": []
+}

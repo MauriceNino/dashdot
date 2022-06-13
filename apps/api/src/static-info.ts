@@ -56,7 +56,8 @@ const loadOsInfo = async (): Promise<void> => {
     distro: info.distro,
     kernel: info.kernel,
     platform: info.platform,
-    release: info.release,
+    release:
+      info.release === 'unknown' ? info.build || 'unknown' : info.release,
     uptime: 0,
   };
 };
@@ -134,11 +135,31 @@ const loadNetworkInfo = async (): Promise<void> => {
   }
 };
 
-export const runSpeedTest = async (): Promise<void> => {
-  const { stdout, stderr } = await exec('which speedtest');
+const commandExists = async (command: string): Promise<boolean> => {
+  try {
+    const { stdout, stderr } = await exec(`which ${command}`);
+    return stderr === '' && stdout.trim() !== '';
+  } catch (e) {
+    return false;
+  }
+};
 
-  if (stderr === '' && stdout.trim() !== '') {
-    const { stdout } = await exec('speedtest --json');
+export const runSpeedTest = async (): Promise<void> => {
+  let usedRunner;
+  if (CONFIG.accept_ookla_eula && (await commandExists('speedtest'))) {
+    usedRunner = 'ookla';
+    const { stdout } = await exec('speedtest -f json');
+    const json = JSON.parse(stdout);
+
+    STATIC_INFO.network.speedDown =
+      json.download.bandwidth * 8 ?? STATIC_INFO.network.speedDown;
+    STATIC_INFO.network.speedUp =
+      json.upload.bandwidth * 8 ?? STATIC_INFO.network.speedUp;
+    STATIC_INFO.network.publicIp =
+      json.interface.externalIp ?? STATIC_INFO.network.publicIp;
+  } else if (await commandExists('speedtest-cli')) {
+    usedRunner = 'speedtest-cli';
+    const { stdout } = await exec('speedtest-cli --json');
     const json = JSON.parse(stdout);
 
     STATIC_INFO.network.speedDown =
@@ -147,6 +168,7 @@ export const runSpeedTest = async (): Promise<void> => {
     STATIC_INFO.network.publicIp =
       json.client.ip ?? STATIC_INFO.network.publicIp;
   } else {
+    usedRunner = 'universal';
     const universalSpeedtest = new UniversalSpeedtest({
       measureUpload: true,
       downloadUnit: SpeedUnits.bps,
@@ -162,6 +184,8 @@ export const runSpeedTest = async (): Promise<void> => {
     STATIC_INFO.network.publicIp =
       speed.client.ip ?? STATIC_INFO.network.publicIp;
   }
+
+  return usedRunner;
 };
 
 export const loadStaticServerInfo = async (): Promise<void> => {
