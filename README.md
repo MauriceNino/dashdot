@@ -3,11 +3,18 @@
   <img src=".github/images/banner_muted.png" alt="dash. - a modern server dashboard">
 </h1>
 
-<div align="center">
+<p align="center">
   <a href="https://drone.mauz.io/MauriceNino/dashdot" target="_blank">
-    <img src="https://drone.mauz.io/api/badges/MauriceNino/dashdot/status.svg">
+    <img title="Drone" src="https://drone.mauz.io/api/badges/MauriceNino/dashdot/status.svg">
   </a>
-</div>
+
+  <a href="https://discord.gg/3teHFBNQ9W" target="_blank">
+    <img title="Discord" src="https://discord.com/api/guilds/986251291577688064/widget.png?style=shield">
+  </a>
+</p>
+<p align="center">
+  <i>Feel free to join the <b>Discord</b> and <b>star the repo</b> if you like the project!</i>
+</p>
 
 <br/>
 
