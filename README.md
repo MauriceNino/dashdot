@@ -3,11 +3,18 @@
   <img src=".github/images/banner_muted.png" alt="dash. - a modern server dashboard">
 </h1>
 
-<div align="center">
+<p align="center">
   <a href="https://drone.mauz.io/MauriceNino/dashdot" target="_blank">
-    <img src="https://drone.mauz.io/api/badges/MauriceNino/dashdot/status.svg">
+    <img title="Drone" src="https://drone.mauz.io/api/badges/MauriceNino/dashdot/status.svg">
   </a>
-</div>
+
+  <a href="https://discord.gg/3teHFBNQ9W" target="_blank">
+    <img title="Discord" src="https://discord.com/api/guilds/986251291577688064/widget.png?style=shield">
+  </a>
+</p>
+<p align="center">
+  <i>Feel free to join the <b>Discord</b> and <b>star the repo</b> if you like the project!</i>
+</p>
 
 <br/>
 
@@ -39,7 +46,7 @@
 
 **dash.** is a open-source project, so any contribution is highly appreciated.
 If you are interested in further developing this project, have a look at the
-[Contributing.md](./CONTRIBUTING.md).
+[Contributing.md](./.github/CONTRIBUTING.md).
 
 In case you want to financially support this project, you can visit my
 [GitHub Sponsors](https://github.com/sponsors/MauriceNino), or my [Ko-Fi](https://ko-fi.com/mauricenino).
@@ -56,10 +63,10 @@ In case you want to financially support this project, you can visit my
 
 ## Documentation
 
-- [Installation Options](./INSTALL.md)
-- [Configuration Options](./CONFIGURATION.md)
-- [Contributing](./CONTRIBUTING.md)
-- [Changelog](./CHANGELOG.md)
+- [Installation Options](./.github/INSTALL.md)
+- [Configuration Options](./.github/CONFIGURATION.md)
+- [Contributing](./.github/CONTRIBUTING.md)
+- [Changelog](./.github/CHANGELOG.md)
 
 ## Quick Install (Docker)
 
@@ -78,6 +85,6 @@ docker container run -it \
 ```
 
 To get more information on why which flag is needed, or if you want to use other
-install options instead (`docker-compose`, or from source), have a look at the [INSTALL.md](./INSTALL.md).
+install options instead (`docker-compose`, or from source), have a look at the [INSTALL.md](./.github/INSTALL.md).
 
-To read more about configuration options, you can visit the [CONFIGURATION.md](./CONFIGURATION.md).
+To read more about configuration options, you can visit the [CONFIGURATION.md](./.github/CONFIGURATION.md).
