@@ -6595,10 +6595,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.23.0":
-  version: 3.23.0
-  resolution: "core-js@npm:3.23.0"
-  checksum: 4fcfec8133bd31ae34482bcdf891d8dcff4a64de656b82749c56d984b227cc107f755104aefb884b284f78d3e59fad24592de039ff7f78e60316cd4ade734af4
+"core-js@npm:3.23.1":
+  version: 3.23.1
+  resolution: "core-js@npm:3.23.1"
+  checksum: 460328e0b743900d48fc744aab475f6dabdae498cc73f6d038321b0ae1488cb5e73d1670b5914abfe7dd84d0843a828b5d4dd3eba0a5b6a4450f0d7094cda2a5
   languageName: node
   linkType: hard
 
@@ -7092,7 +7092,7 @@ __metadata:
     babel-plugin-styled-components: 2.0.7
     babel-plugin-syntax-jsx: 6.18.0
     commitizen: 4.2.4
-    core-js: 3.23.0
+    core-js: 3.23.1
     cors: 2.8.5
     dotenv: 16.0.1
     eslint: 8.17.0
