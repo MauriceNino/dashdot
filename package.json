@@ -114,7 +114,7 @@
     "inquirer": "8.2.4",
     "jest": "28.1.1",
     "nx": "14.3.1",
-    "prettier": "2.6.2",
+    "prettier": "2.7.0",
     "prop-types": "15.8.1",
     "react-test-renderer": "18.1.0",
     "semantic-release-plus": "20.0.0",
