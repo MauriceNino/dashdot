@@ -27,11 +27,6 @@
     "postinstall": "husky install",
     "commit": "git-cz"
   },
-  "config": {
-    "commitizen": {
-      "path": "@commitlint/cz-commitlint"
-    }
-  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.1.1",
     "@fortawesome/free-brands-svg-icons": "6.1.1",
@@ -121,6 +116,69 @@
     "ts-jest": "28.0.5",
     "ts-node": "10.8.1",
     "typescript": "4.7.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "body-max-line-length": [
+        1,
+        "always",
+        100
+      ],
+      "footer-max-line-length": [
+        1,
+        "always",
+        100
+      ]
+    }
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "jsxSingleQuote": true
+  },
+  "release": {
+    "branches": [
+      "main",
+      "dev"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": ".github/CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "successComment": ":tada: This issue has been resolved in version ${nextRelease.version}\n\nPlease check the [changelog](https://github.com/MauriceNino/dashdot/blob/main/CHANGELOG.md) for more details.",
+          "failComment": false,
+          "failTitle": false,
+          "labels": false,
+          "releasedLabels": false
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            ".github/CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [CI SKIP]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
   },
   "packageManager": "yarn@3.2.1"
 }
