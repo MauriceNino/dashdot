@@ -1,6 +1,7 @@
 import { exec as exaca } from 'child_process';
 import * as fs from 'fs';
 import { promisify } from 'util';
+import { CONFIG } from './config';
 
 const exec = promisify(exaca);
 
@@ -18,11 +19,37 @@ export const setupNetworking = async () => {
     }
 
     try {
+      if (CONFIG.use_network_interface !== '') {
+        if (
+          fs.existsSync(
+            `/internal_mnt/host_sys/class/net/${CONFIG.use_network_interface}`
+          )
+        ) {
+          NET_INTERFACE = CONFIG.use_network_interface;
+          console.log(`Using network interface from config "${NET_INTERFACE}"`);
+
+          return;
+        } else {
+          console.warn(
+            `Network interface "${CONFIG.use_network_interface}" not found, using first available interface`
+          );
+        }
+      }
+
       const { stdout } = await exec(
         "nsenter --net=/mnt/host_ns_net route | grep default | awk '{print $8}'"
       );
 
-      const iface = stdout.trim();
+      const ifaces = stdout.split('\n');
+      const iface = ifaces[0].trim();
+
+      if (ifaces.length > 1) {
+        console.warn(
+          `Multiple default network interfaces found [${ifaces.join(
+            ', '
+          )}], using "${iface}"`
+        );
+      }
 
       if (iface !== '') {
         NET_INTERFACE = iface;
