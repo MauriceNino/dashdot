@@ -1,3 +1,15 @@
+# [3.5.0](https://github.com/MauriceNino/dashdot/compare/v3.4.0...v3.5.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* **view:** add max-height to widgets ([8e9ccfb](https://github.com/MauriceNino/dashdot/commit/8e9ccfb644a5592e5e7b951cc056a2bce7187599))
+
+
+### Features
+
+* **view:** add pagination for servers with too many drives ([bb6fbfb](https://github.com/MauriceNino/dashdot/commit/bb6fbfb8f9262d61b4a4fecdf1a48856f5d55e79))
+
 # [3.4.0](https://github.com/MauriceNino/dashdot/compare/v3.3.3...v3.4.0) (2022-06-15)
 
 
