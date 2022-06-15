@@ -17,6 +17,7 @@ export const CONFIG: Config = {
     penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network'
   ) as any[],
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
+  use_imperial: penv('USE_IMPERIAL') === 'true',
 
   disable_host: penv('DISABLE_HOST') === 'true',
   os_label_list: lst(penv('OS_LABEL_LIST') ?? 'os,arch,up_since') as any[],

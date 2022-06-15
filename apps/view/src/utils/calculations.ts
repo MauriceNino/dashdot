@@ -23,3 +23,6 @@ export const bytePrettyPrint = (byte: number): string => {
     ? `${(byte / 1024).toFixed(1)} KB`
     : `${byte.toFixed(1)} B`;
 };
+
+export const celsiusToFahrenheit = (celsius: number): number =>
+  (celsius * 9) / 5 + 32;
