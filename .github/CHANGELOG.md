@@ -1,3 +1,17 @@
+# [3.4.0](https://github.com/MauriceNino/dashdot/compare/v3.3.3...v3.4.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* **api:** error on multiple default network interfaces ([3cf8774](https://github.com/MauriceNino/dashdot/commit/3cf877458cc938e0ae1a949935afee06b52f6184)), closes [#118](https://github.com/MauriceNino/dashdot/issues/118)
+
+
+### Features
+
+* **api, view:** add raid information to storage widget ([ba84d34](https://github.com/MauriceNino/dashdot/commit/ba84d34d2c403c7b1f8cfcb30de78593da58bf57)), closes [#40](https://github.com/MauriceNino/dashdot/issues/40)
+* **api:** add option to select the used network interface ([8b6a78d](https://github.com/MauriceNino/dashdot/commit/8b6a78d6a9f18dfb4dbfdf73d797b94bb6b33b68)), closes [#117](https://github.com/MauriceNino/dashdot/issues/117)
+* **view:** add option to show in imperial units ([d4b1f69](https://github.com/MauriceNino/dashdot/commit/d4b1f69a36e02c8e5b762cabb7b63225e9be3f10))
+
 ## [3.3.3](https://github.com/MauriceNino/dashdot/compare/v3.3.2...v3.3.3) (2022-06-13)
 
 
