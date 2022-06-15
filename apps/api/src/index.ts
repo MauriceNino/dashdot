@@ -1,3 +1,4 @@
+import { loadCommons } from '@dash/common';
 import * as cors from 'cors';
 import * as express from 'express';
 import * as http from 'http';
@@ -87,3 +88,4 @@ server.listen(CONFIG.port, async () => {
 });
 
 server.on('error', console.error);
+loadCommons();
