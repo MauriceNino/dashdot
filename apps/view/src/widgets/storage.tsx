@@ -1,6 +1,6 @@
 import { Config, StorageInfo, StorageLoad } from '@dash/common';
 import { faHdd } from '@fortawesome/free-solid-svg-icons';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Cell } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultPieChart } from '../components/chart-components';
@@ -23,52 +23,103 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   const theme = useTheme();
   const override = config.override;
 
-  let infos: { label: string; value?: string }[];
+  const layout = useMemo(
+    () =>
+      data.layout.reduce(
+        (acc, curr, i) => {
+          const existing = acc.find(
+            o =>
+              curr.raidGroup != null &&
+              curr.raidGroup !== '' &&
+              o.raidGroup === curr.raidGroup
+          );
 
-  if (data.layout && data.layout.length > 1) {
-    infos = data.layout.map((s, i) => {
-      //@ts-ignore
-      const brand = override[`storage_brand_${i + 1}`] ?? s.brand;
-      //@ts-ignore
-      const type = override[`storage_type_${i + 1}`] ?? s.type;
-      //@ts-ignore
-      const size = override[`storage_size_${i + 1}`] ?? s.size;
+          if (existing) {
+            existing.brands = [
+              ...existing.brands,
+              override.storage_brands[i] ?? curr.brand,
+            ];
+            existing.types = [
+              ...existing.types,
+              override.storage_types[i] ?? curr.type,
+            ];
+          } else {
+            acc.push({
+              brands: [override.storage_brands[i] ?? curr.brand],
+              types: [override.storage_types[i] ?? curr.type],
+              size: override.storage_sizes[i] ?? curr.size,
+              raidGroup: curr.raidGroup,
+            });
+          }
 
-      return {
-        label: `Drive ${i + 1}`,
-        value: `${brand} ${type} (${bytePrettyPrint(size)})`,
-      };
-    });
-  } else {
-    const brand = override.storage_brand_1 ?? data.layout[0]?.brand;
-    const size = override.storage_size_1 ?? data.layout[0]?.size;
-    const type = override.storage_type_1 ?? data.layout[0]?.type;
-
-    infos = toInfoTable(
-      config.storage_label_list,
-      {
-        brand: 'Brand',
-        size: 'Size',
-        type: 'Type',
-      },
-      [
-        {
-          key: 'brand',
-          value: brand,
+          return acc;
         },
-        {
-          key: 'size',
-          value: size ? bytePrettyPrint(size) : '',
-        },
-        {
-          key: 'type',
-          value: type,
-        },
-      ]
-    );
-  }
+        [] as {
+          brands: string[];
+          types: string[];
+          size: number;
+          raidGroup?: string;
+        }[]
+      ),
+    [
+      data.layout,
+      override.storage_brands,
+      override.storage_sizes,
+      override.storage_types,
+    ]
+  );
 
-  const size = data.layout.reduce((acc, s) => (acc = acc + s.size), 0) ?? 0;
+  const infos = useMemo(() => {
+    if (layout && layout.length > 1) {
+      return layout.map(s => {
+        const brand = s.brands.map((b, i) => `${b} ${s.types[i]}`).join(', ');
+        const size = s.size;
+        const raidGroup = s.raidGroup;
+
+        return {
+          label: raidGroup ? `RAID\n=> ${raidGroup}` : 'Drive',
+          value: `${brand}\n=> ${bytePrettyPrint(size)}`,
+        };
+      });
+    } else {
+      const brand = layout[0].brands.join(', ');
+      const size = layout[0].size;
+      const type = layout[0].types.join(', ');
+      const isRaid = layout[0].raidGroup != null;
+
+      return toInfoTable(
+        isRaid
+          ? config.storage_label_list
+          : config.storage_label_list.filter(x => x !== 'raid'),
+        {
+          brand: layout[0].brands.length > 1 ? 'Brands' : 'Brand',
+          size: 'Size',
+          type: layout[0].types.length > 1 ? 'Types' : 'Type',
+          raid: 'Raid',
+        },
+        [
+          {
+            key: 'brand',
+            value: brand,
+          },
+          {
+            key: 'size',
+            value: size ? bytePrettyPrint(size) : '',
+          },
+          {
+            key: 'type',
+            value: type,
+          },
+          {
+            key: 'raid',
+            value: layout[0].raidGroup,
+          },
+        ]
+      );
+    }
+  }, [config.storage_label_list, layout]);
+
+  const size = layout.reduce((acc, s) => (acc = acc + s.size), 0) ?? 0;
   const available = Math.max(size - (load ?? 0), 1);
 
   return (

@@ -19,7 +19,8 @@ const InfoTextLabel = styled(ThemedText)`
   font-size: 0.8rem;
   padding-bottom: 3px;
   padding-right: 15px;
-  white-space: nowrap;
+  line-height: 1.5;
+  white-space: pre;
 `;
 
 const InfoTextValue = styled(ThemedText)`
