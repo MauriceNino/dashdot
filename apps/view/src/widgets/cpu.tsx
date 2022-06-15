@@ -158,6 +158,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
           },
         ]
       )}
+      infosPerPage={7}
       icon={faMicrochip}
       extraContent={
         <WidgetSwitch
