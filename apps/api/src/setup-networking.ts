@@ -40,7 +40,16 @@ export const setupNetworking = async () => {
         "nsenter --net=/mnt/host_ns_net route | grep default | awk '{print $8}'"
       );
 
-      const iface = stdout.trim();
+      const ifaces = stdout.split('\n');
+      const iface = ifaces[0].trim();
+
+      if (ifaces.length > 1) {
+        console.warn(
+          `Multiple default network interfaces found [${ifaces.join(
+            ', '
+          )}], using "${iface}"`
+        );
+      }
 
       if (iface !== '') {
         NET_INTERFACE = iface;
