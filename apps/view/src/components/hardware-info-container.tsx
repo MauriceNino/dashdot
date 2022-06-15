@@ -1,7 +1,8 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { motion } from 'framer-motion';
-import React, { forwardRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Children, forwardRef, ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 import { InfoTable, InfoTableProps } from './info-table';
@@ -85,11 +86,30 @@ const InfoIcon = styled.div<HardwareInfoProps>`
   }
 `;
 
+const InfoHeadingContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 30px 30px 10px 30px;
+`;
+
 const InfoHeading = styled(ThemedText)`
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 30px 30px 10px 30px;
 `;
+
+const Controls = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+
+  svg {
+    cursor: pointer;
+    color: ${props => props.theme.colors.text};
+  }
+`;
+
+const IconContainer = styled(motion.div)``;
 
 type HardwareInfoProps = {
   color: string;
@@ -98,13 +118,15 @@ type HardwareInfoProps = {
   extraContent?: JSX.Element;
   columns?: number;
   gap?: number;
-  children?: React.ReactNode;
+  children?: ReactNode;
+  infosPerPage: number;
 } & InfoTableProps;
 
 export const HardwareInfoContainer = motion(
   forwardRef<HTMLDivElement, HardwareInfoProps>((props, ref) => {
     const isMobile = useIsMobile();
-    const childrenLength = React.Children.count(props.children);
+    const childrenLength = Children.count(props.children);
+    const [page, setPage] = useState(0);
 
     return (
       <Container mobile={isMobile}>
@@ -114,9 +136,36 @@ export const HardwareInfoContainer = motion(
 
         <ContentContainer mobile={isMobile}>
           <InfoContainer>
-            <InfoHeading>{props.heading}</InfoHeading>
+            <InfoHeadingContainer>
+              <InfoHeading>{props.heading}</InfoHeading>
 
-            <InfoTable infos={props.infos} />
+              <Controls>
+                <AnimatePresence>
+                  {page > 0 && (
+                    <IconContainer layout>
+                      <FontAwesomeIcon
+                        icon={faArrowLeft}
+                        onClick={() => setPage(p => p - 1)}
+                      />
+                    </IconContainer>
+                  )}
+                  {(page + 1) * props.infosPerPage < props.infos.length && (
+                    <IconContainer layout>
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        onClick={() => setPage(p => p + 1)}
+                      />
+                    </IconContainer>
+                  )}
+                </AnimatePresence>
+              </Controls>
+            </InfoHeadingContainer>
+
+            <InfoTable
+              infos={props.infos}
+              page={page}
+              itemsPerPage={props.infosPerPage}
+            />
           </InfoContainer>
 
           {props.extraContent}

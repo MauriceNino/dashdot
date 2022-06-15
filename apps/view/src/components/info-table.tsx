@@ -1,7 +1,19 @@
+import { motion, Variants } from 'framer-motion';
 import { FC } from 'react';
 import styled from 'styled-components';
 import { InfoTableArr } from '../utils/format';
 import { ThemedText } from './text';
+
+const itemVariants: Variants = {
+  initial: {
+    opacity: 0,
+    scale: 0.9,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+  },
+};
 
 export const InfoTextContainer = styled.div<{ noPadding?: boolean }>`
   display: table;
@@ -9,7 +21,7 @@ export const InfoTextContainer = styled.div<{ noPadding?: boolean }>`
   color: ${props => props.theme.colors.text};
 `;
 
-const InfoTextRow = styled.div`
+const InfoTextRow = styled(motion.div)`
   display: table-row;
 `;
 
@@ -37,11 +49,28 @@ export type InfoTableProps = {
   className?: string;
 };
 
-export const InfoTable: FC<InfoTableProps> = props => {
+export const InfoTable: FC<
+  InfoTableProps & {
+    page: number;
+    itemsPerPage: number;
+  }
+> = props => {
+  const itemsStart = props.page * props.itemsPerPage;
+  const items = props.infos.slice(
+    itemsStart,
+    Math.min(itemsStart + props.itemsPerPage, props.infos.length)
+  );
+
   return (
     <InfoTextContainer className={props.className}>
-      {props.infos.map((info, i) => (
-        <InfoTextRow key={i.toString() + info.label}>
+      {items.map((info, i) => (
+        <InfoTextRow
+          key={(itemsStart + i).toString()}
+          variants={itemVariants}
+          initial='initial'
+          animate='animate'
+          exit='initial'
+        >
           <InfoTextLabel>{info.label}</InfoTextLabel>
           <InfoTextValue>
             {info.value == null || info.value.trim().length === 0
