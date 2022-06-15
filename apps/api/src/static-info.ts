@@ -88,15 +88,62 @@ const loadRamInfo = async (): Promise<void> => {
 };
 
 const loadStorageInfo = async (): Promise<void> => {
-  const info = await si.diskLayout();
+  const [disks, blocks] = await Promise.all([
+    si.diskLayout(),
+    si.blockDevices(),
+  ]);
 
-  STATIC_INFO.storage = {
-    layout: info.map(({ size, type, vendor }) => ({
-      brand: vendor,
-      size,
-      type,
-    })),
-  };
+  const raidMembers = blocks.filter(block => block.fsType.endsWith('_member'));
+  const blockDisks = blocks.filter(block => block.type === 'disk');
+  const blockParts = blocks.filter(block => block.type === 'part');
+
+  if (raidMembers.length > 0) {
+    const blockLayout = blockDisks
+      .map(disk => {
+        const diskRaidMem = raidMembers.filter(member =>
+          member.name.startsWith(disk.name)
+        );
+        const diskParts = blockParts.filter(part =>
+          part.name.startsWith(disk.name)
+        );
+        const nativeDisk = disks.find(d => d.name === disk.model);
+
+        if (nativeDisk != null) {
+          if (diskParts.some(part => part.mount != null && part.mount !== '')) {
+            return {
+              brand: nativeDisk.vendor,
+              size: nativeDisk.size,
+              type: nativeDisk.type,
+            };
+          } else if (diskRaidMem.length > 0) {
+            const label = diskRaidMem[0].label.includes(':')
+              ? diskRaidMem[0].label.split(':')[0]
+              : diskRaidMem[0].label;
+            return {
+              brand: nativeDisk.vendor,
+              size: nativeDisk.size,
+              type: nativeDisk.type,
+              raidGroup: label,
+            };
+          }
+        }
+
+        return undefined;
+      })
+      .filter(d => d != null);
+
+    STATIC_INFO.storage = {
+      layout: blockLayout,
+    };
+  } else {
+    STATIC_INFO.storage = {
+      layout: disks.map(({ size, type, vendor }) => ({
+        brand: vendor,
+        size,
+        type,
+      })),
+    };
+  }
 };
 
 const loadNetworkInfo = async (): Promise<void> => {
@@ -144,8 +191,8 @@ const commandExists = async (command: string): Promise<boolean> => {
   }
 };
 
-export const runSpeedTest = async (): Promise<void> => {
-  let usedRunner;
+export const runSpeedTest = async (): Promise<string> => {
+  let usedRunner: string;
   if (CONFIG.accept_ookla_eula && (await commandExists('speedtest'))) {
     usedRunner = 'ookla';
     const { stdout } = await exec('speedtest -f json');

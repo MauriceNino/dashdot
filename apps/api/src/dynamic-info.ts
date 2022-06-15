@@ -82,7 +82,7 @@ export const getDynamicServerInfo = () => {
       const sizes = await si.fsSize();
 
       const filtered = sizes.filter(
-        ({ fs, mount }) => mount.startsWith('/mnt/host_') || fs === 'overlay'
+        ({ mount }) => mount.startsWith('/mnt/host_') || mount === '/'
       );
 
       return filtered.reduce((acc, { used }) => acc + used, 0);

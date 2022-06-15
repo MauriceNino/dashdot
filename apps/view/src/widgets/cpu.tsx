@@ -12,6 +12,7 @@ import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
 import { WidgetSwitch } from '../components/widget-switch';
 import { useSetting } from '../services/settings';
+import { celsiusToFahrenheit } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
 
 const containerVariants = {
@@ -197,10 +198,10 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
               {config.enable_cpu_temps && !multiCore && chart.length > 1 && (
                 <TempContainer>
                   {`Ø: ${
-                    (multiCore
-                      ? latestLoad[chartI].temp
+                    (config.use_imperial
+                      ? celsiusToFahrenheit(averageTemp).toFixed(1)
                       : averageTemp.toFixed(1)) || '?'
-                  } °C`}
+                  } ${config.use_imperial ? '°F' : '°C'}`}
                 </TempContainer>
               )}
 

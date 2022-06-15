@@ -26,6 +26,7 @@ export type StorageInfo = {
     brand: string;
     size: number;
     type: string;
+    raidGroup?: string;
   }[];
 };
 export type StorageLoad = number;
@@ -64,6 +65,7 @@ export type Config = {
   port: number;
   widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network')[];
   accept_ookla_eula: boolean;
+  use_imperial: boolean;
 
   // OS Widget
   disable_host: boolean;
@@ -80,7 +82,7 @@ export type Config = {
   cpu_poll_interval: number;
 
   // Storage Widget
-  storage_label_list: ('brand' | 'size' | 'type')[];
+  storage_label_list: ('brand' | 'size' | 'type' | 'raid')[];
   storage_widget_grow: number;
   storage_widget_min_width: number;
   storage_poll_interval: number;
@@ -93,6 +95,7 @@ export type Config = {
   ram_poll_interval: number;
 
   // Network Widget
+  use_network_interface: string;
   speed_test_interval: number;
   network_label_list: (
     | 'type'
@@ -124,24 +127,17 @@ export type Config = {
     network_speed_down?: number;
     network_interface_speed?: number;
     network_public_ip?: string;
-    storage_brand_1?: string;
-    storage_size_1?: number;
-    storage_type_1?: string;
-    storage_brand_2?: string;
-    storage_size_2?: number;
-    storage_type_2?: string;
-    storage_brand_3?: string;
-    storage_size_3?: number;
-    storage_type_3?: string;
-    storage_brand_4?: string;
-    storage_size_4?: number;
-    storage_type_4?: string;
-    storage_brand_5?: string;
-    storage_size_5?: number;
-    storage_type_5?: string;
+    storage_brands: string[];
+    storage_types: string[];
+    storage_sizes: number[];
   };
 };
 
 export type ServerInfo = HardwareInfo & {
   config: Config;
 };
+
+// This is needed for HMR to work, because it won't work on modules
+// which only export types
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const loadCommons = () => {};
