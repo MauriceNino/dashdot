@@ -90,6 +90,7 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
           },
         ]
       )}
+      infosPerPage={7}
       icon={faNetworkWired}
     >
       <ChartContainer
