@@ -1,3 +1,10 @@
+## [3.5.1](https://github.com/MauriceNino/dashdot/compare/v3.5.0...v3.5.1) (2022-06-15)
+
+
+### Bug Fixes
+
+* **view:** mobile view cutting off content ([3dd19bb](https://github.com/MauriceNino/dashdot/commit/3dd19bb33d662f02067b10ab100df94272ab9233))
+
 # [3.5.0](https://github.com/MauriceNino/dashdot/compare/v3.4.0...v3.5.0) (2022-06-15)
 
 
