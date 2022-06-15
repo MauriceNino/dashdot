@@ -48,6 +48,7 @@ export const CONFIG: Config = {
   ram_shown_datapoints: numNull(penv('RAM_SHOWN_DATAPOINTS')) ?? 20,
   ram_poll_interval: numNull(penv('RAM_POLL_INTERVAL')) ?? 1000,
 
+  use_network_interface: penv('USE_NETWORK_INTERFACE') ?? '',
   speed_test_interval: numNull(penv('SPEED_TEST_INTERVAL')) ?? 60,
   network_label_list: lst(
     penv('NETWORK_LABEL_LIST') ?? 'type,speed_up,speed_down,interface_speed'

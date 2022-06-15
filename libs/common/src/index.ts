@@ -95,6 +95,7 @@ export type Config = {
   ram_poll_interval: number;
 
   // Network Widget
+  use_network_interface: string;
   speed_test_interval: number;
   network_label_list: (
     | 'type'
