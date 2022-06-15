@@ -72,6 +72,7 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
           },
         ]
       )}
+      infosPerPage={7}
       icon={faMemory}
     >
       <ChartContainer

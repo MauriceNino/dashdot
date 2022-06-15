@@ -127,6 +127,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       color={theme.colors.storagePrimary}
       heading='Storage'
       infos={infos}
+      infosPerPage={3}
       icon={faHdd}
     >
       <ChartContainer

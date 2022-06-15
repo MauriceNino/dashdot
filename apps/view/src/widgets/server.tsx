@@ -281,6 +281,8 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
             dateInfos,
           ]
         )}
+        page={0}
+        itemsPerPage={7}
       />
 
       <ServerIcon

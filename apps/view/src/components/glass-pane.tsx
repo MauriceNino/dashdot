@@ -8,6 +8,7 @@ type SCProps = GlassPaneProps & { mobile: boolean };
 const Container = styled.div<SCProps>`
   min-width: ${({ minWidth, mobile }) => (mobile ? 0 : minWidth)}px;
   min-height: 360px;
+  max-height: 500px;
 
   flex-grow: ${props => props.grow ?? 1};
   transition: opacity 0.3 ease-in-out;
