@@ -16,11 +16,11 @@ export const bpsPrettyPrint = (bits: number) => {
 
 export const bytePrettyPrint = (byte: number): string => {
   return byte > 1024 * 1024 * 1024
-    ? `${(byte / 1024 / 1024 / 1024).toFixed(1)} GB`
+    ? `${(byte / 1024 / 1024 / 1024).toFixed(1)} GiB`
     : byte > 1024 * 1024
-    ? `${(byte / 1024 / 1024).toFixed(1)} MB`
+    ? `${(byte / 1024 / 1024).toFixed(1)} MiB`
     : byte > 1024
-    ? `${(byte / 1024).toFixed(1)} KB`
+    ? `${(byte / 1024).toFixed(1)} KiB`
     : `${byte.toFixed(1)} B`;
 };
 
