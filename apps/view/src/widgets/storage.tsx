@@ -70,7 +70,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   );
 
   const infos = useMemo(() => {
-    if (layout && layout.length > 1) {
+    if (layout.length > 1) {
       return layout.map(s => {
         const brand = s.brands.map((b, i) => `${b} ${s.types[i]}`).join(', ');
         const size = s.size;
@@ -127,7 +127,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       color={theme.colors.storagePrimary}
       heading='Storage'
       infos={infos}
-      infosPerPage={3}
+      infosPerPage={layout.length > 1 ? 3 : 7}
       icon={faHdd}
     >
       <ChartContainer
