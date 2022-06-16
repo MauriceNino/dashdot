@@ -43,6 +43,20 @@ export type NetworkLoad = {
   down: number;
 };
 
+export type GpuInfo = {
+  layout: {
+    brand: string;
+    model: string;
+    memory: number;
+  }[];
+};
+export type GpuLoad = {
+  layout: {
+    load: number;
+    memory: number;
+  }[];
+};
+
 export type OsInfo = {
   platform: string;
   distro: string;
@@ -58,12 +72,13 @@ export type HardwareInfo = {
   ram: RamInfo;
   storage: StorageInfo;
   network: NetworkInfo;
+  gpu: GpuInfo;
 };
 
 export type Config = {
   // General
   port: number;
-  widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network')[];
+  widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network' | 'gpu')[];
   accept_ookla_eula: boolean;
   use_imperial: boolean;
 
@@ -109,6 +124,13 @@ export type Config = {
   network_shown_datapoints: number;
   network_poll_interval: number;
 
+  // GPU Widget
+  gpu_label_list: ('brand' | 'model' | 'memory')[];
+  gpu_widget_grow: number;
+  gpu_widget_min_width: number;
+  gpu_shown_datapoints: number;
+  gpu_poll_interval: number;
+
   // Overrides
   override: {
     os?: string;
@@ -130,6 +152,9 @@ export type Config = {
     storage_brands: string[];
     storage_types: string[];
     storage_sizes: number[];
+    gpu_brands: string[];
+    gpu_models: string[];
+    gpu_memories: number[];
   };
 };
 
