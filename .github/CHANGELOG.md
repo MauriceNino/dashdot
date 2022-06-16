@@ -1,3 +1,11 @@
+## [3.5.2](https://github.com/MauriceNino/dashdot/compare/v3.5.1...v3.5.2) (2022-06-16)
+
+
+### Bug Fixes
+
+* **view:** change base 1024 size measurements to unambigous labels ([148f8db](https://github.com/MauriceNino/dashdot/commit/148f8dbb5decf81212cec6e938226f14dc79e565)), closes [#119](https://github.com/MauriceNino/dashdot/issues/119)
+* **view:** single drive in raid mode not shown in one page ([ac01eb3](https://github.com/MauriceNino/dashdot/commit/ac01eb3ff592ba7e82e7b820e3cd8eab896e1dcb))
+
 ## [3.5.1](https://github.com/MauriceNino/dashdot/compare/v3.5.0...v3.5.1) (2022-06-15)
 
 
