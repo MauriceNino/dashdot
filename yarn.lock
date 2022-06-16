@@ -4162,14 +4162,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.0.12":
-  version: 18.0.12
-  resolution: "@types/react@npm:18.0.12"
+"@types/react@npm:18.0.13":
+  version: 18.0.13
+  resolution: "@types/react@npm:18.0.13"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 526ea13b3adf7fe4b475e55b7426510a7861ef2910664a9014ef42cba0c699d5167dc378eb161e2ec26c07a3b6fde9b6bdcbbb6f4b5580612246bc289395ef03
+  checksum: ef976dbcd5605f3b8db2b286b1b35471d574dca711a2b6928c164075efd3ee731b3f32708f1ae09cfb04b003f9a4a9774cc386c32688f7fae864ea53a1c238f6
   languageName: node
   linkType: hard
 
@@ -7078,7 +7078,7 @@ __metadata:
     "@types/express": 4.17.13
     "@types/jest": 28.1.1
     "@types/node": 17.0.38
-    "@types/react": 18.0.12
+    "@types/react": 18.0.13
     "@types/react-dom": 18.0.5
     "@types/react-is": 17.0.3
     "@types/react-virtualized-auto-sizer": 1.0.1
