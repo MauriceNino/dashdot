@@ -17,8 +17,9 @@ services:
     environment:
       - DASHDOT_ENABLE_CPU_TEMPS=true
     ports:
-      - '3000:3000'
-      - '3001:3001'
+      - 3000:3000 # view
+      - 3001:3001 # api
+      - 3002:3002 # docs
     volumes:
       - ./:/app
       - /etc/os-release:/etc/os-release:ro
