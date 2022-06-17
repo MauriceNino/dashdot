@@ -22,7 +22,7 @@ After that, download and build the project (might take a few minutes)
 git clone https://github.com/MauriceNino/dashdot &&\
   cd dashdot &&\
   yarn &&\
-  yarn build
+  yarn build:prod
 ```
 
 When done, you can run the dashboard by executing:

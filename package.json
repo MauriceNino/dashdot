@@ -21,6 +21,7 @@
     "start": "node .",
     "cli": "node dist/apps/cli/main.js",
     "build": "nx run-many --target=build --configuration=production --all=true --parallel=true",
+    "build:prod": "nx run-many --target=build --configuration=production --projects=api,cli,view --parallel=true",
     "serve": "nx run-many --target=serve --all=true --parallel=true",
     "dev": "docker-compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
     "test": "nx run-many --target=test --all=true --parallel=true",
