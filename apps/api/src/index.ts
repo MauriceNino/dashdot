@@ -63,11 +63,16 @@ server.listen(CONFIG.port, async () => {
       socket.emit('network-load', network);
     });
 
+    const gpuSub = obs.gpu.subscribe(async gpu => {
+      socket.emit('gpu-load', gpu);
+    });
+
     socket.on('disconnect', () => {
       cpuSub.unsubscribe();
       ramSub.unsubscribe();
       storageSub.unsubscribe();
       networkSub.unsubscribe();
+      gpuSub.unsubscribe();
     });
   });
 

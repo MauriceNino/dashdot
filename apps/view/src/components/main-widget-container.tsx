@@ -1,4 +1,10 @@
-import { CpuLoad, NetworkLoad, RamLoad, StorageLoad } from '@dash/common';
+import {
+  CpuLoad,
+  GpuLoad,
+  NetworkLoad,
+  RamLoad,
+  StorageLoad,
+} from '@dash/common';
 import { motion, Variants } from 'framer-motion';
 import { FC, useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
@@ -9,6 +15,7 @@ import { environment } from '../environments/environment';
 import { useIsMobile } from '../services/mobile';
 import { CpuWidget } from '../widgets/cpu';
 import { ErrorWidget } from '../widgets/error';
+import { GpuWidget } from '../widgets/gpu';
 import { NetworkWidget } from '../widgets/network';
 import { RamWidget } from '../widgets/ram';
 import { ServerWidget } from '../widgets/server';
@@ -69,11 +76,13 @@ export const MainWidgetContainer: FC = () => {
   const ramData = serverInfo.data?.ram;
   const networkData = serverInfo.data?.network;
   const storageData = serverInfo.data?.storage;
+  const gpuData = serverInfo.data?.gpu;
   const config = serverInfo.data?.config;
 
   const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
   const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
   const [networkLoad, setNetworkLoad] = useState<NetworkLoad[]>([]);
+  const [gpuLoad, setGpuLoad] = useState<GpuLoad[]>([]);
   const [storageLoad, setStorageLoad] = useState<StorageLoad>();
   const configRef = useRef(config);
 
@@ -109,6 +118,16 @@ export const MainWidgetContainer: FC = () => {
         if (
           oldData.length >= (configRef.current?.network_shown_datapoints ?? 0)
         ) {
+          return [...oldData.slice(1), data];
+        } else {
+          return [...oldData, data];
+        }
+      });
+    });
+
+    socket.on('gpu-load', data => {
+      setGpuLoad(oldData => {
+        if (oldData.length >= (configRef.current?.gpu_shown_datapoints ?? 0)) {
           return [...oldData.slice(1), data];
         } else {
           return [...oldData, data];
@@ -198,6 +217,13 @@ export const MainWidgetContainer: FC = () => {
       Widget: NetworkWidget,
       data: networkData,
       load: networkLoad,
+    },
+    gpu: {
+      grow: config.gpu_widget_grow,
+      minWidth: config.gpu_widget_min_width,
+      Widget: GpuWidget,
+      data: gpuData,
+      load: gpuLoad,
     },
   };
 

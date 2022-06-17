@@ -1,4 +1,10 @@
-import { CpuLoad, NetworkLoad, RamLoad, StorageLoad } from '@dash/common';
+import {
+  CpuLoad,
+  GpuLoad,
+  NetworkLoad,
+  RamLoad,
+  StorageLoad,
+} from '@dash/common';
 import { exec as cexec } from 'child_process';
 import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import * as si from 'systeminformation';
@@ -132,6 +138,22 @@ export const getDynamicServerInfo = () => {
     }
   );
 
+  const gpuObs = createBufferedInterval(
+    'GPU',
+    CONFIG.gpu_shown_datapoints,
+    CONFIG.gpu_poll_interval,
+    async (): Promise<GpuLoad> => {
+      const info = await si.graphics();
+
+      return {
+        layout: info.controllers.map(controller => ({
+          load: controller.utilizationGpu ?? 0,
+          memory: controller.utilizationMemory ?? 0,
+        })),
+      };
+    }
+  );
+
   const speedTestObs = interval(CONFIG.speed_test_interval * 60 * 1000).pipe(
     mergeMap(async () => await runSpeedTest())
   );
@@ -141,6 +163,7 @@ export const getDynamicServerInfo = () => {
     ram: ramObs,
     storage: storageObs,
     network: networkObs,
+    gpu: gpuObs,
     speedTest: speedTestObs,
   };
 };

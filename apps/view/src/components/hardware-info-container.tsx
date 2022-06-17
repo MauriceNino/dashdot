@@ -120,6 +120,7 @@ type HardwareInfoProps = {
   gap?: number;
   children?: ReactNode;
   infosPerPage: number;
+  onPageChange?: (page: number) => void;
 } & InfoTableProps;
 
 export const HardwareInfoContainer = motion(
@@ -127,6 +128,11 @@ export const HardwareInfoContainer = motion(
     const isMobile = useIsMobile();
     const childrenLength = Children.count(props.children);
     const [page, setPage] = useState(0);
+
+    const changePage = (page: number) => {
+      setPage(page);
+      props.onPageChange?.(page);
+    };
 
     return (
       <Container mobile={isMobile}>
@@ -145,7 +151,7 @@ export const HardwareInfoContainer = motion(
                     <IconContainer layout>
                       <FontAwesomeIcon
                         icon={faArrowLeft}
-                        onClick={() => setPage(p => p - 1)}
+                        onClick={() => changePage(page - 1)}
                       />
                     </IconContainer>
                   )}
@@ -153,7 +159,7 @@ export const HardwareInfoContainer = motion(
                     <IconContainer layout>
                       <FontAwesomeIcon
                         icon={faArrowRight}
-                        onClick={() => setPage(p => p + 1)}
+                        onClick={() => changePage(page + 1)}
                       />
                     </IconContainer>
                   )}
