@@ -3182,15 +3182,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:1.6.21":
-  version: 1.6.21
-  resolution: "@mdx-js/react@npm:1.6.21"
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0
-  checksum: 4b3ae40b954cb0a0a5e7240f3cb53bc35c0b004a1cbf4a5ca5f3656d03bb9685fffbce498935bc3f69c71f74b3e96d07630aa86ff466790025b65b3c12468ff0
-  languageName: node
-  linkType: hard
-
 "@mdx-js/react@npm:1.6.22, @mdx-js/react@npm:^1.6.21":
   version: 1.6.22
   resolution: "@mdx-js/react@npm:1.6.22"
@@ -8476,7 +8467,7 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": 6.1.1
     "@fortawesome/free-solid-svg-icons": 6.1.1
     "@fortawesome/react-fontawesome": 0.1.18
-    "@mdx-js/react": 1.6.21
+    "@mdx-js/react": 1.6.22
     "@nrwl/cli": 14.3.6
     "@nrwl/eslint-plugin-nx": 14.3.6
     "@nrwl/express": 14.3.6
