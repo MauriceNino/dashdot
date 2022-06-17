@@ -69,7 +69,7 @@ COPY . ./
 
 RUN \
   yarn &&\
-  yarn build
+  yarn build:prod
 
 # PROD #
 FROM base as prod
