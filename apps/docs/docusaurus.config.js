@@ -10,6 +10,7 @@ const config = {
   tagline: 'a modern server dashboard',
   url: 'https://getdashdot.com',
   baseUrl: '/',
+  trailingSlash: false,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',

@@ -139,6 +139,20 @@ steps:
         -t mauricenino/dashdot:$(cat package.version)
         -t mauricenino/dashdot:latest .
       - yarn semantic-release
+  - name: deploy gh-pages
+    image: timbru31/node-alpine-git:latest
+    when:
+      event:
+        - push
+        - custom
+      branch: main
+    environment:
+      GIT_USER: MauriceNino
+      GIT_PASS:
+        from_secret: GITHUB_TOKEN
+    commands:
+      - yarn nx build docs
+      - yarn nx deploy docs
   - name: update & deploy server files
     image: docker/compose
     when:
@@ -186,4 +200,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: 01253b4a116ce79ff319d78836bb3963dcc2c6e33bcc1f33777e16204671f786
+hmac: 43f21557ef82cd0b1bd7dee8f9f2d884ebd09622995c4d2e2d03a71daea37092

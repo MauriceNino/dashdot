@@ -15,6 +15,13 @@
         "port": 3002,
         "host": "0.0.0.0"
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/docs",
+        "command": "ts-node deploy.ts"
+      }
     }
   },
   "tags": []
