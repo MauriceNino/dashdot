@@ -7403,7 +7403,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.1.1":
+"clsx@npm:1.1.1, clsx@npm:^1.1.1":
   version: 1.1.1
   resolution: "clsx@npm:1.1.1"
   checksum: ff052650329773b9b245177305fc4c4dc3129f7b2be84af4f58dc5defa99538c61d4207be7419405a5f8f3d92007c954f4daba5a7b74e563d5de71c28c830063
@@ -8510,6 +8510,7 @@ __metadata:
     babel-jest: 28.1.1
     babel-plugin-styled-components: 2.0.7
     babel-plugin-syntax-jsx: 6.18.0
+    clsx: 1.1.1
     commitizen: 4.2.4
     core-js: 3.23.1
     cors: 2.8.5
