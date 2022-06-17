@@ -63,8 +63,8 @@ In case you want to financially support this project, you can visit my
 
 ## Documentation
 
-- [Installation Options](./.github/INSTALL.md)
-- [Configuration Options](./.github/CONFIGURATION.md)
+- [Installation Options](https://getdashdot.com/docs/install)
+- [Configuration Options](https://getdashdot.com/docs/config)
 - [Contributing](./.github/CONTRIBUTING.md)
 - [Changelog](./.github/CHANGELOG.md)
 
@@ -85,6 +85,7 @@ docker container run -it \
 ```
 
 To get more information on why which flag is needed, or if you want to use other
-install options instead (`docker-compose`, or from source), have a look at the [INSTALL.md](./.github/INSTALL.md).
+install options instead (`docker-compose`, or from source), have a look at the
+[installation options](https://getdashdot.com/docs/install).
 
-To read more about configuration options, you can visit the [CONFIGURATION.md](./.github/CONFIGURATION.md).
+To read more about configuration options, you can visit the [configuration options](https://getdashdot.com/docs/config).
