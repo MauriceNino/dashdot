@@ -17,7 +17,9 @@ docker container run -it \
 
 ## Configuration
 
-Config options can optionally passed using the --env flag.
+Config options can optionally passed using the
+[`--env`](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file)
+flag.
 
 ```bash
 docker container run -it \

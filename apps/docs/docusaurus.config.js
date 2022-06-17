@@ -75,15 +75,15 @@ const config = {
             items: [
               {
                 label: 'Installation',
-                to: '/docs/quick-setup',
+                to: '/docs/install',
               },
               {
                 label: 'Configuration',
-                to: '/docs/quick-setup',
+                to: '/docs/config',
               },
               {
                 label: 'Changelog',
-                to: '/docs/quick-setup',
+                href: 'https://github.com/MauriceNino/dashdot/blob/main/.github/CHANGELOG.md',
               },
             ],
           },
