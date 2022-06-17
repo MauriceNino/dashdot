@@ -1,3 +1,44 @@
+## [3.5.2](https://github.com/MauriceNino/dashdot/compare/v3.5.1...v3.5.2) (2022-06-16)
+
+
+### Bug Fixes
+
+* **view:** change base 1024 size measurements to unambigous labels ([148f8db](https://github.com/MauriceNino/dashdot/commit/148f8dbb5decf81212cec6e938226f14dc79e565)), closes [#119](https://github.com/MauriceNino/dashdot/issues/119)
+* **view:** single drive in raid mode not shown in one page ([ac01eb3](https://github.com/MauriceNino/dashdot/commit/ac01eb3ff592ba7e82e7b820e3cd8eab896e1dcb))
+
+## [3.5.1](https://github.com/MauriceNino/dashdot/compare/v3.5.0...v3.5.1) (2022-06-15)
+
+
+### Bug Fixes
+
+* **view:** mobile view cutting off content ([3dd19bb](https://github.com/MauriceNino/dashdot/commit/3dd19bb33d662f02067b10ab100df94272ab9233))
+
+# [3.5.0](https://github.com/MauriceNino/dashdot/compare/v3.4.0...v3.5.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* **view:** add max-height to widgets ([8e9ccfb](https://github.com/MauriceNino/dashdot/commit/8e9ccfb644a5592e5e7b951cc056a2bce7187599))
+
+
+### Features
+
+* **view:** add pagination for servers with too many drives ([bb6fbfb](https://github.com/MauriceNino/dashdot/commit/bb6fbfb8f9262d61b4a4fecdf1a48856f5d55e79))
+
+# [3.4.0](https://github.com/MauriceNino/dashdot/compare/v3.3.3...v3.4.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* **api:** error on multiple default network interfaces ([3cf8774](https://github.com/MauriceNino/dashdot/commit/3cf877458cc938e0ae1a949935afee06b52f6184)), closes [#118](https://github.com/MauriceNino/dashdot/issues/118)
+
+
+### Features
+
+* **api, view:** add raid information to storage widget ([ba84d34](https://github.com/MauriceNino/dashdot/commit/ba84d34d2c403c7b1f8cfcb30de78593da58bf57)), closes [#40](https://github.com/MauriceNino/dashdot/issues/40)
+* **api:** add option to select the used network interface ([8b6a78d](https://github.com/MauriceNino/dashdot/commit/8b6a78d6a9f18dfb4dbfdf73d797b94bb6b33b68)), closes [#117](https://github.com/MauriceNino/dashdot/issues/117)
+* **view:** add option to show in imperial units ([d4b1f69](https://github.com/MauriceNino/dashdot/commit/d4b1f69a36e02c8e5b762cabb7b63225e9be3f10))
+
 ## [3.3.3](https://github.com/MauriceNino/dashdot/compare/v3.3.2...v3.3.3) (2022-06-13)
 
 

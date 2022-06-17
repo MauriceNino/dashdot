@@ -16,6 +16,18 @@ const normalizeCpuModel = (cpuModel: string) => {
     .trim();
 };
 
+const normalizeGpuBrand = (brand: string) => {
+  return brand ? brand.replace(/(corporation)/gi, '').trim() : undefined;
+};
+
+const normalizeGpuName = (name: string) => {
+  return name ? name.replace(/(nvidia|amd|intel)/gi, '').trim() : undefined;
+};
+
+const normalizeGpuModel = (model: string) => {
+  return model ? model.replace(/\[.*\]/gi, '').trim() : undefined;
+};
+
 const STATIC_INFO: HardwareInfo = {
   os: {
     arch: '',
@@ -45,6 +57,9 @@ const STATIC_INFO: HardwareInfo = {
     speedUp: 0,
     type: '',
     publicIp: '',
+  },
+  gpu: {
+    layout: [],
   },
 };
 
@@ -182,6 +197,20 @@ const loadNetworkInfo = async (): Promise<void> => {
   }
 };
 
+const loadGpuInfo = async (): Promise<void> => {
+  const info = await si.graphics();
+
+  STATIC_INFO.gpu = {
+    layout: info.controllers.map(controller => ({
+      brand: normalizeGpuBrand(controller.vendor),
+      model:
+        normalizeGpuName(controller.name) ??
+        normalizeGpuModel(controller.model),
+      memory: controller.memoryTotal ?? controller.vram ?? 0,
+    })),
+  };
+};
+
 const commandExists = async (command: string): Promise<boolean> => {
   try {
     const { stdout, stderr } = await exec(`which ${command}`);
@@ -242,6 +271,7 @@ export const loadStaticServerInfo = async (): Promise<void> => {
     loadRamInfo(),
     loadStorageInfo(),
     loadNetworkInfo(),
+    loadGpuInfo(),
   ]);
 
   console.log(
