@@ -6,15 +6,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'dash.',
+  tagline: 'a modern server dashboard',
+  url: 'https://getdashdot.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'MauriceNino',
+  projectName: 'dashdot',
 
   presets: [
     [
@@ -24,13 +24,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/main/website/blog/',
+          editUrl: 'https://github.com/MauriceNino/dashdot/edit/dev/apps/docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -43,21 +37,30 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'dash.',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'Logo',
+          src: 'img/logo512.png',
         },
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'quick-setup',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://dash.mauz.io',
+            label: 'Demo',
+            position: 'left',
+          },
+          {
+            href: 'https://ko-fi.com/mauricenino',
+            label: 'Donate on Ko-Fi',
+            position: 'right',
+          },
+          {
+            href: 'https://github.com/MauriceNino/dashdot',
             label: 'GitHub',
             position: 'right',
           },
@@ -67,11 +70,19 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Help',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Installation',
+                to: '/docs/quick-setup',
+              },
+              {
+                label: 'Configuration',
+                to: '/docs/quick-setup',
+              },
+              {
+                label: 'Changelog',
+                to: '/docs/quick-setup',
               },
             ],
           },
@@ -79,34 +90,16 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
+                href: 'https://discord.gg/3teHFBNQ9W',
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/MauriceNino/dashdot',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,

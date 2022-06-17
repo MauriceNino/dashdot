@@ -1,42 +1,167 @@
-import React from 'react';
-import clsx from 'clsx';
-import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import styles from './index.module.css';
-import HomepageFeatures from '../components/HomepageFeatures';
+import CodeBlock from '@theme/CodeBlock';
+import useThemeContext from '@theme/hooks/useThemeContext';
+import Layout from '@theme/Layout';
+import React from 'react';
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
+import styled from 'styled-components';
 
-function HomepageHeader() {
+const Banner = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  background-color: var(--ifm-color-primary);
+
+  .code {
+    width: 500px;
+    max-width: calc(100% - 20px);
+  }
+`;
+
+const Heading = styled.div`
+  text-align: center;
+
+  > h1 {
+    font-size: 3rem;
+  }
+  > p {
+    font-size: 1.5rem;
+    font-style: italic;
+  }
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 40px;
+
+  &:first-child {
+    background-color: var(--ifm-color-primary);
+  }
+`;
+
+const HomepageHeader = () => {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className='container'>
-        <h1 className='hero__title'>{siteConfig.title}</h1>
-        <p className='hero__subtitle'>{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className='button button--secondary button--lg'
-            to='/docs/intro'
-          >
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
+    <Banner>
+      <Heading>
+        <h1>{siteConfig.title}</h1>
+        <p>{siteConfig.tagline}</p>
+      </Heading>
+
+      <CodeBlock className='language-bash code'>
+        {`docker container run -it \\
+  -p 80:3001 \\
+  -v /etc/os-release:/etc/os-release:ro \\
+  -v /proc/1/ns/net:/mnt/host_ns_net:ro \\
+  -v /media:/mnt/host_media:ro \\
+  -v /mnt:/mnt/host_mnt:ro \\
+  --privileged \\
+  mauricenino/dashdot`}
+      </CodeBlock>
+
+      <Buttons>
+        <Link
+          className='button button--secondary button--lg'
+          to='/docs/install'
+        >
+          Installation
+        </Link>
+        <Link className='button button--secondary button--lg' to='/docs/config'>
+          Configuration
+        </Link>
+      </Buttons>
+    </Banner>
   );
-}
+};
+
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+  padding: 4rem 0;
+`;
+
+const InfoSection = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 20px);
+  max-width: 600px;
+
+  img {
+    width: 100%;
+    border-radius: 15px;
+  }
+  ul {
+    text-align: center;
+    list-style: inside;
+
+    li {
+      margin-left: -30px;
+    }
+  }
+`;
+
+const Images = styled.div``;
+
+const HomePageInfo = () => {
+  const theme = useThemeContext();
+
+  return (
+    <InfoContainer>
+      <InfoSection>
+        <h2>dash. is beautiful</h2>
+
+        {theme.isDarkTheme ? (
+          <Zoom overlayBgColorEnd={'#000'}>
+            <img
+              src='./img/screenshot_darkmode.png'
+              alt='Dark-Mode'
+              className='dark'
+            />
+          </Zoom>
+        ) : (
+          <Zoom overlayBgColorEnd={theme.isDarkTheme ? '#000' : '#FFF'}>
+            <img
+              src='./img/screenshot_lightmode.png'
+              alt='Light-Mode'
+              className='light'
+            />
+          </Zoom>
+        )}
+      </InfoSection>
+
+      <InfoSection>
+        <h2>dash. is feature-rich</h2>
+
+        <ul style={{ width: '100%' }}>
+          <li>Dark/Light-Mode</li>
+          <li>Customizable Widgets</li>
+          <li>Beautiful Animations and Styles</li>
+          <li>Support for multiple architectures</li>
+          <li>A lot of personalization options</li>
+        </ul>
+      </InfoSection>
+    </InfoContainer>
+  );
+};
 
 export default function Home(): JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description='Description will go into a meta tag in <head />'
+      title={`Home`}
+      description='dash. is a modern and responsive dashboard for your server'
     >
       <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
+      <HomePageInfo />
     </Layout>
   );
 }

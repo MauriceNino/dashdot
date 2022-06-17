@@ -3182,6 +3182,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mdx-js/react@npm:1.6.21":
+  version: 1.6.21
+  resolution: "@mdx-js/react@npm:1.6.21"
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0
+  checksum: 4b3ae40b954cb0a0a5e7240f3cb53bc35c0b004a1cbf4a5ca5f3656d03bb9685fffbce498935bc3f69c71f74b3e96d07630aa86ff466790025b65b3c12468ff0
+  languageName: node
+  linkType: hard
+
 "@mdx-js/react@npm:1.6.22, @mdx-js/react@npm:^1.6.21":
   version: 1.6.22
   resolution: "@mdx-js/react@npm:1.6.22"
@@ -8467,7 +8476,7 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": 6.1.1
     "@fortawesome/free-solid-svg-icons": 6.1.1
     "@fortawesome/react-fontawesome": 0.1.18
-    "@mdx-js/react": ^1.6.21
+    "@mdx-js/react": 1.6.21
     "@nrwl/cli": 14.3.6
     "@nrwl/eslint-plugin-nx": 14.3.6
     "@nrwl/express": 14.3.6
@@ -8501,7 +8510,6 @@ __metadata:
     babel-jest: 28.1.1
     babel-plugin-styled-components: 2.0.7
     babel-plugin-syntax-jsx: 6.18.0
-    clsx: ^1.1.1
     commitizen: 4.2.4
     core-js: 3.23.1
     cors: 2.8.5
@@ -8521,12 +8529,13 @@ __metadata:
     nx: 14.3.6
     parse-domain: 7.0.0
     prettier: 2.7.1
-    prism-react-renderer: ^1.2.1
+    prism-react-renderer: 1.3.3
     prop-types: 15.8.1
     punycode: 2.1.1
     react: 18.2.0
     react-dom: 18.2.0
     react-is: 18.2.0
+    react-medium-image-zoom: 4.4.3
     react-spinners-kit: 1.9.1
     react-test-renderer: 18.2.0
     react-virtualized-auto-sizer: 1.0.6
@@ -10325,6 +10334,13 @@ __metadata:
   peerDependencies:
     react: ^15.0.2 || ^16.0.0 || ^17.0.0
   checksum: 6b3f5150bcce481ce5bc09e54dbe4bf2a052f9fbc04c1de64f8d816adc4f90ad7955d9aed0022c7b6a2ed11b809ac40527bb50c2cd89c23d42f56694abe20748
+  languageName: node
+  linkType: hard
+
+"focus-options-polyfill@npm:1.5.1":
+  version: 1.5.1
+  resolution: "focus-options-polyfill@npm:1.5.1"
+  checksum: 405b588fe20400a2d9e92d36704e96b39258c4662af9f11c30065842519804b6b498e367018ee85c2a0696174810d9ae9bda16058afd64f4ef93d470a36e75e5
   languageName: node
   linkType: hard
 
@@ -16918,7 +16934,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prism-react-renderer@npm:^1.2.1":
+"prism-react-renderer@npm:1.3.3, prism-react-renderer@npm:^1.2.1":
   version: 1.3.3
   resolution: "prism-react-renderer@npm:1.3.3"
   peerDependencies:
@@ -17964,6 +17980,19 @@ __metadata:
     react-loadable: "*"
     webpack: ">=4.41.1 || 5.x"
   checksum: 1cf7ceb488d329a5be15f891dae16727fb7ade08ef57826addd21e2c3d485e2440259ef8be94f4d54e9afb4bcbd2fcc22c3c5bad92160c9c06ae6ba7b5562497
+  languageName: node
+  linkType: hard
+
+"react-medium-image-zoom@npm:4.4.3":
+  version: 4.4.3
+  resolution: "react-medium-image-zoom@npm:4.4.3"
+  dependencies:
+    focus-options-polyfill: 1.5.1
+    tslib: ^2.4.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: e986e6cc64ea2cc30f58de1b25ac6cc239b3a86fbe4c29f8e037f3b5427141fb4202190ac0c5c2bb7646eddf641a2010fc64bb0746c1c7ae275af1f5a9a3188c
   languageName: node
   linkType: hard
 
@@ -20928,7 +20957,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.4.0, tslib@npm:^2, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.3.1":
+"tslib@npm:2.4.0, tslib@npm:^2, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0":
   version: 2.4.0
   resolution: "tslib@npm:2.4.0"
   checksum: 8c4aa6a3c5a754bf76aefc38026134180c053b7bd2f81338cb5e5ebf96fefa0f417bff221592bf801077f5bf990562f6264fecbc42cd3309b33872cb6fc3b113

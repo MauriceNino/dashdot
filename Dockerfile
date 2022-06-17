@@ -77,7 +77,9 @@ FROM base as prod
 COPY --from=build /app/package.json .
 COPY --from=build /app/version.json .
 COPY --from=build /app/.yarn/releases/ .yarn/releases/
-COPY --from=build /app/dist/ dist/
+COPY --from=build /app/dist/apps/api dist/apps/api
+COPY --from=build /app/dist/apps/cli dist/apps/cli
+COPY --from=build /app/dist/apps/view dist/apps/view
 
 EXPOSE 3001
 
