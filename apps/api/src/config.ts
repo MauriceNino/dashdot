@@ -14,7 +14,7 @@ const numlst = (item: string): number[] => lst(item).map(numNull);
 export const CONFIG: Config = {
   port: numNull(penv('PORT')) ?? 3001,
   widget_list: lst(
-    penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network,gpu'
+    penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network'
   ) as any[],
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
   use_imperial: penv('USE_IMPERIAL') === 'true',
