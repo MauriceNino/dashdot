@@ -29,8 +29,8 @@
     "commit": "git-cz"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.13",
-    "@docusaurus/preset-classic": "2.0.0-beta.13",
+    "@docusaurus/core": "2.0.0-beta.21",
+    "@docusaurus/preset-classic": "2.0.0-beta.21",
     "@fortawesome/fontawesome-svg-core": "6.1.1",
     "@fortawesome/free-brands-svg-icons": "6.1.1",
     "@fortawesome/free-solid-svg-icons": "6.1.1",
@@ -73,7 +73,7 @@
     "@commitlint/cli": "17.0.2",
     "@commitlint/config-conventional": "17.0.2",
     "@commitlint/cz-commitlint": "17.0.0",
-    "@docusaurus/module-type-aliases": "2.0.0-beta.13",
+    "@docusaurus/module-type-aliases": "2.0.0-beta.21",
     "@nrwl/cli": "14.3.6",
     "@nrwl/eslint-plugin-nx": "14.3.6",
     "@nrwl/express": "14.3.6",
