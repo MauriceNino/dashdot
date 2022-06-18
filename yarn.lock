@@ -3191,6 +3191,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mdx-js/react@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@mdx-js/react@npm:2.1.1"
+  dependencies:
+    "@types/mdx": ^2.0.0
+    "@types/react": ">=16"
+  peerDependencies:
+    react: ">=16"
+  checksum: e6f1f0a3a7afa893c107744309a5d2a8654a0643c119bbe3d5ec3ad2ba31cf371e94f3dfe7331eb3aa9f3f4582594ec3f7dd11fc909560e512f95b35335ed34e
+  languageName: node
+  linkType: hard
+
 "@mdx-js/runtime@npm:^1.6.22":
   version: 1.6.22
   resolution: "@mdx-js/runtime@npm:1.6.22"
@@ -4931,6 +4943,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mdx@npm:^2.0.0":
+  version: 2.0.2
+  resolution: "@types/mdx@npm:2.0.2"
+  checksum: a10b78946019fe78f7dba749e90924c29a59b23171e7c6aa41f3220a491723c14729212b99eb4e9e1f847d5f4a574ddc4e03c49a2621470e9c822082874eeafc
+  languageName: node
+  linkType: hard
+
 "@types/mime@npm:^1":
   version: 1.3.2
   resolution: "@types/mime@npm:1.3.2"
@@ -5101,7 +5120,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.0.14":
+"@types/react@npm:18.0.14, @types/react@npm:>=16":
   version: 18.0.14
   resolution: "@types/react@npm:18.0.14"
   dependencies:
@@ -8467,7 +8486,7 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": 6.1.1
     "@fortawesome/free-solid-svg-icons": 6.1.1
     "@fortawesome/react-fontawesome": 0.1.18
-    "@mdx-js/react": 1.6.22
+    "@mdx-js/react": 2.1.1
     "@nrwl/cli": 14.3.6
     "@nrwl/eslint-plugin-nx": 14.3.6
     "@nrwl/express": 14.3.6
