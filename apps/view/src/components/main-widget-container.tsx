@@ -3,13 +3,13 @@ import {
   GpuLoad,
   NetworkLoad,
   RamLoad,
+  ServerInfo,
   StorageLoad,
 } from '@dash/common';
 import { motion, Variants } from 'framer-motion';
-import { FC, useEffect, useRef, useState } from 'react';
-import io from 'socket.io-client';
+import { FC, useEffect, useState } from 'react';
+import io, { Socket } from 'socket.io-client';
 import { default as styled } from 'styled-components';
-import { useServerInfo } from '../api/os-info';
 import { GlassPane } from '../components/glass-pane';
 import { environment } from '../environments/environment';
 import { useIsMobile } from '../services/mobile';
@@ -70,73 +70,33 @@ const ErrorContainer = styled(motion.div)<{ mobile: boolean }>`
 export const MainWidgetContainer: FC = () => {
   const isMobile = useIsMobile();
 
-  const [serverInfo, reloadServerInfo] = useServerInfo();
-  const osData = serverInfo.data?.os;
-  const cpuData = serverInfo.data?.cpu;
-  const ramData = serverInfo.data?.ram;
-  const networkData = serverInfo.data?.network;
-  const storageData = serverInfo.data?.storage;
-  const gpuData = serverInfo.data?.gpu;
-  const config = serverInfo.data?.config;
-
+  const [pageLoaded, setPageLoaded] = useState(false);
+  const [serverInfo, setServerInfo] = useState<ServerInfo | undefined>();
   const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
   const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
   const [networkLoad, setNetworkLoad] = useState<NetworkLoad[]>([]);
   const [gpuLoad, setGpuLoad] = useState<GpuLoad[]>([]);
   const [storageLoad, setStorageLoad] = useState<StorageLoad>();
-  const configRef = useRef(config);
 
+  const osData = serverInfo?.os;
+  const cpuData = serverInfo?.cpu;
+  const ramData = serverInfo?.ram;
+  const networkData = serverInfo?.network;
+  const storageData = serverInfo?.storage;
+  const gpuData = serverInfo?.gpu;
+  const config = serverInfo?.config;
+
+  // Timeout needed for socket connection establishment, otherwise the page would show an error
+  // for a split-second
   useEffect(() => {
-    configRef.current = config;
-  }, [config]);
+    setTimeout(() => setPageLoaded(true), 100);
+  }, []);
 
   useEffect(() => {
     const socket = io(environment.backendUrl);
 
-    socket.on('cpu-load', data => {
-      setCpuLoad(oldData => {
-        if (oldData.length >= (configRef.current?.cpu_shown_datapoints ?? 0)) {
-          return [...oldData.slice(1), data];
-        } else {
-          return [...oldData, data];
-        }
-      });
-    });
-
-    socket.on('ram-load', data => {
-      setRamLoad(oldData => {
-        if (oldData.length >= (configRef.current?.ram_shown_datapoints ?? 0)) {
-          return [...oldData.slice(1), data];
-        } else {
-          return [...oldData, data];
-        }
-      });
-    });
-
-    socket.on('network-load', data => {
-      setNetworkLoad(oldData => {
-        if (
-          oldData.length >= (configRef.current?.network_shown_datapoints ?? 0)
-        ) {
-          return [...oldData.slice(1), data];
-        } else {
-          return [...oldData, data];
-        }
-      });
-    });
-
-    socket.on('gpu-load', data => {
-      setGpuLoad(oldData => {
-        if (oldData.length >= (configRef.current?.gpu_shown_datapoints ?? 0)) {
-          return [...oldData.slice(1), data];
-        } else {
-          return [...oldData, data];
-        }
-      });
-    });
-
-    socket.on('storage-load', data => {
-      setStorageLoad(data);
+    socket.on('static-info', data => {
+      setServerInfo(data);
     });
 
     return () => {
@@ -144,21 +104,70 @@ export const MainWidgetContainer: FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    let socket: Socket | undefined;
+    if (config) {
+      socket = io(environment.backendUrl);
+
+      socket.on('cpu-load', data => {
+        setCpuLoad(oldData => {
+          if (oldData.length >= (config.cpu_shown_datapoints ?? 0)) {
+            return [...oldData.slice(1), data];
+          } else {
+            return [...oldData, data];
+          }
+        });
+      });
+
+      socket.on('ram-load', data => {
+        setRamLoad(oldData => {
+          if (oldData.length >= (config.ram_shown_datapoints ?? 0)) {
+            return [...oldData.slice(1), data];
+          } else {
+            return [...oldData, data];
+          }
+        });
+      });
+
+      socket.on('network-load', data => {
+        setNetworkLoad(oldData => {
+          if (oldData.length >= (config.network_shown_datapoints ?? 0)) {
+            return [...oldData.slice(1), data];
+          } else {
+            return [...oldData, data];
+          }
+        });
+      });
+
+      socket.on('gpu-load', data => {
+        setGpuLoad(oldData => {
+          if (oldData.length >= (config.gpu_shown_datapoints ?? 0)) {
+            return [...oldData.slice(1), data];
+          } else {
+            return [...oldData, data];
+          }
+        });
+      });
+
+      socket.on('storage-load', data => {
+        setStorageLoad(data);
+      });
+    }
+
+    return () => {
+      socket?.close();
+    };
+  }, [config]);
+
   const errors = [
-    {
-      condition: !!serverInfo.error,
-      text: 'Error loading the static data!',
-    },
     {
       condition: !config,
       text: 'Invalid or incomplete static data loaded!',
     },
-    {
-      condition: serverInfo.loading,
-      text: 'Loading static data...',
-    },
   ];
   const error = errors.find(e => e.condition);
+
+  if (!pageLoaded) return null;
 
   if (error) {
     return (
@@ -169,11 +178,7 @@ export const MainWidgetContainer: FC = () => {
         exit='exit'
         mobile={isMobile}
       >
-        <ErrorWidget
-          errorText={error.text}
-          onReload={reloadServerInfo}
-          loading={serverInfo.loading}
-        />
+        <ErrorWidget errorText={error.text} />
       </ErrorContainer>
     );
   }

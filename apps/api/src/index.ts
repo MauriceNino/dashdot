@@ -11,6 +11,7 @@ import { environment } from './environments/environment';
 import { setupNetworking } from './setup-networking';
 import {
   getStaticServerInfo,
+  getStaticServerInfoObs,
   loadStaticServerInfo,
   runSpeedTest,
 } from './static-info';
@@ -41,14 +42,15 @@ server.listen(CONFIG.port, async () => {
   await loadStaticServerInfo();
   const obs = getDynamicServerInfo();
 
-  // Send general system information
-  app.get('/system-info', async (_, res) => {
-    res.send(getStaticServerInfo());
-  });
-
   // Send current system status
   io.on('connection', socket => {
     const subscriptions: Subscription[] = [];
+
+    subscriptions.push(
+      getStaticServerInfoObs().subscribe(staticInfo => {
+        socket.emit('static-info', staticInfo);
+      })
+    );
 
     subscriptions.push(
       obs.cpu.subscribe(cpu => {
