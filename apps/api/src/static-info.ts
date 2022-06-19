@@ -264,14 +264,18 @@ export const runSpeedTest = async (): Promise<string> => {
   return usedRunner;
 };
 
+const promIf = (condition: boolean, func: () => Promise<any>): Promise<any> => {
+  return condition ? func() : Promise.resolve(null);
+};
+
 export const loadStaticServerInfo = async (): Promise<void> => {
   await Promise.all([
-    loadOsInfo(),
-    loadCpuInfo(),
-    loadRamInfo(),
-    loadStorageInfo(),
-    loadNetworkInfo(),
-    loadGpuInfo(),
+    promIf(CONFIG.widget_list.includes('os'), loadOsInfo),
+    promIf(CONFIG.widget_list.includes('cpu'), loadCpuInfo),
+    promIf(CONFIG.widget_list.includes('ram'), loadRamInfo),
+    promIf(CONFIG.widget_list.includes('storage'), loadStorageInfo),
+    promIf(CONFIG.widget_list.includes('network'), loadNetworkInfo),
+    promIf(CONFIG.widget_list.includes('gpu'), loadGpuInfo),
   ]);
 
   console.log(

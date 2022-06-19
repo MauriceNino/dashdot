@@ -142,7 +142,7 @@ export const MainWidgetContainer: FC = () => {
     return () => {
       socket.close();
     };
-  }, [serverInfo.data]);
+  }, []);
 
   const errors = [
     {
