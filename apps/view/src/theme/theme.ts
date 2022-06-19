@@ -14,6 +14,7 @@ type Theme = {
     ramPrimary: string;
     storagePrimary: string;
     networkPrimary: string;
+    gpuPrimary: string;
   };
 };
 
@@ -33,6 +34,7 @@ const lightTheme: Theme = {
     ramPrimary: '#ff526f',
     storagePrimary: '#49e37a',
     networkPrimary: '#ffd745',
+    gpuPrimary: '#c97bff',
   },
 };
 
@@ -52,6 +54,7 @@ const darkTheme: Theme = {
     ramPrimary: '#c43148',
     storagePrimary: '#22b352',
     networkPrimary: '#e9c235',
+    gpuPrimary: '#a135eb',
   },
 };
 

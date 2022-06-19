@@ -58,6 +58,12 @@ export const CONFIG: Config = {
   network_shown_datapoints: numNull(penv('NETWORK_SHOWN_DATAPOINTS')) ?? 20,
   network_poll_interval: numNull(penv('NETWORK_POLL_INTERVAL')) ?? 1000,
 
+  gpu_label_list: lst(penv('GPU_LABEL_LIST') ?? 'brand,model,memory') as any[],
+  gpu_widget_grow: numNull(penv('GPU_WIDGET_GROW')) ?? 6,
+  gpu_widget_min_width: numNull(penv('GPU_WIDGET_MIN_WIDTH')) ?? 700,
+  gpu_shown_datapoints: numNull(penv('GPU_SHOWN_DATAPOINTS')) ?? 20,
+  gpu_poll_interval: numNull(penv('GPU_POLL_INTERVAL')) ?? 1000,
+
   override: {
     os: penv('OVERRIDE_OS'),
     arch: penv('OVERRIDE_ARCH'),
@@ -78,5 +84,8 @@ export const CONFIG: Config = {
     storage_brands: lst(penv('OVERRIDE_STORAGE_BRANDS') ?? ''),
     storage_sizes: numlst(penv('OVERRIDE_STORAGE_SIZES') ?? ''),
     storage_types: lst(penv('OVERRIDE_STORAGE_TYPES') ?? ''),
+    gpu_brands: lst(penv('OVERRIDE_GPU_BRANDS') ?? ''),
+    gpu_models: lst(penv('OVERRIDE_GPU_MODELS') ?? ''),
+    gpu_memories: numlst(penv('OVERRIDE_GPU_MEMORIES') ?? ''),
   },
 };
