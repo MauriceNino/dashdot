@@ -71,6 +71,7 @@ export const MainWidgetContainer: FC = () => {
   const isMobile = useIsMobile();
 
   const [pageLoaded, setPageLoaded] = useState(false);
+  const [socketError, setSocketError] = useState(false);
   const [serverInfo, setServerInfo] = useState<ServerInfo | undefined>();
   const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
   const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
@@ -86,17 +87,18 @@ export const MainWidgetContainer: FC = () => {
   const gpuData = serverInfo?.gpu;
   const config = serverInfo?.config;
 
-  // Timeout needed for socket connection establishment, otherwise the page would show an error
-  // for a split-second
-  useEffect(() => {
-    setTimeout(() => setPageLoaded(true), 100);
-  }, []);
-
   useEffect(() => {
     const socket = io(environment.backendUrl);
 
     socket.on('static-info', data => {
       setServerInfo(data);
+    });
+
+    socket.on('connect', () => {
+      setTimeout(() => setPageLoaded(true), 50);
+    });
+    socket.on('connect_error', () => {
+      setSocketError(true);
     });
 
     return () => {
@@ -164,12 +166,17 @@ export const MainWidgetContainer: FC = () => {
       condition: !config,
       text: 'Invalid or incomplete static data loaded!',
     },
+    {
+      condition: socketError,
+      text: 'Unable to connect to backend!',
+    },
   ];
   const error = errors.find(e => e.condition);
 
   if (!pageLoaded) return null;
 
   if (error) {
+    console.log(serverInfo);
     return (
       <ErrorContainer
         variants={containerVariants}
