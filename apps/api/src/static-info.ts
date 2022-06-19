@@ -1,6 +1,7 @@
 import { HardwareInfo, ServerInfo } from '@dash/common';
 import { exec as cexec } from 'child_process';
 import * as fs from 'fs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import * as si from 'systeminformation';
 import { SpeedUnits, UniversalSpeedtest } from 'universal-speedtest';
 import { inspect, promisify } from 'util';
@@ -28,7 +29,7 @@ const normalizeGpuModel = (model: string) => {
   return model ? model.replace(/\[.*\]/gi, '').trim() : undefined;
 };
 
-const STATIC_INFO: HardwareInfo = {
+const STATIC_INFO = new BehaviorSubject<HardwareInfo>({
   os: {
     arch: '',
     distro: '',
@@ -61,45 +62,54 @@ const STATIC_INFO: HardwareInfo = {
   gpu: {
     layout: [],
   },
-};
+});
 
 const loadOsInfo = async (): Promise<void> => {
   const info = await si.osInfo();
 
-  STATIC_INFO.os = {
-    arch: info.arch,
-    distro: info.distro,
-    kernel: info.kernel,
-    platform: info.platform,
-    release:
-      info.release === 'unknown' ? info.build || 'unknown' : info.release,
-    uptime: 0,
-  };
+  STATIC_INFO.next({
+    ...STATIC_INFO.getValue(),
+    os: {
+      arch: info.arch,
+      distro: info.distro,
+      kernel: info.kernel,
+      platform: info.platform,
+      release:
+        info.release === 'unknown' ? info.build || 'unknown' : info.release,
+      uptime: 0,
+    },
+  });
 };
 
 const loadCpuInfo = async (): Promise<void> => {
   const info = await si.cpu();
 
-  STATIC_INFO.cpu = {
-    brand: info.manufacturer,
-    model: normalizeCpuModel(info.brand),
-    cores: info.physicalCores,
-    threads: info.cores,
-    frequency: info.speed,
-  };
+  STATIC_INFO.next({
+    ...STATIC_INFO.getValue(),
+    cpu: {
+      brand: info.manufacturer,
+      model: normalizeCpuModel(info.brand),
+      cores: info.physicalCores,
+      threads: info.cores,
+      frequency: info.speed,
+    },
+  });
 };
 
 const loadRamInfo = async (): Promise<void> => {
   const [info, layout] = await Promise.all([si.mem(), si.memLayout()]);
 
-  STATIC_INFO.ram = {
-    size: info.total,
-    layout: layout.map(({ manufacturer, type, clockSpeed }) => ({
-      brand: manufacturer,
-      type: type,
-      frequency: clockSpeed ?? undefined,
-    })),
-  };
+  STATIC_INFO.next({
+    ...STATIC_INFO.getValue(),
+    ram: {
+      size: info.total,
+      layout: layout.map(({ manufacturer, type, clockSpeed }) => ({
+        brand: manufacturer,
+        type: type,
+        frequency: clockSpeed ?? undefined,
+      })),
+    },
+  });
 };
 
 const loadStorageInfo = async (): Promise<void> => {
@@ -147,17 +157,23 @@ const loadStorageInfo = async (): Promise<void> => {
       })
       .filter(d => d != null);
 
-    STATIC_INFO.storage = {
-      layout: blockLayout,
-    };
+    STATIC_INFO.next({
+      ...STATIC_INFO.getValue(),
+      storage: {
+        layout: blockLayout,
+      },
+    });
   } else {
-    STATIC_INFO.storage = {
-      layout: disks.map(({ size, type, vendor }) => ({
-        brand: vendor,
-        size,
-        type,
-      })),
-    };
+    STATIC_INFO.next({
+      ...STATIC_INFO.getValue(),
+      storage: {
+        layout: disks.map(({ size, type, vendor }) => ({
+          brand: vendor,
+          size,
+          type,
+        })),
+      },
+    });
   }
 };
 
@@ -169,46 +185,66 @@ const loadNetworkInfo = async (): Promise<void> => {
     const isBond = fs.existsSync(`${NET_PATH}/bonding`);
     const isTap = fs.existsSync(`${NET_PATH}/tun_flags`);
 
-    STATIC_INFO.network.type = isWireless
-      ? 'Wireless'
-      : isBridge
-      ? 'Bridge'
-      : isBond
-      ? 'Bond'
-      : isTap
-      ? 'TAP'
-      : 'Wired';
+    STATIC_INFO.next({
+      ...STATIC_INFO.getValue(),
+      network: {
+        ...STATIC_INFO.getValue().network,
+        type: isWireless
+          ? 'Wireless'
+          : isBridge
+          ? 'Bridge'
+          : isBond
+          ? 'Bond'
+          : isTap
+          ? 'TAP'
+          : 'Wired',
+      },
+    });
 
     // Wireless networks have no fixed Interface speed
     if (!isWireless) {
       const { stdout } = await exec(`cat ${NET_PATH}/speed`);
       const numValue = Number(stdout.trim());
 
-      STATIC_INFO.network.interfaceSpeed =
-        isNaN(numValue) || numValue === -1 ? 0 : numValue;
+      STATIC_INFO.next({
+        ...STATIC_INFO.getValue(),
+        network: {
+          ...STATIC_INFO.getValue().network,
+          interfaceSpeed: isNaN(numValue) || numValue === -1 ? 0 : numValue,
+        },
+      });
     }
   } else {
     const networkInfo = await si.networkInterfaces();
     //@ts-ignore
     const defaultNet = networkInfo.find(net => net.default)!;
 
-    STATIC_INFO.network.type = defaultNet.type;
-    STATIC_INFO.network.interfaceSpeed = defaultNet.speed;
+    STATIC_INFO.next({
+      ...STATIC_INFO.getValue(),
+      network: {
+        ...STATIC_INFO.getValue().network,
+        type: defaultNet.type,
+        interfaceSpeed: defaultNet.speed,
+      },
+    });
   }
 };
 
 const loadGpuInfo = async (): Promise<void> => {
   const info = await si.graphics();
 
-  STATIC_INFO.gpu = {
-    layout: info.controllers.map(controller => ({
-      brand: normalizeGpuBrand(controller.vendor),
-      model:
-        normalizeGpuName(controller.name) ??
-        normalizeGpuModel(controller.model),
-      memory: controller.memoryTotal ?? controller.vram ?? 0,
-    })),
-  };
+  STATIC_INFO.next({
+    ...STATIC_INFO.getValue(),
+    gpu: {
+      layout: info.controllers.map(controller => ({
+        brand: normalizeGpuBrand(controller.vendor),
+        model:
+          normalizeGpuName(controller.name) ??
+          normalizeGpuModel(controller.model),
+        memory: controller.memoryTotal ?? controller.vram ?? 0,
+      })),
+    },
+  });
 };
 
 const commandExists = async (command: string): Promise<boolean> => {
@@ -227,22 +263,33 @@ export const runSpeedTest = async (): Promise<string> => {
     const { stdout } = await exec('speedtest -f json');
     const json = JSON.parse(stdout);
 
-    STATIC_INFO.network.speedDown =
-      json.download.bandwidth * 8 ?? STATIC_INFO.network.speedDown;
-    STATIC_INFO.network.speedUp =
-      json.upload.bandwidth * 8 ?? STATIC_INFO.network.speedUp;
-    STATIC_INFO.network.publicIp =
-      json.interface.externalIp ?? STATIC_INFO.network.publicIp;
+    STATIC_INFO.next({
+      ...STATIC_INFO.getValue(),
+      network: {
+        ...STATIC_INFO.getValue().network,
+        speedDown:
+          json.download.bandwidth * 8 ??
+          STATIC_INFO.getValue().network.speedDown,
+        speedUp:
+          json.upload.bandwidth * 8 ?? STATIC_INFO.getValue().network.speedUp,
+        publicIp:
+          json.interface.externalIp ?? STATIC_INFO.getValue().network.publicIp,
+      },
+    });
   } else if (await commandExists('speedtest-cli')) {
     usedRunner = 'speedtest-cli';
     const { stdout } = await exec('speedtest-cli --json');
     const json = JSON.parse(stdout);
 
-    STATIC_INFO.network.speedDown =
-      json.download ?? STATIC_INFO.network.speedDown;
-    STATIC_INFO.network.speedUp = json.upload ?? STATIC_INFO.network.speedUp;
-    STATIC_INFO.network.publicIp =
-      json.client.ip ?? STATIC_INFO.network.publicIp;
+    STATIC_INFO.next({
+      ...STATIC_INFO.getValue(),
+      network: {
+        ...STATIC_INFO.getValue().network,
+        speedDown: json.download ?? STATIC_INFO.getValue().network.speedDown,
+        speedUp: json.upload ?? STATIC_INFO.getValue().network.speedUp,
+        publicIp: json.client.ip ?? STATIC_INFO.getValue().network.publicIp,
+      },
+    });
   } else {
     usedRunner = 'universal';
     const universalSpeedtest = new UniversalSpeedtest({
@@ -253,12 +300,16 @@ export const runSpeedTest = async (): Promise<string> => {
 
     const speed = await universalSpeedtest.runSpeedtestNet();
 
-    STATIC_INFO.network.speedDown =
-      speed.downloadSpeed ?? STATIC_INFO.network.speedDown;
-    STATIC_INFO.network.speedUp =
-      speed.uploadSpeed ?? STATIC_INFO.network.speedUp;
-    STATIC_INFO.network.publicIp =
-      speed.client.ip ?? STATIC_INFO.network.publicIp;
+    STATIC_INFO.next({
+      ...STATIC_INFO.getValue(),
+      network: {
+        ...STATIC_INFO.getValue().network,
+        speedDown:
+          speed.downloadSpeed ?? STATIC_INFO.getValue().network.speedDown,
+        speedUp: speed.uploadSpeed ?? STATIC_INFO.getValue().network.speedUp,
+        publicIp: speed.client.ip ?? STATIC_INFO.getValue().network.publicIp,
+      },
+    });
   }
 
   return usedRunner;
@@ -269,7 +320,7 @@ const promIf = (condition: boolean, func: () => Promise<any>): Promise<any> => {
 };
 
 export const loadStaticServerInfo = async (): Promise<void> => {
-  await Promise.all([
+  await Promise.allSettled([
     promIf(CONFIG.widget_list.includes('os'), loadOsInfo),
     promIf(CONFIG.widget_list.includes('cpu'), loadCpuInfo),
     promIf(CONFIG.widget_list.includes('ram'), loadRamInfo),
@@ -290,11 +341,24 @@ export const loadStaticServerInfo = async (): Promise<void> => {
 
 export const getStaticServerInfo = (): ServerInfo => {
   return {
-    ...STATIC_INFO,
+    ...STATIC_INFO.getValue(),
     os: {
-      ...STATIC_INFO.os,
+      ...STATIC_INFO.getValue().os,
       uptime: +si.time().uptime,
     },
     config: CONFIG,
   };
+};
+
+export const getStaticServerInfoObs = (): Observable<ServerInfo> => {
+  return STATIC_INFO.pipe(
+    map(info => ({
+      ...info,
+      os: {
+        ...info.os,
+        uptime: +si.time().uptime,
+      },
+      config: CONFIG,
+    }))
+  );
 };
