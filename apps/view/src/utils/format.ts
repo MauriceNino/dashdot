@@ -6,7 +6,7 @@ export type InfoTableArr = {
 export const toInfoTable = <T extends string>(
   order: T[],
   labels: { [key in T]: string },
-  data: { key: T; value?: string }[]
+  data: { key: T; value?: string | number }[]
 ): InfoTableArr =>
   order.map(key => {
     const label = labels[key];
@@ -14,6 +14,10 @@ export const toInfoTable = <T extends string>(
 
     return {
       label,
-      value: val?.value ? val.value : undefined,
+      value: val?.value
+        ? typeof val.value === 'number'
+          ? val.value.toString()
+          : val.value
+        : undefined,
     };
   });

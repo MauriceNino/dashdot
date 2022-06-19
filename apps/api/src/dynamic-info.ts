@@ -1,4 +1,10 @@
-import { CpuLoad, NetworkLoad, RamLoad, StorageLoad } from '@dash/common';
+import {
+  CpuLoad,
+  GpuLoad,
+  NetworkLoad,
+  RamLoad,
+  StorageLoad,
+} from '@dash/common';
 import { exec as cexec } from 'child_process';
 import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import * as si from 'systeminformation';
@@ -11,37 +17,43 @@ const exec = promisify(cexec);
 
 const createBufferedInterval = <R>(
   name: string,
+  enabled: boolean,
   bufferSize: number,
   intervalMs: number,
   factory: () => Promise<R>
 ): Observable<R> => {
   const buffer = new ReplaySubject<R>(bufferSize);
 
-  // Instantly load first value
-  factory()
-    .then(value => {
-      console.log(
-        `First measurement [${name}]:`,
-        inspect(value, {
-          showHidden: false,
-          depth: null,
-          colors: true,
-        })
-      );
+  if (enabled) {
+    // Instantly load first value
+    factory()
+      .then(value => {
+        console.log(
+          `First measurement [${name}]:`,
+          inspect(value, {
+            showHidden: false,
+            depth: null,
+            colors: true,
+          })
+        );
 
-      buffer.next(value);
-    })
-    .catch(err => buffer.error(err));
+        buffer.next(value);
+      })
+      .catch(err => buffer.error(err));
 
-  // Load values every intervalMs
-  interval(intervalMs).pipe(mergeMap(factory)).subscribe(buffer);
+    // Load values every intervalMs
+    interval(intervalMs).pipe(mergeMap(factory)).subscribe(buffer);
 
-  return buffer.asObservable();
+    return buffer.asObservable();
+  }
+
+  return new Observable();
 };
 
 export const getDynamicServerInfo = () => {
   const cpuObs = createBufferedInterval(
     'CPU',
+    CONFIG.widget_list.includes('cpu'),
     CONFIG.cpu_shown_datapoints,
     CONFIG.cpu_poll_interval,
     async (): Promise<CpuLoad> => {
@@ -67,6 +79,7 @@ export const getDynamicServerInfo = () => {
 
   const ramObs = createBufferedInterval(
     'RAM',
+    CONFIG.widget_list.includes('ram'),
     CONFIG.ram_shown_datapoints,
     CONFIG.ram_poll_interval,
     async (): Promise<RamLoad> => {
@@ -76,6 +89,7 @@ export const getDynamicServerInfo = () => {
 
   const storageObs = createBufferedInterval(
     'Storage',
+    CONFIG.widget_list.includes('storage'),
     1,
     CONFIG.storage_poll_interval,
     async (): Promise<StorageLoad> => {
@@ -93,6 +107,7 @@ export const getDynamicServerInfo = () => {
 
   const networkObs = createBufferedInterval(
     'Network',
+    CONFIG.widget_list.includes('network'),
     CONFIG.network_shown_datapoints,
     CONFIG.network_poll_interval,
     async (): Promise<NetworkLoad> => {
@@ -132,15 +147,35 @@ export const getDynamicServerInfo = () => {
     }
   );
 
-  const speedTestObs = interval(CONFIG.speed_test_interval * 60 * 1000).pipe(
-    mergeMap(async () => await runSpeedTest())
+  const gpuObs = createBufferedInterval(
+    'GPU',
+    CONFIG.widget_list.includes('gpu'),
+    CONFIG.gpu_shown_datapoints,
+    CONFIG.gpu_poll_interval,
+    async (): Promise<GpuLoad> => {
+      const info = await si.graphics();
+
+      return {
+        layout: info.controllers.map(controller => ({
+          load: controller.utilizationGpu ?? 0,
+          memory: controller.utilizationMemory ?? 0,
+        })),
+      };
+    }
   );
+
+  const speedTestObs = CONFIG.widget_list.includes('network')
+    ? interval(CONFIG.speed_test_interval * 60 * 1000).pipe(
+        mergeMap(async () => await runSpeedTest())
+      )
+    : new Observable();
 
   return {
     cpu: cpuObs,
     ram: ramObs,
     storage: storageObs,
     network: networkObs,
+    gpu: gpuObs,
     speedTest: speedTestObs,
   };
 };

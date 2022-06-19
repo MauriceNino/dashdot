@@ -5,6 +5,7 @@
     "api": "apps/api",
     "cli": "apps/cli",
     "common": "libs/common",
+    "docs": "apps/docs",
     "view": "apps/view"
   }
 }

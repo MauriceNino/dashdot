@@ -5,6 +5,8 @@
 # production
 /dist
 /coverage
+.docusaurus/
 
 # misc
 **.DS_Store
+.prettierignore

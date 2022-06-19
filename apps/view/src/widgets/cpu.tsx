@@ -18,7 +18,7 @@ import { toInfoTable } from '../utils/format';
 const containerVariants = {
   animate: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
 };
