@@ -1,60 +1,22 @@
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import CodeBlock from '@theme/CodeBlock';
-import useThemeContext from '@theme/hooks/useThemeContext';
 import Layout from '@theme/Layout';
 import React from 'react';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
-import styled from 'styled-components';
-
-const Banner = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 0;
-  background-color: var(--ifm-color-primary);
-
-  .code {
-    width: 500px;
-    max-width: calc(100% - 20px);
-  }
-`;
-
-const Heading = styled.div`
-  text-align: center;
-
-  > h1 {
-    font-size: 3rem;
-  }
-  > p {
-    font-size: 1.5rem;
-    font-style: italic;
-  }
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 40px;
-
-  &:first-child {
-    background-color: var(--ifm-color-primary);
-  }
-`;
+import styles from './index.module.scss';
 
 const HomepageHeader = () => {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Banner>
-      <Heading>
+    <div className={styles.banner}>
+      <div className={styles.header}>
         <h1>{siteConfig.title}</h1>
         <p>{siteConfig.tagline}</p>
-      </Heading>
+      </div>
 
-      <CodeBlock className='language-bash code'>
+      <CodeBlock className={`language-bash ${styles.bannerCode}`}>
         {`docker container run -it \\
   -p 80:3001 \\
   -v /etc/os-release:/etc/os-release:ro \\
@@ -65,7 +27,7 @@ const HomepageHeader = () => {
   mauricenino/dashdot`}
       </CodeBlock>
 
-      <Buttons>
+      <div className={styles.buttons}>
         <Link
           className='button button--secondary button--lg'
           to='/docs/install'
@@ -75,71 +37,27 @@ const HomepageHeader = () => {
         <Link className='button button--secondary button--lg' to='/docs/config'>
           Configuration
         </Link>
-      </Buttons>
-    </Banner>
+      </div>
+    </div>
   );
 };
 
-const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 100px;
-  padding: 4rem 0;
-`;
-
-const InfoSection = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: calc(100% - 20px);
-  max-width: 600px;
-
-  img {
-    width: 100%;
-    border-radius: 15px;
-  }
-  ul {
-    text-align: center;
-    list-style: inside;
-
-    li {
-      margin-left: -30px;
-    }
-  }
-`;
-
-const Images = styled.div``;
-
 const HomePageInfo = () => {
-  const theme = useThemeContext();
-
   return (
-    <InfoContainer>
-      <InfoSection>
+    <div className={styles.infoContainer}>
+      <div className={styles.infoSection}>
         <h2>dash. is beautiful</h2>
 
-        {theme.isDarkTheme ? (
-          <Zoom overlayBgColorEnd={'#000'}>
-            <img
-              src='./img/screenshot_darkmode.png'
-              alt='Dark-Mode'
-              className='dark'
-            />
-          </Zoom>
-        ) : (
-          <Zoom overlayBgColorEnd={theme.isDarkTheme ? '#000' : '#FFF'}>
-            <img
-              src='./img/screenshot_lightmode.png'
-              alt='Light-Mode'
-              className='light'
-            />
-          </Zoom>
-        )}
-      </InfoSection>
+        <Zoom overlayBgColorEnd={'#000'}>
+          <img
+            src='./img/screenshot_darkmode.png'
+            alt='Dark-Mode'
+            className='dark'
+          />
+        </Zoom>
+      </div>
 
-      <InfoSection>
+      <div className={styles.infoSection}>
         <h2>dash. is feature-rich</h2>
 
         <ul style={{ width: '100%' }}>
@@ -149,8 +67,8 @@ const HomePageInfo = () => {
           <li>Support for multiple architectures</li>
           <li>A lot of personalization options</li>
         </ul>
-      </InfoSection>
-    </InfoContainer>
+      </div>
+    </div>
   );
 };
 
