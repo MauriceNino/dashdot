@@ -1,7 +1,5 @@
 import { Config, CpuInfo, CpuLoad } from '@dash/common';
 import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
-//@ts-ignore
-import { Datum } from '@nivo/line';
 import { Variants } from 'framer-motion';
 import { FC } from 'react';
 import { Tooltip, YAxis } from 'recharts';
@@ -14,6 +12,7 @@ import { WidgetSwitch } from '../components/widget-switch';
 import { useSetting } from '../services/settings';
 import { celsiusToFahrenheit } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
+import { ChartVal } from '../utils/types';
 
 const containerVariants = {
   animate: {
@@ -69,7 +68,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
 
   const [multiCore, setMulticore] = useSetting('multiCore', false);
 
-  let chartData: Datum[][] = [];
+  let chartData: ChartVal[][] = [];
 
   if (multiCore) {
     const coresWithValues = load.reduce(
@@ -92,13 +91,13 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
         return acc;
       },
       {} as {
-        [key: number]: Datum[];
+        [key: number]: ChartVal[];
       }
     );
 
     chartData = Object.entries(coresWithValues).map(([_, value]) => value);
   } else {
-    const chartValues: Datum[] = load.reduce((acc, curr, i) => {
+    const chartValues: ChartVal[] = load.reduce((acc, curr, i) => {
       const avgLoad =
         curr.reduce((acc, curr) => acc + curr.load, 0) / curr.length;
 
@@ -107,7 +106,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
         y: avgLoad,
       });
       return acc;
-    }, [] as Datum[]);
+    }, [] as ChartVal[]);
 
     chartData = [chartValues];
   }

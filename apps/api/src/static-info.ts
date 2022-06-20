@@ -120,61 +120,47 @@ const loadStorageInfo = async (): Promise<void> => {
 
   const raidMembers = blocks.filter(block => block.fsType.endsWith('_member'));
   const blockDisks = blocks.filter(block => block.type === 'disk');
-  const blockParts = blocks.filter(block => block.type === 'part');
 
-  if (raidMembers.length > 0) {
-    const blockLayout = blockDisks
-      .map(disk => {
-        const diskRaidMem = raidMembers.filter(member =>
-          member.name.startsWith(disk.name)
-        );
-        const diskParts = blockParts.filter(part =>
-          part.name.startsWith(disk.name)
-        );
-        const nativeDisk = disks.find(d => d.name === disk.model);
+  const blockLayout = blockDisks
+    .map(disk => {
+      const device = disk.name;
+      const diskRaidMem = raidMembers.filter(member =>
+        member.name.startsWith(device)
+      );
+      const nativeDisk = disks.find(d => d.name === disk.model);
 
-        if (nativeDisk != null) {
-          if (diskParts.some(part => part.mount != null && part.mount !== '')) {
-            return {
-              brand: nativeDisk.vendor,
-              size: nativeDisk.size,
-              type: nativeDisk.type,
-            };
-          } else if (diskRaidMem.length > 0) {
-            const label = diskRaidMem[0].label.includes(':')
-              ? diskRaidMem[0].label.split(':')[0]
-              : diskRaidMem[0].label;
-            return {
-              brand: nativeDisk.vendor,
-              size: nativeDisk.size,
-              type: nativeDisk.type,
-              raidGroup: label,
-            };
-          }
+      if (nativeDisk != null) {
+        if (diskRaidMem.length > 0) {
+          const label = diskRaidMem[0].label.includes(':')
+            ? diskRaidMem[0].label.split(':')[0]
+            : diskRaidMem[0].label;
+          return {
+            device: device,
+            brand: nativeDisk.vendor,
+            size: nativeDisk.size,
+            type: nativeDisk.type,
+            raidGroup: label,
+          };
+        } else {
+          return {
+            device: device,
+            brand: nativeDisk.vendor,
+            size: nativeDisk.size,
+            type: nativeDisk.type,
+          };
         }
+      }
 
-        return undefined;
-      })
-      .filter(d => d != null);
+      return undefined;
+    })
+    .filter(d => d != null);
 
-    STATIC_INFO.next({
-      ...STATIC_INFO.getValue(),
-      storage: {
-        layout: blockLayout,
-      },
-    });
-  } else {
-    STATIC_INFO.next({
-      ...STATIC_INFO.getValue(),
-      storage: {
-        layout: disks.map(({ size, type, vendor }) => ({
-          brand: vendor,
-          size,
-          type,
-        })),
-      },
-    });
-  }
+  STATIC_INFO.next({
+    ...STATIC_INFO.getValue(),
+    storage: {
+      layout: blockLayout,
+    },
+  });
 };
 
 const loadNetworkInfo = async (): Promise<void> => {

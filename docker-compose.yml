@@ -16,6 +16,7 @@ services:
     privileged: true
     environment:
       - DASHDOT_ENABLE_CPU_TEMPS=true
+      - DASHDOT_ENABLE_STORAGE_SPLIT_VIEW=true
     ports:
       - 3000:3000 # view
       - 3001:3001 # api

@@ -80,6 +80,10 @@ In Podman: ${isPodman}
           boolean: true,
           describe: 'show raw network info',
         })
+        .option('gpu', {
+          boolean: true,
+          describe: 'show raw gpu info',
+        })
         .option('custom', {
           string: true,
           describe:
@@ -100,7 +104,8 @@ In Podman: ${isPodman}
       }
       if (args.storage) {
         console.log('Disk Layout:', inspectObj(await si.diskLayout()));
-        console.log('FS Size', inspectObj(await si.fsSize()));
+        console.log('FS Size:', inspectObj(await si.fsSize()));
+        console.log('BLock Devices:', inspectObj(await si.blockDevices()));
       }
       if (args.network) {
         console.log(
@@ -108,6 +113,9 @@ In Podman: ${isPodman}
           inspectObj(await si.networkInterfaces())
         );
         console.log('Network Stats:', inspectObj(await si.networkStats()));
+      }
+      if (args.gpu) {
+        console.log('Graphics:', inspectObj(await si.graphics()));
       }
       if (args.custom) {
         console.log(

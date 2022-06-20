@@ -93,13 +93,39 @@ export const getDynamicServerInfo = () => {
     1,
     CONFIG.storage_poll_interval,
     async (): Promise<StorageLoad> => {
-      const sizes = await si.fsSize();
+      const [layout, blocks, sizes] = await Promise.all([
+        getStaticServerInfo(),
+        si.blockDevices(),
+        si.fsSize(),
+      ]);
 
-      const filtered = sizes.filter(
+      const storageLayout = layout.storage.layout;
+      const validMounts = sizes.filter(
         ({ mount }) => mount.startsWith('/mnt/host_') || mount === '/'
       );
 
-      return filtered.reduce((acc, { used }) => acc + used, 0);
+      return {
+        layout: storageLayout
+          .map(({ device }) => {
+            const deviceParts = blocks.filter(
+              block => block.type === 'part' && block.name.startsWith(device)
+            );
+            const isHost = deviceParts.every(({ mount }) => mount === '');
+
+            return isHost
+              ? validMounts.find(({ mount }) => mount === '/')?.used
+              : deviceParts.reduce(
+                  (acc, curr) =>
+                    acc +
+                    (validMounts.find(({ mount }) => curr.mount === mount)
+                      ?.used ?? 0),
+                  0
+                );
+          })
+          .map(used => ({
+            load: used,
+          })),
+      };
     }
   );
 
