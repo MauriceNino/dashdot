@@ -1,7 +1,6 @@
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import CodeBlock from '@theme/CodeBlock';
-import useThemeContext from '@theme/hooks/useThemeContext';
 import Layout from '@theme/Layout';
 import React from 'react';
 import Zoom from 'react-medium-image-zoom';
@@ -113,30 +112,18 @@ const InfoSection = styled.div`
 const Images = styled.div``;
 
 const HomePageInfo = () => {
-  const theme = useThemeContext();
-
   return (
     <InfoContainer>
       <InfoSection>
         <h2>dash. is beautiful</h2>
 
-        {theme.isDarkTheme ? (
-          <Zoom overlayBgColorEnd={'#000'}>
-            <img
-              src='./img/screenshot_darkmode.png'
-              alt='Dark-Mode'
-              className='dark'
-            />
-          </Zoom>
-        ) : (
-          <Zoom overlayBgColorEnd={theme.isDarkTheme ? '#000' : '#FFF'}>
-            <img
-              src='./img/screenshot_lightmode.png'
-              alt='Light-Mode'
-              className='light'
-            />
-          </Zoom>
-        )}
+        <Zoom overlayBgColorEnd={'#000'}>
+          <img
+            src='./img/screenshot_darkmode.png'
+            alt='Dark-Mode'
+            className='dark'
+          />
+        </Zoom>
       </InfoSection>
 
       <InfoSection>
