@@ -1,3 +1,10 @@
+## [3.7.2](https://github.com/MauriceNino/dashdot/compare/v3.7.1...v3.7.2) (2022-06-20)
+
+
+### Bug Fixes
+
+* assign unclaimed used space to the host drive ([a33aa1c](https://github.com/MauriceNino/dashdot/commit/a33aa1c0497c34a9c9713471b7072a5e4ef01b71))
+
 ## [3.7.1](https://github.com/MauriceNino/dashdot/compare/v3.7.0...v3.7.1) (2022-06-20)
 
 
