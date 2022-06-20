@@ -106,6 +106,10 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      colorMode: {
+        defaultMode: 'dark',
+        respectPrefersColorScheme: false,
+      },
     }),
 
   themes: [
@@ -117,6 +121,8 @@ const config = {
       },
     ],
   ],
+
+  plugins: ['docusaurus-plugin-sass'],
 };
 
 module.exports = config;

@@ -8741,6 +8741,7 @@ __metadata:
     commitizen: 4.2.4
     core-js: 3.23.1
     cors: 2.8.5
+    docusaurus-plugin-sass: 0.2.2
     dotenv: 16.0.1
     eslint: 8.18.0
     eslint-config-prettier: 8.5.0
@@ -9227,6 +9228,18 @@ __metadata:
   dependencies:
     esutils: ^2.0.2
   checksum: fd7673ca77fe26cd5cba38d816bc72d641f500f1f9b25b83e8ce28827fe2da7ad583a8da26ab6af85f834138cf8dae9f69b0cd6ab925f52ddab1754db44d99ce
+  languageName: node
+  linkType: hard
+
+"docusaurus-plugin-sass@npm:0.2.2":
+  version: 0.2.2
+  resolution: "docusaurus-plugin-sass@npm:0.2.2"
+  dependencies:
+    sass-loader: ^10.1.1
+  peerDependencies:
+    "@docusaurus/core": ^2.0.0-beta
+    sass: ^1.30.0
+  checksum: e409c403fe0679ffbf5bd3e7738664fc95dae78b4152321b546fd5b04b5309566ad19d4b9ea90554d587b5647d20957d7024a2ae180cc708112227a66eca84d0
   languageName: node
   linkType: hard
 
@@ -19378,6 +19391,31 @@ __metadata:
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: cab8f25ae6f1434abee8d80023d7e72b598cf1327164ddab31003c51215526801e40b66c5e65d658a0af1e9d6478cadcb4c745f4bd6751f97d8644786c0978b0
+  languageName: node
+  linkType: hard
+
+"sass-loader@npm:^10.1.1":
+  version: 10.2.1
+  resolution: "sass-loader@npm:10.2.1"
+  dependencies:
+    klona: ^2.0.4
+    loader-utils: ^2.0.0
+    neo-async: ^2.6.2
+    schema-utils: ^3.0.0
+    semver: ^7.3.2
+  peerDependencies:
+    fibers: ">= 3.1.0"
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0
+    sass: ^1.3.0
+    webpack: ^4.36.0 || ^5.0.0
+  peerDependenciesMeta:
+    fibers:
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
+  checksum: e5bc4a230bfb9103dbd05f72e936e9e31cb35d09922fe90541ad71d0a64abce238b54069cfe51e67c045870093a8e9a218aff63d66468e36dc1cc3d5db4ee83b
   languageName: node
   linkType: hard
 
