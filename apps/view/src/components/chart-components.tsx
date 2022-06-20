@@ -1,5 +1,15 @@
 import { FC, useMemo, useState } from 'react';
-import { Area, AreaChart, Pie, PieChart, Sector } from 'recharts';
+import {
+  Area,
+  AreaChart,
+  BarChart,
+  Pie,
+  PieChart,
+  Sector,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import styled, { useTheme } from 'styled-components';
 import { ThemedText } from './text';
 
@@ -170,5 +180,59 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
         </Pie>
       </PieChart>
     </>
+  );
+};
+
+const ToolTipContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+`;
+
+type DefaultVertBarChartProps = {
+  height: number;
+  width: number;
+  children: React.ReactNode;
+  data: any[];
+  tooltipRenderer: (value: any) => React.ReactNode;
+};
+
+export const DefaultVertBarChart: FC<DefaultVertBarChartProps> = ({
+  data,
+  height,
+  width,
+  children,
+  tooltipRenderer,
+}) => {
+  const barSize = Math.min(height / data.length - 10, 60);
+  const gap = (data.length - 1) * 30;
+  const allBars = barSize * data.length;
+  const margin = (height - gap - allBars) / 2;
+
+  return (
+    <BarChart
+      data={data}
+      height={height}
+      width={width}
+      layout={'vertical'}
+      margin={{
+        top: margin,
+        bottom: margin,
+        right: 20,
+        left: 20,
+      }}
+      barSize={barSize}
+    >
+      <XAxis type='number' hide />
+      <YAxis type='category' hide />
+
+      <Tooltip
+        cursor={false}
+        content={x => <ToolTipContainer>{tooltipRenderer(x)}</ToolTipContainer>}
+      />
+      {children}
+    </BarChart>
   );
 };

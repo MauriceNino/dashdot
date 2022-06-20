@@ -1,7 +1,5 @@
 import { Config, NetworkInfo, NetworkLoad } from '@dash/common';
 import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
-//@ts-ignore
-import { Datum } from '@nivo/line';
 import { FC } from 'react';
 import { Tooltip, YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
@@ -11,6 +9,7 @@ import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
 import { bpsPrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
+import { ChartVal } from '../utils/types';
 
 type NetworkWidgetProps = {
   load: NetworkLoad[];
@@ -36,11 +35,11 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
   const chartDataDown = load.map((load, i) => ({
     x: i,
     y: load.down,
-  })) as Datum[];
+  })) as ChartVal[];
   const chartDataUp = load.map((load, i) => ({
     x: i,
     y: load.up,
-  })) as Datum[];
+  })) as ChartVal[];
 
   const maxUp = Math.max(
     (speedUp ?? 0) / 8,

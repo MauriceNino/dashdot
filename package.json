@@ -118,7 +118,7 @@
     "eslint-plugin-react": "7.30.0",
     "eslint-plugin-react-hooks": "4.6.0",
     "husky": "8.0.1",
-    "inquirer": "8.2.4",
+    "inquirer": "9.0.0",
     "jest": "28.1.1",
     "nx": "14.3.6",
     "prettier": "2.7.1",

@@ -33,6 +33,7 @@ export const CONFIG: Config = {
   cpu_shown_datapoints: numNull(penv('CPU_SHOWN_DATAPOINTS')) ?? 20,
   cpu_poll_interval: numNull(penv('CPU_POLL_INTERVAL')) ?? 1000,
 
+  enable_storage_split_view: penv('ENABLE_STORAGE_SPLIT_VIEW') === 'true',
   storage_label_list: lst(
     penv('STORAGE_LABEL_LIST') ?? 'brand,size,type,raid'
   ) as any[],
