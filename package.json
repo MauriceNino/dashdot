@@ -43,6 +43,7 @@
     "clsx": "1.1.1",
     "core-js": "3.23.1",
     "cors": "2.8.5",
+    "docusaurus-plugin-sass": "0.2.2",
     "express": "4.18.1",
     "framer-motion": "6.3.11",
     "parse-domain": "7.0.0",
