@@ -110,7 +110,9 @@ export const getDynamicServerInfo = () => {
             const deviceParts = blocks.filter(
               block => block.type === 'part' && block.name.startsWith(device)
             );
-            const isHost = deviceParts.every(({ mount }) => mount === '');
+            const isHost = deviceParts.every(
+              ({ mount }) => mount == null || !mount.startsWith('/mnt/host_')
+            );
 
             return isHost
               ? validMounts.find(({ mount }) => mount === '/')?.used
