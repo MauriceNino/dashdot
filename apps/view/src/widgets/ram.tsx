@@ -1,7 +1,5 @@
 import { Config, RamInfo, RamLoad } from '@dash/common';
 import { faMemory } from '@fortawesome/free-solid-svg-icons';
-//@ts-ignore
-import { Datum } from '@nivo/line';
 import { FC } from 'react';
 import { Tooltip, YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
@@ -12,6 +10,7 @@ import { ThemedText } from '../components/text';
 import { removeDuplicates } from '../utils/array-utils';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
+import { ChartVal } from '../utils/types';
 
 type RamWidgetProps = {
   load: RamLoad[];
@@ -39,7 +38,7 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
   const chartData = load.map((load, i) => ({
     x: i,
     y: (load / (data.size ?? 1)) * 100,
-  })) as Datum[];
+  })) as ChartVal[];
 
   return (
     <HardwareInfoContainer

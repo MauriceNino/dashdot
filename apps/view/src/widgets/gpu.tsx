@@ -1,7 +1,5 @@
 import { Config, GpuInfo, GpuLoad } from '@dash/common';
 import { faDesktop } from '@fortawesome/free-solid-svg-icons';
-//@ts-ignore
-import { Datum } from '@nivo/line';
 import { FC, useMemo, useState } from 'react';
 import { Tooltip, YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
@@ -11,6 +9,7 @@ import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
+import { ChartVal } from '../utils/types';
 
 type GpuWidgetProps = {
   load: GpuLoad[];
@@ -65,11 +64,11 @@ export const GpuWidget: FC<GpuWidgetProps> = ({ load, data, config }) => {
   const chartDataLoad = load.map((load, i) => ({
     x: i,
     y: load.layout[page].load,
-  })) as Datum[];
+  })) as ChartVal[];
   const chartDataMemory = load.map((load, i) => ({
     x: i,
     y: load.layout[page].memory,
-  })) as Datum[];
+  })) as ChartVal[];
 
   return (
     <HardwareInfoContainer

@@ -23,13 +23,18 @@ export type RamLoad = number;
 
 export type StorageInfo = {
   layout: {
+    device: string;
     brand: string;
     size: number;
     type: string;
     raidGroup?: string;
   }[];
 };
-export type StorageLoad = number;
+export type StorageLoad = {
+  layout: {
+    load: number;
+  }[];
+};
 
 export type NetworkInfo = {
   interfaceSpeed: number;
@@ -97,6 +102,7 @@ export type Config = {
   cpu_poll_interval: number;
 
   // Storage Widget
+  enable_storage_split_view: boolean;
   storage_label_list: ('brand' | 'size' | 'type' | 'raid')[];
   storage_widget_grow: number;
   storage_widget_min_width: number;
