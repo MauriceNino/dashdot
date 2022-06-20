@@ -4,6 +4,7 @@ import store from 'store';
 type Settings = {
   darkMode: boolean;
   multiCore: boolean;
+  splitStorage: boolean;
 };
 
 export const setStoreSetting = <T extends keyof Settings = keyof Settings>(
@@ -24,6 +25,7 @@ const ALL_DISPATCHES: {
 } = {
   darkMode: [],
   multiCore: [],
+  splitStorage: [],
 };
 
 export const useSetting = <T extends keyof Settings = keyof Settings>(

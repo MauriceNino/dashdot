@@ -1,13 +1,31 @@
 import { Config, StorageInfo, StorageLoad } from '@dash/common';
 import { faHdd } from '@fortawesome/free-solid-svg-icons';
+import { Variants } from 'framer-motion';
 import { FC, useMemo } from 'react';
-import { Cell } from 'recharts';
+import { Bar, Cell } from 'recharts';
 import { useTheme } from 'styled-components';
-import { DefaultPieChart } from '../components/chart-components';
+import {
+  DefaultPieChart,
+  DefaultVertBarChart,
+} from '../components/chart-components';
 import { ChartContainer } from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
+import { ThemedText } from '../components/text';
+import { WidgetSwitch } from '../components/widget-switch';
+import { useSetting } from '../services/settings';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
+
+const itemVariants: Variants = {
+  initial: {
+    opacity: 0,
+    scale: 0.8,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+  },
+};
 
 type StorageWidgetProps = {
   load?: StorageLoad;
@@ -22,6 +40,10 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
 }) => {
   const theme = useTheme();
   const override = config.override;
+
+  const [splitView, setSplitView] = useSetting('splitStorage', false);
+  const canHaveSplitView =
+    data.layout.length > 1 && config.enable_storage_split_view;
 
   const layout = useMemo(
     () =>
@@ -119,8 +141,49 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
     }
   }, [config.storage_label_list, layout]);
 
-  const size = layout.reduce((acc, s) => (acc = acc + s.size), 0) ?? 0;
-  const available = Math.max(size - (load ?? 0), 1);
+  const totalSize = layout.reduce((acc, s) => (acc = acc + s.size), 0) ?? 0;
+  const totalAvailable = Math.max(
+    totalSize - (load?.layout.reduce((acc, { load }) => acc + load, 0) ?? 0),
+    1
+  );
+  const totalUsed = totalSize - totalAvailable;
+
+  const usageArr = layout
+    .reduce(
+      (acc, curr, i) => {
+        const diskLoad = load?.layout[i]?.load ?? 0;
+        const diskSize = curr.size;
+
+        const existing = acc.find(
+          o =>
+            curr.raidGroup != null &&
+            curr.raidGroup !== '' &&
+            o.raidGroup === curr.raidGroup
+        );
+
+        if (existing) {
+          existing.used = existing.used + diskLoad;
+        } else {
+          acc.push({
+            used: diskLoad,
+            available: diskSize - diskLoad,
+          });
+        }
+
+        return acc;
+      },
+      [] as {
+        raidGroup?: string;
+        used: number;
+        available: number;
+      }[]
+    )
+    .map(({ used, available }) => ({
+      used,
+      available,
+      usedPercent: used / (used + available),
+      availablePercent: available / (used + available),
+    }));
 
   return (
     <HardwareInfoContainer
@@ -129,46 +192,117 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       infos={infos}
       infosPerPage={layout.length > 1 ? 3 : 7}
       icon={faHdd}
+      extraContent={
+        canHaveSplitView ? (
+          <WidgetSwitch
+            label='Split View'
+            checked={splitView}
+            onChange={() => setSplitView(!splitView)}
+          />
+        ) : undefined
+      }
+      layout
     >
-      <ChartContainer
-        statText={`%: ${(((load ?? 0) / size) * 100).toFixed(1)}`}
-        contentLoaded={load != null}
-      >
-        {size => (
-          <DefaultPieChart
-            data={[
-              {
-                name: 'Used',
-                value: load,
-              },
-              {
-                name: 'Free',
-                value: available,
-              },
-            ]}
-            width={size.width}
-            height={size.height}
-            color={theme.colors.storagePrimary}
-            labelRenderer={val => bytePrettyPrint(val)}
-          >
-            <Cell
-              key='cell-used'
-              fill={theme.colors.storagePrimary}
-              style={{
-                transition: 'all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      {splitView && canHaveSplitView ? (
+        <ChartContainer
+          variants={itemVariants}
+          initial='initial'
+          animate='animate'
+          exit='exit'
+          key='storage-chart-multi'
+          contentLoaded={load != null}
+        >
+          {size => (
+            <DefaultVertBarChart
+              width={size.width}
+              height={size.height}
+              data={usageArr}
+              tooltipRenderer={x => {
+                const value = x.payload?.[0]?.payload as
+                  | typeof usageArr[0]
+                  | undefined;
+
+                return (
+                  <>
+                    <ThemedText>
+                      {value ? (value.usedPercent * 100).toFixed(2) : 0} % Used
+                    </ThemedText>
+
+                    <ThemedText>
+                      ({bytePrettyPrint(value?.used ?? 0)} /{' '}
+                      {bytePrettyPrint(
+                        (value?.available ?? 0) + (value?.used ?? 0)
+                      )}
+                      )
+                    </ThemedText>
+                  </>
+                );
               }}
-            />
-            <Cell
-              key='cell-free'
-              fill={theme.colors.text}
-              opacity={0.2}
-              style={{
-                transition: 'all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-              }}
-            />
-          </DefaultPieChart>
-        )}
-      </ChartContainer>
+            >
+              <Bar
+                dataKey='usedPercent'
+                stackId='stack'
+                fill={theme.colors.storagePrimary}
+                style={{ stroke: theme.colors.surface, strokeWidth: 4 }}
+                radius={10}
+              />
+              <Bar
+                dataKey='availablePercent'
+                stackId='stack'
+                fill={theme.colors.text}
+                style={{ stroke: theme.colors.surface, strokeWidth: 4 }}
+                opacity={0.2}
+                radius={10}
+              />
+            </DefaultVertBarChart>
+          )}
+        </ChartContainer>
+      ) : (
+        <ChartContainer
+          statText={`%: ${(((totalUsed ?? 0) / totalSize) * 100).toFixed(1)}`}
+          variants={itemVariants}
+          initial='initial'
+          animate='animate'
+          exit='exit'
+          key='storage-chart-single'
+          contentLoaded={load != null}
+        >
+          {size => (
+            <DefaultPieChart
+              data={[
+                {
+                  name: 'Used',
+                  value: totalUsed,
+                },
+                {
+                  name: 'Free',
+                  value: totalAvailable,
+                },
+              ]}
+              width={size.width}
+              height={size.height}
+              color={theme.colors.storagePrimary}
+              labelRenderer={val => bytePrettyPrint(val)}
+            >
+              <Cell
+                key='cell-used'
+                fill={theme.colors.storagePrimary}
+                style={{
+                  transition: 'all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                }}
+              />
+              <Cell
+                key='cell-free'
+                fill={theme.colors.text}
+                opacity={0.2}
+                style={{
+                  transition: 'all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                }}
+              />
+            </DefaultPieChart>
+          )}
+        </ChartContainer>
+      )}
     </HardwareInfoContainer>
   );
 };
