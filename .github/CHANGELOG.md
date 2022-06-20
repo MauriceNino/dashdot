@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/MauriceNino/dashdot/compare/v3.6.0...v3.7.0) (2022-06-20)
+
+
+### Features
+
+* add optional storage split view ([962ecbe](https://github.com/MauriceNino/dashdot/commit/962ecbe2b9d88d466a3b57356215e377da70e107)), closes [#104](https://github.com/MauriceNino/dashdot/issues/104)
+
 # [3.6.0](https://github.com/MauriceNino/dashdot/compare/v3.5.2...v3.6.0) (2022-06-19)
 
 
