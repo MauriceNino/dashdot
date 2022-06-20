@@ -103,19 +103,32 @@ export const getDynamicServerInfo = () => {
       const validMounts = sizes.filter(
         ({ mount }) => mount.startsWith('/mnt/host_') || mount === '/'
       );
+      const validParts = blocks.filter(({ type }) => type === 'part');
+
+      let hostFound = false;
 
       return {
         layout: storageLayout
           .map(({ device }) => {
-            const deviceParts = blocks.filter(
-              block => block.type === 'part' && block.name.startsWith(device)
+            const deviceParts = validParts.filter(({ name }) =>
+              name.startsWith(device)
             );
-            const isHost = deviceParts.every(
+            const potentialHost = deviceParts.every(
               ({ mount }) => mount == null || !mount.startsWith('/mnt/host_')
             );
 
-            return isHost
-              ? validMounts.find(({ mount }) => mount === '/')?.used
+            // Apply all unclaimed partitions to the host disk
+            if (potentialHost && !hostFound) {
+              hostFound = true;
+              return validMounts
+                .filter(
+                  ({ mount }) => !validParts.some(part => part.mount === mount)
+                )
+                .reduce((acc, { used }) => acc + used, 0);
+            }
+
+            return potentialHost
+              ? 0
               : deviceParts.reduce(
                   (acc, curr) =>
                     acc +
