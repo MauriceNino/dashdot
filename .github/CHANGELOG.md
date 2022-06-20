@@ -1,3 +1,10 @@
+## [3.7.1](https://github.com/MauriceNino/dashdot/compare/v3.7.0...v3.7.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* non-empty mounts need to be mounted to /mnt/host_ ([f87657a](https://github.com/MauriceNino/dashdot/commit/f87657a41ee7f31e3f3f79b198591b174d20c52c))
+
 # [3.7.0](https://github.com/MauriceNino/dashdot/compare/v3.6.0...v3.7.0) (2022-06-20)
 
 
