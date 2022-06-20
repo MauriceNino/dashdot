@@ -1,3 +1,12 @@
+# [3.6.0](https://github.com/MauriceNino/dashdot/compare/v3.5.2...v3.6.0) (2022-06-19)
+
+
+### Features
+
+* add gpu widget ([0328463](https://github.com/MauriceNino/dashdot/commit/03284632e6960c51452aae10aba7a4cefd3b06a8)), closes [#43](https://github.com/MauriceNino/dashdot/issues/43)
+* **api:** dont load unnecessary data for unused widgets ([c166974](https://github.com/MauriceNino/dashdot/commit/c16697473c70e119c7b7f08010266355493dfc84)), closes [#121](https://github.com/MauriceNino/dashdot/issues/121)
+* load static info via websockets as well ([cad530d](https://github.com/MauriceNino/dashdot/commit/cad530d0c6f98af309a2f42ebab978ad425fc967)), closes [#122](https://github.com/MauriceNino/dashdot/issues/122)
+
 ## [3.5.2](https://github.com/MauriceNino/dashdot/compare/v3.5.1...v3.5.2) (2022-06-16)
 
 
