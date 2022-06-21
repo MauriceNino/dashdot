@@ -2389,7 +2389,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-common@npm:2.0.0-beta.21, @docusaurus/theme-common@npm:^2.0.0-beta.20":
+"@docusaurus/theme-common@npm:2.0.0-beta.21":
   version: 2.0.0-beta.21
   resolution: "@docusaurus/theme-common@npm:2.0.0-beta.21"
   dependencies:
@@ -2519,12 +2519,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@easyops-cn/docusaurus-search-local@npm:0.27.1":
-  version: 0.27.1
-  resolution: "@easyops-cn/docusaurus-search-local@npm:0.27.1"
+"@easyops-cn/docusaurus-search-local@npm:0.27.2":
+  version: 0.27.2
+  resolution: "@easyops-cn/docusaurus-search-local@npm:0.27.2"
   dependencies:
     "@docusaurus/plugin-content-docs": ^2.0.0-beta.20
-    "@docusaurus/theme-common": ^2.0.0-beta.20
     "@docusaurus/theme-translations": ^2.0.0-beta.20
     "@docusaurus/utils": ^2.0.0-beta.20
     "@docusaurus/utils-common": ^2.0.0-beta.20
@@ -2541,8 +2540,10 @@ __metadata:
     mark.js: ^8.11.1
     tslib: ^2.4.0
   peerDependencies:
-    react: ^16.14.0 || 17 || 18
-  checksum: a69dc059b159b63f3e7a6b6573c84eaa34e60fb6482107ce3c073af096722f9b188e87b629f0af3bde1545782f3c5ed8fb290f286cd2a2ba0a509ba6ca1b86c5
+    "@docusaurus/theme-common": ^2.0.0-beta.20
+    react: ^16.14.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
+  checksum: 9d00993176a33e9621b3dd45a0d4b3960a35d0916c06be51400e9c442e481d6d2c6cd8f558bc873c87eacd9abe933d6efda6b4dc884ccd188dd41d0c0984e19c
   languageName: node
   linkType: hard
 
@@ -8735,7 +8736,7 @@ __metadata:
     "@docusaurus/core": 2.0.0-beta.21
     "@docusaurus/module-type-aliases": 2.0.0-beta.21
     "@docusaurus/preset-classic": 2.0.0-beta.21
-    "@easyops-cn/docusaurus-search-local": 0.27.1
+    "@easyops-cn/docusaurus-search-local": 0.27.2
     "@fortawesome/fontawesome-svg-core": 6.1.1
     "@fortawesome/free-brands-svg-icons": 6.1.1
     "@fortawesome/free-solid-svg-icons": 6.1.1
