@@ -6,7 +6,7 @@
   "private": true,
   "main": "dist/apps/api/main.js",
   "repository": "https://github.com/MauriceNino/dashdot",
-  "homepage": "https://github.com/MauriceNino/dashdot#readme",
+  "homepage": "https://getdashdot.com",
   "author": "MauriceNino <mauriceprivat98@gmail.com>",
   "bugs": {
     "url": "https://github.com/MauriceNino/dashdot/issues"
