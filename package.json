@@ -187,7 +187,7 @@
           "assets": [
             ".github/CHANGELOG.md"
           ],
-          "message": "chore(release): ${nextRelease.version} [CI SKIP]\n\n${nextRelease.notes}"
+          "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}\n\n[skip ci]"
         }
       ]
     ]

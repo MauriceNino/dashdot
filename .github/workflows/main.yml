@@ -1,0 +1,67 @@
+name: Test & Deploy Main
+
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # SETUP
+      - uses: actions/checkout@v3
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/login-action@v2
+        with:
+          username: mauricenino
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # TEST
+      - name: install dependencies
+        run: yarn --immutable --immutable-cache
+      - name: test
+        run: yarn test
+
+      # DEPLOY
+      - name: gather version
+        run: |
+          yarn semantic-release -d | sed -n 's/.*The next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p' > package.version
+          echo "Next Version: $(cat package.version)"
+          [ -s package.version ] || exit 1
+          echo ::set-output name=version::$(cat package.version)
+      - name: build and push
+        uses: docker/build-push-action@v3
+        with:
+          platforms: linux/amd64
+          target: prod
+          push: ${{ github.event_name != 'pull_request' }}
+          build-args: |
+            VERSION=0.0.0-dev
+            BUILDHASH=${{ github.sha }}
+          labels: |
+            org.opencontainers.image.title="dash."
+            org.opencontainers.image.description="dash. - a modern server dashboard"
+            org.opencontainers.image.authors="MauriceNino <mauriceprivat98@gmail.com>"
+            org.opencontainers.image.url=https://github.com/MauriceNino/dashdot
+            org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
+            org.opencontainers.image.licenses=MIT
+          tags: |
+            mauricenino/dashdot:latest
+            ghcr.io/mauricenino/dashdot:latest
+            mauricenino/dashdot:${{ steps.vars.outputs.version }}
+            ghcr.io/mauricenino/dashdot:latest:${{ steps.vars.outputs.version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: release
+        run: yarn semantic-release
