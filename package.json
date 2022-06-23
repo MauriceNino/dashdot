@@ -6,7 +6,7 @@
   "private": true,
   "main": "dist/apps/api/main.js",
   "repository": "https://github.com/MauriceNino/dashdot",
-  "homepage": "https://github.com/MauriceNino/dashdot#readme",
+  "homepage": "https://getdashdot.com",
   "author": "MauriceNino <mauriceprivat98@gmail.com>",
   "bugs": {
     "url": "https://github.com/MauriceNino/dashdot/issues"
@@ -192,7 +192,7 @@
       [
         "@semantic-release/github",
         {
-          "successComment": ":tada: This issue has been resolved in version ${nextRelease.version}\n\nPlease check the [changelog](https://github.com/MauriceNino/dashdot/blob/main/CHANGELOG.md) for more details.",
+          "successComment": ":tada: This issue has been resolved in version ${nextRelease.version}\n\nPlease check the [changelog](https://github.com/MauriceNino/dashdot/blob/main/.github/CHANGELOG.md) for more details.",
           "failComment": false,
           "failTitle": false,
           "labels": false,

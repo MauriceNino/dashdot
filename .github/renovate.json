@@ -10,7 +10,8 @@
     {
       "matchUpdateTypes": ["patch", "pin", "digest"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
     }
   ]
 }
