@@ -1,3 +1,24 @@
+## [3.7.2](https://github.com/MauriceNino/dashdot/compare/v3.7.1...v3.7.2) (2022-06-20)
+
+
+### Bug Fixes
+
+* assign unclaimed used space to the host drive ([a33aa1c](https://github.com/MauriceNino/dashdot/commit/a33aa1c0497c34a9c9713471b7072a5e4ef01b71))
+
+## [3.7.1](https://github.com/MauriceNino/dashdot/compare/v3.7.0...v3.7.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* non-empty mounts need to be mounted to /mnt/host_ ([f87657a](https://github.com/MauriceNino/dashdot/commit/f87657a41ee7f31e3f3f79b198591b174d20c52c))
+
+# [3.7.0](https://github.com/MauriceNino/dashdot/compare/v3.6.0...v3.7.0) (2022-06-20)
+
+
+### Features
+
+* add optional storage split view ([962ecbe](https://github.com/MauriceNino/dashdot/commit/962ecbe2b9d88d466a3b57356215e377da70e107)), closes [#104](https://github.com/MauriceNino/dashdot/issues/104)
+
 # [3.6.0](https://github.com/MauriceNino/dashdot/compare/v3.5.2...v3.6.0) (2022-06-19)
 
 
