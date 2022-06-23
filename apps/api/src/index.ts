@@ -34,6 +34,10 @@ if (environment.production) {
   });
 }
 
+app.get('/config', (_, res) => {
+  res.send(CONFIG);
+});
+
 // Launch the server
 server.listen(CONFIG.port, async () => {
   console.log('listening on *:' + CONFIG.port);
