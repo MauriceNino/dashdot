@@ -12,6 +12,7 @@ import { StorageChart } from '../widgets/storage';
 const Container = styled.div`
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 
   > div {
     height: 100vh;
