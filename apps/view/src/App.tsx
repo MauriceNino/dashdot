@@ -6,7 +6,9 @@ import {
 } from 'styled-components';
 import { useColorScheme } from 'use-color-scheme';
 import { MainWidgetContainer } from './components/main-widget-container';
+import { SingleWidgetChart } from './components/single-widget-chart';
 import { MobileContextProvider } from './services/mobile';
+import { useQuery } from './services/query-params';
 import { useSetting } from './services/settings';
 import { darkTheme, lightTheme } from './theme/theme';
 
@@ -46,9 +48,10 @@ linear-gradient(
   ${theme.colors.secondary} 40%
 )`;
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ noBg: boolean }>`
   body {
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme, noBg }) =>
+      noBg ? 'transparent' : theme.colors.background};
 
     --ant-primary-color: ${({ theme }) => theme.colors.primary};
     --ant-primary-color-hover: ${({ theme }) => theme.colors.primary};
@@ -59,8 +62,12 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     min-height: 100vh;
 
-    background: ${({ theme }) =>
-      theme.dark ? getDarkGradient(theme) : getLightGradient(theme)};
+    background: ${({ theme, noBg }) =>
+      noBg
+        ? 'transparent'
+        : theme.dark
+        ? getDarkGradient(theme)
+        : getLightGradient(theme)};
 
     transition: background 0.5s ease;
     background-attachment: fixed;
@@ -89,13 +96,18 @@ export const App: FC = () => {
   const { scheme } = useColorScheme();
   const [darkMode] = useSetting('darkMode', scheme === 'dark');
   const theme = useMemo(() => (darkMode ? darkTheme : lightTheme), [darkMode]);
+  const query = useQuery();
 
   return (
     <ThemeProvider theme={theme}>
       <MobileContextProvider>
-        <MainWidgetContainer />
+        {query.isSingleGraphMode ? (
+          <SingleWidgetChart />
+        ) : (
+          <MainWidgetContainer />
+        )}
       </MobileContextProvider>
-      <GlobalStyle />
+      <GlobalStyle noBg={query.isSingleGraphMode} />
     </ThemeProvider>
   );
 };
