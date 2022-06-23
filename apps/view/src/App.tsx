@@ -92,11 +92,47 @@ const GlobalStyle = createGlobalStyle<{ noBg: boolean }>`
   }
 `;
 
+const overrideColor = (
+  colors: typeof darkTheme['colors'],
+  query: ReturnType<typeof useQuery>
+) => {
+  if (query.isSingleGraphMode) {
+    if (query.overrideThemeColor) {
+      colors.cpuPrimary = `#${query.overrideThemeColor}`;
+      colors.storagePrimary = `#${query.overrideThemeColor}`;
+      colors.ramPrimary = `#${query.overrideThemeColor}`;
+      colors.networkPrimary = `#${query.overrideThemeColor}`;
+      colors.gpuPrimary = `#${query.overrideThemeColor}`;
+      colors.primary = `#${query.overrideThemeColor}`;
+    }
+
+    if (query.overrideThemeSurface) {
+      colors.surface = `#${query.overrideThemeSurface}`;
+    }
+  }
+};
+
 export const App: FC = () => {
   const { scheme } = useColorScheme();
   const [darkMode] = useSetting('darkMode', scheme === 'dark');
-  const theme = useMemo(() => (darkMode ? darkTheme : lightTheme), [darkMode]);
   const query = useQuery();
+
+  const theme = useMemo(() => {
+    const baseTheme = darkMode ? darkTheme : lightTheme;
+
+    if (query.isSingleGraphMode) {
+      const queryTheme = query.overrideTheme
+        ? query.overrideTheme === 'dark'
+          ? darkTheme
+          : lightTheme
+        : baseTheme;
+      overrideColor(queryTheme.colors, query);
+
+      return queryTheme;
+    }
+
+    return baseTheme;
+  }, [darkMode, query]);
 
   return (
     <ThemeProvider theme={theme}>

@@ -18,6 +18,9 @@ type QueryResult =
       isSingleGraphMode: true;
       graph: FullscreenGraphTypes;
       multiView?: boolean;
+      overrideTheme?: 'light' | 'dark';
+      overrideThemeColor?: string;
+      overrideThemeSurface?: string;
     };
 
 export const useQuery = (): QueryResult => {
@@ -31,6 +34,9 @@ export const useQuery = (): QueryResult => {
       isSingleGraphMode: true,
       graph: query['graph'] as FullscreenGraphTypes,
       multiView: query['multiView'] === 'true',
+      overrideTheme: query['theme'] as 'light' | 'dark',
+      overrideThemeColor: query['color'] as string,
+      overrideThemeSurface: query['surface'] as string,
     };
   }
 
