@@ -1,18 +1,9 @@
-import {
-  CpuLoad,
-  GpuLoad,
-  NetworkLoad,
-  RamLoad,
-  ServerInfo,
-  StorageLoad,
-} from '@dash/common';
 import { motion, Variants } from 'framer-motion';
-import { FC, useEffect, useState } from 'react';
-import io, { Socket } from 'socket.io-client';
+import { FC } from 'react';
 import { default as styled } from 'styled-components';
 import { GlassPane } from '../components/glass-pane';
-import { environment } from '../environments/environment';
 import { useIsMobile } from '../services/mobile';
+import { usePageData } from '../services/page-data';
 import { CpuWidget } from '../widgets/cpu';
 import { ErrorWidget } from '../widgets/error';
 import { GpuWidget } from '../widgets/gpu';
@@ -70,14 +61,17 @@ const ErrorContainer = styled(motion.div)<{ mobile: boolean }>`
 export const MainWidgetContainer: FC = () => {
   const isMobile = useIsMobile();
 
-  const [pageLoaded, setPageLoaded] = useState(false);
-  const [socketError, setSocketError] = useState(false);
-  const [serverInfo, setServerInfo] = useState<ServerInfo | undefined>();
-  const [cpuLoad, setCpuLoad] = useState<CpuLoad[]>([]);
-  const [ramLoad, setRamLoad] = useState<RamLoad[]>([]);
-  const [networkLoad, setNetworkLoad] = useState<NetworkLoad[]>([]);
-  const [gpuLoad, setGpuLoad] = useState<GpuLoad[]>([]);
-  const [storageLoad, setStorageLoad] = useState<StorageLoad>();
+  const {
+    pageLoaded,
+    error,
+    serverInfo,
+    config,
+    cpuLoad,
+    storageLoad,
+    ramLoad,
+    networkLoad,
+    gpuLoad,
+  } = usePageData();
 
   const osData = serverInfo?.os;
   const cpuData = serverInfo?.cpu;
@@ -85,98 +79,8 @@ export const MainWidgetContainer: FC = () => {
   const networkData = serverInfo?.network;
   const storageData = serverInfo?.storage;
   const gpuData = serverInfo?.gpu;
-  const config = serverInfo?.config;
-
-  useEffect(() => {
-    const socket = io(environment.backendUrl);
-
-    socket.on('static-info', data => {
-      setServerInfo(data);
-    });
-
-    socket.on('connect', () => {
-      setTimeout(() => setPageLoaded(true), 50);
-    });
-    socket.on('connect_error', () => {
-      setSocketError(true);
-    });
-
-    return () => {
-      socket.close();
-    };
-  }, []);
-
-  useEffect(() => {
-    let socket: Socket | undefined;
-    if (config) {
-      socket = io(environment.backendUrl);
-
-      socket.on('cpu-load', data => {
-        setCpuLoad(oldData => {
-          if (oldData.length >= (config.cpu_shown_datapoints ?? 0)) {
-            return [...oldData.slice(1), data];
-          } else {
-            return [...oldData, data];
-          }
-        });
-      });
-
-      socket.on('ram-load', data => {
-        setRamLoad(oldData => {
-          if (oldData.length >= (config.ram_shown_datapoints ?? 0)) {
-            return [...oldData.slice(1), data];
-          } else {
-            return [...oldData, data];
-          }
-        });
-      });
-
-      socket.on('network-load', data => {
-        setNetworkLoad(oldData => {
-          if (oldData.length >= (config.network_shown_datapoints ?? 0)) {
-            return [...oldData.slice(1), data];
-          } else {
-            return [...oldData, data];
-          }
-        });
-      });
-
-      socket.on('gpu-load', data => {
-        setGpuLoad(oldData => {
-          if (oldData.length >= (config.gpu_shown_datapoints ?? 0)) {
-            return [...oldData.slice(1), data];
-          } else {
-            return [...oldData, data];
-          }
-        });
-      });
-
-      socket.on('storage-load', data => {
-        setStorageLoad(data);
-      });
-    }
-
-    return () => {
-      socket?.close();
-    };
-  }, [config]);
-
-  const errors = [
-    {
-      condition: !config,
-      text: 'Invalid or incomplete static data loaded!',
-    },
-    {
-      condition: socketError,
-      text: 'Unable to connect to backend!',
-    },
-  ];
-  const error = errors.find(e => e.condition);
-
-  if (!pageLoaded) return null;
 
   if (error) {
-    console.log(serverInfo);
     return (
       <ErrorContainer
         variants={containerVariants}
@@ -185,15 +89,14 @@ export const MainWidgetContainer: FC = () => {
         exit='exit'
         mobile={isMobile}
       >
-        <ErrorWidget errorText={error.text} />
+        <GlassPane variants={itemVariants} grow={0} minWidth={500}>
+          <ErrorWidget errorText={error.text} />
+        </GlassPane>
       </ErrorContainer>
     );
   }
 
-  // Can never happen
-  if (!config) {
-    return null;
-  }
+  if (!pageLoaded || !config) return null;
 
   const configs = {
     os: {
