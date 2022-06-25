@@ -32,3 +32,10 @@ Shows any units in the imperial system, instead of the default metric
 
 - type: `boolean`
 - default: `false`
+
+## `DASHDOT_DISABLE_INTEGRATIONS`
+
+Disables support for integrations. This does two things: disable CORS and disable open API endpoints.
+
+- type: `boolean`
+- default: `false`

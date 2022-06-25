@@ -1,0 +1,34 @@
+---
+sidebar_position: 1
+---
+
+# Widgets
+
+## Manual
+
+You can implement your running dash. instance on your websites and personal dashboards, via iframes that
+can be configured using query parameters.
+
+```html
+<iframe
+  src="https://<YOUR_SERVER_URL>/?singleGraphMode=true&graph=cpu&multiView=true"
+  style="border-radius: 20px"
+></iframe>
+```
+
+The available parameters are:
+
+- `singleGraphMode` (`true`, `false`)
+- `graph` (`cpu`, `storage`, `ram`, `network`, `gpu`)
+- `multiView` (`true`, `false` - only available for `cpu` and `storage` graphs)
+- `theme` (`dark`, `light`)
+- `color` (color hash (e.g. `FFFFFF` - without `#`))
+- `surface` (color hash (e.g. `FFFFFF` - without `#`))
+- `innerRadius` (number in px - for outerRadius, just change the `border-radius` of the iframe)
+- `gap` (number in px)
+
+## Widget Creator
+
+import { WidgetPreview } from './widget-preview';
+
+<WidgetPreview />

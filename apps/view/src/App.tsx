@@ -6,7 +6,9 @@ import {
 } from 'styled-components';
 import { useColorScheme } from 'use-color-scheme';
 import { MainWidgetContainer } from './components/main-widget-container';
+import { SingleWidgetChart } from './components/single-widget-chart';
 import { MobileContextProvider } from './services/mobile';
+import { useQuery } from './services/query-params';
 import { useSetting } from './services/settings';
 import { darkTheme, lightTheme } from './theme/theme';
 
@@ -46,9 +48,10 @@ linear-gradient(
   ${theme.colors.secondary} 40%
 )`;
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ noBg: boolean }>`
   body {
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme, noBg }) =>
+      noBg ? 'transparent' : theme.colors.background};
 
     --ant-primary-color: ${({ theme }) => theme.colors.primary};
     --ant-primary-color-hover: ${({ theme }) => theme.colors.primary};
@@ -59,8 +62,12 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     min-height: 100vh;
 
-    background: ${({ theme }) =>
-      theme.dark ? getDarkGradient(theme) : getLightGradient(theme)};
+    background: ${({ theme, noBg }) =>
+      noBg
+        ? 'transparent'
+        : theme.dark
+        ? getDarkGradient(theme)
+        : getLightGradient(theme)};
 
     transition: background 0.5s ease;
     background-attachment: fixed;
@@ -85,17 +92,58 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const overrideColor = (
+  colors: typeof darkTheme['colors'],
+  query: ReturnType<typeof useQuery>
+) => {
+  if (query.isSingleGraphMode) {
+    if (query.overrideThemeColor) {
+      colors.cpuPrimary = `#${query.overrideThemeColor}`;
+      colors.storagePrimary = `#${query.overrideThemeColor}`;
+      colors.ramPrimary = `#${query.overrideThemeColor}`;
+      colors.networkPrimary = `#${query.overrideThemeColor}`;
+      colors.gpuPrimary = `#${query.overrideThemeColor}`;
+      colors.primary = `#${query.overrideThemeColor}`;
+    }
+
+    if (query.overrideThemeSurface) {
+      colors.surface = `#${query.overrideThemeSurface}`;
+    }
+  }
+};
+
 export const App: FC = () => {
   const { scheme } = useColorScheme();
   const [darkMode] = useSetting('darkMode', scheme === 'dark');
-  const theme = useMemo(() => (darkMode ? darkTheme : lightTheme), [darkMode]);
+  const query = useQuery();
+
+  const theme = useMemo(() => {
+    const baseTheme = darkMode ? darkTheme : lightTheme;
+
+    if (query.isSingleGraphMode) {
+      const queryTheme = query.overrideTheme
+        ? query.overrideTheme === 'dark'
+          ? darkTheme
+          : lightTheme
+        : baseTheme;
+      overrideColor(queryTheme.colors, query);
+
+      return queryTheme;
+    }
+
+    return baseTheme;
+  }, [darkMode, query]);
 
   return (
     <ThemeProvider theme={theme}>
       <MobileContextProvider>
-        <MainWidgetContainer />
+        {query.isSingleGraphMode ? (
+          <SingleWidgetChart />
+        ) : (
+          <MainWidgetContainer />
+        )}
       </MobileContextProvider>
-      <GlobalStyle />
+      <GlobalStyle noBg={query.isSingleGraphMode} />
     </ThemeProvider>
   );
 };

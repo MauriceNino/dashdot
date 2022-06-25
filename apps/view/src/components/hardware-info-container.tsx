@@ -2,7 +2,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Children, forwardRef, ReactNode, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 import { InfoTable, InfoTableProps } from './info-table';
@@ -20,38 +20,6 @@ const ContentContainer = styled.div<{ mobile: boolean }>`
   flex-direction: ${({ mobile }) => (mobile ? 'column-reverse' : 'row')};
   flex: 1 1 auto;
   ${({ mobile }) => mobile && 'padding: 20px 0'};
-`;
-
-type ChartAreaProps = {
-  mobile: boolean;
-  columns: number;
-  gap: number;
-  items: number;
-};
-
-const ChartArea = styled.div<ChartAreaProps>`
-  position: relative;
-  flex: 1 1 auto;
-  min-width: 0;
-  ${({ mobile }) => mobile && `height: 270px;`}
-
-  > div {
-    display: grid;
-    grid-template-columns: repeat(${({ columns }) => columns}, 1fr);
-    grid-auto-flow: row;
-    gap: ${({ gap }) => gap}px;
-    justify-items: stretch;
-    align-items: stretch;
-
-    height: ${({ mobile }) => (mobile ? '100%' : '110%')};
-    width: 100%;
-
-    position: ${({ mobile }) => (mobile ? 'relative' : 'absolute')};
-    bottom: ${({ mobile }) => (mobile ? '0' : '-10px')};
-    right: -10px;
-
-    z-index: 1;
-  }
 `;
 
 const InfoContainer = styled.div`
@@ -116,77 +84,64 @@ type HardwareInfoProps = {
   heading: string;
   icon: IconProp;
   extraContent?: JSX.Element;
-  columns?: number;
-  gap?: number;
   children?: ReactNode;
   infosPerPage: number;
   onPageChange?: (page: number) => void;
 } & InfoTableProps;
 
-export const HardwareInfoContainer = motion(
-  forwardRef<HTMLDivElement, HardwareInfoProps>((props, ref) => {
-    const isMobile = useIsMobile();
-    const childrenLength = Children.count(props.children);
-    const [page, setPage] = useState(0);
+export const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
+  const isMobile = useIsMobile();
+  const [page, setPage] = useState(0);
 
-    const changePage = (page: number) => {
-      setPage(page);
-      props.onPageChange?.(page);
-    };
+  const changePage = (page: number) => {
+    setPage(page);
+    props.onPageChange?.(page);
+  };
 
-    return (
-      <Container mobile={isMobile}>
-        <InfoIcon {...props}>
-          <FontAwesomeIcon icon={props.icon} size='2x' />
-        </InfoIcon>
+  return (
+    <Container mobile={isMobile}>
+      <InfoIcon {...props}>
+        <FontAwesomeIcon icon={props.icon} size='2x' />
+      </InfoIcon>
 
-        <ContentContainer mobile={isMobile}>
-          <InfoContainer>
-            <InfoHeadingContainer>
-              <InfoHeading>{props.heading}</InfoHeading>
+      <ContentContainer mobile={isMobile}>
+        <InfoContainer>
+          <InfoHeadingContainer>
+            <InfoHeading>{props.heading}</InfoHeading>
 
-              <Controls>
-                <AnimatePresence>
-                  {page > 0 && (
-                    <IconContainer layout>
-                      <FontAwesomeIcon
-                        icon={faArrowLeft}
-                        onClick={() => changePage(page - 1)}
-                      />
-                    </IconContainer>
-                  )}
-                  {(page + 1) * props.infosPerPage < props.infos.length && (
-                    <IconContainer layout>
-                      <FontAwesomeIcon
-                        icon={faArrowRight}
-                        onClick={() => changePage(page + 1)}
-                      />
-                    </IconContainer>
-                  )}
-                </AnimatePresence>
-              </Controls>
-            </InfoHeadingContainer>
+            <Controls>
+              <AnimatePresence>
+                {page > 0 && (
+                  <IconContainer layout>
+                    <FontAwesomeIcon
+                      icon={faArrowLeft}
+                      onClick={() => changePage(page - 1)}
+                    />
+                  </IconContainer>
+                )}
+                {(page + 1) * props.infosPerPage < props.infos.length && (
+                  <IconContainer layout>
+                    <FontAwesomeIcon
+                      icon={faArrowRight}
+                      onClick={() => changePage(page + 1)}
+                    />
+                  </IconContainer>
+                )}
+              </AnimatePresence>
+            </Controls>
+          </InfoHeadingContainer>
 
-            <InfoTable
-              infos={props.infos}
-              page={page}
-              itemsPerPage={props.infosPerPage}
-            />
-          </InfoContainer>
+          <InfoTable
+            infos={props.infos}
+            page={page}
+            itemsPerPage={props.infosPerPage}
+          />
+        </InfoContainer>
 
-          {props.extraContent}
+        {props.extraContent}
 
-          <ChartArea
-            ref={ref}
-            mobile={isMobile}
-            columns={props.columns ?? 1}
-            gap={props.gap ?? 20}
-            items={childrenLength}
-          >
-            <div>{props.children}</div>
-          </ChartArea>
-        </ContentContainer>
-      </Container>
-    );
-  })
-);
+        {props.children}
+      </ContentContainer>
+    </Container>
+  );
+};
