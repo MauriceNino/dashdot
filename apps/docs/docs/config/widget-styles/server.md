@@ -1,15 +1,11 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
+tags:
+  - Configuration
+  - Styles
 ---
 
 # Server Widget
-
-## `DASHDOT_DISABLE_HOST`
-
-If you want to hide the host part in the server widget (e.g. `dash.mauz.io` -> `dash.`).
-
-- type: `boolean`
-- default: `false`
 
 ## `DASHDOT_OS_LABEL_LIST`
 

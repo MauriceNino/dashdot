@@ -1,5 +1,8 @@
 ---
-sidebar_position: 8
+sidebar_position: 2
+description: Override specific labels in your widgets
+tags:
+  - Configuration
 ---
 
 # Overrides

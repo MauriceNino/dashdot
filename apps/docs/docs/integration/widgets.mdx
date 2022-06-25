@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+description: Show dash. graphs on your page
+tags:
+  - Integration
 ---
 
 # Widgets
@@ -16,16 +19,68 @@ can be configured using query parameters.
 ></iframe>
 ```
 
-The available parameters are:
+## Parameters
 
-- `singleGraphMode` (`true`, `false`)
-- `graph` (`cpu`, `storage`, `ram`, `network`, `gpu`)
-- `multiView` (`true`, `false` - only available for `cpu` and `storage` graphs)
-- `theme` (`dark`, `light`)
-- `color` (color hash (e.g. `FFFFFF` - without `#`))
-- `surface` (color hash (e.g. `FFFFFF` - without `#`))
-- `innerRadius` (number in px - for outerRadius, just change the `border-radius` of the iframe)
-- `gap` (number in px)
+### `singleGraphMode`
+
+This parameter tells dash. that it should only show a single graph in full-screen mode.
+
+- type: `boolean`
+- required: `true`
+
+### `graph`
+
+Select the specific graph that you want to show,
+
+- type: `string` (`cpu`, `storage`, `ram`, `network`, `gpu`)
+- required: `true`
+
+### `multiView`
+
+For the `cpu` and `storage` widgets, there are multi-device views.
+These can be shown, by passing this parameter.
+
+- type: `boolean`
+
+:::caution
+
+The multi-view for the `storage` widget is opt-in. To check if the installation has this enabled, use
+the API Request to `/config`, like [described in the API Section](./api#config)
+
+:::
+
+### `theme`
+
+To override the theme of the graph. If this is not passed, the default theme of the users browser is used.
+
+- type: `string` (`dark`, `light`)
+
+### `color`
+
+To override the color of the graph, passed as a hex string. If this is not passed, the default color of the widget is used.
+The color needs to be passed _without_ the trailing `#`.
+
+- type: `string`
+
+### `surface`
+
+To override the background color, passed as a hex string. If this is not passed, the default color of the theme is used.
+The color needs to be passed _without_ the trailing `#`.
+
+- type: `string`
+
+### `innerRadius`
+
+This changes the `border-radius` on the graphs. This is mainly needed to add `border-radius` on views with multiple graphs,
+like the network graph. If you want to add a bigger `border-radius` to the whole container, just add it to the iframe's styles.
+
+- type: `number`
+
+### `gap` (number in px)
+
+This changes the `gap` between the graphs. This is mainly needed on views with multiple graphs, like the network graph.
+
+- type: `number`
 
 ## Widget Creator
 
