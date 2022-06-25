@@ -21,6 +21,8 @@ type QueryResult =
       overrideTheme?: 'light' | 'dark';
       overrideThemeColor?: string;
       overrideThemeSurface?: string;
+      radius: number;
+      gap?: number;
     };
 
 export const useQuery = (): QueryResult => {
@@ -37,6 +39,8 @@ export const useQuery = (): QueryResult => {
       overrideTheme: query['theme'] as 'light' | 'dark',
       overrideThemeColor: query['color'] as string,
       overrideThemeSurface: query['surface'] as string,
+      radius: +((query['innerRadius'] as string) ?? 0),
+      gap: query['gap'] ? +((query['gap'] as string) ?? 0) : undefined,
     };
   }
 

@@ -51,7 +51,7 @@ const Container = styled.div<ContainerProps>`
   }
 `;
 
-const StatText = styled.div<{ float: 'left' | 'right' }>`
+const StatText = styled.p<{ float: 'left' | 'right' }>`
   position: absolute;
   top: 25px;
   ${({ float }) => (float === 'left' ? 'left: 25px' : 'right: 25px')};

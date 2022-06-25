@@ -9,7 +9,7 @@ import { NetworkChart } from '../widgets/network';
 import { RamChart } from '../widgets/ram';
 import { StorageChart } from '../widgets/storage';
 
-const Container = styled.div`
+const Container = styled.div<{ radius: number; gap?: number }>`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -23,8 +23,14 @@ const Container = styled.div`
       position: relative;
       right: unset;
       bottom: unset;
+      ${({ gap }) => (gap ? `gap: ${gap}px;` : '')}
+
       > div {
-        border-radius: 0;
+        border-radius: ${({ radius }) => radius}px;
+
+        > div {
+          border-radius: ${({ radius }) => radius}px;
+        }
 
         &::before {
           box-shadow: unset;
@@ -101,7 +107,7 @@ export const SingleWidgetChart: FC = () => {
   if (!compConfig) return null;
 
   return (
-    <Container>
+    <Container radius={query.radius} gap={query.gap}>
       {/*@ts-ignore */}
       <compConfig.Component {...compConfig.props} />
     </Container>

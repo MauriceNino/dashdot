@@ -1,6 +1,7 @@
 import { loadCommons } from '@dash/common';
 import * as cors from 'cors';
 import * as express from 'express';
+import { readFileSync } from 'fs';
 import * as http from 'http';
 import * as path from 'path';
 import { Subscription } from 'rxjs';
@@ -32,11 +33,26 @@ if (environment.production) {
   app.get('/', (_, res) => {
     res.sendFile(path.join(__dirname, '../view', 'index.html'));
   });
-}
 
-app.get('/config', (_, res) => {
-  res.send(CONFIG);
-});
+  // Allow integrations
+  const versionFile = JSON.parse(
+    readFileSync(path.join(__dirname, '../../../version.json'), 'utf-8')
+  );
+  app.get('/config', (_, res) => {
+    res.send({
+      config: {
+        ...CONFIG,
+        overrides: undefined,
+      },
+      version: versionFile.version,
+      buildhash: versionFile.buildhash,
+    });
+  });
+
+  app.get('/info', (_, res) => {
+    res.send(getStaticServerInfo());
+  });
+}
 
 // Launch the server
 server.listen(CONFIG.port, async () => {
