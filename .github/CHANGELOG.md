@@ -1,3 +1,10 @@
+# [3.8.0](https://github.com/MauriceNino/dashdot/compare/v3.7.2...v3.8.0) (2022-06-25)
+
+
+### Features
+
+* add integration options for other projects ([#137](https://github.com/MauriceNino/dashdot/issues/137)) ([422662d](https://github.com/MauriceNino/dashdot/commit/422662deeafc1a31be012a23b51816251f0a0d43))
+
 ## [3.7.2](https://github.com/MauriceNino/dashdot/compare/v3.7.1...v3.7.2) (2022-06-20)
 
 
