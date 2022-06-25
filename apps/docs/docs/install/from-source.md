@@ -1,5 +1,10 @@
 ---
 sidebar_position: 3
+description: How to install and configure dash. from source
+tags:
+  - Installation
+  - Configuration
+  - Source
 ---
 
 # From Source

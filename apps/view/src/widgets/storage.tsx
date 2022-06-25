@@ -8,7 +8,10 @@ import {
   DefaultPieChart,
   DefaultVertBarChart,
 } from '../components/chart-components';
-import { ChartContainer } from '../components/chart-container';
+import {
+  ChartContainer,
+  MultiChartContainer,
+} from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
 import { WidgetSwitch } from '../components/widget-switch';
@@ -27,25 +30,10 @@ const itemVariants: Variants = {
   },
 };
 
-type StorageWidgetProps = {
-  load?: StorageLoad;
-  data: StorageInfo;
-  config: Config;
-};
-
-export const StorageWidget: FC<StorageWidgetProps> = ({
-  load,
-  data,
-  config,
-}) => {
-  const theme = useTheme();
+const useStorageLayout = (data: StorageInfo, config: Config) => {
   const override = config.override;
 
-  const [splitView, setSplitView] = useSetting('splitStorage', false);
-  const canHaveSplitView =
-    data.layout.length > 1 && config.enable_storage_split_view;
-
-  const layout = useMemo(
+  return useMemo(
     () =>
       data.layout.reduce(
         (acc, curr, i) => {
@@ -90,58 +78,29 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       override.storage_types,
     ]
   );
+};
 
-  const infos = useMemo(() => {
-    if (layout.length > 1) {
-      return layout.map(s => {
-        const brand = s.brands.map((b, i) => `${b} ${s.types[i]}`).join(', ');
-        const size = s.size;
-        const raidGroup = s.raidGroup;
+type StorageChartProps = {
+  load?: StorageLoad;
+  data: StorageInfo;
+  config: Config;
+  multiView: boolean;
+};
+export const StorageChart: FC<StorageChartProps> = ({
+  load,
+  data,
+  config,
+  multiView,
+}) => {
+  const theme = useTheme();
+  const layout = useStorageLayout(data, config);
+  const canHaveSplitView =
+    data.layout.length > 1 && config.enable_storage_split_view;
 
-        return {
-          label: raidGroup ? `RAID\n=> ${raidGroup}` : 'Drive',
-          value: `${brand}\n=> ${bytePrettyPrint(size)}`,
-        };
-      });
-    } else {
-      const brand = layout[0].brands.join(', ');
-      const size = layout[0].size;
-      const type = layout[0].types.join(', ');
-      const isRaid = layout[0].raidGroup != null;
-
-      return toInfoTable(
-        isRaid
-          ? config.storage_label_list
-          : config.storage_label_list.filter(x => x !== 'raid'),
-        {
-          brand: layout[0].brands.length > 1 ? 'Brands' : 'Brand',
-          size: 'Size',
-          type: layout[0].types.length > 1 ? 'Types' : 'Type',
-          raid: 'Raid',
-        },
-        [
-          {
-            key: 'brand',
-            value: brand,
-          },
-          {
-            key: 'size',
-            value: size ? bytePrettyPrint(size) : '',
-          },
-          {
-            key: 'type',
-            value: type,
-          },
-          {
-            key: 'raid',
-            value: layout[0].raidGroup,
-          },
-        ]
-      );
-    }
-  }, [config.storage_label_list, layout]);
-
-  const totalSize = layout.reduce((acc, s) => (acc = acc + s.size), 0) ?? 0;
+  const totalSize = Math.max(
+    layout.reduce((acc, s) => (acc = acc + s.size), 0),
+    1
+  );
   const totalAvailable = Math.max(
     totalSize - (load?.layout.reduce((acc, { load }) => acc + load, 0) ?? 0),
     1
@@ -186,24 +145,8 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
     }));
 
   return (
-    <HardwareInfoContainer
-      color={theme.colors.storagePrimary}
-      heading='Storage'
-      infos={infos}
-      infosPerPage={layout.length > 1 ? 3 : 7}
-      icon={faHdd}
-      extraContent={
-        canHaveSplitView ? (
-          <WidgetSwitch
-            label='Split View'
-            checked={splitView}
-            onChange={() => setSplitView(!splitView)}
-          />
-        ) : undefined
-      }
-      layout
-    >
-      {splitView && canHaveSplitView ? (
+    <MultiChartContainer layout>
+      {multiView && canHaveSplitView ? (
         <ChartContainer
           variants={itemVariants}
           initial='initial'
@@ -259,7 +202,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
         </ChartContainer>
       ) : (
         <ChartContainer
-          statText={`%: ${(((totalUsed ?? 0) / totalSize) * 100).toFixed(1)}`}
+          textLeft={`%: ${(((totalUsed ?? 1) / (totalSize ?? 1)) * 100).toFixed(
+            1
+          )}`}
           variants={itemVariants}
           initial='initial'
           animate='animate'
@@ -303,6 +248,101 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
           )}
         </ChartContainer>
       )}
+    </MultiChartContainer>
+  );
+};
+
+type StorageWidgetProps = {
+  load?: StorageLoad;
+  data: StorageInfo;
+  config: Config;
+};
+
+export const StorageWidget: FC<StorageWidgetProps> = ({
+  load,
+  data,
+  config,
+}) => {
+  const theme = useTheme();
+  const layout = useStorageLayout(data, config);
+
+  const [splitView, setSplitView] = useSetting('splitStorage', false);
+  const canHaveSplitView =
+    data.layout.length > 1 && config.enable_storage_split_view;
+
+  const infos = useMemo(() => {
+    if (layout.length > 1) {
+      return layout.map(s => {
+        const brand = s.brands.map((b, i) => `${b} ${s.types[i]}`).join(', ');
+        const size = s.size;
+        const raidGroup = s.raidGroup;
+
+        return {
+          label: raidGroup ? `RAID\n=> ${raidGroup}` : 'Drive',
+          value: `${brand}\n=> ${bytePrettyPrint(size)}`,
+        };
+      });
+    } else {
+      const brand = layout[0]?.brands.join(', ');
+      const size = layout[0]?.size;
+      const type = layout[0]?.types.join(', ');
+      const isRaid = layout[0]?.raidGroup != null;
+
+      return toInfoTable(
+        isRaid
+          ? config.storage_label_list
+          : config.storage_label_list.filter(x => x !== 'raid'),
+        {
+          brand: (layout[0]?.brands.length ?? 0) > 1 ? 'Brands' : 'Brand',
+          size: 'Size',
+          type: (layout[0]?.types.length ?? 0) > 1 ? 'Types' : 'Type',
+          raid: 'Raid',
+        },
+        [
+          {
+            key: 'brand',
+            value: brand,
+          },
+          {
+            key: 'size',
+            value: size ? bytePrettyPrint(size) : '',
+          },
+          {
+            key: 'type',
+            value: type,
+          },
+          {
+            key: 'raid',
+            value: layout[0]?.raidGroup,
+          },
+        ]
+      );
+    }
+  }, [config.storage_label_list, layout]);
+
+  return (
+    <HardwareInfoContainer
+      color={theme.colors.storagePrimary}
+      heading='Storage'
+      infos={infos}
+      infosPerPage={layout.length > 1 ? 3 : 7}
+      icon={faHdd}
+      extraContent={
+        canHaveSplitView ? (
+          <WidgetSwitch
+            label='Split View'
+            checked={splitView}
+            onChange={() => setSplitView(!splitView)}
+          />
+        ) : undefined
+      }
+    >
+      <StorageChart
+        load={load}
+        config={config}
+        data={data}
+        multiView={splitView}
+      />
     </HardwareInfoContainer>
   );
 };

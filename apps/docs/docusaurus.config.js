@@ -46,7 +46,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'quick-setup',
+            docId: 'install/index',
             position: 'left',
             label: 'Docs',
           },

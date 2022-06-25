@@ -3,9 +3,12 @@ import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
 import { Variants } from 'framer-motion';
 import { FC } from 'react';
 import { Tooltip, YAxis } from 'recharts';
-import styled, { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
-import { ChartContainer } from '../components/chart-container';
+import {
+  ChartContainer,
+  MultiChartContainer,
+} from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
 import { WidgetSwitch } from '../components/widget-switch';
@@ -46,31 +49,19 @@ const getColumnsForCores = (cores: number): number => {
   return columns;
 };
 
-const TempContainer = styled.div`
-  position: absolute;
-  right: 25px;
-  top: 25px;
-  z-index: 2;
-  color: ${({ theme }) => theme.colors.text}AA;
-  white-space: nowrap;
-`;
-
-type CpuWidgetProps = {
+type CpuChartProps = {
   load: CpuLoad[];
-  data: CpuInfo;
   config: Config;
+  multiView: boolean;
 };
-
-export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
+export const CpuChart: FC<CpuChartProps> = ({ load, config, multiView }) => {
   const theme = useTheme();
-  const override = config.override;
+
   const latestLoad = load[load.length - 1];
-
-  const [multiCore, setMulticore] = useSetting('multiCore', false);
-
+  const columns = getColumnsForCores(latestLoad?.length ?? 1);
   let chartData: ChartVal[][] = [];
 
-  if (multiCore) {
+  if (multiView) {
     const coresWithValues = load.reduce(
       (acc, curr) => {
         curr.forEach(({ load: l, core }) => {
@@ -110,19 +101,88 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
 
     chartData = [chartValues];
   }
-
-  const frequency = override.cpu_frequency ?? data.frequency;
-
   const averageTemp =
     latestLoad?.reduce((acc, { temp }) => acc + (temp ?? 0), 0) /
     latestLoad?.length;
 
-  const columns = getColumnsForCores(latestLoad?.length ?? 1);
+  return (
+    <MultiChartContainer
+      columns={multiView ? columns : 1}
+      gap={8}
+      layout
+      variants={containerVariants}
+      initial='initial'
+      animate='animate'
+      exit='exit'
+    >
+      {chartData.map((chart, chartI) => (
+        <ChartContainer
+          key={chartI.toString() + multiView?.toString()}
+          variants={itemVariants}
+          contentLoaded={chart.length > 1}
+          edges={
+            multiView
+              ? [
+                  chartI === 0,
+                  chartI === columns - 1,
+                  chartI === chartData.length - 1,
+                  chartI === chartData.length - columns,
+                ]
+              : undefined
+          }
+          textLeft={
+            multiView
+              ? undefined
+              : `%: ${((chart.at(-1)?.y as number) ?? 0)?.toFixed(1)}`
+          }
+          textRight={
+            config.enable_cpu_temps && !multiView && chart.length > 1
+              ? `Ø: ${
+                  (config.use_imperial
+                    ? celsiusToFahrenheit(averageTemp).toFixed(1)
+                    : averageTemp.toFixed(1)) || '?'
+                } ${config.use_imperial ? '°F' : '°C'}`
+              : undefined
+          }
+        >
+          {size => (
+            <DefaultAreaChart
+              data={chart}
+              height={size.height}
+              width={size.width}
+              color={theme.colors.cpuPrimary}
+            >
+              <YAxis hide={true} type='number' domain={[-5, 105]} />
+              <Tooltip
+                content={x => (
+                  <ThemedText>
+                    {(x.payload?.[0]?.value as number)?.toFixed(2)} %
+                  </ThemedText>
+                )}
+              />
+            </DefaultAreaChart>
+          )}
+        </ChartContainer>
+      ))}
+    </MultiChartContainer>
+  );
+};
+
+type CpuWidgetProps = {
+  load: CpuLoad[];
+  data: CpuInfo;
+  config: Config;
+};
+
+export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
+  const theme = useTheme();
+  const override = config.override;
+
+  const [multiCore, setMulticore] = useSetting('multiCore', false);
+  const frequency = override.cpu_frequency ?? data.frequency;
 
   return (
     <HardwareInfoContainer
-      columns={multiCore ? columns : 1}
-      gap={8}
       color={theme.colors.cpuPrimary}
       heading='Processor'
       infos={toInfoTable(
@@ -166,64 +226,8 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
           onChange={() => setMulticore(!multiCore)}
         />
       }
-      layout
-      variants={containerVariants}
-      initial='initial'
-      animate='animate'
-      exit='exit'
     >
-      {chartData.map((chart, chartI) => (
-        <ChartContainer
-          key={chartI.toString() + multiCore?.toString()}
-          variants={itemVariants}
-          contentLoaded={chart.length > 1}
-          edges={
-            multiCore
-              ? [
-                  chartI === 0,
-                  chartI === columns - 1,
-                  chartI === chartData.length - 1,
-                  chartI === chartData.length - columns,
-                ]
-              : undefined
-          }
-          statText={
-            multiCore
-              ? undefined
-              : `%: ${(chart.at(-1)?.y as number)?.toFixed(1)}`
-          }
-        >
-          {size => (
-            <>
-              {config.enable_cpu_temps && !multiCore && chart.length > 1 && (
-                <TempContainer>
-                  {`Ø: ${
-                    (config.use_imperial
-                      ? celsiusToFahrenheit(averageTemp).toFixed(1)
-                      : averageTemp.toFixed(1)) || '?'
-                  } ${config.use_imperial ? '°F' : '°C'}`}
-                </TempContainer>
-              )}
-
-              <DefaultAreaChart
-                data={chart}
-                height={size.height}
-                width={size.width}
-                color={theme.colors.cpuPrimary}
-              >
-                <YAxis hide={true} type='number' domain={[-5, 105]} />
-                <Tooltip
-                  content={x => (
-                    <ThemedText>
-                      {(x.payload?.[0]?.value as number)?.toFixed(2)} %
-                    </ThemedText>
-                  )}
-                />
-              </DefaultAreaChart>
-            </>
-          )}
-        </ChartContainer>
-      ))}
+      <CpuChart multiView={multiCore} config={config} load={load} />
     </HardwareInfoContainer>
   );
 };

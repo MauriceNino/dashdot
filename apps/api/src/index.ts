@@ -1,6 +1,7 @@
 import { loadCommons } from '@dash/common';
 import * as cors from 'cors';
 import * as express from 'express';
+import { readFileSync } from 'fs';
 import * as http from 'http';
 import * as path from 'path';
 import { Subscription } from 'rxjs';
@@ -19,12 +20,16 @@ import {
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: '*',
-  },
+  cors: CONFIG.disable_integrations
+    ? {}
+    : {
+        origin: '*',
+      },
 });
 
-app.use(cors());
+if (!CONFIG.disable_integrations) {
+  app.use(cors());
+}
 
 if (environment.production) {
   // Serve static files from the React app
@@ -32,6 +37,27 @@ if (environment.production) {
   app.get('/', (_, res) => {
     res.sendFile(path.join(__dirname, '../view', 'index.html'));
   });
+
+  // Allow integrations
+  if (!CONFIG.disable_integrations) {
+    const versionFile = JSON.parse(
+      readFileSync(path.join(__dirname, '../../../version.json'), 'utf-8')
+    );
+    app.get('/config', (_, res) => {
+      res.send({
+        config: {
+          ...CONFIG,
+          overrides: undefined,
+        },
+        version: versionFile.version,
+        buildhash: versionFile.buildhash,
+      });
+    });
+
+    app.get('/info', (_, res) => {
+      res.send({ ...getStaticServerInfo(), config: undefined });
+    });
+  }
 }
 
 // Launch the server

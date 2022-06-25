@@ -4,13 +4,59 @@ import { FC } from 'react';
 import { Tooltip, YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
-import { ChartContainer } from '../components/chart-container';
+import {
+  ChartContainer,
+  MultiChartContainer,
+} from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
 import { removeDuplicates } from '../utils/array-utils';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
 import { ChartVal } from '../utils/types';
+
+export type RamChartProps = {
+  load: RamLoad[];
+  data: RamInfo;
+};
+
+export const RamChart: FC<RamChartProps> = ({ load, data }) => {
+  const theme = useTheme();
+
+  const chartData = load.map((load, i) => ({
+    x: i,
+    y: (load / (data.size ?? 1)) * 100,
+  })) as ChartVal[];
+
+  return (
+    <MultiChartContainer>
+      <ChartContainer
+        contentLoaded={chartData.length > 1}
+        textLeft={`%: ${(chartData[chartData.length - 1]?.y as number)?.toFixed(
+          1
+        )} (${bytePrettyPrint(load[load.length - 1] ?? 0)})`}
+      >
+        {size => (
+          <DefaultAreaChart
+            data={chartData}
+            height={size.height}
+            width={size.width}
+            color={theme.colors.ramPrimary}
+          >
+            <YAxis hide={true} type='number' domain={[-5, 105]} />
+            <Tooltip
+              content={x => (
+                <ThemedText>
+                  {(x.payload?.[0]?.value as number)?.toFixed(2)} %
+                </ThemedText>
+              )}
+            />
+          </DefaultAreaChart>
+        )}
+      </ChartContainer>
+    </MultiChartContainer>
+  );
+};
 
 type RamWidgetProps = {
   load: RamLoad[];
@@ -34,11 +80,6 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
       ? [override.ram_frequency]
       : data.layout?.map(l => l.frequency).filter(c => c && c !== 0)
   ).map(s => `${s} MHz`);
-
-  const chartData = load.map((load, i) => ({
-    x: i,
-    y: (load / (data.size ?? 1)) * 100,
-  })) as ChartVal[];
 
   return (
     <HardwareInfoContainer
@@ -74,30 +115,7 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
       infosPerPage={7}
       icon={faMemory}
     >
-      <ChartContainer
-        contentLoaded={chartData.length > 1}
-        statText={`%: ${(chartData[chartData.length - 1]?.y as number)?.toFixed(
-          1
-        )} (${bytePrettyPrint(load[load.length - 1] ?? 0)})`}
-      >
-        {size => (
-          <DefaultAreaChart
-            data={chartData}
-            height={size.height}
-            width={size.width}
-            color={theme.colors.ramPrimary}
-          >
-            <YAxis hide={true} type='number' domain={[-5, 105]} />
-            <Tooltip
-              content={x => (
-                <ThemedText>
-                  {(x.payload?.[0]?.value as number)?.toFixed(2)} %
-                </ThemedText>
-              )}
-            />
-          </DefaultAreaChart>
-        )}
-      </ChartContainer>
+      <RamChart load={load} data={data} />
     </HardwareInfoContainer>
   );
 };

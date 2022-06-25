@@ -86,6 +86,7 @@ export type Config = {
   widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network' | 'gpu')[];
   accept_ookla_eula: boolean;
   use_imperial: boolean;
+  disable_integrations: boolean;
 
   // OS Widget
   disable_host: boolean;

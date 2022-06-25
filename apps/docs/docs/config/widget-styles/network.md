@@ -1,15 +1,11 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
+tags:
+  - Configuration
+  - Styles
 ---
 
 # Network Widget
-
-## `DASHDOT_USE_NETWORK_INTERFACE`
-
-If dash. detects the wrong gateway as your default interface, you can provide a name here that is used instead.
-
-- type: `string`
-- default: `unset`
 
 ## `DASHDOT_SPEED_TEST_INTERVAL`
 

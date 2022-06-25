@@ -1,15 +1,11 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
+tags:
+  - Configuration
+  - Styles
 ---
 
 # CPU Widget
-
-## `DASHDOT_ENABLE_CPU_TEMPS`
-
-If you want to show the CPU temperature in the graph. This will probably not work on a VPS, so you need to try it on your own if this works. For home servers it might work just fine.
-
-- type: `boolean`
-- default: `false`
 
 ## `DASHDOT_CPU_LABEL_LIST`
 
