@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+description: Query information about the dash. installation
+tags:
+  - Integration
 ---
 
 # API Endpoints
@@ -8,8 +11,20 @@ sidebar_position: 2
 
 There are two endpoints which can be used to retrieve data about the running dash. instance:
 
-- `https://<YOUR_SERVER_URL>/info` - gives information about the static data (e.g. cpu cores, speedtest results)
-- `https://<YOUR_SERVER_URL>/config` - gives information about server config and versions
+### `/info`
+
+Gives information about the static data of the running instance.
+Mostly needed to read the speed-test result at `network.speedDown` and `network.speedUp`.
+
+- Example: `https://<YOUR_SERVER_URL>/info`
+
+### `/config`
+
+Gives information about the configurations of the runnning instance.
+Mostly needed to read the enabled widgets at `config.widget_list`,
+or if multi-view for the storage widget is enabled at `config.enable_storage_split_view`.
+
+- Example: `https://<YOUR_SERVER_URL>/config`
 
 ## URL Preview
 

@@ -55,7 +55,7 @@ if (environment.production) {
     });
 
     app.get('/info', (_, res) => {
-      res.send(getStaticServerInfo());
+      res.send({ ...getStaticServerInfo(), config: undefined });
     });
   }
 }

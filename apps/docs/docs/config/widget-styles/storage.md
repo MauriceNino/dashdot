@@ -1,18 +1,11 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
+tags:
+  - Configuration
+  - Styles
 ---
 
 # Storage Widget
-
-## `DASHDOT_ENABLE_STORAGE_SPLIT_VIEW`
-
-If you want to enable an optional split view for the storage widget, set this to `true`.
-
-The split view will only work reliably, if all drives are mounted in the container.
-Otherwise, any unassigned space will be attributed to the host drive.
-
-- type: `boolean`
-- default: `false`
 
 ## `DASHDOT_STORAGE_LABEL_LIST`
 

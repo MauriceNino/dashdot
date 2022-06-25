@@ -1,5 +1,11 @@
 ---
 sidebar_position: 2
+description: How to install and configure dash. using docker-compose
+tags:
+  - Installation
+  - Configuration
+  - Docker
+  - Docker-Compose
 ---
 
 # Docker-Compose
