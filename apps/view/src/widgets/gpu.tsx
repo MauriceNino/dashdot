@@ -4,12 +4,87 @@ import { FC, useMemo, useState } from 'react';
 import { Tooltip, YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
-import { ChartContainer } from '../components/chart-container';
+import {
+  ChartContainer,
+  MultiChartContainer,
+} from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
 import { ChartVal } from '../utils/types';
+
+type GpuChartProps = {
+  load: GpuLoad[];
+  index: number;
+};
+
+export const GpuChart: FC<GpuChartProps> = ({ load, index }) => {
+  const theme = useTheme();
+
+  const chartDataLoad = load.map((load, i) => ({
+    x: i,
+    y: load.layout[index].load,
+  })) as ChartVal[];
+  const chartDataMemory = load.map((load, i) => ({
+    x: i,
+    y: load.layout[index].memory,
+  })) as ChartVal[];
+
+  return (
+    <MultiChartContainer columns={2}>
+      <ChartContainer
+        contentLoaded={chartDataLoad.length > 1}
+        textLeft={`%: ${(chartDataLoad.at(-1)?.y as number)?.toFixed(
+          1
+        )} (Load)`}
+      >
+        {size => (
+          <DefaultAreaChart
+            data={chartDataLoad}
+            height={size.height}
+            width={size.width}
+            color={theme.colors.gpuPrimary}
+          >
+            <YAxis hide={true} type='number' domain={[-5, 105]} />
+            <Tooltip
+              content={x => (
+                <ThemedText>
+                  {(x.payload?.[0]?.value as number)?.toFixed(1)} %
+                </ThemedText>
+              )}
+            />
+          </DefaultAreaChart>
+        )}
+      </ChartContainer>
+
+      <ChartContainer
+        contentLoaded={chartDataMemory.length > 1}
+        textLeft={`%: ${(chartDataMemory.at(-1)?.y as number)?.toFixed(
+          1
+        )} (Memory)`}
+      >
+        {size => (
+          <DefaultAreaChart
+            data={chartDataMemory}
+            height={size.height}
+            width={size.width}
+            color={theme.colors.gpuPrimary}
+          >
+            <YAxis hide={true} type='number' domain={[-5, 105]} />
+            <Tooltip
+              content={x => (
+                <ThemedText>
+                  {(x.payload?.[0]?.value as number)?.toFixed(1)} %
+                </ThemedText>
+              )}
+            />
+          </DefaultAreaChart>
+        )}
+      </ChartContainer>
+    </MultiChartContainer>
+  );
+};
 
 type GpuWidgetProps = {
   load: GpuLoad[];
@@ -61,18 +136,8 @@ export const GpuWidget: FC<GpuWidgetProps> = ({ load, data, config }) => {
     ]
   );
 
-  const chartDataLoad = load.map((load, i) => ({
-    x: i,
-    y: load.layout[page].load,
-  })) as ChartVal[];
-  const chartDataMemory = load.map((load, i) => ({
-    x: i,
-    y: load.layout[page].memory,
-  })) as ChartVal[];
-
   return (
     <HardwareInfoContainer
-      columns={2}
       color={theme.colors.gpuPrimary}
       heading='Graphics'
       infos={infos}
@@ -80,55 +145,7 @@ export const GpuWidget: FC<GpuWidgetProps> = ({ load, data, config }) => {
       icon={faDesktop}
       onPageChange={setPage}
     >
-      <ChartContainer
-        contentLoaded={chartDataLoad.length > 1}
-        statText={`%: ${(chartDataLoad.at(-1)?.y as number)?.toFixed(
-          1
-        )} (Load)`}
-      >
-        {size => (
-          <DefaultAreaChart
-            data={chartDataLoad}
-            height={size.height}
-            width={size.width}
-            color={theme.colors.gpuPrimary}
-          >
-            <YAxis hide={true} type='number' domain={[-5, 105]} />
-            <Tooltip
-              content={x => (
-                <ThemedText>
-                  {(x.payload?.[0]?.value as number)?.toFixed(1)} %
-                </ThemedText>
-              )}
-            />
-          </DefaultAreaChart>
-        )}
-      </ChartContainer>
-
-      <ChartContainer
-        contentLoaded={chartDataMemory.length > 1}
-        statText={`%: ${(chartDataMemory.at(-1)?.y as number)?.toFixed(
-          1
-        )} (Memory)`}
-      >
-        {size => (
-          <DefaultAreaChart
-            data={chartDataMemory}
-            height={size.height}
-            width={size.width}
-            color={theme.colors.gpuPrimary}
-          >
-            <YAxis hide={true} type='number' domain={[-5, 105]} />
-            <Tooltip
-              content={x => (
-                <ThemedText>
-                  {(x.payload?.[0]?.value as number)?.toFixed(1)} %
-                </ThemedText>
-              )}
-            />
-          </DefaultAreaChart>
-        )}
-      </ChartContainer>
+      <GpuChart load={load} index={page} />
     </HardwareInfoContainer>
   );
 };

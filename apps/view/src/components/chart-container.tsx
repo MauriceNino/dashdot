@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { forwardRef } from 'react';
+import { forwardRef, ReactElement } from 'react';
 import { SwapSpinner } from 'react-spinners-kit';
 import ReactVirtualizedAutoSizer from 'react-virtualized-auto-sizer';
 import styled, { useTheme } from 'styled-components';
@@ -51,10 +51,10 @@ const Container = styled.div<ContainerProps>`
   }
 `;
 
-const StatText = styled.div`
+const StatText = styled.p<{ float: 'left' | 'right' }>`
   position: absolute;
-  left: 25px;
   top: 25px;
+  ${({ float }) => (float === 'left' ? 'left: 25px' : 'right: 25px')};
   z-index: 2;
   color: ${({ theme }) => theme.colors.text}AA;
   white-space: nowrap;
@@ -63,7 +63,8 @@ const StatText = styled.div`
 type ChartContainerProps = {
   contentLoaded: boolean;
   edges?: [boolean, boolean, boolean, boolean];
-  statText?: string;
+  textLeft?: string;
+  textRight?: string;
   children: (size: { width: number; height: number }) => React.ReactNode;
 };
 
@@ -81,7 +82,8 @@ export const ChartContainer = motion(
       >
         {props.contentLoaded ? (
           <>
-            <StatText>{props.statText}</StatText>
+            <StatText float='left'>{props.textLeft}</StatText>
+            <StatText float='right'>{props.textRight}</StatText>
             <ReactVirtualizedAutoSizer
               style={{
                 height: '100%',
@@ -102,4 +104,51 @@ export const ChartContainer = motion(
       </Container>
     );
   })
+);
+
+type MultiChartContainerProps = {
+  columns?: number;
+  gap?: number;
+  children: ReactElement | ReactElement[];
+};
+
+export const SMultiChartContainer = styled.div<
+  Omit<MultiChartContainerProps, 'children'> & { mobile: boolean }
+>`
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  ${({ mobile }) => mobile && `height: 270px;`}
+
+  > div {
+    display: grid;
+    grid-template-columns: repeat(${({ columns }) => columns ?? 1}, 1fr);
+    grid-auto-flow: row;
+    gap: ${({ gap }) => gap ?? 20}px;
+    justify-items: stretch;
+    align-items: stretch;
+
+    height: ${({ mobile }) => (mobile ? '100%' : '110%')};
+    width: 100%;
+
+    position: ${({ mobile }) => (mobile ? 'relative' : 'absolute')};
+    bottom: ${({ mobile }) => (mobile ? '0' : '-10px')};
+    right: -10px;
+
+    z-index: 1;
+  }
+`;
+
+export const MultiChartContainer = motion(
+  forwardRef<HTMLDivElement, MultiChartContainerProps>(
+    ({ children, ...props }, ref) => {
+      const isMobile = useIsMobile();
+
+      return (
+        <SMultiChartContainer {...props} mobile={isMobile} ref={ref}>
+          <div>{children}</div>
+        </SMultiChartContainer>
+      );
+    }
+  )
 );
