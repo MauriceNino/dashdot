@@ -3387,12 +3387,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:4.2.10":
-  version: 4.2.10
-  resolution: "@mantine/hooks@npm:4.2.10"
+"@mantine/hooks@npm:4.2.11":
+  version: 4.2.11
+  resolution: "@mantine/hooks@npm:4.2.11"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 66e69464f3a311d919ab1733af92753a6f65a0040c82c57d19036940be276cab36a99dd9d6339d1fa67fa8cea634dd277d1bf68d64348ea4a5d35d5ec6060f60
+  checksum: b1446cf11705c228050281f4803aea2c2b943037f68c594e5e0fc96359bdd9ad1fd15a290711ac1ac1449a307e698794880773f9a049c4e8eff0230b9184fe1e
   languageName: node
   linkType: hard
 
@@ -9110,7 +9110,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": 6.1.1
     "@fortawesome/react-fontawesome": 0.1.18
     "@mantine/core": 4.2.11
-    "@mantine/hooks": 4.2.10
+    "@mantine/hooks": 4.2.11
     "@mdx-js/react": 1.6.22
     "@nrwl/cli": 14.3.6
     "@nrwl/eslint-plugin-nx": 14.3.6
