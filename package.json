@@ -38,7 +38,7 @@
     "@fortawesome/free-solid-svg-icons": "6.1.1",
     "@fortawesome/react-fontawesome": "0.1.18",
     "@mantine/core": "4.2.11",
-    "@mantine/hooks": "4.2.10",
+    "@mantine/hooks": "4.2.11",
     "@mdx-js/react": "1.6.22",
     "antd": "4.21.3",
     "axios": "0.27.2",
