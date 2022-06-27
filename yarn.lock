@@ -6498,14 +6498,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:4.21.3":
-  version: 4.21.3
-  resolution: "antd@npm:4.21.3"
+"antd@npm:4.21.4":
+  version: 4.21.4
+  resolution: "antd@npm:4.21.4"
   dependencies:
     "@ant-design/colors": ^6.0.0
     "@ant-design/icons": ^4.7.0
     "@ant-design/react-slick": ~0.29.1
-    "@babel/runtime": ^7.12.5
+    "@babel/runtime": ^7.18.3
     "@ctrl/tinycolor": ^3.4.0
     classnames: ^2.2.6
     copy-to-clipboard: ^3.2.0
@@ -6544,12 +6544,12 @@ __metadata:
     rc-tree-select: ~5.4.0
     rc-trigger: ^5.2.10
     rc-upload: ~4.3.0
-    rc-util: ^5.20.0
+    rc-util: ^5.22.5
     scroll-into-view-if-needed: ^2.2.25
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 34e964b0b9b7cbbe9dbe767c39a2628cc80a9754bd0702362ccdd00ec6ec2aade644291a0cdfcc4cad6d825c70f4e742a213e59b7168a7d4ccb25e027739fe91
+  checksum: 14c36e12e965e7d6d15ded618258ea0c3759a071eef1bc0cd07b6a4e916adbb1d853a66f6685e41c7302e01162c6d4d54a6ca9aa152c3a9832fca2e2eeb8069f
   languageName: node
   linkType: hard
 
@@ -9143,7 +9143,7 @@ __metadata:
     "@types/throttle-debounce": 5.0.0
     "@typescript-eslint/eslint-plugin": 5.29.0
     "@typescript-eslint/parser": 5.29.0
-    antd: 4.21.3
+    antd: 4.21.4
     axios: 0.27.2
     babel-jest: 28.1.1
     babel-plugin-styled-components: 2.0.7
@@ -18700,7 +18700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-util@npm:^5.0.1, rc-util@npm:^5.0.6, rc-util@npm:^5.12.0, rc-util@npm:^5.14.0, rc-util@npm:^5.15.0, rc-util@npm:^5.16.1, rc-util@npm:^5.17.0, rc-util@npm:^5.18.1, rc-util@npm:^5.19.2, rc-util@npm:^5.2.0, rc-util@npm:^5.2.1, rc-util@npm:^5.20.0, rc-util@npm:^5.20.1, rc-util@npm:^5.21.0, rc-util@npm:^5.3.0, rc-util@npm:^5.4.0, rc-util@npm:^5.5.0, rc-util@npm:^5.6.1, rc-util@npm:^5.7.0, rc-util@npm:^5.8.0, rc-util@npm:^5.9.4, rc-util@npm:^5.9.8":
+"rc-util@npm:^5.0.1, rc-util@npm:^5.0.6, rc-util@npm:^5.12.0, rc-util@npm:^5.14.0, rc-util@npm:^5.15.0, rc-util@npm:^5.16.1, rc-util@npm:^5.17.0, rc-util@npm:^5.18.1, rc-util@npm:^5.19.2, rc-util@npm:^5.2.0, rc-util@npm:^5.2.1, rc-util@npm:^5.20.1, rc-util@npm:^5.21.0, rc-util@npm:^5.3.0, rc-util@npm:^5.4.0, rc-util@npm:^5.5.0, rc-util@npm:^5.6.1, rc-util@npm:^5.7.0, rc-util@npm:^5.8.0, rc-util@npm:^5.9.4, rc-util@npm:^5.9.8":
   version: 5.21.5
   resolution: "rc-util@npm:5.21.5"
   dependencies:
@@ -18711,6 +18711,20 @@ __metadata:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
   checksum: 39434002f228381b6a6dbb135a1c099b2e5c5f63aba4616cee1ed9b1436cdc8011d78055b06cc169d44b1a79c42d40ecd3d2f6123a61043510aa2a9de48e0e72
+  languageName: node
+  linkType: hard
+
+"rc-util@npm:^5.22.5":
+  version: 5.22.5
+  resolution: "rc-util@npm:5.22.5"
+  dependencies:
+    "@babel/runtime": ^7.18.3
+    react-is: ^16.12.0
+    shallowequal: ^1.1.0
+  peerDependencies:
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  checksum: 006c172fdba5de580430ed5b921a098e455d8115d020e801822731a63578749cc7fea70aaab3e40ce5947846b68c814532c924195723042d4ecaa1f19f9508e3
   languageName: node
   linkType: hard
 
