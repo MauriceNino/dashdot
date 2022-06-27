@@ -9172,7 +9172,7 @@ __metadata:
     prism-react-renderer: 1.3.3
     prop-types: 15.8.1
     punycode: 2.1.1
-    qs: 6.10.5
+    qs: 6.11.0
     react: 18.2.0
     react-color: 2.19.3
     react-dom: 18.2.0
@@ -18044,12 +18044,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.10.5":
-  version: 6.10.5
-  resolution: "qs@npm:6.10.5"
+"qs@npm:6.11.0":
+  version: 6.11.0
+  resolution: "qs@npm:6.11.0"
   dependencies:
     side-channel: ^1.0.4
-  checksum: b3873189a11bcf48445864b3ba66f7a76db0d9d874955d197779f561addfa604884f7b107971526ce1eca02c99bf7d1e47f28a3e7e6e29204d798fb279164226
+  checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
   languageName: node
   linkType: hard
 
