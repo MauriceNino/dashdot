@@ -7,13 +7,6 @@ tags:
 
 # CPU Widget
 
-## `DASHDOT_CPU_LABEL_LIST`
-
-Change the order of the labels in the list, to change the position in the widget, or remove an item from the list, to remove it from the widget (The available options are: `brand`, `model`, `cores`, `threads`, `frequency`).
-
-- type: `string`
-- default: `brand,model,cores,threads,frequency`
-
 ## `DASHDOT_CPU_WIDGET_GROW`
 
 To adjust the relative size of the Processor widget.
