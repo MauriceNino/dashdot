@@ -13,7 +13,7 @@ const numlst = (item: string): number[] => lst(item).map(numNull);
 
 export const CONFIG: Config = {
   port: numNull(penv('PORT')) ?? 3001,
-  disable_host: penv('DISABLE_HOST') === 'true',
+  show_host: penv('SHOW_HOST') === 'true',
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
   use_imperial: penv('USE_IMPERIAL') === 'true',
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',

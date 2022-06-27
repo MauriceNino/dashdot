@@ -83,7 +83,7 @@ export type HardwareInfo = {
 export type Config = {
   // General
   port: number;
-  disable_host: boolean;
+  show_host: boolean;
   accept_ookla_eula: boolean;
   use_imperial: boolean;
   enable_cpu_temps: boolean;
