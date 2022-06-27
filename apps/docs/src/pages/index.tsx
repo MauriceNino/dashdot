@@ -1,4 +1,5 @@
 import Link from '@docusaurus/Link';
+import { useColorMode } from '@docusaurus/theme-common';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import CodeBlock from '@theme/CodeBlock';
 import Layout from '@theme/Layout';
@@ -43,18 +44,21 @@ const HomepageHeader = () => {
 };
 
 const HomePageInfo = () => {
+  const { colorMode } = useColorMode();
+
   return (
     <div className={styles.infoContainer}>
       <div className={styles.infoSection}>
         <h2>dash. is beautiful</h2>
-
-        <Zoom overlayBgColorEnd={'#000'}>
-          <img
-            src='./img/screenshot_darkmode.png'
-            alt='Dark-Mode'
-            className='dark'
-          />
-        </Zoom>
+        {colorMode === 'dark' ? (
+          <Zoom overlayBgColorEnd={'#000'}>
+            <img src='./img/screenshot_darkmode.png' alt='Dark-Mode' />
+          </Zoom>
+        ) : (
+          <Zoom overlayBgColorEnd={'#fff'}>
+            <img src='./img/screenshot_lightmode.png' alt='Light-Mode' />
+          </Zoom>
+        )}
       </div>
 
       <div className={styles.infoSection}>
