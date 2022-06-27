@@ -21,13 +21,6 @@ These links might help you with that:
 - <https://stackoverflow.com/q/25185405/9150652>
 - <https://stackoverflow.com/q/63751883/9150652>
 
-## `DASHDOT_GPU_LABEL_LIST`
-
-Change the order of the labels in the list, to change the position in the widget, or remove an item from the list, to remove it from the widget (The available options are: `brand`, `model`, `memory`).
-
-- type: `string`
-- default: `brand, model, memory`
-
 ## `DASHDOT_GPU_WIDGET_GROW`
 
 To adjust the relative size of the GPU widget.
