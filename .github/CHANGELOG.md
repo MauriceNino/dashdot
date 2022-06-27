@@ -1,3 +1,16 @@
+# [3.9.0](https://github.com/MauriceNino/dashdot/compare/v3.8.2...v3.9.0) (2022-06-27)
+
+
+### Bug Fixes
+
+* hide host in os widget by default ([3e7f9fd](https://github.com/MauriceNino/dashdot/commit/3e7f9fdcb27f4e3fbd13ee77f4b095c909189f72))
+
+
+### Features
+
+* add api endpoints to get current load ([48ab081](https://github.com/MauriceNino/dashdot/commit/48ab081e330ea2ebb21dcb61d26fbffca022e91d))
+* show percentages only on mobile ([fc0d193](https://github.com/MauriceNino/dashdot/commit/fc0d1930d1056cce8bb0c7cdbbe68bb5fd307909)), closes [#149](https://github.com/MauriceNino/dashdot/issues/149)
+
 ## [3.8.2](https://github.com/MauriceNino/dashdot/compare/v3.8.1...v3.8.2) (2022-06-27)
 
 ## [3.8.1](https://github.com/MauriceNino/dashdot/compare/v3.8.0...v3.8.1) (2022-06-25)
