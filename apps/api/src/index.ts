@@ -4,7 +4,14 @@ import * as express from 'express';
 import { readFileSync } from 'fs';
 import * as http from 'http';
 import * as path from 'path';
-import { Subscription } from 'rxjs';
+import {
+  debounceTime,
+  lastValueFrom,
+  Observable,
+  Subscription,
+  take,
+  timeout,
+} from 'rxjs';
 import { Server } from 'socket.io';
 import { CONFIG } from './config';
 import { getDynamicServerInfo } from './dynamic-info';
@@ -67,6 +74,37 @@ server.listen(CONFIG.port, async () => {
   await setupNetworking();
   await loadStaticServerInfo();
   const obs = getDynamicServerInfo();
+
+  // Allow integrations
+  if (!CONFIG.disable_integrations) {
+    const getCurrentValue = async <T>(
+      subj: Observable<T>
+    ): Promise<T | undefined> => {
+      try {
+        return await lastValueFrom(
+          subj.pipe(debounceTime(0), timeout(20), take(1))
+        );
+      } catch (e) {
+        return undefined;
+      }
+    };
+
+    app.get('/load/cpu', async (_, res) => {
+      res.send(await getCurrentValue(obs.cpu));
+    });
+    app.get('/load/ram', async (_, res) => {
+      res.send({ load: await getCurrentValue(obs.ram) });
+    });
+    app.get('/load/storage', async (_, res) => {
+      res.send(await getCurrentValue(obs.storage));
+    });
+    app.get('/load/network', async (_, res) => {
+      res.send(await getCurrentValue(obs.network));
+    });
+    app.get('/load/gpu', async (_, res) => {
+      res.send(await getCurrentValue(obs.gpu));
+    });
+  }
 
   // Send current system status
   io.on('connection', socket => {

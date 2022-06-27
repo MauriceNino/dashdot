@@ -10,6 +10,7 @@ import {
 } from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
+import { useIsMobile } from '../services/mobile';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
 import { ChartVal } from '../utils/types';
@@ -17,9 +18,14 @@ import { ChartVal } from '../utils/types';
 type GpuChartProps = {
   load: GpuLoad[];
   index: number;
+  showPercentages: boolean;
 };
 
-export const GpuChart: FC<GpuChartProps> = ({ load, index }) => {
+export const GpuChart: FC<GpuChartProps> = ({
+  load,
+  index,
+  showPercentages,
+}) => {
   const theme = useTheme();
 
   const chartDataLoad = load.map((load, i) => ({
@@ -35,9 +41,11 @@ export const GpuChart: FC<GpuChartProps> = ({ load, index }) => {
     <MultiChartContainer columns={2}>
       <ChartContainer
         contentLoaded={chartDataLoad.length > 1}
-        textLeft={`%: ${(chartDataLoad.at(-1)?.y as number)?.toFixed(
-          1
-        )} (Load)`}
+        textLeft={
+          showPercentages
+            ? `%: ${(chartDataLoad.at(-1)?.y as number)?.toFixed(1)} (Load)`
+            : undefined
+        }
       >
         {size => (
           <DefaultAreaChart
@@ -94,6 +102,7 @@ type GpuWidgetProps = {
 
 export const GpuWidget: FC<GpuWidgetProps> = ({ load, data, config }) => {
   const theme = useTheme();
+  const isMobile = useIsMobile();
   const [page, setPage] = useState(0);
   const override = config.override;
 
@@ -145,7 +154,11 @@ export const GpuWidget: FC<GpuWidgetProps> = ({ load, data, config }) => {
       icon={faDesktop}
       onPageChange={setPage}
     >
-      <GpuChart load={load} index={page} />
+      <GpuChart
+        showPercentages={config.always_show_percentages || isMobile}
+        load={load}
+        index={page}
+      />
     </HardwareInfoContainer>
   );
 };
