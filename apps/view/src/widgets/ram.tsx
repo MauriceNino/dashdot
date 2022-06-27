@@ -10,6 +10,7 @@ import {
 } from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
+import { useIsMobile } from '../services/mobile';
 import { removeDuplicates } from '../utils/array-utils';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
@@ -18,9 +19,14 @@ import { ChartVal } from '../utils/types';
 export type RamChartProps = {
   load: RamLoad[];
   data: RamInfo;
+  showPercentages: boolean;
 };
 
-export const RamChart: FC<RamChartProps> = ({ load, data }) => {
+export const RamChart: FC<RamChartProps> = ({
+  load,
+  data,
+  showPercentages,
+}) => {
   const theme = useTheme();
 
   const chartData = load.map((load, i) => ({
@@ -32,9 +38,13 @@ export const RamChart: FC<RamChartProps> = ({ load, data }) => {
     <MultiChartContainer>
       <ChartContainer
         contentLoaded={chartData.length > 1}
-        textLeft={`%: ${(chartData[chartData.length - 1]?.y as number)?.toFixed(
-          1
-        )} (${bytePrettyPrint(load[load.length - 1] ?? 0)})`}
+        textLeft={
+          showPercentages
+            ? `%: ${(chartData[chartData.length - 1]?.y as number)?.toFixed(
+                1
+              )} (${bytePrettyPrint(load[load.length - 1] ?? 0)})`
+            : undefined
+        }
       >
         {size => (
           <DefaultAreaChart
@@ -66,6 +76,7 @@ type RamWidgetProps = {
 
 export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
   const theme = useTheme();
+  const isMobile = useIsMobile();
   const override = config.override;
 
   const brands = removeDuplicates(
@@ -115,7 +126,11 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
       infosPerPage={7}
       icon={faMemory}
     >
-      <RamChart load={load} data={data} />
+      <RamChart
+        showPercentages={config.always_show_percentages || isMobile}
+        load={load}
+        data={data}
+      />
     </HardwareInfoContainer>
   );
 };

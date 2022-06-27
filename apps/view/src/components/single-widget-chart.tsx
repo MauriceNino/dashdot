@@ -60,6 +60,8 @@ export const SingleWidgetChart: FC = () => {
 
   if (!pageLoaded || !config || !query.isSingleGraphMode) return null;
 
+  const showPercentages = query.showPercentage;
+
   const configs = {
     cpu: {
       Component: CpuChart,
@@ -109,7 +111,10 @@ export const SingleWidgetChart: FC = () => {
   return (
     <Container radius={query.radius} gap={query.gap}>
       {/*@ts-ignore */}
-      <compConfig.Component {...compConfig.props} />
+      <compConfig.Component
+        {...compConfig.props}
+        showPercentages={showPercentages}
+      />
     </Container>
   );
 };
