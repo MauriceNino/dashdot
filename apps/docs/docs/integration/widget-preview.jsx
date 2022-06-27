@@ -10,6 +10,7 @@ export const WidgetPreview = () => {
   const [url, setUrl] = useState('dash.mauz.io');
   const [widget, setWidget] = useState('cpu');
   const [multiView, setMultiView] = useState('false');
+  const [showPercentage, setShowPercentage] = useState('false');
   const [primaryColor, setPrimaryColor] = useState('');
   const [surfaceColor, setSurfaceColor] = useState('');
   const [theme, setTheme] = useState('');
@@ -20,7 +21,13 @@ export const WidgetPreview = () => {
   const multiViewAllowed = widget === 'cpu' || widget === 'storage';
 
   const multiViewPart =
-    multiViewAllowed && multiView ? `&multiView=${multiView.toString()}` : '';
+    multiViewAllowed && multiView === 'true'
+      ? `&multiView=${multiView.toString()}`
+      : '';
+  const showPercentagePart =
+    showPercentage === 'true'
+      ? `&showPercentage=${showPercentage.toString()}`
+      : '';
   const themePart = theme !== '' ? `&theme=${theme}` : '';
   const primaryColorPart = primaryColor !== '' ? `&color=${primaryColor}` : '';
   const surfaceColorPart =
@@ -29,7 +36,7 @@ export const WidgetPreview = () => {
     innerRadius !== null ? `&innerRadius=${innerRadius}` : '';
   const gapPart = gap !== null ? `&gap=${gap}` : '';
 
-  const finalUrl = `${protocol}://${url}?singleGraphMode=true&graph=${widget}${multiViewPart}${themePart}${primaryColorPart}${surfaceColorPart}${innerRadiusPart}${gapPart}`;
+  const finalUrl = `${protocol}://${url}?singleGraphMode=true&graph=${widget}${multiViewPart}${showPercentagePart}${themePart}${primaryColorPart}${surfaceColorPart}${innerRadiusPart}${gapPart}`;
 
   return (
     <MantineProvider
@@ -97,6 +104,15 @@ export const WidgetPreview = () => {
               ]}
             />
           )}
+          <Select
+            label='Show Percentage'
+            value={showPercentage}
+            onChange={e => setShowPercentage(e)}
+            data={[
+              { value: 'true', label: 'True' },
+              { value: 'false', label: 'False' },
+            ]}
+          />
 
           <Select
             label='Theme'
@@ -164,6 +180,8 @@ export const WidgetPreview = () => {
   style="border-radius: ${outerRadius}px"`
               : ''
           }
+  allowtransparency="true"
+  frameborder="0"
 ></iframe>`}
         </CodeBlock>
 
@@ -174,6 +192,8 @@ export const WidgetPreview = () => {
             width: '100%',
             maxWidth: '300px',
           }}
+          frameBorder='0'
+          allowTransparency
         ></iframe>
       </div>
     </MantineProvider>

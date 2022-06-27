@@ -26,6 +26,20 @@ or if multi-view for the storage widget is enabled at `config.enable_storage_spl
 
 - Example: `https://<YOUR_SERVER_URL>/config`
 
+### `/load`
+
+Has multiple sub-routes, each returning the current load of the given type.
+
+- `/load/cpu`
+- `/load/storage`
+- `/load/ram`
+- `/load/network`
+- `/load/gpu`
+
+<br />
+
+- Example: `https://<YOUR_SERVER_URL>/load/cpu`
+
 ## URL Preview
 
 import { ApiPreview } from './api-preview';

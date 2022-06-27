@@ -17,7 +17,8 @@ type QueryResult =
   | {
       isSingleGraphMode: true;
       graph: FullscreenGraphTypes;
-      multiView?: boolean;
+      multiView: boolean;
+      showPercentage: boolean;
       overrideTheme?: 'light' | 'dark';
       overrideThemeColor?: string;
       overrideThemeSurface?: string;
@@ -36,6 +37,7 @@ export const useQuery = (): QueryResult => {
       isSingleGraphMode: true,
       graph: query['graph'] as FullscreenGraphTypes,
       multiView: query['multiView'] === 'true',
+      showPercentage: query['showPercentage'] === 'true',
       overrideTheme: query['theme'] as 'light' | 'dark',
       overrideThemeColor: query['color'] as string,
       overrideThemeSurface: query['surface'] as string,

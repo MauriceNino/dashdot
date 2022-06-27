@@ -102,6 +102,7 @@ type DefaultPieChartProps = {
   children: React.ReactNode;
   data: any[];
   labelRenderer: (value: number) => string;
+  hoverLabelRenderer: (label: string, value: number) => string;
 };
 export const DefaultPieChart: FC<DefaultPieChartProps> = ({
   data,
@@ -110,6 +111,7 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
   color,
   children,
   labelRenderer,
+  hoverLabelRenderer,
 }) => {
   const id = useMemo(() => {
     return `pie-chart-${++globalId}`;
@@ -165,9 +167,10 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
               document.querySelector(`#${id}`) as HTMLElement
             ).getBoundingClientRect();
             const label = data.payload.payload.name;
+            const value = data.payload.payload.value;
 
             setLabel({
-              label,
+              label: hoverLabelRenderer(label, value),
               x: event.clientX - rect.left,
               y: event.clientY - rect.top,
             });

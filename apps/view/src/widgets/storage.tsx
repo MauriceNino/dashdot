@@ -15,6 +15,7 @@ import {
 import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
 import { WidgetSwitch } from '../components/widget-switch';
+import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
@@ -85,17 +86,17 @@ type StorageChartProps = {
   data: StorageInfo;
   config: Config;
   multiView: boolean;
+  showPercentages: boolean;
 };
 export const StorageChart: FC<StorageChartProps> = ({
   load,
   data,
   config,
   multiView,
+  showPercentages,
 }) => {
   const theme = useTheme();
   const layout = useStorageLayout(data, config);
-  const canHaveSplitView =
-    data.layout.length > 1 && config.enable_storage_split_view;
 
   const totalSize = Math.max(
     layout.reduce((acc, s) => (acc = acc + s.size), 0),
@@ -146,7 +147,7 @@ export const StorageChart: FC<StorageChartProps> = ({
 
   return (
     <MultiChartContainer layout>
-      {multiView && canHaveSplitView ? (
+      {multiView ? (
         <ChartContainer
           variants={itemVariants}
           initial='initial'
@@ -202,9 +203,11 @@ export const StorageChart: FC<StorageChartProps> = ({
         </ChartContainer>
       ) : (
         <ChartContainer
-          textLeft={`%: ${(((totalUsed ?? 1) / (totalSize ?? 1)) * 100).toFixed(
-            1
-          )}`}
+          textLeft={
+            showPercentages
+              ? `%: ${(((totalUsed ?? 1) / (totalSize ?? 1)) * 100).toFixed(1)}`
+              : undefined
+          }
           variants={itemVariants}
           initial='initial'
           animate='animate'
@@ -228,6 +231,9 @@ export const StorageChart: FC<StorageChartProps> = ({
               height={size.height}
               color={theme.colors.storagePrimary}
               labelRenderer={val => bytePrettyPrint(val)}
+              hoverLabelRenderer={(label, value) =>
+                `${((value / totalSize) * 100).toFixed(1)}% ${label}`
+              }
             >
               <Cell
                 key='cell-used'
@@ -264,6 +270,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   config,
 }) => {
   const theme = useTheme();
+  const isMobile = useIsMobile();
   const layout = useStorageLayout(data, config);
 
   const [splitView, setSplitView] = useSetting('splitStorage', false);
@@ -338,10 +345,11 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       }
     >
       <StorageChart
+        showPercentages={config.always_show_percentages || isMobile}
         load={load}
         config={config}
         data={data}
-        multiView={splitView}
+        multiView={canHaveSplitView && splitView}
       />
     </HardwareInfoContainer>
   );

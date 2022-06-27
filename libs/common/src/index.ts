@@ -83,42 +83,21 @@ export type HardwareInfo = {
 export type Config = {
   // General
   port: number;
-  widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network' | 'gpu')[];
+  show_host: boolean;
   accept_ookla_eula: boolean;
   use_imperial: boolean;
-  disable_integrations: boolean;
-
-  // OS Widget
-  disable_host: boolean;
-  os_label_list: ('os' | 'arch' | 'up_since')[];
-  os_widget_grow: number;
-  os_widget_min_width: number;
-
-  // CPU Widget
   enable_cpu_temps: boolean;
-  cpu_label_list: ('brand' | 'model' | 'cores' | 'threads' | 'frequency')[];
-  cpu_widget_grow: number;
-  cpu_widget_min_width: number;
-  cpu_shown_datapoints: number;
-  cpu_poll_interval: number;
-
-  // Storage Widget
   enable_storage_split_view: boolean;
-  storage_label_list: ('brand' | 'size' | 'type' | 'raid')[];
-  storage_widget_grow: number;
-  storage_widget_min_width: number;
-  storage_poll_interval: number;
-
-  // RAM Widget
-  ram_label_list: ('brand' | 'size' | 'type' | 'frequency')[];
-  ram_widget_grow: number;
-  ram_widget_min_width: number;
-  ram_shown_datapoints: number;
-  ram_poll_interval: number;
-
-  // Network Widget
+  disable_integrations: boolean;
+  always_show_percentages: boolean;
   use_network_interface: string;
-  speed_test_interval: number;
+
+  // Widgets, Labels
+  widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network' | 'gpu')[];
+  os_label_list: ('os' | 'arch' | 'up_since')[];
+  cpu_label_list: ('brand' | 'model' | 'cores' | 'threads' | 'frequency')[];
+  storage_label_list: ('brand' | 'size' | 'type' | 'raid')[];
+  ram_label_list: ('brand' | 'size' | 'type' | 'frequency')[];
   network_label_list: (
     | 'type'
     | 'speed_up'
@@ -126,13 +105,37 @@ export type Config = {
     | 'interface_speed'
     | 'public_ip'
   )[];
+  gpu_label_list: ('brand' | 'model' | 'memory')[];
+
+  // OS Widget
+  os_widget_grow: number;
+  os_widget_min_width: number;
+
+  // CPU Widget
+  cpu_widget_grow: number;
+  cpu_widget_min_width: number;
+  cpu_shown_datapoints: number;
+  cpu_poll_interval: number;
+
+  // Storage Widget
+  storage_widget_grow: number;
+  storage_widget_min_width: number;
+  storage_poll_interval: number;
+
+  // RAM Widget
+  ram_widget_grow: number;
+  ram_widget_min_width: number;
+  ram_shown_datapoints: number;
+  ram_poll_interval: number;
+
+  // Network Widget
+  speed_test_interval: number;
   network_widget_grow: number;
   network_widget_min_width: number;
   network_shown_datapoints: number;
   network_poll_interval: number;
 
   // GPU Widget
-  gpu_label_list: ('brand' | 'model' | 'memory')[];
   gpu_widget_grow: number;
   gpu_widget_min_width: number;
   gpu_shown_datapoints: number;

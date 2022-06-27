@@ -59,6 +59,19 @@ export const ApiPreview = () => {
   const baseUrl = `${protocol}://${url}`;
   const info = getDataFromUrl(baseUrl + '/info');
   const config = getDataFromUrl(baseUrl + '/config');
+  const cpuLoad = getDataFromUrl(baseUrl + '/load/cpu');
+  const storageLoad = getDataFromUrl(baseUrl + '/load/storage');
+  const ramLoad = getDataFromUrl(baseUrl + '/load/ram');
+  const networkLoad = getDataFromUrl(baseUrl + '/load/network');
+  const gpuLoad = getDataFromUrl(baseUrl + '/load/gpu');
+
+  const formatOutput = data => {
+    return !data.loading
+      ? !data.error
+        ? JSON.stringify(data.data, null, 2)
+        : data.error.message ?? 'Error'
+      : 'Loading ...';
+  };
 
   return (
     <MantineProvider
@@ -106,23 +119,58 @@ export const ApiPreview = () => {
         <h3>Info</h3>
         <CodeBlock className={`language-http`}>{`${baseUrl}/info`}</CodeBlock>
 
-        <CodeBlock className={`language-json`}>
-          {!info.loading
-            ? !info.error
-              ? JSON.stringify(info.data, null, 2)
-              : info.error.message ?? 'Error'
-            : 'Loading ...'}
-        </CodeBlock>
+        <CodeBlock className={`language-json`}>{formatOutput(info)}</CodeBlock>
 
         <h3>Config</h3>
         <CodeBlock className={`language-http`}>{`${baseUrl}/config`}</CodeBlock>
 
         <CodeBlock className={`language-json`}>
-          {!config.loading
-            ? !config.error
-              ? JSON.stringify(config.data, null, 2)
-              : config.error.message ?? 'Error'
-            : 'Loading ...'}
+          {formatOutput(config)}
+        </CodeBlock>
+
+        <h3>CPU Load</h3>
+        <CodeBlock
+          className={`language-http`}
+        >{`${baseUrl}/load/cpu`}</CodeBlock>
+
+        <CodeBlock className={`language-json`}>
+          {formatOutput(cpuLoad)}
+        </CodeBlock>
+
+        <h3>Storage Load</h3>
+        <CodeBlock
+          className={`language-http`}
+        >{`${baseUrl}/load/storage`}</CodeBlock>
+
+        <CodeBlock className={`language-json`}>
+          {formatOutput(storageLoad)}
+        </CodeBlock>
+
+        <h3>RAM Load</h3>
+        <CodeBlock
+          className={`language-http`}
+        >{`${baseUrl}/load/ram`}</CodeBlock>
+
+        <CodeBlock className={`language-json`}>
+          {formatOutput(ramLoad)}
+        </CodeBlock>
+
+        <h3>Network Load</h3>
+        <CodeBlock
+          className={`language-http`}
+        >{`${baseUrl}/load/network`}</CodeBlock>
+
+        <CodeBlock className={`language-json`}>
+          {formatOutput(networkLoad)}
+        </CodeBlock>
+
+        <h3>GPU Load</h3>
+        <CodeBlock
+          className={`language-http`}
+        >{`${baseUrl}/load/gpu`}</CodeBlock>
+
+        <CodeBlock className={`language-json`}>
+          {formatOutput(gpuLoad)}
         </CodeBlock>
       </div>
     </MantineProvider>

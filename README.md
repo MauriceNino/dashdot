@@ -55,9 +55,9 @@ In case you want to financially support this project, you can visit my
 
 <!-- markdownlint-disable -->
 
-| Dark-Mode                                                                              | Light-Mode                                                                               |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| <img src=".github/images/screenshot_darkmode.png" alt="Screenshot of the dark-mode" /> | <img src=".github/images/screenshot_lightmode.png" alt="Screenshot of the light-mode" /> |
+| Dark-Mode                                                                                    | Light-Mode                                                                                     |
+| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| <img src="apps/docs/static/img/screenshot_darkmode.png" alt="Screenshot of the dark-mode" /> | <img src="apps/docs/static/img/screenshot_lightmode.png" alt="Screenshot of the light-mode" /> |
 
 <!-- markdownlint-enable -->
 
