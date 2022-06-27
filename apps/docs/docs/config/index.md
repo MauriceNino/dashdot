@@ -19,9 +19,9 @@ The port where the express backend is running (the backend serves the frontend, 
 - type: `number`
 - default: `3001`
 
-### `DASHDOT_DISABLE_HOST`
+### `DASHDOT_SHOW_HOST`
 
-If you want to hide the host part in the server widget (e.g. `dash.mauz.io` -> `dash.`).
+If you want to show the host part in the server widget (e.g. `dash.` -> `dash.mauz.io`).
 
 - type: `boolean`
 - default: `false`

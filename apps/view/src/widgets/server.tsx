@@ -41,7 +41,7 @@ const Container = styled.div`
 const Heading = styled(ThemedText)`
   width: 100%;
   max-width: 100%;
-  margin-top: 45px;
+  margin-top: 31px;
   margin-bottom: 15px;
 
   display: flex;
@@ -70,11 +70,12 @@ const ServerName = styled.span`
   text-decoration-color: ${props => props.theme.colors.primary};
   position: relative;
   bottom: -3px;
-  margin-top: 15px;
+  margin-top: 29px;
 `;
 
 const StandaloneAppendix = styled(ServerName)`
   font-size: 3rem;
+  margin-top: 15px;
 `;
 
 const ButtonsContainer = styled.div`
@@ -250,13 +251,13 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       />
 
       <Heading>
-        {config?.disable_host || !domain ? (
-          <StandaloneAppendix>dash.</StandaloneAppendix>
-        ) : (
+        {config?.show_host && domain ? (
           <>
             <Appendix>dash.</Appendix>
             <ServerName>{domain}</ServerName>
           </>
+        ) : (
+          <StandaloneAppendix>dash.</StandaloneAppendix>
         )}
       </Heading>
 
