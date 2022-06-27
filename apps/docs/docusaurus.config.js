@@ -48,7 +48,7 @@ const config = {
             type: 'doc',
             docId: 'install/index',
             position: 'left',
-            label: 'Docs',
+            label: 'Documentation',
           },
           {
             href: 'https://dash.mauz.io',
