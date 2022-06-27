@@ -16,6 +16,8 @@ can be configured using query parameters.
 <iframe
   src="https://<YOUR_SERVER_URL>/?singleGraphMode=true&graph=cpu&multiView=true"
   style="border-radius: 20px"
+  allowtransparency="true"
+  frameborder="0"
 ></iframe>
 ```
 
@@ -30,7 +32,7 @@ This parameter tells dash. that it should only show a single graph in full-scree
 
 ### `graph`
 
-Select the specific graph that you want to show,
+Select the specific graph that you want to show.
 
 - type: `string` (`cpu`, `storage`, `ram`, `network`, `gpu`)
 - required: `true`
@@ -48,6 +50,12 @@ The multi-view for the `storage` widget is opt-in. To check if the installation 
 the API Request to `/config`, like [described in the API Section](./api#config)
 
 :::
+
+### `showPercentage`
+
+Show a label with the current percentage of the graph.
+
+- type: `boolean`
 
 ### `theme`
 

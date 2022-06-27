@@ -10,6 +10,7 @@ import {
 } from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
+import { useIsMobile } from '../services/mobile';
 import { bpsPrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
 import { ChartVal } from '../utils/types';
@@ -18,9 +19,15 @@ type NetworkChartProps = {
   load: NetworkLoad[];
   data: NetworkInfo;
   config: Config;
+  showPercentages: boolean;
 };
 
-export const NetworkChart: FC<NetworkChartProps> = ({ load, data, config }) => {
+export const NetworkChart: FC<NetworkChartProps> = ({
+  load,
+  data,
+  config,
+  showPercentages,
+}) => {
   const theme = useTheme();
 
   const override = config.override;
@@ -49,9 +56,13 @@ export const NetworkChart: FC<NetworkChartProps> = ({ load, data, config }) => {
     <MultiChartContainer columns={2}>
       <ChartContainer
         contentLoaded={chartDataUp.length > 1}
-        textLeft={`↑ ${bpsPrettyPrint(
-          ((chartDataUp[chartDataUp.length - 1]?.y as number) ?? 0) * 8
-        )}`}
+        textLeft={
+          showPercentages
+            ? `↑ ${bpsPrettyPrint(
+                ((chartDataUp[chartDataUp.length - 1]?.y as number) ?? 0) * 8
+              )}`
+            : '↑'
+        }
       >
         {size => (
           <DefaultAreaChart
@@ -78,9 +89,14 @@ export const NetworkChart: FC<NetworkChartProps> = ({ load, data, config }) => {
 
       <ChartContainer
         contentLoaded={chartDataDown.length > 1}
-        textLeft={`↓ ${bpsPrettyPrint(
-          ((chartDataDown[chartDataDown.length - 1]?.y as number) ?? 0) * 8
-        )}`}
+        textLeft={
+          showPercentages
+            ? `↓ ${bpsPrettyPrint(
+                ((chartDataDown[chartDataDown.length - 1]?.y as number) ?? 0) *
+                  8
+              )}`
+            : '↓'
+        }
       >
         {size => (
           <DefaultAreaChart
@@ -120,6 +136,7 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
   config,
 }) => {
   const theme = useTheme();
+  const isMobile = useIsMobile();
   const override = config.override;
 
   const type = override.network_type ?? data.type;
@@ -170,7 +187,12 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
       infosPerPage={7}
       icon={faNetworkWired}
     >
-      <NetworkChart load={load} data={data} config={config} />
+      <NetworkChart
+        showPercentages={config.always_show_percentages || isMobile}
+        load={load}
+        data={data}
+        config={config}
+      />
     </HardwareInfoContainer>
   );
 };

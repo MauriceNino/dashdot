@@ -12,6 +12,7 @@ import {
 import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { ThemedText } from '../components/text';
 import { WidgetSwitch } from '../components/widget-switch';
+import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';
 import { celsiusToFahrenheit } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
@@ -53,8 +54,14 @@ type CpuChartProps = {
   load: CpuLoad[];
   config: Config;
   multiView: boolean;
+  showPercentages: boolean;
 };
-export const CpuChart: FC<CpuChartProps> = ({ load, config, multiView }) => {
+export const CpuChart: FC<CpuChartProps> = ({
+  load,
+  config,
+  multiView,
+  showPercentages,
+}) => {
   const theme = useTheme();
 
   const latestLoad = load[load.length - 1];
@@ -131,7 +138,7 @@ export const CpuChart: FC<CpuChartProps> = ({ load, config, multiView }) => {
               : undefined
           }
           textLeft={
-            multiView
+            multiView || !showPercentages
               ? undefined
               : `%: ${((chart.at(-1)?.y as number) ?? 0)?.toFixed(1)}`
           }
@@ -176,6 +183,7 @@ type CpuWidgetProps = {
 
 export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
   const theme = useTheme();
+  const isMobile = useIsMobile();
   const override = config.override;
 
   const [multiCore, setMulticore] = useSetting('multiCore', false);
@@ -227,7 +235,12 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
         />
       }
     >
-      <CpuChart multiView={multiCore} config={config} load={load} />
+      <CpuChart
+        showPercentages={config.always_show_percentages || isMobile}
+        multiView={multiCore}
+        config={config}
+        load={load}
+      />
     </HardwareInfoContainer>
   );
 };
