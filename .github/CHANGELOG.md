@@ -1,3 +1,5 @@
+## [3.9.2](https://github.com/MauriceNino/dashdot/compare/v3.9.1...v3.9.2) (2022-06-28)
+
 ## [3.9.1](https://github.com/MauriceNino/dashdot/compare/v3.9.0...v3.9.1) (2022-06-27)
 
 
