@@ -169,15 +169,14 @@ export const StorageChart: FC<StorageChartProps> = ({
                 return (
                   <>
                     <ThemedText>
-                      {value ? (value.usedPercent * 100).toFixed(2) : 0} % Used
+                      {value ? (value.usedPercent * 100).toFixed(1) : 0} % Used
                     </ThemedText>
 
                     <ThemedText>
-                      ({bytePrettyPrint(value?.used ?? 0)} /{' '}
+                      {bytePrettyPrint(value?.used ?? 0)} /{' '}
                       {bytePrettyPrint(
                         (value?.available ?? 0) + (value?.used ?? 0)
                       )}
-                      )
                     </ThemedText>
                   </>
                 );
@@ -230,9 +229,12 @@ export const StorageChart: FC<StorageChartProps> = ({
               width={size.width}
               height={size.height}
               color={theme.colors.storagePrimary}
-              labelRenderer={val => bytePrettyPrint(val)}
               hoverLabelRenderer={(label, value) =>
-                `${((value / totalSize) * 100).toFixed(1)}% ${label}`
+                `${((value / totalSize) * 100).toFixed(
+                  1
+                )} % ${label}\n${bytePrettyPrint(value)} / ${bytePrettyPrint(
+                  totalSize
+                )}`
               }
             >
               <Cell
