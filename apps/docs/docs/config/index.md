@@ -72,6 +72,14 @@ Disables support for integrations. This does two things: disable CORS and disabl
 - type: `boolean`
 - default: `false`
 
+### `DASHDOT_ALWAYS_SHOW_PERCENTAGES`
+
+To always show the current percentage of each graph in the top-left corner. Without enabling this,
+they will only be shown on lower resolution devices (mobile phones).
+
+- type: `boolean`
+- default: `false`
+
 ## Add / Remove / Rearrange Widgets and Labels
 
 These options are passed as comma separated lists - you can remove and add widgets and labels.
