@@ -1,4 +1,5 @@
-import { FC, useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
+import { FC, useMemo, useRef, useState } from 'react';
 import {
   Area,
   AreaChart,
@@ -11,7 +12,7 @@ import {
   YAxis,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import { ThemedText } from './text';
+import { throttle } from 'throttle-debounce';
 
 type DefaultAreaChartProps = {
   height: number;
@@ -55,41 +56,44 @@ export const DefaultAreaChart: FC<DefaultAreaChartProps> = ({
   );
 };
 
-const HoverLabel = styled(ThemedText)<{ top: number; left: number }>`
+const HoverLabel = styled(motion.p)`
+  color: ${props => props.theme.colors.text};
   position: absolute;
-  top: ${props => props.top - 40}px;
-  left: ${props => props.left - 20}px;
   z-index: 999;
   pointer-events: none;
-  transition: all 0.1s;
+  white-space: pre;
+  text-align: center;
+  line-height: 1.4;
 `;
 
-const renderLabel = (
-  { cx, cy, midAngle, innerRadius, outerRadius, payload }: any,
-  theme: any,
-  labelRenderer: (value: number) => string
-) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const centerx = cx + radius * Math.cos((-midAngle * Math.PI) / 180);
-  const centery = cy + radius * Math.sin((-midAngle * Math.PI) / 180);
-  const value = payload.value;
+const getCoords = (
+  pos: { x: number; y: number },
+  parent: { width: number; height: number },
+  label: { width: number; height: number }
+): { top: number; left: number } => {
+  const { width: parentWidth, height: parentHeight } = parent;
+  const { width: labelWidth, height: labelHeight } = label;
+  const { x, y } = pos;
 
-  return value > 1 ? (
-    <text
-      x={centerx}
-      y={centery}
-      fill={theme.colors.text}
-      textAnchor={'middle'}
-      dominantBaseline='central'
-      style={{
-        pointerEvents: 'none',
-      }}
-    >
-      {labelRenderer(value)}
-    </text>
-  ) : null;
+  const topBottomOffset = labelHeight * (y > parentHeight / 2 ? -1 : 1) + 10;
+  const top = y - labelHeight / 2 + topBottomOffset;
+  const left = x - labelWidth / 2;
+
+  if (top < 0) {
+    return { top: 10, left };
+  }
+  if (top + labelHeight > parentHeight) {
+    return { top: parentHeight - labelHeight - 10, left };
+  }
+  if (left < 0) {
+    return { top, left: 10 };
+  }
+  if (left + labelWidth > parentWidth) {
+    return { top, left: parentWidth - labelWidth - 10 };
+  }
+
+  return { top, left };
 };
-
 const renderActiveShape = (props: any) => {
   return <Sector {...props} outerRadius={props.outerRadius * 1.08} />;
 };
@@ -101,7 +105,6 @@ type DefaultPieChartProps = {
   color: string;
   children: React.ReactNode;
   data: any[];
-  labelRenderer: (value: number) => string;
   hoverLabelRenderer: (label: string, value: number) => string;
 };
 export const DefaultPieChart: FC<DefaultPieChartProps> = ({
@@ -110,13 +113,14 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
   width,
   color,
   children,
-  labelRenderer,
   hoverLabelRenderer,
 }) => {
   const id = useMemo(() => {
     return `pie-chart-${++globalId}`;
   }, []);
   const theme = useTheme();
+
+  const labelRef = useRef<HTMLParagraphElement>(null);
 
   const [activeSegment, setActiveSegment] = useState<number | undefined>(
     undefined
@@ -129,13 +133,30 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
       }
     | undefined
   >(undefined);
+  const throttledSetLabel = useMemo(
+    () => throttle(100, setLabel, { noTrailing: true }),
+    []
+  );
 
   const minSize = Math.min(height, width);
+  const labelWidth = labelRef.current?.offsetWidth || 0;
+  const labelHeight = labelRef.current?.offsetHeight || 0;
 
   return (
     <>
       {label && (
-        <HoverLabel top={label.y} left={label.x}>
+        <HoverLabel
+          ref={labelRef}
+          initial={{
+            top: label.y,
+            left: label.x + 20,
+          }}
+          animate={getCoords(
+            label,
+            { width, height },
+            { width: labelWidth, height: labelHeight }
+          )}
+        >
           {label.label}
         </HoverLabel>
       )}
@@ -169,7 +190,7 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
             const label = data.payload.payload.name;
             const value = data.payload.payload.value;
 
-            setLabel({
+            throttledSetLabel({
               label: hoverLabelRenderer(label, value),
               x: event.clientX - rect.left,
               y: event.clientY - rect.top,
@@ -177,7 +198,6 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
           }}
           activeShape={renderActiveShape}
           labelLine={false}
-          label={props => renderLabel(props, theme, labelRenderer)}
         >
           {children}
         </Pie>
