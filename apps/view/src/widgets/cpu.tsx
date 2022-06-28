@@ -163,7 +163,7 @@ export const CpuChart: FC<CpuChartProps> = ({
               <Tooltip
                 content={x => (
                   <ThemedText>
-                    {(x.payload?.[0]?.value as number)?.toFixed(2)} %
+                    {(x.payload?.[0]?.value as number)?.toFixed(1)} %
                   </ThemedText>
                 )}
               />

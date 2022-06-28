@@ -57,7 +57,7 @@ export const RamChart: FC<RamChartProps> = ({
             <Tooltip
               content={x => (
                 <ThemedText>
-                  {(x.payload?.[0]?.value as number)?.toFixed(2)} %
+                  {(x.payload?.[0]?.value as number)?.toFixed(1)} %
                 </ThemedText>
               )}
             />
