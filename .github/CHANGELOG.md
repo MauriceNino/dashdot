@@ -1,3 +1,11 @@
+## [3.9.3](https://github.com/MauriceNino/dashdot/compare/v3.9.2...v3.9.3) (2022-06-28)
+
+
+### Bug Fixes
+
+* make all charts default to one comma precision ([ac7c99e](https://github.com/MauriceNino/dashdot/commit/ac7c99ed4b562a28875a855b12c289790aed2170))
+* remove always on labels from pie chart ([86360a9](https://github.com/MauriceNino/dashdot/commit/86360a934bcb03ec97a24f0c4a4595b131d9ee81))
+
 ## [3.9.2](https://github.com/MauriceNino/dashdot/compare/v3.9.1...v3.9.2) (2022-06-28)
 
 ## [3.9.1](https://github.com/MauriceNino/dashdot/compare/v3.9.0...v3.9.1) (2022-06-27)
