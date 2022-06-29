@@ -83,14 +83,16 @@ export type HardwareInfo = {
 export type Config = {
   // General
   port: number;
-  show_host: boolean;
+  running_in_docker: boolean;
+  use_network_interface: string;
   accept_ookla_eula: boolean;
+  disable_integrations: boolean;
+
+  show_host: boolean;
   use_imperial: boolean;
   enable_cpu_temps: boolean;
   enable_storage_split_view: boolean;
-  disable_integrations: boolean;
   always_show_percentages: boolean;
-  use_network_interface: string;
 
   // Widgets, Labels
   widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network' | 'gpu')[];

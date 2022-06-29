@@ -6,7 +6,7 @@ import * as si from 'systeminformation';
 import { SpeedUnits, UniversalSpeedtest } from 'universal-speedtest';
 import { inspect, promisify } from 'util';
 import { CONFIG } from './config';
-import { NET_INTERFACE } from './setup-networking';
+import { NET_INTERFACE_PATH } from './setup-networking';
 
 const exec = promisify(cexec);
 
@@ -164,12 +164,11 @@ const loadStorageInfo = async (): Promise<void> => {
 };
 
 const loadNetworkInfo = async (): Promise<void> => {
-  if (NET_INTERFACE !== 'unknown') {
-    const NET_PATH = `/internal_mnt/host_sys/class/net/${NET_INTERFACE}`;
-    const isWireless = fs.existsSync(`${NET_PATH}/wireless`);
-    const isBridge = fs.existsSync(`${NET_PATH}/bridge`);
-    const isBond = fs.existsSync(`${NET_PATH}/bonding`);
-    const isTap = fs.existsSync(`${NET_PATH}/tun_flags`);
+  if (NET_INTERFACE_PATH) {
+    const isWireless = fs.existsSync(`${NET_INTERFACE_PATH}/wireless`);
+    const isBridge = fs.existsSync(`${NET_INTERFACE_PATH}/bridge`);
+    const isBond = fs.existsSync(`${NET_INTERFACE_PATH}/bonding`);
+    const isTap = fs.existsSync(`${NET_INTERFACE_PATH}/tun_flags`);
 
     STATIC_INFO.next({
       ...STATIC_INFO.getValue(),
@@ -189,7 +188,7 @@ const loadNetworkInfo = async (): Promise<void> => {
 
     // Wireless networks have no fixed Interface speed
     if (!isWireless) {
-      const { stdout } = await exec(`cat ${NET_PATH}/speed`);
+      const { stdout } = await exec(`cat ${NET_INTERFACE_PATH}/speed`);
       const numValue = Number(stdout.trim());
 
       STATIC_INFO.next({
