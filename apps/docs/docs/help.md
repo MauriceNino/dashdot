@@ -30,7 +30,7 @@ only enabled on mobile devices. If you want to bring back the old behavior, ther
 <details>
   <summary>The network information can not be read correctly - what should I do?</summary>
 
-First of all, if you are running docker, make sure that you are passing the `-v /proc/1/ns/net:/mnt/host_ns_net:ro`
+First of all, if you are running docker, make sure that you are passing the `-v /:/mnt/host:ro`
 bind mount. If you have done so, and it still does not work, please do the following:
 
 > Check your logs for a message like `Using network interface "xxxxx"`.

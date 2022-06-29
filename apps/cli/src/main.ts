@@ -35,6 +35,9 @@ yargs(hideBin(process.argv))
       const buildInfoJson = await execpnoerr('cat version.json');
       const gitHash = await execpnoerr('git log -1 --format="%H"');
 
+      const runningInDocker = await execpnoerr(
+        'echo $DASHDOT_RUNNING_IN_DOCKER'
+      );
       const buildInfo = JSON.parse(buildInfoJson || '{}');
       const version = buildInfo.version ?? 'unknown';
       const buildhash = buildInfo.buildhash ?? gitHash;
@@ -51,6 +54,7 @@ Cwd: ${process.cwd()}
 Hash: ${buildhash}
 In Docker: ${isDocker}
 In Podman: ${isPodman}
+In Docker (env): ${runningInDocker}
       `.trim()
       );
     }
@@ -105,7 +109,7 @@ In Podman: ${isPodman}
       if (args.storage) {
         console.log('Disk Layout:', inspectObj(await si.diskLayout()));
         console.log('FS Size:', inspectObj(await si.fsSize()));
-        console.log('BLock Devices:', inspectObj(await si.blockDevices()));
+        console.log('Block Devices:', inspectObj(await si.blockDevices()));
       }
       if (args.network) {
         console.log(
@@ -119,7 +123,7 @@ In Podman: ${isPodman}
       }
       if (args.custom) {
         console.log(
-          `Custom [${args.custom}]`,
+          `Custom [${args.custom}]:`,
           inspectObj(await si[args.custom]())
         );
       }
