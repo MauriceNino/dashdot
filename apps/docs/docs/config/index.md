@@ -19,6 +19,30 @@ The port where the express backend is running (the backend serves the frontend, 
 - type: `number`
 - default: `3001`
 
+### `DASHDOT_ACCEPT_OOKLA_EULA`
+
+Use the newer and more accurate `speedtest` tool from Ookla, instead of the old `speedtest-cli` for your speedtests.
+When passing this flag, you accept Ooklas: [EULA](https://www.speedtest.net/about/eula), [TERMS](https://www.speedtest.net/about/terms) and [PRIVACY](https://www.speedtest.net/about/privacy).
+
+- type: `boolean`
+- default: `false`
+
+### `DASHDOT_USE_NETWORK_INTERFACE`
+
+If dash. detects the wrong gateway as your default interface, you can provide a name here that is used instead.
+
+- type: `string`
+- default: `unset`
+
+### `DASHDOT_DISABLE_INTEGRATIONS`
+
+Disables support for integrations. This does two things: disable CORS and disable open API endpoints.
+
+- type: `boolean`
+- default: `false`
+
+## UI Features
+
 ### `DASHDOT_SHOW_HOST`
 
 If you want to show the host part in the server widget (e.g. `dash.` -> `dash.mauz.io`).
@@ -43,31 +67,9 @@ Otherwise, any unassigned space will be attributed to the host drive.
 - type: `boolean`
 - default: `false`
 
-### `DASHDOT_ACCEPT_OOKLA_EULA`
-
-Use the newer and more accurate `speedtest` tool from Ookla, instead of the old `speedtest-cli` for your speedtests.
-When passing this flag, you accept Ooklas: [EULA](https://www.speedtest.net/about/eula), [TERMS](https://www.speedtest.net/about/terms) and [PRIVACY](https://www.speedtest.net/about/privacy).
-
-- type: `boolean`
-- default: `false`
-
-### `DASHDOT_USE_NETWORK_INTERFACE`
-
-If dash. detects the wrong gateway as your default interface, you can provide a name here that is used instead.
-
-- type: `string`
-- default: `unset`
-
 ### `DASHDOT_USE_IMPERIAL`
 
-Shows any units in the imperial system, instead of the default metric
-
-- type: `boolean`
-- default: `false`
-
-### `DASHDOT_DISABLE_INTEGRATIONS`
-
-Disables support for integrations. This does two things: disable CORS and disable open API endpoints.
+Shows any units in the imperial system, instead of the default metric.
 
 - type: `boolean`
 - default: `false`
