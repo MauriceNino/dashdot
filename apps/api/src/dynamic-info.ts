@@ -10,7 +10,7 @@ import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import * as si from 'systeminformation';
 import { inspect, promisify } from 'util';
 import { CONFIG } from './config';
-import { NET_INTERFACE } from './setup-networking';
+import { NET_INTERFACE_PATH } from './setup-networking';
 import { getStaticServerInfo, runSpeedTest } from './static-info';
 
 const exec = promisify(cexec);
@@ -87,6 +87,8 @@ export const getDynamicServerInfo = () => {
     }
   );
 
+  const INVALID_FS_TYPES = ['cifs', '9p'];
+
   const storageObs = createBufferedInterval(
     'Storage',
     CONFIG.widget_list.includes('storage'),
@@ -101,30 +103,43 @@ export const getDynamicServerInfo = () => {
 
       const storageLayout = layout.storage.layout;
       const validMounts = sizes.filter(
-        ({ mount }) => mount.startsWith('/mnt/host_') || mount === '/'
+        ({ mount, type }) =>
+          mount.startsWith('/mnt/host/') && !INVALID_FS_TYPES.includes(type)
       );
+      const hostMountUsed =
+        sizes.filter(({ mount }) => mount === '/mnt/host' || mount === '/')[0]
+          ?.used ?? 0;
       const validParts = blocks.filter(({ type }) => type === 'part');
 
       let hostFound = false;
 
       return {
         layout: storageLayout
-          .map(({ device }) => {
+          .map(({ device, size }) => {
             const deviceParts = validParts.filter(({ name }) =>
               name.startsWith(device)
             );
-            const potentialHost = deviceParts.every(
-              ({ mount }) => mount == null || !mount.startsWith('/mnt/host_')
-            );
+            const potentialHost =
+              // drives that have all partitions unmounted
+              deviceParts.every(
+                ({ mount }) => mount == null || !mount.startsWith('/mnt/host/')
+              ) ||
+              // drives where one of the partitions is mounted to the root or /mnt/host/boot/
+              deviceParts.some(
+                ({ mount }) =>
+                  mount === '/mnt/host' || mount.startsWith('/mnt/host/boot/')
+              );
 
             // Apply all unclaimed partitions to the host disk
             if (potentialHost && !hostFound) {
               hostFound = true;
-              return validMounts
+              const unclaimedSpace = validMounts
                 .filter(
                   ({ mount }) => !validParts.some(part => part.mount === mount)
                 )
                 .reduce((acc, { used }) => acc + used, 0);
+
+              return hostMountUsed + unclaimedSpace;
             }
 
             return potentialHost
@@ -152,10 +167,10 @@ export const getDynamicServerInfo = () => {
     CONFIG.network_shown_datapoints,
     CONFIG.network_poll_interval,
     async (): Promise<NetworkLoad> => {
-      if (NET_INTERFACE !== 'unknown') {
+      if (NET_INTERFACE_PATH) {
         const { stdout } = await exec(
-          `cat /internal_mnt/host_sys/class/net/${NET_INTERFACE}/statistics/rx_bytes;` +
-            `cat /internal_mnt/host_sys/class/net/${NET_INTERFACE}/statistics/tx_bytes;`
+          `cat ${NET_INTERFACE_PATH}/statistics/rx_bytes;` +
+            `cat ${NET_INTERFACE_PATH}/statistics/tx_bytes;`
         );
         const [rx, tx] = stdout.split('\n').map(Number);
         const thisTs = performance.now();
