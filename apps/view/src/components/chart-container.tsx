@@ -53,8 +53,13 @@ const Container = styled.div<ContainerProps>`
 
 const StatText = styled.p<{ float: 'left' | 'right' }>`
   position: absolute;
-  top: 25px;
-  ${({ float }) => (float === 'left' ? 'left: 25px' : 'right: 25px')};
+  top: 0;
+  ${({ float }) => (float === 'left' ? 'left: 0' : 'right: 0')};
+  ${({ float }) =>
+    float === 'left'
+      ? 'margin-left: min(13%, 30px)'
+      : 'margin-right: min(13%, 30px)'};
+  margin-top: min(13%, 30px);
   z-index: 2;
   color: ${({ theme }) => theme.colors.text}AA;
   white-space: nowrap;

@@ -1,3 +1,34 @@
+## [3.9.3](https://github.com/MauriceNino/dashdot/compare/v3.9.2...v3.9.3) (2022-06-28)
+
+
+### Bug Fixes
+
+* make all charts default to one comma precision ([ac7c99e](https://github.com/MauriceNino/dashdot/commit/ac7c99ed4b562a28875a855b12c289790aed2170))
+* remove always on labels from pie chart ([86360a9](https://github.com/MauriceNino/dashdot/commit/86360a934bcb03ec97a24f0c4a4595b131d9ee81))
+
+## [3.9.2](https://github.com/MauriceNino/dashdot/compare/v3.9.1...v3.9.2) (2022-06-28)
+
+## [3.9.1](https://github.com/MauriceNino/dashdot/compare/v3.9.0...v3.9.1) (2022-06-27)
+
+
+### Bug Fixes
+
+* replace images with higher res ones ([bef477d](https://github.com/MauriceNino/dashdot/commit/bef477d03dba27d6949c4f5bbd04a98bc44ceb2d))
+* **view:** make chart label position relative to container width ([6ad530d](https://github.com/MauriceNino/dashdot/commit/6ad530df5e2ea5d0d0f1c247be8f5d3a752df56e))
+
+# [3.9.0](https://github.com/MauriceNino/dashdot/compare/v3.8.2...v3.9.0) (2022-06-27)
+
+
+### Bug Fixes
+
+* hide host in os widget by default ([3e7f9fd](https://github.com/MauriceNino/dashdot/commit/3e7f9fdcb27f4e3fbd13ee77f4b095c909189f72))
+
+
+### Features
+
+* add api endpoints to get current load ([48ab081](https://github.com/MauriceNino/dashdot/commit/48ab081e330ea2ebb21dcb61d26fbffca022e91d))
+* show percentages only on mobile ([fc0d193](https://github.com/MauriceNino/dashdot/commit/fc0d1930d1056cce8bb0c7cdbbe68bb5fd307909)), closes [#149](https://github.com/MauriceNino/dashdot/issues/149)
+
 ## [3.8.2](https://github.com/MauriceNino/dashdot/compare/v3.8.1...v3.8.2) (2022-06-27)
 
 ## [3.8.1](https://github.com/MauriceNino/dashdot/compare/v3.8.0...v3.8.1) (2022-06-25)
