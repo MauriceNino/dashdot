@@ -9354,7 +9354,7 @@ __metadata:
     inquirer: 8.2.4
     jest: 28.1.1
     nx: 14.3.6
-    parse-domain: 7.0.0
+    parse-domain: 7.0.1
     prettier: 2.7.1
     prism-react-renderer: 1.3.3
     prop-types: 15.8.1
@@ -17021,15 +17021,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-domain@npm:7.0.0":
-  version: 7.0.0
-  resolution: "parse-domain@npm:7.0.0"
+"parse-domain@npm:7.0.1":
+  version: 7.0.1
+  resolution: "parse-domain@npm:7.0.1"
   dependencies:
     is-ip: ^4.0.0
     node-fetch: ^3.2.0
   bin:
     parse-domain-update: bin/update.js
-  checksum: 41becfda82d3192e70336cb96414403d697e855bfdb463e6ee04ce6bfcd3121534b54229e494e6b1e35e6f93391649d4d1fbf6b1d5c282ec78887ab0f7c6d538
+  checksum: 71e1e4e808a6196b27670fe91bbdfc412f9337368924ad0a0f2f6a1e2eca300c0f6c0381e3f90c2b0cb8b6bd9103633bb6a4d8f0475dad9dd5831d85fff2e393
   languageName: node
   linkType: hard
 
