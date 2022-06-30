@@ -139,23 +139,30 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
   );
 
   const minSize = Math.min(height, width);
-  const labelWidth = labelRef.current?.offsetWidth || 0;
-  const labelHeight = labelRef.current?.offsetHeight || 0;
+  const labelWidth = labelRef.current?.offsetWidth || 120;
+  const labelHeight = labelRef.current?.offsetHeight || 50;
+
+  const coords = label
+    ? getCoords(
+        label,
+        { width, height },
+        { width: labelWidth, height: labelHeight }
+      )
+    : undefined;
 
   return (
     <>
       {label && (
         <HoverLabel
           ref={labelRef}
-          initial={{
-            top: label.y,
-            left: label.x + 20,
+          initial={{ ...coords, opacity: 0 }}
+          animate={{
+            ...coords,
+            opacity: 1,
+            transition: {
+              duration: 0.3,
+            },
           }}
-          animate={getCoords(
-            label,
-            { width, height },
-            { width: labelWidth, height: labelHeight }
-          )}
         >
           {label.label}
         </HoverLabel>
