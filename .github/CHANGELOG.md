@@ -1,3 +1,10 @@
+## [3.9.6](https://github.com/MauriceNino/dashdot/compare/v3.9.5...v3.9.6) (2022-07-01)
+
+
+### Bug Fixes
+
+* **view:** storage chart overflow on multiview with >3 disks ([64d2b82](https://github.com/MauriceNino/dashdot/commit/64d2b8204eb6d3674a3de8eacc4568e494cc0f1a))
+
 ## [3.9.5](https://github.com/MauriceNino/dashdot/compare/v3.9.4...v3.9.5) (2022-06-30)
 
 
