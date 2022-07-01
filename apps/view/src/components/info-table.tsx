@@ -17,7 +17,7 @@ const itemVariants: Variants = {
 
 export const InfoTextContainer = styled.div<{ noPadding?: boolean }>`
   display: table;
-  padding: 30px;
+  padding: 30px 30px 15px 30px;
   color: ${props => props.theme.colors.text};
 `;
 

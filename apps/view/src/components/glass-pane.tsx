@@ -7,6 +7,7 @@ type SCProps = GlassPaneProps & { mobile: boolean };
 
 const Container = styled.div<SCProps>`
   min-width: ${({ minWidth, mobile }) => (mobile ? 0 : minWidth)}px;
+  width: ${({ mobile }) => (mobile ? '100%' : 'unset')};
   min-height: 360px;
   max-height: ${({ mobile }) => (mobile ? 'unset' : '500px')};
 

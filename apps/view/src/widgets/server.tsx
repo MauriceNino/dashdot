@@ -70,12 +70,12 @@ const ServerName = styled.span`
   text-decoration-color: ${props => props.theme.colors.primary};
   position: relative;
   bottom: -3px;
-  margin-top: 29px;
+  margin-top: 32px;
 `;
 
 const StandaloneAppendix = styled(ServerName)`
   font-size: 3rem;
-  margin-top: 15px;
+  margin-top: 18px;
 `;
 
 const ButtonsContainer = styled.div`
@@ -98,7 +98,7 @@ const Link = styled(Button)`
 
 const StyledInfoTable = styled(InfoTable)<{ mobile: boolean }>`
   width: 100%;
-  padding: 30px 5px ${({ mobile }) => (mobile ? 20 : 5)}px 5px;
+  padding: 15px 5px ${({ mobile }) => (mobile ? 15 : 5)}px 5px;
 `;
 
 const SFontAwesomeIcon = styled(FontAwesomeIcon)`
