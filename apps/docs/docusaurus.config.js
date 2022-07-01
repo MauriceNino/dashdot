@@ -110,6 +110,15 @@ const config = {
         defaultMode: 'dark',
         respectPrefersColorScheme: false,
       },
+      zoom: {
+        selector: '.markdown :not(em) > img',
+        config: {
+          background: {
+            light: 'rgb(255, 255, 255)',
+            dark: 'rgb(50, 50, 50)',
+          },
+        },
+      },
     }),
 
   themes: [
@@ -122,7 +131,10 @@ const config = {
     ],
   ],
 
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [
+    'docusaurus-plugin-sass',
+    require.resolve('docusaurus-plugin-image-zoom'),
+  ],
 };
 
 module.exports = config;
