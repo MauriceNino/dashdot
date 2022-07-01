@@ -1,3 +1,12 @@
+## [3.9.5](https://github.com/MauriceNino/dashdot/compare/v3.9.4...v3.9.5) (2022-06-30)
+
+
+### Bug Fixes
+
+* **view:** make storage label more floaty ([9619e27](https://github.com/MauriceNino/dashdot/commit/9619e2742bd4bab3b19cf285b560e91d4b1d6d76))
+
+## [3.9.4](https://github.com/MauriceNino/dashdot/compare/v3.9.3...v3.9.4) (2022-06-29)
+
 ## [3.9.3](https://github.com/MauriceNino/dashdot/compare/v3.9.2...v3.9.3) (2022-06-28)
 
 

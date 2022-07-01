@@ -161,7 +161,6 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
   const days = Math.floor(uptime / (24 * 60 * 60));
   const hours = Math.floor((uptime % (24 * 60 * 60)) / (60 * 60));
   const minutes = Math.floor((uptime % (60 * 60)) / 60);
-  const seconds = Math.floor(uptime % 60);
 
   // Client-side calculation of uptime
   useEffect(() => {
@@ -208,11 +207,6 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       label: '',
       value: `${minutes} minutes`,
       amount: minutes,
-    },
-    {
-      label: '',
-      value: `${seconds} seconds`,
-      amount: seconds,
     },
   ].reduce(
     (acc, cur) => ({
