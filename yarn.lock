@@ -4101,7 +4101,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/devkit@npm:14.4.0":
+"@nrwl/devkit@npm:14.4.0, @nrwl/devkit@npm:^14.3.6":
   version: 14.4.0
   resolution: "@nrwl/devkit@npm:14.4.0"
   dependencies:
@@ -4113,21 +4113,6 @@ __metadata:
   peerDependencies:
     nx: ">= 13.10 <= 15"
   checksum: 8a0d378b9e956b43f59d31758087955d4a48b89d82ec9387c5f49b400f54c27607bcac96648e2f6f620e9a857a2c953b0cda4001b856e8ed04f3b5f2c16b1b08
-  languageName: node
-  linkType: hard
-
-"@nrwl/devkit@npm:^14.1.4":
-  version: 14.3.6
-  resolution: "@nrwl/devkit@npm:14.3.6"
-  dependencies:
-    ejs: ^3.1.7
-    ignore: ^5.0.4
-    rxjs: ^6.5.4
-    semver: 7.3.4
-    tslib: ^2.3.0
-  peerDependencies:
-    nx: ">= 13.10 <= 15"
-  checksum: f24319b2b9d6669662a63ab378ae17383b29ab5cb2c5fbef44275d9d7cb9429c2beef76bc85c455a417f1f682d888ad2f54dca9fb4fa424155dee57f1bc4cee5
   languageName: node
   linkType: hard
 
@@ -4459,14 +4444,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx-plus/docusaurus@npm:14.0.0":
-  version: 14.0.0
-  resolution: "@nx-plus/docusaurus@npm:14.0.0"
+"@nx-plus/docusaurus@npm:14.1.0":
+  version: 14.1.0
+  resolution: "@nx-plus/docusaurus@npm:14.1.0"
   dependencies:
-    "@nrwl/devkit": ^14.1.4
+    "@nrwl/devkit": ^14.3.6
   peerDependencies:
-    "@nrwl/workspace": ^14.1.4
-  checksum: d98c7b1a355a03a11594a3988789ccda0ab829f00e4dc9ff41ae0e5dbe2e3953d1787f665934b9d3e88b8068892c397b525ca02ac3709c0c5ecea1d86d3e9363
+    "@nrwl/workspace": ^14.3.6
+  checksum: a84890d0c26534feea08c19869ec4575a6ce55244548797dbe15e8e8a333ccafe11f739568947fd4dc21fb110f5fe474dea5fa8f40cf7e111a0e60d2698ed6b4
   languageName: node
   linkType: hard
 
@@ -9274,7 +9259,7 @@ __metadata:
     "@nrwl/tao": 14.4.0
     "@nrwl/web": 14.4.0
     "@nrwl/workspace": 14.4.0
-    "@nx-plus/docusaurus": 14.0.0
+    "@nx-plus/docusaurus": 14.1.0
     "@semantic-release-plus/docker": 3.1.2
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/git": 10.0.1
