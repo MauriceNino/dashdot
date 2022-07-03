@@ -23,5 +23,4 @@ services:
       - 3002:3002 # docs
     volumes:
       - ./:/app
-      - /etc/os-release:/etc/os-release:ro
       - /:/mnt/host:ro

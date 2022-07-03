@@ -14,7 +14,6 @@ and are available for both AMD64 and ARM devices.
 ```bash
 docker container run -it \
   -p 80:3001 \
-  -v /etc/os-release:/etc/os-release:ro \
   -v /:/mnt/host:ro \
   --privileged \
   mauricenino/dashdot
@@ -24,14 +23,9 @@ docker container run -it \
 
 - The `--privileged` flag is needed to correctly determine the memory and storage info.
 
-- The volume mount on `/etc/os-release:/etc/os-release:ro` is for the
-  dashboard to show the OS version of the host instead of the OS of the docker
-  container (which is running on Alpine Linux). If you wish to show the docker
-  container OS instead, just remove this line. If you are not able to use this
-  mount, you can pass a custom OS with the `DASHDOT_OVERRIDE_OS` flag.
-
-- The volume mounts on `/:/mnt/host:ro` is needed to read the usage stats of all drives and also
-  for reading the correct network stats.
+- The volume mounts on `/:/mnt/host:ro` is needed to read the usage stats of all drives,
+  read the network usage and read the os version of the host. If you don't like to use this
+  mount, feel free to check out the [help page](../help.md#qa) to find a guide on how to set it up manually.
 
 :::
 

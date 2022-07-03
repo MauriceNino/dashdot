@@ -13,7 +13,6 @@ tags:
 docker container run -it \
   -p 80:3001 \
   --privileged \
-  -v /etc/os-release:/etc/os-release:ro \
   -v /:/mnt/host:ro \
   mauricenino/dashdot
 ```
