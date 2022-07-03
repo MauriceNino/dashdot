@@ -10,7 +10,7 @@ import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
 import * as si from 'systeminformation';
 import { inspect, promisify } from 'util';
 import { CONFIG } from './config';
-import { NET_INTERFACE_PATH } from './setup-networking';
+import { NET_INTERFACE_PATH } from './setup';
 import { getStaticServerInfo, runSpeedTest } from './static-info';
 
 const exec = promisify(cexec);
@@ -115,7 +115,7 @@ export const getDynamicServerInfo = () => {
 
       return {
         layout: storageLayout
-          .map(({ device, size }) => {
+          .map(({ device }) => {
             const deviceParts = validParts.filter(({ name }) =>
               name.startsWith(device)
             );

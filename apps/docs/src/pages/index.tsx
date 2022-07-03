@@ -20,7 +20,6 @@ const HomepageHeader = () => {
       <CodeBlock className={`language-bash ${styles.bannerCode}`}>
         {`docker container run -it \\
   -p 80:3001 \\
-  -v /etc/os-release:/etc/os-release:ro \\
   -v /:/mnt/host:ro \\
   --privileged \\
   mauricenino/dashdot`}

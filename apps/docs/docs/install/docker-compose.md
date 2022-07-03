@@ -21,7 +21,6 @@ services:
     ports:
       - '80:3001'
     volumes:
-      - /etc/os-release:/etc/os-release:ro
       - /:/mnt/host:ro
 ```
 

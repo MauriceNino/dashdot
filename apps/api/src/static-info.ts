@@ -6,7 +6,7 @@ import * as si from 'systeminformation';
 import { SpeedUnits, UniversalSpeedtest } from 'universal-speedtest';
 import { inspect, promisify } from 'util';
 import { CONFIG } from './config';
-import { NET_INTERFACE_PATH } from './setup-networking';
+import { NET_INTERFACE_PATH } from './setup';
 
 const exec = promisify(cexec);
 

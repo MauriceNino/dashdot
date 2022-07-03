@@ -61,3 +61,18 @@ export const setupNetworking = async () => {
     console.log(`Using default (container) network interface`);
   }
 };
+
+const LOCAL_OS_PATH = '/etc/os-release';
+const MNT_OS_PATH = '/mnt/host/etc/os-release';
+
+export const setupOsVersion = async () => {
+  try {
+    if (fs.existsSync(MNT_OS_PATH)) {
+      await exec(`ln -sf ${MNT_OS_PATH} ${LOCAL_OS_PATH}`);
+
+      console.log(`Using host os version from "${MNT_OS_PATH}"`);
+    }
+  } catch (e) {
+    console.warn(e);
+  }
+};

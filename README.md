@@ -76,7 +76,6 @@ and are available for both AMD64 and ARM devices.
 ```bash
 docker container run -it \
   -p 80:3001 \
-  -v /etc/os-release:/etc/os-release:ro \
   -v /:/mnt/host:ro \
   --privileged \
   mauricenino/dashdot

@@ -16,7 +16,7 @@ import { Server } from 'socket.io';
 import { CONFIG } from './config';
 import { getDynamicServerInfo } from './dynamic-info';
 import { environment } from './environments/environment';
-import { setupNetworking } from './setup-networking';
+import { setupNetworking, setupOsVersion } from './setup';
 import {
   getStaticServerInfo,
   getStaticServerInfoObs,
@@ -72,6 +72,7 @@ server.listen(CONFIG.port, async () => {
   console.log('listening on *:' + CONFIG.port);
 
   await setupNetworking();
+  await setupOsVersion();
   await loadStaticServerInfo();
   const obs = getDynamicServerInfo();
 
