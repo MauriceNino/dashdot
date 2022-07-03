@@ -3597,20 +3597,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:4.2.11":
-  version: 4.2.11
-  resolution: "@mantine/core@npm:4.2.11"
+"@mantine/core@npm:4.2.12":
+  version: 4.2.12
+  resolution: "@mantine/core@npm:4.2.12"
   dependencies:
-    "@mantine/styles": 4.2.11
+    "@mantine/styles": 4.2.12
     "@popperjs/core": ^2.9.3
     "@radix-ui/react-scroll-area": ^0.1.1
     react-popper: ^2.2.5
     react-textarea-autosize: ^8.3.2
   peerDependencies:
-    "@mantine/hooks": 4.2.11
+    "@mantine/hooks": 4.2.12
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 41f65d65bbfeb9c8429bc1f86c426d2c2ae47b4d902763c8538b79ae68efa2380f8ee0e5ac01be517f2360c1acd8d88d9aceae4095f09050ed346cfe8230752d
+  checksum: c7656b1249edbd71a27e46dc8921a9e012ea11e4696cc1b8784fca74eca683d3b3817463168f908f221643a1b7ab3d47bbd6292acd1694d23a0f8e23c735fc51
   languageName: node
   linkType: hard
 
@@ -3623,9 +3623,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/styles@npm:4.2.11":
-  version: 4.2.11
-  resolution: "@mantine/styles@npm:4.2.11"
+"@mantine/styles@npm:4.2.12":
+  version: 4.2.12
+  resolution: "@mantine/styles@npm:4.2.12"
   dependencies:
     "@emotion/cache": 11.7.1
     "@emotion/react": 11.7.1
@@ -3636,7 +3636,7 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: f59a1f7f4581c00634145b34b3f0613b452a6b0144d6b44e6843ef14fbe5cee9ad2097ce2404d858107123902bdb7df03f5867fd5e232d03b5d1fa323c61c6c6
+  checksum: 8e99c7109e61ca1e3119cec39cac22a7b137964f61822e95c85c6c4e028852b42ace16ad82c94bcd1f3ba52106ae5e3c9b47bd33100eaa99a9e885fec1b1e58e
   languageName: node
   linkType: hard
 
@@ -9313,7 +9313,7 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": 6.1.1
     "@fortawesome/free-solid-svg-icons": 6.1.1
     "@fortawesome/react-fontawesome": 0.2.0
-    "@mantine/core": 4.2.11
+    "@mantine/core": 4.2.12
     "@mantine/hooks": 4.2.11
     "@mdx-js/react": 1.6.22
     "@nrwl/cli": 14.4.0
