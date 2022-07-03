@@ -93,7 +93,7 @@
     "@nrwl/tao": "14.4.0",
     "@nrwl/web": "14.4.0",
     "@nrwl/workspace": "14.4.0",
-    "@nx-plus/docusaurus": "14.0.0",
+    "@nx-plus/docusaurus": "14.1.0",
     "@semantic-release-plus/docker": "3.1.2",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/git": "10.0.1",
