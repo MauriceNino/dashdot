@@ -72,7 +72,7 @@ steps:
       - docker buildx create --name builder --driver docker-container --use
       - docker buildx inspect --bootstrap --builder builder
       - docker buildx build
-        --platform linux/amd64
+        --platform linux/amd64,linux/arm/v7,linux/arm64/v8
         --target prod
         --label org.opencontainers.image.title="dash."
         --label org.opencontainers.image.description="dash. - a modern server dashboard"
@@ -200,4 +200,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: 43f21557ef82cd0b1bd7dee8f9f2d884ebd09622995c4d2e2d03a71daea37092
+hmac: f8e0c0188ca3025fbc9306917b05d45a5a0a10cb1c799fa0be40f7ecdac33dca
