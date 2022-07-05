@@ -1,3 +1,21 @@
+# [4.0.0](https://github.com/MauriceNino/dashdot/compare/v3.9.8...v4.0.0) (2022-07-05)
+
+
+### Features
+
+* **api,docker:** remove the need for multiple volume mounts ([ea8160e](https://github.com/MauriceNino/dashdot/commit/ea8160e55d71c4384ddfec663c1253c7e84889af))
+
+
+### Reverts
+
+* **deps:** upgrade inquirer to v9 ([9fd04af](https://github.com/MauriceNino/dashdot/commit/9fd04af4533b4363225bf78c5a4ae6414dc64122))
+
+
+### BREAKING CHANGES
+
+* **api,docker:** Previously, you needed to volume mount every disk seperately. Now you can simply do
+it once with /:/mnt/host:ro.
+
 ## [3.9.8](https://github.com/MauriceNino/dashdot/compare/v3.9.7...v3.9.8) (2022-07-03)
 
 ## [3.9.7](https://github.com/MauriceNino/dashdot/compare/v3.9.6...v3.9.7) (2022-07-01)
