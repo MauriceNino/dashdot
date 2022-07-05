@@ -63,8 +63,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
               )}`
             : '↑'
         }
-      >
-        {size => (
+        renderChart={size => (
           <DefaultAreaChart
             data={chartDataUp}
             height={size.height}
@@ -85,7 +84,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
             />
           </DefaultAreaChart>
         )}
-      </ChartContainer>
+      ></ChartContainer>
 
       <ChartContainer
         contentLoaded={chartDataDown.length > 1}
@@ -97,8 +96,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
               )}`
             : '↓'
         }
-      >
-        {size => (
+        renderChart={size => (
           <DefaultAreaChart
             data={chartDataDown}
             height={size.height}
@@ -119,7 +117,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
             />
           </DefaultAreaChart>
         )}
-      </ChartContainer>
+      ></ChartContainer>
     </MultiChartContainer>
   );
 };

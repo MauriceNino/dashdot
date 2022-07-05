@@ -13,12 +13,14 @@ const numlst = (item: string): number[] => lst(item).map(numNull);
 
 export const CONFIG: Config = {
   port: numNull(penv('PORT')) ?? 3001,
-  show_host: penv('SHOW_HOST') === 'true',
+  running_in_docker: penv('RUNNING_IN_DOCKER') === 'true',
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
-  use_imperial: penv('USE_IMPERIAL') === 'true',
-  disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
-  enable_storage_split_view: penv('ENABLE_STORAGE_SPLIT_VIEW') === 'true',
   use_network_interface: penv('USE_NETWORK_INTERFACE') ?? '',
+  disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
+
+  show_host: penv('SHOW_HOST') === 'true',
+  use_imperial: penv('USE_IMPERIAL') === 'true',
+  enable_storage_split_view: penv('ENABLE_STORAGE_SPLIT_VIEW') === 'true',
   always_show_percentages: penv('ALWAYS_SHOW_PERCENTAGES') === 'true',
 
   widget_list: lst(

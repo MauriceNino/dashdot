@@ -151,8 +151,7 @@ export const CpuChart: FC<CpuChartProps> = ({
                 } ${config.use_imperial ? '°F' : '°C'}`
               : undefined
           }
-        >
-          {size => (
+          renderChart={size => (
             <DefaultAreaChart
               data={chart}
               height={size.height}
@@ -169,7 +168,7 @@ export const CpuChart: FC<CpuChartProps> = ({
               />
             </DefaultAreaChart>
           )}
-        </ChartContainer>
+        ></ChartContainer>
       ))}
     </MultiChartContainer>
   );

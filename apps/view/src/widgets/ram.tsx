@@ -45,8 +45,7 @@ export const RamChart: FC<RamChartProps> = ({
               )} (${bytePrettyPrint(load[load.length - 1] ?? 0)})`
             : undefined
         }
-      >
-        {size => (
+        renderChart={size => (
           <DefaultAreaChart
             data={chartData}
             height={size.height}
@@ -63,7 +62,7 @@ export const RamChart: FC<RamChartProps> = ({
             />
           </DefaultAreaChart>
         )}
-      </ChartContainer>
+      ></ChartContainer>
     </MultiChartContainer>
   );
 };

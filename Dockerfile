@@ -2,8 +2,8 @@
 FROM node:18-alpine AS base
 
 WORKDIR /app
-
 ARG TARGETPLATFORM
+ENV DASHDOT_RUNNING_IN_DOCKER=true
 
 RUN \
   /bin/echo ">> installing dependencies" &&\
@@ -40,14 +40,14 @@ RUN \
 # DEV #
 FROM base AS dev
 
+EXPOSE 3001
+EXPOSE 3000
+
 RUN \
   /bin/echo -e ">> installing dependencies (dev)" &&\
   apk --no-cache add \
     git &&\
   git config --global --add safe.directory /app
-
-EXPOSE 3001
-EXPOSE 3000
 
 # BUILD #
 FROM base as build
@@ -74,13 +74,13 @@ RUN \
 # PROD #
 FROM base as prod
 
+EXPOSE 3001
+
 COPY --from=build /app/package.json .
 COPY --from=build /app/version.json .
 COPY --from=build /app/.yarn/releases/ .yarn/releases/
 COPY --from=build /app/dist/apps/api dist/apps/api
 COPY --from=build /app/dist/apps/cli dist/apps/cli
 COPY --from=build /app/dist/apps/view dist/apps/view
-
-EXPOSE 3001
 
 CMD ["yarn", "start"]
