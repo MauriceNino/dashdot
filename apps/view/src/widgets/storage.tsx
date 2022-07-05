@@ -155,8 +155,7 @@ export const StorageChart: FC<StorageChartProps> = ({
           exit='exit'
           key='storage-chart-multi'
           contentLoaded={load != null}
-        >
-          {size => (
+          renderChart={size => (
             <DefaultVertBarChart
               width={size.width}
               height={size.height}
@@ -199,7 +198,7 @@ export const StorageChart: FC<StorageChartProps> = ({
               />
             </DefaultVertBarChart>
           )}
-        </ChartContainer>
+        ></ChartContainer>
       ) : (
         <ChartContainer
           textLeft={
@@ -213,8 +212,7 @@ export const StorageChart: FC<StorageChartProps> = ({
           exit='exit'
           key='storage-chart-single'
           contentLoaded={load != null}
-        >
-          {size => (
+          renderChart={size => (
             <DefaultPieChart
               data={[
                 {
@@ -254,7 +252,7 @@ export const StorageChart: FC<StorageChartProps> = ({
               />
             </DefaultPieChart>
           )}
-        </ChartContainer>
+        ></ChartContainer>
       )}
     </MultiChartContainer>
   );

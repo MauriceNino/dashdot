@@ -58,7 +58,7 @@ const InfoHeadingContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 30px 30px 10px 30px;
+  margin: 30px 30px 0 30px;
 `;
 
 const InfoHeading = styled(ThemedText)`

@@ -46,8 +46,7 @@ export const GpuChart: FC<GpuChartProps> = ({
             ? `%: ${(chartDataLoad.at(-1)?.y as number)?.toFixed(1)} (Load)`
             : undefined
         }
-      >
-        {size => (
+        renderChart={size => (
           <DefaultAreaChart
             data={chartDataLoad}
             height={size.height}
@@ -64,15 +63,14 @@ export const GpuChart: FC<GpuChartProps> = ({
             />
           </DefaultAreaChart>
         )}
-      </ChartContainer>
+      ></ChartContainer>
 
       <ChartContainer
         contentLoaded={chartDataMemory.length > 1}
         textLeft={`%: ${(chartDataMemory.at(-1)?.y as number)?.toFixed(
           1
         )} (Memory)`}
-      >
-        {size => (
+        renderChart={size => (
           <DefaultAreaChart
             data={chartDataMemory}
             height={size.height}
@@ -89,7 +87,7 @@ export const GpuChart: FC<GpuChartProps> = ({
             />
           </DefaultAreaChart>
         )}
-      </ChartContainer>
+      ></ChartContainer>
     </MultiChartContainer>
   );
 };

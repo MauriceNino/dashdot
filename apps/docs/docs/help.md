@@ -30,7 +30,7 @@ only enabled on mobile devices. If you want to bring back the old behavior, ther
 <details>
   <summary>The network information can not be read correctly - what should I do?</summary>
 
-First of all, if you are running docker, make sure that you are passing the `-v /proc/1/ns/net:/mnt/host_ns_net:ro`
+First of all, if you are running docker, make sure that you are passing the `-v /:/mnt/host:ro`
 bind mount. If you have done so, and it still does not work, please do the following:
 
 > Check your logs for a message like `Using network interface "xxxxx"`.
@@ -42,6 +42,25 @@ If it **is** the correct network interface, please open a GitHub issue with the 
 
 **Is there no message like this?** If so, please check your log for any errors and open a new issue on GitHub with
 that information.
+
+</details>
+
+<details>
+  <summary>Can you use dash. without mounting the whole host drive?</summary>
+
+Yes, you can - the mount is only needed to make it easier for the user, but you can
+manually mount the relevant parts into the container as well.
+
+For this you need to use the following volume mounts:
+
+- `/etc/os-release:/mnt/host/etc/os-release:ro` for reading the OS version of the host
+- `/proc/1/ns/net:/mnt/host/proc/1/ns/net:ro` for reading the Network usage of the host
+  - alternatively, you can just bind the container to the host network using `--net=host`,
+    but this is not recommended, because it messes with Dockers internal networking
+- `/mnt:/mnt/host/mnt:ro` and `/media:/mnt/host/media:ro` for reading the usage stats of all drives
+  - keep in mind that this covers only the most basic mount paths of linux. if your system uses other mount paths,
+    you will need to manually add them to the list of volumes, following the pattern `/xxx:/mnt/host/xxx:ro`. To
+    check where all your mounts are on your system, you can use the command `df` and run it in a shell.
 
 </details>
 

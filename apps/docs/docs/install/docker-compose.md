@@ -21,10 +21,7 @@ services:
     ports:
       - '80:3001'
     volumes:
-      - /etc/os-release:/etc/os-release:ro
-      - /proc/1/ns/net:/mnt/host_ns_net:ro
-      - /media:/mnt/host_media:ro
-      - /mnt:/mnt/host_mnt:ro
+      - /:/mnt/host:ro
 ```
 
 ## Configuration
