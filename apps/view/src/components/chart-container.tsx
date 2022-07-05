@@ -70,7 +70,7 @@ type ChartContainerProps = {
   edges?: [boolean, boolean, boolean, boolean];
   textLeft?: string;
   textRight?: string;
-  children: (size: { width: number; height: number }) => React.ReactNode;
+  renderChart: (size: { width: number; height: number }) => React.ReactNode;
 };
 
 export const ChartContainer = motion(
@@ -96,7 +96,7 @@ export const ChartContainer = motion(
                 overflow: 'hidden',
               }}
             >
-              {props.children}
+              {size => props.renderChart(size)}
             </ReactVirtualizedAutoSizer>
           </>
         ) : (
