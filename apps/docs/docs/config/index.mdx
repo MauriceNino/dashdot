@@ -34,6 +34,15 @@ If dash. detects the wrong gateway as your default interface, you can provide a 
 - type: `string`
 - default: `unset`
 
+### `DASHDOT_FS_TYPE_FILTER`
+
+If dash. detects network drives as internal drives, you can provide a list of ignored FS types here (e.g. `cifs,9p`).
+Please also create a [bug ticket](https://github.com/MauriceNino/dashdot/issues/new/choose) on the
+repository though, so that we can fix this problem for everyone.
+
+- type: `string`
+- default: `unset`
+
 ### `DASHDOT_DISABLE_INTEGRATIONS`
 
 Disables support for integrations. This does two things: disable CORS and disable open API endpoints.

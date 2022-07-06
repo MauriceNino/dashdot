@@ -87,7 +87,12 @@ export const getDynamicServerInfo = () => {
     }
   );
 
-  const INVALID_FS_TYPES = ['cifs', '9p', 'fuse.rclone', 'fuse.mergerfs'];
+  const INVALID_FS_TYPES = [
+    'cifs',
+    '9p',
+    'fuse.rclone',
+    'fuse.mergerfs',
+  ].concat(CONFIG.fs_type_filter);
 
   const storageObs = createBufferedInterval(
     'Storage',

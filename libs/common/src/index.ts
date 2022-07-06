@@ -86,6 +86,7 @@ export type Config = {
   running_in_docker: boolean;
   use_network_interface: string;
   accept_ookla_eula: boolean;
+  fs_type_filter: string[];
   disable_integrations: boolean;
 
   show_host: boolean;
