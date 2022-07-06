@@ -138,12 +138,16 @@ export const StorageChart: FC<StorageChartProps> = ({
         available: number;
       }[]
     )
-    .map(({ used, available }) => ({
-      used,
-      available,
-      usedPercent: used / (used + available),
-      availablePercent: available / (used + available),
-    }));
+    .map(({ used, available }) => {
+      const usedPercent = Math.min(used / (used + available), 100);
+
+      return {
+        used,
+        available,
+        usedPercent: usedPercent,
+        availablePercent: 1 - usedPercent,
+      };
+    });
 
   return (
     <MultiChartContainer layout>
