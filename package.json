@@ -42,7 +42,7 @@
     "@mdx-js/react": "1.6.22",
     "antd": "4.21.5",
     "axios": "0.27.2",
-    "clsx": "1.2.0",
+    "clsx": "1.2.1",
     "core-js": "3.23.3",
     "cors": "2.8.5",
     "docusaurus-plugin-sass": "0.2.2",
