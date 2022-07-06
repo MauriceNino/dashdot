@@ -1,3 +1,16 @@
+# [4.1.0](https://github.com/MauriceNino/dashdot/compare/v4.0.0...v4.1.0) (2022-07-06)
+
+
+### Bug Fixes
+
+* **api:** add invalid fs types ([a15cee8](https://github.com/MauriceNino/dashdot/commit/a15cee8c91296ae646aa8312416a9ae05c758ed9)), closes [#182](https://github.com/MauriceNino/dashdot/issues/182)
+* automatically reload page when socket reconnects ([43f57d1](https://github.com/MauriceNino/dashdot/commit/43f57d1dead35423476a82d6413143cfa63dbbf1))
+
+
+### Features
+
+* add fs type filter to disable invalid storage types ([3ecd8b8](https://github.com/MauriceNino/dashdot/commit/3ecd8b8e3211d35d3e5013522c0ff279b5a59b40))
+
 # [4.0.0](https://github.com/MauriceNino/dashdot/compare/v3.9.8...v4.0.0) (2022-07-05)
 
 
