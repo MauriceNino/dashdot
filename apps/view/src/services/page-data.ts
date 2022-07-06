@@ -31,6 +31,7 @@ export const usePageData = () => {
 
     socket.on('connect', () => {
       setTimeout(() => setPageLoaded(true), 50);
+      setSocketError(false);
     });
     socket.on('connect_error', () => {
       setSocketError(true);
