@@ -3695,9 +3695,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@motionone/dom@npm:^10.11.0":
-  version: 10.11.0
-  resolution: "@motionone/dom@npm:10.11.0"
+"@motionone/dom@npm:^10.11.1":
+  version: 10.11.2
+  resolution: "@motionone/dom@npm:10.11.2"
   dependencies:
     "@motionone/animation": ^10.10.1
     "@motionone/generators": ^10.9.0
@@ -3705,7 +3705,7 @@ __metadata:
     "@motionone/utils": ^10.9.0
     hey-listen: ^1.0.8
     tslib: ^2.3.1
-  checksum: 055cbe25c1a2b9cdf8fc6c60daf5dcc40ec8977ab25fb43a6677ea6e59ee337c2a1b5f64f7e193d39863776bda00c5695e4b512fd3e96d574e91cbf458c1c5a7
+  checksum: 1208915aaf2300a7159b98bbaa05d2a323898d6114de07244414dfcd0fecc9282a5b1848d4a1c69a30a0067295ef7d234ec779e73a3d70abc216814d293374f3
   languageName: node
   linkType: hard
 
@@ -9455,7 +9455,7 @@ __metadata:
     eslint-plugin-react: 7.30.1
     eslint-plugin-react-hooks: 4.6.0
     express: 4.18.1
-    framer-motion: 6.4.1
+    framer-motion: 6.4.2
     husky: 8.0.1
     inquirer: 8.2.4
     jest: 28.1.2
@@ -11511,12 +11511,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:6.4.1":
-  version: 6.4.1
-  resolution: "framer-motion@npm:6.4.1"
+"framer-motion@npm:6.4.2":
+  version: 6.4.2
+  resolution: "framer-motion@npm:6.4.2"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
-    "@motionone/dom": ^10.11.0
+    "@motionone/dom": ^10.11.1
     framesync: 6.0.1
     hey-listen: ^1.0.8
     popmotion: 11.0.3
@@ -11528,7 +11528,7 @@ __metadata:
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: 66b1d3d2a27fd0ffa7091f098a6a387791c259d8861dd802367693ee226fbb651f853c1cc08e5ad2b682511397e58fe2ec203bb17e51859e1be50ad7e9c2b716
+  checksum: 876dabb78869e0644f7bc2be11b4878c640b7d88b914a2415890c81e7ce73d7c38ffb1592a3eb89754da207f369a813c5361d09b1e6262a2f0c07be913506605
   languageName: node
   linkType: hard
 
