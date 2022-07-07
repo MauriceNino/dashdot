@@ -112,8 +112,10 @@ export const getDynamicServerInfo = () => {
           mount.startsWith('/mnt/host/') && !INVALID_FS_TYPES.includes(type)
       );
       const hostMountUsed =
-        sizes.filter(({ mount }) => mount === '/mnt/host' || mount === '/')[0]
-          ?.used ?? 0;
+        (
+          sizes.find(({ mount }) => mount === '/mnt/host') ??
+          sizes.find(({ mount }) => mount === '/')
+        )?.used ?? 0;
       const validParts = blocks.filter(({ type }) => type === 'part');
 
       let hostFound = false;
