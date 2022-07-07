@@ -97,11 +97,27 @@ If dash. detects the wrong gateway as your default interface, you can provide a 
 
 ### `DASHDOT_FS_TYPE_FILTER`
 
-If dash. detects network drives as internal drives, you can provide a list of ignored FS types here (e.g. `cifs,9p`).
+If dash. detects network drives as internal drives, you can provide a list of ignored FS types here.
 Please also create a [bug ticket](https://github.com/MauriceNino/dashdot/issues/new/choose) on the
 repository though, so that we can fix this problem for everyone.
 
-- type: `string`
+- type: `string (comma separated list)`
+- default: `cifs,9p,fuse.rclone,fuse.mergerfs`
+
+### `DASHDOT_FS_VIRTUAL_MOUNTS`
+
+If you want to show a virtual mount in the storage split view, that is ignored in the filter above.
+Can be used for example to show `fuse.mergerfs` mounts, which is basically a grouping of other mounts.
+
+You need to pass the names of the filesystems you want to use. To find out what the name is, execute `df`
+and look at the first column.
+
+Note that this will only be shown in the storage split view (enabled with the
+[`DASHDOT_ENABLE_STORAGE_SPLIT_VIEW`](./config#dashdot_enable_storage_split_view) flag).
+The normal pie chart will not be affected and there will also be no disk shown in the list of the storage
+widget.
+
+- type: `string (comma separated list)`
 - default: `unset`
 
 ### `DASHDOT_DISABLE_INTEGRATIONS`
@@ -119,7 +135,7 @@ These options are passed as comma separated lists - you can remove and add widge
 
 The available options are: `os`, `cpu`, `storage`, `ram`, `network`, `gpu`.
 
-- type: `string`
+- type: `string (comma separated list)`
 - default: `os,cpu,storage,ram,network`
 
 | `os,cpu,storage,ram,network`                                                                            | `ram,cpu,storage,network`                                                                                                  |
@@ -130,42 +146,42 @@ The available options are: `os`, `cpu`, `storage`, `ram`, `network`, `gpu`.
 
 The available options are: `os`, `arch`, `up_since`.
 
-- type: `string`
+- type: `string (comma separated list)`
 - default: `os,arch,up_since`
 
 ### `DASHDOT_CPU_LABEL_LIST`
 
 The available options are: `brand`, `model`, `cores`, `threads`, `frequency`.
 
-- type: `string`
+- type: `string (comma separated list)`
 - default: `brand,model,cores,threads,frequency`
 
 ### `DASHDOT_STORAGE_LABEL_LIST`
 
 The available options are: `brand`, `size`, `type`.
 
-- type: `string`
+- type: `string (comma separated list)`
 - default: `brand,size,type`
 
 ### `DASHDOT_RAM_LABEL_LIST`
 
 The available options are: `brand`, `size`, `type`, `frequency`.
 
-- type: `string`
+- type: `string (comma separated list)`
 - default: `brand,size,type,frequency`
 
 ### `DASHDOT_NETWORK_LABEL_LIST`
 
 The available options are: `type`, `speed_up`, `speed_down`, `interface_speed`, `public_ip`.
 
-- type: `string`
+- type: `string (comma separated list)`
 - default: `type,speed_up,speed_down,interface_speed`
 
 ### `DASHDOT_GPU_LABEL_LIST`
 
 The available options are: `brand`, `model`, `memory`.
 
-- type: `string`
+- type: `string (comma separated list)`
 - default: `brand, model, memory`
 
 ## Widget Options and Styles

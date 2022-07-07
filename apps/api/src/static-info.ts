@@ -113,9 +113,10 @@ const loadRamInfo = async (): Promise<void> => {
 };
 
 const loadStorageInfo = async (): Promise<void> => {
-  const [disks, blocks] = await Promise.all([
+  const [disks, blocks, sizes] = await Promise.all([
     si.diskLayout(),
     si.blockDevices(),
+    si.fsSize(),
   ]);
 
   const raidMembers = blocks.filter(block => block.fsType.endsWith('_member'));
@@ -155,10 +156,26 @@ const loadStorageInfo = async (): Promise<void> => {
     })
     .filter(d => d != null);
 
+  const sizesLayout = CONFIG.fs_virtual_mounts
+    .map(mount => {
+      const size = sizes.find(s => s.fs === mount);
+
+      return size
+        ? {
+            device: size.fs,
+            brand: size.fs,
+            type: 'VIRTUAL',
+            size: size.size,
+            virtual: true,
+          }
+        : undefined;
+    })
+    .filter(d => d != null);
+
   STATIC_INFO.next({
     ...STATIC_INFO.getValue(),
     storage: {
-      layout: blockLayout,
+      layout: blockLayout.concat(sizesLayout),
     },
   });
 };
