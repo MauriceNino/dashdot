@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/MauriceNino/dashdot/compare/v4.1.2...v4.2.0) (2022-07-07)
+
+
+### Features
+
+* **api,view:** add option to show specific virtual file mounts ([e5b2794](https://github.com/MauriceNino/dashdot/commit/e5b279425220a5b4966e664f90311370ad63a731))
+
 ## [4.1.2](https://github.com/MauriceNino/dashdot/compare/v4.1.1...v4.1.2) (2022-07-07)
 
 
