@@ -27,7 +27,7 @@
     "test": "nx run-many --target=test --all=true --parallel=true",
     "postinstall": "husky install",
     "commit": "git-cz",
-    "clean": "rm -rf dist apps/docs/.docusaurus"
+    "clean": "rm -rf dist apps/docs/.docusaurus node_modules/.cache"
   },
   "dependencies": {
     "@docusaurus/core": "2.0.0-beta.21",
