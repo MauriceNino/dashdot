@@ -87,13 +87,6 @@ export const getDynamicServerInfo = () => {
     }
   );
 
-  const INVALID_FS_TYPES = [
-    'cifs',
-    '9p',
-    'fuse.rclone',
-    'fuse.mergerfs',
-  ].concat(CONFIG.fs_type_filter);
-
   const storageObs = createBufferedInterval(
     'Storage',
     CONFIG.widget_list.includes('storage'),
@@ -109,7 +102,8 @@ export const getDynamicServerInfo = () => {
       const storageLayout = layout.storage.layout;
       const validMounts = sizes.filter(
         ({ mount, type }) =>
-          mount.startsWith('/mnt/host/') && !INVALID_FS_TYPES.includes(type)
+          mount.startsWith('/mnt/host/') &&
+          !CONFIG.fs_type_filter.includes(type)
       );
       const hostMountUsed =
         (
@@ -122,7 +116,12 @@ export const getDynamicServerInfo = () => {
 
       return {
         layout: storageLayout
-          .map(({ device }) => {
+          .map(({ device, virtual }) => {
+            if (virtual) {
+              const size = sizes.find(s => s.fs === device);
+              return size?.used ?? 0;
+            }
+
             const deviceParts = validParts.filter(({ name }) =>
               name.startsWith(device)
             );

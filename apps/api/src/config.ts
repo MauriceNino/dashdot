@@ -16,7 +16,10 @@ export const CONFIG: Config = {
   running_in_docker: penv('RUNNING_IN_DOCKER') === 'true',
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
   use_network_interface: penv('USE_NETWORK_INTERFACE') ?? '',
-  fs_type_filter: lst(penv('FS_TYPE_FILTER') ?? ''),
+  fs_type_filter: lst(
+    penv('FS_TYPE_FILTER') ?? 'cifs,9p,fuse.rclone,fuse.mergerfs'
+  ),
+  fs_virtual_mounts: lst(penv('FS_VIRTUAL_MOUNTS') ?? ''),
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
 
   show_host: penv('SHOW_HOST') === 'true',

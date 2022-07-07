@@ -28,6 +28,7 @@ export type StorageInfo = {
     size: number;
     type: string;
     raidGroup?: string;
+    virtual?: boolean;
   }[];
 };
 export type StorageLoad = {
@@ -87,6 +88,7 @@ export type Config = {
   use_network_interface: string;
   accept_ookla_eula: boolean;
   fs_type_filter: string[];
+  fs_virtual_mounts: string[];
   disable_integrations: boolean;
 
   show_host: boolean;

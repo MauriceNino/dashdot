@@ -60,6 +60,7 @@ const useStorageLayout = (data: StorageInfo, config: Config) => {
               types: [override.storage_types[i] ?? curr.type],
               size: override.storage_sizes[i] ?? curr.size,
               raidGroup: curr.raidGroup,
+              virtual: curr.virtual,
             });
           }
 
@@ -70,6 +71,7 @@ const useStorageLayout = (data: StorageInfo, config: Config) => {
           types: string[];
           size: number;
           raidGroup?: string;
+          virtual?: boolean;
         }[]
       ),
     [
@@ -97,13 +99,17 @@ export const StorageChart: FC<StorageChartProps> = ({
 }) => {
   const theme = useTheme();
   const layout = useStorageLayout(data, config);
+  const layoutNoVirtual = layout.filter(l => !l.virtual);
 
   const totalSize = Math.max(
-    layout.reduce((acc, s) => (acc = acc + s.size), 0),
+    layoutNoVirtual.reduce((acc, s) => (acc = acc + s.size), 0),
     1
   );
   const totalAvailable = Math.max(
-    totalSize - (load?.layout.reduce((acc, { load }) => acc + load, 0) ?? 0),
+    totalSize -
+      (load?.layout
+        .slice(0, layoutNoVirtual.length)
+        .reduce((acc, { load }) => acc + load, 0) ?? 0),
     1
   );
   const totalUsed = totalSize - totalAvailable;
@@ -275,7 +281,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useIsMobile();
-  const layout = useStorageLayout(data, config);
+  const layout = useStorageLayout(data, config).filter(s => !s.virtual);
 
   const [splitView, setSplitView] = useSetting('splitStorage', false);
   const canHaveSplitView =
