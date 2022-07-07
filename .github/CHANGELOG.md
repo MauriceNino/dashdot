@@ -1,3 +1,11 @@
+## [4.1.2](https://github.com/MauriceNino/dashdot/compare/v4.1.1...v4.1.2) (2022-07-07)
+
+
+### Bug Fixes
+
+* **api:** give real host mount priority over docker host mount ([796c44b](https://github.com/MauriceNino/dashdot/commit/796c44ba8c242a4c918195b995aeedef837bb10d)), closes [#188](https://github.com/MauriceNino/dashdot/issues/188)
+* remove invalid temp data from storage calculations ([45a2e74](https://github.com/MauriceNino/dashdot/commit/45a2e744c2cce22da1bddee627d6302c1f6c00ef))
+
 ## [4.1.1](https://github.com/MauriceNino/dashdot/compare/v4.1.0...v4.1.1) (2022-07-07)
 
 
