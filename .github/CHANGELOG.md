@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/MauriceNino/dashdot/compare/v4.1.0...v4.1.1) (2022-07-07)
+
+
+### Bug Fixes
+
+* **api:** networking for non-default docker installs ([cd2e63b](https://github.com/MauriceNino/dashdot/commit/cd2e63be1a0c1511c7488323fe609dc0645a2c70)), closes [#186](https://github.com/MauriceNino/dashdot/issues/186)
+
 # [4.1.0](https://github.com/MauriceNino/dashdot/compare/v4.0.0...v4.1.0) (2022-07-06)
 
 
