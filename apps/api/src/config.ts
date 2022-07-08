@@ -23,6 +23,7 @@ export const CONFIG: Config = {
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
 
   show_host: penv('SHOW_HOST') === 'true',
+  page_title: penv('PAGE_TITLE') ?? 'dash.',
   use_imperial: penv('USE_IMPERIAL') === 'true',
   enable_storage_split_view: penv('ENABLE_STORAGE_SPLIT_VIEW') === 'true',
   always_show_percentages: penv('ALWAYS_SHOW_PERCENTAGES') === 'true',

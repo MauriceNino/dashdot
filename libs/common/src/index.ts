@@ -92,6 +92,7 @@ export type Config = {
   disable_integrations: boolean;
 
   show_host: boolean;
+  page_title: string;
   use_imperial: boolean;
   enable_cpu_temps: boolean;
   enable_storage_split_view: boolean;
