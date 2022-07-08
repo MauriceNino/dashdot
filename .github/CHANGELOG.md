@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/MauriceNino/dashdot/compare/v4.2.0...v4.3.0) (2022-07-08)
+
+
+### Features
+
+* **view:** add option to set page title ([e42fb84](https://github.com/MauriceNino/dashdot/commit/e42fb842ac795edbf69b34f6a0d61e214d5aed4e)), closes [#189](https://github.com/MauriceNino/dashdot/issues/189)
+
 # [4.2.0](https://github.com/MauriceNino/dashdot/compare/v4.1.2...v4.2.0) (2022-07-07)
 
 
