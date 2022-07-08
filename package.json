@@ -30,8 +30,8 @@
     "clean": "rm -rf dist apps/docs/.docusaurus"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.21",
-    "@docusaurus/preset-classic": "2.0.0-beta.21",
+    "@docusaurus/core": "2.0.0-beta.22",
+    "@docusaurus/preset-classic": "2.0.0-beta.22",
     "@easyops-cn/docusaurus-search-local": "0.29.0",
     "@fortawesome/fontawesome-svg-core": "6.1.1",
     "@fortawesome/free-brands-svg-icons": "6.1.1",
@@ -81,7 +81,7 @@
     "@commitlint/cli": "17.0.3",
     "@commitlint/config-conventional": "17.0.3",
     "@commitlint/cz-commitlint": "17.0.3",
-    "@docusaurus/module-type-aliases": "2.0.0-beta.21",
+    "@docusaurus/module-type-aliases": "2.0.0-beta.22",
     "@nrwl/cli": "14.4.2",
     "@nrwl/eslint-plugin-nx": "14.4.2",
     "@nrwl/express": "14.4.2",
