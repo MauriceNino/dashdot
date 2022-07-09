@@ -44,27 +44,38 @@ if (environment.production) {
   app.get('/', (_, res) => {
     res.sendFile(path.join(__dirname, '../view', 'index.html'));
   });
+}
 
-  // Allow integrations
-  if (!CONFIG.disable_integrations) {
-    const versionFile = JSON.parse(
-      readFileSync(path.join(__dirname, '../../../version.json'), 'utf-8')
-    );
-    app.get('/config', (_, res) => {
-      res.send({
-        config: {
-          ...CONFIG,
-          overrides: undefined,
-        },
-        version: versionFile.version,
-        buildhash: versionFile.buildhash,
-      });
-    });
+// Allow integrations
+if (!CONFIG.disable_integrations) {
+  const getVersionFile = () => {
+    try {
+      return JSON.parse(
+        readFileSync(path.join(__dirname, '../../../version.json'), 'utf-8')
+      );
+    } catch (e) {
+      console.warn(
+        'Version file not found. This is normal on from-source builds.'
+      );
+      return {};
+    }
+  };
 
-    app.get('/info', (_, res) => {
-      res.send({ ...getStaticServerInfo(), config: undefined });
+  const versionFile = getVersionFile();
+  app.get('/config', (_, res) => {
+    res.send({
+      config: {
+        ...CONFIG,
+        overrides: undefined,
+      },
+      version: versionFile.version,
+      buildhash: versionFile.buildhash,
     });
-  }
+  });
+
+  app.get('/info', (_, res) => {
+    res.send({ ...getStaticServerInfo(), config: undefined });
+  });
 }
 
 // Launch the server
