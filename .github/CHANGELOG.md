@@ -1,3 +1,10 @@
+## [4.3.1](https://github.com/MauriceNino/dashdot/compare/v4.3.0...v4.3.1) (2022-07-09)
+
+
+### Bug Fixes
+
+* **api:** dont fail on missing version file for integrations ([87449ff](https://github.com/MauriceNino/dashdot/commit/87449ffde7e1f62cfc2eb44e8c46dfa72c7d1805)), closes [#193](https://github.com/MauriceNino/dashdot/issues/193)
+
 # [4.3.0](https://github.com/MauriceNino/dashdot/compare/v4.2.0...v4.3.0) (2022-07-08)
 
 
