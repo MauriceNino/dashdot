@@ -128,31 +128,33 @@ const loadStorageInfo = async (): Promise<void> => {
       const diskRaidMem = raidMembers.filter(member =>
         member.name.startsWith(device)
       );
-      const nativeDisk = disks.find(d => d.name === disk.model);
+      const nativeDisk = disks.find(
+        d => disk.model != '' && d.name === disk.model
+      ) ?? {
+        vendor: disk.name,
+        size: disk.size,
+        type: disk.physical,
+      };
 
-      if (nativeDisk != null) {
-        if (diskRaidMem.length > 0) {
-          const label = diskRaidMem[0].label.includes(':')
-            ? diskRaidMem[0].label.split(':')[0]
-            : diskRaidMem[0].label;
-          return {
-            device: device,
-            brand: nativeDisk.vendor,
-            size: nativeDisk.size,
-            type: nativeDisk.type,
-            raidGroup: label,
-          };
-        } else {
-          return {
-            device: device,
-            brand: nativeDisk.vendor,
-            size: nativeDisk.size,
-            type: nativeDisk.type,
-          };
-        }
+      if (diskRaidMem.length > 0) {
+        const label = diskRaidMem[0].label.includes(':')
+          ? diskRaidMem[0].label.split(':')[0]
+          : diskRaidMem[0].label;
+        return {
+          device: device,
+          brand: nativeDisk.vendor,
+          size: nativeDisk.size,
+          type: nativeDisk.type,
+          raidGroup: label,
+        };
+      } else {
+        return {
+          device: device,
+          brand: nativeDisk.vendor,
+          size: nativeDisk.size,
+          type: nativeDisk.type,
+        };
       }
-
-      return undefined;
     })
     .filter(d => d != null);
 
