@@ -1,3 +1,10 @@
+## [4.3.2](https://github.com/MauriceNino/dashdot/compare/v4.3.1...v4.3.2) (2022-07-10)
+
+
+### Bug Fixes
+
+* **api:** fallback to disk block info when no native disk found ([ca180c0](https://github.com/MauriceNino/dashdot/commit/ca180c09161e3fc1e0cc154e2f379359528877d1)), closes [#196](https://github.com/MauriceNino/dashdot/issues/196)
+
 ## [4.3.1](https://github.com/MauriceNino/dashdot/compare/v4.3.0...v4.3.1) (2022-07-09)
 
 
