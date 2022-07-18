@@ -107,8 +107,9 @@ export const getDynamicServerInfo = () => {
       );
       const hostMountUsed =
         (
-          sizes.find(({ mount }) => mount === '/mnt/host') ??
-          sizes.find(({ mount }) => mount === '/')
+          sizes.find(
+            ({ mount, type }) => type !== 'squashfs' && mount === '/mnt/host'
+          ) ?? sizes.find(({ mount }) => mount === '/')
         )?.used ?? 0;
       const validParts = blocks.filter(({ type }) => type === 'part');
 
@@ -134,7 +135,9 @@ export const getDynamicServerInfo = () => {
               deviceParts.some(
                 ({ mount }) =>
                   mount === '/mnt/host' || mount.startsWith('/mnt/host/boot/')
-              );
+              ) ||
+              // if there is only one drive, it has to be the host
+              storageLayout.length === 1;
 
             // Apply all unclaimed partitions to the host disk
             if (potentialHost && !hostFound) {
