@@ -1,3 +1,10 @@
+## [4.3.4](https://github.com/MauriceNino/dashdot/compare/v4.3.3...v4.3.4) (2022-07-18)
+
+
+### Bug Fixes
+
+* **api:** assign mounts also by disk type ([0a2ddf3](https://github.com/MauriceNino/dashdot/commit/0a2ddf32c8947e08cb2df455794b23c7f0ba82b9)), closes [#214](https://github.com/MauriceNino/dashdot/issues/214)
+
 ## [4.3.3](https://github.com/MauriceNino/dashdot/compare/v4.3.2...v4.3.3) (2022-07-18)
 
 
