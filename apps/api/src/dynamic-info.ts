@@ -111,7 +111,9 @@ export const getDynamicServerInfo = () => {
             ({ mount, type }) => type !== 'squashfs' && mount === '/mnt/host'
           ) ?? sizes.find(({ mount }) => mount === '/')
         )?.used ?? 0;
-      const validParts = blocks.filter(({ type }) => type === 'part');
+      const validParts = blocks.filter(
+        ({ type }) => type === 'part' || type === 'disk'
+      );
 
       let hostFound = false;
 
