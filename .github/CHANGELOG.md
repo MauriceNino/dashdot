@@ -1,3 +1,10 @@
+## [4.3.3](https://github.com/MauriceNino/dashdot/compare/v4.3.2...v4.3.3) (2022-07-18)
+
+
+### Bug Fixes
+
+* **api:** assign host used, if only one drive exists ([38e62bc](https://github.com/MauriceNino/dashdot/commit/38e62bc677b812bba550fcce5a5de84dad028529)), closes [#214](https://github.com/MauriceNino/dashdot/issues/214)
+
 ## [4.3.2](https://github.com/MauriceNino/dashdot/compare/v4.3.1...v4.3.2) (2022-07-10)
 
 
