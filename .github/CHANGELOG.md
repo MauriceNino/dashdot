@@ -1,3 +1,10 @@
+## [4.3.5](https://github.com/MauriceNino/dashdot/compare/v4.3.4...v4.3.5) (2022-07-19)
+
+
+### Bug Fixes
+
+* **api:** only include disks that are non-zero size ([5056532](https://github.com/MauriceNino/dashdot/commit/5056532f21f8608c02bea76322810dbbc98a059b)), closes [#218](https://github.com/MauriceNino/dashdot/issues/218)
+
 ## [4.3.4](https://github.com/MauriceNino/dashdot/compare/v4.3.3...v4.3.4) (2022-07-18)
 
 
