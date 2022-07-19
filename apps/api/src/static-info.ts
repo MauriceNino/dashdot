@@ -120,7 +120,9 @@ const loadStorageInfo = async (): Promise<void> => {
   ]);
 
   const raidMembers = blocks.filter(block => block.fsType.endsWith('_member'));
-  const blockDisks = blocks.filter(block => block.type === 'disk');
+  const blockDisks = blocks.filter(
+    block => block.type === 'disk' && block.size > 0
+  );
 
   const blockLayout = blockDisks
     .map(disk => {
