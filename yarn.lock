@@ -3934,9 +3934,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@easyops-cn/docusaurus-search-local@npm:0.29.2":
-  version: 0.29.2
-  resolution: "@easyops-cn/docusaurus-search-local@npm:0.29.2"
+"@easyops-cn/docusaurus-search-local@npm:0.29.3":
+  version: 0.29.3
+  resolution: "@easyops-cn/docusaurus-search-local@npm:0.29.3"
   dependencies:
     "@docusaurus/plugin-content-docs": ^2.0.0-rc.1
     "@docusaurus/theme-translations": ^2.0.0-rc.1
@@ -3958,7 +3958,7 @@ __metadata:
     "@docusaurus/theme-common": ^2.0.0-rc.1
     react: ^16.14.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
-  checksum: abd2cb58afebd32ee53033defd2f64ef4c1545eaa581490fed8efbe732f149a19d0d6525c27f0c2ce07e7ac418781b98e07060a6190966b81aa38c2cec7e4075
+  checksum: d5710cef84e7f6253abc26ecd7b5f98ab4135c04f61126f1f48be42584ab85c6e1b79fa7a37005cb47014efbe143117df0b6466858a908c54c2c3443dc6f0396
   languageName: node
   linkType: hard
 
@@ -10663,7 +10663,7 @@ __metadata:
     "@docusaurus/core": 2.0.0-rc.1
     "@docusaurus/module-type-aliases": 2.0.0-rc.1
     "@docusaurus/preset-classic": 2.0.0-rc.1
-    "@easyops-cn/docusaurus-search-local": 0.29.2
+    "@easyops-cn/docusaurus-search-local": 0.29.3
     "@fortawesome/fontawesome-svg-core": 6.1.1
     "@fortawesome/free-brands-svg-icons": 6.1.1
     "@fortawesome/free-solid-svg-icons": 6.1.1
