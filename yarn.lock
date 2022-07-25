@@ -10060,10 +10060,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.23.5":
-  version: 3.23.5
-  resolution: "core-js@npm:3.23.5"
-  checksum: 0277d46b151126c5d90411e8e6b0d338abe2aaa695a132c360203a3772c620f849622c4fab8bfd7a46eec6933d5fe90f32f7167779d419bda699ff7808605757
+"core-js@npm:3.24.0":
+  version: 3.24.0
+  resolution: "core-js@npm:3.24.0"
+  checksum: f1d1feef82bac7ecddd9e40e75b7126e7b5299a0d17aa046238bd8c78567d485b32c9c80b212704d9483ccc8b3f13b3ee35a5ec69fdca874377f654664068669
   languageName: node
   linkType: hard
 
@@ -10725,7 +10725,7 @@ __metadata:
     babel-plugin-syntax-jsx: 6.18.0
     clsx: 1.2.1
     commitizen: 4.2.5
-    core-js: 3.23.5
+    core-js: 3.24.0
     cors: 2.8.5
     docusaurus-plugin-sass: 0.2.2
     dotenv: 16.0.1
