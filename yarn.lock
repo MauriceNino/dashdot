@@ -8296,9 +8296,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:4.22.2":
-  version: 4.22.2
-  resolution: "antd@npm:4.22.2"
+"antd@npm:4.22.3":
+  version: 4.22.3
+  resolution: "antd@npm:4.22.3"
   dependencies:
     "@ant-design/colors": ^6.0.0
     "@ant-design/icons": ^4.7.0
@@ -8347,7 +8347,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: e450c5795c5417a1cd0ec8ba6f8998ec001b1ed3cd35a1ea78e2c8ef1e35e8bf13f91158db9c8fba9f9d06f4de09cbaf44152e022b253089de325e933588308a
+  checksum: f7e82011acd7f3188d267aae7766408368e09a086dc2a40fbd61cefe37ada3c14b2e336b910f490eea3e3a25dac50dd5be9f738bc0b682b112c228509c814bcb
   languageName: node
   linkType: hard
 
@@ -10998,7 +10998,7 @@ __metadata:
     "@types/throttle-debounce": 5.0.0
     "@typescript-eslint/eslint-plugin": 5.31.0
     "@typescript-eslint/parser": 5.31.0
-    antd: 4.22.2
+    antd: 4.22.3
     axios: 0.27.2
     babel-jest: 28.1.3
     babel-plugin-styled-components: 2.0.7
