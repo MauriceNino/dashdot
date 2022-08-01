@@ -28,7 +28,7 @@ To adjust the minimum width of the Network widget (in px).
 - type: `number`
 - default: `500`
 
-## `DASHDOT_NETWORK_DATAPOINTS`
+## `DASHDOT_NETWORK_SHOWN_DATAPOINTS`
 
 The amount of datapoints in each of the Network graphs.
 
