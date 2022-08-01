@@ -21,7 +21,7 @@ To adjust the minimum width of the Processor widget (in px).
 - type: `number`
 - default: `500`
 
-## `DASHDOT_CPU_DATAPOINTS`
+## `DASHDOT_CPU_SHOWN_DATAPOINTS`
 
 The amount of datapoints in the Processor graph.
 

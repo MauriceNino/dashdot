@@ -21,7 +21,7 @@ To adjust the minimum width of the Memory widget (in px).
 - type: `number`
 - default: `500`
 
-## `DASHDOT_RAM_DATAPOINTS`
+## `DASHDOT_RAM_SHOWN_DATAPOINTS`
 
 The amount of datapoints in the Memory graph.
 
