@@ -11034,7 +11034,7 @@ __metadata:
     react-color: 2.19.3
     react-dom: 18.2.0
     react-is: 18.2.0
-    react-medium-image-zoom: 4.4.3
+    react-medium-image-zoom: 5.0.1
     react-spinners-kit: 1.9.1
     react-test-renderer: 18.2.0
     react-virtualized-auto-sizer: 1.0.6
@@ -12960,13 +12960,6 @@ __metadata:
   peerDependencies:
     react: ^15.0.2 || ^16.0.0 || ^17.0.0
   checksum: 6b3f5150bcce481ce5bc09e54dbe4bf2a052f9fbc04c1de64f8d816adc4f90ad7955d9aed0022c7b6a2ed11b809ac40527bb50c2cd89c23d42f56694abe20748
-  languageName: node
-  linkType: hard
-
-"focus-options-polyfill@npm:1.5.1":
-  version: 1.5.1
-  resolution: "focus-options-polyfill@npm:1.5.1"
-  checksum: 405b588fe20400a2d9e92d36704e96b39258c4662af9f11c30065842519804b6b498e367018ee85c2a0696174810d9ae9bda16058afd64f4ef93d470a36e75e5
   languageName: node
   linkType: hard
 
@@ -20821,16 +20814,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-medium-image-zoom@npm:4.4.3":
-  version: 4.4.3
-  resolution: "react-medium-image-zoom@npm:4.4.3"
-  dependencies:
-    focus-options-polyfill: 1.5.1
-    tslib: ^2.4.0
+"react-medium-image-zoom@npm:5.0.1":
+  version: 5.0.1
+  resolution: "react-medium-image-zoom@npm:5.0.1"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: e986e6cc64ea2cc30f58de1b25ac6cc239b3a86fbe4c29f8e037f3b5427141fb4202190ac0c5c2bb7646eddf641a2010fc64bb0746c1c7ae275af1f5a9a3188c
+  checksum: 1e6d4844c3923c1f74b2e718a4c9ab0cbd61766d3831358fdb19b4a2c769c5f5c5b7a2af7f7111c9969bf2a1393b7137e1653941f418415f2561393f572c9f96
   languageName: node
   linkType: hard
 
