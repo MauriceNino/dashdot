@@ -1,3 +1,10 @@
+## [4.3.9](https://github.com/MauriceNino/dashdot/compare/v4.3.8...v4.3.9) (2022-08-08)
+
+
+### Bug Fixes
+
+* **frontend:** fix web-manifest and sub-routing ([1c119d8](https://github.com/MauriceNino/dashdot/commit/1c119d8099aaebd79a80698f9be50d43c397bc19))
+
 ## [4.3.8](https://github.com/MauriceNino/dashdot/compare/v4.3.7...v4.3.8) (2022-08-08)
 
 
