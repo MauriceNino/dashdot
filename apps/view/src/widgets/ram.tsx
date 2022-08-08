@@ -51,6 +51,7 @@ export const RamChart: FC<RamChartProps> = ({
             height={size.height}
             width={size.width}
             color={theme.colors.ramPrimary}
+            renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
           >
             <YAxis hide={true} type='number' domain={[-5, 105]} />
             <Tooltip

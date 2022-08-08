@@ -1,7 +1,7 @@
 import { Config, NetworkInfo, NetworkLoad } from '@dash/common';
 import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 import { FC } from 'react';
-import { Tooltip, YAxis } from 'recharts';
+import { YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
 import {
@@ -9,7 +9,6 @@ import {
   MultiChartContainer,
 } from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
-import { ThemedText } from '../components/text';
 import { useIsMobile } from '../services/mobile';
 import { bpsPrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
@@ -69,18 +68,14 @@ export const NetworkChart: FC<NetworkChartProps> = ({
             height={size.height}
             width={size.width}
             color={theme.colors.networkPrimary}
+            renderTooltip={val =>
+              bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8)
+            }
           >
             <YAxis
               hide={true}
               type='number'
               domain={[maxUp * -0.1, maxUp * 1.1]}
-            />
-            <Tooltip
-              content={x => (
-                <ThemedText>
-                  {bpsPrettyPrint(((x.payload?.[0]?.value as number) ?? 0) * 8)}
-                </ThemedText>
-              )}
             />
           </DefaultAreaChart>
         )}
@@ -102,18 +97,14 @@ export const NetworkChart: FC<NetworkChartProps> = ({
             height={size.height}
             width={size.width}
             color={theme.colors.networkPrimary}
+            renderTooltip={val =>
+              bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8)
+            }
           >
             <YAxis
               hide={true}
               type='number'
               domain={[maxDown * -0.1, maxDown * 1.1]}
-            />
-            <Tooltip
-              content={x => (
-                <ThemedText>
-                  {bpsPrettyPrint(((x.payload?.[0]?.value as number) ?? 0) * 8)}
-                </ThemedText>
-              )}
             />
           </DefaultAreaChart>
         )}
