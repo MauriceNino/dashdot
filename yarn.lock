@@ -7456,14 +7456,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.0.16":
-  version: 18.0.16
-  resolution: "@types/react@npm:18.0.16"
+"@types/react@npm:18.0.17":
+  version: 18.0.17
+  resolution: "@types/react@npm:18.0.17"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 47853419adbf7f35f302cd4ef804c5a50498a0917a34e696caa693fc60b9c52c644ca2ecf64cbba4a5efd963771167d241906f117d16d59e20e84b882215b6bd
+  checksum: 18cae64f5bfd6bb58fbd8ee2ba52ec82de844f114254e26de7b513e4b86621f643f9b71d7066958cd571b0d78cb86cbceda449c5289f9349ca573df29ab69252
   languageName: node
   linkType: hard
 
@@ -10990,7 +10990,7 @@ __metadata:
     "@types/jest": 28.1.6
     "@types/node": 17.0.38
     "@types/qs": 6.9.7
-    "@types/react": 18.0.16
+    "@types/react": 18.0.17
     "@types/react-color": 3.0.6
     "@types/react-dom": 18.0.6
     "@types/react-is": 17.0.3
