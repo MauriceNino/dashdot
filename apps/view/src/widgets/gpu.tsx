@@ -1,7 +1,7 @@
 import { Config, GpuInfo, GpuLoad } from '@dash/common';
 import { faDesktop } from '@fortawesome/free-solid-svg-icons';
 import { FC, useMemo, useState } from 'react';
-import { Tooltip, YAxis } from 'recharts';
+import { YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
 import {
@@ -9,7 +9,6 @@ import {
   MultiChartContainer,
 } from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
-import { ThemedText } from '../components/text';
 import { useIsMobile } from '../services/mobile';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
@@ -52,15 +51,9 @@ export const GpuChart: FC<GpuChartProps> = ({
             height={size.height}
             width={size.width}
             color={theme.colors.gpuPrimary}
+            renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
           >
             <YAxis hide={true} type='number' domain={[-5, 105]} />
-            <Tooltip
-              content={x => (
-                <ThemedText>
-                  {(x.payload?.[0]?.value as number)?.toFixed(1)} %
-                </ThemedText>
-              )}
-            />
           </DefaultAreaChart>
         )}
       ></ChartContainer>
@@ -76,15 +69,9 @@ export const GpuChart: FC<GpuChartProps> = ({
             height={size.height}
             width={size.width}
             color={theme.colors.gpuPrimary}
+            renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
           >
             <YAxis hide={true} type='number' domain={[-5, 105]} />
-            <Tooltip
-              content={x => (
-                <ThemedText>
-                  {(x.payload?.[0]?.value as number)?.toFixed(1)} %
-                </ThemedText>
-              )}
-            />
           </DefaultAreaChart>
         )}
       ></ChartContainer>

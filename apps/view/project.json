@@ -14,7 +14,11 @@
         "baseHref": "/",
         "main": "apps/view/src/index.tsx",
         "tsConfig": "apps/view/tsconfig.json",
-        "assets": ["apps/view/src/assets"],
+        "assets": [
+          "apps/view/src/assets",
+          "apps/view/src/manifest.json",
+          "apps/view/src/robots.txt"
+        ],
         "styles": [],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"

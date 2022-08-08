@@ -2,7 +2,7 @@ import { Config, CpuInfo, CpuLoad } from '@dash/common';
 import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
 import { Variants } from 'framer-motion';
 import { FC } from 'react';
-import { Tooltip, YAxis } from 'recharts';
+import { YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
 import {
@@ -10,7 +10,6 @@ import {
   MultiChartContainer,
 } from '../components/chart-container';
 import { HardwareInfoContainer } from '../components/hardware-info-container';
-import { ThemedText } from '../components/text';
 import { WidgetSwitch } from '../components/widget-switch';
 import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';
@@ -157,15 +156,9 @@ export const CpuChart: FC<CpuChartProps> = ({
               height={size.height}
               width={size.width}
               color={theme.colors.cpuPrimary}
+              renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
             >
               <YAxis hide={true} type='number' domain={[-5, 105]} />
-              <Tooltip
-                content={x => (
-                  <ThemedText>
-                    {(x.payload?.[0]?.value as number)?.toFixed(1)} %
-                  </ThemedText>
-                )}
-              />
             </DefaultAreaChart>
           )}
         ></ChartContainer>

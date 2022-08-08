@@ -1,5 +1,5 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import { Input, InputWrapper, MantineProvider, Select } from '@mantine/core';
+import { Input, MantineProvider, Select } from '@mantine/core';
 import CodeBlock from '@theme/CodeBlock';
 import React, { useState } from 'react';
 
@@ -60,7 +60,7 @@ export const WidgetPreview = () => {
             alignItems: 'center',
           }}
         >
-          <InputWrapper label='URL'>
+          <Input.Wrapper label='URL'>
             <div
               style={{
                 display: 'flex',
@@ -78,7 +78,7 @@ export const WidgetPreview = () => {
               />
               <Input value={url} onChange={e => setUrl(e.target.value)} />
             </div>
-          </InputWrapper>
+          </Input.Wrapper>
 
           <Select
             label='Widget'
@@ -124,22 +124,22 @@ export const WidgetPreview = () => {
               { value: 'dark', label: 'Dark' },
             ]}
           />
-          <InputWrapper label='Primary Color'>
+          <Input.Wrapper label='Primary Color'>
             <Input
               icon='#'
               value={primaryColor}
               onChange={e => setPrimaryColor(e.target.value)}
             />
-          </InputWrapper>
-          <InputWrapper label='Surface Color'>
+          </Input.Wrapper>
+          <Input.Wrapper label='Surface Color'>
             <Input
               icon='#'
               value={surfaceColor}
               onChange={e => setSurfaceColor(e.target.value)}
             />
-          </InputWrapper>
+          </Input.Wrapper>
 
-          <InputWrapper label='Outer Radius'>
+          <Input.Wrapper label='Outer Radius'>
             <Input
               rightSection='px'
               value={outerRadius}
@@ -148,8 +148,8 @@ export const WidgetPreview = () => {
                 setOuterRadius(e.target.value === '' ? null : +e.target.value)
               }
             />
-          </InputWrapper>
-          <InputWrapper label='Inner Radius'>
+          </Input.Wrapper>
+          <Input.Wrapper label='Inner Radius'>
             <Input
               rightSection='px'
               value={innerRadius}
@@ -158,8 +158,8 @@ export const WidgetPreview = () => {
                 setInnerRadius(e.target.value === '' ? null : +e.target.value)
               }
             />
-          </InputWrapper>
-          <InputWrapper label='Gap'>
+          </Input.Wrapper>
+          <Input.Wrapper label='Gap'>
             <Input
               rightSection='px'
               value={gap}
@@ -168,7 +168,7 @@ export const WidgetPreview = () => {
                 setGap(e.target.value === '' ? null : +e.target.value)
               }
             />
-          </InputWrapper>
+          </Input.Wrapper>
         </div>
 
         <h3>Result</h3>

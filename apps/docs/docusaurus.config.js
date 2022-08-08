@@ -109,7 +109,7 @@ const config = {
         respectPrefersColorScheme: false,
       },
       zoom: {
-        selector: '.markdown > img',
+        selector: 'img',
         config: {
           background: {
             light: 'rgb(255, 255, 255)',

@@ -1,5 +1,5 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import { Input, InputWrapper, MantineProvider, Select } from '@mantine/core';
+import { Input, MantineProvider, Select } from '@mantine/core';
 import CodeBlock from '@theme/CodeBlock';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { debounce } from 'throttle-debounce';
@@ -95,7 +95,7 @@ export const ApiPreview = () => {
             alignItems: 'center',
           }}
         >
-          <InputWrapper label='URL'>
+          <Input.Wrapper label='URL'>
             <div
               style={{
                 display: 'flex',
@@ -113,7 +113,7 @@ export const ApiPreview = () => {
               />
               <Input value={url} onChange={e => setUrl(e.target.value)} />
             </div>
-          </InputWrapper>
+          </Input.Wrapper>
         </div>
 
         <h3>Info</h3>
