@@ -8370,9 +8370,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:4.22.3":
-  version: 4.22.3
-  resolution: "antd@npm:4.22.3"
+"antd@npm:4.22.4":
+  version: 4.22.4
+  resolution: "antd@npm:4.22.4"
   dependencies:
     "@ant-design/colors": ^6.0.0
     "@ant-design/icons": ^4.7.0
@@ -8394,7 +8394,7 @@ __metadata:
     rc-image: ~5.7.0
     rc-input: ~0.0.1-alpha.5
     rc-input-number: ~7.3.5
-    rc-mentions: ~1.9.0
+    rc-mentions: ~1.9.1
     rc-menu: ~9.6.0
     rc-motion: ^2.6.1
     rc-notification: ~4.6.0
@@ -8421,7 +8421,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: f7e82011acd7f3188d267aae7766408368e09a086dc2a40fbd61cefe37ada3c14b2e336b910f490eea3e3a25dac50dd5be9f738bc0b682b112c228509c814bcb
+  checksum: 6d3e543146c32d5aa607a1f16203fd6495956d6f1a4c1d86b6a6599d81f18cae56347da1a71d2c5b40a807042141ee227c7913bddcff7dbe6253126f8440f972
   languageName: node
   linkType: hard
 
@@ -11070,7 +11070,7 @@ __metadata:
     "@types/throttle-debounce": 5.0.0
     "@typescript-eslint/eslint-plugin": 5.32.0
     "@typescript-eslint/parser": 5.32.0
-    antd: 4.22.3
+    antd: 4.22.4
     axios: 0.27.2
     babel-jest: 28.1.3
     babel-plugin-styled-components: 2.0.7
@@ -20252,9 +20252,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-mentions@npm:~1.9.0":
-  version: 1.9.0
-  resolution: "rc-mentions@npm:1.9.0"
+"rc-mentions@npm:~1.9.1":
+  version: 1.9.1
+  resolution: "rc-mentions@npm:1.9.1"
   dependencies:
     "@babel/runtime": ^7.10.1
     classnames: ^2.2.6
@@ -20265,7 +20265,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 40b0af494e83f09910bdc22e60b971eb2599b1afd52fe6ffe2be1390bb14a7c912e92d6c926cabe307702d8f5e850d9272f380ae9f4295c3830b2906c54f150c
+  checksum: 348088f54382d7938e7e9847e9055d6ab9519af30d9a4114d70686e29be6aed85945a0a38614571724d1bcb3de56f3c4f530e0edd8f7be95e0aba792c7750ef2
   languageName: node
   linkType: hard
 
