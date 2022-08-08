@@ -11009,6 +11009,7 @@ __metadata:
     commitizen: 4.2.5
     core-js: 3.24.1
     cors: 2.8.5
+    docusaurus-plugin-image-zoom: 0.1.1
     docusaurus-plugin-sass: 0.2.2
     dotenv: 16.0.1
     eslint: 8.21.0
@@ -11506,6 +11507,15 @@ __metadata:
   dependencies:
     esutils: ^2.0.2
   checksum: fd7673ca77fe26cd5cba38d816bc72d641f500f1f9b25b83e8ce28827fe2da7ad583a8da26ab6af85f834138cf8dae9f69b0cd6ab925f52ddab1754db44d99ce
+  languageName: node
+  linkType: hard
+
+"docusaurus-plugin-image-zoom@npm:0.1.1":
+  version: 0.1.1
+  resolution: "docusaurus-plugin-image-zoom@npm:0.1.1"
+  dependencies:
+    medium-zoom: ^1.0.6
+  checksum: aa7a65c891a9281cba6fc3663a76507a9009b5c7ecf002cef185211288c1c3c5c6adf2c772092e9ca2861166c93b0c189a909c73f1fe781d77a4e12484984ef6
   languageName: node
   linkType: hard
 
@@ -17157,6 +17167,13 @@ __metadata:
   version: 0.3.0
   resolution: "media-typer@npm:0.3.0"
   checksum: af1b38516c28ec95d6b0826f6c8f276c58aec391f76be42aa07646b4e39d317723e869700933ca6995b056db4b09a78c92d5440dc23657e6764be5d28874bba1
+  languageName: node
+  linkType: hard
+
+"medium-zoom@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "medium-zoom@npm:1.0.6"
+  checksum: 728b9f661262fd084da26f401ffe9bf98afc6d14ad93d4bfb08b95d32f9c4494a97dc8cb3a62353e8d350dc09c84a3f6f686a0fec321bfb609e5ba5e24bdb9d2
   languageName: node
   linkType: hard
 

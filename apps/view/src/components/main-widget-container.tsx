@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { default as styled } from 'styled-components';
 import { GlassPane } from '../components/glass-pane';
 import { useIsMobile } from '../services/mobile';
@@ -79,6 +79,12 @@ export const MainWidgetContainer: FC = () => {
   const networkData = serverInfo?.network;
   const storageData = serverInfo?.storage;
   const gpuData = serverInfo?.gpu;
+
+  useEffect(() => {
+    if (config?.page_title) {
+      document.title = config.page_title;
+    }
+  }, [config?.page_title]);
 
   if (error) {
     return (

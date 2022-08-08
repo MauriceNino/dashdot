@@ -1,5 +1,4 @@
 // @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
@@ -24,8 +23,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/MauriceNino/dashdot/edit/dev/apps/docs',
+          editUrl: 'https://github.com/MauriceNino/dashdot/edit/main/apps/docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -110,6 +108,15 @@ const config = {
         defaultMode: 'dark',
         respectPrefersColorScheme: false,
       },
+      zoom: {
+        selector: '.markdown > img',
+        config: {
+          background: {
+            light: 'rgb(255, 255, 255)',
+            dark: 'rgb(50, 50, 50)',
+          },
+        },
+      },
     }),
 
   themes: [
@@ -122,7 +129,10 @@ const config = {
     ],
   ],
 
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [
+    'docusaurus-plugin-sass',
+    require.resolve('docusaurus-plugin-image-zoom'),
+  ],
 };
 
 module.exports = config;

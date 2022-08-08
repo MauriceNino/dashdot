@@ -35,7 +35,7 @@ To adjust the minimum width of the GPU widget (in px).
 - type: `number`
 - default: `700`
 
-## `DASHDOT_GPU_DATAPOINTS`
+## `DASHDOT_GPU_SHOWN_DATAPOINTS`
 
 The amount of datapoints in the GPU graph.
 

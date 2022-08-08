@@ -113,13 +113,16 @@ const loadRamInfo = async (): Promise<void> => {
 };
 
 const loadStorageInfo = async (): Promise<void> => {
-  const [disks, blocks] = await Promise.all([
+  const [disks, blocks, sizes] = await Promise.all([
     si.diskLayout(),
     si.blockDevices(),
+    si.fsSize(),
   ]);
 
   const raidMembers = blocks.filter(block => block.fsType.endsWith('_member'));
-  const blockDisks = blocks.filter(block => block.type === 'disk');
+  const blockDisks = blocks.filter(
+    block => block.type === 'disk' && block.size > 0
+  );
 
   const blockLayout = blockDisks
     .map(disk => {
@@ -127,38 +130,56 @@ const loadStorageInfo = async (): Promise<void> => {
       const diskRaidMem = raidMembers.filter(member =>
         member.name.startsWith(device)
       );
-      const nativeDisk = disks.find(d => d.name === disk.model);
+      const nativeDisk = disks.find(
+        d => disk.model != '' && d.name === disk.model
+      ) ?? {
+        vendor: disk.name,
+        size: disk.size,
+        type: disk.physical,
+      };
 
-      if (nativeDisk != null) {
-        if (diskRaidMem.length > 0) {
-          const label = diskRaidMem[0].label.includes(':')
-            ? diskRaidMem[0].label.split(':')[0]
-            : diskRaidMem[0].label;
-          return {
-            device: device,
-            brand: nativeDisk.vendor,
-            size: nativeDisk.size,
-            type: nativeDisk.type,
-            raidGroup: label,
-          };
-        } else {
-          return {
-            device: device,
-            brand: nativeDisk.vendor,
-            size: nativeDisk.size,
-            type: nativeDisk.type,
-          };
-        }
+      if (diskRaidMem.length > 0) {
+        const label = diskRaidMem[0].label.includes(':')
+          ? diskRaidMem[0].label.split(':')[0]
+          : diskRaidMem[0].label;
+        return {
+          device: device,
+          brand: nativeDisk.vendor,
+          size: nativeDisk.size,
+          type: nativeDisk.type,
+          raidGroup: label,
+        };
+      } else {
+        return {
+          device: device,
+          brand: nativeDisk.vendor,
+          size: nativeDisk.size,
+          type: nativeDisk.type,
+        };
       }
+    })
+    .filter(d => d != null);
 
-      return undefined;
+  const sizesLayout = CONFIG.fs_virtual_mounts
+    .map(mount => {
+      const size = sizes.find(s => s.fs === mount);
+
+      return size
+        ? {
+            device: size.fs,
+            brand: size.fs,
+            type: 'VIRTUAL',
+            size: size.size,
+            virtual: true,
+          }
+        : undefined;
     })
     .filter(d => d != null);
 
   STATIC_INFO.next({
     ...STATIC_INFO.getValue(),
     storage: {
-      layout: blockLayout,
+      layout: blockLayout.concat(sizesLayout),
     },
   });
 };

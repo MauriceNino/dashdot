@@ -28,6 +28,7 @@ export type StorageInfo = {
     size: number;
     type: string;
     raidGroup?: string;
+    virtual?: boolean;
   }[];
 };
 export type StorageLoad = {
@@ -86,9 +87,12 @@ export type Config = {
   running_in_docker: boolean;
   use_network_interface: string;
   accept_ookla_eula: boolean;
+  fs_type_filter: string[];
+  fs_virtual_mounts: string[];
   disable_integrations: boolean;
 
   show_host: boolean;
+  page_title: string;
   use_imperial: boolean;
   enable_cpu_temps: boolean;
   enable_storage_split_view: boolean;
