@@ -29,6 +29,16 @@ docker container run -it \
 
 :::
 
+:::warning
+
+The speed testing feature can consume significant amounts of bandwidth, which can pose
+problems if your usage is metered (say, by a VPS provider).
+
+Setting the environment variable [`DASHDOT_SPEED_TEST_INTERVAL`](./config/widget-options/network#dashdot_speed_test_interval)
+to a higher number can mitigate this concern.
+
+:::
+
 ## Installation Options
 
 ```mdx-code-block
