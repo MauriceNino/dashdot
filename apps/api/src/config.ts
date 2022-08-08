@@ -17,7 +17,7 @@ export const CONFIG: Config = {
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
   use_network_interface: penv('USE_NETWORK_INTERFACE') ?? '',
   fs_type_filter: lst(
-    penv('FS_TYPE_FILTER') ?? 'cifs,9p,fuse.rclone,fuse.mergerfs'
+    penv('FS_TYPE_FILTER') ?? 'cifs,9p,fuse.rclone,fuse.mergerfs,nfs4'
   ),
   fs_virtual_mounts: lst(penv('FS_VIRTUAL_MOUNTS') ?? ''),
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
