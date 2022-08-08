@@ -8,11 +8,13 @@ import {
   PieChart,
   Sector,
   Tooltip,
+  TooltipProps,
   XAxis,
   YAxis,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
 import { throttle } from 'throttle-debounce';
+import { ThemedText } from './text';
 
 type DefaultAreaChartProps = {
   height: number;
@@ -20,6 +22,7 @@ type DefaultAreaChartProps = {
   color: string;
   children: React.ReactNode;
   data: any[];
+  renderTooltip?: (point: TooltipProps<number, string>) => React.ReactNode;
 };
 
 export const DefaultAreaChart: FC<DefaultAreaChartProps> = ({
@@ -27,6 +30,7 @@ export const DefaultAreaChart: FC<DefaultAreaChartProps> = ({
   height,
   width,
   color,
+  renderTooltip,
   children,
 }) => {
   return (
@@ -51,6 +55,12 @@ export const DefaultAreaChart: FC<DefaultAreaChartProps> = ({
         fill={`url(#${`gradient_${color}`})`}
         isAnimationActive={false}
       />
+      {renderTooltip && (
+        <Tooltip<number, string>
+          content={x => <ThemedText>{renderTooltip(x)}</ThemedText>}
+          wrapperStyle={{ outline: 'none' }}
+        />
+      )}
       {children}
     </AreaChart>
   );
