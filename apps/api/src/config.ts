@@ -64,7 +64,7 @@ export const CONFIG: Config = {
   ram_shown_datapoints: numNull(penv('RAM_SHOWN_DATAPOINTS')) ?? 20,
   ram_poll_interval: numNull(penv('RAM_POLL_INTERVAL')) ?? 1000,
 
-  speed_test_interval: numNull(penv('SPEED_TEST_INTERVAL')) ?? 60,
+  speed_test_interval: numNull(penv('SPEED_TEST_INTERVAL')) ?? 60 * 4,
   network_widget_grow: numNull(penv('NETWORK_WIDGET_GROW')) ?? 6,
   network_widget_min_width: numNull(penv('NETWORK_WIDGET_MIN_WIDTH')) ?? 500,
   network_shown_datapoints: numNull(penv('NETWORK_SHOWN_DATAPOINTS')) ?? 20,
