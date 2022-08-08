@@ -1,3 +1,113 @@
+## [4.3.7](https://github.com/MauriceNino/dashdot/compare/v4.3.6...v4.3.7) (2022-08-01)
+
+## [4.3.6](https://github.com/MauriceNino/dashdot/compare/v4.3.5...v4.3.6) (2022-07-20)
+
+## [4.3.5](https://github.com/MauriceNino/dashdot/compare/v4.3.4...v4.3.5) (2022-07-19)
+
+
+### Bug Fixes
+
+* **api:** only include disks that are non-zero size ([5056532](https://github.com/MauriceNino/dashdot/commit/5056532f21f8608c02bea76322810dbbc98a059b)), closes [#218](https://github.com/MauriceNino/dashdot/issues/218)
+
+## [4.3.4](https://github.com/MauriceNino/dashdot/compare/v4.3.3...v4.3.4) (2022-07-18)
+
+
+### Bug Fixes
+
+* **api:** assign mounts also by disk type ([0a2ddf3](https://github.com/MauriceNino/dashdot/commit/0a2ddf32c8947e08cb2df455794b23c7f0ba82b9)), closes [#214](https://github.com/MauriceNino/dashdot/issues/214)
+
+## [4.3.3](https://github.com/MauriceNino/dashdot/compare/v4.3.2...v4.3.3) (2022-07-18)
+
+
+### Bug Fixes
+
+* **api:** assign host used, if only one drive exists ([38e62bc](https://github.com/MauriceNino/dashdot/commit/38e62bc677b812bba550fcce5a5de84dad028529)), closes [#214](https://github.com/MauriceNino/dashdot/issues/214)
+
+## [4.3.2](https://github.com/MauriceNino/dashdot/compare/v4.3.1...v4.3.2) (2022-07-10)
+
+
+### Bug Fixes
+
+* **api:** fallback to disk block info when no native disk found ([ca180c0](https://github.com/MauriceNino/dashdot/commit/ca180c09161e3fc1e0cc154e2f379359528877d1)), closes [#196](https://github.com/MauriceNino/dashdot/issues/196)
+
+## [4.3.1](https://github.com/MauriceNino/dashdot/compare/v4.3.0...v4.3.1) (2022-07-09)
+
+
+### Bug Fixes
+
+* **api:** dont fail on missing version file for integrations ([87449ff](https://github.com/MauriceNino/dashdot/commit/87449ffde7e1f62cfc2eb44e8c46dfa72c7d1805)), closes [#193](https://github.com/MauriceNino/dashdot/issues/193)
+
+# [4.3.0](https://github.com/MauriceNino/dashdot/compare/v4.2.0...v4.3.0) (2022-07-08)
+
+
+### Features
+
+* **view:** add option to set page title ([e42fb84](https://github.com/MauriceNino/dashdot/commit/e42fb842ac795edbf69b34f6a0d61e214d5aed4e)), closes [#189](https://github.com/MauriceNino/dashdot/issues/189)
+
+# [4.2.0](https://github.com/MauriceNino/dashdot/compare/v4.1.2...v4.2.0) (2022-07-07)
+
+
+### Features
+
+* **api,view:** add option to show specific virtual file mounts ([e5b2794](https://github.com/MauriceNino/dashdot/commit/e5b279425220a5b4966e664f90311370ad63a731))
+
+## [4.1.2](https://github.com/MauriceNino/dashdot/compare/v4.1.1...v4.1.2) (2022-07-07)
+
+
+### Bug Fixes
+
+* **api:** give real host mount priority over docker host mount ([796c44b](https://github.com/MauriceNino/dashdot/commit/796c44ba8c242a4c918195b995aeedef837bb10d)), closes [#188](https://github.com/MauriceNino/dashdot/issues/188)
+* remove invalid temp data from storage calculations ([45a2e74](https://github.com/MauriceNino/dashdot/commit/45a2e744c2cce22da1bddee627d6302c1f6c00ef))
+
+## [4.1.1](https://github.com/MauriceNino/dashdot/compare/v4.1.0...v4.1.1) (2022-07-07)
+
+
+### Bug Fixes
+
+* **api:** networking for non-default docker installs ([cd2e63b](https://github.com/MauriceNino/dashdot/commit/cd2e63be1a0c1511c7488323fe609dc0645a2c70)), closes [#186](https://github.com/MauriceNino/dashdot/issues/186)
+
+# [4.1.0](https://github.com/MauriceNino/dashdot/compare/v4.0.0...v4.1.0) (2022-07-06)
+
+
+### Bug Fixes
+
+* **api:** add invalid fs types ([a15cee8](https://github.com/MauriceNino/dashdot/commit/a15cee8c91296ae646aa8312416a9ae05c758ed9)), closes [#182](https://github.com/MauriceNino/dashdot/issues/182)
+* automatically reload page when socket reconnects ([43f57d1](https://github.com/MauriceNino/dashdot/commit/43f57d1dead35423476a82d6413143cfa63dbbf1))
+
+
+### Features
+
+* add fs type filter to disable invalid storage types ([3ecd8b8](https://github.com/MauriceNino/dashdot/commit/3ecd8b8e3211d35d3e5013522c0ff279b5a59b40))
+
+# [4.0.0](https://github.com/MauriceNino/dashdot/compare/v3.9.8...v4.0.0) (2022-07-05)
+
+
+### Features
+
+* **api,docker:** remove the need for multiple volume mounts ([ea8160e](https://github.com/MauriceNino/dashdot/commit/ea8160e55d71c4384ddfec663c1253c7e84889af))
+
+
+### Reverts
+
+* **deps:** upgrade inquirer to v9 ([9fd04af](https://github.com/MauriceNino/dashdot/commit/9fd04af4533b4363225bf78c5a4ae6414dc64122))
+
+
+### BREAKING CHANGES
+
+* **api,docker:** Previously, you needed to volume mount every disk seperately. Now you can simply do
+it once with /:/mnt/host:ro.
+
+## [3.9.8](https://github.com/MauriceNino/dashdot/compare/v3.9.7...v3.9.8) (2022-07-03)
+
+## [3.9.7](https://github.com/MauriceNino/dashdot/compare/v3.9.6...v3.9.7) (2022-07-01)
+
+## [3.9.6](https://github.com/MauriceNino/dashdot/compare/v3.9.5...v3.9.6) (2022-07-01)
+
+
+### Bug Fixes
+
+* **view:** storage chart overflow on multiview with >3 disks ([64d2b82](https://github.com/MauriceNino/dashdot/commit/64d2b8204eb6d3674a3de8eacc4568e494cc0f1a))
+
 ## [3.9.5](https://github.com/MauriceNino/dashdot/compare/v3.9.4...v3.9.5) (2022-06-30)
 
 

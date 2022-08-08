@@ -12,7 +12,7 @@ tags:
 At which interval the network speed-test should be rerun (in minutes).
 
 - type: `number`
-- default: `60`
+- default: `240` (every 4 hours)
 
 ## `DASHDOT_NETWORK_WIDGET_GROW`
 
@@ -28,7 +28,7 @@ To adjust the minimum width of the Network widget (in px).
 - type: `number`
 - default: `500`
 
-## `DASHDOT_NETWORK_DATAPOINTS`
+## `DASHDOT_NETWORK_SHOWN_DATAPOINTS`
 
 The amount of datapoints in each of the Network graphs.
 

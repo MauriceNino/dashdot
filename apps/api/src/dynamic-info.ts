@@ -87,8 +87,6 @@ export const getDynamicServerInfo = () => {
     }
   );
 
-  const INVALID_FS_TYPES = ['cifs', '9p'];
-
   const storageObs = createBufferedInterval(
     'Storage',
     CONFIG.widget_list.includes('storage'),
@@ -104,18 +102,29 @@ export const getDynamicServerInfo = () => {
       const storageLayout = layout.storage.layout;
       const validMounts = sizes.filter(
         ({ mount, type }) =>
-          mount.startsWith('/mnt/host/') && !INVALID_FS_TYPES.includes(type)
+          mount.startsWith('/mnt/host/') &&
+          !CONFIG.fs_type_filter.includes(type)
       );
       const hostMountUsed =
-        sizes.filter(({ mount }) => mount === '/mnt/host' || mount === '/')[0]
-          ?.used ?? 0;
-      const validParts = blocks.filter(({ type }) => type === 'part');
+        (
+          sizes.find(
+            ({ mount, type }) => type !== 'squashfs' && mount === '/mnt/host'
+          ) ?? sizes.find(({ mount }) => mount === '/')
+        )?.used ?? 0;
+      const validParts = blocks.filter(
+        ({ type }) => type === 'part' || type === 'disk'
+      );
 
       let hostFound = false;
 
       return {
         layout: storageLayout
-          .map(({ device }) => {
+          .map(({ device, virtual }) => {
+            if (virtual) {
+              const size = sizes.find(s => s.fs === device);
+              return size?.used ?? 0;
+            }
+
             const deviceParts = validParts.filter(({ name }) =>
               name.startsWith(device)
             );
@@ -128,7 +137,9 @@ export const getDynamicServerInfo = () => {
               deviceParts.some(
                 ({ mount }) =>
                   mount === '/mnt/host' || mount.startsWith('/mnt/host/boot/')
-              );
+              ) ||
+              // if there is only one drive, it has to be the host
+              storageLayout.length === 1;
 
             // Apply all unclaimed partitions to the host disk
             if (potentialHost && !hostFound) {
