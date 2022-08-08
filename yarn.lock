@@ -11105,7 +11105,6 @@ __metadata:
     react-color: 2.19.3
     react-dom: 18.2.0
     react-is: 18.2.0
-    react-medium-image-zoom: 5.0.1
     react-spinners-kit: 1.9.1
     react-test-renderer: 18.2.0
     react-virtualized-auto-sizer: 1.0.6
@@ -20898,16 +20897,6 @@ __metadata:
     react-loadable: "*"
     webpack: ">=4.41.1 || 5.x"
   checksum: 1cf7ceb488d329a5be15f891dae16727fb7ade08ef57826addd21e2c3d485e2440259ef8be94f4d54e9afb4bcbd2fcc22c3c5bad92160c9c06ae6ba7b5562497
-  languageName: node
-  linkType: hard
-
-"react-medium-image-zoom@npm:5.0.1":
-  version: 5.0.1
-  resolution: "react-medium-image-zoom@npm:5.0.1"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 1e6d4844c3923c1f74b2e718a4c9ab0cbd61766d3831358fdb19b4a2c769c5f5c5b7a2af7f7111c9969bf2a1393b7137e1653941f418415f2561393f572c9f96
   languageName: node
   linkType: hard
 
