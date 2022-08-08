@@ -4,8 +4,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import CodeBlock from '@theme/CodeBlock';
 import Layout from '@theme/Layout';
 import React from 'react';
-import Zoom from 'react-medium-image-zoom';
-import 'react-medium-image-zoom/dist/styles.css';
 import styles from './index.module.scss';
 
 const HomepageHeader = () => {
@@ -48,13 +46,9 @@ const HomePageInfo = () => {
       <div className={styles.infoSection}>
         <h2>dash. is beautiful</h2>
         {colorMode === 'dark' ? (
-          <Zoom overlayBgColorEnd={'#000'}>
-            <img src='./img/screenshot_darkmode.png' alt='Dark-Mode' />
-          </Zoom>
+          <img src='./img/screenshot_darkmode.png' alt='Dark-Mode' />
         ) : (
-          <Zoom overlayBgColorEnd={'#fff'}>
-            <img src='./img/screenshot_lightmode.png' alt='Light-Mode' />
-          </Zoom>
+          <img src='./img/screenshot_lightmode.png' alt='Light-Mode' />
         )}
       </div>
 
