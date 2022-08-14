@@ -184,15 +184,15 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
   return (
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
-      heading='Processor'
+      heading='处理器'
       infos={toInfoTable(
         config.cpu_label_list,
         {
-          brand: 'Brand',
-          model: 'Model',
-          cores: 'Cores',
-          threads: 'Threads',
-          frequency: 'Frequency',
+          brand: '品牌',
+          model: '型号',
+          cores: '核心数',
+          threads: '线程数',
+          frequency: '频率',
         },
         [
           {
