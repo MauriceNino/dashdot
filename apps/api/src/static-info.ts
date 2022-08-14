@@ -196,14 +196,14 @@ const loadNetworkInfo = async (): Promise<void> => {
       network: {
         ...STATIC_INFO.getValue().network,
         type: isWireless
-          ? 'Wireless'
+          ? '无线'
           : isBridge
-          ? 'Bridge'
+          ? '桥接'
           : isBond
-          ? 'Bond'
+          ? '绑定'
           : isTap
           ? 'TAP'
-          : 'Wired',
+          : '有线',
       },
     });
 
