@@ -95,14 +95,14 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
   return (
     <HardwareInfoContainer
       color={theme.colors.ramPrimary}
-      heading='Memory'
+      heading='内存'
       infos={toInfoTable(
         config.ram_label_list,
         {
-          brand: brands.length > 1 ? 'Brands' : 'Brand',
-          size: 'Size',
-          type: types.length > 1 ? 'Types' : 'Type',
-          frequency: frequencies.length > 1 ? 'Frequencies' : 'Frequency',
+          brand: brands.length > 1 ? 'Brands' : '品牌',
+          size: '大小',
+          type: types.length > 1 ? 'Types' : '类型',
+          frequency: frequencies.length > 1 ? 'Frequencies' : '频率',
         },
         [
           {
