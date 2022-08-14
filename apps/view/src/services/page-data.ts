@@ -104,7 +104,7 @@ export const usePageData = () => {
     },
     {
       condition: socketError,
-      text: 'Unable to connect to backend!',
+      text: '无法连接到后台程序！',
     },
   ];
   const error = errors.find(e => e.condition && pageLoaded === true);
