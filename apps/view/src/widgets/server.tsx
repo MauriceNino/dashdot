@@ -260,9 +260,9 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
         infos={toInfoTable(
           config.os_label_list,
           {
-            os: 'OS',
-            arch: 'Arch',
-            up_since: 'Up since',
+            os: '操作系统',
+            arch: '架构',
+            up_since: '运行时长',
           },
           [
             {
