@@ -195,17 +195,17 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
   const dateInfos = [
     {
       label: '',
-      value: `${days} days`,
+      value: `${days} 天`,
       amount: days,
     },
     {
       label: '',
-      value: `${hours} hours`,
+      value: `${hours} 小时`,
       amount: hours,
     },
     {
       label: '',
-      value: `${minutes} minutes`,
+      value: `${minutes} 分钟`,
       amount: minutes,
     },
   ].reduce(
