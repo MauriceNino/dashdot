@@ -239,7 +239,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       </ButtonsContainer>
 
       <WidgetSwitch
-        label='Dark Mode'
+        label='黑暗模式'
         checked={darkMode}
         onChange={() => setDarkMode(!darkMode)}
       />
