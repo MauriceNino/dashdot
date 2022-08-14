@@ -138,15 +138,15 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
   return (
     <HardwareInfoContainer
       color={theme.colors.networkPrimary}
-      heading='Network'
+      heading='网络'
       infos={toInfoTable(
         config.network_label_list,
         {
-          type: 'Type',
-          speed_up: 'Speed (Up)',
-          speed_down: 'Speed (Down)',
-          interface_speed: 'Interface Speed',
-          public_ip: 'Public IP',
+          type: '类型',
+          speed_up: '速率（上传）',
+          speed_down: '速率（下载）',
+          interface_speed: '接口速率',
+          public_ip: '公网 IP',
         },
         [
           {
