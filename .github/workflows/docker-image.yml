@@ -55,5 +55,5 @@ jobs:
           APP_NAME=${{ env.APP_NAME }}
           APP_VERSION=${{ env.APP_VERSION }}
         tags: |
-          ${{ env.DOCKERHUB_REPO }}:latest
+          ${{ env.DOCKERHUB_REPO }}
           ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}
