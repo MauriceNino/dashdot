@@ -295,7 +295,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
         const raidGroup = s.raidGroup;
 
         return {
-          label: raidGroup ? `RAID\n=> ${raidGroup}` : 'Drive',
+          label: raidGroup ? `RAID\n=> ${raidGroup}` : '驱动盘',
           value: `${brand}\n=> ${bytePrettyPrint(size)}`,
         };
       });
@@ -310,9 +310,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
           ? config.storage_label_list
           : config.storage_label_list.filter(x => x !== 'raid'),
         {
-          brand: (layout[0]?.brands.length ?? 0) > 1 ? 'Brands' : 'Brand',
-          size: 'Size',
-          type: (layout[0]?.types.length ?? 0) > 1 ? 'Types' : 'Type',
+          brand: (layout[0]?.brands.length ?? 0) > 1 ? '品牌' : '品牌',
+          size: '大小',
+          type: (layout[0]?.types.length ?? 0) > 1 ? '类型' : '类型',
           raid: 'Raid',
         },
         [
@@ -340,7 +340,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   return (
     <HardwareInfoContainer
       color={theme.colors.storagePrimary}
-      heading='Storage'
+      heading='存储'
       infos={infos}
       infosPerPage={layout.length > 1 ? 3 : 7}
       icon={faHdd}
