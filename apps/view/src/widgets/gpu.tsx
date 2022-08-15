@@ -101,9 +101,9 @@ export const GpuWidget: FC<GpuWidgetProps> = ({ load, data, config }) => {
         return toInfoTable(
           config.gpu_label_list,
           {
-            brand: 'Brand',
-            model: 'Model',
-            memory: 'Memory',
+            brand: '品牌',
+            model: '型号',
+            memory: '显存',
           },
           [
             {
@@ -133,7 +133,7 @@ export const GpuWidget: FC<GpuWidgetProps> = ({ load, data, config }) => {
   return (
     <HardwareInfoContainer
       color={theme.colors.gpuPrimary}
-      heading='Graphics'
+      heading='图形'
       infos={infos}
       infosPerPage={config.gpu_label_list.length}
       icon={faDesktop}
