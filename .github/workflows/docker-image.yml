@@ -6,8 +6,8 @@ on:
       - v*
     
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  APP_NAME: dashdotzhcn
+  DOCKERHUB_REPO: sp1ke47/dashdotzhcn
 
 jobs:
 
@@ -28,9 +28,8 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        username: sp1ke47
+        password: dckr_pat_oD1pX62ayP38Q-YvQb3d3X1sRJI
         
     - name: Generate App Version
       run: echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
