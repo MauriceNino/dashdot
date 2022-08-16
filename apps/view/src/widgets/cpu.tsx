@@ -221,7 +221,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       icon={faMicrochip}
       extraContent={
         <WidgetSwitch
-          label='Show All Cores'
+          label='显示所有核心'
           checked={multiCore}
           onChange={() => setMulticore(!multiCore)}
         />
