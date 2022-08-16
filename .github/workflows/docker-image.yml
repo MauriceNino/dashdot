@@ -31,8 +31,12 @@ jobs:
 
     env:
       REGISTRY: docker.pkg.github.com
+      OWNER: '${{ github.repository_owner }}'
 
     steps:
+      - name: set lower case owner name
+        run: |
+          echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
       - uses: actions/checkout@v3
       - name: Login
         uses: docker/login-action@v1
@@ -46,4 +50,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.REGISTRY }}/${{ OWNER_LC }}/${{ env.IMAGE_NAME }}:latest
