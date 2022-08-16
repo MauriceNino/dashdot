@@ -6,7 +6,7 @@ on:
       - "v*.*"
       
 env:
-  REPO_NAME: dashdot_zh-CN
+  REPO_NAME: dashdot_zh-cn
   IMAGE_NAME: dashdot
 
 jobs:
