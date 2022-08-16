@@ -1,3 +1,10 @@
+## [4.3.10](https://github.com/MauriceNino/dashdot/compare/v4.3.9...v4.3.10) (2022-08-16)
+
+
+### Bug Fixes
+
+* **api:** host drive did not collect all partition infos ([3caa68f](https://github.com/MauriceNino/dashdot/commit/3caa68f5ee9bfdf14dadcd5c5a0358aadadff90b)), closes [#277](https://github.com/MauriceNino/dashdot/issues/277)
+
 ## [4.3.9](https://github.com/MauriceNino/dashdot/compare/v4.3.8...v4.3.9) (2022-08-08)
 
 
