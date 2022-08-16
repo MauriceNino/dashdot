@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 <h1>
-  <img src=".github/images/banner_muted.png" alt="dash. - a modern server dashboard">
+  <img src=".github/images/banner_muted.png" alt="dash. - 一个现代化的服务器仪表盘">
 </h1>
 
 <p align="center">
@@ -13,21 +13,19 @@
   </a>
 </p>
 <p align="center">
-  <i>Feel free to join the <b>Discord</b> and <b>star the repo</b> if you like the project!</i>
+  <i>如果您喜欢这个项目，欢迎加入我们的 <b>Discord</b> 并且给这个库<b>点 Star</b>！</i>
 </p>
 
 <br/>
 
 <p align="center">
-  <b>dash.</b> (or <b>dashdot</b>) is a modern server dashboard,
-  running on the latest tech, designed with glassmorphism in mind.
-  It is intended to be used for smaller VPS and private servers.
+  <b>dash.</b>（又称<b>dashdot</b>）是一个现代化的服务器仪表板，采用最新技术以及玻璃拟物化设计。适用于私人服务器或更小型的 VPS.
 </p>
 <br />
 <p align="center">
-  <a href="https://dash.mauz.io" target="_blank">Live Demo</a>
+  <a href="https://dash.mauz.io" target="_blank">在线样板</a>
  |
-  <a href="https://hub.docker.com/r/mauricenino/dashdot" target="_blank">Docker Image</a>
+  <a href="https://github.com/Sp1ke47/dashdot_zh-CN/pkgs/container/dashdot_zh-cn%2Fdashdot" target="_blank">Docker 镜像</a>
 </p>
 
 #
@@ -37,52 +35,84 @@
     align="right"
     width="160"
     style="padding-left: 20px; padding-bottom: 10px"
-    alt="Consider sponsoring the development of this project"
+    alt="请考虑资助本项目的开发"
     src="https://cdn.ko-fi.com/cdn/kofi2.png?v=3"
   />
 </a>
 
 <!-- markdownlint-enable -->
 
-**dash.** is a open-source project, so any contribution is highly appreciated.
-If you are interested in further developing this project, have a look at the
+**dash.** 是一个开源项目，因此我们热烈欢迎一切贡献者。如果您有兴趣进一步开发此项目，请参阅
 [Contributing.md](./.github/CONTRIBUTING.md).
 
-In case you want to financially support this project, you can visit my
-[GitHub Sponsors](https://github.com/sponsors/MauriceNino), or my [Ko-Fi](https://ko-fi.com/mauricenino).
+如果您想在经济上支持这个项目，您可以访问原作者的
+[GitHub Sponsors](https://github.com/sponsors/MauriceNino)，或者其 [Ko-Fi](https://ko-fi.com/mauricenino).
 
-## Preview
+## 预览
 
 <!-- markdownlint-disable -->
 
-| Dark-Mode                                                                                    | Light-Mode                                                                                     |
+| 黑暗模式                                                                                    | 浅色模式                                                                                     |
 | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | <img src="apps/docs/static/img/screenshot_darkmode.png" alt="Screenshot of the dark-mode" /> | <img src="apps/docs/static/img/screenshot_lightmode.png" alt="Screenshot of the light-mode" /> |
 
 <!-- markdownlint-enable -->
 
-## Documentation
+## 文档
 
-- [Installation Options](https://getdashdot.com/docs/install)
-- [Configuration Options](https://getdashdot.com/docs/config)
-- [Contributing](./.github/CONTRIBUTING.md)
-- [Changelog](./.github/CHANGELOG.md)
+- [安装选项](https://getdashdot.com/docs/install)
+- [配置选项](https://getdashdot.com/docs/config)
+- [贡献](./.github/CONTRIBUTING.md)
+- [变更日志](./.github/CHANGELOG.md)
 
-## Quick Install (Docker)
+## 快速安装（Docker）
 
-Images are hosted on [DockerHub](https://hub.docker.com/r/mauricenino/dashdot),
-and are available for both AMD64 and ARM devices.
+镜像资源托管在 [Github Packages](https://github.com/Sp1ke47/dashdot_zh-CN/pkgs/container/dashdot_zh-cn%2Fdashdot)，可用于 AMD64 和 ARM 设备。
 
 ```bash
 docker container run -it \
   -p 80:3001 \
   -v /:/mnt/host:ro \
   --privileged \
-  mauricenino/dashdot
+  ghcr.io/sp1ke47/dashdot_zh-cn/dashdot:latest
 ```
 
-To get more information on why which flag is needed, or if you want to use other
-install options instead (`docker-compose`, or from source), have a look at the
-[installation options](https://getdashdot.com/docs/install).
+## 源码安装
 
-To read more about configuration options, you can visit the [configuration options](https://getdashdot.com/docs/config).
+### 环境要求
+
+- [node.js](https://nodejs.org/)（推荐 18.x 版本)
+- [yarn](https://yarnpkg.com/)
+- [git](https://git-scm.com/)
+- [speedtest](https://www.speedtest.net/apps/cli)（推荐）
+- 或者改用：[speedtest-cli](https://github.com/sivel/speedtest-cli)
+
+### 准备
+
+下载并构建：
+
+```git clone https://github.com/MauriceNino/dashdot &&\
+  cd dashdot &&\
+  yarn &&\
+  yarn build:prod
+```
+
+完成后，使用以下命令启动仪表板：
+
+```
+sudo yarn start
+```
+
+### 配置
+
+配置选项可以选择使用环境变量传递：
+
+```
+export DASHDOT_PORT="8080" &&\
+  sudo yarn start
+```
+
+
+若要了解 flag 使用详情，或者采用其他安装方式（`docker-compose`），请参阅[安装选项](https://getdashdot.com/docs/install)。
+
+若要阅读有关配置选项的更多信息，请参阅[配置选项](https://getdashdot.com/docs/config)。
