@@ -26,11 +26,11 @@ jobs:
           fi
           echo ::set-output name=tags::${VERSION}
           
-  push-ghcr:
+  push-docker-pkg-github:
     runs-on: ubuntu-latest
 
     env:
-      REGISTRY: ghcr.io
+      REGISTRY: docker.pkg.github.com
 
     steps:
       - uses: actions/checkout@v3
