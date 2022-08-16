@@ -91,7 +91,8 @@ docker container run -it \
 
 下载并构建：
 
-```git clone https://github.com/MauriceNino/dashdot &&\
+```
+git clone https://github.com/Sp1ke47/dashdot_zh-CN &&\
   cd dashdot &&\
   yarn &&\
   yarn build:prod
