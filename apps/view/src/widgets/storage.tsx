@@ -226,11 +226,11 @@ export const StorageChart: FC<StorageChartProps> = ({
             <DefaultPieChart
               data={[
                 {
-                  name: 'Used',
+                  name: '使用中',
                   value: totalUsed,
                 },
                 {
-                  name: 'Free',
+                  name: '空闲中',
                   value: totalAvailable,
                 },
               ]}
