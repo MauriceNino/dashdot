@@ -93,7 +93,7 @@ docker container run -it \
 
 ```
 git clone https://github.com/Sp1ke47/dashdot_zh-CN &&\
-  cd dashdot &&\
+  cd dashdot_zh-CN &&\
   yarn &&\
   yarn build:prod
 ```
