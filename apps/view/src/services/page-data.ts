@@ -100,7 +100,7 @@ export const usePageData = () => {
   const errors = [
     {
       condition: !config,
-      text: 'Invalid or incomplete static data loaded!',
+      text: '载入的静态数据无效或不完整！',
     },
     {
       condition: socketError,
