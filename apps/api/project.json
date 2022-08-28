@@ -9,7 +9,7 @@
       "options": {
         "outputPath": "dist/apps/api",
         "main": "apps/api/src/index.ts",
-        "tsConfig": "apps/api/tsconfig.json"
+        "tsConfig": "apps/api/tsconfig.app.json"
       },
       "configurations": {
         "production": {
@@ -38,15 +38,27 @@
         "lintFilePatterns": ["apps/api/**/*.ts"]
       }
     },
-    "test": {
+    "format": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/api",
         "command": "prettier --check ."
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/api"],
+      "options": {
+        "jestConfig": "apps/api/jest.config.ts",
+        "passWithNoTests": true
       },
       "dependsOn": [
         {
           "target": "lint",
+          "projects": "self"
+        },
+        {
+          "target": "format",
           "projects": "self"
         }
       ]
