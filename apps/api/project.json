@@ -9,7 +9,7 @@
       "options": {
         "outputPath": "dist/apps/api",
         "main": "apps/api/src/index.ts",
-        "tsConfig": "apps/api/tsconfig.json"
+        "tsConfig": "apps/api/tsconfig.app.json"
       },
       "configurations": {
         "production": {
@@ -39,10 +39,11 @@
       }
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/api"],
       "options": {
-        "cwd": "apps/api",
-        "command": "prettier --check ."
+        "jestConfig": "apps/api/jest.config.ts",
+        "passWithNoTests": true
       },
       "dependsOn": [
         {

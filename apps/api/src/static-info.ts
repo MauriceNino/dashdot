@@ -112,13 +112,11 @@ const loadRamInfo = async (): Promise<void> => {
   });
 };
 
-const loadStorageInfo = async (): Promise<void> => {
-  const [disks, blocks, sizes] = await Promise.all([
-    si.diskLayout(),
-    si.blockDevices(),
-    si.fsSize(),
-  ]);
-
+export const mapToStorageLayout = (
+  disks: si.Systeminformation.DiskLayoutData[],
+  blocks: si.Systeminformation.BlockDevicesData[],
+  sizes: si.Systeminformation.FsSizeData[]
+) => {
   const raidMembers = blocks.filter(block => block.fsType.endsWith('_member'));
   const blockDisks = blocks.filter(
     block => block.type === 'disk' && block.size > 0
@@ -176,10 +174,20 @@ const loadStorageInfo = async (): Promise<void> => {
     })
     .filter(d => d != null);
 
+  return blockLayout.concat(sizesLayout);
+};
+
+const loadStorageInfo = async (): Promise<void> => {
+  const [disks, blocks, sizes] = await Promise.all([
+    si.diskLayout(),
+    si.blockDevices(),
+    si.fsSize(),
+  ]);
+
   STATIC_INFO.next({
     ...STATIC_INFO.getValue(),
     storage: {
-      layout: blockLayout.concat(sizesLayout),
+      layout: mapToStorageLayout(disks, blocks, sizes),
     },
   });
 };
