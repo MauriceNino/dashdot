@@ -64,25 +64,12 @@
         }
       }
     },
-    "lint": {
+    "test": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/view/**/*.{ts,tsx,js,jsx}"]
       }
-    },
-    "test": {
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "apps/view",
-        "command": "prettier --check ."
-      },
-      "dependsOn": [
-        {
-          "target": "lint",
-          "projects": "self"
-        }
-      ]
     }
   },
   "tags": []

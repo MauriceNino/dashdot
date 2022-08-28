@@ -38,13 +38,6 @@
         "lintFilePatterns": ["apps/api/**/*.ts"]
       }
     },
-    "format": {
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "apps/api",
-        "command": "prettier --check ."
-      }
-    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/api"],
@@ -55,10 +48,6 @@
       "dependsOn": [
         {
           "target": "lint",
-          "projects": "self"
-        },
-        {
-          "target": "format",
           "projects": "self"
         }
       ]

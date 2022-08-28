@@ -19,25 +19,12 @@
         }
       }
     },
-    "lint": {
+    "test": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/cli/**/*.ts"]
       }
-    },
-    "test": {
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "apps/cli",
-        "command": "prettier --check ."
-      },
-      "dependsOn": [
-        {
-          "target": "lint",
-          "projects": "self"
-        }
-      ]
     }
   },
   "tags": []
