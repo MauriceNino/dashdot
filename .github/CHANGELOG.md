@@ -1,3 +1,15 @@
+# [4.4.0](https://github.com/MauriceNino/dashdot/compare/v4.3.10...v4.4.0) (2022-08-28)
+
+
+### Bug Fixes
+
+* **api:** storage widget showing 0 when host mount is explicit ([c413305](https://github.com/MauriceNino/dashdot/commit/c4133058509601c2981b491314de191b3f3d2f79))
+
+
+### Features
+
+* remove prettier steps ([7ee1bfb](https://github.com/MauriceNino/dashdot/commit/7ee1bfb5bb668c04f138dcf68d1d60adf6b58cae))
+
 ## [4.3.10](https://github.com/MauriceNino/dashdot/compare/v4.3.9...v4.3.10) (2022-08-16)
 
 
