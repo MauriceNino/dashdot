@@ -5199,20 +5199,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:5.2.3":
-  version: 5.2.3
-  resolution: "@mantine/core@npm:5.2.3"
+"@mantine/core@npm:5.2.4":
+  version: 5.2.4
+  resolution: "@mantine/core@npm:5.2.4"
   dependencies:
     "@floating-ui/react-dom-interactions": 0.6.6
-    "@mantine/styles": 5.2.3
-    "@mantine/utils": 5.2.3
+    "@mantine/styles": 5.2.4
+    "@mantine/utils": 5.2.4
     "@radix-ui/react-scroll-area": 1.0.0
     react-textarea-autosize: 8.3.4
   peerDependencies:
-    "@mantine/hooks": 5.2.3
+    "@mantine/hooks": 5.2.4
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 39c3328335a9de3d1f72a8e7d043005f0920039e37ff4ff8029d1955ec5b4fad9f5fb2a112490862061e0ecf1803d0fdaeb532c0b716394681d17abd6b410cc8
+  checksum: d7702274a4c0e9f3dd88dda702fee296edfdba2069a0c50c4a106a995ccac058c3711c92812e7134bf80e118267aaee54aa5726427e40cf9b9b3a2ebff8e1230
   languageName: node
   linkType: hard
 
@@ -5225,9 +5225,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/styles@npm:5.2.3":
-  version: 5.2.3
-  resolution: "@mantine/styles@npm:5.2.3"
+"@mantine/styles@npm:5.2.4":
+  version: 5.2.4
+  resolution: "@mantine/styles@npm:5.2.4"
   dependencies:
     clsx: 1.1.1
     csstype: 3.0.9
@@ -5235,16 +5235,16 @@ __metadata:
     "@emotion/react": ">=11.9.0"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 39e9e3c7462386da8106260787e0537b767e54b8b01b5077b3e371c9026ad78228e8bea801d4d3968faca6254e509bdd3ca783eba8a62be0d011f585bdf6019e
+  checksum: 8a0dee38931285d04bf022349a0cadaf812ee1a4d239b3c8246454002b9e5f37079d3fa5eef6706d610408c5fde06f5b82fd604177812169d3de3f9c8196900f
   languageName: node
   linkType: hard
 
-"@mantine/utils@npm:5.2.3":
-  version: 5.2.3
-  resolution: "@mantine/utils@npm:5.2.3"
+"@mantine/utils@npm:5.2.4":
+  version: 5.2.4
+  resolution: "@mantine/utils@npm:5.2.4"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: bac3a5637efc2163b8308d42bbb4bc828b0cbeecfcbcb81dfb4b252afd728197b5a96abd37b0f0c7a432be2ab30e0525bbdefbe3f89f35bf321c168464af4a01
+  checksum: c3c58b60255c140dc336615fc582960b88b2fc0e540da359bf8c6c4bdfbe43a07bf886a0da7ca6d9d11fbb457e86ed73c761765a850b0db7112c5ce6dec61d19
   languageName: node
   linkType: hard
 
@@ -11101,7 +11101,7 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": 6.1.2
     "@fortawesome/free-solid-svg-icons": 6.1.2
     "@fortawesome/react-fontawesome": 0.2.0
-    "@mantine/core": 5.2.3
+    "@mantine/core": 5.2.4
     "@mantine/hooks": 5.2.4
     "@mdx-js/react": 1.6.22
     "@nrwl/cli": 14.5.6
