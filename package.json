@@ -34,7 +34,7 @@
     "@docusaurus/preset-classic": "2.0.1",
     "@easyops-cn/docusaurus-search-local": "0.31.0",
     "@emotion/memoize": "0.8.0",
-    "@emotion/react": "11.10.0",
+    "@emotion/react": "11.10.4",
     "@fortawesome/fontawesome-svg-core": "6.1.2",
     "@fortawesome/free-brands-svg-icons": "6.1.2",
     "@fortawesome/free-solid-svg-icons": "6.1.2",
