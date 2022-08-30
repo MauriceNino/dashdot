@@ -11190,7 +11190,7 @@ __metadata:
     cors: 2.8.5
     docusaurus-plugin-image-zoom: 0.1.1
     docusaurus-plugin-sass: 0.2.2
-    dotenv: 16.0.1
+    dotenv: 16.0.2
     eslint: 8.23.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-cypress: 2.12.1
@@ -11847,10 +11847,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:16.0.1":
-  version: 16.0.1
-  resolution: "dotenv@npm:16.0.1"
-  checksum: f459ffce07b977b7f15d8cc4ee69cdff77d4dd8c5dc8c85d2d485ee84655352c2415f9dd09d42b5b5985ced3be186130871b34e2f3e2569ebc72fbc2e8096792
+"dotenv@npm:16.0.2":
+  version: 16.0.2
+  resolution: "dotenv@npm:16.0.2"
+  checksum: ca8f9ca2d67929c7771069f4c31b4e46b9932621009e658e5afd655dde2d69b77642bf36dbc9e72bc170523dfd908a9ee41c26f034c1fdc605ace3b1b4b10faf
   languageName: node
   linkType: hard
 
