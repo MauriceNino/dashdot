@@ -121,7 +121,7 @@
     "babel-plugin-syntax-jsx": "6.18.0",
     "chai": "4.3.6",
     "commitizen": "4.2.5",
-    "dotenv": "16.0.1",
+    "dotenv": "16.0.2",
     "eslint": "8.23.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-cypress": "2.12.1",
