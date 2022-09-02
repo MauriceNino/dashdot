@@ -3,6 +3,7 @@ import {
   GpuLoad,
   NetworkLoad,
   RamLoad,
+  StorageInfo,
   StorageLoad,
 } from '@dash/common';
 import { exec as cexec } from 'child_process';
@@ -48,6 +49,87 @@ const createBufferedInterval = <R>(
   }
 
   return new Observable();
+};
+
+export const mapToStorageOutput = (
+  layout: StorageInfo['layout'],
+  blocks: si.Systeminformation.BlockDevicesData[],
+  sizes: si.Systeminformation.FsSizeData[]
+) => {
+  const validMounts = sizes.filter(
+    ({ mount, type }) =>
+      mount.startsWith('/mnt/host') && !CONFIG.fs_type_filter.includes(type)
+  );
+  const hostMountUsed =
+    (
+      sizes.find(
+        ({ mount, type }) => type !== 'squashfs' && mount === '/mnt/host'
+      ) ?? sizes.find(({ mount }) => mount === '/')
+    )?.used ?? 0;
+  const validParts = blocks.filter(
+    ({ type }) => type === 'part' || type === 'disk'
+  );
+
+  let hostFound = false;
+
+  return {
+    layout: layout
+      .map(({ device, virtual }) => {
+        if (virtual) {
+          const size = sizes.find(s => s.fs === device);
+          return size?.used ?? 0;
+        }
+
+        const deviceParts = validParts.filter(({ name }) =>
+          name.startsWith(device)
+        );
+        const explicitHost =
+          // drives where one of the partitions is mounted to the root or /mnt/host/boot/
+          deviceParts.some(
+            ({ mount }) =>
+              mount === '/mnt/host' || mount.startsWith('/mnt/host/boot/')
+          );
+        const potentialHost =
+          // drives that have all partitions unmounted
+          deviceParts.every(
+            ({ mount }) => mount == null || !mount.startsWith('/mnt/host/')
+          ) ||
+          // if there is only one drive, it has to be the host
+          layout.length === 1;
+
+        if (explicitHost || !potentialHost) {
+          if (explicitHost) {
+            hostFound = true;
+          }
+
+          return deviceParts.reduce(
+            (acc, curr) =>
+              acc +
+              (validMounts.find(({ mount }) => curr.mount === mount)?.used ??
+                0),
+            0
+          );
+        }
+
+        // Apply all unclaimed partitions to the host disk
+        if (potentialHost && !hostFound) {
+          hostFound = true;
+
+          const unclaimedSpace = validMounts
+            .filter(
+              ({ mount }) => !validParts.some(part => part.mount === mount)
+            )
+            .reduce((acc, { used }) => acc + used, 0);
+
+          return hostMountUsed + unclaimedSpace;
+        }
+
+        return 0;
+      })
+      .map(used => ({
+        load: used,
+      })),
+  };
 };
 
 export const getDynamicServerInfo = () => {
@@ -100,81 +182,8 @@ export const getDynamicServerInfo = () => {
       ]);
 
       const storageLayout = layout.storage.layout;
-      const validMounts = sizes.filter(
-        ({ mount, type }) =>
-          mount.startsWith('/mnt/host/') &&
-          !CONFIG.fs_type_filter.includes(type)
-      );
-      const hostMountUsed =
-        (
-          sizes.find(
-            ({ mount, type }) => type !== 'squashfs' && mount === '/mnt/host'
-          ) ?? sizes.find(({ mount }) => mount === '/')
-        )?.used ?? 0;
-      const validParts = blocks.filter(
-        ({ type }) => type === 'part' || type === 'disk'
-      );
 
-      let hostFound = false;
-
-      return {
-        layout: storageLayout
-          .map(({ device, virtual }) => {
-            if (virtual) {
-              const size = sizes.find(s => s.fs === device);
-              return size?.used ?? 0;
-            }
-
-            const deviceParts = validParts.filter(({ name }) =>
-              name.startsWith(device)
-            );
-            const explicitHost =
-              // drives where one of the partitions is mounted to the root or /mnt/host/boot/
-              deviceParts.some(
-                ({ mount }) =>
-                  mount === '/mnt/host' || mount.startsWith('/mnt/host/boot/')
-              );
-            const potentialHost =
-              // drives that have all partitions unmounted
-              deviceParts.every(
-                ({ mount }) => mount == null || !mount.startsWith('/mnt/host/')
-              ) ||
-              // if there is only one drive, it has to be the host
-              storageLayout.length === 1;
-
-            if (explicitHost || !potentialHost) {
-              if (explicitHost) {
-                hostFound = true;
-              }
-
-              return deviceParts.reduce(
-                (acc, curr) =>
-                  acc +
-                  (validMounts.find(({ mount }) => curr.mount === mount)
-                    ?.used ?? 0),
-                0
-              );
-            }
-
-            // Apply all unclaimed partitions to the host disk
-            if (potentialHost && !hostFound) {
-              hostFound = true;
-
-              const unclaimedSpace = validMounts
-                .filter(
-                  ({ mount }) => !validParts.some(part => part.mount === mount)
-                )
-                .reduce((acc, { used }) => acc + used, 0);
-
-              return hostMountUsed + unclaimedSpace;
-            }
-
-            return 0;
-          })
-          .map(used => ({
-            load: used,
-          })),
-      };
+      return mapToStorageOutput(storageLayout, blocks, sizes);
     }
   );
 
