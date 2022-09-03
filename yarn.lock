@@ -7155,13 +7155,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/component-emitter@npm:^1.2.10":
-  version: 1.2.11
-  resolution: "@types/component-emitter@npm:1.2.11"
-  checksum: 0e081c5f7a4b113af3732f67ad9ebb487d5c239d440d96938ff9a679d18bb9337a513638e12b5b02a7a921494eef18c5a4d78f1188bc43a12290edd74c42a9c7
-  languageName: node
-  linkType: hard
-
 "@types/connect-history-api-fallback@npm:^1.3.5":
   version: 1.3.5
   resolution: "@types/connect-history-api-fallback@npm:1.3.5"
@@ -10204,13 +10197,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"component-emitter@npm:~1.3.0":
-  version: 1.3.0
-  resolution: "component-emitter@npm:1.3.0"
-  checksum: b3c46de38ffd35c57d1c02488355be9f218e582aec72d72d1b8bbec95a3ac1b38c96cd6e03ff015577e68f550fbb361a3bfdbd9bb248be9390b7b3745691be6b
-  languageName: node
-  linkType: hard
-
 "compressible@npm:~2.0.16":
   version: 2.0.18
   resolution: "compressible@npm:2.0.18"
@@ -11222,8 +11208,8 @@ __metadata:
     rxjs: 7.5.6
     sass: 1.54.8
     semantic-release-plus: 20.0.0
-    socket.io: 4.5.1
-    socket.io-client: 4.5.1
+    socket.io: 4.5.2
+    socket.io-client: 4.5.2
     store: 2.0.12
     styled-components: 5.3.5
     systeminformation: 5.12.6
@@ -22554,26 +22540,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io-client@npm:4.5.1":
-  version: 4.5.1
-  resolution: "socket.io-client@npm:4.5.1"
+"socket.io-client@npm:4.5.2":
+  version: 4.5.2
+  resolution: "socket.io-client@npm:4.5.2"
   dependencies:
     "@socket.io/component-emitter": ~3.1.0
     debug: ~4.3.2
     engine.io-client: ~6.2.1
     socket.io-parser: ~4.2.0
-  checksum: e6e5ff1bb4b5714195b961274925cf23de81e070258d2ec1c8e12fcd9cebf4b4725c5fcff58699b23de8a260884f272f4e7e1e1146c0c72b75028fc438d069aa
-  languageName: node
-  linkType: hard
-
-"socket.io-parser@npm:~4.0.4":
-  version: 4.0.4
-  resolution: "socket.io-parser@npm:4.0.4"
-  dependencies:
-    "@types/component-emitter": ^1.2.10
-    component-emitter: ~1.3.0
-    debug: ~4.3.1
-  checksum: c173b4f3747c51e2af802eca35212f4dcfa8fe55d7fdc07b9a01da1ecc956791c1bf6591e307952548eab69e6500bcfe27cea8aff1386b860d9bb51f98e4fafb
+  checksum: f3196a731d7f502bcce8b54a3430485d2015d0e7d74050c1be8fa0622da0b62977719f903ec0dfb113d4be1564f6509d73f2fc257cf3972f3be877722aeabeb9
   languageName: node
   linkType: hard
 
@@ -22587,17 +22562,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io@npm:4.5.1":
-  version: 4.5.1
-  resolution: "socket.io@npm:4.5.1"
+"socket.io@npm:4.5.2":
+  version: 4.5.2
+  resolution: "socket.io@npm:4.5.2"
   dependencies:
     accepts: ~1.3.4
     base64id: ~2.0.0
     debug: ~4.3.2
     engine.io: ~6.2.0
     socket.io-adapter: ~2.4.0
-    socket.io-parser: ~4.0.4
-  checksum: 86afd6dcce0c96de85b20a0e37fa4a21e2e96bd6e36d2518acfad37597bcb5208feafbbac20cd34ee4b9356d40418a43938bcf4a206ba693ba3c771ffcef724f
+    socket.io-parser: ~4.2.0
+  checksum: 8527dd78fa3cf483a2cf0f09f64c4591186931b6765e5d8456dd3022b8786407952e3b931a83a86513c9f56852442e12f3497c761a113113e32b0c867c5ad5a7
   languageName: node
   linkType: hard
 
