@@ -11182,7 +11182,7 @@ __metadata:
     eslint-plugin-cypress: 2.12.1
     eslint-plugin-import: 2.26.0
     eslint-plugin-jsx-a11y: 6.6.1
-    eslint-plugin-react: 7.31.2
+    eslint-plugin-react: 7.31.4
     eslint-plugin-react-hooks: 4.6.0
     express: 4.18.1
     framer-motion: 7.2.1
@@ -12405,9 +12405,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:7.31.2":
-  version: 7.31.2
-  resolution: "eslint-plugin-react@npm:7.31.2"
+"eslint-plugin-react@npm:7.31.4":
+  version: 7.31.4
+  resolution: "eslint-plugin-react@npm:7.31.4"
   dependencies:
     array-includes: ^3.1.5
     array.prototype.flatmap: ^1.3.0
@@ -12425,7 +12425,7 @@ __metadata:
     string.prototype.matchall: ^4.0.7
   peerDependencies:
     eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
-  checksum: f2115c77c0f7e307b613c93c947eff341651c8483698bcad27b9d265b113ab993ea37c0ba5f5ef476320139546936d35212a9879987f34c5efec20761727bbf1
+  checksum: 5fa5293f922c9fc24c300a60b9d3f33a2406116b88df46a134cbcdb514b91b526251ce604716ab1cde94c7c95f25963a56c1509faf867601b3b0f94d9f68d61b
   languageName: node
   linkType: hard
 
