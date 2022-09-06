@@ -32,7 +32,7 @@
   "dependencies": {
     "@docusaurus/core": "2.0.1",
     "@docusaurus/preset-classic": "2.0.1",
-    "@easyops-cn/docusaurus-search-local": "0.31.0",
+    "@easyops-cn/docusaurus-search-local": "0.32.0",
     "@emotion/memoize": "0.8.0",
     "@emotion/react": "11.10.4",
     "@fortawesome/fontawesome-svg-core": "6.2.0",
