@@ -7197,6 +7197,54 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/d3-color@npm:*":
+  version: 3.1.0
+  resolution: "@types/d3-color@npm:3.1.0"
+  checksum: b1856f17d6366559a68eaba0164f30727e9dc5eaf1b3a6c8844354da228860240423d19fa4de65bff9da26b4ead8843eab14b1566962665412e8fd82c3810554
+  languageName: node
+  linkType: hard
+
+"@types/d3-interpolate@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@types/d3-interpolate@npm:3.0.1"
+  dependencies:
+    "@types/d3-color": "*"
+  checksum: 29ce472968b9e6611bdf0eeedaf89e8d6066190b52ced011d16d8183b8b9f8e6dd6516ca2b85242594942896299b42f37504d44e635f8fba3090c2c58594e21b
+  languageName: node
+  linkType: hard
+
+"@types/d3-path@npm:*":
+  version: 3.0.0
+  resolution: "@types/d3-path@npm:3.0.0"
+  checksum: af7f45ea912cddd794c03384baba856f11e1f9b57a49d05a66a61968dafaeb86e0e42394883118b9b8ccadce21a5f25b1f9a88ad05235e1dc6d24c3e34a379ff
+  languageName: node
+  linkType: hard
+
+"@types/d3-scale@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "@types/d3-scale@npm:4.0.2"
+  dependencies:
+    "@types/d3-time": "*"
+  checksum: 6b3c0337f38f82b582d9f3190fde82edfce7ffafb371e5b2464c443137c2660bac644099d259f1f5cc829085eb5688bed0bea2b336a957d0845433bd07bf2ddd
+  languageName: node
+  linkType: hard
+
+"@types/d3-shape@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@types/d3-shape@npm:3.1.0"
+  dependencies:
+    "@types/d3-path": "*"
+  checksum: 19d43b9762cbff503806d014be1b8a5d22dd12c71635f1f0b30696d3b3b31528b978175afe2ba183542fd16e4fc740f56e7a84100ead00f7d95eaeb890ac8b78
+  languageName: node
+  linkType: hard
+
+"@types/d3-time@npm:*":
+  version: 3.0.0
+  resolution: "@types/d3-time@npm:3.0.0"
+  checksum: e76adb056daccf80107f4db190ac6deb77e8774f00362bb6c76f178e67f2f217422fe502b654edbc9ac6451f6619045b9f6f5fe0db1ec5520e2ada377af7c72e
+  languageName: node
+  linkType: hard
+
 "@types/eslint-scope@npm:^3.7.3":
   version: 3.7.3
   resolution: "@types/eslint-scope@npm:3.7.3"
@@ -11146,7 +11194,7 @@ __metadata:
     react-spinners-kit: 1.9.1
     react-test-renderer: 18.2.0
     react-virtualized-auto-sizer: 1.0.6
-    recharts: 2.1.13
+    recharts: 2.1.14
     regenerator-runtime: 0.13.9
     rxjs: 7.5.6
     sass: 1.54.8
@@ -21242,10 +21290,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recharts@npm:2.1.13":
-  version: 2.1.13
-  resolution: "recharts@npm:2.1.13"
+"recharts@npm:2.1.14":
+  version: 2.1.14
+  resolution: "recharts@npm:2.1.14"
   dependencies:
+    "@types/d3-interpolate": ^3.0.1
+    "@types/d3-scale": ^4.0.2
+    "@types/d3-shape": ^3.1.0
     classnames: ^2.2.5
     d3-interpolate: ^3.0.1
     d3-scale: ^4.0.2
@@ -21261,7 +21312,7 @@ __metadata:
     prop-types: ^15.6.0
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: a4f0db4a1c0cfa0cc4f0bd33150f2c2de8627365beecce6c5bde84eb189f2fb43cc2f5d7f3997fb793ff7436b84968d6ac2fd09da3d9dad4452174e66e5ea7dd
+  checksum: 58f11fe8c9c4c36ddfe464ed896a7fd61b3c6cedeeab07cd86f286604dc11e96d2dc9288c55bb9c4e3c083ee325ffcccb5d0e6bc43a747c72110d25300624b22
   languageName: node
   linkType: hard
 
