@@ -90,7 +90,7 @@
     "@nrwl/jest": "14.6.5",
     "@nrwl/linter": "14.6.5",
     "@nrwl/node": "14.6.5",
-    "@nrwl/nx-cloud": "14.6.1",
+    "@nrwl/nx-cloud": "14.6.2",
     "@nrwl/react": "14.6.5",
     "@nrwl/tao": "14.6.5",
     "@nrwl/web": "14.6.5",
