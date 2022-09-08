@@ -5974,9 +5974,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/nx-cloud@npm:14.6.1":
-  version: 14.6.1
-  resolution: "@nrwl/nx-cloud@npm:14.6.1"
+"@nrwl/nx-cloud@npm:14.6.2":
+  version: 14.6.2
+  resolution: "@nrwl/nx-cloud@npm:14.6.2"
   dependencies:
     axios: ^0.21.1
     chalk: 4.1.0
@@ -5987,7 +5987,7 @@ __metadata:
     yargs-parser: ">=21.0.1"
   bin:
     nx-cloud: bin/nx-cloud.js
-  checksum: 2f5d20ea4bf414a51b4f7b8f18070c0bebba7a71b8978bfb3280a0df8fc9fc0503f8ea8f7eec1d0a971cd026bb3d1f323eb1245d326d95de3c341c1db2a01822
+  checksum: 3289d3eaeab6e9d75297c867ea74c6ab22111fa5ba248537579bd35dce6c96e1c5f21f6c4d7c6ff18bcb95273ce43c0930f2f88982fb098a15bf14d02216bd4e
   languageName: node
   linkType: hard
 
@@ -11129,7 +11129,7 @@ __metadata:
     "@nrwl/jest": 14.6.5
     "@nrwl/linter": 14.6.5
     "@nrwl/node": 14.6.5
-    "@nrwl/nx-cloud": 14.6.1
+    "@nrwl/nx-cloud": 14.6.2
     "@nrwl/react": 14.6.5
     "@nrwl/tao": 14.6.5
     "@nrwl/web": 14.6.5
