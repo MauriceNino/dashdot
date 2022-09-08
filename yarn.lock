@@ -10505,10 +10505,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.25.0":
-  version: 3.25.0
-  resolution: "core-js@npm:3.25.0"
-  checksum: 5a72740bf5babaf2e6203da4c0e831a0b97c3fe6f21b4c1aa8601d3a927660a22128dd8f0e86ce84778c4e5372ab0fc03c7944afa7e215c7fb13b2c79d5d5504
+"core-js@npm:3.25.1":
+  version: 3.25.1
+  resolution: "core-js@npm:3.25.1"
+  checksum: bfacb078e790913841e2d5008b9b6705ae56ed23f83c7f0ae08d330d874561012611089d53b71520105234ed0abba36f28d91b391514a16541a8c8d98c464239
   languageName: node
   linkType: hard
 
@@ -11163,7 +11163,7 @@ __metadata:
     chai: 4.3.6
     clsx: 1.2.1
     commitizen: 4.2.5
-    core-js: 3.25.0
+    core-js: 3.25.1
     cors: 2.8.5
     docusaurus-plugin-image-zoom: 0.1.1
     docusaurus-plugin-sass: 0.2.2
