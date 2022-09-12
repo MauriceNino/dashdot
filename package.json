@@ -60,7 +60,7 @@
     "react-dom": "18.2.0",
     "react-is": "18.2.0",
     "react-spinners-kit": "1.9.1",
-    "react-virtualized-auto-sizer": "1.0.6",
+    "react-virtualized-auto-sizer": "1.0.7",
     "recharts": "2.1.14",
     "regenerator-runtime": "0.13.9",
     "rxjs": "7.5.6",
