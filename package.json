@@ -75,7 +75,7 @@
     "universal-speedtest": "2.0.5",
     "use-color-scheme": "1.1.3",
     "util": "0.12.4",
-    "web-vitals": "3.0.1",
+    "web-vitals": "3.0.2",
     "yargs": "17.5.1"
   },
   "devDependencies": {
