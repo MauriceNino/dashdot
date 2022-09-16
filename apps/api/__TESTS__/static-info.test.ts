@@ -6,6 +6,7 @@ import {
   TEST_CASE_10,
   TEST_CASE_11,
   TEST_CASE_12,
+  TEST_CASE_13,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -67,6 +68,10 @@ describe('Static Info', () => {
     });
     it('Test Case 12', () => {
       const output = mapToStorageLayout(...toStorageInp(TEST_CASE_12));
+      expect(output).to.deep.equal(TEST_CASE_12.layout);
+    });
+    it('Test Case 13', () => {
+      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_13));
       expect(output).to.deep.equal(TEST_CASE_12.layout);
     });
   });
