@@ -5,6 +5,7 @@ import {
   TEST_CASE_1,
   TEST_CASE_10,
   TEST_CASE_11,
+  TEST_CASE_12,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -63,6 +64,10 @@ describe('Dynamic Info', () => {
     it('Test Case 11', () => {
       const output = mapToStorageOutput(...toStorageInp(TEST_CASE_11));
       expect(output).to.deep.equal(TEST_CASE_11.output);
+    });
+    it('Test Case 12', () => {
+      const output = mapToStorageOutput(...toStorageInp(TEST_CASE_12));
+      expect(output).to.deep.equal(TEST_CASE_12.output);
     });
   });
 });
