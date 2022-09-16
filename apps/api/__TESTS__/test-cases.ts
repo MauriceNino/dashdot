@@ -1,3 +1,14 @@
+import { StorageInfo, StorageLoad } from '@dash/common';
+import * as si from 'systeminformation';
+
+export type TestCase = {
+  disks: si.Systeminformation.DiskLayoutData[];
+  blocks: si.Systeminformation.BlockDevicesData[];
+  sizes: si.Systeminformation.FsSizeData[];
+  layout: StorageInfo['layout'];
+  output: StorageLoad;
+};
+
 export const TEST_CASE_1 = {
   disks: [
     {
@@ -182,7 +193,7 @@ export const TEST_CASE_1 = {
   ],
   layout: [{ device: 'sda', brand: 'QEMU', size: 429496729600, type: 'HD' }],
   output: { layout: [{ load: 185203033088 }] },
-};
+} as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/292
 export const TEST_CASE_2 = {
@@ -664,7 +675,7 @@ export const TEST_CASE_2 = {
       { load: 0 },
     ],
   },
-};
+} as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/277
 export const TEST_CASE_3 = {
@@ -991,7 +1002,7 @@ export const TEST_CASE_3 = {
     { brand: 'Seagate', device: 'sda', size: 1000204886016, type: 'HD' },
   ],
   output: { layout: [{ load: 336017707008 }] },
-};
+} as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/252
 export const TEST_CASE_4 = {
@@ -1297,7 +1308,7 @@ export const TEST_CASE_4 = {
     { brand: 'mmcblk0', device: 'mmcblk0', size: 31914983424, type: 'SSD' },
   ],
   output: { layout: [{ load: 17802143744 }] },
-};
+} as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/218
 export const TEST_CASE_5 = {
@@ -1815,7 +1826,7 @@ export const TEST_CASE_5 = {
     },
   ],
   output: { layout: [{ load: 957712490496 }, { load: 0 }] },
-};
+} as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/214 (1)
 export const TEST_CASE_6 = {
@@ -2025,7 +2036,7 @@ export const TEST_CASE_6 = {
   output: {
     layout: [{ load: 10733150208 }, { load: 4816718381056 }, { load: 28672 }],
   },
-};
+} as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/214 (2)
 export const TEST_CASE_7 = {
@@ -2319,7 +2330,7 @@ export const TEST_CASE_7 = {
     },
   ],
   output: { layout: [{ load: 104365518848 }] },
-};
+} as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/196
 export const TEST_CASE_8 = {
@@ -2446,7 +2457,7 @@ export const TEST_CASE_8 = {
     { brand: 'vdb', device: 'vdb', size: 485376, type: 'HDD' },
   ],
   output: { layout: [{ load: 0 }, { load: 17542520832 }] },
-};
+} as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/188
 export const TEST_CASE_9 = {
@@ -2973,7 +2984,7 @@ export const TEST_CASE_9 = {
     },
   ],
   output: { layout: [{ load: 1040577499136 }, { load: 0 }] },
-};
+} as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/182
 export const TEST_CASE_10 = {
@@ -3349,4 +3360,398 @@ export const TEST_CASE_10 = {
     },
   ],
   output: { layout: [{ load: 76902424576 }, { load: 225562624 }] },
-};
+} as any as TestCase;
+
+export const TEST_CASE_11 = {
+  disks: [
+    {
+      device: '/dev/sda',
+      type: 'SSD',
+      name: 'OCZ-VERTEX3     ',
+      vendor: 'ATA',
+      size: 90028302336,
+      bytesPerSector: null,
+      totalCylinders: null,
+      totalHeads: null,
+      totalSectors: null,
+      totalTracks: null,
+      tracksPerCylinder: null,
+      sectorsPerTrack: null,
+      firmwareRevision: '2.22',
+      serialNum: '',
+      interfaceType: 'SATA',
+      smartStatus: 'unknown',
+      temperature: null,
+    },
+    {
+      device: '/dev/sdb',
+      type: 'HD',
+      name: 'ST4000DM004-2CV1',
+      vendor: 'Seagate',
+      size: 4000787030016,
+      bytesPerSector: null,
+      totalCylinders: null,
+      totalHeads: null,
+      totalSectors: null,
+      totalTracks: null,
+      tracksPerCylinder: null,
+      sectorsPerTrack: null,
+      firmwareRevision: '0001',
+      serialNum: '',
+      interfaceType: 'SATA',
+      smartStatus: 'unknown',
+      temperature: null,
+    },
+    {
+      device: '/dev/sdc',
+      type: 'HD',
+      name: 'ST4000DM004-2CV1',
+      vendor: 'Seagate',
+      size: 4000787030016,
+      bytesPerSector: null,
+      totalCylinders: null,
+      totalHeads: null,
+      totalSectors: null,
+      totalTracks: null,
+      tracksPerCylinder: null,
+      sectorsPerTrack: null,
+      firmwareRevision: '0001',
+      serialNum: '',
+      interfaceType: 'SATA',
+      smartStatus: 'unknown',
+      temperature: null,
+    },
+    {
+      device: '/dev/sdd',
+      type: 'SSD',
+      name: 'ADATA SU800     ',
+      vendor: 'ATA',
+      size: 512110190592,
+      bytesPerSector: null,
+      totalCylinders: null,
+      totalHeads: null,
+      totalSectors: null,
+      totalTracks: null,
+      tracksPerCylinder: null,
+      sectorsPerTrack: null,
+      firmwareRevision: '1A',
+      serialNum: '',
+      interfaceType: 'SATA',
+      smartStatus: 'unknown',
+      temperature: null,
+    },
+    {
+      device: '/dev/sde',
+      type: 'SSD',
+      name: 'ADATA SU800     ',
+      vendor: 'ATA',
+      size: 512110190592,
+      bytesPerSector: null,
+      totalCylinders: null,
+      totalHeads: null,
+      totalSectors: null,
+      totalTracks: null,
+      tracksPerCylinder: null,
+      sectorsPerTrack: null,
+      firmwareRevision: '7ANR',
+      serialNum: '',
+      interfaceType: 'SATA',
+      smartStatus: 'unknown',
+      temperature: null,
+    },
+    {
+      device: '/dev/sdf',
+      type: 'HD',
+      name: 'DataTraveler 3.0',
+      vendor: 'Kingston',
+      size: 61991813632,
+      bytesPerSector: null,
+      totalCylinders: null,
+      totalHeads: null,
+      totalSectors: null,
+      totalTracks: null,
+      tracksPerCylinder: null,
+      sectorsPerTrack: null,
+      firmwareRevision: '0000',
+      serialNum: '',
+      interfaceType: 'USB',
+      smartStatus: 'unknown',
+      temperature: null,
+    },
+  ],
+  sizes: [
+    {
+      fs: 'overlay',
+      type: 'overlay',
+      size: 71289790464,
+      used: 12009525248,
+      available: 55614865408,
+      use: 17.76,
+      mount: '/',
+    },
+    {
+      fs: '/dev/sda1',
+      type: 'ext4',
+      size: 71289790464,
+      used: 12009525248,
+      available: 55614865408,
+      use: 17.76,
+      mount: '/mnt/host',
+    },
+    {
+      fs: '/dev/md1',
+      type: 'ext4',
+      size: 1006691278848,
+      used: 880640,
+      available: 1006673620992,
+      use: 0,
+      mount:
+        '/mnt/host/srv/dev-disk-by-uuid-c341fe26-6494-4e16-a530-4dc06e3c904f',
+    },
+    {
+      fs: '/dev/sdf1',
+      type: 'ext4',
+      size: 60749164544,
+      used: 3735523328,
+      available: 56996864000,
+      use: 6.15,
+      mount:
+        '/mnt/host/srv/dev-disk-by-uuid-2422de0a-b36f-45dc-8999-edc746fb7499',
+    },
+    {
+      fs: '/dev/md0',
+      type: 'ext4',
+      size: 3936780869632,
+      used: 1383350038528,
+      available: 2553414053888,
+      use: 35.14,
+      mount: '/mnt/host/srv/dev-disk-by-label-Array',
+    },
+  ],
+  blocks: [
+    {
+      name: 'sda',
+      type: 'disk',
+      fsType: '',
+      mount: '',
+      size: 90028302336,
+      physical: 'SSD',
+      uuid: '',
+      label: '',
+      model: 'OCZ-VERTEX3     ',
+      serial: '',
+      removable: false,
+      protocol: 'sata',
+      group: undefined,
+    },
+    {
+      name: 'sdb',
+      type: 'disk',
+      fsType: 'linux_raid_member',
+      mount: '',
+      size: 4000787030016,
+      physical: 'HDD',
+      uuid: '70112d0e-8e45-9502-d1af-2eaaa608f693',
+      label: 'Joe:mirrored',
+      model: 'ST4000DM004-2CV1',
+      serial: '',
+      removable: false,
+      protocol: 'sata',
+      group: undefined,
+    },
+    {
+      name: 'sdc',
+      type: 'disk',
+      fsType: 'linux_raid_member',
+      mount: '',
+      size: 4000787030016,
+      physical: 'HDD',
+      uuid: '70112d0e-8e45-9502-d1af-2eaaa608f693',
+      label: 'Joe:mirrored',
+      model: 'ST4000DM004-2CV1',
+      serial: '',
+      removable: false,
+      protocol: 'sata',
+      group: undefined,
+    },
+    {
+      name: 'sdd',
+      type: 'disk',
+      fsType: 'linux_raid_member',
+      mount: '',
+      size: 512110190592,
+      physical: 'SSD',
+      uuid: 'ff12ce61-fdd1-920f-fd01-6eb8c668b47a',
+      label: 'Joe:1',
+      model: 'ADATA SU800     ',
+      serial: '',
+      removable: false,
+      protocol: 'sata',
+      group: undefined,
+    },
+    {
+      name: 'sde',
+      type: 'disk',
+      fsType: 'linux_raid_member',
+      mount: '',
+      size: 512110190592,
+      physical: 'SSD',
+      uuid: 'ff12ce61-fdd1-920f-fd01-6eb8c668b47a',
+      label: 'Joe:1',
+      model: 'ADATA SU800     ',
+      serial: '',
+      removable: false,
+      protocol: 'sata',
+      group: undefined,
+    },
+    {
+      name: 'sdf',
+      type: 'disk',
+      fsType: '',
+      mount: '',
+      size: 61991813632,
+      physical: 'HDD',
+      uuid: '',
+      label: '',
+      model: 'DataTraveler 3.0',
+      serial: '',
+      removable: true,
+      protocol: 'usb',
+      group: undefined,
+    },
+    {
+      name: 'sda1',
+      type: 'part',
+      fsType: 'ext4',
+      mount: '/mnt/host',
+      size: 72972500992,
+      physical: '',
+      uuid: '5bcd72c3-1606-4997-9ee3-6f1f088d13ed',
+      label: '',
+      model: '',
+      serial: '',
+      removable: false,
+      protocol: '',
+      group: undefined,
+    },
+    {
+      name: 'sda2',
+      type: 'part',
+      fsType: '',
+      mount: '',
+      size: 1024,
+      physical: '',
+      uuid: '',
+      label: '',
+      model: '',
+      serial: '',
+      removable: false,
+      protocol: '',
+      group: undefined,
+    },
+    {
+      name: 'sda5',
+      type: 'part',
+      fsType: 'swap',
+      mount: '[SWAP]',
+      size: 17052991488,
+      physical: '',
+      uuid: '51a5ff2c-2222-4c39-9188-87fc1b6d20ee',
+      label: '',
+      model: '',
+      serial: '',
+      removable: false,
+      protocol: '',
+      group: undefined,
+    },
+    {
+      name: 'sdf1',
+      type: 'part',
+      fsType: 'ext4',
+      mount:
+        '/mnt/host/srv/dev-disk-by-uuid-2422de0a-b36f-45dc-8999-edc746fb7499',
+      size: 61990748160,
+      physical: '',
+      uuid: '2422de0a-b36f-45dc-8999-edc746fb7499',
+      label: 'kingston',
+      model: '',
+      serial: '',
+      removable: true,
+      protocol: '',
+      group: undefined,
+    },
+    {
+      name: 'md1',
+      type: 'raid0',
+      fsType: 'ext4',
+      mount:
+        '/mnt/host/srv/dev-disk-by-uuid-c341fe26-6494-4e16-a530-4dc06e3c904f',
+      size: 1023949144064,
+      physical: '',
+      uuid: 'c341fe26-6494-4e16-a530-4dc06e3c904f',
+      label: '',
+      model: '',
+      serial: '',
+      removable: false,
+      protocol: '',
+      group: undefined,
+    },
+    {
+      name: 'md0',
+      type: 'raid1',
+      fsType: 'ext4',
+      mount: '/mnt/host/srv/dev-disk-by-label-Array',
+      size: 4000652787712,
+      physical: '',
+      uuid: 'a144c5d0-11e0-4889-94ff-74748b02777d',
+      label: 'Array',
+      model: '',
+      serial: '',
+      removable: false,
+      protocol: '',
+      group: undefined,
+    },
+  ],
+  layout: [
+    { brand: 'ATA', device: 'sda', size: 90028302336, type: 'SSD' },
+    {
+      brand: 'Seagate',
+      device: 'sdb',
+      raidGroup: 'Joe:mirrored',
+      size: 4000787030016,
+      type: 'HD',
+    },
+    {
+      brand: 'Seagate',
+      device: 'sdc',
+      raidGroup: 'Joe:mirrored',
+      size: 4000787030016,
+      type: 'HD',
+    },
+    {
+      brand: 'ATA',
+      device: 'sdd',
+      raidGroup: 'Joe:1',
+      size: 512110190592,
+      type: 'SSD',
+    },
+    {
+      brand: 'ATA',
+      device: 'sde',
+      raidGroup: 'Joe:1',
+      size: 512110190592,
+      type: 'SSD',
+    },
+    { brand: 'Kingston', device: 'sdf', size: 61991813632, type: 'HD' },
+  ],
+  output: {
+    layout: [
+      { load: 12009525248 },
+      { load: 0 },
+      { load: 0 },
+      { load: 0 },
+      { load: 0 },
+      { load: 3735523328 },
+    ],
+  },
+} as any as TestCase;

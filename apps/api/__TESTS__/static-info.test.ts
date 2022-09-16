@@ -1,8 +1,10 @@
 import { expect } from 'chai';
 import { mapToStorageLayout } from '../src/static-info';
 import {
+  TestCase,
   TEST_CASE_1,
   TEST_CASE_10,
+  TEST_CASE_11,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -13,7 +15,7 @@ import {
   TEST_CASE_9,
 } from './test-cases';
 
-const toStorageInp = (inp: { disks: any; blocks: any; sizes: any }) =>
+const toStorageInp = (inp: TestCase) =>
   [inp.disks, inp.blocks, inp.sizes] as const;
 
 describe('Static Info', () => {
@@ -57,6 +59,10 @@ describe('Static Info', () => {
     it('Test Case 10', () => {
       const output = mapToStorageLayout(...toStorageInp(TEST_CASE_10));
       expect(output).to.deep.equal(TEST_CASE_10.layout);
+    });
+    it('Test Case 11', () => {
+      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_11));
+      expect(output).to.deep.equal(TEST_CASE_11.layout);
     });
   });
 });
