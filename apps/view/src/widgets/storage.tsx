@@ -31,6 +31,18 @@ const itemVariants: Variants = {
   },
 };
 
+const removeDuplicates = (arr: string[]): string => {
+  const amounts: Record<string, number> = {};
+  for (const el of arr) {
+    if (amounts[el]) amounts[el] = amounts[el] + 1;
+    else amounts[el] = 1;
+  }
+
+  return Object.entries(amounts)
+    .map(([key, val]) => (val === 1 ? key : `${val}x ${key}`))
+    .join(', ');
+};
+
 const useStorageLayout = (data: StorageInfo, config: Config) => {
   const override = config.override;
 
@@ -114,10 +126,11 @@ export const StorageChart: FC<StorageChartProps> = ({
   );
   const totalUsed = totalSize - totalAvailable;
 
+  let alreadyAdded = 0;
   const usageArr = layout
     .reduce(
-      (acc, curr, i) => {
-        const diskLoad = load?.layout[i]?.load ?? 0;
+      (acc, curr) => {
+        const diskLoad = load?.layout[alreadyAdded]?.load ?? 0;
         const diskSize = curr.size;
 
         const existing = acc.find(
@@ -136,6 +149,7 @@ export const StorageChart: FC<StorageChartProps> = ({
           });
         }
 
+        alreadyAdded += curr.brands.length;
         return acc;
       },
       [] as {
@@ -290,7 +304,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   const infos = useMemo(() => {
     if (layout.length > 1) {
       return layout.map(s => {
-        const brand = s.brands.map((b, i) => `${b} ${s.types[i]}`).join(', ');
+        const brand = removeDuplicates(
+          s.brands.map((b, i) => `${b} ${s.types[i]}`)
+        );
         const size = s.size;
         const raidGroup = s.raidGroup;
 
