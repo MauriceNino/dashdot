@@ -130,7 +130,11 @@ export const StorageChart: FC<StorageChartProps> = ({
   const usageArr = layout
     .reduce(
       (acc, curr) => {
-        const diskLoad = load?.layout[alreadyAdded]?.load ?? 0;
+        const diskLoad = curr.brands.reduce(
+          (acc, _, i) =>
+            acc === 0 ? load?.layout[alreadyAdded + i]?.load ?? 0 : acc,
+          0
+        );
         const diskSize = curr.size;
 
         const existing = acc.find(
