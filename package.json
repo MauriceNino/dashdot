@@ -103,7 +103,7 @@
     "@types/chai": "4.3.3",
     "@types/cors": "2.8.12",
     "@types/express": "4.17.14",
-    "@types/jest": "29.0.2",
+    "@types/jest": "29.0.3",
     "@types/node": "17.0.38",
     "@types/qs": "6.9.7",
     "@types/react": "18.0.20",
