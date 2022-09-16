@@ -98,17 +98,30 @@ export const mapToStorageOutput = (
           layout.length === 1;
 
         if (explicitHost || !potentialHost) {
-          if (explicitHost) {
-            hostFound = true;
-          }
-
-          return deviceParts.reduce(
+          const deviceSizes = deviceParts.reduce(
             (acc, curr) =>
               acc +
               (validMounts.find(({ mount }) => curr.mount === mount)?.used ??
                 0),
             0
           );
+
+          if (explicitHost) {
+            hostFound = true;
+
+            const hasNoExplicitMount = !deviceParts.some(
+              d => d.mount === '/mnt/host'
+            );
+            return (
+              deviceSizes +
+              (hasNoExplicitMount
+                ? validMounts.find(({ mount }) => mount === '/mnt/host')
+                    ?.used ?? 0
+                : 0)
+            );
+          }
+
+          return deviceSizes;
         }
 
         // Apply all unclaimed partitions to the host disk
