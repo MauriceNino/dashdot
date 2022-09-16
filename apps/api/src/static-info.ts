@@ -137,9 +137,22 @@ export const mapToStorageLayout = (
       };
 
       if (diskRaidMem.length > 0) {
-        const label = diskRaidMem[0].label.includes(':')
-          ? diskRaidMem[0].label.split(':')[0]
-          : diskRaidMem[0].label;
+        const isSplit = diskRaidMem[0].label.includes(':');
+
+        let label: string;
+        if (isSplit) {
+          const splitLabel = diskRaidMem[0].label.split(':')[0];
+          const hasUniqueName = !raidMembers.some(member => {
+            const startSame = member.label.split(':')[0] === splitLabel;
+            const isSame = member.label === diskRaidMem[0].label;
+
+            return startSame && !isSame;
+          });
+          label = hasUniqueName ? splitLabel : diskRaidMem[0].label;
+        } else {
+          label = diskRaidMem[0].label;
+        }
+
         return {
           device: device,
           brand: nativeDisk.vendor,
