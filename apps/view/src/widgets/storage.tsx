@@ -1,8 +1,8 @@
 import { Config, StorageInfo, StorageLoad } from '@dash/common';
 import { faHdd } from '@fortawesome/free-solid-svg-icons';
 import { Variants } from 'framer-motion';
-import { FC, useMemo } from 'react';
-import { Bar, Cell } from 'recharts';
+import { FC, useMemo, useState } from 'react';
+import { Bar, Cell, LabelList } from 'recharts';
 import { useTheme } from 'styled-components';
 import {
   DefaultPieChart,
@@ -29,6 +29,18 @@ const itemVariants: Variants = {
     opacity: 1,
     scale: 1,
   },
+};
+
+const removeDuplicates = (arr: string[]): string => {
+  const amounts: Record<string, number> = {};
+  for (const el of arr) {
+    if (amounts[el]) amounts[el] = amounts[el] + 1;
+    else amounts[el] = 1;
+  }
+
+  return Object.entries(amounts)
+    .map(([key, val]) => (val === 1 ? key : `${val}x ${key}`))
+    .join(', ');
 };
 
 const useStorageLayout = (data: StorageInfo, config: Config) => {
@@ -85,6 +97,7 @@ const useStorageLayout = (data: StorageInfo, config: Config) => {
 
 type StorageChartProps = {
   load?: StorageLoad;
+  index: number;
   data: StorageInfo;
   config: Config;
   multiView: boolean;
@@ -92,11 +105,13 @@ type StorageChartProps = {
 };
 export const StorageChart: FC<StorageChartProps> = ({
   load,
+  index,
   data,
   config,
   multiView,
   showPercentages,
 }) => {
+  const isMobile = useIsMobile();
   const theme = useTheme();
   const layout = useStorageLayout(data, config);
   const layoutNoVirtual = layout.filter(l => !l.virtual);
@@ -114,10 +129,15 @@ export const StorageChart: FC<StorageChartProps> = ({
   );
   const totalUsed = totalSize - totalAvailable;
 
+  let alreadyAdded = 0;
   const usageArr = layout
     .reduce(
-      (acc, curr, i) => {
-        const diskLoad = load?.layout[i]?.load ?? 0;
+      (acc, curr) => {
+        const diskLoad = curr.brands.reduce(
+          (acc, _, i) =>
+            acc === 0 ? load?.layout[alreadyAdded + i]?.load ?? 0 : acc,
+          0
+        );
         const diskSize = curr.size;
 
         const existing = acc.find(
@@ -136,6 +156,7 @@ export const StorageChart: FC<StorageChartProps> = ({
           });
         }
 
+        alreadyAdded += curr.brands.length;
         return acc;
       },
       [] as {
@@ -169,7 +190,7 @@ export const StorageChart: FC<StorageChartProps> = ({
             <DefaultVertBarChart
               width={size.width}
               height={size.height}
-              data={usageArr}
+              data={usageArr.slice(index * 3, index * 3 + 3)}
               tooltipRenderer={x => {
                 const value = x.payload?.[0]?.payload as
                   | typeof usageArr[0]
@@ -197,7 +218,22 @@ export const StorageChart: FC<StorageChartProps> = ({
                 fill={theme.colors.storagePrimary}
                 style={{ stroke: theme.colors.surface, strokeWidth: 4 }}
                 radius={10}
-              />
+                isAnimationActive={!config.always_show_percentages && !isMobile}
+              >
+                {(config.always_show_percentages || isMobile) && (
+                  <LabelList
+                    position='insideLeft'
+                    offset={15}
+                    dataKey='usedPercent'
+                    formatter={(value: number) =>
+                      `%: ${(value * 100).toFixed(1)}`
+                    }
+                    style={{
+                      fill: theme.colors.text,
+                    }}
+                  />
+                )}
+              </Bar>
               <Bar
                 dataKey='availablePercent'
                 stackId='stack'
@@ -281,6 +317,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useIsMobile();
+  const [page, setPage] = useState(0);
   const layout = useStorageLayout(data, config).filter(s => !s.virtual);
 
   const [splitView, setSplitView] = useSetting('splitStorage', false);
@@ -290,7 +327,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   const infos = useMemo(() => {
     if (layout.length > 1) {
       return layout.map(s => {
-        const brand = s.brands.map((b, i) => `${b} ${s.types[i]}`).join(', ');
+        const brand = removeDuplicates(
+          s.brands.map((b, i) => `${b} ${s.types[i]}`)
+        );
         const size = s.size;
         const raidGroup = s.raidGroup;
 
@@ -353,10 +392,12 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
           />
         ) : undefined
       }
+      onPageChange={setPage}
     >
       <StorageChart
         showPercentages={config.always_show_percentages || isMobile}
         load={load}
+        index={page}
         config={config}
         data={data}
         multiView={canHaveSplitView && splitView}

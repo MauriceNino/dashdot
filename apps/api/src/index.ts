@@ -1,4 +1,3 @@
-import { loadCommons } from '@dash/common';
 import * as cors from 'cors';
 import * as express from 'express';
 import { readFileSync } from 'fs';
@@ -182,4 +181,3 @@ server.listen(CONFIG.port, async () => {
 });
 
 server.on('error', console.error);
-loadCommons();

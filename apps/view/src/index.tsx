@@ -1,4 +1,3 @@
-import { loadCommons } from '@dash/common';
 import 'antd/dist/antd.variable.min.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
@@ -14,4 +13,3 @@ root.render(
 );
 
 reportWebVitals();
-loadCommons();
