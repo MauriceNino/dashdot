@@ -119,7 +119,10 @@ export const mapToStorageLayout = (
 ) => {
   const raidMembers = blocks.filter(block => block.fsType.endsWith('_member'));
   const blockDisks = blocks.filter(
-    block => block.type === 'disk' && block.size > 0
+    block =>
+      block.type === 'disk' &&
+      block.size > 0 &&
+      !CONFIG.fs_device_filter.includes(block.name)
   );
 
   const blockLayout = blockDisks

@@ -102,6 +102,37 @@ If dash. detects the wrong gateway as your default interface, you can provide a 
 - type: `string`
 - default: `unset`
 
+### `DASHDOT_FS_DEVICE_FILTER`
+
+To hide specific drives, you can pass the device names as a string list using this parameter.
+If you don't know the device names of your drives, have a look at the log of dash. and look for the `Static Server Info -> storage` output.
+
+```js
+storage: {
+  layout: [
+    {
+      // highlight-next-line
+      device: 'nvme0n1',
+      brand: 'Samsung',
+      size: 500107862016,
+      type: 'NVMe',
+      raidGroup: '',
+    },
+    {
+      // highlight-next-line
+      device: 'sda',
+      brand: 'DELL',
+      size: 4000225165312,
+      type: 'HD',
+      raidGroup: '',
+    },
+  ];
+}
+```
+
+- type: `string (comma separated list)`
+- default: `unset`
+
 ### `DASHDOT_FS_TYPE_FILTER`
 
 If dash. detects network drives as internal drives, you can provide a list of ignored FS types here.
