@@ -1,3 +1,4 @@
+import { clamp } from '@dash/common';
 import { motion } from 'framer-motion';
 import { FC, useMemo, useRef, useState } from 'react';
 import {
@@ -246,7 +247,7 @@ export const DefaultVertBarChart: FC<DefaultVertBarChartProps> = ({
   children,
   tooltipRenderer,
 }) => {
-  const barSize = Math.min(Math.max(height / data.length - 20, 20), 50);
+  const barSize = clamp(height / data.length - 20, 40, 60);
   const gap = (data.length - 1) * 10;
   const allBars = barSize * data.length;
   const margin = (height - gap - allBars) / 2;
@@ -259,7 +260,7 @@ export const DefaultVertBarChart: FC<DefaultVertBarChartProps> = ({
       layout={'vertical'}
       margin={{
         top: margin,
-        bottom: margin,
+        bottom: data.length === 1 ? margin / 2 : margin,
         right: 20,
         left: 20,
       }}
