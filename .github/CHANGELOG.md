@@ -1,3 +1,19 @@
+# [4.5.0](https://github.com/MauriceNino/dashdot/compare/v4.4.0...v4.5.0) (2022-09-17)
+
+
+### Bug Fixes
+
+* **api:** bad group matching when raid labels have different endings ([db8d49f](https://github.com/MauriceNino/dashdot/commit/db8d49f1d790993f2ad49a9572fb2df9288f3183)), closes [#295](https://github.com/MauriceNino/dashdot/issues/295)
+* **api:** error when host drive partition has no correct host mount ([1e49d4c](https://github.com/MauriceNino/dashdot/commit/1e49d4c4941b5c052abf77233c1e7f255c5eff58)), closes [#369](https://github.com/MauriceNino/dashdot/issues/369)
+* **api:** storage widget not working on from source installation ([0ab0f66](https://github.com/MauriceNino/dashdot/commit/0ab0f663e30a88990cdec76511b5ee8d9d008f2e))
+* **view:** drive not picking correct sizes in raid mode ([8bfc576](https://github.com/MauriceNino/dashdot/commit/8bfc57608d5b6c57aad4a58310427c53e4c597c7)), closes [#295](https://github.com/MauriceNino/dashdot/issues/295)
+
+
+### Features
+
+* **api:** add option to filter storage devices by name ([5eb6efb](https://github.com/MauriceNino/dashdot/commit/5eb6efb77fba59144722cb83e410523785fa290f)), closes [#314](https://github.com/MauriceNino/dashdot/issues/314)
+* **view:** add percentage labels to storage split view ([718eb6b](https://github.com/MauriceNino/dashdot/commit/718eb6beafc0cfb9b41f2e5693d531df32c8729d)), closes [#370](https://github.com/MauriceNino/dashdot/issues/370)
+
 # [4.4.0](https://github.com/MauriceNino/dashdot/compare/v4.3.10...v4.4.0) (2022-08-28)
 
 
