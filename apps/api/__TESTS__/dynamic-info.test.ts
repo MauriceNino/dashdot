@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { CONFIG } from '../src/config';
 import { mapToStorageOutput } from '../src/dynamic-info';
 import {
   TestCase,
@@ -19,6 +20,10 @@ import {
 
 const toStorageInp = (inp: TestCase) =>
   [inp.layout, inp.blocks, inp.sizes] as const;
+
+beforeEach(() => {
+  CONFIG.running_in_docker = true;
+});
 
 describe('Dynamic Info', () => {
   describe('Storage', () => {
@@ -71,6 +76,7 @@ describe('Dynamic Info', () => {
       expect(output).to.deep.equal(TEST_CASE_12.output);
     });
     it('Test Case 13', () => {
+      CONFIG.running_in_docker = false;
       const output = mapToStorageOutput(...toStorageInp(TEST_CASE_13));
       expect(output).to.deep.equal(TEST_CASE_13.output);
     });

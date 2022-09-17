@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { CONFIG } from '../src/config';
 import { mapToStorageLayout } from '../src/static-info';
 import {
   TestCase,
@@ -19,6 +20,10 @@ import {
 
 const toStorageInp = (inp: TestCase) =>
   [inp.disks, inp.blocks, inp.sizes] as const;
+
+beforeEach(() => {
+  CONFIG.running_in_docker = true;
+});
 
 describe('Static Info', () => {
   describe('Storage', () => {
@@ -71,8 +76,9 @@ describe('Static Info', () => {
       expect(output).to.deep.equal(TEST_CASE_12.layout);
     });
     it('Test Case 13', () => {
+      CONFIG.running_in_docker = false;
       const output = mapToStorageLayout(...toStorageInp(TEST_CASE_13));
-      expect(output).to.deep.equal(TEST_CASE_12.layout);
+      expect(output).to.deep.equal(TEST_CASE_13.layout);
     });
   });
 });
