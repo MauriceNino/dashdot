@@ -87,6 +87,7 @@ export type Config = {
   running_in_docker: boolean;
   use_network_interface: string;
   accept_ookla_eula: boolean;
+  fs_device_filter: string[];
   fs_type_filter: string[];
   fs_virtual_mounts: string[];
   disable_integrations: boolean;
