@@ -7,6 +7,7 @@ import { useTheme } from 'styled-components';
 import {
   DefaultPieChart,
   DefaultVertBarChart,
+  VertBarStartLabel,
 } from '../components/chart-components';
 import {
   ChartContainer,
@@ -225,12 +226,13 @@ export const StorageChart: FC<StorageChartProps> = ({
                     position='insideLeft'
                     offset={15}
                     dataKey='usedPercent'
-                    formatter={(value: number) =>
-                      `%: ${(value * 100).toFixed(1)}`
+                    content={
+                      <VertBarStartLabel
+                        labelRenderer={value =>
+                          `%: ${(value * 100).toFixed(1)}`
+                        }
+                      />
                     }
-                    style={{
-                      fill: theme.colors.text,
-                    }}
                   />
                 )}
               </Bar>
