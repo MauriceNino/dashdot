@@ -176,11 +176,13 @@ steps:
       status:
         - failure
         - success
+    failure: ignore
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
       - docker logout
+      - docker image rm $(docker images -f "dangling=true" | grep 'mauricenino/dashdot') || true
 
 volumes:
   - name: dockersock
@@ -200,4 +202,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: f8e0c0188ca3025fbc9306917b05d45a5a0a10cb1c799fa0be40f7ecdac33dca
+hmac: fb8e06b4c73d6feb3772cb8d36533c90e3f0220da5151e8d4a8d006d03b7039c
