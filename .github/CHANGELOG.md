@@ -1,3 +1,10 @@
+## [4.5.2](https://github.com/MauriceNino/dashdot/compare/v4.5.1...v4.5.2) (2022-09-18)
+
+
+### Bug Fixes
+
+* **view:** storage multi-view sizing + text ([afb66c4](https://github.com/MauriceNino/dashdot/commit/afb66c4801e68076ad4562ba67636f05120f9e9a))
+
 ## [4.5.1](https://github.com/MauriceNino/dashdot/compare/v4.5.0...v4.5.1) (2022-09-18)
 
 
