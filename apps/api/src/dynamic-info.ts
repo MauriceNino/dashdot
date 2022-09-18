@@ -189,13 +189,11 @@ export const getDynamicServerInfo = () => {
     1,
     CONFIG.storage_poll_interval,
     async (): Promise<StorageLoad> => {
-      const [layout, blocks, sizes] = await Promise.all([
-        getStaticServerInfo(),
+      const storageLayout = getStaticServerInfo().storage.layout;
+      const [blocks, sizes] = await Promise.all([
         si.blockDevices(),
         si.fsSize(),
       ]);
-
-      const storageLayout = layout.storage.layout;
 
       return mapToStorageOutput(storageLayout, blocks, sizes);
     }
