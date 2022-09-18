@@ -112,7 +112,6 @@ export const StorageChart: FC<StorageChartProps> = ({
   multiView,
   showPercentages,
 }) => {
-  const isMobile = useIsMobile();
   const theme = useTheme();
   const layout = useStorageLayout(data, config);
   const layoutNoVirtual = layout.filter(l => !l.virtual);
@@ -191,7 +190,11 @@ export const StorageChart: FC<StorageChartProps> = ({
             <DefaultVertBarChart
               width={size.width}
               height={size.height}
-              data={index ? usageArr.slice(index * 3, index * 3 + 3) : usageArr}
+              data={
+                index != null
+                  ? usageArr.slice(index * 3, index * 3 + 3)
+                  : usageArr
+              }
               tooltipRenderer={x => {
                 const value = x.payload?.[0]?.payload as
                   | typeof usageArr[0]
@@ -219,9 +222,9 @@ export const StorageChart: FC<StorageChartProps> = ({
                 fill={theme.colors.storagePrimary}
                 style={{ stroke: theme.colors.surface, strokeWidth: 4 }}
                 radius={10}
-                isAnimationActive={!config.always_show_percentages && !isMobile}
+                isAnimationActive={!showPercentages}
               >
-                {(config.always_show_percentages || isMobile) && (
+                {showPercentages && (
                   <LabelList
                     position='insideLeft'
                     offset={15}

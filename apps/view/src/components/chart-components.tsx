@@ -273,7 +273,7 @@ export const DefaultVertBarChart: FC<DefaultVertBarChartProps> = ({
   children,
   tooltipRenderer,
 }) => {
-  const barSize = clamp(height / data.length - 20, 40, 60);
+  const barSize = clamp(height / data.length - 20, 10, 60);
   const gap = (data.length - 1) * 10;
   const allBars = barSize * data.length;
   const margin = (height - gap - allBars) / 2;
