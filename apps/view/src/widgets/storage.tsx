@@ -97,7 +97,7 @@ const useStorageLayout = (data: StorageInfo, config: Config) => {
 
 type StorageChartProps = {
   load?: StorageLoad;
-  index: number;
+  index?: number;
   data: StorageInfo;
   config: Config;
   multiView: boolean;
@@ -190,7 +190,7 @@ export const StorageChart: FC<StorageChartProps> = ({
             <DefaultVertBarChart
               width={size.width}
               height={size.height}
-              data={usageArr.slice(index * 3, index * 3 + 3)}
+              data={index ? usageArr.slice(index * 3, index * 3 + 3) : usageArr}
               tooltipRenderer={x => {
                 const value = x.payload?.[0]?.payload as
                   | typeof usageArr[0]
