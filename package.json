@@ -63,7 +63,7 @@
     "react-virtualized-auto-sizer": "1.0.7",
     "recharts": "2.1.14",
     "regenerator-runtime": "0.13.9",
-    "rxjs": "7.5.6",
+    "rxjs": "7.5.7",
     "sass": "1.54.9",
     "socket.io": "4.5.2",
     "socket.io-client": "4.5.2",
