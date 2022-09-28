@@ -68,7 +68,7 @@
     "socket.io": "4.5.2",
     "socket.io-client": "4.5.2",
     "store": "2.0.12",
-    "styled-components": "5.3.5",
+    "styled-components": "5.3.6",
     "systeminformation": "5.12.6",
     "throttle-debounce": "5.0.0",
     "tslib": "2.4.0",
