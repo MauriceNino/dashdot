@@ -79,7 +79,7 @@
     "yargs": "17.5.1"
   },
   "devDependencies": {
-    "@babel/core": "7.19.1",
+    "@babel/core": "7.19.3",
     "@commitlint/cli": "17.1.2",
     "@commitlint/config-conventional": "17.1.0",
     "@commitlint/cz-commitlint": "17.1.2",
