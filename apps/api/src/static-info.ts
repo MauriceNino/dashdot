@@ -308,7 +308,7 @@ export const runSpeedTest = async (): Promise<string> => {
     });
   } else if (await commandExists('speedtest-cli')) {
     usedRunner = 'speedtest-cli';
-    const { stdout } = await exec('speedtest-cli --json');
+    const { stdout } = await exec('speedtest-cli --json --secure');
     const json = JSON.parse(stdout);
 
     STATIC_INFO.next({
