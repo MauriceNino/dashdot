@@ -11322,7 +11322,7 @@ __metadata:
     recharts: 2.1.14
     regenerator-runtime: 0.13.9
     rxjs: 7.5.7
-    sass: 1.54.9
+    sass: 1.56.1
     semantic-release-plus: 20.0.0
     socket.io: 4.5.2
     socket.io-client: 4.5.2
@@ -22086,16 +22086,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.54.9":
-  version: 1.54.9
-  resolution: "sass@npm:1.54.9"
+"sass@npm:1.56.1":
+  version: 1.56.1
+  resolution: "sass@npm:1.56.1"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 90182b566072b48e2263c5a87229ab85164e13b71b24847ba76a8e68eb952cb69a7dcef815f4ccc0189dd2d0c254311acff6972166603338d33bbc96f6d500c6
+  checksum: 78e693e5992b149574c95d5adfe39ca3e5b97d80befa11191a20d1daa41fe201a98ac099beab726cd3095e2d2e7991a2c408ba0fcc3fa9f525879de7eee18dad
   languageName: node
   linkType: hard
 
