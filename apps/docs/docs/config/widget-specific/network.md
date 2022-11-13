@@ -3,9 +3,14 @@ sidebar_position: 5
 tags:
   - Configuration
   - Styles
+title: Network
 ---
 
+<!-- markdownlint-disable -->
+
 # Network Widget
+
+<!-- markdownlint-enable -->
 
 ## `DASHDOT_SPEED_TEST_INTERVAL`
 

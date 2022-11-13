@@ -3,9 +3,14 @@ sidebar_position: 3
 tags:
   - Configuration
   - Styles
+title: Storage
 ---
 
+<!-- markdownlint-disable -->
+
 # Storage Widget
+
+<!-- markdownlint-enable -->
 
 ## `DASHDOT_STORAGE_WIDGET_GROW`
 

@@ -3,9 +3,14 @@ sidebar_position: 6
 tags:
   - Configuration
   - Styles
+title: Graphics
 ---
 
+<!-- markdownlint-disable -->
+
 # GPU Widget
+
+<!-- markdownlint-enable -->
 
 To use the GPU widget, make sure to include it in the `DASHDOT_WIDGET_LIST`. One
 limitation with the GPU widget is that it will **only run out of the box with from

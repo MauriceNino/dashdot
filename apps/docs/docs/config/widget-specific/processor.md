@@ -3,9 +3,14 @@ sidebar_position: 2
 tags:
   - Configuration
   - Styles
+title: Processor
 ---
 
+<!-- markdownlint-disable -->
+
 # CPU Widget
+
+<!-- markdownlint-enable -->
 
 ## `DASHDOT_CPU_WIDGET_GROW`
 
