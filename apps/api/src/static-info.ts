@@ -1,9 +1,8 @@
-import { HardwareInfo, ServerInfo } from '@dash/common';
+import { HardwareInfo, removePad, ServerInfo } from '@dash/common';
 import { exec as cexec } from 'child_process';
 import * as fs from 'fs';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import * as si from 'systeminformation';
-import { SpeedUnits, UniversalSpeedtest } from 'universal-speedtest';
 import { inspect, promisify } from 'util';
 import { CONFIG } from './config';
 import { NET_INTERFACE_PATH } from './setup';
@@ -321,25 +320,14 @@ export const runSpeedTest = async (): Promise<string> => {
       },
     });
   } else {
-    usedRunner = 'universal';
-    const universalSpeedtest = new UniversalSpeedtest({
-      measureUpload: true,
-      downloadUnit: SpeedUnits.bps,
-      uploadUnit: SpeedUnits.bps,
-    });
+    throw new Error(removePad`
+      There is no speedtest module installed - please use one of the following:
+      - speedtest: https://www.speedtest.net/apps/cli
+      - speedtest-cli: https://github.com/sivel/speedtest-cli
 
-    const speed = await universalSpeedtest.runSpeedtestNet();
-
-    STATIC_INFO.next({
-      ...STATIC_INFO.getValue(),
-      network: {
-        ...STATIC_INFO.getValue().network,
-        speedDown:
-          speed.downloadSpeed ?? STATIC_INFO.getValue().network.speedDown,
-        speedUp: speed.uploadSpeed ?? STATIC_INFO.getValue().network.speedUp,
-        publicIp: speed.client.ip ?? STATIC_INFO.getValue().network.publicIp,
-      },
-    });
+      For more help on how to setup dashdot, look here:
+      https://getdashdot.com/docs/install/from-source
+    `);
   }
 
   return usedRunner;
