@@ -1,3 +1,11 @@
+## [4.5.5](https://github.com/MauriceNino/dashdot/compare/v4.5.4...v4.5.5) (2022-11-13)
+
+
+### Bug Fixes
+
+* **api:** remove broken universal-speedtest to avoid confusion ([0f5e785](https://github.com/MauriceNino/dashdot/commit/0f5e7855e2be1187e1bed7de0630370f3fb31516))
+* **view:** show virtual mounts as "disk" in widget ([0263a16](https://github.com/MauriceNino/dashdot/commit/0263a160ae10b97e7f1b2eb0e992d20e9424df99)), closes [#384](https://github.com/MauriceNino/dashdot/issues/384)
+
 ## [4.5.4](https://github.com/MauriceNino/dashdot/compare/v4.5.3...v4.5.4) (2022-11-13)
 
 
