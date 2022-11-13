@@ -1,3 +1,10 @@
+## [4.5.4](https://github.com/MauriceNino/dashdot/compare/v4.5.3...v4.5.4) (2022-11-13)
+
+
+### Bug Fixes
+
+* **speedtest-cli:** avoid speedtest DNS error ([bc0e9f5](https://github.com/MauriceNino/dashdot/commit/bc0e9f50979e7dfc09296d843c046324807a5eee))
+
 ## [4.5.3](https://github.com/MauriceNino/dashdot/compare/v4.5.2...v4.5.3) (2022-10-13)
 
 ## [4.5.2](https://github.com/MauriceNino/dashdot/compare/v4.5.1...v4.5.2) (2022-09-18)
