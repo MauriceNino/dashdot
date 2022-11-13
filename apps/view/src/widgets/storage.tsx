@@ -323,23 +323,27 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   const theme = useTheme();
   const isMobile = useIsMobile();
   const [page, setPage] = useState(0);
-  const layout = useStorageLayout(data, config).filter(s => !s.virtual);
+  const layout = useStorageLayout(data, config);
 
   const [splitView, setSplitView] = useSetting('splitStorage', false);
   const canHaveSplitView =
-    data.layout.length > 1 && config.enable_storage_split_view;
+    layout.length > 1 && config.enable_storage_split_view;
 
   const infos = useMemo(() => {
     if (layout.length > 1) {
       return layout.map(s => {
-        const brand = removeDuplicates(
-          s.brands.map((b, i) => `${b} ${s.types[i]}`)
-        );
+        const brand = s.virtual
+          ? s.brands[0]
+          : removeDuplicates(s.brands.map((b, i) => `${b} ${s.types[i]}`));
         const size = s.size;
         const raidGroup = s.raidGroup;
 
         return {
-          label: raidGroup ? `RAID\n=> ${raidGroup}` : 'Drive',
+          label: s.virtual
+            ? 'VIRT'
+            : raidGroup
+            ? `RAID\n=> ${raidGroup}`
+            : 'Drive',
           value: `${brand}\n=> ${bytePrettyPrint(size)}`,
         };
       });
