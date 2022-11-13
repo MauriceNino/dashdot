@@ -3,9 +3,14 @@ sidebar_position: 1
 tags:
   - Configuration
   - Styles
+title: Server
 ---
 
+<!-- markdownlint-disable -->
+
 # Server Widget
+
+<!-- markdownlint-enable -->
 
 ## `DASHDOT_OS_WIDGET_GROW`
 

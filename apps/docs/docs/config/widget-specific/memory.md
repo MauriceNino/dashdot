@@ -3,9 +3,14 @@ sidebar_position: 4
 tags:
   - Configuration
   - Styles
+title: Memory
 ---
 
+<!-- markdownlint-disable -->
+
 # RAM Widget
+
+<!-- markdownlint-enable -->
 
 ## `DASHDOT_RAM_WIDGET_GROW`
 
