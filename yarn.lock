@@ -11230,8 +11230,8 @@ __metadata:
     rxjs: 7.5.7
     sass: 1.56.1
     semantic-release-plus: 20.0.0
-    socket.io: 4.5.2
-    socket.io-client: 4.5.2
+    socket.io: 4.5.3
+    socket.io-client: 4.5.3
     store: 2.0.12
     styled-components: 5.3.6
     systeminformation: 5.12.6
@@ -11954,16 +11954,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"engine.io-client@npm:~6.2.1":
-  version: 6.2.2
-  resolution: "engine.io-client@npm:6.2.2"
+"engine.io-client@npm:~6.2.3":
+  version: 6.2.3
+  resolution: "engine.io-client@npm:6.2.3"
   dependencies:
     "@socket.io/component-emitter": ~3.1.0
     debug: ~4.3.1
     engine.io-parser: ~5.0.3
     ws: ~8.2.3
     xmlhttprequest-ssl: ~2.0.0
-  checksum: bda989d88d663cda5f1fbe6b235dba35b80ba9e947685b94b40d3daf4545ccdcb54232d2ad210bbe9b5e0b73b0e019b54716d1285ed300e1f1c7ad97fd6cafaf
+  checksum: c09fb6429503a4a8a599ec1c4f67f100202e6e06588b67b81d386a4ebf8e81160cf7501ad6770ffe0a04575f41868f0a4cbf330b85de3f7cd24ebcf2bf9fc660
   languageName: node
   linkType: hard
 
@@ -22315,15 +22315,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io-client@npm:4.5.2":
-  version: 4.5.2
-  resolution: "socket.io-client@npm:4.5.2"
+"socket.io-client@npm:4.5.3":
+  version: 4.5.3
+  resolution: "socket.io-client@npm:4.5.3"
   dependencies:
     "@socket.io/component-emitter": ~3.1.0
     debug: ~4.3.2
-    engine.io-client: ~6.2.1
+    engine.io-client: ~6.2.3
     socket.io-parser: ~4.2.0
-  checksum: f3196a731d7f502bcce8b54a3430485d2015d0e7d74050c1be8fa0622da0b62977719f903ec0dfb113d4be1564f6509d73f2fc257cf3972f3be877722aeabeb9
+  checksum: ebd2dbddece9e8b5926e8f20ed3d0620bdb07de70ece8fb6fa786690f543f420e2ea784a37e46ac470af3cc11f0199d9ecabd8f30eaf63c80974c3eaa7e8a9b0
   languageName: node
   linkType: hard
 
@@ -22337,9 +22337,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io@npm:4.5.2":
-  version: 4.5.2
-  resolution: "socket.io@npm:4.5.2"
+"socket.io@npm:4.5.3":
+  version: 4.5.3
+  resolution: "socket.io@npm:4.5.3"
   dependencies:
     accepts: ~1.3.4
     base64id: ~2.0.0
@@ -22347,7 +22347,7 @@ __metadata:
     engine.io: ~6.2.0
     socket.io-adapter: ~2.4.0
     socket.io-parser: ~4.2.0
-  checksum: 8527dd78fa3cf483a2cf0f09f64c4591186931b6765e5d8456dd3022b8786407952e3b931a83a86513c9f56852442e12f3497c761a113113e32b0c867c5ad5a7
+  checksum: 2a7e4c64bbebb444d211bc66fb8356c14dd0fd4138d31e1781db03fa5a731a3abb7b305fa32cb6c7b57e5ac788601583aad14bea6ff9b8c4ca7b74118ba55f66
   languageName: node
   linkType: hard
 
