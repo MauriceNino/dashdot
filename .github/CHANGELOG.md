@@ -1,3 +1,5 @@
+## [4.5.7](https://github.com/MauriceNino/dashdot/compare/v4.5.6...v4.5.7) (2022-11-17)
+
 ## [4.5.6](https://github.com/MauriceNino/dashdot/compare/v4.5.5...v4.5.6) (2022-11-13)
 
 ## [4.5.5](https://github.com/MauriceNino/dashdot/compare/v4.5.4...v4.5.5) (2022-11-13)
