@@ -11242,7 +11242,7 @@ __metadata:
     react-test-renderer: 18.2.0
     react-virtualized-auto-sizer: 1.0.7
     recharts: 2.1.16
-    regenerator-runtime: 0.13.10
+    regenerator-runtime: 0.13.11
     rxjs: 7.5.7
     sass: 1.56.1
     semantic-release-plus: 20.0.0
@@ -21235,14 +21235,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:0.13.10":
-  version: 0.13.10
-  resolution: "regenerator-runtime@npm:0.13.10"
-  checksum: 09893f5a9e82932642d9a999716b6c626dc53ef2a01307c952ebbf8e011802360163a37c304c18a6c358548be5a72b448e37209954a18696f21e438c81cbb4b9
-  languageName: node
-  linkType: hard
-
-"regenerator-runtime@npm:^0.13.10":
+"regenerator-runtime@npm:0.13.11, regenerator-runtime@npm:^0.13.10":
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
