@@ -10,6 +10,7 @@ RUN \
   apk update &&\
   apk --no-cache add \
     lsblk \
+    mdadm \
     dmidecode \
     util-linux \
     lm-sensors \
