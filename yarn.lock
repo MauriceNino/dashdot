@@ -11312,7 +11312,7 @@ __metadata:
     eslint-plugin-react: 7.31.11
     eslint-plugin-react-hooks: 4.6.0
     express: 4.18.2
-    framer-motion: 7.6.9
+    framer-motion: 7.6.10
     husky: 8.0.2
     inquirer: 8.2.4
     jest: 29.3.1
@@ -13334,9 +13334,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:7.6.9":
-  version: 7.6.9
-  resolution: "framer-motion@npm:7.6.9"
+"framer-motion@npm:7.6.10":
+  version: 7.6.10
+  resolution: "framer-motion@npm:7.6.10"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     "@motionone/dom": 10.13.1
@@ -13351,7 +13351,7 @@ __metadata:
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: db7f86add0873096cf86a4605247560f7a2ef3e8c9ff4524ec7ec7aec74129ad52cd7283c4446aba53f5de89fc8ba70fc4b78c8325ca0622083c6090834ce518
+  checksum: 02cb3954d21c6a997bac8c8e155900d41536dbb8d5064256098f9d16d2f12360d233aa578974a4a4e2ed252cddc8c044087b32f48478093b2324d9213adc8d79
   languageName: node
   linkType: hard
 
