@@ -39,7 +39,7 @@
     "@fortawesome/free-brands-svg-icons": "6.2.1",
     "@fortawesome/free-solid-svg-icons": "6.2.1",
     "@fortawesome/react-fontawesome": "0.2.0",
-    "@mantine/core": "5.8.2",
+    "@mantine/core": "5.8.3",
     "@mantine/hooks": "5.8.2",
     "@mdx-js/react": "1.6.22",
     "antd": "5.0.1",
