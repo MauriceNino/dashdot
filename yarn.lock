@@ -6599,6 +6599,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rc-component/mini-decimal@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@rc-component/mini-decimal@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.18.0
+  checksum: 2fd3f3d9c404f679461fa52372b71b1131ecad6b2a34d6b5be07b04475ed22428ffc7dac599a28734b349f7b1c5b714cf879e9c005a89430016c6d83899ff1e9
+  languageName: node
+  linkType: hard
+
 "@rc-component/portal@npm:^1.0.0-6, @rc-component/portal@npm:^1.0.0-8, @rc-component/portal@npm:^1.0.0-9, @rc-component/portal@npm:^1.0.2":
   version: 1.0.3
   resolution: "@rc-component/portal@npm:1.0.3"
@@ -8592,9 +8601,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:5.0.3":
-  version: 5.0.3
-  resolution: "antd@npm:5.0.3"
+"antd@npm:5.0.4":
+  version: 5.0.4
+  resolution: "antd@npm:5.0.4"
   dependencies:
     "@ant-design/colors": ^6.0.0
     "@ant-design/cssinjs": ^1.0.0
@@ -8616,7 +8625,7 @@ __metadata:
     rc-field-form: ~1.27.0
     rc-image: ~5.12.0
     rc-input: ~0.1.4
-    rc-input-number: ~7.3.9
+    rc-input-number: ~7.4.0
     rc-mentions: ~1.13.1
     rc-menu: ~9.8.0
     rc-motion: ^2.6.1
@@ -8639,13 +8648,13 @@ __metadata:
     rc-tree-select: ~5.5.4
     rc-trigger: ^5.2.10
     rc-upload: ~4.3.0
-    rc-util: ^5.22.5
+    rc-util: ^5.25.2
     scroll-into-view-if-needed: ^2.2.25
     shallowequal: ^1.1.0
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: ae8ef1b03c943450c93ae3746a6ca69d9cbc0849f61822391db9e5d83fdb46c6feaf4f0b22aa040100d832887a74484e21a34d91dc9939e5c1f7b48f0e007b6e
+  checksum: a32f38ece67a810da77c4f35381f70c763ea21e0921fe91b804eefc64732e95362ce19eccd6276ce497b85d1897dd03727c91a20065fe0fd203bc7060dae80d8
   languageName: node
   linkType: hard
 
@@ -11349,7 +11358,7 @@ __metadata:
     "@types/throttle-debounce": 5.0.0
     "@typescript-eslint/eslint-plugin": 5.43.0
     "@typescript-eslint/parser": 5.43.0
-    antd: 5.0.3
+    antd: 5.0.4
     axios: 1.1.3
     babel-jest: 29.3.1
     babel-plugin-styled-components: 2.0.7
@@ -20353,17 +20362,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-input-number@npm:~7.3.9":
-  version: 7.3.9
-  resolution: "rc-input-number@npm:7.3.9"
+"rc-input-number@npm:~7.4.0":
+  version: 7.4.0
+  resolution: "rc-input-number@npm:7.4.0"
   dependencies:
     "@babel/runtime": ^7.10.1
+    "@rc-component/mini-decimal": ^1.0.1
     classnames: ^2.2.5
     rc-util: ^5.23.0
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: ad5eb4e3abefcd7c1ed87dc8a7c84611325598f9fa122736bd644446415396f1b12225e8a7fef4477b028a025c4b12e46501a5719e1266781891206617fe6d24
+  checksum: 6f6a46eec6d1993ee47c9de5622276fc33f37d36ee06582cd9d7625ae83516a3e335c5bfc82950d8c9bdf603eeac7c7b25b9c1148fc2465aa3cb1f0a5f6485df
   languageName: node
   linkType: hard
 
@@ -20858,6 +20868,20 @@ __metadata:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
   checksum: 006c172fdba5de580430ed5b921a098e455d8115d020e801822731a63578749cc7fea70aaab3e40ce5947846b68c814532c924195723042d4ecaa1f19f9508e3
+  languageName: node
+  linkType: hard
+
+"rc-util@npm:^5.25.2":
+  version: 5.25.2
+  resolution: "rc-util@npm:5.25.2"
+  dependencies:
+    "@babel/runtime": ^7.18.3
+    react-is: ^16.12.0
+    shallowequal: ^1.1.0
+  peerDependencies:
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  checksum: 55b28c161705a3c24e8d27c030d69f077c7445018d5acd84f189297175d1b8c6fff50246d4f44bb048abacf5feaa93ec9ef62c504792c05afda7ee27532c9c77
   languageName: node
   linkType: hard
 
