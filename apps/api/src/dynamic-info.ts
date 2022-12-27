@@ -13,6 +13,7 @@ import { inspect, promisify } from 'util';
 import { CONFIG } from './config';
 import { NET_INTERFACE_PATH } from './setup';
 import { getStaticServerInfo, runSpeedTest } from './static-info';
+import { fromHost } from './utils';
 
 const exec = promisify(cexec);
 
@@ -58,7 +59,7 @@ export const mapToStorageOutput = (
 ) => {
   const validMounts = sizes.filter(
     ({ mount, type }) =>
-      mount.startsWith('/mnt/host') && !CONFIG.fs_type_filter.includes(type)
+      mount.startsWith(fromHost('/')) && !CONFIG.fs_type_filter.includes(type)
   );
   const hostMountUsed =
     (
@@ -87,28 +88,41 @@ export const mapToStorageOutput = (
           // drives where one of the partitions is mounted to the root or /mnt/host/boot/
           deviceParts.some(
             ({ mount }) =>
-              mount === '/mnt/host' || mount.startsWith('/mnt/host/boot/')
+              mount === fromHost('/') || mount.startsWith(fromHost('/boot/'))
           );
         const potentialHost =
           // drives that have all partitions unmounted
           deviceParts.every(
-            ({ mount }) => mount == null || !mount.startsWith('/mnt/host/')
+            ({ mount }) => mount == null || !mount.startsWith(fromHost('/'))
           ) ||
           // if there is only one drive, it has to be the host
           layout.length === 1;
 
         if (explicitHost || !potentialHost) {
-          if (explicitHost) {
-            hostFound = true;
-          }
-
-          return deviceParts.reduce(
+          const deviceSizes = deviceParts.reduce(
             (acc, curr) =>
               acc +
               (validMounts.find(({ mount }) => curr.mount === mount)?.used ??
                 0),
             0
           );
+
+          if (explicitHost) {
+            hostFound = true;
+
+            const hasNoExplicitMount = !deviceParts.some(
+              d => d.mount === fromHost('/')
+            );
+            return (
+              deviceSizes +
+              (hasNoExplicitMount
+                ? validMounts.find(({ mount }) => mount === fromHost('/'))
+                    ?.used ?? 0
+                : 0)
+            );
+          }
+
+          return deviceSizes;
         }
 
         // Apply all unclaimed partitions to the host disk
@@ -175,13 +189,11 @@ export const getDynamicServerInfo = () => {
     1,
     CONFIG.storage_poll_interval,
     async (): Promise<StorageLoad> => {
-      const [layout, blocks, sizes] = await Promise.all([
-        getStaticServerInfo(),
+      const storageLayout = getStaticServerInfo().storage.layout;
+      const [blocks, sizes] = await Promise.all([
         si.blockDevices(),
         si.fsSize(),
       ]);
-
-      const storageLayout = layout.storage.layout;
 
       return mapToStorageOutput(storageLayout, blocks, sizes);
     }

@@ -12,9 +12,9 @@ tags:
 <details>
   <summary>How can I enable the GPU Widget?</summary>
 
-You can use the [`DASHDOT_WIDGET_LIST`](./config#dashdot_widget_list) flag to add the GPU widget,
+You can use the [`DASHDOT_WIDGET_LIST`](./config/ui-features#dashdot_widget_list) flag to add the GPU widget,
 by passing a list that includes it (e.g. `os,cpu,storage,ram,network,gpu`). If you are running
-on docker though, make sure to also carefully read the [GPU Widget Options](./config/widget-options/graphics).
+on docker though, make sure to also carefully read the [GPU Widget Options](./config/widget-specific/graphics).
 
 </details>
 
@@ -23,7 +23,7 @@ on docker though, make sure to also carefully read the [GPU Widget Options](./co
 
 In earlier versions, the top-left percentage labels were on by default, but due to UX decisions, they are now
 only enabled on mobile devices. If you want to bring back the old behavior, there is the flag
-[`DASHDOT_ALWAYS_SHOW_PERCENTAGES`](./config#dashdot_always_show_percentages) for that.
+[`DASHDOT_ALWAYS_SHOW_PERCENTAGES`](./config/ui-features#dashdot_always_show_percentages) for that.
 
 </details>
 
@@ -36,7 +36,7 @@ bind mount. If you have done so, and it still does not work, please do the follo
 > Check your logs for a message like `Using network interface "xxxxx"`.
 
 **Is this the correct network interface?** If not, please find out your default interface, and pass the name
-manually, using the [`DASHDOT_USE_NETWORK_INTERFACE`](./config#dashdot_use_network_interface) flag.
+manually, using the [`DASHDOT_USE_NETWORK_INTERFACE`](./config/features#dashdot_use_network_interface) flag.
 
 If it **is** the correct network interface, please open a GitHub issue with the relevant log outputs and information.
 

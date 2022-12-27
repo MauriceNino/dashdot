@@ -1,9 +1,8 @@
-import { HardwareInfo, ServerInfo } from '@dash/common';
+import { HardwareInfo, removePad, ServerInfo } from '@dash/common';
 import { exec as cexec } from 'child_process';
 import * as fs from 'fs';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import * as si from 'systeminformation';
-import { SpeedUnits, UniversalSpeedtest } from 'universal-speedtest';
 import { inspect, promisify } from 'util';
 import { CONFIG } from './config';
 import { NET_INTERFACE_PATH } from './setup';
@@ -119,7 +118,10 @@ export const mapToStorageLayout = (
 ) => {
   const raidMembers = blocks.filter(block => block.fsType.endsWith('_member'));
   const blockDisks = blocks.filter(
-    block => block.type === 'disk' && block.size > 0
+    block =>
+      block.type === 'disk' &&
+      block.size > 0 &&
+      !CONFIG.fs_device_filter.includes(block.name)
   );
 
   const blockLayout = blockDisks
@@ -137,9 +139,22 @@ export const mapToStorageLayout = (
       };
 
       if (diskRaidMem.length > 0) {
-        const label = diskRaidMem[0].label.includes(':')
-          ? diskRaidMem[0].label.split(':')[0]
-          : diskRaidMem[0].label;
+        const isSplit = diskRaidMem[0].label.includes(':');
+
+        let label: string;
+        if (isSplit) {
+          const splitLabel = diskRaidMem[0].label.split(':')[0];
+          const hasUniqueName = !raidMembers.some(member => {
+            const startSame = member.label.split(':')[0] === splitLabel;
+            const isSame = member.label === diskRaidMem[0].label;
+
+            return startSame && !isSame;
+          });
+          label = hasUniqueName ? splitLabel : diskRaidMem[0].label;
+        } else {
+          label = diskRaidMem[0].label;
+        }
+
         return {
           device: device,
           brand: nativeDisk.vendor,
@@ -292,7 +307,7 @@ export const runSpeedTest = async (): Promise<string> => {
     });
   } else if (await commandExists('speedtest-cli')) {
     usedRunner = 'speedtest-cli';
-    const { stdout } = await exec('speedtest-cli --json');
+    const { stdout } = await exec('speedtest-cli --json --secure');
     const json = JSON.parse(stdout);
 
     STATIC_INFO.next({
@@ -305,25 +320,14 @@ export const runSpeedTest = async (): Promise<string> => {
       },
     });
   } else {
-    usedRunner = 'universal';
-    const universalSpeedtest = new UniversalSpeedtest({
-      measureUpload: true,
-      downloadUnit: SpeedUnits.bps,
-      uploadUnit: SpeedUnits.bps,
-    });
+    throw new Error(removePad`
+      There is no speedtest module installed - please use one of the following:
+      - speedtest: https://www.speedtest.net/apps/cli
+      - speedtest-cli: https://github.com/sivel/speedtest-cli
 
-    const speed = await universalSpeedtest.runSpeedtestNet();
-
-    STATIC_INFO.next({
-      ...STATIC_INFO.getValue(),
-      network: {
-        ...STATIC_INFO.getValue().network,
-        speedDown:
-          speed.downloadSpeed ?? STATIC_INFO.getValue().network.speedDown,
-        speedUp: speed.uploadSpeed ?? STATIC_INFO.getValue().network.speedUp,
-        publicIp: speed.client.ip ?? STATIC_INFO.getValue().network.publicIp,
-      },
-    });
+      For more help on how to setup dashdot, look here:
+      https://getdashdot.com/docs/install/from-source
+    `);
   }
 
   return usedRunner;

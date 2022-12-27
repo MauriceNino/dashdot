@@ -33,8 +33,21 @@ git clone https://github.com/MauriceNino/dashdot &&\
 When done, you can run the dashboard by executing:
 
 ```bash
-sudo yarn start
+sudo -E yarn start
 ```
+
+:::info
+
+In case you get a speedtest related error, you might have to accept the license
+before being able to start your dashboard.
+
+For this, run the following in your terminal:
+
+```bash
+speedtest --accept-license
+```
+
+:::
 
 ## Configuration
 
@@ -42,5 +55,5 @@ Config options can optionally passed using environment variables.
 
 ```bash
 export DASHDOT_PORT="8080" &&\
-  sudo yarn start
+  sudo -E yarn start
 ```

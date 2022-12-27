@@ -1,3 +1,55 @@
+## [4.5.7](https://github.com/MauriceNino/dashdot/compare/v4.5.6...v4.5.7) (2022-11-17)
+
+## [4.5.6](https://github.com/MauriceNino/dashdot/compare/v4.5.5...v4.5.6) (2022-11-13)
+
+## [4.5.5](https://github.com/MauriceNino/dashdot/compare/v4.5.4...v4.5.5) (2022-11-13)
+
+
+### Bug Fixes
+
+* **api:** remove broken universal-speedtest to avoid confusion ([0f5e785](https://github.com/MauriceNino/dashdot/commit/0f5e7855e2be1187e1bed7de0630370f3fb31516))
+* **view:** show virtual mounts as "disk" in widget ([0263a16](https://github.com/MauriceNino/dashdot/commit/0263a160ae10b97e7f1b2eb0e992d20e9424df99)), closes [#384](https://github.com/MauriceNino/dashdot/issues/384)
+
+## [4.5.4](https://github.com/MauriceNino/dashdot/compare/v4.5.3...v4.5.4) (2022-11-13)
+
+
+### Bug Fixes
+
+* **speedtest-cli:** avoid speedtest DNS error ([bc0e9f5](https://github.com/MauriceNino/dashdot/commit/bc0e9f50979e7dfc09296d843c046324807a5eee))
+
+## [4.5.3](https://github.com/MauriceNino/dashdot/compare/v4.5.2...v4.5.3) (2022-10-13)
+
+## [4.5.2](https://github.com/MauriceNino/dashdot/compare/v4.5.1...v4.5.2) (2022-09-18)
+
+
+### Bug Fixes
+
+* **view:** storage multi-view sizing + text ([afb66c4](https://github.com/MauriceNino/dashdot/commit/afb66c4801e68076ad4562ba67636f05120f9e9a))
+
+## [4.5.1](https://github.com/MauriceNino/dashdot/compare/v4.5.0...v4.5.1) (2022-09-18)
+
+
+### Bug Fixes
+
+* **view:** label not breaking correctly when green bar is too small ([1cd5e7b](https://github.com/MauriceNino/dashdot/commit/1cd5e7b65f1f6b57eddf4c41a5b89b30752cc498))
+* **view:** show all storage options in widget mode ([6b969c3](https://github.com/MauriceNino/dashdot/commit/6b969c3ab4a21788de5f19b4038b5e995ebbb566)), closes [#385](https://github.com/MauriceNino/dashdot/issues/385)
+
+# [4.5.0](https://github.com/MauriceNino/dashdot/compare/v4.4.0...v4.5.0) (2022-09-17)
+
+
+### Bug Fixes
+
+* **api:** bad group matching when raid labels have different endings ([db8d49f](https://github.com/MauriceNino/dashdot/commit/db8d49f1d790993f2ad49a9572fb2df9288f3183)), closes [#295](https://github.com/MauriceNino/dashdot/issues/295)
+* **api:** error when host drive partition has no correct host mount ([1e49d4c](https://github.com/MauriceNino/dashdot/commit/1e49d4c4941b5c052abf77233c1e7f255c5eff58)), closes [#369](https://github.com/MauriceNino/dashdot/issues/369)
+* **api:** storage widget not working on from source installation ([0ab0f66](https://github.com/MauriceNino/dashdot/commit/0ab0f663e30a88990cdec76511b5ee8d9d008f2e))
+* **view:** drive not picking correct sizes in raid mode ([8bfc576](https://github.com/MauriceNino/dashdot/commit/8bfc57608d5b6c57aad4a58310427c53e4c597c7)), closes [#295](https://github.com/MauriceNino/dashdot/issues/295)
+
+
+### Features
+
+* **api:** add option to filter storage devices by name ([5eb6efb](https://github.com/MauriceNino/dashdot/commit/5eb6efb77fba59144722cb83e410523785fa290f)), closes [#314](https://github.com/MauriceNino/dashdot/issues/314)
+* **view:** add percentage labels to storage split view ([718eb6b](https://github.com/MauriceNino/dashdot/commit/718eb6beafc0cfb9b41f2e5693d531df32c8729d)), closes [#370](https://github.com/MauriceNino/dashdot/issues/370)
+
 # [4.4.0](https://github.com/MauriceNino/dashdot/compare/v4.3.10...v4.4.0) (2022-08-28)
 
 
