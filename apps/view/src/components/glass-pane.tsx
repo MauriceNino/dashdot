@@ -12,6 +12,7 @@ const Container = styled.div<SCProps>`
   max-height: ${({ mobile }) => (mobile ? 'unset' : '500px')};
 
   flex-grow: ${props => props.grow ?? 1};
+  flex-basis: ${({ mobile }) => (mobile ? 'unset' : '0')};
   transition: opacity 0.3 ease-in-out;
 
   display: flex;
