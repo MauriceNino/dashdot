@@ -1,3 +1,4 @@
+import { Transient } from '@dash/common';
 import { motion, Variants } from 'framer-motion';
 import { FC, useEffect } from 'react';
 import { default as styled } from 'styled-components';
@@ -31,28 +32,28 @@ const itemVariants: Variants = {
   },
 };
 
-const FlexContainer = styled(motion.div)<{ mobile: boolean }>`
-  width: ${({ mobile }) => (mobile ? 'calc(100vw - 50px)' : '92vw')};
-  min-height: ${({ mobile }) => (mobile ? 'calc(100vh - 50px)' : '86vh')};
-  margin: ${({ mobile }) => (mobile ? '50px' : '7vh')} auto
-    ${({ mobile }) => (mobile ? '50px' : '7vh')} auto;
+const FlexContainer = styled(motion.div)<Transient<{ mobile: boolean }>>`
+  width: ${({ $mobile }) => ($mobile ? 'calc(100vw - 50px)' : '92vw')};
+  min-height: ${({ $mobile }) => ($mobile ? 'calc(100vh - 50px)' : '86vh')};
+  margin: ${({ $mobile }) => ($mobile ? '50px' : '7vh')} auto
+    ${({ $mobile }) => ($mobile ? '50px' : '7vh')} auto;
 
   display: flex;
   flex-flow: row wrap;
   column-gap: 40px;
-  row-gap: ${({ mobile }) => (mobile ? '40px' : '70px')};
+  row-gap: ${({ $mobile }) => ($mobile ? '40px' : '70px')};
 `;
 
-const ErrorContainer = styled(motion.div)<{ mobile: boolean }>`
-  width: ${({ mobile }) => (mobile ? 'calc(100vw - 50px)' : '92vw')};
-  min-height: ${({ mobile }) => (mobile ? 'calc(100vh - 50px)' : '86vh')};
-  margin: ${({ mobile }) => (mobile ? '50px' : '7vh')} auto
-    ${({ mobile }) => (mobile ? '50px' : '7vh')} auto;
+const ErrorContainer = styled(motion.div)<Transient<{ mobile: boolean }>>`
+  width: ${({ $mobile }) => ($mobile ? 'calc(100vw - 50px)' : '92vw')};
+  min-height: ${({ $mobile }) => ($mobile ? 'calc(100vh - 50px)' : '86vh')};
+  margin: ${({ $mobile }) => ($mobile ? '50px' : '7vh')} auto
+    ${({ $mobile }) => ($mobile ? '50px' : '7vh')} auto;
 
   display: flex;
   flex-flow: row wrap;
   column-gap: 40px;
-  row-gap: ${({ mobile }) => (mobile ? '40px' : '70px')};
+  row-gap: ${({ $mobile }) => ($mobile ? '40px' : '70px')};
 
   justify-content: center;
   align-items: center;
@@ -93,7 +94,7 @@ export const MainWidgetContainer: FC = () => {
         initial='initial'
         animate='animate'
         exit='exit'
-        mobile={isMobile}
+        $mobile={isMobile}
       >
         <GlassPane variants={itemVariants} grow={0} minWidth={500}>
           <ErrorWidget errorText={error.text} />
@@ -150,7 +151,7 @@ export const MainWidgetContainer: FC = () => {
 
   return (
     <FlexContainer
-      mobile={isMobile}
+      $mobile={isMobile}
       variants={containerVariants}
       initial='initial'
       animate='animate'

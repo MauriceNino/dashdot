@@ -1,4 +1,4 @@
-import { Config, OsInfo } from '@dash/common';
+import { Config, OsInfo, Transient } from '@dash/common';
 import {
   faApple,
   faCentos,
@@ -96,9 +96,9 @@ const Link = styled(Button)`
   }
 `;
 
-const StyledInfoTable = styled(InfoTable)<{ mobile: boolean }>`
+const StyledInfoTable = styled(InfoTable)<Transient<{ mobile: boolean }>>`
   width: 100%;
-  padding: 15px 5px ${({ mobile }) => (mobile ? 15 : 5)}px 5px;
+  padding: 15px 5px ${({ $mobile }) => ($mobile ? 15 : 5)}px 5px;
 `;
 
 const SFontAwesomeIcon = styled(FontAwesomeIcon)`
@@ -256,7 +256,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       </Heading>
 
       <StyledInfoTable
-        mobile={isMobile}
+        $mobile={isMobile}
         infos={toInfoTable(
           config.os_label_list,
           {

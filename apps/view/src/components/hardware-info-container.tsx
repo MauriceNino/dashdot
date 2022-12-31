@@ -1,3 +1,4 @@
+import { Transient } from '@dash/common';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,18 +9,18 @@ import { useIsMobile } from '../services/mobile';
 import { InfoTable, InfoTableProps } from './info-table';
 import { ThemedText } from './text';
 
-const Container = styled.div<{ mobile: boolean }>`
+const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-const ContentContainer = styled.div<{ mobile: boolean }>`
+const ContentContainer = styled.div<Transient<{ mobile: boolean }>>`
   display: flex;
-  flex-direction: ${({ mobile }) => (mobile ? 'column-reverse' : 'row')};
+  flex-direction: ${({ $mobile }) => ($mobile ? 'column-reverse' : 'row')};
   flex: 1 1 auto;
-  ${({ mobile }) => mobile && 'padding: 20px 0'};
+  ${({ $mobile }) => $mobile && 'padding: 20px 0'};
 `;
 
 const InfoContainer = styled.div`
@@ -31,7 +32,7 @@ const InfoContainer = styled.div`
   flex-grow: 0 !important;
 `;
 
-const InfoIcon = styled.div<HardwareInfoProps>`
+const InfoIcon = styled.div<Transient<{ color: string }>>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +44,7 @@ const InfoIcon = styled.div<HardwareInfoProps>`
   top: -10px;
   left: 20px;
 
-  background-color: ${props => props.color};
+  background-color: ${props => props.$color};
   border-radius: 10px;
   box-shadow: 13px 13px 35px 0px rgba(0, 0, 0, 0.15);
 
@@ -99,12 +100,12 @@ export const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
   };
 
   return (
-    <Container mobile={isMobile}>
-      <InfoIcon {...props}>
+    <Container>
+      <InfoIcon $color={props.color}>
         <FontAwesomeIcon icon={props.icon} size='2x' />
       </InfoIcon>
 
-      <ContentContainer mobile={isMobile}>
+      <ContentContainer $mobile={isMobile}>
         <InfoContainer>
           <InfoHeadingContainer>
             <InfoHeading>{props.heading}</InfoHeading>

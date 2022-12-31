@@ -1,17 +1,20 @@
+import { Transient } from '@dash/common';
 import { motion } from 'framer-motion';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 
-type SCProps = GlassPaneProps & { mobile: boolean };
+type SCProps = Transient<
+  Pick<GlassPaneProps, 'grow' | 'minWidth'> & { mobile: boolean }
+>;
 
 const Container = styled.div<SCProps>`
-  min-width: ${({ minWidth, mobile }) => (mobile ? 0 : minWidth)}px;
-  width: ${({ mobile }) => (mobile ? '100%' : 'unset')};
+  min-width: ${({ $minWidth, $mobile }) => ($mobile ? 0 : $minWidth)}px;
+  width: ${({ $mobile }) => ($mobile ? '100%' : 'unset')};
   min-height: 360px;
-  max-height: ${({ mobile }) => (mobile ? 'unset' : '500px')};
+  max-height: ${({ $mobile }) => ($mobile ? 'unset' : '500px')};
 
-  flex-grow: ${props => props.grow ?? 1};
+  flex-grow: ${({ $grow }) => $grow ?? 1};
   transition: opacity 0.3 ease-in-out;
 
   display: flex;
@@ -35,9 +38,9 @@ export const GlassPane = motion(
     return (
       <Container
         ref={ref}
-        mobile={isMobile}
-        grow={props.grow ?? 1}
-        minWidth={props.minWidth ?? 350}
+        $mobile={isMobile}
+        $grow={props.grow ?? 1}
+        $minWidth={props.minWidth ?? 350}
       >
         {props.children}
       </Container>
