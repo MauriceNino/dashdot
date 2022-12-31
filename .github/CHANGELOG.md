@@ -1,3 +1,18 @@
+# [4.6.0](https://github.com/MauriceNino/dashdot/compare/v4.5.7...v4.6.0) (2022-12-31)
+
+
+### Bug Fixes
+
+* add mdadm to docker container for RAID info ([574aa41](https://github.com/MauriceNino/dashdot/commit/574aa418f2626f2f551e5b0dac55c45c8744bd5c))
+* remove arm v7 from build ([04e1463](https://github.com/MauriceNino/dashdot/commit/04e146395200d43d2de6f20aeb907035387e1807))
+* **view:** antd upgrade errors ([130e15b](https://github.com/MauriceNino/dashdot/commit/130e15b71c32c1587d7e1d217e206ff6342ab2ca))
+* **view:** errors for transient props in styled-components ([599e968](https://github.com/MauriceNino/dashdot/commit/599e968c22b2efdbf40eaabc4f6b332a0b588724))
+
+
+### Features
+
+* **view:** add option for custom host ([01d35e0](https://github.com/MauriceNino/dashdot/commit/01d35e061a58d25658d240acc1556c97c6d12b58)), closes [#496](https://github.com/MauriceNino/dashdot/issues/496)
+
 ## [4.5.7](https://github.com/MauriceNino/dashdot/compare/v4.5.6...v4.5.7) (2022-11-17)
 
 ## [4.5.6](https://github.com/MauriceNino/dashdot/compare/v4.5.5...v4.5.6) (2022-11-13)
