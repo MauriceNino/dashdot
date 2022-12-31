@@ -20,6 +20,13 @@ If you want to show the host part in the server widget (e.g. `dash.` -> `dash.ma
 | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | <img src="/img/server_view_normal.png" alt="Server widget normal" style={{maxHeight: "250px"}} /> | <img src="/img/server_view_with_host.png" alt="Server widget with host" style={{maxHeight: "250px"}} /> |
 
+## `DASHDOT_CUSTOM_HOST`
+
+If you want to show a custom host in the server widget (needs [`DASHDOT_SHOW_HOST`](./ui-features#dashdot_show_host) enabled to work).
+
+- type: `string`
+- default: `unset`
+
 ## `DASHDOT_ENABLE_CPU_TEMPS`
 
 If you want to show the CPU temperature in the graph. This will probably not work on a VPS, so you need to try it on your own if this works. For home servers it might work just fine.

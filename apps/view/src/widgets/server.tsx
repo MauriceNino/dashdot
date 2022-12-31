@@ -1,4 +1,4 @@
-import { Config, OsInfo } from '@dash/common';
+import { Config, OsInfo, Transient } from '@dash/common';
 import {
   faApple,
   faCentos,
@@ -40,7 +40,6 @@ const Container = styled.div`
 
 const Heading = styled(ThemedText)`
   width: 100%;
-  max-width: 100%;
   margin-top: 31px;
   margin-bottom: 15px;
 
@@ -57,6 +56,7 @@ const Heading = styled(ThemedText)`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    padding-bottom: 5px;
   }
 `;
 
@@ -96,9 +96,9 @@ const Link = styled(Button)`
   }
 `;
 
-const StyledInfoTable = styled(InfoTable)<{ mobile: boolean }>`
+const StyledInfoTable = styled(InfoTable)<Transient<{ mobile: boolean }>>`
   width: 100%;
-  padding: 15px 5px ${({ mobile }) => (mobile ? 15 : 5)}px 5px;
+  padding: 15px 5px ${({ $mobile }) => ($mobile ? 15 : 5)}px 5px;
 `;
 
 const SFontAwesomeIcon = styled(FontAwesomeIcon)`
@@ -180,7 +180,9 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
     return () => clearInterval(interval);
   }, [data.uptime]);
 
-  const domain = useMemo(() => {
+  const host = useMemo(() => {
+    if (config?.custom_host) return config?.custom_host;
+
     const href = window.location.href;
     const result = parseDomain(fromUrl(href));
 
@@ -190,7 +192,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
     } else {
       return undefined;
     }
-  }, []);
+  }, [config?.custom_host]);
 
   const dateInfos = [
     {
@@ -245,10 +247,10 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       />
 
       <Heading>
-        {config?.show_host && domain ? (
+        {config?.show_host && host ? (
           <>
             <Appendix>dash.</Appendix>
-            <ServerName>{domain}</ServerName>
+            <ServerName>{host}</ServerName>
           </>
         ) : (
           <StandaloneAppendix>dash.</StandaloneAppendix>
@@ -256,7 +258,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       </Heading>
 
       <StyledInfoTable
-        mobile={isMobile}
+        $mobile={isMobile}
         infos={toInfoTable(
           config.os_label_list,
           {

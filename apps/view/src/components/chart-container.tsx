@@ -1,3 +1,4 @@
+import { Transient } from '@dash/common';
 import { motion } from 'framer-motion';
 import { forwardRef, ReactElement } from 'react';
 import { SwapSpinner } from 'react-spinners-kit';
@@ -5,18 +6,17 @@ import ReactVirtualizedAutoSizer from 'react-virtualized-auto-sizer';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 
-type ContainerProps = {
-  mobile: boolean;
+type ContainerProps = Transient<{
   edges: [boolean, boolean, boolean, boolean];
   loading: boolean;
-};
+}>;
 const Container = styled.div<ContainerProps>`
   position: relative;
   display: flex;
 
   min-width: 0;
   background-color: ${({ theme }) => theme.colors.surface};
-  border-radius: ${({ edges: [top, right, bottom, left] }) =>
+  border-radius: ${({ $edges: [top, right, bottom, left] }) =>
     `${top ? '25px' : '10px'} ${right ? '25px' : '10px'} ${
       bottom ? '25px' : '10px'
     } ${left ? '25px' : '10px'}`};
@@ -28,8 +28,8 @@ const Container = styled.div<ContainerProps>`
 
   > div {
     overflow: hidden;
-    ${({ edges: [top, right, bottom, left], loading }) =>
-      !loading &&
+    ${({ $edges: [top, right, bottom, left], $loading }) =>
+      !$loading &&
       `
     position: absolute;
     border-radius: ${`${top ? '25px' : '10px'} ${right ? '25px' : '10px'} ${
@@ -76,14 +76,12 @@ type ChartContainerProps = {
 export const ChartContainer = motion(
   forwardRef<HTMLDivElement, ChartContainerProps>((props, ref) => {
     const theme = useTheme();
-    const isMobile = useIsMobile();
 
     return (
       <Container
         ref={ref}
-        mobile={isMobile}
-        edges={props.edges ?? [true, true, true, true]}
-        loading={!props.contentLoaded}
+        $edges={props.edges ?? [true, true, true, true]}
+        $loading={!props.contentLoaded}
       >
         {props.contentLoaded ? (
           <>
