@@ -17,7 +17,7 @@ title: Server
 To adjust the relative size of the OS widget.
 
 - type: `number`
-- default: `1.5`
+- default: `2.5`
 
 ## `DASHDOT_OS_WIDGET_MIN_WIDTH`
 
