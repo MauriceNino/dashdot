@@ -40,7 +40,6 @@ const Container = styled.div`
 
 const Heading = styled(ThemedText)`
   width: 100%;
-  max-width: 100%;
   margin-top: 31px;
   margin-bottom: 15px;
 
@@ -57,6 +56,7 @@ const Heading = styled(ThemedText)`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    padding-bottom: 5px;
   }
 `;
 
@@ -180,7 +180,9 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
     return () => clearInterval(interval);
   }, [data.uptime]);
 
-  const domain = useMemo(() => {
+  const host = useMemo(() => {
+    if (config?.custom_host) return config?.custom_host;
+
     const href = window.location.href;
     const result = parseDomain(fromUrl(href));
 
@@ -190,7 +192,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
     } else {
       return undefined;
     }
-  }, []);
+  }, [config?.custom_host]);
 
   const dateInfos = [
     {
@@ -245,10 +247,10 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       />
 
       <Heading>
-        {config?.show_host && domain ? (
+        {config?.show_host && host ? (
           <>
             <Appendix>dash.</Appendix>
-            <ServerName>{domain}</ServerName>
+            <ServerName>{host}</ServerName>
           </>
         ) : (
           <StandaloneAppendix>dash.</StandaloneAppendix>

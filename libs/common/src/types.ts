@@ -93,6 +93,7 @@ export type Config = {
   disable_integrations: boolean;
 
   show_host: boolean;
+  custom_host?: string;
   page_title: string;
   use_imperial: boolean;
   enable_cpu_temps: boolean;
