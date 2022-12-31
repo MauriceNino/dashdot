@@ -11399,7 +11399,7 @@ __metadata:
     react-virtualized-auto-sizer: 1.0.7
     recharts: 2.1.16
     regenerator-runtime: 0.13.11
-    rxjs: 7.5.7
+    rxjs: 7.8.0
     sass: 1.56.1
     semantic-release-plus: 20.0.0
     socket.io: 4.5.4
@@ -22022,12 +22022,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:7.5.7":
-  version: 7.5.7
-  resolution: "rxjs@npm:7.5.7"
+"rxjs@npm:7.8.0":
+  version: 7.8.0
+  resolution: "rxjs@npm:7.8.0"
   dependencies:
     tslib: ^2.1.0
-  checksum: edabcdb73b0f7e0f5f6e05c2077aff8c52222ac939069729704357d6406438acca831c24210db320aba269e86dbe1a400f3769c89101791885121a342fb15d9c
+  checksum: 61b4d4fd323c1043d8d6ceb91f24183b28bcf5def4f01ca111511d5c6b66755bc5578587fe714ef5d67cf4c9f2e26f4490d4e1d8cabf9bd5967687835e9866a2
   languageName: node
   linkType: hard
 
