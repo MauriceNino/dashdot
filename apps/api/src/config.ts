@@ -24,6 +24,7 @@ export const CONFIG: Config = {
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
 
   show_host: penv('SHOW_HOST') === 'true',
+  custom_host: penv('CUSTOM_HOST'),
   page_title: penv('PAGE_TITLE') ?? 'dash.',
   use_imperial: penv('USE_IMPERIAL') === 'true',
   enable_storage_split_view: penv('ENABLE_STORAGE_SPLIT_VIEW') === 'true',
@@ -47,7 +48,7 @@ export const CONFIG: Config = {
   ) as any[],
   gpu_label_list: lst(penv('GPU_LABEL_LIST') ?? 'brand,model,memory') as any[],
 
-  os_widget_grow: numNull(penv('OS_WIDGET_GROW')) ?? 1.5,
+  os_widget_grow: numNull(penv('OS_WIDGET_GROW')) ?? 2.5,
   os_widget_min_width: numNull(penv('OS_WIDGET_MIN_WIDTH')) ?? 300,
 
   enable_cpu_temps: penv('ENABLE_CPU_TEMPS') === 'true',

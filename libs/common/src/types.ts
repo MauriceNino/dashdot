@@ -93,6 +93,7 @@ export type Config = {
   disable_integrations: boolean;
 
   show_host: boolean;
+  custom_host?: string;
   page_title: string;
   use_imperial: boolean;
   enable_cpu_temps: boolean;
@@ -177,4 +178,8 @@ export type Config = {
 
 export type ServerInfo = HardwareInfo & {
   config: Config;
+};
+
+export type Transient<T extends object> = {
+  [K in keyof T & string as `$${K}`]: T[K];
 };

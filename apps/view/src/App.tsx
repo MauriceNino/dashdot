@@ -1,3 +1,4 @@
+import { ConfigProvider } from 'antd';
 import { FC, useMemo } from 'react';
 import {
   createGlobalStyle,
@@ -52,9 +53,6 @@ const GlobalStyle = createGlobalStyle<{ noBg: boolean }>`
   body {
     background-color: ${({ theme, noBg }) =>
       noBg ? 'transparent' : theme.colors.background};
-
-    --ant-primary-color: ${({ theme }) => theme.colors.primary};
-    --ant-primary-color-hover: ${({ theme }) => theme.colors.primary};
   }
 
   #root {
@@ -78,17 +76,9 @@ const GlobalStyle = createGlobalStyle<{ noBg: boolean }>`
     background-image: unset;
   }
 
-  .ant-switch-checked {
-    background: var(--ant-primary-color);
-  }
-
   .ant-btn {
     background: ${({ theme }) => theme.colors.background};
     border: none;
-
-    &:hover, &:focus, &:active {
-      background: var(--ant-primary-color);
-    }
   }
 `;
 
@@ -136,13 +126,22 @@ export const App: FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <MobileContextProvider>
-        {query.isSingleGraphMode ? (
-          <SingleWidgetChart />
-        ) : (
-          <MainWidgetContainer />
-        )}
-      </MobileContextProvider>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: theme.colors.primary,
+            colorPrimaryHover: theme.colors.primary,
+          },
+        }}
+      >
+        <MobileContextProvider>
+          {query.isSingleGraphMode ? (
+            <SingleWidgetChart />
+          ) : (
+            <MainWidgetContainer />
+          )}
+        </MobileContextProvider>
+      </ConfigProvider>
       <GlobalStyle noBg={query.isSingleGraphMode} />
     </ThemeProvider>
   );
