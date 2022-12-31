@@ -178,3 +178,7 @@ export type Config = {
 export type ServerInfo = HardwareInfo & {
   config: Config;
 };
+
+export type Transient<T extends object> = {
+  [K in keyof T & string as `$${K}`]: T[K];
+};
