@@ -5335,35 +5335,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:5.8.4":
-  version: 5.8.4
-  resolution: "@mantine/core@npm:5.8.4"
+"@mantine/core@npm:5.9.6":
+  version: 5.9.6
+  resolution: "@mantine/core@npm:5.9.6"
   dependencies:
     "@floating-ui/react-dom-interactions": ^0.10.1
-    "@mantine/styles": 5.8.4
-    "@mantine/utils": 5.8.4
-    "@radix-ui/react-scroll-area": 1.0.0
+    "@mantine/styles": 5.9.6
+    "@mantine/utils": 5.9.6
+    "@radix-ui/react-scroll-area": 1.0.2
     react-textarea-autosize: 8.3.4
   peerDependencies:
-    "@mantine/hooks": 5.8.4
+    "@mantine/hooks": 5.9.6
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: f2356d7afb844654ab23d230aacb4953ea1cd593f6a70ded30d15648209db109492850ab7a88309af9f6c599b9ca7e3c425d805e2dbcc878d66fe7ea25d651f8
+  checksum: affb8eea7c1400431d4cd7e3fbe6f493369e68f050c96b35847f5badc3729b077e96523ac187889fd474a6761d6bce2f5a5f6715c372cb9e8f4a354432dd8975
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:5.8.4":
-  version: 5.8.4
-  resolution: "@mantine/hooks@npm:5.8.4"
+"@mantine/hooks@npm:5.9.6":
+  version: 5.9.6
+  resolution: "@mantine/hooks@npm:5.9.6"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: d89e47fefe942fc170906435805f6c036bc78627cd29d7f3591aff87167ccf3bc270e32b703fdd438cccee447779ced453b7934298809702a5d9c798455942f7
+  checksum: 506a1c3c90ca44d8a4ad91ba47b6b0d0dbd7e37c221d2411d46b0de6a5c2920d8f2de539661cba9a04c58e0884fb0ce9d72c41a5562b95f3df4e5fc6a1840c33
   languageName: node
   linkType: hard
 
-"@mantine/styles@npm:5.8.4":
-  version: 5.8.4
-  resolution: "@mantine/styles@npm:5.8.4"
+"@mantine/styles@npm:5.9.6":
+  version: 5.9.6
+  resolution: "@mantine/styles@npm:5.9.6"
   dependencies:
     clsx: 1.1.1
     csstype: 3.0.9
@@ -5371,16 +5371,16 @@ __metadata:
     "@emotion/react": ">=11.9.0"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 2c6ae0a50bb3b8451b002b226990e13e22f073f9ecd15f5f990e677c78df1459a0436f9f5bb06f3f41ed174e6a9b2391c3797345d8def8a92d14fb96d9620694
+  checksum: e4cd861a37137119afdd9e0aedfad30ffc6a4f77154c5ff0a608299696e86b5eeabd6fd779ad132859d715386f7dd339fc4c59013f87058b1c2b8185a8a4cfb3
   languageName: node
   linkType: hard
 
-"@mantine/utils@npm:5.8.4":
-  version: 5.8.4
-  resolution: "@mantine/utils@npm:5.8.4"
+"@mantine/utils@npm:5.9.6":
+  version: 5.9.6
+  resolution: "@mantine/utils@npm:5.9.6"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: c1be5a678ada0a683ecf444ca2a129c506bab925d1e2159ceca59be31dcd5567c18b84a5404c59d8cc0ec3c0148f95eca607780d08d48d196e2311a56ee101a2
+  checksum: 273e9dd679225021b0ba10d372210cc7b593bef2de5ac156045b33a8bc998ea11ea8127ece997616593a8aaa3af5c5b412b11e964b9e64854a474ba8c44724d6
   languageName: node
   linkType: hard
 
@@ -6531,22 +6531,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-primitive@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@radix-ui/react-primitive@npm:1.0.0"
+"@radix-ui/react-primitive@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-primitive@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/react-slot": 1.0.0
+    "@radix-ui/react-slot": 1.0.1
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: fb3fe8c8c5a57995716cce4d7e9039e474c09ba5d714994419ad4940bc954da670f1188813cc931f189b23d9bd5a67adf7087bf44fe1d4272b4a334a3514d38b
+  checksum: 1cc86b72f926be4a42122e7e456e965de0906f16b0dc244b8448bac05905f208598c984a0dd40026f654b4a71d0235335d48a18e377b07b0ec6c6917576a8080
   languageName: node
   linkType: hard
 
-"@radix-ui/react-scroll-area@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@radix-ui/react-scroll-area@npm:1.0.0"
+"@radix-ui/react-scroll-area@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@radix-ui/react-scroll-area@npm:1.0.2"
   dependencies:
     "@babel/runtime": ^7.13.10
     "@radix-ui/number": 1.0.0
@@ -6555,25 +6555,25 @@ __metadata:
     "@radix-ui/react-context": 1.0.0
     "@radix-ui/react-direction": 1.0.0
     "@radix-ui/react-presence": 1.0.0
-    "@radix-ui/react-primitive": 1.0.0
+    "@radix-ui/react-primitive": 1.0.1
     "@radix-ui/react-use-callback-ref": 1.0.0
     "@radix-ui/react-use-layout-effect": 1.0.0
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: 0b7756f1df19ac13c570941461794668d0fb15fd576f37a698a6d0a39f48b728db751455f8de202e5ccb8750c3d9f31a02ada7b79d9f064347aa96e780d8f104
+  checksum: c59062c3321fb92b526f2b63be2636569c4a33fa81bd5c5109b13516932cebaf680a5cd318263d37e7e6e4ca62aa45521c34447478fd2acde3b2639ae53252d7
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@radix-ui/react-slot@npm:1.0.0"
+"@radix-ui/react-slot@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-slot@npm:1.0.1"
   dependencies:
     "@babel/runtime": ^7.13.10
     "@radix-ui/react-compose-refs": 1.0.0
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
-  checksum: 60c0190ebdca21785b4f8b58a0c52717600c98953fc49da9580870519c60f52d5cf873dffa05446f4bb539066326ccec0827f4ca252b02ec4ff1a4ae203f59d7
+  checksum: a20693f8ce532bd6cbff12ba543dfcf90d451f22923bd60b57dc9e639f6e53348915e182002b33444feb6ab753434e78e2a54085bf7092aadda4418f0423763f
   languageName: node
   linkType: hard
 
@@ -11324,8 +11324,8 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": 6.2.1
     "@fortawesome/free-solid-svg-icons": 6.2.1
     "@fortawesome/react-fontawesome": 0.2.0
-    "@mantine/core": 5.8.4
-    "@mantine/hooks": 5.8.4
+    "@mantine/core": 5.9.6
+    "@mantine/hooks": 5.9.6
     "@mdx-js/react": 1.6.22
     "@nrwl/cli": 14.7.5
     "@nrwl/eslint-plugin-nx": 14.7.5
