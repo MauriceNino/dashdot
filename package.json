@@ -42,7 +42,7 @@
     "@mantine/core": "5.9.6",
     "@mantine/hooks": "5.9.6",
     "@mdx-js/react": "1.6.22",
-    "antd": "5.0.4",
+    "antd": "5.1.2",
     "axios": "1.2.2",
     "clsx": "1.2.1",
     "core-js": "3.26.1",
