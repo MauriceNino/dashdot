@@ -102,7 +102,7 @@
     "@types/cors": "2.8.13",
     "@types/express": "4.17.15",
     "@types/jest": "29.2.5",
-    "@types/node": "18.11.11",
+    "@types/node": "18.11.18",
     "@types/qs": "6.9.7",
     "@types/react": "18.0.26",
     "@types/react-color": "3.0.6",
