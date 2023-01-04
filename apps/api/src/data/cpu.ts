@@ -13,32 +13,32 @@ const normalizeCpuModel = (cpuModel: string) => {
 export default {
   dynamic: async (): Promise<CpuLoad> => {
     const staticInfo = await getStaticServerInfo();
-    const loads = (await si.currentLoad()).cpus;
+    const cpuLoad = (await si.currentLoad()).cpus;
 
     let temps: si.Systeminformation.CpuTemperatureData['cores'] = [];
     let mainTemp = 0;
     if (CONFIG.enable_cpu_temps) {
-      const siTemps = await si.cpuTemperature();
+      const cpuTemp = await si.cpuTemperature();
       const threadsPerCore = staticInfo.cpu.threads / staticInfo.cpu.cores;
-      temps = siTemps.cores.flatMap(temp => Array(threadsPerCore).fill(temp));
-      mainTemp = siTemps.main; // AVG temp of all cores, in case no per-core data is found
+      temps = cpuTemp.cores.flatMap(temp => Array(threadsPerCore).fill(temp));
+      mainTemp = cpuTemp.main; // AVG temp of all cores, in case no per-core data is found
     }
 
-    return loads.map(({ load }, i) => ({
+    return cpuLoad.map(({ load }, i) => ({
       load,
       temp: temps[i] ?? mainTemp,
       core: i,
     }));
   },
   static: async (): Promise<CpuInfo> => {
-    const info = await si.cpu();
+    const cpuInfo = await si.cpu();
 
     return {
-      brand: info.manufacturer,
-      model: normalizeCpuModel(info.brand),
-      cores: info.physicalCores,
-      threads: info.cores,
-      frequency: info.speed,
+      brand: cpuInfo.manufacturer,
+      model: normalizeCpuModel(cpuInfo.brand),
+      cores: cpuInfo.physicalCores,
+      threads: cpuInfo.cores,
+      frequency: cpuInfo.speed,
     };
   },
 };

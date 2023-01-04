@@ -15,20 +15,20 @@ const normalizeGpuModel = (model: string) => {
 
 export default {
   dynamic: async (): Promise<GpuLoad> => {
-    const info = await si.graphics();
+    const gpuInfo = await si.graphics();
 
     return {
-      layout: info.controllers.map(controller => ({
+      layout: gpuInfo.controllers.map(controller => ({
         load: controller.utilizationGpu ?? 0,
         memory: controller.utilizationMemory ?? 0,
       })),
     };
   },
   static: async (): Promise<GpuInfo> => {
-    const info = await si.graphics();
+    const gpuInfo = await si.graphics();
 
     return {
-      layout: info.controllers.map(controller => ({
+      layout: gpuInfo.controllers.map(controller => ({
         brand: normalizeGpuBrand(controller.vendor),
         model:
           normalizeGpuName(controller.name) ??
