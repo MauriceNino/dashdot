@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { CONFIG } from '../src/config';
-import { mapToStorageLayout } from '../src/data/storage';
+import { mapToStorageLayout } from '../src/data/storage/static';
 import {
   TestCase,
   TEST_CASE_1,
