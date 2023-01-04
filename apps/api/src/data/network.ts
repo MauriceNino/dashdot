@@ -81,6 +81,8 @@ export default {
 
         net.interfaceSpeed = isNaN(numValue) || numValue === -1 ? 0 : numValue;
       }
+
+      return net;
     } else {
       const networkInfo = await si.networkInterfaces();
       //@ts-ignore
