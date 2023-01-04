@@ -1,3 +1,4 @@
+import { removePad } from '@dash/common';
 import { exec } from 'child_process';
 import { existsSync } from 'fs';
 import * as si from 'systeminformation';
@@ -43,19 +44,18 @@ yargs(hideBin(process.argv))
       const buildhash = buildInfo.buildhash ?? gitHash;
 
       console.log(
-        `
-INFO
-=========
-Yarn: ${yarnVersion.trim()}
-Node: ${nodeVersion.trim()}
-Dash: ${version}
+        removePad`
+          INFO
+          =========
+          Yarn: ${yarnVersion.trim()}
+          Node: ${nodeVersion.trim()}
+          Dash: ${version}
 
-Cwd: ${process.cwd()}
-Hash: ${buildhash}
-In Docker: ${isDocker}
-In Podman: ${isPodman}
-In Docker (env): ${runningInDocker}
-      `.trim()
+          Cwd: ${process.cwd()}
+          Hash: ${buildhash}
+          In Docker: ${isDocker}
+          In Podman: ${isPodman}
+          In Docker (env): ${runningInDocker}`
       );
     }
   )
@@ -94,39 +94,68 @@ In Docker (env): ${runningInDocker}
             'show custom raw info (provide systeminformation function name)',
         }),
     async args => {
+      console.log(
+        removePad`
+          If you were asked to paste the output of this command, please post only the following:
+
+          - On GitHub: Everything between the lines
+          - On Discord: Everything between the \`\`\`
+
+          ${'-'.repeat(40)}
+
+          <details>
+            <summary>Output:</summary>
+
+          \`\`\`js
+        `
+      );
+
       if (args.os) {
-        console.log('OS:', inspectObj(await si.osInfo()));
+        console.log('const osInfo = ', inspectObj(await si.osInfo()));
       }
       if (args.cpu) {
-        console.log('CPU:', inspectObj(await si.cpu()));
-        console.log('CPU Load:', inspectObj(await si.currentLoad()));
-        console.log('CPU Temp:', inspectObj(await si.cpuTemperature()));
+        console.log('const cpuInfo = ', inspectObj(await si.cpu()));
+        console.log('const cpuLoad = ', inspectObj(await si.currentLoad()));
+        console.log('const cpuTemp = ', inspectObj(await si.cpuTemperature()));
       }
       if (args.ram) {
-        console.log('Mem:', inspectObj(await si.mem()));
-        console.log('Mem Layout:', inspectObj(await si.memLayout()));
+        console.log('const memInfo = ', inspectObj(await si.mem()));
+        console.log('const memLayout = ', inspectObj(await si.memLayout()));
       }
       if (args.storage) {
-        console.log('Disk Layout:', inspectObj(await si.diskLayout()));
-        console.log('FS Size:', inspectObj(await si.fsSize()));
-        console.log('Block Devices:', inspectObj(await si.blockDevices()));
+        console.log('const disks = ', inspectObj(await si.diskLayout()));
+        console.log('const sizes = ', inspectObj(await si.fsSize()));
+        console.log('const blocks = ', inspectObj(await si.blockDevices()));
       }
       if (args.network) {
         console.log(
-          'Network Interfaces:',
+          'const networkInfo = ',
           inspectObj(await si.networkInterfaces())
         );
-        console.log('Network Stats:', inspectObj(await si.networkStats()));
+        console.log(
+          'const networkStats = ',
+          inspectObj(await si.networkStats())
+        );
       }
       if (args.gpu) {
-        console.log('Graphics:', inspectObj(await si.graphics()));
+        console.log('const gpuInfo = ', inspectObj(await si.graphics()));
       }
       if (args.custom) {
         console.log(
-          `Custom [${args.custom}]:`,
+          `const custom_${args.custom}:`,
           inspectObj(await si[args.custom]())
         );
       }
+
+      console.log(
+        removePad`
+          \`\`\`
+          
+          </details>
+          
+          ${'-'.repeat(40)}
+        `
+      );
     }
   )
   .demandCommand(1, 1, 'You need to specify a single command')

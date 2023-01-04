@@ -3,15 +3,17 @@ import * as si from 'systeminformation';
 
 export default {
   static: async (): Promise<OsInfo> => {
-    const info = await si.osInfo();
+    const osInfo = await si.osInfo();
 
     return {
-      arch: info.arch,
-      distro: info.distro,
-      kernel: info.kernel,
-      platform: info.platform,
+      arch: osInfo.arch,
+      distro: osInfo.distro,
+      kernel: osInfo.kernel,
+      platform: osInfo.platform,
       release:
-        info.release === 'unknown' ? info.build || 'unknown' : info.release,
+        osInfo.release === 'unknown'
+          ? osInfo.build || 'unknown'
+          : osInfo.release,
       uptime: 0,
     };
   },

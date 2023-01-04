@@ -47,11 +47,11 @@ export default {
 
       return result;
     } else {
-      const data = (await si.networkStats())[0];
+      const networkStats = (await si.networkStats())[0];
 
       return {
-        up: data.tx_sec,
-        down: data.rx_sec,
+        up: networkStats.tx_sec,
+        down: networkStats.rx_sec,
       };
     }
   },
