@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { CONFIG } from '../src/config';
-import { mapToStorageOutput } from '../src/dynamic-info';
+import { mapToStorageOutput } from '../src/data/storage';
 import {
   TestCase,
   TEST_CASE_1,
