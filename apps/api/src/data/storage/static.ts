@@ -11,7 +11,8 @@ const getDiskBlocks = (blocks: Block[]) =>
     block =>
       block.type === 'disk' &&
       block.size > 0 &&
-      !CONFIG.fs_device_filter.includes(block.name)
+      !CONFIG.fs_device_filter.includes(block.name) &&
+      !CONFIG.fs_type_filter.includes(block.fsType)
   );
 
 const getNativeDisk = (disks: Disk[], block: Block) =>
