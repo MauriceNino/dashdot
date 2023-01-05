@@ -2452,11 +2452,8 @@ export const TEST_CASE_8 = {
       group: undefined,
     },
   ],
-  layout: [
-    { brand: 'vda', device: 'vda', size: 53687091200, type: 'HDD' },
-    { brand: 'vdb', device: 'vdb', size: 485376, type: 'HDD' },
-  ],
-  output: { layout: [{ load: 17542520832 }, { load: 0 }] },
+  layout: [{ brand: 'vda', device: 'vda', size: 53687091200, type: 'HDD' }],
+  output: { layout: [{ load: 17542520832 }] },
 } as any as TestCase;
 
 // https://github.com/MauriceNino/dashdot/issues/188
