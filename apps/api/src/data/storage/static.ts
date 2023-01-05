@@ -2,69 +2,30 @@ import { StorageInfo } from '@dash/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
 
-export const mapToStorageLayout = (
-  disks: si.Systeminformation.DiskLayoutData[],
-  blocks: si.Systeminformation.BlockDevicesData[],
-  sizes: si.Systeminformation.FsSizeData[]
-) => {
-  const raidMembers = blocks.filter(block => block.fsType.endsWith('_member'));
-  const blockDisks = blocks.filter(
+type Block = si.Systeminformation.BlockDevicesData;
+type Disk = si.Systeminformation.DiskLayoutData;
+type Size = si.Systeminformation.FsSizeData;
+
+const getDiskBlocks = (blocks: Block[]) =>
+  blocks.filter(
     block =>
       block.type === 'disk' &&
       block.size > 0 &&
       !CONFIG.fs_device_filter.includes(block.name)
   );
 
-  const blockLayout = blockDisks
-    .map(disk => {
-      const device = disk.name;
-      const diskRaidMem = raidMembers.filter(member =>
-        member.name.startsWith(device)
-      );
-      const nativeDisk = disks.find(
-        d => disk.model != '' && d.name === disk.model
-      ) ?? {
-        vendor: disk.name,
-        size: disk.size,
-        type: disk.physical,
-      };
+const getNativeDisk = (disks: Disk[], block: Block) =>
+  disks.find(
+    d =>
+      d.device === block.device || (block.model != '' && d.name === block.model)
+  ) ?? {
+    vendor: block.name,
+    size: block.size,
+    type: block.physical,
+  };
 
-      if (diskRaidMem.length > 0) {
-        const isSplit = diskRaidMem[0].label.includes(':');
-
-        let label: string;
-        if (isSplit) {
-          const splitLabel = diskRaidMem[0].label.split(':')[0];
-          const hasUniqueName = !raidMembers.some(member => {
-            const startSame = member.label.split(':')[0] === splitLabel;
-            const isSame = member.label === diskRaidMem[0].label;
-
-            return startSame && !isSame;
-          });
-          label = hasUniqueName ? splitLabel : diskRaidMem[0].label;
-        } else {
-          label = diskRaidMem[0].label;
-        }
-
-        return {
-          device: device,
-          brand: nativeDisk.vendor,
-          size: nativeDisk.size,
-          type: nativeDisk.type,
-          raidGroup: label,
-        };
-      } else {
-        return {
-          device: device,
-          brand: nativeDisk.vendor,
-          size: nativeDisk.size,
-          type: nativeDisk.type,
-        };
-      }
-    })
-    .filter(d => d != null);
-
-  const sizesLayout = CONFIG.fs_virtual_mounts
+const getVirtualMountsLayout = (sizes: Size[]) =>
+  CONFIG.fs_virtual_mounts
     .map(mount => {
       const size = sizes.find(s => s.fs === mount);
 
@@ -79,6 +40,61 @@ export const mapToStorageLayout = (
         : undefined;
     })
     .filter(d => d != null);
+
+const getRaidLabel = (deviceName: string, allRaidBlocks: Block[]) => {
+  const raidBlocks = allRaidBlocks.filter(m => m.name.startsWith(deviceName));
+
+  if (raidBlocks.length > 0) {
+    const isSplit = raidBlocks[0].label.includes(':');
+
+    if (isSplit) {
+      const splitLabel = raidBlocks[0].label.split(':')[0];
+      const hasUniqueName = !allRaidBlocks.some(member => {
+        const startSame = member.label.split(':')[0] === splitLabel;
+        const isSame = member.label === raidBlocks[0].label;
+
+        return startSame && !isSame;
+      });
+
+      return hasUniqueName ? splitLabel : raidBlocks[0].label;
+    } else {
+      return raidBlocks[0].label;
+    }
+  }
+
+  return undefined;
+};
+
+export const mapToStorageLayout = (
+  disks: Disk[],
+  blocks: Block[],
+  sizes: Size[]
+) => {
+  const raidBlocks = blocks.filter(block => block.fsType.endsWith('_member'));
+  const diskBlocks = getDiskBlocks(blocks);
+
+  const blockLayout = diskBlocks
+    .map(diskBlock => {
+      const device = diskBlock.name;
+      const nativeDisk = getNativeDisk(disks, diskBlock);
+      const raidLabel = getRaidLabel(device, raidBlocks);
+
+      const layout: StorageInfo['layout'][number] = {
+        device: device,
+        brand: nativeDisk.vendor,
+        size: nativeDisk.size,
+        type: nativeDisk.type,
+      };
+
+      if (raidLabel != null) {
+        layout.raidGroup = raidLabel;
+      }
+
+      return layout;
+    })
+    .filter(d => d != null);
+
+  const sizesLayout = getVirtualMountsLayout(sizes);
 
   return blockLayout.concat(sizesLayout);
 };

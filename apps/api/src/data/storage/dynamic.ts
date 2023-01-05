@@ -4,103 +4,155 @@ import { CONFIG } from '../../config';
 import { getStaticServerInfo } from '../../static-info';
 import { fromHost } from '../../utils';
 
-export const mapToStorageOutput = (
-  layout: StorageInfo['layout'],
-  blocks: si.Systeminformation.BlockDevicesData[],
-  sizes: si.Systeminformation.FsSizeData[]
-) => {
-  const validMounts = sizes.filter(
-    ({ mount, type }) =>
-      mount.startsWith(fromHost('/')) && !CONFIG.fs_type_filter.includes(type)
-  );
-  const hostMountUsed =
-    (
-      sizes.find(
-        ({ mount, type }) => type !== 'squashfs' && mount === '/mnt/host'
-      ) ?? sizes.find(({ mount }) => mount === '/')
-    )?.used ?? 0;
-  const validParts = blocks.filter(
-    ({ type }) => type === 'part' || type === 'disk'
-  );
+type Block = si.Systeminformation.BlockDevicesData;
+type Size = si.Systeminformation.FsSizeData;
 
-  let hostFound = false;
+const unwrapUsed = (size?: Size) => size?.used ?? 0;
 
-  return {
-    layout: layout
-      .map(({ device, virtual }) => {
-        if (virtual) {
-          const size = sizes.find(s => s.fs === device);
-          return size?.used ?? 0;
-        }
+export class DynamicStorageMapper {
+  private validSizes: Size[];
+  private validBlocks: Block[];
+  private hasExplicitHost = false;
 
-        const deviceParts = validParts.filter(({ name }) =>
-          name.startsWith(device)
-        );
-        const explicitHost =
-          // drives where one of the partitions is mounted to the root or /mnt/host/boot/
-          deviceParts.some(
-            ({ mount }) =>
-              mount === fromHost('/') || mount.startsWith(fromHost('/boot/'))
-          );
-        const potentialHost =
-          // drives that have all partitions unmounted
-          deviceParts.every(
-            ({ mount }) => mount == null || !mount.startsWith(fromHost('/'))
-          ) ||
-          // if there is only one drive, it has to be the host
-          layout.length === 1;
+  constructor(
+    private layout: StorageInfo['layout'],
+    private blocks: Block[],
+    private sizes: Size[]
+  ) {
+    this.validSizes = this.getValidSizes();
+    this.validBlocks = this.getValidBlocks();
+    this.hasExplicitHost = this.getHasExplicitHost();
+  }
 
-        if (explicitHost || !potentialHost) {
-          const deviceSizes = deviceParts.reduce(
-            (acc, curr) =>
-              acc +
-              (validMounts.find(({ mount }) => curr.mount === mount)?.used ??
-                0),
-            0
-          );
+  // Setup local values
+  private getValidSizes() {
+    return this.sizes.filter(
+      ({ mount, type }) =>
+        mount.startsWith(fromHost('/')) && !CONFIG.fs_type_filter.includes(type)
+    );
+  }
 
-          if (explicitHost) {
+  private getValidBlocks() {
+    return this.blocks.filter(({ type }) => type === 'part' || type === 'disk');
+  }
+
+  private getIsExplicitHost(deviceBlocks: Block[]) {
+    return deviceBlocks.some(({ mount }) => this.isRootMount(mount));
+  }
+
+  private getHasExplicitHost() {
+    return this.layout.some(({ device }) =>
+      this.getIsExplicitHost(this.getBlocksForDevice(device))
+    );
+  }
+
+  // Helpers
+  private getBlocksForDevice(deviceName: string) {
+    return this.blocks.filter(({ name }) => name.startsWith(deviceName));
+  }
+
+  private isRootMount(mount: string) {
+    return mount === fromHost('/') || mount.startsWith(fromHost('/boot/'));
+  }
+
+  private blocksHaveMounts(deviceBlocks: Block[]) {
+    return deviceBlocks.some(
+      ({ mount }) =>
+        mount != null &&
+        mount.startsWith(fromHost('/')) &&
+        this.validSizes.some(s => s.mount === mount)
+    );
+  }
+
+  // Get sizes of all unmapped sizes, including the host
+  // because this function will only run, if there is no explicit host
+  private getSizesOfAllUnmapped() {
+    const hostMountUsed = unwrapUsed(
+      this.validSizes.find(
+        ({ mount, type }) => type !== 'squashfs' && this.isRootMount(mount)
+      ) ?? this.sizes.find(({ mount }) => mount === '/')
+    );
+    const unclaimedSpace = this.validSizes
+      .filter(
+        ({ mount }) => !this.validBlocks.some(part => part.mount === mount)
+      )
+      .reduce((acc, { used }) => acc + used, 0);
+
+    return hostMountUsed + unclaimedSpace;
+  }
+
+  // Get the size of the explicit host
+  private getHostSize(deviceBlocks: Block[]) {
+    const hasNoExplicitMount = !deviceBlocks.some(
+      d => d.mount === fromHost('/')
+    );
+    return hasNoExplicitMount
+      ? unwrapUsed(
+          this.validSizes.find(({ mount }) => mount === fromHost('/')) ??
+            this.sizes.find(({ mount }) => mount === '/')
+        )
+      : 0;
+  }
+
+  // Get size of the mounts of the partitions/disks of device
+  private getSizeForBlocks(deviceBlocks: Block[]) {
+    return deviceBlocks.reduce(
+      (acc, curr) =>
+        acc +
+        unwrapUsed(this.validSizes.find(({ mount }) => curr.mount === mount)),
+      0
+    );
+  }
+
+  public getMappedLayout() {
+    let hostFound = false;
+
+    return {
+      layout: this.layout
+        .map(({ device, virtual }) => {
+          if (virtual) {
+            const size = this.sizes.find(s => s.fs === device);
+            return size?.used ?? 0;
+          }
+
+          const deviceBlocks = this.getBlocksForDevice(device);
+          const isExplicitHost = this.getIsExplicitHost(deviceBlocks);
+          const hasMounts = this.blocksHaveMounts(deviceBlocks);
+
+          if (isExplicitHost) {
             hostFound = true;
-
-            const hasNoExplicitMount = !deviceParts.some(
-              d => d.mount === fromHost('/')
-            );
             return (
-              deviceSizes +
-              (hasNoExplicitMount
-                ? validMounts.find(({ mount }) => mount === fromHost('/'))
-                    ?.used ?? 0
-                : 0)
+              this.getSizeForBlocks(deviceBlocks) +
+              this.getHostSize(deviceBlocks)
             );
           }
 
-          return deviceSizes;
-        }
+          const assignAllUnmapped =
+            !this.hasExplicitHost &&
+            !hostFound &&
+            (!hasMounts || this.layout.length === 1);
 
-        // Apply all unclaimed partitions to the host disk
-        if (potentialHost && !hostFound) {
-          hostFound = true;
+          if (assignAllUnmapped) {
+            hostFound = true;
+            return this.getSizesOfAllUnmapped();
+          }
 
-          const unclaimedSpace = validMounts
-            .filter(
-              ({ mount }) => !validParts.some(part => part.mount === mount)
-            )
-            .reduce((acc, { used }) => acc + used, 0);
-
-          return hostMountUsed + unclaimedSpace;
-        }
-
-        return 0;
-      })
-      .map(used => ({
-        load: used,
-      })),
-  };
-};
+          return this.getSizeForBlocks(deviceBlocks);
+        })
+        .map(used => ({
+          load: used,
+        })),
+    };
+  }
+}
 
 export default async (): Promise<StorageLoad> => {
   const storageLayout = getStaticServerInfo().storage.layout;
   const [blocks, sizes] = await Promise.all([si.blockDevices(), si.fsSize()]);
 
-  return mapToStorageOutput(storageLayout, blocks, sizes);
+  return new DynamicStorageMapper(
+    storageLayout,
+    blocks,
+    sizes
+  ).getMappedLayout();
 };
