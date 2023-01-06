@@ -98,8 +98,8 @@ yargs(hideBin(process.argv))
         removePad`
           If you were asked to paste the output of this command, please post only the following:
 
-          - On GitHub: Everything between the lines
-          - On Discord: Everything between the \`\`\`
+          - On GitHub: Everything between (and excluding) the lines
+          - On Discord: Everything between (and including) the \`\`\`
 
           ${'-'.repeat(40)}
 
