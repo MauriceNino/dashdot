@@ -350,9 +350,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
         };
       });
     } else {
-      const brand = layout[0]?.brands.join(', ');
+      const brand = removeDuplicates(layout[0]?.brands);
       const size = layout[0]?.size;
-      const type = layout[0]?.types.join(', ');
+      const type = removeDuplicates(layout[0]?.types);
       const isRaid = layout[0]?.raidGroup != null;
 
       return toInfoTable(
@@ -360,9 +360,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
           ? config.storage_label_list
           : config.storage_label_list.filter(x => x !== 'raid'),
         {
-          brand: (layout[0]?.brands.length ?? 0) > 1 ? 'Brands' : 'Brand',
+          brand: 'Brand',
           size: 'Size',
-          type: (layout[0]?.types.length ?? 0) > 1 ? 'Types' : 'Type',
+          type: 'Type',
           raid: 'Raid',
         },
         [

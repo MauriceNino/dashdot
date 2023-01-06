@@ -38,10 +38,10 @@ export const CONFIG: Config = {
     penv('CPU_LABEL_LIST') ?? 'brand,model,cores,threads,frequency'
   ) as any[],
   storage_label_list: lst(
-    penv('STORAGE_LABEL_LIST') ?? 'brand,size,type,raid'
+    penv('STORAGE_LABEL_LIST') ?? 'brand,type,size,raid'
   ) as any[],
   ram_label_list: lst(
-    penv('RAM_LABEL_LIST') ?? 'brand,size,type,frequency'
+    penv('RAM_LABEL_LIST') ?? 'brand,type,size,frequency'
   ) as any[],
   network_label_list: lst(
     penv('NETWORK_LABEL_LIST') ?? 'type,speed_up,speed_down,interface_speed'
