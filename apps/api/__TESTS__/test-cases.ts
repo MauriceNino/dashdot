@@ -5137,14 +5137,14 @@ export const TEST_CASE_14 = {
     {
       brand: 'Samsung',
       device: 'nvme0n1',
-      raidGroup: 'archlinux-latest-64-minimal:0',
+      raidGroup: 'archlinux-latest-64-minimal',
       size: 512110190592,
       type: 'NVMe',
     },
     {
       brand: 'Samsung',
       device: 'nvme1n1',
-      raidGroup: 'archlinux-latest-64-minimal:0',
+      raidGroup: 'archlinux-latest-64-minimal',
       size: 512110190592,
       type: 'NVMe',
     },

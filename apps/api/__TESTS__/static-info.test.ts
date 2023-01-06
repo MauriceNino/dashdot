@@ -22,11 +22,11 @@ import {
 const toStorageInp = (inp: TestCase) =>
   [inp.disks, inp.blocks, inp.sizes] as const;
 
-beforeEach(() => {
-  CONFIG.running_in_docker = true;
-});
-
 describe('Static Info', () => {
+  beforeEach(() => {
+    CONFIG.running_in_docker = true;
+  });
+
   describe('Storage', () => {
     it('Test Case 1', () => {
       const output = mapToStorageLayout(...toStorageInp(TEST_CASE_1));
