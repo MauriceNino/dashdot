@@ -298,6 +298,7 @@ export const DefaultVertBarChart: FC<DefaultVertBarChartProps> = ({
       <Tooltip
         cursor={false}
         content={x => <ToolTipContainer>{tooltipRenderer(x)}</ToolTipContainer>}
+        wrapperStyle={{ outline: 'none' }}
       />
       {children}
     </BarChart>
