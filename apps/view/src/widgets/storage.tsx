@@ -116,65 +116,65 @@ export const StorageChart: FC<StorageChartProps> = ({
   const layout = useStorageLayout(data, config);
   const layoutNoVirtual = layout.filter(l => !l.virtual);
 
-  const totalSize = Math.max(
-    layoutNoVirtual.reduce((acc, s) => (acc = acc + s.size), 0),
-    1
-  );
-  const totalAvailable = Math.max(
-    totalSize -
-      (load?.layout
-        .slice(0, layoutNoVirtual.length)
-        .reduce((acc, { load }) => acc + load, 0) ?? 0),
-    1
-  );
-  const totalUsed = totalSize - totalAvailable;
+  const totalSize = layoutNoVirtual.reduce((acc, s) => (acc = acc + s.size), 0);
+  const totalUsed =
+    load?.layout
+      .slice(0, layoutNoVirtual.length)
+      .reduce((acc, { load }) => acc + load, 0) ?? 0;
+  const totalAvailable = Math.max(0, totalSize - totalUsed);
 
-  let alreadyAdded = 0;
-  const usageArr = layout
-    .reduce(
-      (acc, curr) => {
-        const diskLoad = curr.brands.reduce(
-          (acc, _, i) =>
-            acc === 0 ? load?.layout[alreadyAdded + i]?.load ?? 0 : acc,
-          0
-        );
-        const diskSize = curr.size;
+  const usageArr = useMemo(() => {
+    if (!multiView) return [];
 
-        const existing = acc.find(
-          o =>
-            curr.raidGroup != null &&
-            curr.raidGroup !== '' &&
-            o.raidGroup === curr.raidGroup
-        );
+    let alreadyAdded = 0;
+    return layout
+      .reduce(
+        (acc, curr) => {
+          const diskLoad = curr.brands.reduce(
+            (acc, _, i) =>
+              acc === 0 ? load?.layout[alreadyAdded + i]?.load ?? 0 : acc,
+            0
+          );
+          const diskSize = curr.size;
 
-        if (existing) {
-          existing.used = existing.used + diskLoad;
-        } else {
-          acc.push({
-            used: diskLoad,
-            available: diskSize - diskLoad,
-          });
-        }
+          const existing = acc.find(
+            o =>
+              curr.raidGroup != null &&
+              curr.raidGroup !== '' &&
+              o.raidGroup === curr.raidGroup
+          );
 
-        alreadyAdded += curr.brands.length;
-        return acc;
-      },
-      [] as {
-        raidGroup?: string;
-        used: number;
-        available: number;
-      }[]
-    )
-    .map(({ used, available }) => {
-      const usedPercent = Math.min(used / (used + available), 100);
+          if (existing) {
+            existing.used = existing.used + diskLoad;
+          } else {
+            acc.push({
+              used: diskLoad,
+              available: diskSize - diskLoad,
+            });
+          }
 
-      return {
-        used,
-        available,
-        usedPercent: usedPercent,
-        availablePercent: 1 - usedPercent,
-      };
-    });
+          alreadyAdded += curr.brands.length;
+          return acc;
+        },
+        [] as {
+          raidGroup?: string;
+          used: number;
+          available: number;
+        }[]
+      )
+      .map(({ used, available }) => {
+        const realPercent = used / (used + available),
+          usedPercent = Math.min(realPercent, 1);
+
+        return {
+          used,
+          available,
+          realPercent,
+          usedPercent,
+          availablePercent: 1 - usedPercent,
+        };
+      });
+  }, [layout, load?.layout, multiView]);
 
   return (
     <MultiChartContainer layout>
@@ -200,17 +200,19 @@ export const StorageChart: FC<StorageChartProps> = ({
                   | typeof usageArr[0]
                   | undefined;
 
+                if (!value) {
+                  return <ThemedText>? % Used</ThemedText>;
+                }
+
                 return (
                   <>
                     <ThemedText>
-                      {value ? (value.usedPercent * 100).toFixed(1) : 0} % Used
+                      {(value.realPercent * 100).toFixed(1)} % Used
                     </ThemedText>
 
                     <ThemedText>
-                      {bytePrettyPrint(value?.used ?? 0)} /{' '}
-                      {bytePrettyPrint(
-                        (value?.available ?? 0) + (value?.used ?? 0)
-                      )}
+                      {bytePrettyPrint(value.used)} /{' '}
+                      {bytePrettyPrint(value.available + value.used)}
                     </ThemedText>
                   </>
                 );
@@ -228,7 +230,7 @@ export const StorageChart: FC<StorageChartProps> = ({
                   <LabelList
                     position='insideLeft'
                     offset={15}
-                    dataKey='usedPercent'
+                    dataKey='realPercent'
                     content={
                       <VertBarStartLabel
                         labelRenderer={value =>
@@ -254,7 +256,7 @@ export const StorageChart: FC<StorageChartProps> = ({
         <ChartContainer
           textLeft={
             showPercentages
-              ? `%: ${(((totalUsed ?? 1) / (totalSize ?? 1)) * 100).toFixed(1)}`
+              ? `%: ${((totalUsed / totalSize) * 100).toFixed(1)}`
               : undefined
           }
           variants={itemVariants}
@@ -348,9 +350,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
         };
       });
     } else {
-      const brand = layout[0]?.brands.join(', ');
+      const brand = removeDuplicates(layout[0]?.brands);
       const size = layout[0]?.size;
-      const type = layout[0]?.types.join(', ');
+      const type = removeDuplicates(layout[0]?.types);
       const isRaid = layout[0]?.raidGroup != null;
 
       return toInfoTable(
@@ -358,9 +360,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
           ? config.storage_label_list
           : config.storage_label_list.filter(x => x !== 'raid'),
         {
-          brand: (layout[0]?.brands.length ?? 0) > 1 ? 'Brands' : 'Brand',
+          brand: 'Brand',
           size: 'Size',
-          type: (layout[0]?.types.length ?? 0) > 1 ? 'Types' : 'Type',
+          type: 'Type',
           raid: 'Raid',
         },
         [

@@ -1,21 +1,12 @@
-import {
-  CpuLoad,
-  GpuLoad,
-  NetworkLoad,
-  RamLoad,
-  StorageInfo,
-  StorageLoad,
-} from '@dash/common';
-import { exec as cexec } from 'child_process';
 import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
-import * as si from 'systeminformation';
-import { inspect, promisify } from 'util';
+import { inspect } from 'util';
 import { CONFIG } from './config';
-import { NET_INTERFACE_PATH } from './setup';
-import { getStaticServerInfo, runSpeedTest } from './static-info';
-import { fromHost } from './utils';
-
-const exec = promisify(cexec);
+import getCpuInfo from './data/cpu';
+import getGpuInfo from './data/gpu';
+import getNetworkInfo from './data/network';
+import getRamInfo from './data/ram';
+import getStorageInfo from './data/storage';
+import { loadInfo } from './static-info';
 
 const createBufferedInterval = <R>(
   name: string,
@@ -52,125 +43,13 @@ const createBufferedInterval = <R>(
   return new Observable();
 };
 
-export const mapToStorageOutput = (
-  layout: StorageInfo['layout'],
-  blocks: si.Systeminformation.BlockDevicesData[],
-  sizes: si.Systeminformation.FsSizeData[]
-) => {
-  const validMounts = sizes.filter(
-    ({ mount, type }) =>
-      mount.startsWith(fromHost('/')) && !CONFIG.fs_type_filter.includes(type)
-  );
-  const hostMountUsed =
-    (
-      sizes.find(
-        ({ mount, type }) => type !== 'squashfs' && mount === '/mnt/host'
-      ) ?? sizes.find(({ mount }) => mount === '/')
-    )?.used ?? 0;
-  const validParts = blocks.filter(
-    ({ type }) => type === 'part' || type === 'disk'
-  );
-
-  let hostFound = false;
-
-  return {
-    layout: layout
-      .map(({ device, virtual }) => {
-        if (virtual) {
-          const size = sizes.find(s => s.fs === device);
-          return size?.used ?? 0;
-        }
-
-        const deviceParts = validParts.filter(({ name }) =>
-          name.startsWith(device)
-        );
-        const explicitHost =
-          // drives where one of the partitions is mounted to the root or /mnt/host/boot/
-          deviceParts.some(
-            ({ mount }) =>
-              mount === fromHost('/') || mount.startsWith(fromHost('/boot/'))
-          );
-        const potentialHost =
-          // drives that have all partitions unmounted
-          deviceParts.every(
-            ({ mount }) => mount == null || !mount.startsWith(fromHost('/'))
-          ) ||
-          // if there is only one drive, it has to be the host
-          layout.length === 1;
-
-        if (explicitHost || !potentialHost) {
-          const deviceSizes = deviceParts.reduce(
-            (acc, curr) =>
-              acc +
-              (validMounts.find(({ mount }) => curr.mount === mount)?.used ??
-                0),
-            0
-          );
-
-          if (explicitHost) {
-            hostFound = true;
-
-            const hasNoExplicitMount = !deviceParts.some(
-              d => d.mount === fromHost('/')
-            );
-            return (
-              deviceSizes +
-              (hasNoExplicitMount
-                ? validMounts.find(({ mount }) => mount === fromHost('/'))
-                    ?.used ?? 0
-                : 0)
-            );
-          }
-
-          return deviceSizes;
-        }
-
-        // Apply all unclaimed partitions to the host disk
-        if (potentialHost && !hostFound) {
-          hostFound = true;
-
-          const unclaimedSpace = validMounts
-            .filter(
-              ({ mount }) => !validParts.some(part => part.mount === mount)
-            )
-            .reduce((acc, { used }) => acc + used, 0);
-
-          return hostMountUsed + unclaimedSpace;
-        }
-
-        return 0;
-      })
-      .map(used => ({
-        load: used,
-      })),
-  };
-};
-
 export const getDynamicServerInfo = () => {
   const cpuObs = createBufferedInterval(
     'CPU',
     CONFIG.widget_list.includes('cpu'),
     CONFIG.cpu_shown_datapoints,
     CONFIG.cpu_poll_interval,
-    async (): Promise<CpuLoad> => {
-      const staticInfo = await getStaticServerInfo();
-      const loads = (await si.currentLoad()).cpus;
-
-      let temps: si.Systeminformation.CpuTemperatureData['cores'] = [];
-      let mainTemp = 0;
-      if (CONFIG.enable_cpu_temps) {
-        const siTemps = await si.cpuTemperature();
-        const threadsPerCore = staticInfo.cpu.threads / staticInfo.cpu.cores;
-        temps = siTemps.cores.flatMap(temp => Array(threadsPerCore).fill(temp));
-        mainTemp = siTemps.main; // AVG temp of all cores, in case no per-core data is found
-      }
-
-      return loads.map(({ load }, i) => ({
-        load,
-        temp: temps[i] ?? mainTemp,
-        core: i,
-      }));
-    }
+    getCpuInfo.dynamic
   );
 
   const ramObs = createBufferedInterval(
@@ -178,9 +57,7 @@ export const getDynamicServerInfo = () => {
     CONFIG.widget_list.includes('ram'),
     CONFIG.ram_shown_datapoints,
     CONFIG.ram_poll_interval,
-    async (): Promise<RamLoad> => {
-      return (await si.mem()).active;
-    }
+    getRamInfo.dynamic
   );
 
   const storageObs = createBufferedInterval(
@@ -188,59 +65,15 @@ export const getDynamicServerInfo = () => {
     CONFIG.widget_list.includes('storage'),
     1,
     CONFIG.storage_poll_interval,
-    async (): Promise<StorageLoad> => {
-      const storageLayout = getStaticServerInfo().storage.layout;
-      const [blocks, sizes] = await Promise.all([
-        si.blockDevices(),
-        si.fsSize(),
-      ]);
-
-      return mapToStorageOutput(storageLayout, blocks, sizes);
-    }
+    getStorageInfo.dynamic
   );
-
-  let [lastRx, lastTx, lastTs] = [0, 0, 0];
 
   const networkObs = createBufferedInterval(
     'Network',
     CONFIG.widget_list.includes('network'),
     CONFIG.network_shown_datapoints,
     CONFIG.network_poll_interval,
-    async (): Promise<NetworkLoad> => {
-      if (NET_INTERFACE_PATH) {
-        const { stdout } = await exec(
-          `cat ${NET_INTERFACE_PATH}/statistics/rx_bytes;` +
-            `cat ${NET_INTERFACE_PATH}/statistics/tx_bytes;`
-        );
-        const [rx, tx] = stdout.split('\n').map(Number);
-        const thisTs = performance.now();
-        const dividend = (thisTs - lastTs) / 1000;
-
-        const result =
-          lastTs === 0
-            ? {
-                up: 0,
-                down: 0,
-              }
-            : {
-                up: (tx - lastTx) / dividend,
-                down: (rx - lastRx) / dividend,
-              };
-
-        lastRx = rx;
-        lastTx = tx;
-        lastTs = thisTs;
-
-        return result;
-      } else {
-        const data = (await si.networkStats())[0];
-
-        return {
-          up: data.tx_sec,
-          down: data.rx_sec,
-        };
-      }
-    }
+    getNetworkInfo.dynamic
   );
 
   const gpuObs = createBufferedInterval(
@@ -248,21 +81,14 @@ export const getDynamicServerInfo = () => {
     CONFIG.widget_list.includes('gpu'),
     CONFIG.gpu_shown_datapoints,
     CONFIG.gpu_poll_interval,
-    async (): Promise<GpuLoad> => {
-      const info = await si.graphics();
-
-      return {
-        layout: info.controllers.map(controller => ({
-          load: controller.utilizationGpu ?? 0,
-          memory: controller.utilizationMemory ?? 0,
-        })),
-      };
-    }
+    getGpuInfo.dynamic
   );
 
   const speedTestObs = CONFIG.widget_list.includes('network')
     ? interval(CONFIG.speed_test_interval * 60 * 1000).pipe(
-        mergeMap(async () => await runSpeedTest())
+        mergeMap(
+          async () => await loadInfo('network', getNetworkInfo.speedTest, true)
+        )
       )
     : new Observable();
 

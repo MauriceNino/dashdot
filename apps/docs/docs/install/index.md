@@ -8,8 +8,8 @@ tags:
 
 ## Quick Setup
 
-Images are hosted on [DockerHub](https://hub.docker.com/r/mauricenino/dashdot),
-and are available for both AMD64 and ARM devices.
+Images are hosted on [DockerHub](https://hub.docker.com/r/mauricenino/dashdot)
+and are available for Linux devices, running on both AMD64 and ARM architecture.
 
 ```bash
 docker container run -it \
