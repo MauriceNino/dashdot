@@ -8,6 +8,7 @@ import {
   TEST_CASE_11,
   TEST_CASE_12,
   TEST_CASE_13,
+  TEST_CASE_14,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -21,11 +22,10 @@ import {
 const toStorageInp = (inp: TestCase) =>
   [inp.layout, inp.blocks, inp.sizes] as const;
 
-beforeEach(() => {
-  CONFIG.running_in_docker = true;
-});
-
 describe('Dynamic Info', () => {
+  beforeEach(() => {
+    CONFIG.running_in_docker = true;
+  });
   describe('Storage', () => {
     it('Test Case 1', () => {
       const output = new DynamicStorageMapper(
@@ -105,6 +105,12 @@ describe('Dynamic Info', () => {
         ...toStorageInp(TEST_CASE_13)
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_13.output);
+    });
+    it('Test Case 14', () => {
+      const output = new DynamicStorageMapper(
+        ...toStorageInp(TEST_CASE_14)
+      ).getMappedLayout();
+      expect(output).to.deep.equal(TEST_CASE_14.output);
     });
   });
 });

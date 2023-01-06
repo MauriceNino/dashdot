@@ -74,7 +74,9 @@ export class DynamicStorageMapper {
     );
     const unclaimedSpace = this.validSizes
       .filter(
-        ({ mount }) => !this.validBlocks.some(part => part.mount === mount)
+        ({ mount }) =>
+          !this.isRootMount(mount) &&
+          !this.validBlocks.some(part => part.mount === mount)
       )
       .reduce((acc, { used }) => acc + used, 0);
 
