@@ -1,3 +1,14 @@
+## [4.6.1](https://github.com/MauriceNino/dashdot/compare/v4.6.0...v4.6.1) (2023-01-06)
+
+
+### Bug Fixes
+
+* **api:** also filter disks by fs type filter ([0a97265](https://github.com/MauriceNino/dashdot/commit/0a97265796196d111c048e902c4457aa2a850b90))
+* **api:** remove appendix from raid label when it is not a dupe ([23bbc05](https://github.com/MauriceNino/dashdot/commit/23bbc05625d7a1dd8536fc568d0353e63b4d2a2f)), closes [#514](https://github.com/MauriceNino/dashdot/issues/514)
+* **api:** removed host size from unassigned sizes ([e462e28](https://github.com/MauriceNino/dashdot/commit/e462e286b41dafb2506d0a403a72cb455e1e6b18)), closes [#514](https://github.com/MauriceNino/dashdot/issues/514)
+* **cli:** add instructions and formatting for cli output ([ae79e62](https://github.com/MauriceNino/dashdot/commit/ae79e62e8f00b6687acefe9fa21525edbb780871))
+* **view:** cap storage graphs at 100% (visually) ([453a94b](https://github.com/MauriceNino/dashdot/commit/453a94b7cb93fba4f60f2ccc44464f0df5571245))
+
 # [4.6.0](https://github.com/MauriceNino/dashdot/compare/v4.5.7...v4.6.0) (2022-12-31)
 
 
