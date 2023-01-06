@@ -26,6 +26,7 @@ describe('Dynamic Info', () => {
   beforeEach(() => {
     CONFIG.running_in_docker = true;
   });
+
   describe('Storage', () => {
     it('Test Case 1', () => {
       const output = new DynamicStorageMapper(

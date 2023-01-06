@@ -44,18 +44,23 @@ const getVirtualMountsLayout = (sizes: Size[]) =>
 
 const getRaidLabel = (deviceName: string, allRaidBlocks: Block[]) => {
   const raidBlocks = allRaidBlocks.filter(m => m.name.startsWith(deviceName));
+  const uuids = raidBlocks.map(rb => rb.uuid);
 
   if (raidBlocks.length > 0) {
     const isSplit = raidBlocks[0].label.includes(':');
 
     if (isSplit) {
       const splitLabel = raidBlocks[0].label.split(':')[0];
-      const hasUniqueName = !allRaidBlocks.some(member => {
-        const startSame = member.label.split(':')[0] === splitLabel;
-        const isSame = member.label === raidBlocks[0].label;
+      const hasUniqueName = !allRaidBlocks
+        .filter(
+          rb => !rb.name.startsWith(deviceName) && !uuids.includes(rb.uuid)
+        )
+        .some(rb => {
+          const startSame = rb.label.split(':')[0] === splitLabel;
+          const isSame = rb.label === raidBlocks[0].label;
 
-        return startSame && !isSame;
-      });
+          return startSame && !isSame;
+        });
 
       return hasUniqueName ? splitLabel : raidBlocks[0].label;
     } else {
