@@ -13,14 +13,15 @@ import {
 } from 'rxjs';
 import { Server } from 'socket.io';
 import { CONFIG } from './config';
+import getNetworkInfo from './data/network';
 import { getDynamicServerInfo } from './dynamic-info';
 import { environment } from './environments/environment';
 import { setupNetworking, setupOsVersion } from './setup';
 import {
   getStaticServerInfo,
   getStaticServerInfoObs,
+  loadInfo,
   loadStaticServerInfo,
-  runSpeedTest,
 } from './static-info';
 
 const app = express();
@@ -165,11 +166,7 @@ server.listen(CONFIG.port, async () => {
   if (CONFIG.widget_list.includes('network')) {
     try {
       console.log('Running speed-test (this may take a few minutes)...');
-      const usedRunner = await runSpeedTest();
-      console.log(
-        `Speed-test completed successfully [${usedRunner}]`,
-        getStaticServerInfo().network
-      );
+      await loadInfo('network', () => getNetworkInfo.speedTest(true), true);
     } catch (e) {
       console.warn(e);
     }
