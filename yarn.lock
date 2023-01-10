@@ -11421,7 +11421,7 @@ __metadata:
     core-js: 3.27.1
     cors: 2.8.5
     docusaurus-plugin-image-zoom: 0.1.1
-    docusaurus-plugin-sass: 0.2.2
+    docusaurus-plugin-sass: 0.2.3
     dotenv: 16.0.3
     eslint: 8.31.0
     eslint-config-prettier: 8.6.0
@@ -11882,15 +11882,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-sass@npm:0.2.2":
-  version: 0.2.2
-  resolution: "docusaurus-plugin-sass@npm:0.2.2"
+"docusaurus-plugin-sass@npm:0.2.3":
+  version: 0.2.3
+  resolution: "docusaurus-plugin-sass@npm:0.2.3"
   dependencies:
     sass-loader: ^10.1.1
   peerDependencies:
     "@docusaurus/core": ^2.0.0-beta
     sass: ^1.30.0
-  checksum: e409c403fe0679ffbf5bd3e7738664fc95dae78b4152321b546fd5b04b5309566ad19d4b9ea90554d587b5647d20957d7024a2ae180cc708112227a66eca84d0
+  checksum: 928b02fd7c63835d54cdcce2eeda01cb6124707c6d43ef8e77db06474d3e3b4b7282cc0d88fed378cf1f3db2fc93ba8c11366965bb9b668eae19ca805e578acb
   languageName: node
   linkType: hard
 
