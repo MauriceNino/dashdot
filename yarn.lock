@@ -11466,7 +11466,7 @@ __metadata:
     typescript: 4.9.4
     use-color-scheme: 1.1.3
     util: 0.12.5
-    web-vitals: 3.1.0
+    web-vitals: 3.1.1
     yargs: 17.6.2
   languageName: unknown
   linkType: soft
@@ -24837,10 +24837,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:3.1.0":
-  version: 3.1.0
-  resolution: "web-vitals@npm:3.1.0"
-  checksum: 867161fd16e22b39720c8da3a5976ab08f414490123d94543b427832354bcdd36c64ff589a2c8de636cbe9593c5121e4a9a804d40b34a6e2b1c4cf275c5ba8e2
+"web-vitals@npm:3.1.1":
+  version: 3.1.1
+  resolution: "web-vitals@npm:3.1.1"
+  checksum: 26d552d7e0bba470e1426bbf55c3c1a701c683bbde4553791a2c7e1bc3a7b7b29bf66ccf67c74872af3aa39e5668728736b90f8b3fee2910c0c566e7eb1b6096
   languageName: node
   linkType: hard
 
