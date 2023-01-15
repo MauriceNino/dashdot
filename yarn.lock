@@ -182,12 +182,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/colors@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "@ant-design/colors@npm:6.0.0"
+"@ant-design/colors@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "@ant-design/colors@npm:7.0.0"
   dependencies:
     "@ctrl/tinycolor": ^3.4.0
-  checksum: 55110ac8a3353f3ec2d2fdee6ffb841967dd75f3783ef4e68c22731e042606bc5b3c3febb6cd20aed3f14585729ce8eddf75b531c703c06a2e95b8569861bb47
+  checksum: 419e98d9cb823ff0935024f4278f7b9c5896805dce4c93d667b5a4d76b03f5fa969b32d1998ee761113da43063e2b23a94c330ad6e865f03fbbb2579907e7fdb
   languageName: node
   linkType: hard
 
@@ -216,11 +216,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/icons@npm:^4.7.0":
-  version: 4.7.0
-  resolution: "@ant-design/icons@npm:4.7.0"
+"@ant-design/icons@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@ant-design/icons@npm:5.0.0"
   dependencies:
-    "@ant-design/colors": ^6.0.0
+    "@ant-design/colors": ^7.0.0
     "@ant-design/icons-svg": ^4.2.1
     "@babel/runtime": ^7.11.2
     classnames: ^2.2.6
@@ -228,7 +228,7 @@ __metadata:
   peerDependencies:
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: 4264d38e6b3cc6d640e1e7f9821e5f428369c31754df03b4712706dba4e89c7bc3e6370ba8dc52b9eb278ccb986ddf215bfac0b0c01e5b7e8ed6f50179be1a69
+  checksum: a6d96f8f822208193433a78754e013341f9c8c1c26599a0eefb63978c3581c1f6d404c2eadd0e72e32e9d218349e09dab9ade145af39176886974cd37ed1c226
   languageName: node
   linkType: hard
 
@@ -6644,6 +6644,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rc-component/mutate-observer@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@rc-component/mutate-observer@npm:1.0.0"
+  dependencies:
+    "@babel/runtime": ^7.18.0
+    classnames: ^2.3.2
+    rc-util: ^5.24.4
+  peerDependencies:
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  checksum: fd6d9581882cca35582e399bf5585e237748fc8240a2d76549ed003ea17fdf7ca97609cb6c8113c2836e9d3182fceda2c1469620560168eeb66fc95656f495e7
+  languageName: node
+  linkType: hard
+
 "@rc-component/portal@npm:^1.0.0-6, @rc-component/portal@npm:^1.0.0-8, @rc-component/portal@npm:^1.0.0-9, @rc-component/portal@npm:^1.0.2":
   version: 1.0.3
   resolution: "@rc-component/portal@npm:1.0.3"
@@ -8641,16 +8655,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:5.1.4":
-  version: 5.1.4
-  resolution: "antd@npm:5.1.4"
+"antd@npm:5.1.5":
+  version: 5.1.5
+  resolution: "antd@npm:5.1.5"
   dependencies:
-    "@ant-design/colors": ^6.0.0
+    "@ant-design/colors": ^7.0.0
     "@ant-design/cssinjs": ^1.4.0
-    "@ant-design/icons": ^4.7.0
+    "@ant-design/icons": ^5.0.0
     "@ant-design/react-slick": ~1.0.0
     "@babel/runtime": ^7.18.3
     "@ctrl/tinycolor": ^3.4.0
+    "@rc-component/mutate-observer": ^1.0.0
     "@rc-component/tour": ~1.1.0
     classnames: ^2.2.6
     copy-to-clipboard: ^3.2.0
@@ -8686,7 +8701,7 @@ __metadata:
     rc-tooltip: ~5.2.0
     rc-tree: ~5.7.0
     rc-tree-select: ~5.6.0
-    rc-trigger: ^5.2.10
+    rc-trigger: ^5.3.4
     rc-upload: ~4.3.0
     rc-util: ^5.27.0
     scroll-into-view-if-needed: ^3.0.3
@@ -8694,7 +8709,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: e55862c56dcbb4d1c573a64c758d6a3cd401625160053f14f462d3724a8df2d7d3ca7a272911f3ce31ae6acd83f3fe523622b13ef6c69af779405941ae2db4bf
+  checksum: baa1b333bd3c304d850723f584d084b5bb0f1989cc26572ad196b67afe4bd96a7b9f703f07a7443538c2d487de534f9ebfc532efc2b2a3cdd57c726eaba7ab2c
   languageName: node
   linkType: hard
 
@@ -11410,7 +11425,7 @@ __metadata:
     "@types/throttle-debounce": 5.0.0
     "@typescript-eslint/eslint-plugin": 5.48.1
     "@typescript-eslint/parser": 5.48.1
-    antd: 5.1.4
+    antd: 5.1.5
     axios: 1.2.2
     babel-jest: 29.3.1
     babel-plugin-styled-components: 2.0.7
@@ -20878,7 +20893,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-trigger@npm:^5.0.0, rc-trigger@npm:^5.0.4, rc-trigger@npm:^5.1.2, rc-trigger@npm:^5.2.10, rc-trigger@npm:^5.3.1":
+"rc-trigger@npm:^5.0.0, rc-trigger@npm:^5.0.4, rc-trigger@npm:^5.1.2, rc-trigger@npm:^5.3.1":
   version: 5.3.1
   resolution: "rc-trigger@npm:5.3.1"
   dependencies:
