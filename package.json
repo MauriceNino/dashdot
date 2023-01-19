@@ -45,7 +45,7 @@
     "antd": "5.1.5",
     "axios": "1.2.3",
     "clsx": "1.2.1",
-    "core-js": "3.27.1",
+    "core-js": "3.27.2",
     "cors": "2.8.5",
     "docusaurus-plugin-image-zoom": "0.1.1",
     "docusaurus-plugin-sass": "0.2.3",
