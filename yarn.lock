@@ -191,9 +191,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/cssinjs@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "@ant-design/cssinjs@npm:1.4.0"
+"@ant-design/cssinjs@npm:^1.5.6":
+  version: 1.5.6
+  resolution: "@ant-design/cssinjs@npm:1.5.6"
   dependencies:
     "@babel/runtime": ^7.11.1
     "@emotion/hash": ^0.8.0
@@ -205,7 +205,7 @@ __metadata:
   peerDependencies:
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: c488599af25ddccb947007df13d14b1917ae5a639d8d1636af86081ff59850ce47cb964375c5920fddcf657010ec2be84b91b6273fd8d4a45b98b9be85154bf9
+  checksum: 78b810b7a08d760a3a9a14bd319b7863bdaf461043f76c49b645e7bae8234d930bffca3af5e32e9721a89cce5e751ebc5934d17f6c51c9ac2fdfe5e88ffffda0
   languageName: node
   linkType: hard
 
@@ -8655,12 +8655,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:5.1.5":
-  version: 5.1.5
-  resolution: "antd@npm:5.1.5"
+"antd@npm:5.1.6":
+  version: 5.1.6
+  resolution: "antd@npm:5.1.6"
   dependencies:
     "@ant-design/colors": ^7.0.0
-    "@ant-design/cssinjs": ^1.4.0
+    "@ant-design/cssinjs": ^1.5.6
     "@ant-design/icons": ^5.0.0
     "@ant-design/react-slick": ~1.0.0
     "@babel/runtime": ^7.18.3
@@ -8682,7 +8682,7 @@ __metadata:
     rc-input: ~0.1.4
     rc-input-number: ~7.4.0
     rc-mentions: ~1.13.1
-    rc-menu: ~9.8.0
+    rc-menu: ~9.8.2
     rc-motion: ^2.6.1
     rc-notification: ~5.0.0
     rc-pagination: ~3.2.0
@@ -8709,7 +8709,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: baa1b333bd3c304d850723f584d084b5bb0f1989cc26572ad196b67afe4bd96a7b9f703f07a7443538c2d487de534f9ebfc532efc2b2a3cdd57c726eaba7ab2c
+  checksum: 424f3eedeffb02b62c195086588d946eb721b9838bdf146268efd09d92da643f3e42a6f80362936c9f6b0028888630eb6d00e03b40845e990c17c927e19bd082
   languageName: node
   linkType: hard
 
@@ -11425,7 +11425,7 @@ __metadata:
     "@types/throttle-debounce": 5.0.0
     "@typescript-eslint/eslint-plugin": 5.48.2
     "@typescript-eslint/parser": 5.48.2
-    antd: 5.1.5
+    antd: 5.1.6
     axios: 1.2.3
     babel-jest: 29.3.1
     babel-plugin-styled-components: 2.0.7
@@ -20549,6 +20549,23 @@ __metadata:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
   checksum: e6e3209381e9b90373765a76818ca15ebf27d06739cea1176c2c3ebf204394d2ae8edfd952ff6f04a63c83f23c12b79807b8a6ec2ba0df1d107a0cacc4d20ce9
+  languageName: node
+  linkType: hard
+
+"rc-menu@npm:~9.8.2":
+  version: 9.8.2
+  resolution: "rc-menu@npm:9.8.2"
+  dependencies:
+    "@babel/runtime": ^7.10.1
+    classnames: 2.x
+    rc-motion: ^2.4.3
+    rc-overflow: ^1.2.8
+    rc-trigger: ^5.1.2
+    rc-util: ^5.27.0
+  peerDependencies:
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  checksum: cd8513fe329802e627785133784954e2745afde7cd4507dfcd7cdde933b087f93d9acb478b3e02a5cc30228ef7611002a269c9a64bfa5228b74eba63d3d37a05
   languageName: node
   linkType: hard
 
