@@ -10445,9 +10445,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commitizen@npm:4.2.6":
-  version: 4.2.6
-  resolution: "commitizen@npm:4.2.6"
+"commitizen@npm:4.3.0":
+  version: 4.3.0
+  resolution: "commitizen@npm:4.3.0"
   dependencies:
     cachedir: 2.3.0
     cz-conventional-changelog: 3.3.0
@@ -10457,17 +10457,17 @@ __metadata:
     find-root: 1.1.0
     fs-extra: 9.1.0
     glob: 7.2.3
-    inquirer: 8.2.4
+    inquirer: 8.2.5
     is-utf8: ^0.2.1
     lodash: 4.17.21
-    minimist: 1.2.6
+    minimist: 1.2.7
     strip-bom: 4.0.0
     strip-json-comments: 3.1.1
   bin:
     commitizen: bin/commitizen
     cz: bin/git-cz
     git-cz: bin/git-cz
-  checksum: 4423b25900a02d10e6a6aa98d58404bad0c0c2a68bbeff1ef2379c1ef04344a1fecdaaac3e773988d460de93c8ed4325d1afc186a01f904f7f27edcffcccfd49
+  checksum: 5a54f81ab7f24b74dd7791ae408796b0ac9ae6675cbe85db71047cee131e627ed5bfb9365de8b5777bedfbcdee1bccf15e5da5dae8b09b3fce93b551baa2cb63
   languageName: node
   linkType: hard
 
@@ -11504,7 +11504,7 @@ __metadata:
     babel-plugin-syntax-jsx: 6.18.0
     chai: 4.3.7
     clsx: 1.2.1
-    commitizen: 4.2.6
+    commitizen: 4.3.0
     core-js: 3.27.2
     cors: 2.8.5
     docusaurus-plugin-image-zoom: 0.1.1
@@ -15063,6 +15063,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"inquirer@npm:8.2.5":
+  version: 8.2.5
+  resolution: "inquirer@npm:8.2.5"
+  dependencies:
+    ansi-escapes: ^4.2.1
+    chalk: ^4.1.1
+    cli-cursor: ^3.1.0
+    cli-width: ^3.0.0
+    external-editor: ^3.0.3
+    figures: ^3.0.0
+    lodash: ^4.17.21
+    mute-stream: 0.0.8
+    ora: ^5.4.1
+    run-async: ^2.4.0
+    rxjs: ^7.5.5
+    string-width: ^4.1.0
+    strip-ansi: ^6.0.0
+    through: ^2.3.6
+    wrap-ansi: ^7.0.0
+  checksum: f13ee4c444187786fb393609dedf6b30870115a57b603f2e6424f29a99abc13446fd45ee22461c33c9c40a92a60a8df62d0d6b25d74fc6676fa4cb211de55b55
+  languageName: node
+  linkType: hard
+
 "internal-slot@npm:^1.0.3":
   version: 1.0.3
   resolution: "internal-slot@npm:1.0.3"
@@ -18152,7 +18175,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:1.2.6, minimist@npm:^1.2.0, minimist@npm:^1.2.5, minimist@npm:^1.2.6":
+"minimist@npm:1.2.7":
+  version: 1.2.7
+  resolution: "minimist@npm:1.2.7"
+  checksum: 7346574a1038ca23c32e02252f603801f09384dd1d78b69a943a4e8c2c28730b80e96193882d3d3b22a063445f460e48316b29b8a25addca2d7e5e8f75478bec
+  languageName: node
+  linkType: hard
+
+"minimist@npm:^1.2.0, minimist@npm:^1.2.5, minimist@npm:^1.2.6":
   version: 1.2.6
   resolution: "minimist@npm:1.2.6"
   checksum: d15428cd1e11eb14e1233bcfb88ae07ed7a147de251441d61158619dfb32c4d7e9061d09cab4825fdee18ecd6fce323228c8c47b5ba7cd20af378ca4048fb3fb
