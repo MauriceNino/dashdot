@@ -27,6 +27,6 @@ export const WidgetSwitch = ({
 }: WidgetSwitchProps) => (
   <SwitchContainer>
     <ThemedText>{label}</ThemedText>
-    <Switch checked={checked} onChange={onChange} />
+    <Switch checked={checked} onChange={onChange} title={label} />
   </SwitchContainer>
 );
