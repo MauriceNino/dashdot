@@ -1,3 +1,4 @@
+import * as compression from 'compression';
 import * as cors from 'cors';
 import * as express from 'express';
 import { readFileSync } from 'fs';
@@ -37,6 +38,8 @@ const io = new Server(server, {
 if (!CONFIG.disable_integrations) {
   app.use(cors());
 }
+
+app.use(compression());
 
 if (environment.production) {
   // Serve static files from the React app
