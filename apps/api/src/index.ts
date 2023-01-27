@@ -1,3 +1,4 @@
+import * as compression from 'compression';
 import * as cors from 'cors';
 import * as express from 'express';
 import { readFileSync } from 'fs';
@@ -38,12 +39,20 @@ if (!CONFIG.disable_integrations) {
   app.use(cors());
 }
 
+app.use(compression());
+
 if (environment.production) {
   // Serve static files from the React app
-  app.use(express.static(path.join(__dirname, '../view')));
-  app.get('/', (_, res) => {
-    res.sendFile(path.join(__dirname, '../view', 'index.html'));
-  });
+  app.use(
+    express.static(path.join(__dirname, '../view'), {
+      maxAge: '1y',
+      setHeaders: (res, path) => {
+        if (express.static.mime.lookup(path) === 'text/html') {
+          res.setHeader('Cache-Control', 'public, max-age=0');
+        }
+      },
+    })
+  );
 }
 
 // Allow integrations
