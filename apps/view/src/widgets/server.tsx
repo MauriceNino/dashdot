@@ -237,6 +237,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
           icon={<FontAwesomeIcon icon={faGithub} />}
           href='https://github.com/MauriceNino/dashdot'
           target='_blank'
+          aria-label='GitHub Link'
         />
       </ButtonsContainer>
 

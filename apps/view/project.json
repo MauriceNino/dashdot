@@ -39,9 +39,9 @@
           ],
           "optimization": true,
           "outputHashing": "all",
-          "sourceMap": false,
+          "sourceMap": true,
           "namedChunks": false,
-          "vendorChunk": false
+          "vendorChunk": true
         }
       }
     },
