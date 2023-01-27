@@ -1,3 +1,17 @@
+# [4.7.0](https://github.com/MauriceNino/dashdot/compare/v4.6.1...v4.7.0) (2023-01-27)
+
+
+### Bug Fixes
+
+* add missing accessibility options ([f677f2f](https://github.com/MauriceNino/dashdot/commit/f677f2f0d55ac0ae388a443131d38db4fa2f2936))
+* add source map for easier debugging in prod ([f4d141e](https://github.com/MauriceNino/dashdot/commit/f4d141ef3f7b9cab83a26565bac604aa2a301157))
+
+
+### Features
+
+* add server side compression and add font locally ([7cb2ffc](https://github.com/MauriceNino/dashdot/commit/7cb2ffcd13d793de8eafe3d50a52959411f00c40)), closes [#549](https://github.com/MauriceNino/dashdot/issues/549)
+* set cache control headers ([ac12981](https://github.com/MauriceNino/dashdot/commit/ac12981fcbee33a7daa448df1e8f1349e0e8145f)), closes [#549](https://github.com/MauriceNino/dashdot/issues/549)
+
 ## [4.6.1](https://github.com/MauriceNino/dashdot/compare/v4.6.0...v4.6.1) (2023-01-06)
 
 
