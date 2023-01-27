@@ -11556,7 +11556,7 @@ __metadata:
     socket.io-client: 4.5.4
     store: 2.0.12
     styled-components: 5.3.6
-    systeminformation: 5.17.3
+    systeminformation: 5.17.4
     throttle-debounce: 5.0.0
     ts-jest: 29.0.5
     ts-node: 10.9.1
@@ -24000,12 +24000,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:5.17.3":
-  version: 5.17.3
-  resolution: "systeminformation@npm:5.17.3"
+"systeminformation@npm:5.17.4":
+  version: 5.17.4
+  resolution: "systeminformation@npm:5.17.4"
   bin:
     systeminformation: lib/cli.js
-  checksum: 1d9a66adacf29a88cb8b61fe6391ce52cf849f8fb66fc87c693aaf30be2351def899a07c8be92ff12ae505f1c9df2cf88df7e1fb3020e695aec4aea33fcc2f6e
+  checksum: 4453b65fa1c6f673aa225dde6da53effd0ef671bb8d7f202c217e0ec634693a1b1738c19ee53ecfde5eec02ae66568b94135f0db2bc34016776f4dd67d6a9a89
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
