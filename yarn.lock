@@ -9091,14 +9091,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.2.3":
-  version: 1.2.3
-  resolution: "axios@npm:1.2.3"
+"axios@npm:1.2.5":
+  version: 1.2.5
+  resolution: "axios@npm:1.2.5"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: 52802a1e317e8a6fd2c014aa06a6978ea8381142c98e91f2be5e9e213b77b541451e588e17a3d6db2d6e76faea82911239ca4981d7af959d67fb66018dab3ac9
+  checksum: 3d7a3b029b9f46fb296bcecf84fbe4be32b09511aba2256d44fc5c1a75824f364d2ce22fd0ea61adfd564e1c353c6d2000b4cc340c65b27102528101557dd9db
   languageName: node
   linkType: hard
 
@@ -11508,7 +11508,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.49.0
     "@typescript-eslint/parser": 5.49.0
     antd: 5.1.6
-    axios: 1.2.3
+    axios: 1.2.5
     babel-jest: 29.3.1
     babel-plugin-styled-components: 2.0.7
     babel-plugin-syntax-jsx: 6.18.0
