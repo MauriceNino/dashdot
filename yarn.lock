@@ -5367,35 +5367,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:5.10.1":
-  version: 5.10.1
-  resolution: "@mantine/core@npm:5.10.1"
+"@mantine/core@npm:5.10.2":
+  version: 5.10.2
+  resolution: "@mantine/core@npm:5.10.2"
   dependencies:
     "@floating-ui/react-dom-interactions": ^0.10.1
-    "@mantine/styles": 5.10.1
-    "@mantine/utils": 5.10.1
+    "@mantine/styles": 5.10.2
+    "@mantine/utils": 5.10.2
     "@radix-ui/react-scroll-area": 1.0.2
     react-textarea-autosize: 8.3.4
   peerDependencies:
-    "@mantine/hooks": 5.10.1
+    "@mantine/hooks": 5.10.2
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 8b4ecd6951e6c0c618064ca0ca130c81835887ec69a4534a8315aa5fd9c2c1d7e9bbda44ba5942d47c0c65490f1edd2436320dc37f24261844705db68ef7e6a1
+  checksum: 25b385a37106119283a11d79e26578c2e6b7625b2e26bf121926aeaaaa6b74e96c24354c12ead3604881db97be3c7dea9b121b3cb4df673cc08d6e1cd435ee2a
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:5.10.1":
-  version: 5.10.1
-  resolution: "@mantine/hooks@npm:5.10.1"
+"@mantine/hooks@npm:5.10.2":
+  version: 5.10.2
+  resolution: "@mantine/hooks@npm:5.10.2"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 9b01c87ba8709bfd3bc7990b3bca5beb6d82ce66c089a39fcd63a4abf9dd64a5e85caee98ac22a68e0755a9ae815491561f5bc4fa5693d011a04bb22d8f211d1
+  checksum: 247f5cdce90e4ecabc81a899361091d0c9b4da57485d30ca74dccdb99053b7d5a53d2fb57df18907ca3676a8328f9a94d69d72aa38426efd17dd60d1b1f645a9
   languageName: node
   linkType: hard
 
-"@mantine/styles@npm:5.10.1":
-  version: 5.10.1
-  resolution: "@mantine/styles@npm:5.10.1"
+"@mantine/styles@npm:5.10.2":
+  version: 5.10.2
+  resolution: "@mantine/styles@npm:5.10.2"
   dependencies:
     clsx: 1.1.1
     csstype: 3.0.9
@@ -5403,16 +5403,16 @@ __metadata:
     "@emotion/react": ">=11.9.0"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 877d28258a7f1a7e1ff9681e90be7ccdfe5bf75638f9ec9a2f9ad13153d1f27610b5f9bc30867ae211cad6533ed02ee816b36654b5c00ca0c2a47d5ee6287e4f
+  checksum: c7c6b785399b9414bf3933673266bbff205884639639d2e2e44ad0152af4d7e40e82c10d27043aac80d426144fc73876b877146218de8a970e2f729b4fa66276
   languageName: node
   linkType: hard
 
-"@mantine/utils@npm:5.10.1":
-  version: 5.10.1
-  resolution: "@mantine/utils@npm:5.10.1"
+"@mantine/utils@npm:5.10.2":
+  version: 5.10.2
+  resolution: "@mantine/utils@npm:5.10.2"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: a5ab487a0b24cc12e0b4ef1e5c49439dfa03e29f8f631eb45565fb6991a31aa762816d520904f22a36eff849b7fa2c0996f35af7e1581e4a069c5a1c81b231d4
+  checksum: 6d1acdcd58020c26b646adfacd8082a03d17348ab921d741c6dae48312264bfd03afe9b91cb827c48cbc2f0480054a7b3aae808ec39240d0e4067b413cf19ea8
   languageName: node
   linkType: hard
 
@@ -11506,8 +11506,8 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": 6.2.1
     "@fortawesome/free-solid-svg-icons": 6.2.1
     "@fortawesome/react-fontawesome": 0.2.0
-    "@mantine/core": 5.10.1
-    "@mantine/hooks": 5.10.1
+    "@mantine/core": 5.10.2
+    "@mantine/hooks": 5.10.2
     "@mdx-js/react": 1.6.22
     "@nrwl/cli": 14.7.5
     "@nrwl/eslint-plugin-nx": 14.7.5
