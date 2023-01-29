@@ -97,7 +97,26 @@ export default {
   speedTest: async (printResult = false): Promise<Partial<NetworkInfo>> => {
     let usedRunner: string;
     let result: Partial<NetworkInfo>;
-    if (CONFIG.accept_ookla_eula && (await commandExists('speedtest'))) {
+
+    if (CONFIG.speed_test_from_path) {
+      usedRunner = 'file';
+      const json = JSON.parse(
+        fs.readFileSync(CONFIG.speed_test_from_path, 'utf-8')
+      );
+
+      const unit = json.unit ?? 'bit';
+
+      if (unit !== 'bit' && unit !== 'byte')
+        throw new Error(
+          "You can only use 'bit' or 'byte' as a unit for your speed-test results"
+        );
+
+      result = {
+        speedDown: json.speedDown * (unit === 'bit' ? 8 : 1),
+        speedUp: json.speedUp * (unit === 'bit' ? 8 : 1),
+        publicIp: json.publicIp,
+      };
+    } else if (CONFIG.accept_ookla_eula && (await commandExists('speedtest'))) {
       usedRunner = 'ookla';
       const { stdout } = await exec('speedtest -f json');
       const json = JSON.parse(stdout);
@@ -122,6 +141,9 @@ export default {
         There is no speedtest module installed - please use one of the following:
         - speedtest: https://www.speedtest.net/apps/cli
         - speedtest-cli: https://github.com/sivel/speedtest-cli
+
+        Or alternatively, provide a local file with speedtest results,
+        using DASHDOT_SPEEDTEST_FROM_PATH.
   
         For more help on how to setup dashdot, look here:
         https://getdashdot.com/docs/install/from-source
