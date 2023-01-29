@@ -29,6 +29,26 @@ If dash. detects the wrong gateway as your default interface, you can provide a 
 - type: `string`
 - default: `unset`
 
+## `DASHDOT_SPEED_TEST_FROM_PATH`
+
+You can provide a local file-path from where dash. should read its speed-test results.
+This is also useful, if you want to disable speed-tests, as you can just pass a maximum value for your network graphs
+and then disable the `Speed (Up)` and `Speed (Down)` labels in your network widget.
+
+The file that is being read, should have the following format (you will need to remove the comments):
+
+```json
+{
+  "unit": "byte", // can either be "bit" or "byte"
+  "speedDown": 150000000, // values need to be in the unit provided above
+  "speedUp": 50000000,
+  "publicIp": "123.123.123.123" // optional
+}
+```
+
+- type: `string`
+- default: `unset`
+
 ## `DASHDOT_FS_DEVICE_FILTER`
 
 To hide specific drives, you can pass the device names as a string list using this parameter.
