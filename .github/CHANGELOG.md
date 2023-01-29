@@ -1,3 +1,10 @@
+# [4.8.0](https://github.com/MauriceNino/dashdot/compare/v4.7.0...v4.8.0) (2023-01-29)
+
+
+### Features
+
+* add option to read speed-test result from file ([006dd6f](https://github.com/MauriceNino/dashdot/commit/006dd6f9b7e397dd350421b9ad1edae0ee881482)), closes [#558](https://github.com/MauriceNino/dashdot/issues/558)
+
 # [4.7.0](https://github.com/MauriceNino/dashdot/compare/v4.6.1...v4.7.0) (2023-01-27)
 
 
