@@ -62,7 +62,6 @@ const StatText = styled.p<{ float: 'left' | 'right' }>`
   margin-top: min(13%, 30px);
   z-index: 2;
   color: ${({ theme }) => theme.colors.text}AA;
-  white-space: nowrap;
 `;
 
 type ChartContainerProps = {
