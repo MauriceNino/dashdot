@@ -1,3 +1,10 @@
+## [4.8.1](https://github.com/MauriceNino/dashdot/compare/v4.8.0...v4.8.1) (2023-01-29)
+
+
+### Bug Fixes
+
+* **view:** allow chart labels to break line ([72443d2](https://github.com/MauriceNino/dashdot/commit/72443d20855f93cfe99bab8045cfb2bc9f41b2ae))
+
 # [4.8.0](https://github.com/MauriceNino/dashdot/compare/v4.7.0...v4.8.0) (2023-01-29)
 
 
