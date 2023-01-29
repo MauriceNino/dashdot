@@ -16,6 +16,7 @@ export const CONFIG: Config = {
   running_in_docker: penv('RUNNING_IN_DOCKER') === 'true',
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
   use_network_interface: penv('USE_NETWORK_INTERFACE') ?? '',
+  speed_test_from_path: penv('SPEED_TEST_FROM_PATH'),
   fs_device_filter: lst(penv('FS_DEVICE_FILTER') ?? ''),
   fs_type_filter: lst(
     penv('FS_TYPE_FILTER') ?? 'cifs,9p,fuse.rclone,fuse.mergerfs,nfs4,iso9660'

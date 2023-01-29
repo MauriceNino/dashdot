@@ -86,6 +86,7 @@ export type Config = {
   port: number;
   running_in_docker: boolean;
   use_network_interface: string;
+  speed_test_from_path?: string;
   accept_ookla_eula: boolean;
   fs_device_filter: string[];
   fs_type_filter: string[];
