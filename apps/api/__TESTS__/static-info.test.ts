@@ -10,6 +10,7 @@ import {
   TEST_CASE_13,
   TEST_CASE_14,
   TEST_CASE_15,
+  TEST_CASE_16,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -90,6 +91,11 @@ describe('Static Info', () => {
       CONFIG.running_in_docker = false;
       const output = mapToStorageLayout(true, ...toStorageInp(TEST_CASE_15));
       expect(output).to.deep.equal(TEST_CASE_15.layout);
+    });
+    it('Test Case 16', () => {
+      CONFIG.running_in_docker = false;
+      const output = mapToStorageLayout(true, ...toStorageInp(TEST_CASE_16));
+      expect(output).to.deep.equal(TEST_CASE_16.layout);
     });
   });
 });

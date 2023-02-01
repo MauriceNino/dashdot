@@ -10,6 +10,7 @@ import {
   TEST_CASE_13,
   TEST_CASE_14,
   TEST_CASE_15,
+  TEST_CASE_16,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -135,6 +136,14 @@ describe('Dynamic Info', () => {
         ...toStorageInp(TEST_CASE_15)
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_15.output);
+    });
+    it('Test Case 16', () => {
+      CONFIG.running_in_docker = false;
+      const output = new DynamicStorageMapper(
+        true,
+        ...toStorageInp(TEST_CASE_16)
+      ).getMappedLayout();
+      expect(output).to.deep.equal(TEST_CASE_16.output);
     });
   });
 });
