@@ -5296,15 +5296,18 @@ export const TEST_CASE_15 = {
     },
   ],
   layout: [
-    { brand: '', device: 'A:', size: 256052966400, type: 'SSD' },
-    { brand: '', device: 'C:', size: 256052966400, type: 'SSD' },
-    { brand: 'Seagate', device: 'E:', size: 8001560609280, type: 'HD' },
+    {
+      brand: '',
+      device: '\\\\.\\PHYSICALDRIVE1',
+      size: 256052966400,
+      type: 'SSD',
+    },
+    {
+      brand: 'Seagate',
+      device: '\\\\.\\PHYSICALDRIVE0',
+      size: 8001560609280,
+      type: 'HD',
+    },
   ],
-  output: {
-    layout: [
-      { load: 449269760 },
-      { load: 225739960320 },
-      { load: 7547945865216 },
-    ],
-  },
+  output: { layout: [{ load: 226189230080 }, { load: 7547945865216 }] },
 } as any as TestCase;
