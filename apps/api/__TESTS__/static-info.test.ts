@@ -9,6 +9,8 @@ import {
   TEST_CASE_12,
   TEST_CASE_13,
   TEST_CASE_14,
+  TEST_CASE_15,
+  TEST_CASE_16,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -29,61 +31,71 @@ describe('Static Info', () => {
 
   describe('Storage', () => {
     it('Test Case 1', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_1));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_1));
       expect(output).to.deep.equal(TEST_CASE_1.layout);
     });
     it('Test Case 2', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_2));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_2));
       expect(output).to.deep.equal(TEST_CASE_2.layout);
     });
     it('Test Case 3', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_3));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_3));
       expect(output).to.deep.equal(TEST_CASE_3.layout);
     });
     it('Test Case 4', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_4));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_4));
       expect(output).to.deep.equal(TEST_CASE_4.layout);
     });
     it('Test Case 5', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_5));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_5));
       expect(output).to.deep.equal(TEST_CASE_5.layout);
     });
     it('Test Case 6', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_6));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_6));
       expect(output).to.deep.equal(TEST_CASE_6.layout);
     });
     it('Test Case 7', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_7));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_7));
       expect(output).to.deep.equal(TEST_CASE_7.layout);
     });
     it('Test Case 8', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_8));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_8));
       expect(output).to.deep.equal(TEST_CASE_8.layout);
     });
     it('Test Case 9', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_9));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_9));
       expect(output).to.deep.equal(TEST_CASE_9.layout);
     });
     it('Test Case 10', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_10));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_10));
       expect(output).to.deep.equal(TEST_CASE_10.layout);
     });
     it('Test Case 11', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_11));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_11));
       expect(output).to.deep.equal(TEST_CASE_11.layout);
     });
     it('Test Case 12', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_12));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_12));
       expect(output).to.deep.equal(TEST_CASE_12.layout);
     });
     it('Test Case 13', () => {
       CONFIG.running_in_docker = false;
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_13));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_13));
       expect(output).to.deep.equal(TEST_CASE_13.layout);
     });
     it('Test Case 14', () => {
-      const output = mapToStorageLayout(...toStorageInp(TEST_CASE_14));
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_14));
       expect(output).to.deep.equal(TEST_CASE_14.layout);
+    });
+    it('Test Case 15', () => {
+      CONFIG.running_in_docker = false;
+      const output = mapToStorageLayout(true, ...toStorageInp(TEST_CASE_15));
+      expect(output).to.deep.equal(TEST_CASE_15.layout);
+    });
+    it('Test Case 16', () => {
+      CONFIG.running_in_docker = false;
+      const output = mapToStorageLayout(true, ...toStorageInp(TEST_CASE_16));
+      expect(output).to.deep.equal(TEST_CASE_16.layout);
     });
   });
 });

@@ -3,11 +3,11 @@ export const toCommas = (num: number, commas = 1): number => {
 };
 
 export const bpsPrettyPrint = (bits: number) => {
-  return bits > 1000 * 1000 * 1000
+  return bits >= 1000 * 1000 * 1000
     ? `${(bits / 1000 / 1000 / 1000).toFixed(1)} Gb/s`
-    : bits > 1000 * 1000
+    : bits >= 1000 * 1000
     ? `${(bits / 1000 / 1000).toFixed(1)} Mb/s`
-    : bits > 1000
+    : bits >= 1000
     ? `${(bits / 1000).toFixed(1)} Kb/s`
     : `${bits.toFixed(1)} b/s`;
 };

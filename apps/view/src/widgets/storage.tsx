@@ -197,7 +197,7 @@ export const StorageChart: FC<StorageChartProps> = ({
               }
               tooltipRenderer={x => {
                 const value = x.payload?.[0]?.payload as
-                  | typeof usageArr[0]
+                  | (typeof usageArr)[0]
                   | undefined;
 
                 if (!value) {
@@ -328,15 +328,16 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   const layout = useStorageLayout(data, config);
 
   const [splitView, setSplitView] = useSetting('splitStorage', false);
-  const canHaveSplitView =
-    layout.length > 1 && config.enable_storage_split_view;
+  const canHaveSplitView = layout.length > 1;
 
   const infos = useMemo(() => {
     if (layout.length > 1) {
       return layout.map(s => {
         const brand = s.virtual
           ? s.brands[0]
-          : removeDuplicates(s.brands.map((b, i) => `${b} ${s.types[i]}`));
+          : removeDuplicates(
+              s.brands.map((b, i) => `${b || 'Unknown'} ${s.types[i]}`)
+            );
         const size = s.size;
         const raidGroup = s.raidGroup;
 
