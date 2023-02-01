@@ -328,8 +328,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   const layout = useStorageLayout(data, config);
 
   const [splitView, setSplitView] = useSetting('splitStorage', false);
-  const canHaveSplitView =
-    layout.length > 1 && config.enable_storage_split_view;
+  const canHaveSplitView = layout.length > 1;
 
   const infos = useMemo(() => {
     if (layout.length > 1) {
@@ -339,7 +338,6 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
           : removeDuplicates(
               s.brands.map((b, i) => `${b || 'Unknown'} ${s.types[i]}`)
             );
-        console.log('Brand', brand);
         const size = s.size;
         const raidGroup = s.raidGroup;
 

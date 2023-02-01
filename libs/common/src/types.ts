@@ -98,7 +98,6 @@ export type Config = {
   page_title: string;
   use_imperial: boolean;
   enable_cpu_temps: boolean;
-  enable_storage_split_view: boolean;
   always_show_percentages: boolean;
 
   // Widgets, Labels
