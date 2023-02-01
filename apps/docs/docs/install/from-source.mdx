@@ -104,3 +104,31 @@ set DASHDOT_PORT="8080" ^
 
   </TabItem>
 </Tabs>
+
+:::
+
+## Update
+
+You can update your Dash. instance, by stopping your instance, then
+running the following commands and in the end, restart your instance.
+
+<Tabs>
+  <TabItem value='linux' label='Linux' default>
+
+```bash
+git pull --rebase \
+  && yarn \
+  && yarn build:prod
+```
+
+  </TabItem>
+  <TabItem value='windows' label='Windows (Cmd)'>
+
+```bash
+git pull --rebase ^
+  && yarn ^
+  && yarn build:prod
+```
+
+  </TabItem>
+</Tabs>
