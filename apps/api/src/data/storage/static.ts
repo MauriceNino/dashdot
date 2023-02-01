@@ -2,6 +2,7 @@ import { StorageInfo } from '@dash/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
 import { getStaticServerInfo } from '../../static-info';
+import { platformIsWindows } from '../../utils';
 
 type Block = si.Systeminformation.BlockDevicesData;
 type Disk = si.Systeminformation.DiskLayoutData;
@@ -126,7 +127,7 @@ export default async (): Promise<StorageInfo> => {
 
   return {
     layout: mapToStorageLayout(
-      svInfo.os.platform === 'win32',
+      platformIsWindows(svInfo.os.platform),
       disks,
       blocks,
       sizes
