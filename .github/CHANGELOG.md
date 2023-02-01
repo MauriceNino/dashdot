@@ -1,3 +1,16 @@
+## [4.8.3](https://github.com/MauriceNino/dashdot/compare/v4.8.2...v4.8.3) (2023-02-01)
+
+
+### Bug Fixes
+
+* **api:** allow storage widget to work with win32 from host ([e5b9670](https://github.com/MauriceNino/dashdot/commit/e5b96709919653541fb9c9d28ae7793c825692fc))
+* **api:** capitalize first letter in network type ([ad934e7](https://github.com/MauriceNino/dashdot/commit/ad934e70b4e802a2c11de874d4ac0332ced547a7))
+* **api:** infer SSD type from interfaceType ([6d9ddb6](https://github.com/MauriceNino/dashdot/commit/6d9ddb6021c38e0396146b015c2ea63a7c4b9961))
+* **api:** merge partitions in win32 ([8302df4](https://github.com/MauriceNino/dashdot/commit/8302df44a7650771d67ddd25fa116f4552f7c763))
+* **view:** display 1000 Mb/s as 1 Gb/s ([a36aff0](https://github.com/MauriceNino/dashdot/commit/a36aff0b039b256bb9b4e1853ef2a1cc71f32da7))
+* **view:** enable storage split-view by default ([7f5186e](https://github.com/MauriceNino/dashdot/commit/7f5186e8d21dfb6fb2c7f1108d1fb5291d89da7e))
+* **view:** show unknown for disk vendor on multi-disk view ([93c7b1a](https://github.com/MauriceNino/dashdot/commit/93c7b1a8a2a1fabff6c449957990117a9fcec875))
+
 ## [4.8.2](https://github.com/MauriceNino/dashdot/compare/v4.8.1...v4.8.2) (2023-01-29)
 
 ## [4.8.1](https://github.com/MauriceNino/dashdot/compare/v4.8.0...v4.8.1) (2023-01-29)
