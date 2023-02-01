@@ -17,7 +17,15 @@ const getDiskBlocks = (blocks: Block[]) =>
       !CONFIG.fs_type_filter.includes(block.fsType)
   );
 
-const getNativeDisk = (disks: Disk[], block: Block) =>
+const getNativeDisk = (
+  disks: Disk[],
+  block: Block
+): {
+  vendor: string;
+  size: number;
+  type: string;
+  interfaceType?: string;
+} =>
   disks.find(
     d =>
       d.device === block.device || (block.model != '' && d.name === block.model)
@@ -73,6 +81,10 @@ const getRaidLabel = (deviceName: string, allRaidBlocks: Block[]) => {
   return undefined;
 };
 
+const getDiskType = (type: string, interfaceType?: string) => {
+  return type === 'SSD' && interfaceType === 'NVMe' ? 'NVMe' : type;
+};
+
 export const mapToStorageLayout = (
   hostWin32: boolean,
   disks: Disk[],
@@ -91,7 +103,7 @@ export const mapToStorageLayout = (
       device: hostWin32 ? diskBlock.device : device,
       brand: nativeDisk.vendor,
       size: nativeDisk.size,
-      type: nativeDisk.type,
+      type: getDiskType(nativeDisk.type, nativeDisk.interfaceType),
     };
 
     if (raidLabel != null) {
