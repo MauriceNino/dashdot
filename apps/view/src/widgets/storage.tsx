@@ -197,7 +197,7 @@ export const StorageChart: FC<StorageChartProps> = ({
               }
               tooltipRenderer={x => {
                 const value = x.payload?.[0]?.payload as
-                  | typeof usageArr[0]
+                  | (typeof usageArr)[0]
                   | undefined;
 
                 if (!value) {
@@ -336,7 +336,10 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       return layout.map(s => {
         const brand = s.virtual
           ? s.brands[0]
-          : removeDuplicates(s.brands.map((b, i) => `${b} ${s.types[i]}`));
+          : removeDuplicates(
+              s.brands.map((b, i) => `${b || 'Unknown'} ${s.types[i]}`)
+            );
+        console.log('Brand', brand);
         const size = s.size;
         const raidGroup = s.raidGroup;
 
