@@ -33,3 +33,7 @@ export const removePad = (strings: TemplateStringsArray, ...content: any[]) => {
 
   return trimmed.map(s => s.substring(shortestPad)).join('\n');
 };
+
+export const capFirst = (str: string) => {
+  return str[0].toUpperCase() + str.slice(1);
+};
