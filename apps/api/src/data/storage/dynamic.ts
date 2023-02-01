@@ -2,7 +2,7 @@ import { StorageInfo, StorageLoad } from '@dash/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
 import { getStaticServerInfo } from '../../static-info';
-import { fromHost } from '../../utils';
+import { fromHost, platformIsWindows } from '../../utils';
 
 type Block = si.Systeminformation.BlockDevicesData;
 type Size = si.Systeminformation.FsSizeData;
@@ -160,7 +160,7 @@ export default async (): Promise<StorageLoad> => {
   const [blocks, sizes] = await Promise.all([si.blockDevices(), si.fsSize()]);
 
   return new DynamicStorageMapper(
-    svInfo.os.platform === 'win32',
+    platformIsWindows(svInfo.os.platform),
     svInfo.storage.layout,
     blocks,
     sizes

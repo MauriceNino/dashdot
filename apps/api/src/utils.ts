@@ -5,3 +5,6 @@ export const fromHost = (path: string): string => {
   const pathInDocker = path === '/' ? '/mnt/host' : join('/mnt/host/', path);
   return CONFIG.running_in_docker ? pathInDocker : path;
 };
+
+export const platformIsWindows = (platform: string) =>
+  platform === 'Windows' || platform === 'win32';
