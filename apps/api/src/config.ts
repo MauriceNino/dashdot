@@ -28,7 +28,6 @@ export const CONFIG: Config = {
   custom_host: penv('CUSTOM_HOST'),
   page_title: penv('PAGE_TITLE') ?? 'dash.',
   use_imperial: penv('USE_IMPERIAL') === 'true',
-  enable_storage_split_view: penv('ENABLE_STORAGE_SPLIT_VIEW') === 'true',
   always_show_percentages: penv('ALWAYS_SHOW_PERCENTAGES') === 'true',
 
   widget_list: lst(

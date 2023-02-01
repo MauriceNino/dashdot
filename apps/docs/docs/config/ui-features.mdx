@@ -38,20 +38,6 @@ If you want to show the CPU temperature in the graph. This will probably not wor
 | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | <img src="/img/cpu_view_normal.png" alt="CPU widget normal" style={{maxHeight: "250px"}} /> | <img src="/img/cpu_view_temps.png" alt="CPU widget with temps" style={{maxHeight: "250px"}} /> |
 
-## `DASHDOT_ENABLE_STORAGE_SPLIT_VIEW`
-
-If you want to enable an optional split view for the storage widget, set this to `true`.
-
-The split view will only work reliably, if all drives are mounted in the container.
-Otherwise, any unassigned space will be attributed to the host drive.
-
-- type: `boolean`
-- default: `false`
-
-| `false`                                                                                                  | `true`                                                                                                 |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| <img src="/img/storage_view_single.png" alt="Storage widget single view" style={{maxHeight: "250px"}} /> | <img src="/img/storage_view_multi.png" alt="Storage widget multi view" style={{maxHeight: "250px"}} /> |
-
 ## `DASHDOT_USE_IMPERIAL`
 
 Shows any units in the imperial system, instead of the default metric.
