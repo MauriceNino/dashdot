@@ -1,6 +1,8 @@
 import { StorageInfo } from '@dash/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
+import { getStaticServerInfo } from '../../static-info';
+import { platformIsWindows } from '../../utils';
 
 type Block = si.Systeminformation.BlockDevicesData;
 type Disk = si.Systeminformation.DiskLayoutData;
@@ -15,7 +17,15 @@ const getDiskBlocks = (blocks: Block[]) =>
       !CONFIG.fs_type_filter.includes(block.fsType)
   );
 
-const getNativeDisk = (disks: Disk[], block: Block) =>
+const getNativeDisk = (
+  disks: Disk[],
+  block: Block
+): {
+  vendor: string;
+  size: number;
+  type: string;
+  interfaceType?: string;
+} =>
   disks.find(
     d =>
       d.device === block.device || (block.model != '' && d.name === block.model)
@@ -71,7 +81,12 @@ const getRaidLabel = (deviceName: string, allRaidBlocks: Block[]) => {
   return undefined;
 };
 
+const getDiskType = (type: string, interfaceType?: string) => {
+  return type === 'SSD' && interfaceType === 'NVMe' ? 'NVMe' : type;
+};
+
 export const mapToStorageLayout = (
+  hostWin32: boolean,
   disks: Disk[],
   blocks: Block[],
   sizes: Size[]
@@ -79,26 +94,35 @@ export const mapToStorageLayout = (
   const raidBlocks = blocks.filter(block => block.fsType.endsWith('_member'));
   const diskBlocks = getDiskBlocks(blocks);
 
-  const blockLayout = diskBlocks
-    .map(diskBlock => {
-      const device = diskBlock.name;
-      const nativeDisk = getNativeDisk(disks, diskBlock);
-      const raidLabel = getRaidLabel(device, raidBlocks);
+  const mapDiskBlock = (diskBlock: Block) => {
+    const device = diskBlock.name;
+    const nativeDisk = getNativeDisk(disks, diskBlock);
+    const raidLabel = getRaidLabel(device, raidBlocks);
 
-      const layout: StorageInfo['layout'][number] = {
-        device: device,
-        brand: nativeDisk.vendor,
-        size: nativeDisk.size,
-        type: nativeDisk.type,
-      };
+    const layout: StorageInfo['layout'][number] = {
+      device: hostWin32 ? diskBlock.device : device,
+      brand: nativeDisk.vendor,
+      size: nativeDisk.size,
+      type: getDiskType(nativeDisk.type, nativeDisk.interfaceType),
+    };
 
-      if (raidLabel != null) {
-        layout.raidGroup = raidLabel;
-      }
+    if (raidLabel != null) {
+      layout.raidGroup = raidLabel;
+    }
 
-      return layout;
-    })
-    .filter(d => d != null);
+    return layout;
+  };
+
+  const blockLayout = (
+    hostWin32
+      ? diskBlocks.reduce((acc, curr) => {
+          if (curr.device && !acc.some(b => b.device === curr.device)) {
+            acc.push(curr);
+          }
+          return acc;
+        }, [] as Block[])
+      : diskBlocks
+  ).map(mapDiskBlock);
 
   const sizesLayout = getVirtualMountsLayout(sizes);
 
@@ -106,6 +130,7 @@ export const mapToStorageLayout = (
 };
 
 export default async (): Promise<StorageInfo> => {
+  const svInfo = getStaticServerInfo();
   const [disks, blocks, sizes] = await Promise.all([
     si.diskLayout(),
     si.blockDevices(),
@@ -113,6 +138,11 @@ export default async (): Promise<StorageInfo> => {
   ]);
 
   return {
-    layout: mapToStorageLayout(disks, blocks, sizes),
+    layout: mapToStorageLayout(
+      platformIsWindows(svInfo.os.platform),
+      disks,
+      blocks,
+      sizes
+    ),
   };
 };

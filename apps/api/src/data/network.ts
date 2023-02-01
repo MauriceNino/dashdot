@@ -1,4 +1,4 @@
-import { NetworkInfo, NetworkLoad, removePad } from '@dash/common';
+import { capFirst, NetworkInfo, NetworkLoad, removePad } from '@dash/common';
 import { exec as cexec } from 'child_process';
 import * as fs from 'fs';
 import * as si from 'systeminformation';
@@ -89,7 +89,7 @@ export default {
       const defaultNet = networkInfo.find(net => net.default)!;
 
       return {
-        type: defaultNet.type,
+        type: capFirst(defaultNet.type),
         interfaceSpeed: defaultNet.speed,
       };
     }

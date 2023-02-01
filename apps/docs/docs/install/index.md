@@ -6,7 +6,7 @@ tags:
 
 # Installation
 
-## Quick Setup
+## Quick Setup (Linux)
 
 Images are hosted on [DockerHub](https://hub.docker.com/r/mauricenino/dashdot)
 and are available for Linux devices, running on both AMD64 and ARM architecture.
@@ -38,6 +38,11 @@ Setting the environment variable [`DASHDOT_SPEED_TEST_INTERVAL`](./config/widget
 to a higher number can mitigate this concern.
 
 :::
+
+## Windows / MacOS
+
+If you want to install Dash. on Windows or MacOS, you will have to use the [from source](./install/from-source)
+installation, as Docker Desktop is technologically impossible to support.
 
 ## Installation Options
 
