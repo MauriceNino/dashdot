@@ -1,6 +1,7 @@
 import { StorageInfo } from '@dash/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
+import { getStaticServerInfo } from '../../static-info';
 
 type Block = si.Systeminformation.BlockDevicesData;
 type Disk = si.Systeminformation.DiskLayoutData;
@@ -72,6 +73,7 @@ const getRaidLabel = (deviceName: string, allRaidBlocks: Block[]) => {
 };
 
 export const mapToStorageLayout = (
+  hostWin32: boolean,
   disks: Disk[],
   blocks: Block[],
   sizes: Size[]
@@ -79,26 +81,35 @@ export const mapToStorageLayout = (
   const raidBlocks = blocks.filter(block => block.fsType.endsWith('_member'));
   const diskBlocks = getDiskBlocks(blocks);
 
-  const blockLayout = diskBlocks
-    .map(diskBlock => {
-      const device = diskBlock.name;
-      const nativeDisk = getNativeDisk(disks, diskBlock);
-      const raidLabel = getRaidLabel(device, raidBlocks);
+  const mapDiskBlock = (diskBlock: Block) => {
+    const device = diskBlock.name;
+    const nativeDisk = getNativeDisk(disks, diskBlock);
+    const raidLabel = getRaidLabel(device, raidBlocks);
 
-      const layout: StorageInfo['layout'][number] = {
-        device: device,
-        brand: nativeDisk.vendor,
-        size: nativeDisk.size,
-        type: nativeDisk.type,
-      };
+    const layout: StorageInfo['layout'][number] = {
+      device: hostWin32 ? diskBlock.device : device,
+      brand: nativeDisk.vendor,
+      size: nativeDisk.size,
+      type: nativeDisk.type,
+    };
 
-      if (raidLabel != null) {
-        layout.raidGroup = raidLabel;
-      }
+    if (raidLabel != null) {
+      layout.raidGroup = raidLabel;
+    }
 
-      return layout;
-    })
-    .filter(d => d != null);
+    return layout;
+  };
+
+  const blockLayout = (
+    hostWin32
+      ? diskBlocks.reduce((acc, curr) => {
+          if (curr.device && !acc.some(b => b.device === curr.device)) {
+            acc.push(curr);
+          }
+          return acc;
+        }, [] as Block[])
+      : diskBlocks
+  ).map(mapDiskBlock);
 
   const sizesLayout = getVirtualMountsLayout(sizes);
 
@@ -106,6 +117,7 @@ export const mapToStorageLayout = (
 };
 
 export default async (): Promise<StorageInfo> => {
+  const svInfo = getStaticServerInfo();
   const [disks, blocks, sizes] = await Promise.all([
     si.diskLayout(),
     si.blockDevices(),
@@ -113,6 +125,11 @@ export default async (): Promise<StorageInfo> => {
   ]);
 
   return {
-    layout: mapToStorageLayout(disks, blocks, sizes),
+    layout: mapToStorageLayout(
+      svInfo.os.platform === 'win32',
+      disks,
+      blocks,
+      sizes
+    ),
   };
 };

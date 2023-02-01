@@ -50,7 +50,9 @@ export class DynamicStorageMapper {
 
   // Helpers
   private getBlocksForDevice(deviceName: string) {
-    return this.blocks.filter(({ name }) => name.startsWith(deviceName));
+    return this.blocks.filter(({ name, device }) =>
+      this.hostWin32 ? device === deviceName : name.startsWith(deviceName)
+    );
   }
 
   private isRootMount(mount: string) {
