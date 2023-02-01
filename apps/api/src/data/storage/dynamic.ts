@@ -15,6 +15,7 @@ export class DynamicStorageMapper {
   private hasExplicitHost = false;
 
   constructor(
+    private hostWin32: boolean,
     private layout: StorageInfo['layout'],
     private blocks: Block[],
     private sizes: Size[]
@@ -28,7 +29,8 @@ export class DynamicStorageMapper {
   private getValidSizes() {
     return this.sizes.filter(
       ({ mount, type }) =>
-        mount.startsWith(fromHost('/')) && !CONFIG.fs_type_filter.includes(type)
+        (this.hostWin32 || mount.startsWith(fromHost('/'))) &&
+        !CONFIG.fs_type_filter.includes(type)
     );
   }
 
@@ -52,15 +54,18 @@ export class DynamicStorageMapper {
   }
 
   private isRootMount(mount: string) {
-    return mount === fromHost('/') || mount.startsWith(fromHost('/boot/'));
+    return (
+      !this.hostWin32 &&
+      (mount === fromHost('/') || mount.startsWith(fromHost('/boot/')))
+    );
   }
 
   private blocksHaveMounts(deviceBlocks: Block[]) {
     return deviceBlocks.some(
       ({ mount }) =>
         mount != null &&
-        mount.startsWith(fromHost('/')) &&
-        this.validSizes.some(s => s.mount === mount)
+        this.validSizes.some(s => s.mount === mount) &&
+        (this.hostWin32 || mount.startsWith(fromHost('/')))
     );
   }
 
@@ -149,11 +154,12 @@ export class DynamicStorageMapper {
 }
 
 export default async (): Promise<StorageLoad> => {
-  const storageLayout = getStaticServerInfo().storage.layout;
+  const svInfo = getStaticServerInfo();
   const [blocks, sizes] = await Promise.all([si.blockDevices(), si.fsSize()]);
 
   return new DynamicStorageMapper(
-    storageLayout,
+    svInfo.os.platform === 'win32',
+    svInfo.storage.layout,
     blocks,
     sizes
   ).getMappedLayout();
