@@ -54,12 +54,16 @@ type CpuChartProps = {
   config: Config;
   multiView: boolean;
   showPercentages: boolean;
+  textOffset?: string;
+  textSize?: string;
 };
 export const CpuChart: FC<CpuChartProps> = ({
   load,
   config,
   multiView,
   showPercentages,
+  textOffset,
+  textSize,
 }) => {
   const theme = useTheme();
 
@@ -150,6 +154,8 @@ export const CpuChart: FC<CpuChartProps> = ({
                 } ${config.use_imperial ? '°F' : '°C'}`
               : undefined
           }
+          textOffset={textOffset}
+          textSize={textSize}
           renderChart={size => (
             <DefaultAreaChart
               data={chart}

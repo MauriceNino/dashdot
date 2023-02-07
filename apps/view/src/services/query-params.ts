@@ -5,26 +5,30 @@ export type FullscreenGraphTypes =
   | 'cpu'
   | 'storage'
   | 'ram'
-  | 'network_up'
-  | 'network_down'
-  | 'gpu_memory'
-  | 'gpu_usage';
+  | 'network'
+  | 'gpu';
 
 type QueryResult =
   | {
-      isSingleGraphMode: false;
+      singleWidget: false;
     }
   | {
-      isSingleGraphMode: true;
+      singleWidget: true;
       graph: FullscreenGraphTypes;
       multiView: boolean;
       showPercentage: boolean;
+      textOffset: string;
+      textSize: string;
       overrideTheme?: 'light' | 'dark';
       overrideThemeColor?: string;
       overrideThemeSurface?: string;
-      radius: number;
-      gap?: number;
+      radius?: string;
+      gap?: string;
     };
+
+const sizeRegex = /^\d+\D+$/;
+const extractSizeValue = (input?: string) =>
+  input ? (sizeRegex.test(input) ? input : input + 'px') : undefined;
 
 export const useQuery = (): QueryResult => {
   const query = useMemo(
@@ -32,21 +36,23 @@ export const useQuery = (): QueryResult => {
     []
   );
 
-  if (query['singleGraphMode'] === 'true') {
+  if (query['graph'] != null) {
     return {
-      isSingleGraphMode: true,
+      singleWidget: true,
       graph: query['graph'] as FullscreenGraphTypes,
       multiView: query['multiView'] === 'true',
       showPercentage: query['showPercentage'] === 'true',
+      textOffset: extractSizeValue(query['textOffset'] as string) ?? '24px',
+      textSize: extractSizeValue(query['textSize'] as string) ?? '16px',
       overrideTheme: query['theme'] as 'light' | 'dark',
       overrideThemeColor: query['color'] as string,
       overrideThemeSurface: query['surface'] as string,
-      radius: +((query['innerRadius'] as string) ?? 0),
-      gap: query['gap'] ? +((query['gap'] as string) ?? 0) : undefined,
+      radius: extractSizeValue(query['innerRadius'] as string),
+      gap: extractSizeValue(query['gap'] as string),
     };
   }
 
   return {
-    isSingleGraphMode: false,
+    singleWidget: false,
   };
 };
