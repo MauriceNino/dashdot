@@ -51,15 +51,21 @@ const Container = styled.div<ContainerProps>`
   }
 `;
 
-const StatText = styled.p<{ float: 'left' | 'right' }>`
+type StatTextProps = Transient<{
+  float: 'left' | 'right';
+  offset?: string;
+  size?: string;
+}>;
+const StatText = styled.p<StatTextProps>`
   position: absolute;
   top: 0;
-  ${({ float }) => (float === 'left' ? 'left: 0' : 'right: 0')};
-  ${({ float }) =>
-    float === 'left'
-      ? 'margin-left: min(13%, 30px)'
-      : 'margin-right: min(13%, 30px)'};
-  margin-top: min(13%, 30px);
+  ${({ $float }) => ($float === 'left' ? 'left: 0' : 'right: 0')};
+  ${({ $float, $offset }) =>
+    $float === 'left'
+      ? `margin-left: ${$offset ?? 'min(13%, 30px)'}`
+      : `margin-right: ${$offset ?? 'min(13%, 30px)'}`};
+  margin-top: ${({ $offset }) => $offset ?? 'min(13%, 30px)'};
+  font-size: ${({ $size }) => $size ?? 'unset'};
   z-index: 2;
   color: ${({ theme }) => theme.colors.text}AA;
 `;
@@ -69,6 +75,8 @@ type ChartContainerProps = {
   edges?: [boolean, boolean, boolean, boolean];
   textLeft?: string;
   textRight?: string;
+  textOffset?: string;
+  textSize?: string;
   renderChart: (size: { width: number; height: number }) => React.ReactNode;
 };
 
@@ -84,8 +92,20 @@ export const ChartContainer = motion(
       >
         {props.contentLoaded ? (
           <>
-            <StatText float='left'>{props.textLeft}</StatText>
-            <StatText float='right'>{props.textRight}</StatText>
+            <StatText
+              $float='left'
+              $offset={props.textOffset}
+              $size={props.textSize}
+            >
+              {props.textLeft}
+            </StatText>
+            <StatText
+              $float='right'
+              $offset={props.textOffset}
+              $size={props.textSize}
+            >
+              {props.textRight}
+            </StatText>
             <ReactVirtualizedAutoSizer
               style={{
                 height: '100%',

@@ -20,12 +20,16 @@ export type RamChartProps = {
   load: RamLoad[];
   data: RamInfo;
   showPercentages: boolean;
+  textOffset?: string;
+  textSize?: string;
 };
 
 export const RamChart: FC<RamChartProps> = ({
   load,
   data,
   showPercentages,
+  textOffset,
+  textSize,
 }) => {
   const theme = useTheme();
 
@@ -45,6 +49,8 @@ export const RamChart: FC<RamChartProps> = ({
               )} (${bytePrettyPrint(load[load.length - 1] ?? 0)})`
             : undefined
         }
+        textOffset={textOffset}
+        textSize={textSize}
         renderChart={size => (
           <DefaultAreaChart
             data={chartData}
