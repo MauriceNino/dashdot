@@ -1,3 +1,10 @@
+# [4.9.0](https://github.com/MauriceNino/dashdot/compare/v4.8.5...v4.9.0) (2023-02-08)
+
+
+### Features
+
+* **view:** add text size/offset parameters to widgets ([683d1e5](https://github.com/MauriceNino/dashdot/commit/683d1e5463bd9e19f1f53fa7687037cef347047c))
+
 ## [4.8.5](https://github.com/MauriceNino/dashdot/compare/v4.8.4...v4.8.5) (2023-02-07)
 
 ## [4.8.4](https://github.com/MauriceNino/dashdot/compare/v4.8.3...v4.8.4) (2023-02-05)
