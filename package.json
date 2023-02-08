@@ -133,7 +133,7 @@
     "inquirer": "8.2.4",
     "jest": "29.4.2",
     "nx": "14.7.5",
-    "prettier": "2.8.3",
+    "prettier": "2.8.4",
     "prop-types": "15.8.1",
     "react-test-renderer": "18.2.0",
     "semantic-release-plus": "20.0.0",
