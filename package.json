@@ -80,8 +80,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.20.12",
-    "@commitlint/cli": "17.4.2",
-    "@commitlint/config-conventional": "17.4.2",
+    "@commitlint/cli": "17.4.3",
+    "@commitlint/config-conventional": "17.4.3",
     "@commitlint/cz-commitlint": "17.4.2",
     "@docusaurus/module-type-aliases": "2.3.1",
     "@nrwl/cli": "14.7.5",
