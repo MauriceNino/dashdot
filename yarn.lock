@@ -7745,10 +7745,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.11.19":
-  version: 18.11.19
-  resolution: "@types/node@npm:18.11.19"
-  checksum: d7cd19fcfc59cbdd3f9ba0b4072cb7adc21bd575bd8eb7d7e698975e63564aaa83f03434f32b12331f84f73d0b369d9cbe2371e359d9d7f5c3361f4987f4f7da
+"@types/node@npm:18.14.0":
+  version: 18.14.0
+  resolution: "@types/node@npm:18.14.0"
+  checksum: d83fcf5e4ed544755dd9028f5cbb6b9d46235043159111bb2ad62223729aee581c0144a9f6df8ba73d74011db9ed4ebd7af2fd5e0996714e3beb508a5da8ac5c
   languageName: node
   linkType: hard
 
@@ -11549,7 +11549,7 @@ __metadata:
     "@types/cors": 2.8.13
     "@types/express": 4.17.17
     "@types/jest": 29.4.0
-    "@types/node": 18.11.19
+    "@types/node": 18.14.0
     "@types/qs": 6.9.7
     "@types/react": 18.0.28
     "@types/react-color": 3.0.6
