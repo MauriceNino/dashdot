@@ -1,3 +1,10 @@
+## [4.9.1](https://github.com/MauriceNino/dashdot/compare/v4.9.0...v4.9.1) (2023-02-22)
+
+
+### Bug Fixes
+
+* **api:** fix possible size mismatch on root mount ([148c1df](https://github.com/MauriceNino/dashdot/commit/148c1df772fc0b1b93edefb8f9d2fff8271519d6)), closes [#594](https://github.com/MauriceNino/dashdot/issues/594)
+
 # [4.9.0](https://github.com/MauriceNino/dashdot/compare/v4.8.5...v4.9.0) (2023-02-08)
 
 
