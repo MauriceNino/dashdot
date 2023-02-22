@@ -11,6 +11,7 @@ import {
   TEST_CASE_14,
   TEST_CASE_15,
   TEST_CASE_16,
+  TEST_CASE_17,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -144,6 +145,13 @@ describe('Dynamic Info', () => {
         ...toStorageInp(TEST_CASE_16)
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_16.output);
+    });
+    it('Test Case 17', () => {
+      const output = new DynamicStorageMapper(
+        false,
+        ...toStorageInp(TEST_CASE_17)
+      ).getMappedLayout();
+      expect(output).to.deep.equal(TEST_CASE_17.output);
     });
   });
 });
