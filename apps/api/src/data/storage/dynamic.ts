@@ -58,7 +58,7 @@ export class DynamicStorageMapper {
   private isRootMount(mount: string) {
     return (
       !this.hostWin32 &&
-      (mount === fromHost('/') || mount.startsWith(fromHost('/boot/')))
+      (mount === fromHost('/') || mount.startsWith(fromHost('/boot')))
     );
   }
 
