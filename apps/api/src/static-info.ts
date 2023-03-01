@@ -30,9 +30,7 @@ const STATIC_INFO = new BehaviorSubject<HardwareInfo>({
     size: 0,
     layout: [],
   },
-  storage: {
-    layout: [],
-  },
+  storage: [],
   network: {
     interfaceSpeed: 0,
     speedDown: 0,
