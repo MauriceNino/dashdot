@@ -101,21 +101,22 @@ Number needs to be passed in Megabit (e.g. `10000` for 10 GB/s, because it is `1
 
 ## `DASHDOT_OVERRIDE_STORAGE_BRANDS`
 
-Pass a comma-separated list of brands of your drives. You can skip correct drives, by passing empty values for it (e.g. `Samsung,,WD` would result in `Samsung` for Drive 1 and `WD` for Drive 3).
+Pass a list of key-value pairs where the key is the device name of your drive (have a look in the log in `Static Server Info` > `storage` to gather the device name) and the value is the new brand of the device. An example value could be `sda=Samsung,sdb=Western Digital`.
 
 - type: `string`
 - default: `unset`
 
 ## `DASHDOT_OVERRIDE_STORAGE_SIZES`
 
-Pass a comma-separated list of sizes of your drives. You can skip correct drives, by passing empty values for it (e.g. `123,,321` would result in `123` for Drive 1 and `321` for Drive 3). Number needs to be passed in bytes (e.g. `34359738368` for 32 GB, because it is `32 * 1024 * 1024 * 1024`).
+Pass a list of key-value pairs where the key is the device name of your drive (have a look in the log in `Static Server Info` > `storage` to gather the device name) and the value is the new size of the device (In RAIDS you only need to apply this to a single drive in the RAID). An example value could be `sda=56127367,sdb=6172637222`.
+Number needs to be passed in bytes (e.g. `34359738368` for 32 GB, because it is `32 * 1024 * 1024 * 1024`).
 
 - type: `string`
 - default: `unset`
 
 ## `DASHDOT_OVERRIDE_STORAGE_TYPES`
 
-Pass a comma-separated list of types of your drives. You can skip correct drives, by passing empty values for it (e.g. `SSD,,HDD` would result in `SSD` for Drive 1 and `HDD` for Drive 3).
+Pass a list of key-value pairs where the key is the device name of your drive (have a look in the log in `Static Server Info` > `storage` to gather the device name) and the value is the new type of the device. An example value could be `sda=SSD,sdb=HDD`.
 
 - type: `string`
 - default: `unset`
