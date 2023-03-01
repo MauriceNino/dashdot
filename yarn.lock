@@ -11533,6 +11533,7 @@ __metadata:
     react: 18.2.0
     react-color: 2.19.3
     react-dom: 18.2.0
+    react-form-ctl: 2.0.1
     react-is: 18.2.0
     react-spinners-kit: 1.9.1
     react-test-renderer: 18.2.0
@@ -21486,6 +21487,15 @@ __metadata:
   version: 3.2.0
   resolution: "react-fast-compare@npm:3.2.0"
   checksum: 8ef272c825ae329f61633ce4ce7f15aa5b84e5214d88bc0823880236e03e985a13195befa2c7a4eda7db3b017dc7985729152d88445823f652403cf36c2b86aa
+  languageName: node
+  linkType: hard
+
+"react-form-ctl@npm:2.0.1":
+  version: 2.0.1
+  resolution: "react-form-ctl@npm:2.0.1"
+  peerDependencies:
+    react: "*"
+  checksum: 82cce4d69b6f61a272806518987796f519c9f23bf859b3225a984bdea807f7cf17cbf2ac497129bb494c032af2ae7a83fe1f700cae9a29d4d040dd396e53d8a9
   languageName: node
   linkType: hard
 

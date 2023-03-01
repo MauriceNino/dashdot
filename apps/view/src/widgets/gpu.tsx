@@ -18,12 +18,16 @@ type GpuChartProps = {
   load: GpuLoad[];
   index: number;
   showPercentages: boolean;
+  textOffset?: string;
+  textSize?: string;
 };
 
 export const GpuChart: FC<GpuChartProps> = ({
   load,
   index,
   showPercentages,
+  textOffset,
+  textSize,
 }) => {
   const theme = useTheme();
 
@@ -45,6 +49,8 @@ export const GpuChart: FC<GpuChartProps> = ({
             ? `%: ${(chartDataLoad.at(-1)?.y as number)?.toFixed(1)} (Load)`
             : undefined
         }
+        textOffset={textOffset}
+        textSize={textSize}
         renderChart={size => (
           <DefaultAreaChart
             data={chartDataLoad}
@@ -63,6 +69,8 @@ export const GpuChart: FC<GpuChartProps> = ({
         textLeft={`%: ${(chartDataMemory.at(-1)?.y as number)?.toFixed(
           1
         )} (Memory)`}
+        textOffset={textOffset}
+        textSize={textSize}
         renderChart={size => (
           <DefaultAreaChart
             data={chartDataMemory}
