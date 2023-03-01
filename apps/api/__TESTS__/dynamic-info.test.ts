@@ -7,11 +7,11 @@ import {
   TEST_CASE_10,
   TEST_CASE_11,
   TEST_CASE_12,
-  TEST_CASE_13,
   TEST_CASE_14,
   TEST_CASE_15,
   TEST_CASE_16,
   TEST_CASE_17,
+  TEST_CASE_18,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -19,7 +19,6 @@ import {
   TEST_CASE_6,
   TEST_CASE_7,
   TEST_CASE_8,
-  TEST_CASE_9,
 } from './test-cases';
 
 const toStorageInp = (inp: TestCase) =>
@@ -87,13 +86,6 @@ describe('Dynamic Info', () => {
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_8.output);
     });
-    it('Test Case 9', () => {
-      const output = new DynamicStorageMapper(
-        false,
-        ...toStorageInp(TEST_CASE_9)
-      ).getMappedLayout();
-      expect(output).to.deep.equal(TEST_CASE_9.output);
-    });
     it('Test Case 10', () => {
       const output = new DynamicStorageMapper(
         false,
@@ -114,14 +106,6 @@ describe('Dynamic Info', () => {
         ...toStorageInp(TEST_CASE_12)
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_12.output);
-    });
-    it('Test Case 13', () => {
-      CONFIG.running_in_docker = false;
-      const output = new DynamicStorageMapper(
-        false,
-        ...toStorageInp(TEST_CASE_13)
-      ).getMappedLayout();
-      expect(output).to.deep.equal(TEST_CASE_13.output);
     });
     it('Test Case 14', () => {
       const output = new DynamicStorageMapper(
@@ -152,6 +136,13 @@ describe('Dynamic Info', () => {
         ...toStorageInp(TEST_CASE_17)
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_17.output);
+    });
+    it('Test Case 18', () => {
+      const output = new DynamicStorageMapper(
+        false,
+        ...toStorageInp(TEST_CASE_18)
+      ).getMappedLayout();
+      expect(output).to.deep.equal(TEST_CASE_18.output);
     });
   });
 });

@@ -21,21 +21,24 @@ export type RamInfo = {
 };
 export type RamLoad = number;
 
+export enum RaidType {
+  ZERO = 0,
+  ONE = 1,
+}
 export type StorageInfo = {
-  layout: {
+  raidType?: RaidType;
+  raidLabel?: string;
+  raidName?: string;
+  size: number;
+  virtual?: boolean;
+
+  disks: {
     device: string;
     brand: string;
-    size: number;
     type: string;
-    raidGroup?: string;
-    virtual?: boolean;
   }[];
-};
-export type StorageLoad = {
-  layout: {
-    load: number;
-  }[];
-};
+}[];
+export type StorageLoad = number[];
 
 export type NetworkInfo = {
   interfaceSpeed: number;
