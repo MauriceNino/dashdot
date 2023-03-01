@@ -83,10 +83,10 @@ const GlobalStyle = createGlobalStyle<{ noBg: boolean }>`
 `;
 
 const overrideColor = (
-  colors: typeof darkTheme['colors'],
+  colors: (typeof darkTheme)['colors'],
   query: ReturnType<typeof useQuery>
 ) => {
-  if (query.isSingleGraphMode) {
+  if (query.singleWidget) {
     if (query.overrideThemeColor) {
       colors.cpuPrimary = `#${query.overrideThemeColor}`;
       colors.storagePrimary = `#${query.overrideThemeColor}`;
@@ -110,7 +110,7 @@ export const App: FC = () => {
   const theme = useMemo(() => {
     const baseTheme = darkMode ? darkTheme : lightTheme;
 
-    if (query.isSingleGraphMode) {
+    if (query.singleWidget) {
       const queryTheme = query.overrideTheme
         ? query.overrideTheme === 'dark'
           ? darkTheme
@@ -135,14 +135,10 @@ export const App: FC = () => {
         }}
       >
         <MobileContextProvider>
-          {query.isSingleGraphMode ? (
-            <SingleWidgetChart />
-          ) : (
-            <MainWidgetContainer />
-          )}
+          {query.singleWidget ? <SingleWidgetChart /> : <MainWidgetContainer />}
         </MobileContextProvider>
       </ConfigProvider>
-      <GlobalStyle noBg={query.isSingleGraphMode} />
+      <GlobalStyle noBg={query.singleWidget} />
     </ThemeProvider>
   );
 };

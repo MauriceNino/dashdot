@@ -14,7 +14,7 @@ can be configured using query parameters.
 
 ```html
 <iframe
-  src="https://<YOUR_SERVER_URL>/?singleGraphMode=true&graph=cpu&multiView=true"
+  src="https://<YOUR_SERVER_URL>/?graph=cpu&multiView=true"
   style="border-radius: 20px"
   allowtransparency="true"
   frameborder="0"
@@ -22,13 +22,6 @@ can be configured using query parameters.
 ```
 
 ## Parameters
-
-### `singleGraphMode`
-
-This parameter tells dash. that it should only show a single graph in full-screen mode.
-
-- type: `boolean`
-- required: `true`
 
 ### `graph`
 
@@ -43,13 +36,6 @@ For the `cpu` and `storage` widgets, there are multi-device views.
 These can be shown, by passing this parameter.
 
 - type: `boolean`
-
-:::caution
-
-The multi-view for the `storage` widget is opt-in. To check if the installation has this enabled, use
-the API Request to `/config`, like [described in the API Section](./api#config)
-
-:::
 
 ### `showPercentage`
 
@@ -82,13 +68,25 @@ The color needs to be passed _without_ the trailing `#`.
 This changes the `border-radius` on the graphs. This is mainly needed to add `border-radius` on views with multiple graphs,
 like the network graph. If you want to add a bigger `border-radius` to the whole container, just add it to the iframe's styles.
 
-- type: `number`
+- type: `string`
 
 ### `gap`
 
 This changes the `gap` between the graphs. This is mainly needed on views with multiple graphs, like the network graph.
 
-- type: `number`
+- type: `string`
+
+### `textSize`
+
+This changes the `font-size` of the texts (e.g. percentage) in your graph.
+
+- type: `string`
+
+### `textOffset`
+
+This changes the `margin` of the texts (e.g. percentage) in your graph.
+
+- type: `string`
 
 ## Widget Creator
 

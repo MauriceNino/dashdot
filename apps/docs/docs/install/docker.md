@@ -25,6 +25,6 @@ flag.
 
 ```bash
 docker container run -it \
-  --env DASHDOT_ENABLE_CPU_TEMPS "true" \
+  --env DASHDOT_ENABLE_CPU_TEMPS="true" \
   # ...
 ```

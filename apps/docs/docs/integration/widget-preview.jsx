@@ -1,42 +1,76 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import { Input, MantineProvider, Select } from '@mantine/core';
+import { Group, Input, MantineProvider, Select, Stack } from '@mantine/core';
 import CodeBlock from '@theme/CodeBlock';
-import React, { useState } from 'react';
+import React from 'react';
+import { useFormControl } from 'react-form-ctl';
+
+const getPart = (name, control) => {
+  if (typeof control.value === 'boolean') {
+    return control.value === true ? `&${name}=true` : '';
+  }
+
+  return control.value !== '' && control.value != null
+    ? `&${name}=${control.value.toString()}`
+    : '';
+};
 
 export const WidgetPreview = () => {
   const { colorMode } = useColorMode();
 
-  const [protocol, setProtocol] = useState('https');
-  const [url, setUrl] = useState('dash.mauz.io');
-  const [widget, setWidget] = useState('cpu');
-  const [multiView, setMultiView] = useState('false');
-  const [showPercentage, setShowPercentage] = useState('false');
-  const [primaryColor, setPrimaryColor] = useState('');
-  const [surfaceColor, setSurfaceColor] = useState('');
-  const [theme, setTheme] = useState('');
-  const [outerRadius, setOuterRadius] = useState(20);
-  const [innerRadius, setInnerRadius] = useState(10);
-  const [gap, setGap] = useState(null);
+  const isDev = process.env.NODE_ENV === 'development';
 
-  const multiViewAllowed = widget === 'cpu' || widget === 'storage';
+  const { controls } = useFormControl({
+    protocol: [isDev ? 'http' : 'https'],
+    url: [isDev ? 'localhost:3000' : 'dash.mauz.io'],
+    widget: ['cpu'],
+    multiView: [false],
+    showPercentage: [false],
+    primaryColor: [''],
+    surfaceColor: [''],
+    theme: [''],
+    outerRadius: [20],
+    innerRadius: [null],
+    gap: [null],
+    textSize: [null],
+    textOffset: [null],
+  });
 
-  const multiViewPart =
-    multiViewAllowed && multiView === 'true'
-      ? `&multiView=${multiView.toString()}`
-      : '';
-  const showPercentagePart =
-    showPercentage === 'true'
-      ? `&showPercentage=${showPercentage.toString()}`
-      : '';
-  const themePart = theme !== '' ? `&theme=${theme}` : '';
-  const primaryColorPart = primaryColor !== '' ? `&color=${primaryColor}` : '';
-  const surfaceColorPart =
-    surfaceColor !== '' ? `&surface=${surfaceColor}` : '';
-  const innerRadiusPart =
-    innerRadius !== null ? `&innerRadius=${innerRadius}` : '';
-  const gapPart = gap !== null ? `&gap=${gap}` : '';
+  const multiViewAllowed =
+    controls.widget.value === 'cpu' || controls.widget.value === 'storage';
 
-  const finalUrl = `${protocol}://${url}?singleGraphMode=true&graph=${widget}${multiViewPart}${showPercentagePart}${themePart}${primaryColorPart}${surfaceColorPart}${innerRadiusPart}${gapPart}`;
+  const multiViewPart = multiViewAllowed
+    ? getPart('multiView', controls.multiView)
+    : '';
+  const showPercentagePart = getPart('showPercentage', controls.showPercentage);
+  const themePart = getPart('theme', controls.theme);
+  const primaryColorPart = getPart('color', controls.primaryColor);
+  const surfaceColorPart = getPart('surface', controls.surfaceColor);
+  const innerRadiusPart = getPart('innerRadius', controls.innerRadius);
+  const gapPart = getPart('gap', controls.gap);
+  const textSizePart = getPart('textSize', controls.textSize);
+  const textOffsetPart = getPart('textOffset', controls.textOffset);
+
+  const protocol = controls.protocol.value;
+  const url = controls.url.value;
+  const widget = controls.widget.value;
+  const outerRadius = controls.outerRadius.value;
+
+  const finalUrl = encodeURI(
+    `${protocol}://${url}?graph=${widget}${multiViewPart}${showPercentagePart}` +
+      `${themePart}${primaryColorPart}${surfaceColorPart}${innerRadiusPart}` +
+      `${gapPart}${textSizePart}${textOffsetPart}`
+  );
+
+  const code = `<iframe
+  src="${finalUrl}"${
+    outerRadius != null
+      ? `
+  style="border-radius: ${outerRadius}px"`
+      : ''
+  }
+  allowtransparency="true"
+  frameborder="0"
+></iframe>`;
 
   return (
     <MantineProvider
@@ -44,158 +78,144 @@ export const WidgetPreview = () => {
         colorScheme: colorMode === 'dark' ? 'dark' : 'light',
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          flexFlow: 'column nowrap',
-          gap: '20px',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'row wrap',
-            columnGap: '20px',
-            rowGap: '10px',
-            alignItems: 'center',
-          }}
-        >
-          <Input.Wrapper label='URL'>
-            <div
-              style={{
-                display: 'flex',
-                flexFlow: 'row nowrap',
-              }}
-            >
-              <Select
-                style={{ width: '100px' }}
-                value={protocol}
-                onChange={e => setProtocol(e)}
-                data={[
-                  { value: 'https', label: 'https://' },
-                  { value: 'http', label: 'http://' },
-                ]}
-              />
-              <Input value={url} onChange={e => setUrl(e.target.value)} />
-            </div>
-          </Input.Wrapper>
+      <Stack spacing='xl'>
+        <Stack spacing='xs'>
+          <h3 style={{ marginBottom: 0 }}>General</h3>
+          <Group>
+            <Input.Wrapper label='URL'>
+              <div
+                style={{
+                  display: 'flex',
+                  flexFlow: 'row nowrap',
+                }}
+              >
+                <Select
+                  style={{ width: '100px' }}
+                  value={controls.protocol.value}
+                  onChange={e => controls.protocol.setValue(e)}
+                  data={[
+                    { value: 'https', label: 'https://' },
+                    { value: 'http', label: 'http://' },
+                  ]}
+                />
+                <Input {...controls.url.inputProps()} />
+              </div>
+            </Input.Wrapper>
 
-          <Select
-            label='Widget'
-            value={widget}
-            onChange={e => setWidget(e)}
-            data={[
-              { value: 'cpu', label: 'CPU' },
-              { value: 'storage', label: 'Storage' },
-              { value: 'ram', label: 'RAM' },
-              { value: 'network', label: 'Network' },
-              { value: 'gpu', label: 'GPU' },
-            ]}
-          />
-
-          {multiViewAllowed && (
             <Select
-              label='Multi-View'
-              value={multiView}
-              onChange={e => setMultiView(e)}
+              label='Widget'
+              value={controls.widget.value}
+              onChange={e => controls.widget.setValue(e)}
               data={[
-                { value: 'true', label: 'True' },
-                { value: 'false', label: 'False' },
+                { value: 'cpu', label: 'CPU' },
+                { value: 'storage', label: 'Storage' },
+                { value: 'ram', label: 'RAM' },
+                { value: 'network', label: 'Network' },
+                { value: 'gpu', label: 'GPU' },
               ]}
             />
-          )}
-          <Select
-            label='Show Percentage'
-            value={showPercentage}
-            onChange={e => setShowPercentage(e)}
-            data={[
-              { value: 'true', label: 'True' },
-              { value: 'false', label: 'False' },
-            ]}
-          />
 
-          <Select
-            label='Theme'
-            value={theme}
-            onChange={e => setTheme(e)}
-            data={[
-              { value: '', label: 'Inherit' },
-              { value: 'light', label: 'Light' },
-              { value: 'dark', label: 'Dark' },
-            ]}
-          />
-          <Input.Wrapper label='Primary Color'>
-            <Input
-              icon='#'
-              value={primaryColor}
-              onChange={e => setPrimaryColor(e.target.value)}
+            {multiViewAllowed && (
+              <Select
+                label='Multi-View'
+                value={controls.multiView.value}
+                onChange={e => controls.multiView.setValue(e)}
+                data={[
+                  { value: true, label: 'True' },
+                  { value: false, label: 'False' },
+                ]}
+              />
+            )}
+            <Select
+              label='Show Percentage'
+              value={controls.showPercentage.value}
+              onChange={e => controls.showPercentage.setValue(e)}
+              data={[
+                { value: true, label: 'True' },
+                { value: false, label: 'False' },
+              ]}
             />
-          </Input.Wrapper>
-          <Input.Wrapper label='Surface Color'>
-            <Input
-              icon='#'
-              value={surfaceColor}
-              onChange={e => setSurfaceColor(e.target.value)}
-            />
-          </Input.Wrapper>
+          </Group>
+        </Stack>
 
-          <Input.Wrapper label='Outer Radius'>
-            <Input
-              rightSection='px'
-              value={outerRadius}
-              type='number'
-              onChange={e =>
-                setOuterRadius(e.target.value === '' ? null : +e.target.value)
-              }
+        <Stack spacing='xs'>
+          <h3 style={{ marginBottom: 0 }}>Theming</h3>
+          <Group>
+            <Select
+              label='Theme'
+              value={controls.theme.value}
+              onChange={e => controls.theme.setValue(e)}
+              data={[
+                { value: '', label: 'Inherit' },
+                { value: 'light', label: 'Light' },
+                { value: 'dark', label: 'Dark' },
+              ]}
             />
-          </Input.Wrapper>
-          <Input.Wrapper label='Inner Radius'>
-            <Input
-              rightSection='px'
-              value={innerRadius}
-              type='number'
-              onChange={e =>
-                setInnerRadius(e.target.value === '' ? null : +e.target.value)
-              }
-            />
-          </Input.Wrapper>
-          <Input.Wrapper label='Gap'>
-            <Input
-              rightSection='px'
-              value={gap}
-              type='number'
-              onChange={e =>
-                setGap(e.target.value === '' ? null : +e.target.value)
-              }
-            />
-          </Input.Wrapper>
-        </div>
+            <Input.Wrapper label='Primary Color'>
+              <Input icon='#' {...controls.primaryColor.inputProps()} />
+            </Input.Wrapper>
+            <Input.Wrapper label='Surface Color'>
+              <Input icon='#' {...controls.surfaceColor.inputProps()} />
+            </Input.Wrapper>
 
-        <h3>Result</h3>
-        <CodeBlock className={`language-html`}>
-          {`<iframe
-  src="${finalUrl}"${
-            outerRadius != null
-              ? `
-  style="border-radius: ${outerRadius}px"`
-              : ''
-          }
-  allowtransparency="true"
-  frameborder="0"
-></iframe>`}
-        </CodeBlock>
+            <Input.Wrapper label='Outer Radius'>
+              <Input
+                rightSection='px'
+                type='number'
+                {...controls.outerRadius.numberInputProps()}
+              />
+            </Input.Wrapper>
+            <Input.Wrapper label='Inner Radius'>
+              <Input
+                rightSection='px'
+                type='number'
+                placeholder='10'
+                {...controls.innerRadius.numberInputProps()}
+              />
+            </Input.Wrapper>
+            <Input.Wrapper label='Gap'>
+              <Input
+                rightSection='px'
+                type='number'
+                placeholder='12'
+                {...controls.gap.numberInputProps()}
+              />
+            </Input.Wrapper>
+            <Input.Wrapper label='Text Size'>
+              <Input
+                rightSection='px'
+                type='number'
+                placeholder='16'
+                {...controls.textSize.numberInputProps()}
+              />
+            </Input.Wrapper>
+            <Input.Wrapper label='Text Offset'>
+              <Input
+                rightSection='px'
+                type='number'
+                placeholder='24'
+                {...controls.textOffset.numberInputProps()}
+              />
+            </Input.Wrapper>
+          </Group>
+        </Stack>
 
-        <iframe
-          src={finalUrl}
-          style={{
-            borderRadius: (outerRadius ?? 0) + 'px',
-            width: '100%',
-            maxWidth: '300px',
-          }}
-          frameBorder='0'
-          allowTransparency
-        ></iframe>
-      </div>
+        <Stack spacing='xs'>
+          <h3 style={{ marginBottom: 0 }}>Result</h3>
+          <CodeBlock className={`language-html`}>{code}</CodeBlock>
+
+          <iframe
+            src={finalUrl}
+            style={{
+              borderRadius: (outerRadius ?? 0) + 'px',
+              width: '100%',
+              maxWidth: '300px',
+            }}
+            frameBorder='0'
+            allowTransparency
+          ></iframe>
+        </Stack>
+      </Stack>
     </MantineProvider>
   );
 };

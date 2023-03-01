@@ -19,6 +19,8 @@ type NetworkChartProps = {
   data: NetworkInfo;
   config: Config;
   showPercentages: boolean;
+  textOffset?: string;
+  textSize?: string;
 };
 
 export const NetworkChart: FC<NetworkChartProps> = ({
@@ -26,6 +28,8 @@ export const NetworkChart: FC<NetworkChartProps> = ({
   data,
   config,
   showPercentages,
+  textOffset,
+  textSize,
 }) => {
   const theme = useTheme();
 
@@ -62,6 +66,8 @@ export const NetworkChart: FC<NetworkChartProps> = ({
               )}`
             : '↑'
         }
+        textOffset={textOffset}
+        textSize={textSize}
         renderChart={size => (
           <DefaultAreaChart
             data={chartDataUp}
@@ -91,6 +97,8 @@ export const NetworkChart: FC<NetworkChartProps> = ({
               )}`
             : '↓'
         }
+        textOffset={textOffset}
+        textSize={textSize}
         renderChart={size => (
           <DefaultAreaChart
             data={chartDataDown}

@@ -51,6 +51,8 @@ type StorageChartProps = {
   config: Config;
   multiView: boolean;
   showPercentages: boolean;
+  textOffset?: string;
+  textSize?: string;
 };
 export const StorageChart: FC<StorageChartProps> = ({
   load,
@@ -59,6 +61,8 @@ export const StorageChart: FC<StorageChartProps> = ({
   config,
   multiView,
   showPercentages,
+  textOffset,
+  textSize,
 }) => {
   const theme = useTheme();
   const layoutNoVirtual = data.filter(l => !l.virtual);
@@ -172,6 +176,8 @@ export const StorageChart: FC<StorageChartProps> = ({
               ? `%: ${((totalUsed / totalSize) * 100).toFixed(1)}`
               : undefined
           }
+          textOffset={textOffset}
+          textSize={textSize}
           variants={itemVariants}
           initial='initial'
           animate='animate'

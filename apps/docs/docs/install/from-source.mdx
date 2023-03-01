@@ -27,7 +27,7 @@ To run this repository from source, you need to have the following installed:
 
 After that, download and build the project (might take a few minutes)
 
-<Tabs>
+<Tabs groupId="os">
   <TabItem value='linux' label='Linux' default>
 
 ```bash
@@ -52,7 +52,7 @@ git clone https://github.com/MauriceNino/dashdot ^
 
 When done, you can run the dashboard by executing:
 
-<Tabs>
+<Tabs groupId="os">
   <TabItem value='linux' label='Linux' default>
 
 ```bash
@@ -61,6 +61,8 @@ sudo -E yarn start
 
   </TabItem>
   <TabItem value='windows' label='Windows (Cmd)'>
+
+For the most accurate results, it is recommended to start the Cmd as an Admin.
 
 ```bash
 yarn start
@@ -86,7 +88,7 @@ speedtest --accept-license
 
 Config options can optionally passed using environment variables.
 
-<Tabs>
+<Tabs groupId="os">
   <TabItem value='linux' label='Linux' default>
 
 ```bash
@@ -100,6 +102,32 @@ export DASHDOT_PORT="8080" \
 ```bash
 set DASHDOT_PORT="8080" ^
   && yarn start
+```
+
+  </TabItem>
+</Tabs>
+
+## Update
+
+You can update your Dash. instance, by stopping your instance, then
+running the following commands and in the end, restart your instance.
+
+<Tabs groupId="os">
+  <TabItem value='linux' label='Linux' default>
+
+```bash
+git pull --rebase \
+  && yarn \
+  && yarn build:prod
+```
+
+  </TabItem>
+  <TabItem value='windows' label='Windows (Cmd)'>
+
+```bash
+git pull --rebase ^
+  && yarn ^
+  && yarn build:prod
 ```
 
   </TabItem>
