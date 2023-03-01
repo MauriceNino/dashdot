@@ -12,6 +12,7 @@ import {
   TEST_CASE_16,
   TEST_CASE_17,
   TEST_CASE_18,
+  TEST_CASE_19,
   TEST_CASE_2,
   TEST_CASE_3,
   TEST_CASE_4,
@@ -95,6 +96,10 @@ describe('Static Info', () => {
     it('Test Case 18', () => {
       const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_18));
       expect(output).to.deep.equal(TEST_CASE_18.layout);
+    });
+    it('Test Case 19', () => {
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_19));
+      expect(output).to.deep.equal(TEST_CASE_19.layout);
     });
   });
 });

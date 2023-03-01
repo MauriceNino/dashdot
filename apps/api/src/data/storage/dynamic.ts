@@ -61,6 +61,14 @@ export class DynamicStorageMapper {
   private getBlocksForRaid(raidName: string) {
     return this.blocks.filter(({ name }) => name.startsWith(raidName));
   }
+  private getBlocksForXfs(parts: Block[]) {
+    return this.blocks.filter(
+      ({ uuid, type, fsType }) =>
+        type === 'md' &&
+        fsType === 'xfs' &&
+        parts.some(part => part.uuid === uuid)
+    );
+  }
 
   private isRootMount(mount: string) {
     return (
@@ -103,10 +111,7 @@ export class DynamicStorageMapper {
       d => d.mount === fromHost('/')
     );
     return hasNoExplicitMount
-      ? unwrapUsed(
-          this.validSizes.find(({ mount }) => mount === fromHost('/')) ??
-            this.sizes.find(({ mount }) => mount === '/')
-        )
+      ? unwrapUsed(this.validSizes.find(({ mount }) => mount === fromHost('/')))
       : 0;
   }
 
@@ -129,9 +134,11 @@ export class DynamicStorageMapper {
         return size?.used ?? 0;
       }
 
-      const deviceBlocks = this.getBlocksForDisks(disks).concat(
-        this.getBlocksForRaid(raidName)
-      );
+      const deviceParts = this.getBlocksForDisks(disks);
+      const deviceBlocks = deviceParts
+        .concat(this.getBlocksForRaid(raidName))
+        .concat(this.getBlocksForXfs(deviceParts));
+
       const isExplicitHost = this.getIsExplicitHost(deviceBlocks);
       const hasMounts = this.blocksHaveMounts(deviceBlocks);
 
