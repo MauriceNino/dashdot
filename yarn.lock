@@ -7760,12 +7760,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.10":
-  version: 18.0.10
-  resolution: "@types/react-dom@npm:18.0.10"
+"@types/react-dom@npm:18.0.11":
+  version: 18.0.11
+  resolution: "@types/react-dom@npm:18.0.11"
   dependencies:
     "@types/react": "*"
-  checksum: ff8282d5005a0b1cd95fb65bf79d3d8485e4cfe2aaf052129033a178684b940014a3f4536bc20d573f8a01cf4c6f4770c74988cef7c2b5cac3041d9f172647e3
+  checksum: 579691e4d5ec09688087568037c35edf8cfb1ab3e07f6c60029280733ee7b5c06d66df6fcc90786702c93ac8cb13bc7ff16c79ddfc75d082938fbaa36e1cdbf4
   languageName: node
   linkType: hard
 
@@ -11495,7 +11495,7 @@ __metadata:
     "@types/qs": 6.9.7
     "@types/react": 18.0.28
     "@types/react-color": 3.0.6
-    "@types/react-dom": 18.0.10
+    "@types/react-dom": 18.0.11
     "@types/react-is": 17.0.3
     "@types/react-virtualized-auto-sizer": 1.0.1
     "@types/store": 2.0.2
