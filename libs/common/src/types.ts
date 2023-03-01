@@ -170,9 +170,9 @@ export type Config = {
     network_speed_down?: number;
     network_interface_speed?: number;
     network_public_ip?: string;
-    storage_brands: string[];
-    storage_types: string[];
-    storage_sizes: number[];
+    storage_brands: Record<string, string>;
+    storage_types: Record<string, string>;
+    storage_sizes: Record<string, number>;
     gpu_brands: string[];
     gpu_models: string[];
     gpu_memories: number[];

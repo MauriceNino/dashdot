@@ -10,6 +10,20 @@ const numNull = (val: string | undefined): number | undefined => {
 const penv = (key: string): string | undefined => process.env[`DASHDOT_${key}`];
 const lst = (item: string): string[] => (item === '' ? [] : item.split(','));
 const numlst = (item: string): number[] => lst(item).map(numNull);
+const kv = <T extends boolean>(
+  inp: string[],
+  toNum: T
+): Record<string, T extends true ? number : string> =>
+  Object.fromEntries(
+    inp.map(p => {
+      const [key, value] = p.split('=');
+      if (toNum) {
+        return [key, +value];
+      } else {
+        return [key, value];
+      }
+    })
+  );
 
 export const CONFIG: Config = {
   port: numNull(penv('PORT')) ?? 3001,
@@ -94,9 +108,9 @@ export const CONFIG: Config = {
     network_speed_down: numNull(penv('OVERRIDE_NETWORK_SPEED_DOWN')),
     network_interface_speed: numNull(penv('OVERRIDE_NETWORK_INTERFACE_SPEED')),
     network_public_ip: penv('OVERRIDE_NETWORK_PUBLIC_IP'),
-    storage_brands: lst(penv('OVERRIDE_STORAGE_BRANDS') ?? ''),
-    storage_sizes: numlst(penv('OVERRIDE_STORAGE_SIZES') ?? ''),
-    storage_types: lst(penv('OVERRIDE_STORAGE_TYPES') ?? ''),
+    storage_brands: kv(lst(penv('OVERRIDE_STORAGE_BRANDS') ?? ''), false),
+    storage_sizes: kv(lst(penv('OVERRIDE_STORAGE_SIZES') ?? ''), true),
+    storage_types: kv(lst(penv('OVERRIDE_STORAGE_TYPES') ?? ''), false),
     gpu_brands: lst(penv('OVERRIDE_GPU_BRANDS') ?? ''),
     gpu_models: lst(penv('OVERRIDE_GPU_MODELS') ?? ''),
     gpu_memories: numlst(penv('OVERRIDE_GPU_MEMORIES') ?? ''),
