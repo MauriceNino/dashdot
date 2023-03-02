@@ -43,11 +43,7 @@ export class DynamicStorageMapper {
   }
 
   private getHasExplicitHost() {
-    return this.layout.some(({ disks, raidName }) =>
-      this.getIsExplicitHost(
-        this.getBlocksForDisks(disks).concat(this.getBlocksForRaid(raidName))
-      )
-    );
+    return this.getIsExplicitHost(this.validBlocks);
   }
 
   // Helpers

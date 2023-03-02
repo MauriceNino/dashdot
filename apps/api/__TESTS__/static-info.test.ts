@@ -28,6 +28,7 @@ const toStorageInp = (inp: TestCase) =>
 describe('Static Info', () => {
   beforeEach(() => {
     CONFIG.running_in_docker = true;
+    CONFIG.fs_device_filter = [];
   });
 
   describe('Storage', () => {
@@ -98,6 +99,7 @@ describe('Static Info', () => {
       expect(output).to.deep.equal(TEST_CASE_18.layout);
     });
     it('Test Case 19', () => {
+      CONFIG.fs_device_filter = ['sda'];
       const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_19));
       expect(output).to.deep.equal(TEST_CASE_19.layout);
     });

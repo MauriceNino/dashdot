@@ -33,7 +33,8 @@ export const CONFIG: Config = {
   speed_test_from_path: penv('SPEED_TEST_FROM_PATH'),
   fs_device_filter: lst(penv('FS_DEVICE_FILTER') ?? ''),
   fs_type_filter: lst(
-    penv('FS_TYPE_FILTER') ?? 'cifs,9p,fuse.rclone,fuse.mergerfs,nfs4,iso9660'
+    penv('FS_TYPE_FILTER') ??
+      'cifs,9p,fuse.rclone,fuse.mergerfs,nfs4,iso9660,fuse.shfs'
   ),
   fs_virtual_mounts: lst(penv('FS_VIRTUAL_MOUNTS') ?? ''),
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
