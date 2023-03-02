@@ -28,6 +28,7 @@ const toStorageInp = (inp: TestCase) =>
 describe('Dynamic Info', () => {
   beforeEach(() => {
     CONFIG.running_in_docker = true;
+    CONFIG.fs_device_filter = [];
   });
 
   describe('Storage', () => {
@@ -146,6 +147,7 @@ describe('Dynamic Info', () => {
       expect(output).to.deep.equal(TEST_CASE_18.output);
     });
     it('Test Case 19', () => {
+      CONFIG.fs_device_filter = ['sda'];
       const output = new DynamicStorageMapper(
         false,
         ...toStorageInp(TEST_CASE_19)
