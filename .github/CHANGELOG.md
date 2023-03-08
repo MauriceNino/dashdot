@@ -1,3 +1,23 @@
+# [5.0.0](https://github.com/MauriceNino/dashdot/compare/v4.9.1...v5.0.0) (2023-03-08)
+
+
+### Bug Fixes
+
+* disallow unclaimed space assignment when host drive is filtered ([997cec6](https://github.com/MauriceNino/dashdot/commit/997cec6ed5fe9e6244a71a894ae76f4d58f053bd))
+
+
+### Features
+
+* add new config vars to replace old storage overrides ([3199dbd](https://github.com/MauriceNino/dashdot/commit/3199dbd5197db3c4b21094d4209812183bc14c33))
+* add support for xfs based setups ([218d3e6](https://github.com/MauriceNino/dashdot/commit/218d3e6cbaddfa31854dbf3ceecf3ec7800b5579))
+* support raid 0 in storage widget ([634aed5](https://github.com/MauriceNino/dashdot/commit/634aed5ef1c45899c26b69f8cb60b860c59e48ab)), closes [#295](https://github.com/MauriceNino/dashdot/issues/295)
+
+
+### BREAKING CHANGES
+
+* storage layout changed, so config options will no longer work the way they did
+before
+
 ## [4.9.1](https://github.com/MauriceNino/dashdot/compare/v4.9.0...v4.9.1) (2023-02-22)
 
 
