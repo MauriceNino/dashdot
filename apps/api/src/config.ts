@@ -29,7 +29,7 @@ export const CONFIG: Config = {
   port: numNull(penv('PORT')) ?? 3001,
   running_in_docker: penv('RUNNING_IN_DOCKER') === 'true',
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
-  use_network_interface: penv('USE_NETWORK_INTERFACE') ?? '',
+  use_network_interface: penv('USE_NETWORK_INTERFACE'),
   speed_test_from_path: penv('SPEED_TEST_FROM_PATH'),
   fs_device_filter: lst(penv('FS_DEVICE_FILTER') ?? ''),
   fs_type_filter: lst(
@@ -39,6 +39,7 @@ export const CONFIG: Config = {
   fs_virtual_mounts: lst(penv('FS_VIRTUAL_MOUNTS') ?? ''),
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
 
+  show_dash_version: penv('SHOW_DASH_VERSION') as any,
   show_host: penv('SHOW_HOST') === 'true',
   custom_host: penv('CUSTOM_HOST'),
   page_title: penv('PAGE_TITLE') ?? 'dash.',

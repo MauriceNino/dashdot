@@ -191,38 +191,22 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
       heading='Processor'
-      infos={toInfoTable(
-        config.cpu_label_list,
-        {
-          brand: 'Brand',
-          model: 'Model',
-          cores: 'Cores',
-          threads: 'Threads',
-          frequency: 'Frequency',
+      infos={toInfoTable(config.cpu_label_list, {
+        brand: { label: 'Brand', value: override.cpu_brand ?? data.brand },
+        model: { label: 'Model', value: override.cpu_model ?? data.model },
+        cores: {
+          label: 'Cores',
+          value: (override.cpu_cores ?? data.cores)?.toString(),
         },
-        [
-          {
-            key: 'brand',
-            value: override.cpu_brand ?? data.brand,
-          },
-          {
-            key: 'model',
-            value: override.cpu_model ?? data.model,
-          },
-          {
-            key: 'cores',
-            value: (override.cpu_cores ?? data.cores)?.toString(),
-          },
-          {
-            key: 'threads',
-            value: (override.cpu_threads ?? data.threads)?.toString(),
-          },
-          {
-            key: 'frequency',
-            value: frequency ? `${frequency} GHz` : '',
-          },
-        ]
-      )}
+        threads: {
+          label: 'Threads',
+          value: (override.cpu_threads ?? data.threads)?.toString(),
+        },
+        frequency: {
+          label: 'Frequency',
+          value: frequency ? `${frequency} GHz` : '',
+        },
+      })}
       infosPerPage={7}
       icon={faMicrochip}
       extraContent={

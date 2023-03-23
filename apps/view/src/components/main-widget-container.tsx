@@ -12,6 +12,7 @@ import { NetworkWidget } from '../widgets/network';
 import { RamWidget } from '../widgets/ram';
 import { ServerWidget } from '../widgets/server';
 import { StorageWidget } from '../widgets/storage';
+import { ThemedText } from './text';
 
 const containerVariants = {
   animate: {
@@ -150,34 +151,48 @@ export const MainWidgetContainer: FC = () => {
   };
 
   return (
-    <FlexContainer
-      $mobile={isMobile}
-      variants={containerVariants}
-      initial='initial'
-      animate='animate'
-      exit='exit'
-    >
-      {config.widget_list.map(widget => {
-        const currentConfig = configs[widget];
+    <>
+      <FlexContainer
+        $mobile={isMobile}
+        variants={containerVariants}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+      >
+        {config.widget_list.map(widget => {
+          const currentConfig = configs[widget];
 
-        return (
-          <GlassPane
-            key={widget}
-            variants={itemVariants}
-            layoutId={`widget_${widget}`}
-            grow={currentConfig.grow}
-            minWidth={currentConfig.minWidth}
-          >
-            <currentConfig.Widget
-              // @ts-ignore
-              data={currentConfig.data}
-              // @ts-ignore
-              load={currentConfig.load}
-              config={config}
-            />
-          </GlassPane>
-        );
-      })}
-    </FlexContainer>
+          return (
+            <GlassPane
+              key={widget}
+              variants={itemVariants}
+              layoutId={`widget_${widget}`}
+              grow={currentConfig.grow}
+              minWidth={currentConfig.minWidth}
+            >
+              <currentConfig.Widget
+                // @ts-ignore
+                data={currentConfig.data}
+                // @ts-ignore
+                load={currentConfig.load}
+                config={config}
+              />
+            </GlassPane>
+          );
+        })}
+      </FlexContainer>
+
+      {config.show_dash_version === 'bottom_right' && (
+        <ThemedText
+          style={{
+            position: 'fixed',
+            right: '10px',
+            bottom: '10px',
+          }}
+        >
+          {osData?.dash_version}
+        </ThemedText>
+      )}
+    </>
   );
 };

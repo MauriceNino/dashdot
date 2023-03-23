@@ -16,7 +16,7 @@ import {
   FontAwesomeIcon,
   FontAwesomeIconProps,
 } from '@fortawesome/react-fontawesome';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { fromUrl, parseDomain, ParseResultType } from 'parse-domain';
 import { toUnicode } from 'punycode';
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -194,51 +194,36 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
     }
   }, [config?.custom_host]);
 
-  const dateInfos = [
-    {
-      label: '',
-      value: `${days} days`,
-      amount: days,
-    },
-    {
-      label: '',
-      value: `${hours} hours`,
-      amount: hours,
-    },
-    {
-      label: '',
-      value: `${minutes} minutes`,
-      amount: minutes,
-    },
-  ].reduce(
-    (acc, cur) => ({
-      ...acc,
-      value: [acc.value, cur.amount || acc.value !== '' ? cur.value : undefined]
-        .join('\n')
-        .trim(),
-    }),
-    {
-      key: 'up_since',
-      value: '',
-    }
-  );
-
+  const uptimeStr =
+    (days ? `${days} days\n` : '') +
+    (hours ? `${hours} hours\n` : '') +
+    (minutes ? `${minutes} minutes` : '');
   const distro = data.distro;
   const platform = data.platform;
   const os = override.os ?? `${distro} ${data.release}`;
   const arch = override.arch ?? data.arch;
 
+  const ghBtn = (
+    <Link
+      ghost
+      shape='circle'
+      icon={<FontAwesomeIcon icon={faGithub} />}
+      href='https://github.com/MauriceNino/dashdot'
+      target='_blank'
+      aria-label='GitHub Link'
+    />
+  );
+
   return (
     <Container>
       <ButtonsContainer>
-        <Link
-          ghost
-          shape='circle'
-          icon={<FontAwesomeIcon icon={faGithub} />}
-          href='https://github.com/MauriceNino/dashdot'
-          target='_blank'
-          aria-label='GitHub Link'
-        />
+        {config.show_dash_version === 'icon_hover' ? (
+          <Tooltip placement='right' title={data.dash_version}>
+            {ghBtn}
+          </Tooltip>
+        ) : (
+          ghBtn
+        )}
       </ButtonsContainer>
 
       <WidgetSwitch
@@ -260,25 +245,12 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
 
       <StyledInfoTable
         $mobile={isMobile}
-        infos={toInfoTable(
-          config.os_label_list,
-          {
-            os: 'OS',
-            arch: 'Arch',
-            up_since: 'Up since',
-          },
-          [
-            {
-              key: 'os',
-              value: os,
-            },
-            {
-              key: 'arch',
-              value: arch,
-            },
-            dateInfos,
-          ]
-        )}
+        infos={toInfoTable(config.os_label_list, {
+          os: { label: 'OS', value: os },
+          arch: { label: 'Arch', value: arch },
+          up_since: { label: 'Up since', value: uptimeStr },
+          dash_version: { label: 'Dash Version', value: data.dash_version },
+        })}
         page={0}
         itemsPerPage={7}
       />
