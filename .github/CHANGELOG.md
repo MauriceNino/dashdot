@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/MauriceNino/dashdot/compare/v5.0.0...v5.1.0) (2023-03-23)
+
+
+### Features
+
+* **view:** add options for showing dash version in UI ([57c4374](https://github.com/MauriceNino/dashdot/commit/57c4374b431088362585cb04c1d04f3dd3709668)), closes [#635](https://github.com/MauriceNino/dashdot/issues/635)
+
 # [5.0.0](https://github.com/MauriceNino/dashdot/compare/v4.9.1...v5.0.0) (2023-03-08)
 
 
