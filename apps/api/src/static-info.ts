@@ -18,6 +18,8 @@ const STATIC_INFO = new BehaviorSubject<HardwareInfo>({
     platform: '',
     release: '',
     uptime: 0,
+    dash_buildhash: '',
+    dash_version: '',
   },
   cpu: {
     brand: '',

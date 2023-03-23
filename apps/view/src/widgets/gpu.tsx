@@ -106,28 +106,14 @@ export const GpuWidget: FC<GpuWidgetProps> = ({ load, data, config }) => {
         const model = override.gpu_models[i] ?? gpu.model;
         const memory = override.gpu_memories[i] ?? gpu.memory;
 
-        return toInfoTable(
-          config.gpu_label_list,
-          {
-            brand: 'Brand',
-            model: 'Model',
-            memory: 'Memory',
+        return toInfoTable(config.gpu_label_list, {
+          brand: { label: 'Brand', value: brand },
+          model: { label: 'Model', value: model },
+          memory: {
+            label: 'Memory',
+            value: memory ? bytePrettyPrint(memory * 1024 * 1024) : memory,
           },
-          [
-            {
-              key: 'brand',
-              value: brand,
-            },
-            {
-              key: 'model',
-              value: model,
-            },
-            {
-              key: 'memory',
-              value: memory ? bytePrettyPrint(memory * 1024 * 1024) : memory,
-            },
-          ]
-        );
+        });
       }),
     [
       config.gpu_label_list,

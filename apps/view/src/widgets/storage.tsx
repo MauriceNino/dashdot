@@ -309,29 +309,11 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
           ? config.storage_label_list
           : config.storage_label_list.filter(x => x !== 'raid'),
         {
-          brand: 'Brand',
-          size: 'Size',
-          type: 'Type',
-          raid: 'Raid',
-        },
-        [
-          {
-            key: 'brand',
-            value: brand,
-          },
-          {
-            key: 'size',
-            value: size ? bytePrettyPrint(size) : '',
-          },
-          {
-            key: 'type',
-            value: type,
-          },
-          {
-            key: 'raid',
-            value: shownData[0]?.raidLabel,
-          },
-        ]
+          brand: { label: 'Brand', value: brand },
+          size: { label: 'Size', value: size ? bytePrettyPrint(size) : '' },
+          type: { label: 'Type', value: type },
+          raid: { label: 'Raid', value: shownData[0]?.raidLabel },
+        }
       );
     }
   }, [config.storage_label_list, shownData]);
