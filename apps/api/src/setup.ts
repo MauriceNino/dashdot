@@ -14,7 +14,7 @@ const NS_NET = '/mnt/host/proc/1/ns/net';
 export let NET_INTERFACE_PATH = undefined;
 
 const getDefaultIface = async (): Promise<string | undefined> => {
-  if (CONFIG.use_network_interface !== '') {
+  if (CONFIG.use_network_interface != null) {
     return CONFIG.use_network_interface;
   }
 

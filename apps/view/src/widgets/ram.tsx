@@ -102,33 +102,21 @@ export const RamWidget: FC<RamWidgetProps> = ({ load, data, config }) => {
     <HardwareInfoContainer
       color={theme.colors.ramPrimary}
       heading='Memory'
-      infos={toInfoTable(
-        config.ram_label_list,
-        {
-          brand: brands.length > 1 ? 'Brands' : 'Brand',
-          size: 'Size',
-          type: types.length > 1 ? 'Types' : 'Type',
-          frequency: frequencies.length > 1 ? 'Frequencies' : 'Frequency',
+      infos={toInfoTable(config.ram_label_list, {
+        brand: {
+          label: brands.length > 1 ? 'Brands' : 'Brand',
+          value: brands.join(', '),
         },
-        [
-          {
-            key: 'brand',
-            value: brands.join(', '),
-          },
-          {
-            key: 'size',
-            value: size ? `${bytePrettyPrint(size)}` : '',
-          },
-          {
-            key: 'type',
-            value: types.join(', '),
-          },
-          {
-            key: 'frequency',
-            value: frequencies.join(', '),
-          },
-        ]
-      )}
+        size: { label: 'Size', value: size ? `${bytePrettyPrint(size)}` : '' },
+        type: {
+          label: types.length > 1 ? 'Types' : 'Type',
+          value: types.join(', '),
+        },
+        frequency: {
+          label: frequencies.length > 1 ? 'Frequencies' : 'Frequency',
+          value: frequencies.join(', '),
+        },
+      })}
       infosPerPage={7}
       icon={faMemory}
     >

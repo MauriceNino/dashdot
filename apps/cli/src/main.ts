@@ -7,10 +7,10 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 const execp = promisify(exec);
-const execpnoerr = async (cmd: string): Promise<string> => {
+const execpnoerr = async (cmd: string): Promise<string | undefined> => {
   return execp(cmd)
     .then(({ stdout }) => stdout)
-    .catch(() => '');
+    .catch(() => undefined);
 };
 
 const inspectObj = (obj: any): string => {
@@ -39,7 +39,7 @@ yargs(hideBin(process.argv))
       const runningInDocker = await execpnoerr(
         'echo $DASHDOT_RUNNING_IN_DOCKER'
       );
-      const buildInfo = JSON.parse(buildInfoJson || '{}');
+      const buildInfo = JSON.parse(buildInfoJson ?? '{}');
       const version = buildInfo.version ?? 'unknown';
       const buildhash = buildInfo.buildhash ?? gitHash;
 
