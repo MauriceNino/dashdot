@@ -20,6 +20,19 @@ If you want to show the host part in the server widget (e.g. `dash.` -> `dash.ma
 | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | <img src="/img/server_view_normal.png" alt="Server widget normal" style={{maxHeight: "250px"}} /> | <img src="/img/server_view_with_host.png" alt="Server widget with host" style={{maxHeight: "250px"}} /> |
 
+## `DASHDOT_SHOW_DASH_VERSION`
+
+If you want to show the version number of your dash. instance on the bottom right of the page, or alternatively on the GitHub icon (hover).
+
+The available options are: `bottom_right`, `icon_hover`.
+
+- type: `string`
+- default: `unset`
+
+| `bottom_right`                                                                                            | `icon_hover`                                                                                                      |
+| --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| <img src="/img/version_bottom_right.png" alt="Dash. version bottom right" style={{maxHeight: "250px"}} /> | <img src="/img/version_server_hover.png" alt="Dash. version on GitHub icon hover" style={{maxHeight: "250px"}} /> |
+
 ## `DASHDOT_CUSTOM_HOST`
 
 If you want to show a custom host in the server widget (needs [`DASHDOT_SHOW_HOST`](./ui-features#dashdot_show_host) enabled to work).
@@ -85,7 +98,7 @@ The available options are: `os`, `cpu`, `storage`, `ram`, `network`, `gpu`.
 
 ### `DASHDOT_OS_LABEL_LIST`
 
-The available options are: `os`, `arch`, `up_since`.
+The available options are: `os`, `arch`, `up_since`, `dash_version`.
 
 - type: `string (comma separated list)`
 - default: `os,arch,up_since`

@@ -147,40 +147,24 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
     <HardwareInfoContainer
       color={theme.colors.networkPrimary}
       heading='Network'
-      infos={toInfoTable(
-        config.network_label_list,
-        {
-          type: 'Type',
-          speed_up: 'Speed (Up)',
-          speed_down: 'Speed (Down)',
-          interface_speed: 'Interface Speed',
-          public_ip: 'Public IP',
+      infos={toInfoTable(config.network_label_list, {
+        type: { label: 'Type', value: type },
+        speed_up: {
+          label: 'Speed (Up)',
+          value: speedUp ? bpsPrettyPrint(speedUp) : undefined,
         },
-        [
-          {
-            key: 'type',
-            value: type,
-          },
-          {
-            key: 'speed_up',
-            value: speedUp ? bpsPrettyPrint(speedUp) : undefined,
-          },
-          {
-            key: 'speed_down',
-            value: speedDown ? bpsPrettyPrint(speedDown) : undefined,
-          },
-          {
-            key: 'interface_speed',
-            value: interfaceSpeed
-              ? bpsPrettyPrint(interfaceSpeed * 1000 * 1000)
-              : undefined,
-          },
-          {
-            key: 'public_ip',
-            value: publicIp,
-          },
-        ]
-      )}
+        speed_down: {
+          label: 'Speed (Down)',
+          value: speedDown ? bpsPrettyPrint(speedDown) : undefined,
+        },
+        interface_speed: {
+          label: 'Interface Speed',
+          value: interfaceSpeed
+            ? bpsPrettyPrint(interfaceSpeed * 1000 * 1000)
+            : undefined,
+        },
+        public_ip: { label: 'Public IP', value: publicIp },
+      })}
       infosPerPage={7}
       icon={faNetworkWired}
     >
