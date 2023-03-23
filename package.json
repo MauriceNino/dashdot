@@ -30,8 +30,8 @@
     "clean": "rm -rf dist apps/docs/.docusaurus node_modules/.cache"
   },
   "dependencies": {
-    "@docusaurus/core": "2.3.1",
-    "@docusaurus/preset-classic": "2.3.1",
+    "@docusaurus/core": "2.4.0",
+    "@docusaurus/preset-classic": "2.4.0",
     "@easyops-cn/docusaurus-search-local": "0.35.0",
     "@emotion/memoize": "0.8.0",
     "@emotion/react": "11.10.6",
@@ -84,7 +84,7 @@
     "@commitlint/cli": "17.4.4",
     "@commitlint/config-conventional": "17.4.4",
     "@commitlint/cz-commitlint": "17.4.4",
-    "@docusaurus/module-type-aliases": "2.3.1",
+    "@docusaurus/module-type-aliases": "2.4.0",
     "@nrwl/cli": "14.7.5",
     "@nrwl/eslint-plugin-nx": "14.7.5",
     "@nrwl/express": "14.7.5",
