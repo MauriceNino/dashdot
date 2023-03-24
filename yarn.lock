@@ -6875,9 +6875,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/changelog@npm:6.0.2":
-  version: 6.0.2
-  resolution: "@semantic-release/changelog@npm:6.0.2"
+"@semantic-release/changelog@npm:6.0.3":
+  version: 6.0.3
+  resolution: "@semantic-release/changelog@npm:6.0.3"
   dependencies:
     "@semantic-release/error": ^3.0.0
     aggregate-error: ^3.0.0
@@ -6885,7 +6885,7 @@ __metadata:
     lodash: ^4.17.4
   peerDependencies:
     semantic-release: ">=18.0.0"
-  checksum: e116a1ac2528c960743ae952f0b2510713a18a9df1d7ea61dc0092380eb26c5e79c5b0b699f7c9cc71f5f27b49ccd736c46319363a737528454568b000016752
+  checksum: 63283df7aaff7b2d5c08ac322faf362fd953d4ca4f2d2a1855ca51482ff8e973e38497a4c4a35a5b6ebec8373608895ef74d41072565e5bf3766850b4a6def37
   languageName: node
   linkType: hard
 
@@ -11583,7 +11583,7 @@ __metadata:
     "@nrwl/workspace": 14.7.5
     "@nx-plus/docusaurus": 14.1.0
     "@semantic-release-plus/docker": 3.1.2
-    "@semantic-release/changelog": 6.0.2
+    "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
     "@testing-library/react": 14.0.0
     "@types/chai": 4.3.4
