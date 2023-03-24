@@ -116,7 +116,14 @@ export class DynamicStorageMapper {
     return deviceBlocks.reduce(
       (acc, curr) =>
         acc +
-        unwrapUsed(this.validSizes.find(({ mount }) => curr.mount === mount)),
+        unwrapUsed(
+          this.validSizes.find(
+            ({ mount }) =>
+              mount &&
+              (curr.mount === mount ||
+                mount.endsWith(`dev-disk-by-uuid-${curr.uuid}`))
+          )
+        ),
       0
     );
   }

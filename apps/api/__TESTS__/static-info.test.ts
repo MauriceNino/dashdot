@@ -14,6 +14,7 @@ import {
   TEST_CASE_18,
   TEST_CASE_19,
   TEST_CASE_2,
+  TEST_CASE_20,
   TEST_CASE_3,
   TEST_CASE_4,
   TEST_CASE_5,
@@ -102,6 +103,10 @@ describe('Static Info', () => {
       CONFIG.fs_device_filter = ['sda'];
       const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_19));
       expect(output).to.deep.equal(TEST_CASE_19.layout);
+    });
+    it('Test Case 20', () => {
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_20));
+      expect(output).to.deep.equal(TEST_CASE_20.layout);
     });
   });
 });
