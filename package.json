@@ -127,7 +127,7 @@
     "babel-plugin-syntax-jsx": "6.18.0",
     "chai": "4.3.7",
     "commitizen": "4.3.0",
-    "css-loader": "6.4.0",
+    "css-loader": "6.7.3",
     "dotenv": "16.0.3",
     "eslint": "8.36.0",
     "eslint-config-prettier": "8.8.0",
