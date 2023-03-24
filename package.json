@@ -103,7 +103,7 @@
     "@semantic-release-plus/docker": "3.1.2",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
-    "@svgr/webpack": "6.1.2",
+    "@svgr/webpack": "6.5.1",
     "@testing-library/react": "14.0.0",
     "@types/chai": "4.3.4",
     "@types/compression": "1.7.2",
