@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/MauriceNino/dashdot/compare/v5.1.0...v5.1.1) (2023-03-24)
+
+
+### Bug Fixes
+
+* allow drive mappings via uuid ([44e87a8](https://github.com/MauriceNino/dashdot/commit/44e87a8fd82311e8f1efd7c8f8294f29f1408c16))
+
 # [5.1.0](https://github.com/MauriceNino/dashdot/compare/v5.0.0...v5.1.0) (2023-03-23)
 
 
