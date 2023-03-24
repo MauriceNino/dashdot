@@ -1,10 +1,11 @@
 {
+  "name": "view",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/view/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -21,7 +22,8 @@
         ],
         "styles": [],
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "webpackConfig": "apps/view/webpack.config.js",
+        "isolatedConfig": true
       },
       "configurations": {
         "development": {
@@ -46,7 +48,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "view:build",

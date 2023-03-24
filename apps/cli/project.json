@@ -1,15 +1,18 @@
 {
+  "name": "cli",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/cli/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/cli",
         "main": "apps/cli/src/main.ts",
-        "tsConfig": "apps/cli/tsconfig.json"
+        "tsConfig": "apps/cli/tsconfig.json",
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "production": {
