@@ -147,7 +147,7 @@
     "react-refresh": "0.10.0",
     "react-test-renderer": "18.2.0",
     "semantic-release-plus": "20.0.0",
-    "style-loader": "3.3.0",
+    "style-loader": "3.3.2",
     "stylus": "0.55.0",
     "stylus-loader": "7.1.0",
     "ts-jest": "29.0.5",

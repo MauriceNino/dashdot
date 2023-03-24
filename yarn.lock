@@ -11962,7 +11962,7 @@ __metadata:
     socket.io: 4.6.1
     socket.io-client: 4.6.1
     store: 2.0.12
-    style-loader: 3.3.0
+    style-loader: 3.3.2
     styled-components: 5.3.9
     stylus: 0.55.0
     stylus-loader: 7.1.0
@@ -24397,12 +24397,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-loader@npm:3.3.0":
-  version: 3.3.0
-  resolution: "style-loader@npm:3.3.0"
+"style-loader@npm:3.3.2":
+  version: 3.3.2
+  resolution: "style-loader@npm:3.3.2"
   peerDependencies:
     webpack: ^5.0.0
-  checksum: edad553a1ae74af9afb4dd582774d484e8e4e5f8c9593a921b0f3f0e2cdb3a58c4b44a3afb43021956804042eaffd68d5dc4f956d4c5f633e7e67eda6a750042
+  checksum: 5ee5ce2dc885369eccb55d429376e83d02570d473ac5edeb69fd65ee894847f1e51429cf078351f617bd04516ece8a1dd967f9f40464bd8fa76d903c6b2a6f08
   languageName: node
   linkType: hard
 
