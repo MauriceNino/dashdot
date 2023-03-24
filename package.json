@@ -99,7 +99,7 @@
     "@nrwl/webpack": "15.8.8",
     "@nrwl/workspace": "15.8.8",
     "@nx-plus/docusaurus": "14.1.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "0.5.7",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.10",
     "@semantic-release-plus/docker": "3.1.2",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
