@@ -81,9 +81,9 @@
   },
   "devDependencies": {
     "@babel/core": "7.21.3",
-    "@commitlint/cli": "17.4.4",
+    "@commitlint/cli": "17.5.0",
     "@commitlint/config-conventional": "17.4.4",
-    "@commitlint/cz-commitlint": "17.4.4",
+    "@commitlint/cz-commitlint": "17.5.0",
     "@docusaurus/module-type-aliases": "2.4.0",
     "@nrwl/cli": "14.7.5",
     "@nrwl/eslint-plugin-nx": "14.7.5",
