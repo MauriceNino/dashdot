@@ -51,7 +51,7 @@
     "docusaurus-plugin-image-zoom": "0.1.1",
     "docusaurus-plugin-sass": "0.2.3",
     "express": "4.18.2",
-    "framer-motion": "10.9.1",
+    "framer-motion": "10.9.2",
     "parse-domain": "7.0.1",
     "prism-react-renderer": "1.3.5",
     "punycode": "2.3.0",
