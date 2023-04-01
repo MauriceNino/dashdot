@@ -21146,15 +21146,15 @@ __metadata:
   linkType: hard
 
 "rc-pagination@npm:~3.3.0":
-  version: 3.3.0
-  resolution: "rc-pagination@npm:3.3.0"
+  version: 3.3.1
+  resolution: "rc-pagination@npm:3.3.1"
   dependencies:
     "@babel/runtime": ^7.10.1
     classnames: ^2.2.1
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 6b40cb2ab6519bde72ceaeccc5865e536ee40c3d6bf125fb4184c027728b0061f228fde7d2c10e686e69d233a3796bbbf0d8f33d71f9a7327d897f8656a5c79d
+  checksum: 0294cf1a79c054c3eda2f65cdbfdc9322aa2f025200048fe71e85948ff034b3fd7c4fd657ca9980bf5c420e3f7297c4afa79bc337f5056c94f09d89fb4f90bef
   languageName: node
   linkType: hard
 
