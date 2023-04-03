@@ -49,7 +49,7 @@ const config = {
             label: 'Documentation',
           },
           {
-            href: 'https://dash.mauz.io',
+            href: 'https://dash.mauz.dev',
             label: 'Demo',
             position: 'left',
           },
