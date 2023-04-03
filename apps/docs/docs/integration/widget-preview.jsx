@@ -21,7 +21,7 @@ export const WidgetPreview = () => {
 
   const { controls } = useFormControl({
     protocol: [isDev ? 'http' : 'https'],
-    url: [isDev ? 'localhost:3000' : 'dash.mauz.io'],
+    url: [isDev ? 'localhost:3000' : 'dash.mauz.dev'],
     widget: ['cpu'],
     multiView: [false],
     showPercentage: [false],
