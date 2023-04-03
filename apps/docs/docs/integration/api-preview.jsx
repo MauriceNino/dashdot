@@ -54,7 +54,7 @@ export const ApiPreview = () => {
   const { colorMode } = useColorMode();
 
   const [protocol, setProtocol] = useState('https');
-  const [url, setUrl] = useState('dash.mauz.io');
+  const [url, setUrl] = useState('dash.mauz.dev');
 
   const baseUrl = `${protocol}://${url}`;
   const info = getDataFromUrl(baseUrl + '/info');

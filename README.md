@@ -4,8 +4,8 @@
 </h1>
 
 <p align="center">
-  <a href="https://drone.mauz.io/MauriceNino/dashdot" target="_blank">
-    <img title="Drone" src="https://drone.mauz.io/api/badges/MauriceNino/dashdot/status.svg">
+  <a href="https://drone.mauz.dev/MauriceNino/dashdot" target="_blank">
+    <img title="Drone" src="https://drone.mauz.dev/api/badges/MauriceNino/dashdot/status.svg">
   </a>
 
   <a href="https://discord.gg/3teHFBNQ9W" target="_blank">
@@ -25,7 +25,7 @@
 </p>
 <br />
 <p align="center">
-  <a href="https://dash.mauz.io" target="_blank">Live Demo</a>
+  <a href="https://dash.mauz.dev" target="_blank">Live Demo</a>
  |
   <a href="https://hub.docker.com/r/mauricenino/dashdot" target="_blank">Docker Image</a>
 </p>

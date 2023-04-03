@@ -85,7 +85,7 @@ steps:
         -o type=registry
         -t mauricenino/dashdot:dev .
   - name: update & deploy server files (dev)
-    image: docker/compose
+    image: docker:dind
     when:
       event:
         - push
@@ -154,7 +154,7 @@ steps:
       - yarn nx build docs
       - yarn nx deploy docs
   - name: update & deploy server files
-    image: docker/compose
+    image: docker:dind
     when:
       event:
         - push
@@ -202,4 +202,4 @@ name: GITHUB_TOKEN
 data: JMpZE0aC5Fau1tDEh+6Huy+yZJF1BqhVAzIm7+Xvfx9vYxHRrPAbh6hZrJzEvEjK9ClGNoPCHJaKmezV3Yrt2qYsARU=
 ---
 kind: signature
-hmac: fb8e06b4c73d6feb3772cb8d36533c90e3f0220da5151e8d4a8d006d03b7039c
+hmac: bd1b5a1e29274b6a2b697f3a25b63b8be97148aeaac3cdaf61aec335192d784e
