@@ -9446,7 +9446,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-styled-components@npm:2.0.7, babel-plugin-styled-components@npm:>= 1, babel-plugin-styled-components@npm:>= 1.12.0":
+"babel-plugin-styled-components@npm:2.1.1":
+  version: 2.1.1
+  resolution: "babel-plugin-styled-components@npm:2.1.1"
+  dependencies:
+    "@babel/helper-annotate-as-pure": ^7.16.0
+    "@babel/helper-module-imports": ^7.16.0
+    babel-plugin-syntax-jsx: ^6.18.0
+    lodash: ^4.17.21
+    picomatch: ^2.3.0
+  peerDependencies:
+    styled-components: ">= 2"
+  checksum: 152ced102bcacbd421e14f3e11d4a1a0ee8d2f6a3623697ee3efd90f3bf45b4752a615da908b7ad73208aed2dcf58b83ced2e033269c4a42354e1f3ab5f0b676
+  languageName: node
+  linkType: hard
+
+"babel-plugin-styled-components@npm:>= 1, babel-plugin-styled-components@npm:>= 1.12.0":
   version: 2.0.7
   resolution: "babel-plugin-styled-components@npm:2.0.7"
   dependencies:
@@ -11643,7 +11658,7 @@ __metadata:
     antd: 5.3.3
     axios: 1.3.5
     babel-jest: 29.5.0
-    babel-plugin-styled-components: 2.0.7
+    babel-plugin-styled-components: 2.1.1
     babel-plugin-syntax-jsx: 6.18.0
     chai: 4.3.7
     clsx: 1.2.1
