@@ -77,7 +77,10 @@ type ChartContainerProps = {
   textRight?: string;
   textOffset?: string;
   textSize?: string;
-  renderChart: (size: { width: number; height: number }) => React.ReactNode;
+  renderChart: (size: {
+    width: number;
+    height: number;
+  }) => React.ReactElement<any>;
 };
 
 export const ChartContainer = motion(
@@ -113,7 +116,12 @@ export const ChartContainer = motion(
                 overflow: 'hidden',
               }}
             >
-              {size => props.renderChart(size)}
+              {size =>
+                props.renderChart({
+                  width: size.width ?? 0,
+                  height: size.height ?? 0,
+                })
+              }
             </ReactVirtualizedAutoSizer>
           </>
         ) : (
