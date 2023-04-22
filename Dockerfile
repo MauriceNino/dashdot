@@ -19,23 +19,20 @@ RUN \
     then \
       /bin/echo ">> installing dependencies (amd64)" &&\
       wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-x86_64.tgz \
-        | tar xmoz -C /usr/bin speedtest &&\
-      speedtest --accept-license --accept-gdpr > /dev/null; \
+        | tar xmoz -C /usr/bin speedtest; \
   elif [ "$TARGETPLATFORM" = "linux/arm64" ] || [ "$(uname -m)" = "aarch64" ]; \
     then \
       /bin/echo ">> installing dependencies (arm64)" &&\
       wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-aarch64.tgz \
         | tar xmoz -C /usr/bin speedtest &&\
-      speedtest --accept-license --accept-gdpr > /dev/null &&\
       apk --no-cache add raspberrypi; \
   elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; \
     then \
       /bin/echo ">> installing dependencies (arm/v7)" &&\
       wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-armhf.tgz \
         | tar xmoz -C /usr/bin speedtest &&\
-      speedtest --accept-license --accept-gdpr > /dev/null &&\
       apk --no-cache add raspberrypi; \
-  else echo "Unsupported platform"; exit 1; \
+  else /bin/echo "Unsupported platform"; exit 1; \
   fi
 
 # DEV #
@@ -69,7 +66,7 @@ RUN \
 COPY . ./
 
 RUN \
-  yarn &&\
+  yarn --immutable --immutable-cache &&\
   yarn build:prod
 
 # PROD #
