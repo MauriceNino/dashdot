@@ -118,7 +118,9 @@ export default {
       };
     } else if (CONFIG.accept_ookla_eula && (await commandExists('speedtest'))) {
       usedRunner = 'ookla';
-      const { stdout } = await exec('speedtest -f json');
+      const { stdout } = await exec(
+        'speedtest --accept-license --accept-gdpr -f json'
+      );
       const json = JSON.parse(stdout);
 
       result = {

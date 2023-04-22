@@ -1,0 +1,69 @@
+name: Deploy
+
+on:
+  push:
+    branches: ['main', 'dev', 'feature/**']
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # SETUP
+      - uses: actions/checkout@v3
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/login-action@v2
+        with:
+          username: mauricenino
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'yarn'
+      - run: |
+          echo "package_version=$(yarn semantic-release -d | sed -n 's/.*The next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p')" >> "$GITHUB_ENV"
+
+      # DEPLOY
+      - uses: docker/metadata-action@v4
+        id: meta
+        with:
+          images: |
+            ghcr.io/mauricenino/dashdot
+            mauricenino/dashdot
+          labels: |
+            org.opencontainers.image.title="dash."
+            org.opencontainers.image.description="dash. - a modern server dashboard"
+            org.opencontainers.image.authors="MauriceNino <mauriceprivat98@gmail.com>"
+            org.opencontainers.image.url=https://github.com/MauriceNino/dashdot
+            org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
+            org.opencontainers.image.licenses=MIT
+          tags: |
+            type=semver,pattern={{version}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }}
+            type=semver,pattern={{major}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }}
+            type=ref,event=branch,enable=${{ github.ref_name != 'main' }}
+            type=sha
+      - uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+          target: prod
+          push: true
+          build-args: |
+            VERSION=${{ github.ref_name == 'main' && env.package_version || format('0.0.0-{0}', github.ref_name) }}
+            BUILDHASH=${{ github.sha }}
+          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - if: ${{ github.ref_name == 'main' }}
+        run: |
+          yarn nx build docs
+          yarn nx deploy docs

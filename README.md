@@ -4,8 +4,8 @@
 </h1>
 
 <p align="center">
-  <a href="https://drone.mauz.dev/MauriceNino/dashdot" target="_blank">
-    <img title="Drone" src="https://drone.mauz.dev/api/badges/MauriceNino/dashdot/status.svg">
+  <a href="https://github.com/MauriceNino/dashdot/actions/workflows/deploy.yaml?branch=main" target="_blank">
+    <img title="GitHub Actions" src="https://github.com/MauriceNino/dashdot/actions/workflows/deploy.yaml/badge.svg?branch=main">
   </a>
 
   <a href="https://discord.gg/3teHFBNQ9W" target="_blank">
