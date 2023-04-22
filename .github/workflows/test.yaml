@@ -23,4 +23,6 @@ jobs:
         run: yarn --immutable --immutable-cache
       - if: ${{ github.event_name == 'pull_request' }}
         run: yarn --immutable --immutable-cache --check-cache
-      - run: yarn test
+      - run: |
+          yarn test
+          yarn build:prod
