@@ -11654,7 +11654,7 @@ __metadata:
     compression: 1.7.4
     core-js: 3.30.1
     cors: 2.8.5
-    docusaurus-plugin-image-zoom: 0.1.1
+    docusaurus-plugin-image-zoom: 0.1.4
     docusaurus-plugin-sass: 0.2.3
     dotenv: 16.0.3
     eslint: 8.39.0
@@ -12140,12 +12140,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-image-zoom@npm:0.1.1":
-  version: 0.1.1
-  resolution: "docusaurus-plugin-image-zoom@npm:0.1.1"
+"docusaurus-plugin-image-zoom@npm:0.1.4":
+  version: 0.1.4
+  resolution: "docusaurus-plugin-image-zoom@npm:0.1.4"
   dependencies:
     medium-zoom: ^1.0.6
-  checksum: aa7a65c891a9281cba6fc3663a76507a9009b5c7ecf002cef185211288c1c3c5c6adf2c772092e9ca2861166c93b0c189a909c73f1fe781d77a4e12484984ef6
+  checksum: 5243476e5344b1a881a32a8a66aaa2e2ad7813d71980828b8da1fbb57782c2e6382a9cb5ce1efc4e5e0e61d668ec47ec7063145b1130d3209377e941fbb66e40
   languageName: node
   linkType: hard
 
