@@ -27,8 +27,14 @@ jobs:
         with:
           node-version: '18.x'
           cache: 'yarn'
-      - run: |
-          echo "package_version=$(yarn semantic-release -d | sed -n 's/.*The next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p')" >> "$GITHUB_ENV"
+      - if: ${{ github.ref_name == 'main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "package_version=$(yarn semantic-release -d | sed -n 's/.*next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p')" >> "$GITHUB_ENV"
+      - if: ${{ github.ref_name == 'main' }}
+        run: |
+          [ ! -z "${package_version}" ] || exit 1
 
       # DEPLOY
       - uses: docker/metadata-action@v4
@@ -64,6 +70,14 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - if: ${{ github.ref_name == 'main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          yarn semantic-release
           yarn nx build docs
           yarn nx deploy docs
+
+      - if: ${{ github.ref_name == 'main' }}
+        run: curl --get --data-urlencode "service=dashdot" --data-urlencode "image=mauricenino/dashdot:latest" --data-urlencode "secret=${{ secrets.REX_TOKEN }}" https://rex.mauz.dev/deploy
+      - if: ${{ github.ref_name == 'dev' }}
+        run: curl --get --data-urlencode "service=dashdot" --data-urlencode "image=mauricenino/dashdot:dev" --data-urlencode "secret=${{ secrets.REX_TOKEN }}" https://rex.mauz.dev/deploy
