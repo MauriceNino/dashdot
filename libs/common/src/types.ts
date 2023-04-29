@@ -132,6 +132,7 @@ export type Config = {
   cpu_poll_interval: number;
 
   // Storage Widget
+  storage_widget_items_per_page: number;
   storage_widget_grow: number;
   storage_widget_min_width: number;
   storage_poll_interval: number;
