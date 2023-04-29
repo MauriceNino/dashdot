@@ -143,7 +143,9 @@ export const CpuChart: FC<CpuChartProps> = ({
           textLeft={
             multiView || !showPercentages
               ? undefined
-              : `%: ${((chart.at(-1)?.y as number) ?? 0)?.toFixed(1)}`
+              : `%: ${((chart[chart.length - 1]?.y as number) ?? 0)?.toFixed(
+                  1
+                )}`
           }
           textRight={
             config.enable_cpu_temps && !multiView && chart.length > 1
