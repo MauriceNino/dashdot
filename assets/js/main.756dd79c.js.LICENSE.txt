@@ -57,6 +57,8 @@
  * Copyright (C) 2020 Oliver Nightingale
  */
 
+/*! medium-zoom 1.0.6 | MIT License | https://github.com/francoischalifour/medium-zoom */
+
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
 
 /**
