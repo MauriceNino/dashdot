@@ -46,7 +46,9 @@ export const GpuChart: FC<GpuChartProps> = ({
         contentLoaded={chartDataLoad.length > 1}
         textLeft={
           showPercentages
-            ? `%: ${(chartDataLoad.at(-1)?.y as number)?.toFixed(1)} (Load)`
+            ? `%: ${(
+                chartDataLoad[chartDataLoad.length - 1]?.y as number
+              )?.toFixed(1)} (Load)`
             : undefined
         }
         textOffset={textOffset}
@@ -66,9 +68,9 @@ export const GpuChart: FC<GpuChartProps> = ({
 
       <ChartContainer
         contentLoaded={chartDataMemory.length > 1}
-        textLeft={`%: ${(chartDataMemory.at(-1)?.y as number)?.toFixed(
-          1
-        )} (Memory)`}
+        textLeft={`%: ${(
+          chartDataMemory[chartDataMemory.length - 1]?.y as number
+        )?.toFixed(1)} (Memory)`}
         textOffset={textOffset}
         textSize={textSize}
         renderChart={size => (
