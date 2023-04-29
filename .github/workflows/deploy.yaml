@@ -32,6 +32,8 @@ jobs:
           node-version: '18.x'
           cache: 'yarn'
       - if: ${{ github.ref_name == 'main' }}
+        run: yarn --immutable --immutable-cache
+      - if: ${{ github.ref_name == 'main' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
