@@ -1,3 +1,18 @@
+# [5.2.0](https://github.com/MauriceNino/dashdot/compare/v5.1.3...v5.2.0) (2023-04-29)
+
+
+### Bug Fixes
+
+* also hide hidden storage labels on multiple drives ([213b73e](https://github.com/MauriceNino/dashdot/commit/213b73e5692ae7d1bdef564f0c7d8ba8e4613b41)), closes [#716](https://github.com/MauriceNino/dashdot/issues/716)
+* dont crash on missing network interface speed ([c62ba63](https://github.com/MauriceNino/dashdot/commit/c62ba6395f7d34abccba579b8ed7111845023308)), closes [#715](https://github.com/MauriceNino/dashdot/issues/715) [#727](https://github.com/MauriceNino/dashdot/issues/727)
+* hide public ip, if not included in label list ([ccf7d12](https://github.com/MauriceNino/dashdot/commit/ccf7d12051cb24ed4220eab5f2ef85cf6b54f8ce)), closes [#690](https://github.com/MauriceNino/dashdot/issues/690)
+* **view:** remove not broadly supported ECMA Script features in the frontend ([5ba5ed2](https://github.com/MauriceNino/dashdot/commit/5ba5ed2ce501bac1b7ab2963c9bbd408c27177d7))
+
+
+### Features
+
+* allow adjusting of items per page in multi-drive storage widget ([54be449](https://github.com/MauriceNino/dashdot/commit/54be449be6351f157dfe9c72561854530da0252c))
+
 ## [5.1.3](https://github.com/MauriceNino/dashdot/compare/v5.1.2...v5.1.3) (2023-04-03)
 
 ## [5.1.2](https://github.com/MauriceNino/dashdot/compare/v5.1.1...v5.1.2) (2023-04-01)
