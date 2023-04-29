@@ -121,7 +121,9 @@ export default {
       result = {
         speedDown: json.speedDown * (unit === 'bit' ? 8 : 1),
         speedUp: json.speedUp * (unit === 'bit' ? 8 : 1),
-        publicIp: json.publicIp,
+        publicIp: CONFIG.network_label_list.includes('public_ip')
+          ? json.publicIp
+          : undefined,
       };
     } else if (CONFIG.accept_ookla_eula && (await commandExists('speedtest'))) {
       usedRunner = 'ookla';
@@ -133,7 +135,9 @@ export default {
       result = {
         speedDown: json.download.bandwidth * 8,
         speedUp: json.upload.bandwidth * 8,
-        publicIp: json.interface.externalIp,
+        publicIp: CONFIG.network_label_list.includes('public_ip')
+          ? json.interface.externalIp
+          : undefined,
       };
     } else if (await commandExists('speedtest-cli')) {
       usedRunner = 'speedtest-cli';
@@ -143,7 +147,9 @@ export default {
       result = {
         speedDown: json.download,
         speedUp: json.upload,
-        publicIp: json.client.ip,
+        publicIp: CONFIG.network_label_list.includes('public_ip')
+          ? json.client.ip
+          : undefined,
       };
     } else {
       throw new Error(removePad`
