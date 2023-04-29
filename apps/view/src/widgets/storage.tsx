@@ -134,7 +134,11 @@ export const StorageChart: FC<StorageChartProps> = ({
               height={size.height}
               data={
                 index != null
-                  ? usageArr.slice(index * 3, index * 3 + 3)
+                  ? usageArr.slice(
+                      index * config.storage_widget_items_per_page,
+                      index * config.storage_widget_items_per_page +
+                        config.storage_widget_items_per_page
+                    )
                   : usageArr
               }
               tooltipRenderer={x => {
@@ -340,7 +344,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       color={theme.colors.storagePrimary}
       heading='Storage'
       infos={infos}
-      infosPerPage={shownData.length > 1 ? 3 : 7}
+      infosPerPage={
+        shownData.length > 1 ? config.storage_widget_items_per_page : 7
+      }
       icon={faHdd}
       extraContent={
         canHaveSplitView ? (
