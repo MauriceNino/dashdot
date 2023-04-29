@@ -1,3 +1,5 @@
+## [5.2.1](https://github.com/MauriceNino/dashdot/compare/v5.2.0...v5.2.1) (2023-04-29)
+
 # [5.2.0](https://github.com/MauriceNino/dashdot/compare/v5.1.3...v5.2.0) (2023-04-29)
 
 
