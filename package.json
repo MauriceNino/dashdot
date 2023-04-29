@@ -192,6 +192,10 @@
             {
               "type": "refactor",
               "release": "patch"
+            },
+            {
+              "type": "ci",
+              "release": "patch"
             }
           ]
         }
