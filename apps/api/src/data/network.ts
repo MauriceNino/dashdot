@@ -76,10 +76,17 @@ export default {
 
       // Wireless networks have no fixed Interface speed
       if (!isWireless) {
-        const { stdout } = await exec(`cat ${NET_INTERFACE_PATH}/speed`);
-        const numValue = Number(stdout.trim());
+        try {
+          const { stdout } = await exec(`cat ${NET_INTERFACE_PATH}/speed`);
+          const numValue = Number(stdout.trim());
 
-        net.interfaceSpeed = isNaN(numValue) || numValue === -1 ? 0 : numValue;
+          net.interfaceSpeed =
+            isNaN(numValue) || numValue === -1 ? 0 : numValue;
+        } catch (e) {
+          console.warn(e);
+
+          net.interfaceSpeed = 0;
+        }
       }
 
       return net;
