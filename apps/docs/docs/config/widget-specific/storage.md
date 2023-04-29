@@ -12,6 +12,14 @@ title: Storage
 
 <!-- markdownlint-enable -->
 
+## `DASHDOT_STORAGE_ITEMS_PER_PAGE`
+
+To adjust the number of items per page in the Storage view, when multiple disks are
+present.
+
+- type: `number`
+- default: `3`
+
 ## `DASHDOT_STORAGE_WIDGET_GROW`
 
 To adjust the relative size of the Storage widget.

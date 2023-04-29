@@ -134,7 +134,11 @@ export const StorageChart: FC<StorageChartProps> = ({
               height={size.height}
               data={
                 index != null
-                  ? usageArr.slice(index * 3, index * 3 + 3)
+                  ? usageArr.slice(
+                      index * config.storage_widget_items_per_page,
+                      index * config.storage_widget_items_per_page +
+                        config.storage_widget_items_per_page
+                    )
                   : usageArr
               }
               tooltipRenderer={x => {
@@ -276,11 +280,23 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
 
   const infos = useMemo(() => {
     if (shownData.length > 1) {
+      const brandShown = config.storage_label_list.includes('brand');
+      const typeShown = config.storage_label_list.includes('type');
+      const sizeShown = config.storage_label_list.includes('size');
+      const raidShown = config.storage_label_list.includes('raid');
+
       return shownData.map(s => {
         const brand = s.virtual
           ? s.disks[0].brand
           : removeDuplicates(
-              s.disks.map(d => `${d.brand || 'Unknown'} ${d.type}`)
+              s.disks.map(d =>
+                [
+                  brandShown ? d.brand : undefined,
+                  typeShown ? d.type : undefined,
+                ]
+                  .filter(x => x)
+                  .join(' ')
+              )
             );
         const size = s.size;
         const raidGroup = s.raidLabel;
@@ -289,9 +305,14 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
           label: s.virtual
             ? 'VIRT'
             : raidGroup
-            ? `RAID\n=> ${raidGroup}`
+            ? `RAID${raidShown ? `\n=> ${raidGroup}` : ''}`
             : 'Drive',
-          value: `${brand}\n=> ${bytePrettyPrint(size)}`,
+          value: [
+            brandShown || typeShown ? brand : undefined,
+            sizeShown ? bytePrettyPrint(size) : undefined,
+          ]
+            .filter(x => x)
+            .join('\n=> '),
         };
       });
     } else {
@@ -323,7 +344,9 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       color={theme.colors.storagePrimary}
       heading='Storage'
       infos={infos}
-      infosPerPage={shownData.length > 1 ? 3 : 7}
+      infosPerPage={
+        shownData.length > 1 ? config.storage_widget_items_per_page : 7
+      }
       icon={faHdd}
       extraContent={
         canHaveSplitView ? (

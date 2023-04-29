@@ -73,6 +73,8 @@ export const CONFIG: Config = {
   cpu_shown_datapoints: numNull(penv('CPU_SHOWN_DATAPOINTS')) ?? 20,
   cpu_poll_interval: numNull(penv('CPU_POLL_INTERVAL')) ?? 1000,
 
+  storage_widget_items_per_page:
+    numNull(penv('STORAGE_WIDGET_ITEMS_PER_PAGE')) ?? 3,
   storage_widget_grow: numNull(penv('STORAGE_WIDGET_GROW')) ?? 3.5,
   storage_widget_min_width: numNull(penv('STORAGE_WIDGET_MIN_WIDTH')) ?? 500,
   storage_poll_interval: numNull(penv('STORAGE_POLL_INTERVAL')) ?? 60000,

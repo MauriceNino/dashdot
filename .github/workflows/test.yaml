@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  push:
+    branches: ['dev', 'feature/**', 'renovate/**']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # SETUP
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'yarn'
+
+      # TEST
+      - if: ${{ github.event_name != 'pull_request' }}
+        run: yarn --immutable --immutable-cache
+      - if: ${{ github.event_name == 'pull_request' }}
+        run: yarn --immutable --immutable-cache --check-cache
+      - run: |
+          yarn test
+          yarn build:prod
