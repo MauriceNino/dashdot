@@ -5,12 +5,17 @@ import * as si from 'systeminformation';
 import { promisify } from 'util';
 import { CONFIG } from '../config';
 import { NET_INTERFACE_PATH } from '../setup';
+import { getStaticServerInfo } from '../static-info';
+import { platformIsWindows } from '../utils';
 
 const exec = promisify(cexec);
 
 const commandExists = async (command: string): Promise<boolean> => {
   try {
-    const { stdout, stderr } = await exec(`which ${command}`);
+    const svInfo = getStaticServerInfo();
+    const { stdout, stderr } = await exec(
+      `${platformIsWindows(svInfo.os.platform) ? 'where' : 'which'} ${command}`
+    );
     return stderr === '' && stdout.trim() !== '';
   } catch (e) {
     return false;
@@ -93,6 +98,7 @@ export default {
     } else {
       const networkInfo = await si.networkInterfaces();
       //@ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const defaultNet = networkInfo.find(net => net.default)!;
 
       return {
