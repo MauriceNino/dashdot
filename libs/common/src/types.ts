@@ -2,6 +2,8 @@ export type CpuInfo = {
   brand: string;
   model: string;
   cores: number;
+  ecores: number;
+  pcores: number;
   threads: number;
   frequency: number;
 };

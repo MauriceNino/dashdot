@@ -1,5 +1,5 @@
 import { HardwareInfo, ServerInfo } from '@dash/common';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import * as si from 'systeminformation';
 import { inspect } from 'util';
 import { CONFIG } from './config';
@@ -25,6 +25,8 @@ const STATIC_INFO = new BehaviorSubject<HardwareInfo>({
     brand: '',
     model: '',
     cores: 0,
+    ecores: 0,
+    pcores: 0,
     threads: 0,
     frequency: 0,
   },
