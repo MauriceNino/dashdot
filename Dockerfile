@@ -53,6 +53,8 @@ FROM base as build
 ARG BUILDHASH
 ARG VERSION
 
+ENV NX_DAEMON=false
+
 RUN \
   /bin/echo -e ">> installing dependencies (build)" &&\
   apk --no-cache add \
