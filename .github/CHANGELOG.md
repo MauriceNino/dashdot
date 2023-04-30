@@ -1,3 +1,58 @@
+## [5.2.1](https://github.com/MauriceNino/dashdot/compare/v5.2.0...v5.2.1) (2023-04-29)
+
+# [5.2.0](https://github.com/MauriceNino/dashdot/compare/v5.1.3...v5.2.0) (2023-04-29)
+
+
+### Bug Fixes
+
+* also hide hidden storage labels on multiple drives ([213b73e](https://github.com/MauriceNino/dashdot/commit/213b73e5692ae7d1bdef564f0c7d8ba8e4613b41)), closes [#716](https://github.com/MauriceNino/dashdot/issues/716)
+* dont crash on missing network interface speed ([c62ba63](https://github.com/MauriceNino/dashdot/commit/c62ba6395f7d34abccba579b8ed7111845023308)), closes [#715](https://github.com/MauriceNino/dashdot/issues/715) [#727](https://github.com/MauriceNino/dashdot/issues/727)
+* hide public ip, if not included in label list ([ccf7d12](https://github.com/MauriceNino/dashdot/commit/ccf7d12051cb24ed4220eab5f2ef85cf6b54f8ce)), closes [#690](https://github.com/MauriceNino/dashdot/issues/690)
+* **view:** remove not broadly supported ECMA Script features in the frontend ([5ba5ed2](https://github.com/MauriceNino/dashdot/commit/5ba5ed2ce501bac1b7ab2963c9bbd408c27177d7))
+
+
+### Features
+
+* allow adjusting of items per page in multi-drive storage widget ([54be449](https://github.com/MauriceNino/dashdot/commit/54be449be6351f157dfe9c72561854530da0252c))
+
+## [5.1.3](https://github.com/MauriceNino/dashdot/compare/v5.1.2...v5.1.3) (2023-04-03)
+
+## [5.1.2](https://github.com/MauriceNino/dashdot/compare/v5.1.1...v5.1.2) (2023-04-01)
+
+## [5.1.1](https://github.com/MauriceNino/dashdot/compare/v5.1.0...v5.1.1) (2023-03-24)
+
+
+### Bug Fixes
+
+* allow drive mappings via uuid ([44e87a8](https://github.com/MauriceNino/dashdot/commit/44e87a8fd82311e8f1efd7c8f8294f29f1408c16))
+
+# [5.1.0](https://github.com/MauriceNino/dashdot/compare/v5.0.0...v5.1.0) (2023-03-23)
+
+
+### Features
+
+* **view:** add options for showing dash version in UI ([57c4374](https://github.com/MauriceNino/dashdot/commit/57c4374b431088362585cb04c1d04f3dd3709668)), closes [#635](https://github.com/MauriceNino/dashdot/issues/635)
+
+# [5.0.0](https://github.com/MauriceNino/dashdot/compare/v4.9.1...v5.0.0) (2023-03-08)
+
+
+### Bug Fixes
+
+* disallow unclaimed space assignment when host drive is filtered ([997cec6](https://github.com/MauriceNino/dashdot/commit/997cec6ed5fe9e6244a71a894ae76f4d58f053bd))
+
+
+### Features
+
+* add new config vars to replace old storage overrides ([3199dbd](https://github.com/MauriceNino/dashdot/commit/3199dbd5197db3c4b21094d4209812183bc14c33))
+* add support for xfs based setups ([218d3e6](https://github.com/MauriceNino/dashdot/commit/218d3e6cbaddfa31854dbf3ceecf3ec7800b5579))
+* support raid 0 in storage widget ([634aed5](https://github.com/MauriceNino/dashdot/commit/634aed5ef1c45899c26b69f8cb60b860c59e48ab)), closes [#295](https://github.com/MauriceNino/dashdot/issues/295)
+
+
+### BREAKING CHANGES
+
+* storage layout changed, so config options will no longer work the way they did
+before
+
 ## [4.9.1](https://github.com/MauriceNino/dashdot/compare/v4.9.0...v4.9.1) (2023-02-22)
 
 

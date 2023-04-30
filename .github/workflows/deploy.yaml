@@ -32,6 +32,8 @@ jobs:
           node-version: '18.x'
           cache: 'yarn'
       - if: ${{ github.ref_name == 'main' }}
+        run: yarn --immutable --immutable-cache
+      - if: ${{ github.ref_name == 'main' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -75,6 +77,12 @@ jobs:
           cache-to: type=gha,mode=max
       - if: ${{ github.ref_name == 'main' }}
         env:
+          GIT_USER: github-actions
+          GIT_AUTHOR_NAME: github-actions
+          GIT_COMMITTER_NAME: github-actions
+          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn semantic-release
