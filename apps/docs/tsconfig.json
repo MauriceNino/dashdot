@@ -5,7 +5,6 @@
     "esModuleInterop": true,
     "jsx": "react",
     "lib": ["DOM"],
-    "module": "commonjs",
     "noEmit": true,
     "noImplicitAny": false,
     "types": [

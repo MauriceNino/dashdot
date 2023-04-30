@@ -77,7 +77,7 @@ EXPOSE 3001
 COPY --from=build /app/package.json .
 COPY --from=build /app/version.json .
 COPY --from=build /app/.yarn/releases/ .yarn/releases/
-COPY --from=build /app/dist/apps/api dist/apps/api
+COPY --from=build /app/dist/apps/server dist/apps/server
 COPY --from=build /app/dist/apps/cli dist/apps/cli
 COPY --from=build /app/dist/apps/view dist/apps/view
 
