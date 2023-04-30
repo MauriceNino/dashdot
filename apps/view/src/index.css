@@ -2,7 +2,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-display: swap;
-  src: url(/assets/Inter.ttf) format('woff2');
+  src: url(/Inter.ttf) format('woff2');
 }
 
 body {

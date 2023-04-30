@@ -1,38 +1,34 @@
 {
-  "name": "cli",
+  "name": "server",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/cli/src",
+  "sourceRoot": "apps/server/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/esbuild:esbuild",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "platform": "node",
-        "outputPath": "dist/apps/cli",
-        "format": ["cjs"],
-        "bundle": false,
-        "main": "apps/cli/src/main.ts",
-        "tsConfig": "apps/cli/tsconfig.app.json",
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/server",
+        "main": "apps/server/src/index.ts",
+        "tsConfig": "apps/server/tsconfig.app.json",
         "assets": [],
-        "generatePackageJson": true,
-        "esbuildOptions": {
-          "sourcemap": true,
-          "outExtension": {
-            ".js": ".js"
-          }
-        }
+        "isolatedConfig": true,
+        "webpackConfig": "apps/server/webpack.config.js"
       },
       "configurations": {
         "development": {},
         "production": {
-          "esbuildOptions": {
-            "sourcemap": false,
-            "outExtension": {
-              ".js": ".js"
+          "externalDependencies": "none",
+          "optimization": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/server/src/environments/environment.ts",
+              "with": "apps/server/src/environments/environment.prod.ts"
             }
-          }
+          ]
         }
       }
     },
@@ -40,14 +36,15 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "cli:build"
+        "buildTarget": "server:build",
+        "host": "0.0.0.0"
       },
       "configurations": {
         "development": {
-          "buildTarget": "cli:build:development"
+          "buildTarget": "server:build:development"
         },
         "production": {
-          "buildTarget": "cli:build:production"
+          "buildTarget": "server:build:production"
         }
       }
     },
@@ -55,14 +52,14 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/cli/**/*.ts"]
+        "lintFilePatterns": ["apps/server/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/cli/jest.config.ts",
+        "jestConfig": "apps/server/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

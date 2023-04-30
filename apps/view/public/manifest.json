@@ -2,17 +2,17 @@
   "name": "dash.",
   "icons": [
     {
-      "src": "./assets/favicon.ico",
+      "src": "/favicon.ico",
       "sizes": "256x256",
       "type": "image/x-icon"
     },
     {
-      "src": "./assets/logo192.png",
+      "src": "/logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "./assets/logo512.png",
+      "src": "/logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

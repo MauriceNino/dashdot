@@ -20,7 +20,7 @@ services:
       - DASHDOT_SPEED_TEST_FROM_PATH=/app/speedtest_result
     ports:
       - 3000:3000 # view
-      - 3001:3001 # api
+      - 3001:3001 # server
       - 3002:3002 # docs
     volumes:
       - ./:/app

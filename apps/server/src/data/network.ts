@@ -1,6 +1,6 @@
 import { capFirst, NetworkInfo, NetworkLoad, removePad } from '@dash/common';
 import { exec as cexec } from 'child_process';
-import * as fs from 'fs';
+import fs from 'fs';
 import * as si from 'systeminformation';
 import { promisify } from 'util';
 import { CONFIG } from '../config';

@@ -62,7 +62,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
         textLeft={
           showPercentages
             ? `↑ ${bpsPrettyPrint(
-                ((chartDataUp[chartDataUp.length - 1]?.y as number) ?? 0) * 8
+                ((chartDataUp.at(-1)?.y as number) ?? 0) * 8
               )}`
             : '↑'
         }
@@ -92,8 +92,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
         textLeft={
           showPercentages
             ? `↓ ${bpsPrettyPrint(
-                ((chartDataDown[chartDataDown.length - 1]?.y as number) ?? 0) *
-                  8
+                ((chartDataDown.at(-1)?.y as number) ?? 0) * 8
               )}`
             : '↓'
         }

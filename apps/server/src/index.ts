@@ -1,9 +1,9 @@
-import * as compression from 'compression';
-import * as cors from 'cors';
-import * as express from 'express';
+import compression from 'compression';
+import cors from 'cors';
+import express from 'express';
 import { readFileSync } from 'fs';
-import * as http from 'http';
-import * as path from 'path';
+import http from 'http';
+import path from 'path';
 import {
   debounceTime,
   lastValueFrom,

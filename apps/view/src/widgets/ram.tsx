@@ -44,9 +44,9 @@ export const RamChart: FC<RamChartProps> = ({
         contentLoaded={chartData.length > 1}
         textLeft={
           showPercentages
-            ? `%: ${(chartData[chartData.length - 1]?.y as number)?.toFixed(
+            ? `%: ${(chartData.at(-1)?.y as number)?.toFixed(
                 1
-              )} (${bytePrettyPrint(load[load.length - 1] ?? 0)})`
+              )} (${bytePrettyPrint(load.at(-1) ?? 0)})`
             : undefined
         }
         textOffset={textOffset}

@@ -67,7 +67,7 @@ export const CpuChart: FC<CpuChartProps> = ({
 }) => {
   const theme = useTheme();
 
-  const latestLoad = load[load.length - 1];
+  const latestLoad = load.at(-1) ?? [];
   const columns = getColumnsForCores(latestLoad?.length ?? 1);
   let chartData: ChartVal[][] = [];
 
@@ -143,9 +143,7 @@ export const CpuChart: FC<CpuChartProps> = ({
           textLeft={
             multiView || !showPercentages
               ? undefined
-              : `%: ${((chart[chart.length - 1]?.y as number) ?? 0)?.toFixed(
-                  1
-                )}`
+              : `%: ${((chart.at(-1)?.y as number) ?? 0)?.toFixed(1)}`
           }
           textRight={
             config.enable_cpu_temps && !multiView && chart.length > 1
