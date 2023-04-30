@@ -40,7 +40,7 @@ export default {
       model: normalizeCpuModel(cpuInfo.brand),
       cores: cpuInfo.physicalCores,
       ecores: cpuInfo.efficiencyCores,
-      pcores: cpuInfo.physicalCores,
+      pcores: cpuInfo.performanceCores,
       threads: cpuInfo.cores,
       frequency: cpuInfo.speed,
     };
