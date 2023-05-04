@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import { readFileSync } from 'fs';
 import http from 'http';
+import morgan from 'morgan';
 import path from 'path';
 import {
   debounceTime,
@@ -13,6 +14,7 @@ import {
   timeout,
 } from 'rxjs';
 import { Server } from 'socket.io';
+import urlJoin from 'url-join';
 import { CONFIG } from './config';
 import getNetworkInfo from './data/network';
 import { getDynamicServerInfo } from './dynamic-info';
@@ -26,6 +28,7 @@ import {
 } from './static-info';
 
 const app = express();
+const router = express.Router();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: CONFIG.disable_integrations
@@ -33,17 +36,22 @@ const io = new Server(server, {
     : {
         origin: '*',
       },
+  path: urlJoin(CONFIG.routing_path, '/socket'),
 });
 
 if (!CONFIG.disable_integrations) {
   app.use(cors());
 }
+if (CONFIG.log_requests) {
+  app.use(morgan('tiny'));
+}
 
 app.use(compression());
+app.use(CONFIG.routing_path, router);
 
 if (environment.production) {
   // Serve static files from the React app
-  app.use(
+  router.use(
     express.static(path.join(__dirname, '../view'), {
       maxAge: '1y',
       setHeaders: (res, path) => {
@@ -71,7 +79,7 @@ if (!CONFIG.disable_integrations) {
   };
 
   const versionFile = getVersionFile();
-  app.get('/config', (_, res) => {
+  router.get('/config', (_, res) => {
     res.send({
       config: {
         ...CONFIG,
@@ -82,7 +90,7 @@ if (!CONFIG.disable_integrations) {
     });
   });
 
-  app.get('/info', (_, res) => {
+  router.get('/info', (_, res) => {
     res.send({ ...getStaticServerInfo(), config: undefined });
   });
 }
@@ -110,19 +118,19 @@ server.listen(CONFIG.port, async () => {
       }
     };
 
-    app.get('/load/cpu', async (_, res) => {
+    router.get('/load/cpu', async (_, res) => {
       res.send(await getCurrentValue(obs.cpu));
     });
-    app.get('/load/ram', async (_, res) => {
+    router.get('/load/ram', async (_, res) => {
       res.send({ load: await getCurrentValue(obs.ram) });
     });
-    app.get('/load/storage', async (_, res) => {
+    router.get('/load/storage', async (_, res) => {
       res.send(await getCurrentValue(obs.storage));
     });
-    app.get('/load/network', async (_, res) => {
+    router.get('/load/network', async (_, res) => {
       res.send(await getCurrentValue(obs.network));
     });
-    app.get('/load/gpu', async (_, res) => {
+    router.get('/load/gpu', async (_, res) => {
       res.send(await getCurrentValue(obs.gpu));
     });
   }

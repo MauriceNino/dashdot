@@ -7942,6 +7942,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/morgan@npm:1.9.4":
+  version: 1.9.4
+  resolution: "@types/morgan@npm:1.9.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: d1e99c66a43501dcdf6e94e013dfff4e6c152cbb5f782d954bb722d230a9c1c0fe06fab6df3f3dfa3547735a7598f9471633cc6813d794e9562fd022e217c6ae
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:>=12":
   version: 17.0.38
   resolution: "@types/node@npm:17.0.38"
@@ -8234,6 +8243,13 @@ __metadata:
   version: 2.0.6
   resolution: "@types/unist@npm:2.0.6"
   checksum: 25cb860ff10dde48b54622d58b23e66214211a61c84c0f15f88d38b61aa1b53d4d46e42b557924a93178c501c166aa37e28d7f6d994aba13d24685326272d5db
+  languageName: node
+  linkType: hard
+
+"@types/url-join@npm:4.0.1":
+  version: 4.0.1
+  resolution: "@types/url-join@npm:4.0.1"
+  checksum: 29444b90e165b3970c8ad3fcef1e2de092e72b67e1f3aaff3016eea1697f98a01a28fb4f71f8044e3338a95bd2262327e9299be416efe5297018658760a331b4
   languageName: node
   linkType: hard
 
@@ -9893,7 +9909,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"basic-auth@npm:^2.0.1":
+"basic-auth@npm:^2.0.1, basic-auth@npm:~2.0.1":
   version: 2.0.1
   resolution: "basic-auth@npm:2.0.1"
   dependencies:
@@ -12061,6 +12077,7 @@ __metadata:
     "@types/cors": 2.8.13
     "@types/express": 4.17.17
     "@types/jest": 29.5.1
+    "@types/morgan": 1.9.4
     "@types/node": 18.16.3
     "@types/qs": 6.9.7
     "@types/react": 18.2.0
@@ -12071,6 +12088,7 @@ __metadata:
     "@types/store": 2.0.2
     "@types/styled-components": 5.1.26
     "@types/throttle-debounce": 5.0.0
+    "@types/url-join": 4.0.1
     "@typescript-eslint/eslint-plugin": 5.59.1
     "@typescript-eslint/parser": 5.59.1
     "@vitejs/plugin-react": 4.0.0
@@ -12105,6 +12123,7 @@ __metadata:
     jest: 29.5.0
     jest-environment-node: 29.5.0
     jsdom: 21.1.1
+    morgan: 1.10.0
     nx: 16.0.1
     nx-cloud: latest
     parse-domain: 7.0.1
@@ -12136,6 +12155,7 @@ __metadata:
     ts-node: 10.9.1
     tslib: 2.5.0
     typescript: 5.0.4
+    url-join: 4.0.1
     use-color-scheme: 1.1.3
     util: 0.12.5
     vite: 4.3.3
@@ -12431,7 +12451,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"depd@npm:2.0.0":
+"depd@npm:2.0.0, depd@npm:~2.0.0":
   version: 2.0.0
   resolution: "depd@npm:2.0.0"
   checksum: abbe19c768c97ee2eed6282d8ce3031126662252c58d711f646921c9623f9052e3e1906443066beec1095832f534e57c523b7333f8e7e0d93051ab6baef5ab3a
@@ -18805,6 +18825,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"morgan@npm:1.10.0":
+  version: 1.10.0
+  resolution: "morgan@npm:1.10.0"
+  dependencies:
+    basic-auth: ~2.0.1
+    debug: 2.6.9
+    depd: ~2.0.0
+    on-finished: ~2.3.0
+    on-headers: ~1.0.2
+  checksum: fb41e226ab5a1abf7e8909e486b387076534716d60207e361acfb5df78b84d703a7b7ea58f3046a9fd0b83d3c94bfabde32323341a1f1b26ce50680abd2ea5dd
+  languageName: node
+  linkType: hard
+
 "mrmime@npm:^1.0.0":
   version: 1.0.1
   resolution: "mrmime@npm:1.0.1"
@@ -19608,6 +19641,15 @@ __metadata:
   dependencies:
     ee-first: 1.1.1
   checksum: d20929a25e7f0bb62f937a425b5edeb4e4cde0540d77ba146ec9357f00b0d497cdb3b9b05b9c8e46222407d1548d08166bff69cc56dfa55ba0e4469228920ff0
+  languageName: node
+  linkType: hard
+
+"on-finished@npm:~2.3.0":
+  version: 2.3.0
+  resolution: "on-finished@npm:2.3.0"
+  dependencies:
+    ee-first: 1.1.1
+  checksum: 1db595bd963b0124d6fa261d18320422407b8f01dc65863840f3ddaaf7bcad5b28ff6847286703ca53f4ec19595bd67a2f1253db79fc4094911ec6aa8df1671b
   languageName: node
   linkType: hard
 
@@ -25885,7 +25927,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"url-join@npm:^4.0.0, url-join@npm:^4.0.1":
+"url-join@npm:4.0.1, url-join@npm:^4.0.0, url-join@npm:^4.0.1":
   version: 4.0.1
   resolution: "url-join@npm:4.0.1"
   checksum: f74e868bf25dbc8be6a8d7237d4c36bb5b6c62c72e594d5ab1347fe91d6af7ccd9eb5d621e30152e4da45c2e9a26bec21390e911ab54a62d4d82e76028374ee5

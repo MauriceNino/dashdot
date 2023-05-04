@@ -27,6 +27,8 @@ const kv = <T extends boolean>(
 
 export const CONFIG: Config = {
   port: numNull(penv('PORT')) ?? 3001,
+  routing_path: penv('ROUTING_PATH') ?? '/',
+  log_requests: penv('LOG_REQUESTS') === 'true',
   running_in_docker: penv('RUNNING_IN_DOCKER') === 'true',
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
   use_network_interface: penv('USE_NETWORK_INTERFACE'),
@@ -39,7 +41,7 @@ export const CONFIG: Config = {
   fs_virtual_mounts: lst(penv('FS_VIRTUAL_MOUNTS') ?? ''),
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
 
-  show_dash_version: penv('SHOW_DASH_VERSION') as any,
+  show_dash_version: penv('SHOW_DASH_VERSION') as Config['show_dash_version'],
   show_host: penv('SHOW_HOST') === 'true',
   custom_host: penv('CUSTOM_HOST'),
   page_title: penv('PAGE_TITLE') ?? 'dash.',
@@ -48,21 +50,25 @@ export const CONFIG: Config = {
 
   widget_list: lst(
     penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network'
-  ) as any[],
-  os_label_list: lst(penv('OS_LABEL_LIST') ?? 'os,arch,up_since') as any[],
+  ) as Config['widget_list'],
+  os_label_list: lst(
+    penv('OS_LABEL_LIST') ?? 'os,arch,up_since'
+  ) as Config['os_label_list'],
   cpu_label_list: lst(
     penv('CPU_LABEL_LIST') ?? 'brand,model,cores,threads,frequency'
-  ) as any[],
+  ) as Config['cpu_label_list'],
   storage_label_list: lst(
     penv('STORAGE_LABEL_LIST') ?? 'brand,type,size,raid'
-  ) as any[],
+  ) as Config['storage_label_list'],
   ram_label_list: lst(
     penv('RAM_LABEL_LIST') ?? 'brand,type,size,frequency'
-  ) as any[],
+  ) as Config['ram_label_list'],
   network_label_list: lst(
     penv('NETWORK_LABEL_LIST') ?? 'type,speed_up,speed_down,interface_speed'
-  ) as any[],
-  gpu_label_list: lst(penv('GPU_LABEL_LIST') ?? 'brand,model,memory') as any[],
+  ) as Config['network_label_list'],
+  gpu_label_list: lst(
+    penv('GPU_LABEL_LIST') ?? 'brand,model,memory'
+  ) as Config['gpu_label_list'],
 
   os_widget_grow: numNull(penv('OS_WIDGET_GROW')) ?? 2.5,
   os_widget_min_width: numNull(penv('OS_WIDGET_MIN_WIDTH')) ?? 300,
