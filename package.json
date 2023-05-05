@@ -114,7 +114,7 @@
     "@types/qs": "6.9.7",
     "@types/react": "18.2.5",
     "@types/react-color": "3.0.6",
-    "@types/react-dom": "18.2.3",
+    "@types/react-dom": "18.2.4",
     "@types/react-is": "18.2.0",
     "@types/react-virtualized-auto-sizer": "1.0.1",
     "@types/store": "2.0.2",
