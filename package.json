@@ -132,7 +132,7 @@
     "commitizen": "4.3.0",
     "dotenv": "16.0.3",
     "esbuild": "^0.17.17",
-    "eslint": "8.39.0",
+    "eslint": "8.40.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-cypress": "2.13.3",
     "eslint-plugin-import": "2.27.5",
