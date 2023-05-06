@@ -9255,9 +9255,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:5.4.6":
-  version: 5.4.6
-  resolution: "antd@npm:5.4.6"
+"antd@npm:5.4.7":
+  version: 5.4.7
+  resolution: "antd@npm:5.4.7"
   dependencies:
     "@ant-design/colors": ^7.0.0
     "@ant-design/cssinjs": ^1.9.1
@@ -9309,7 +9309,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 49b540f79f946b7b71ed26e6947e6b9281637bfb0f0f664a79e913caea0594ef350a5556f758a29bdc56c9414ad67758ee0e50422c9e12aceea5175568a50605
+  checksum: 27fadd198f70ac369f9ac47f07e79bd39b1dfa06bb5efab13f4a32cf95e51e4873d24a2cdde9ee4fb4360f95ee143ebad01ec0a0438aed305deda820ddd7023f
   languageName: node
   linkType: hard
 
@@ -12165,7 +12165,7 @@ __metadata:
     "@vitejs/plugin-react": 4.0.0
     "@vitest/coverage-c8": 0.31.0
     "@vitest/ui": 0.31.0
-    antd: 5.4.6
+    antd: 5.4.7
     axios: 1.4.0
     babel-jest: 29.5.0
     babel-plugin-styled-components: 2.1.1
