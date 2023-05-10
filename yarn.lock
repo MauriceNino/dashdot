@@ -12211,7 +12211,7 @@ __metadata:
     react-spinners-kit: 1.9.1
     react-test-renderer: 18.2.0
     react-virtualized-auto-sizer: 1.0.15
-    recharts: 2.6.0
+    recharts: 2.6.2
     regenerator-runtime: 0.13.11
     rxjs: 7.8.1
     sass: 1.62.1
@@ -22597,9 +22597,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recharts@npm:2.6.0":
-  version: 2.6.0
-  resolution: "recharts@npm:2.6.0"
+"recharts@npm:2.6.2":
+  version: 2.6.2
+  resolution: "recharts@npm:2.6.2"
   dependencies:
     classnames: ^2.2.5
     eventemitter3: ^4.0.1
@@ -22614,7 +22614,7 @@ __metadata:
     prop-types: ^15.6.0
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: dc7db8360cab8a6fd25d17c6fdb93c04dd7ad04446e59f8ae965fd00b4c724e77c0294f0d5859e109438d800faa1e1d58fa8e48889d6f747cc7cf62d82aaf8dd
+  checksum: 4d63232317bbb39e457d13575a8410b353f8b45bb62aaf515d9f5a33bb7a04202908aa760b87a7e243503a5a033a176922ae4aef51238aab8511a5554cf7746e
   languageName: node
   linkType: hard
 
