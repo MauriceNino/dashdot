@@ -12343,7 +12343,7 @@ __metadata:
     typescript: 5.0.4
     use-color-scheme: 1.1.3
     util: 0.12.5
-    vite: 4.3.5
+    vite: 4.3.7
     vite-plugin-eslint: 1.8.1
     vite-tsconfig-paths: 4.2.0
     vitest: 0.31.0
@@ -26350,9 +26350,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:4.3.5":
-  version: 4.3.5
-  resolution: "vite@npm:4.3.5"
+"vite@npm:4.3.7":
+  version: 4.3.7
+  resolution: "vite@npm:4.3.7"
   dependencies:
     esbuild: ^0.17.5
     fsevents: ~2.3.2
@@ -26383,7 +26383,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 6b7f2189f097110846e49a3f1d463bd620dfe9e4f433b1967e5b99f0789610ff4475e85e3e71476e6fa40be25449bb6f1c45edb95c79deba6f3f173699bff948
+  checksum: cda8c86fd9f9ab984f2ab8ae09f89bfef7dc636142f0b1ed30d37b8155516729cf91d95eab7ba43d43bb51d8068f0d938ac85dc80d3f53497fbd35f50d27ec25
   languageName: node
   linkType: hard
 
