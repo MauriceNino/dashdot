@@ -72,7 +72,7 @@
     "socket.io-client": "4.6.1",
     "store": "2.0.12",
     "styled-components": "5.3.11",
-    "systeminformation": "5.17.13",
+    "systeminformation": "5.17.14",
     "throttle-debounce": "5.0.0",
     "tslib": "2.5.2",
     "use-color-scheme": "1.1.3",
