@@ -12333,7 +12333,7 @@ __metadata:
     react-is: 18.2.0
     react-spinners-kit: 1.9.1
     react-test-renderer: 18.2.0
-    react-virtualized-auto-sizer: 1.0.19
+    react-virtualized-auto-sizer: 1.0.20
     recharts: 2.6.2
     regenerator-runtime: 0.13.11
     rxjs: 7.8.1
@@ -22567,13 +22567,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-virtualized-auto-sizer@npm:1.0.19":
-  version: 1.0.19
-  resolution: "react-virtualized-auto-sizer@npm:1.0.19"
+"react-virtualized-auto-sizer@npm:1.0.20":
+  version: 1.0.20
+  resolution: "react-virtualized-auto-sizer@npm:1.0.20"
   peerDependencies:
     react: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0-rc
     react-dom: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0-rc
-  checksum: daafcd099e8d375efef72914e83a7904d4303b62b093af8e322c036463598e61a9c2b18c82a602e62e69ecf581d3c02c8a67a4165bc1b23de61e94674f681cb1
+  checksum: 2c616ec7587de64a46aa8c6c301e75fee87eb7a39013f25d940b0fe95eee5e8a8a3c109923e241b427752d71fba80f44cd2c8557750967df0777d99ebd16ba24
   languageName: node
   linkType: hard
 
