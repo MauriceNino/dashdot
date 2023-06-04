@@ -130,7 +130,7 @@
     "babel-plugin-syntax-jsx": "6.18.0",
     "chai": "4.3.7",
     "commitizen": "4.3.0",
-    "dotenv": "16.0.3",
+    "dotenv": "16.1.4",
     "esbuild": "^0.17.17",
     "eslint": "8.41.0",
     "eslint-config-prettier": "8.8.0",
