@@ -10,3 +10,6 @@
 # misc
 **.DS_Store
 .prettierignore
+
+# Auto generated
+/.github/CHANGELOG.md
