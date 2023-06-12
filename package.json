@@ -112,7 +112,7 @@
     "@types/jest": "29.5.2",
     "@types/node": "18.16.17",
     "@types/qs": "6.9.7",
-    "@types/react": "18.2.8",
+    "@types/react": "18.2.11",
     "@types/react-color": "3.0.6",
     "@types/react-dom": "18.2.4",
     "@types/react-is": "18.2.0",
