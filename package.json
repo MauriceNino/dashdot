@@ -54,7 +54,7 @@
     "express": "4.18.2",
     "framer-motion": "10.12.16",
     "parse-domain": "7.0.1",
-    "prism-react-renderer": "^1",
+    "prism-react-renderer": "^2.0.0",
     "punycode": "2.3.0",
     "qs": "6.11.2",
     "react": "18.2.0",
