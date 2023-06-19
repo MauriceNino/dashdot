@@ -43,7 +43,7 @@
     "@mantine/hooks": "6.0.13",
     "@mdx-js/react": "1.6.22",
     "@swc/helpers": "0.5.1",
-    "antd": "5.6.1",
+    "antd": "5.6.2",
     "axios": "1.4.0",
     "clsx": "1.2.1",
     "compression": "1.7.4",
