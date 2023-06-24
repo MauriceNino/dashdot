@@ -82,8 +82,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.22.5",
-    "@commitlint/cli": "17.6.5",
-    "@commitlint/config-conventional": "17.6.5",
+    "@commitlint/cli": "17.6.6",
+    "@commitlint/config-conventional": "17.6.6",
     "@commitlint/cz-commitlint": "17.5.0",
     "@docusaurus/module-type-aliases": "2.4.1",
     "@nx-plus/docusaurus": "15.0.0-rc.0",
