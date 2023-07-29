@@ -76,6 +76,13 @@ This changes the `gap` between the graphs. This is mainly needed on views with m
 
 - type: `string`
 
+### `filter`
+
+For views with multiple graphs, filter the view to just a single graph. 
+
+- type (when `graph=network`): `string` (`up`, `down`)
+- type (when `graph=gpu`): `string` (`load`, `memory`)
+
 ### `textSize`
 
 This changes the `font-size` of the texts (e.g. percentage) in your graph.
