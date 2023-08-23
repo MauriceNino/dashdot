@@ -188,9 +188,9 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
   const frequency = override.cpu_frequency ?? data.frequency;
 
   useEffect(() => {
-    if (config.cpu_show_all_cores === 'multi-core') {
+    if (config.cpu_cores_toggle_mode === 'multi-core') {
       setMulticore(true);
-    } else if (config.cpu_show_all_cores === 'single-core') {
+    } else if (config.cpu_cores_toggle_mode === 'average') {
       setMulticore(false);
     }
   }, []);
@@ -218,7 +218,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       infosPerPage={7}
       icon={faMicrochip}
       extraContent={
-        config.cpu_show_all_cores === 'toggle' ?
+        config.cpu_cores_toggle_mode === 'toggle' ?
           <WidgetSwitch
             label='Show All Cores'
             checked={multiCore}
