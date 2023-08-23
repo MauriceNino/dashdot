@@ -132,6 +132,7 @@ export type Config = {
   cpu_widget_min_width: number;
   cpu_shown_datapoints: number;
   cpu_poll_interval: number;
+  cpu_show_all_cores: 'toggle' | 'multi-core' | 'single-core';
 
   // Storage Widget
   storage_widget_items_per_page: number;
