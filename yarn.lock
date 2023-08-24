@@ -8278,13 +8278,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:29.5.2":
-  version: 29.5.2
-  resolution: "@types/jest@npm:29.5.2"
+"@types/jest@npm:29.5.4":
+  version: 29.5.4
+  resolution: "@types/jest@npm:29.5.4"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: 7d205599ea3cccc262bad5cc173d3242d6bf8138c99458509230e4ecef07a52d6ddcde5a1dbd49ace655c0af51d2dbadef3748697292ea4d86da19d9e03e19c0
+  checksum: 38ed5942f44336452efd0f071eab60aaa57cd8d46530348d0a3aa5a691dcbf1366c4ca8f6ee8364efb45b4413bfefae443e5d4f469246a472a03b21ac11cd4ed
   languageName: node
   linkType: hard
 
@@ -12587,7 +12587,7 @@ __metadata:
     "@types/compression": 1.7.2
     "@types/cors": 2.8.13
     "@types/express": 4.17.17
-    "@types/jest": 29.5.2
+    "@types/jest": 29.5.4
     "@types/node": 18.16.18
     "@types/qs": 6.9.7
     "@types/react": 18.2.14
