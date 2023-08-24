@@ -11032,7 +11032,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:4.3.7, chai@npm:^4.3.7":
+"chai@npm:4.3.8":
+  version: 4.3.8
+  resolution: "chai@npm:4.3.8"
+  dependencies:
+    assertion-error: ^1.1.0
+    check-error: ^1.0.2
+    deep-eql: ^4.1.2
+    get-func-name: ^2.0.0
+    loupe: ^2.3.1
+    pathval: ^1.1.1
+    type-detect: ^4.0.5
+  checksum: 29e0984ed13308319cadc35437c8ef0a3e271544d226c991bf7e3b6d771bf89707321669e11d05e362bc0ad0bd26585079b989d1032f3c106e3bb95d7f079cce
+  languageName: node
+  linkType: hard
+
+"chai@npm:^4.3.7":
   version: 4.3.7
   resolution: "chai@npm:4.3.7"
   dependencies:
@@ -12619,7 +12634,7 @@ __metadata:
     babel-jest: 29.5.0
     babel-plugin-styled-components: 2.1.4
     babel-plugin-syntax-jsx: 6.18.0
-    chai: 4.3.7
+    chai: 4.3.8
     clsx: 1.2.1
     commitizen: 4.3.0
     compression: 1.7.4
