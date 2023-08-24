@@ -50,7 +50,7 @@
     "core-js": "3.31.0",
     "cors": "2.8.5",
     "docusaurus-plugin-image-zoom": "1.0.1",
-    "docusaurus-plugin-sass": "0.2.3",
+    "docusaurus-plugin-sass": "0.2.5",
     "express": "4.18.2",
     "framer-motion": "10.12.17",
     "parse-domain": "7.0.1",
