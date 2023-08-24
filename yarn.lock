@@ -12615,7 +12615,7 @@ __metadata:
     core-js: 3.31.0
     cors: 2.8.5
     docusaurus-plugin-image-zoom: 1.0.1
-    docusaurus-plugin-sass: 0.2.3
+    docusaurus-plugin-sass: 0.2.5
     dotenv: 16.3.1
     esbuild: ^0.18.0
     eslint: 8.47.0
@@ -13160,15 +13160,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-sass@npm:0.2.3":
-  version: 0.2.3
-  resolution: "docusaurus-plugin-sass@npm:0.2.3"
+"docusaurus-plugin-sass@npm:0.2.5":
+  version: 0.2.5
+  resolution: "docusaurus-plugin-sass@npm:0.2.5"
   dependencies:
     sass-loader: ^10.1.1
   peerDependencies:
-    "@docusaurus/core": ^2.0.0-beta
+    "@docusaurus/core": ^2.0.0-beta || ^3.0.0-alpha
     sass: ^1.30.0
-  checksum: 928b02fd7c63835d54cdcce2eeda01cb6124707c6d43ef8e77db06474d3e3b4b7282cc0d88fed378cf1f3db2fc93ba8c11366965bb9b668eae19ca805e578acb
+  checksum: db17a8c87a344330717962fe195c94089e32281dc7f79b66bf99587254ebad71353b8588c5b74feb1c2841c6183e59b20259f5fb1a5c74026903557cbb113a68
   languageName: node
   linkType: hard
 
