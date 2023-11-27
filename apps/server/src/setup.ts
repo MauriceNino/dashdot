@@ -1,7 +1,9 @@
 import { exec as exaca } from 'child_process';
 import * as fs from 'fs';
+import * as si from 'systeminformation';
 import { promisify } from 'util';
 import { CONFIG } from './config';
+import { platformIsWindows } from './utils';
 
 const exec = promisify(exaca);
 
@@ -98,5 +100,19 @@ export const setupOsVersion = async () => {
     }
   } catch (e) {
     console.warn(e);
+  }
+};
+
+export const setupHostSpecific = async () => {
+  if (platformIsWindows) {
+    console.log('Acquiring Windows Persistent Powershell')
+    si.powerShellStart()
+  }
+};
+
+export const tearDownHostSpecific = () => {
+  if (platformIsWindows) {
+    console.log('Releasing Windows Persistent Powershell')
+    si.powerShellRelease()
   }
 };
