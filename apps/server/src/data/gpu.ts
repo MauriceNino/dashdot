@@ -13,12 +13,18 @@ const normalizeGpuModel = (model: string) => {
   return model ? model.replace(/\[.*\]/gi, '').trim() : undefined;
 };
 
+const isValidController = (controller: si.Systeminformation.GraphicsControllerData) => {
+  const blacklist = ['monitor'];
+  const model = controller.model.toLowerCase();
+  return blacklist.every( w => ! model.includes(w) );
+};
+
 export default {
   dynamic: async (): Promise<GpuLoad> => {
     const gpuInfo = await si.graphics();
 
     return {
-      layout: gpuInfo.controllers.map(controller => ({
+      layout: gpuInfo.controllers.filter(isValidController).map(controller => ({
         load: controller.utilizationGpu ?? 0,
         memory: controller.utilizationMemory ?? 0,
       })),
@@ -28,7 +34,7 @@ export default {
     const gpuInfo = await si.graphics();
 
     return {
-      layout: gpuInfo.controllers.map(controller => ({
+      layout: gpuInfo.controllers.filter(isValidController).map(controller => ({
         brand: normalizeGpuBrand(controller.vendor),
         model:
           normalizeGpuName(controller.name) ??
