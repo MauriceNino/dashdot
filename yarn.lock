@@ -9622,10 +9622,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qs@npm:*, @types/qs@npm:6.9.7":
+"@types/qs@npm:*":
   version: 6.9.7
   resolution: "@types/qs@npm:6.9.7"
   checksum: 7fd6f9c25053e9b5bb6bc9f9f76c1d89e6c04f7707a7ba0e44cc01f17ef5284adb82f230f542c2d5557d69407c9a40f0f3515e8319afd14e1e16b5543ac6cdba
+  languageName: node
+  linkType: hard
+
+"@types/qs@npm:6.9.10":
+  version: 6.9.10
+  resolution: "@types/qs@npm:6.9.10"
+  checksum: 3e479ee056bd2b60894baa119d12ecd33f20a25231b836af04654e784c886f28a356477630430152a86fba253da65d7ecd18acffbc2a8877a336e75aa0272c67
   languageName: node
   linkType: hard
 
@@ -13754,7 +13761,7 @@ __metadata:
     "@types/express": 4.17.17
     "@types/jest": 29.5.4
     "@types/node": 20.10.4
-    "@types/qs": 6.9.7
+    "@types/qs": 6.9.10
     "@types/react": 18.2.24
     "@types/react-color": 3.0.6
     "@types/react-dom": 18.2.9
