@@ -18,13 +18,7 @@
           "mode": "development"
         },
         "production": {
-          "mode": "production",
-          "fileReplacements": [
-            {
-              "replace": "apps/view/src/environments/environment.ts",
-              "with": "apps/view/src/environments/environment.prod.ts"
-            }
-          ]
+          "mode": "production"
         }
       }
     },
@@ -64,7 +58,7 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/apps/view"],
+      "outputs": ["{workspaceRoot}/coverage/apps/view"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../coverage/apps/view"
@@ -78,11 +72,8 @@
       ]
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/view/**/*.{ts,tsx,js,jsx}"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "serve-static": {
       "executor": "@nx/web:file-server",

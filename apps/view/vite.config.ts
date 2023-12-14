@@ -1,9 +1,10 @@
 /// <reference types="vitest" />
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import viteTsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  root: __dirname,
   cacheDir: '../../node_modules/.vite/view',
 
   server: {
@@ -16,14 +17,15 @@ export default defineConfig({
     host: '0.0.0.0',
   },
 
-  plugins: [
-    react(),
-    viteTsConfigPaths({
-      root: '../../',
-    }),
-  ],
+  plugins: [react(), nxViteTsPaths()],
 
+  //@ts-ignore
   test: {
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../coverage/apps/view',
+      provider: 'v8',
+    },
     globals: true,
     cache: {
       dir: '../../node_modules/.vitest',
@@ -33,6 +35,9 @@ export default defineConfig({
   },
 
   build: {
+    outDir: '../../dist/apps/view',
+    reportCompressedSize: true,
+    commonjsOptions: { transformMixedEsModules: true },
     target: 'es2015',
   },
 });

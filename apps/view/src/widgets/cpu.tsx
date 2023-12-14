@@ -184,16 +184,16 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
   const isMobile = useIsMobile();
   const override = config.override;
 
-  const [multiCore, setMulticore] = useSetting('multiCore', false);
+  const [multiCore, setMultiCore] = useSetting('multiCore', false);
   const frequency = override.cpu_frequency ?? data.frequency;
 
   useEffect(() => {
     if (config.cpu_cores_toggle_mode === 'multi-core') {
-      setMulticore(true);
+      setMultiCore(true);
     } else if (config.cpu_cores_toggle_mode === 'average') {
-      setMulticore(false);
+      setMultiCore(false);
     }
-  }, []);
+  }, [config.cpu_cores_toggle_mode, setMultiCore]);
 
   return (
     <HardwareInfoContainer
@@ -218,12 +218,13 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       infosPerPage={7}
       icon={faMicrochip}
       extraContent={
-        config.cpu_cores_toggle_mode === 'toggle' ?
+        config.cpu_cores_toggle_mode === 'toggle' ? (
           <WidgetSwitch
             label='Show All Cores'
             checked={multiCore}
-            onChange={() => setMulticore(!multiCore)}
-          /> : undefined
+            onChange={() => setMultiCore(!multiCore)}
+          />
+        ) : undefined
       }
     >
       <CpuChart

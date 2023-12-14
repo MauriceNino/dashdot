@@ -118,21 +118,21 @@ export const WidgetPreview = () => {
             {multiViewAllowed && (
               <Select
                 label='Multi-View'
-                value={controls.multiView.value}
-                onChange={e => controls.multiView.setValue(e)}
+                value={controls.multiView.value.toString()}
+                onChange={e => controls.multiView.setValue(Boolean(e))}
                 data={[
-                  { value: true, label: 'True' },
-                  { value: false, label: 'False' },
+                  { value: 'true', label: 'True' },
+                  { value: 'false', label: 'False' },
                 ]}
               />
             )}
             <Select
               label='Show Percentage'
-              value={controls.showPercentage.value}
-              onChange={e => controls.showPercentage.setValue(e)}
+              value={controls.showPercentage.value.toString()}
+              onChange={e => controls.showPercentage.setValue(Boolean(e))}
               data={[
-                { value: true, label: 'True' },
-                { value: false, label: 'False' },
+                { value: 'true', label: 'True' },
+                { value: 'false', label: 'False' },
               ]}
             />
           </Group>
