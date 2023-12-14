@@ -9207,12 +9207,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/compression@npm:1.7.2":
-  version: 1.7.2
-  resolution: "@types/compression@npm:1.7.2"
+"@types/compression@npm:1.7.5":
+  version: 1.7.5
+  resolution: "@types/compression@npm:1.7.5"
   dependencies:
     "@types/express": "*"
-  checksum: 3457f9d39ed73d58387bccf15bcfe8e140298c5d6e90fe354dfeb24ec7828432658caebee8ab6f4e4ac39a7d03bc0a6a52686d7fb2fe405fbdefede41d6b5834
+  checksum: 2fc6e4376027d44a4dde304d3b7763ba3d6e229b9417f4a92738e07ae9e5f06708268db5226f5fc7de46c3b9c0c4e3576701c550432b04148778f0de0dcc15f9
   languageName: node
   linkType: hard
 
@@ -13749,7 +13749,7 @@ __metadata:
     "@swc/helpers": 0.5.3
     "@testing-library/react": 14.0.0
     "@types/chai": 4.3.5
-    "@types/compression": 1.7.2
+    "@types/compression": 1.7.5
     "@types/cors": 2.8.13
     "@types/express": 4.17.17
     "@types/jest": 29.5.4
