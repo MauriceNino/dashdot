@@ -9650,13 +9650,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-color@npm:3.0.6":
-  version: 3.0.6
-  resolution: "@types/react-color@npm:3.0.6"
+"@types/react-color@npm:3.0.10":
+  version: 3.0.10
+  resolution: "@types/react-color@npm:3.0.10"
   dependencies:
     "@types/react": "*"
     "@types/reactcss": "*"
-  checksum: 8cd881d6eb725190be942c1d71f7917d3dd1b418417740f64fa6c03ae3ba16cb91d07c4b3b348cf5bae20071c8ca5d4aaf514c9a5318077d5e50bd782a5e8da2
+  checksum: 1cf7cc4629a9f48715aa12cb1e5280bf3e429af55f5d741a23d8a8081f8f38ad1ebd8aed40af2a0809d58573535dbf21d0f4c1d6584fc18f0d423077a0fedc1b
   languageName: node
   linkType: hard
 
@@ -13780,7 +13780,7 @@ __metadata:
     "@types/node": 20.10.4
     "@types/qs": 6.9.10
     "@types/react": 18.2.24
-    "@types/react-color": 3.0.6
+    "@types/react-color": 3.0.10
     "@types/react-dom": 18.2.9
     "@types/react-is": 18.2.2
     "@types/react-virtualized-auto-sizer": 1.0.1

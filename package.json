@@ -113,7 +113,7 @@
     "@types/node": "20.10.4",
     "@types/qs": "6.9.10",
     "@types/react": "18.2.24",
-    "@types/react-color": "3.0.6",
+    "@types/react-color": "3.0.10",
     "@types/react-dom": "18.2.9",
     "@types/react-is": "18.2.2",
     "@types/react-virtualized-auto-sizer": "1.0.1",
