@@ -65,7 +65,7 @@ jobs:
       - uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: linux/amd64
           target: prod
           push: true
           build-args: |
