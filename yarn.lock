@@ -9678,12 +9678,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-is@npm:18.2.2":
-  version: 18.2.2
-  resolution: "@types/react-is@npm:18.2.2"
+"@types/react-is@npm:18.2.4":
+  version: 18.2.4
+  resolution: "@types/react-is@npm:18.2.4"
   dependencies:
     "@types/react": "*"
-  checksum: b7b9ccdb1cfdd3c0341759abc5acc6cf356be27e8d0d7824072d2dbe4f8e3aa000ac3a6516f4c55420ea1a3adef8e3d189db7800e49486bb144aca69edf0e31d
+  checksum: 2b69293a04609641be4963f5a9127aba3b7576cc15e3234fe6c341a940cbf3979e80bf848a43d93a24fb2ab09ad8faed54ac38c22037b159a0eea852e4dfa6eb
   languageName: node
   linkType: hard
 
@@ -13782,7 +13782,7 @@ __metadata:
     "@types/react": 18.2.24
     "@types/react-color": 3.0.10
     "@types/react-dom": 18.2.9
-    "@types/react-is": 18.2.2
+    "@types/react-is": 18.2.4
     "@types/react-virtualized-auto-sizer": 1.0.1
     "@types/store": 2.0.2
     "@types/styled-components": 5.1.32
