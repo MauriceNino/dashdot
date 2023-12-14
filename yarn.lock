@@ -215,21 +215,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/cssinjs@npm:^1.18.0":
-  version: 1.18.0
-  resolution: "@ant-design/cssinjs@npm:1.18.0"
+"@ant-design/cssinjs@npm:^1.18.1":
+  version: 1.18.1
+  resolution: "@ant-design/cssinjs@npm:1.18.1"
   dependencies:
     "@babel/runtime": ^7.11.1
     "@emotion/hash": ^0.8.0
     "@emotion/unitless": ^0.7.5
     classnames: ^2.3.1
-    csstype: ^3.0.10
+    csstype: 3.1.2
     rc-util: ^5.35.0
     stylis: ^4.0.13
   peerDependencies:
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: 7ca236ef2f1dfc4c8aa1f98f6db728f3eb11b585242738f547d2715e9e3caccdfc2ab727eb74617c3c6cef862071e9af0855a55ee1e777cc5b8ebf7333383a77
+  checksum: 69a46791ef18a66fabe6569e58ad97feff9f4366c6653a2ae1360aca21607c6ce448595dd26c72d2e387352d6bafe5f1ff4339c956798c19a7de69f09c4f2818
   languageName: node
   linkType: hard
 
@@ -8104,9 +8104,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rc-component/tour@npm:~1.11.0":
-  version: 1.11.0
-  resolution: "@rc-component/tour@npm:1.11.0"
+"@rc-component/tour@npm:~1.11.1":
+  version: 1.11.1
+  resolution: "@rc-component/tour@npm:1.11.1"
   dependencies:
     "@babel/runtime": ^7.18.0
     "@rc-component/portal": ^1.0.0-9
@@ -8116,7 +8116,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 87d4672d5f30c0ad0243bdd78ea745727f67794669d05ab40776b9d76b4a8dd619632d250f184796f154ca614be98a6b4121142f0205dc2cb55d71cb7f707182
+  checksum: 4c9c509f775cd3c4bdc2d73efe27f2c1ec19132f5a0011c1e82420bc243fdb2fc66bfeee0bd4c4073a1c2621d9aa0d303a71f233db6be5140a397c3f94979090
   languageName: node
   linkType: hard
 
@@ -8283,16 +8283,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release-plus/docker@npm:3.1.2":
-  version: 3.1.2
-  resolution: "@semantic-release-plus/docker@npm:3.1.2"
+"@semantic-release-plus/docker@npm:3.1.3":
+  version: 3.1.3
+  resolution: "@semantic-release-plus/docker@npm:3.1.3"
   dependencies:
     "@semantic-release-plus/core": "*"
     execa: 5.1.1
-    semver: 7.3.5
+    jest-mock: 29.7.0
+    semver: 7.5.4
   peerDependencies:
     semantic-release-plus: ^19.0.0 || ^20.0.0 || >=20.0.0-alpha
-  checksum: 020b4611147e1bf6619622de98c7faaf4e3a2a15ab4d152f380428fc40b76b91a5efe24b74d2fb7a6c03c92f6e727767a2aadbb8cb0e559e1220ede27c96f86b
+  checksum: 16fab71ba8b4997e9a4d285a45c5d1f47bcf7af38d4c22da85ffbeaa8b426690f371d070c63e3e2a69804ea67564c19ac7551a82f274c406fc85433812acd223
   languageName: node
   linkType: hard
 
@@ -8832,9 +8833,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/cli@npm:0.1.62":
-  version: 0.1.62
-  resolution: "@swc/cli@npm:0.1.62"
+"@swc/cli@npm:0.1.63":
+  version: 0.1.63
+  resolution: "@swc/cli@npm:0.1.63"
   dependencies:
     "@mole-inc/bin-wrapper": ^8.0.1
     commander: ^7.1.0
@@ -8852,7 +8853,7 @@ __metadata:
     spack: bin/spack.js
     swc: bin/swc.js
     swcx: bin/swcx.js
-  checksum: d44e88a724ba32d4f63856f15899f8eff78d90d0c5452e4882412307bf6353a64b25e7dc9992fd6e3975c87e6c0d7b494d859a0d8badb9f3c6103623ca89ddc2
+  checksum: 5cc888b995374fd35d38b42261cf73ec9bbc4ea327f220de38e8ad4cfdf2839a3e0b1a8778f56ead0e475774bc8f7925c42bef71993dd1cad5776e8b934e7e06
   languageName: node
   linkType: hard
 
@@ -9570,10 +9571,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.16.9":
-  version: 18.16.9
-  resolution: "@types/node@npm:18.16.9"
-  checksum: 7fe0ef372ba8b157bd646efe29b0ece92ccb9f455171a7ceb4c92d6b490789ff0f14411b1dc6ad203351a0efa2b435072dfab5566fb6eaaaa5cd549e1fb22afa
+"@types/node@npm:20.10.4":
+  version: 20.10.4
+  resolution: "@types/node@npm:20.10.4"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: 054b296417e771ab524bea63cf3289559c6bdf290d45428f7cc68e9b00030ff7a0ece47b8c99a26b4f47a443919813bcf42beadff2f0bea7d8125fa541d92eb0
   languageName: node
   linkType: hard
 
@@ -10801,19 +10804,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:5.12.1":
-  version: 5.12.1
-  resolution: "antd@npm:5.12.1"
+"antd@npm:5.12.2":
+  version: 5.12.2
+  resolution: "antd@npm:5.12.2"
   dependencies:
     "@ant-design/colors": ^7.0.0
-    "@ant-design/cssinjs": ^1.18.0
+    "@ant-design/cssinjs": ^1.18.1
     "@ant-design/icons": ^5.2.6
     "@ant-design/react-slick": ~1.0.2
     "@babel/runtime": ^7.23.4
     "@ctrl/tinycolor": ^3.6.1
     "@rc-component/color-picker": ~1.4.1
     "@rc-component/mutate-observer": ^1.1.0
-    "@rc-component/tour": ~1.11.0
+    "@rc-component/tour": ~1.11.1
     "@rc-component/trigger": ^1.18.2
     classnames: ^2.3.2
     copy-to-clipboard: ^3.3.3
@@ -10830,10 +10833,10 @@ __metadata:
     rc-input: ~1.3.6
     rc-input-number: ~8.4.0
     rc-mentions: ~2.9.1
-    rc-menu: ~9.12.2
+    rc-menu: ~9.12.4
     rc-motion: ^2.9.0
     rc-notification: ~5.3.0
-    rc-pagination: ~4.0.1
+    rc-pagination: ~4.0.3
     rc-picker: ~3.14.6
     rc-progress: ~3.5.1
     rc-rate: ~2.12.0
@@ -10856,7 +10859,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 29590617a0a13a4f3efbfae45fc84c46e09573d7c3766a8240dce4cece9d9fd0d5712c7ce17bf87767c048d56400e4b376e72209344eaeb19a1c8c0a40097a79
+  checksum: de4daf00999b27a9414378c9c2d484ab5e99a0e344735ea45f7f938ba15565c939416308097cfcff19d24a90a7e780de965fa42cfb6258ac34f2f2e3a13161d3
   languageName: node
   linkType: hard
 
@@ -11183,14 +11186,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.4.0":
-  version: 1.4.0
-  resolution: "axios@npm:1.4.0"
+"axios@npm:1.6.2, axios@npm:^1.5.1":
+  version: 1.6.2
+  resolution: "axios@npm:1.6.2"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: 7fb6a4313bae7f45e89d62c70a800913c303df653f19eafec88e56cea2e3821066b8409bc68be1930ecca80e861c52aa787659df0ffec6ad4d451c7816b9386b
+  checksum: 4a7429e2b784be0f2902ca2680964391eae7236faa3967715f30ea45464b98ae3f1c6f631303b13dfe721b17126b01f486c7644b9ef276bfc63112db9fd379f8
   languageName: node
   linkType: hard
 
@@ -11200,17 +11203,6 @@ __metadata:
   dependencies:
     follow-redirects: ^1.14.7
   checksum: 2a8a3787c05f2a0c9c3878f49782357e2a9f38945b93018fb0c4fd788171c43dceefbb577988628e09fea53952744d1ecebde234b561f1e703aa43e0a598a3ad
-  languageName: node
-  linkType: hard
-
-"axios@npm:^1.5.1":
-  version: 1.6.2
-  resolution: "axios@npm:1.6.2"
-  dependencies:
-    follow-redirects: ^1.15.0
-    form-data: ^4.0.0
-    proxy-from-env: ^1.1.0
-  checksum: 4a7429e2b784be0f2902ca2680964391eae7236faa3967715f30ea45464b98ae3f1c6f631303b13dfe721b17126b01f486c7644b9ef276bfc63112db9fd379f8
   languageName: node
   linkType: hard
 
@@ -13558,10 +13550,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.10":
-  version: 3.1.1
-  resolution: "csstype@npm:3.1.1"
-  checksum: 1f7b4f5fdd955b7444b18ebdddf3f5c699159f13e9cf8ac9027ae4a60ae226aef9bbb14a6e12ca7dba3358b007cee6354b116e720262867c398de6c955ea451d
+"csstype@npm:3.1.2, csstype@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "csstype@npm:3.1.2"
+  checksum: e1a52e6c25c1314d6beef5168da704ab29c5186b877c07d822bd0806717d9a265e8493a2e35ca7e68d0f5d472d43fac1cdce70fd79fd0853dff81f3028d857b5
   languageName: node
   linkType: hard
 
@@ -13569,13 +13561,6 @@ __metadata:
   version: 3.1.0
   resolution: "csstype@npm:3.1.0"
   checksum: 644e986cefab86525f0b674a06889cfdbb1f117e5b7d1ce0fc55b0423ecc58807a1ea42ecc75c4f18999d14fc42d1d255f84662a45003a52bb5840e977eb2ffd
-  languageName: node
-  linkType: hard
-
-"csstype@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "csstype@npm:3.1.2"
-  checksum: e1a52e6c25c1314d6beef5168da704ab29c5186b877c07d822bd0806717d9a265e8493a2e35ca7e68d0f5d472d43fac1cdce70fd79fd0853dff81f3028d857b5
   languageName: node
   linkType: hard
 
@@ -13756,10 +13741,10 @@ __metadata:
     "@nx/vite": 17.2.4
     "@nx/webpack": 17.2.4
     "@nx/workspace": 17.2.4
-    "@semantic-release-plus/docker": 3.1.2
+    "@semantic-release-plus/docker": 3.1.3
     "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
-    "@swc/cli": 0.1.62
+    "@swc/cli": 0.1.63
     "@swc/core": 1.3.100
     "@swc/helpers": 0.5.3
     "@testing-library/react": 14.0.0
@@ -13768,7 +13753,7 @@ __metadata:
     "@types/cors": 2.8.13
     "@types/express": 4.17.17
     "@types/jest": 29.5.4
-    "@types/node": 18.16.9
+    "@types/node": 20.10.4
     "@types/qs": 6.9.7
     "@types/react": 18.2.24
     "@types/react-color": 3.0.6
@@ -13783,8 +13768,8 @@ __metadata:
     "@vitejs/plugin-react": 4.2.1
     "@vitest/coverage-c8": 0.32.4
     "@vitest/ui": 0.32.4
-    antd: 5.12.1
-    axios: 1.4.0
+    antd: 5.12.2
+    axios: 1.6.2
     babel-jest: 29.5.0
     babel-plugin-styled-components: 2.1.4
     babel-plugin-syntax-jsx: 6.18.0
@@ -13835,7 +13820,7 @@ __metadata:
     socket.io-client: 4.7.2
     store: 2.0.12
     styled-components: 6.1.1
-    systeminformation: 5.18.5
+    systeminformation: 5.21.20
     throttle-debounce: 5.0.0
     ts-jest: 29.1.1
     ts-node: 10.9.1
@@ -18721,6 +18706,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-mock@npm:29.7.0":
+  version: 29.7.0
+  resolution: "jest-mock@npm:29.7.0"
+  dependencies:
+    "@jest/types": ^29.6.3
+    "@types/node": "*"
+    jest-util: ^29.7.0
+  checksum: 81ba9b68689a60be1482212878973700347cb72833c5e5af09895882b9eb5c4e02843a1bbdf23f94c52d42708bab53a30c45a3482952c9eec173d1eaac5b86c5
+  languageName: node
+  linkType: hard
+
 "jest-mock@npm:^29.5.0":
   version: 29.5.0
   resolution: "jest-mock@npm:29.5.0"
@@ -23594,7 +23590,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-menu@npm:~9.12.0, rc-menu@npm:~9.12.2":
+"rc-menu@npm:~9.12.0":
   version: 9.12.3
   resolution: "rc-menu@npm:9.12.3"
   dependencies:
@@ -23608,6 +23604,23 @@ __metadata:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
   checksum: 9af0e08480f6423587ddfb86362222409166f1b458a31cb70c1cfc2b2df8ded590eef81a1099eb2dbfcff224ed4e1c07864296ae6ac902cd9f9cf1117eb24cc0
+  languageName: node
+  linkType: hard
+
+"rc-menu@npm:~9.12.4":
+  version: 9.12.4
+  resolution: "rc-menu@npm:9.12.4"
+  dependencies:
+    "@babel/runtime": ^7.10.1
+    "@rc-component/trigger": ^1.17.0
+    classnames: 2.x
+    rc-motion: ^2.4.3
+    rc-overflow: ^1.3.1
+    rc-util: ^5.27.0
+  peerDependencies:
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  checksum: 3d7770defb882a444b21d6c437b0cf8759226a98233a50d48d0554bf2addab05c67544466b54c9bcc641d7859e7a9be84031d3493a521b697d56c9b9c2a0e7f3
   languageName: node
   linkType: hard
 
@@ -23683,9 +23696,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-pagination@npm:~4.0.1":
-  version: 4.0.1
-  resolution: "rc-pagination@npm:4.0.1"
+"rc-pagination@npm:~4.0.3":
+  version: 4.0.3
+  resolution: "rc-pagination@npm:4.0.3"
   dependencies:
     "@babel/runtime": ^7.10.1
     classnames: ^2.3.2
@@ -23693,7 +23706,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: de1d948efc5409ed874cc52a8d6bf4941e9a9240e1a45186432fe9f9f6e82a397ebf28c70c9fd5e456325adc9e3d843c1db63ed4545ca72c7e273187c9e5d128
+  checksum: 7b238f0c9c2d7e3d0d42b54007ca3e60adae67b04455c186a3c9038c52257bdd1ff90690f0ca0087233b35a5132207a0c197e93caeb301ec41085d8162e052a3
   languageName: node
   linkType: hard
 
@@ -25785,17 +25798,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.3.5":
-  version: 7.3.5
-  resolution: "semver@npm:7.3.5"
-  dependencies:
-    lru-cache: ^6.0.0
-  bin:
-    semver: bin/semver.js
-  checksum: 5eafe6102bea2a7439897c1856362e31cc348ccf96efd455c8b5bc2c61e6f7e7b8250dc26b8828c1d76a56f818a7ee907a36ae9fb37a599d3d24609207001d60
-  languageName: node
-  linkType: hard
-
 "semver@npm:7.5.2":
   version: 7.5.2
   resolution: "semver@npm:7.5.2"
@@ -25815,6 +25817,17 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 9d58db16525e9f749ad0a696a1f27deabaa51f66e91d2fa2b0db3de3e9644e8677de3b7d7a03f4c15bc81521e0c3916d7369e0572dbde250d9bedf5194e2a8a7
+  languageName: node
+  linkType: hard
+
+"semver@npm:7.5.4, semver@npm:^7.5.3, semver@npm:^7.5.4":
+  version: 7.5.4
+  resolution: "semver@npm:7.5.4"
+  dependencies:
+    lru-cache: ^6.0.0
+  bin:
+    semver: bin/semver.js
+  checksum: 12d8ad952fa353b0995bf180cdac205a4068b759a140e5d3c608317098b3575ac2f1e09182206bf2eb26120e1c0ed8fb92c48c592f6099680de56bb071423ca3
   languageName: node
   linkType: hard
 
@@ -25855,17 +25868,6 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 2d266937756689a76f124ffb4c1ea3e1bbb2b263219f90ada8a11aebebe1280b13bb76cca2ca96bdee3dbc554cbc0b24752eb895b2a51577aa644427e9229f2b
-  languageName: node
-  linkType: hard
-
-"semver@npm:^7.5.3, semver@npm:^7.5.4":
-  version: 7.5.4
-  resolution: "semver@npm:7.5.4"
-  dependencies:
-    lru-cache: ^6.0.0
-  bin:
-    semver: bin/semver.js
-  checksum: 12d8ad952fa353b0995bf180cdac205a4068b759a140e5d3c608317098b3575ac2f1e09182206bf2eb26120e1c0ed8fb92c48c592f6099680de56bb071423ca3
   languageName: node
   linkType: hard
 
@@ -27042,12 +27044,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:5.18.5":
-  version: 5.18.5
-  resolution: "systeminformation@npm:5.18.5"
+"systeminformation@npm:5.21.20":
+  version: 5.21.20
+  resolution: "systeminformation@npm:5.21.20"
   bin:
     systeminformation: lib/cli.js
-  checksum: 6827e7bf0c746b4fe2a10510a2af5c7ff3f1956a09e347b89a62601a0185ed4d4abb9cf23bcc345c582814036a0615db19eccc7f5b88fd9776f6e2edd4511d11
+  checksum: 49ff533d592defdc8d3fd2a801357303bdbac6dbd5661630592d0426150e6ba0eea3c51981af75851cc083f58c916182ba804939d92c7df1cbad1b35b2e0be58
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
@@ -27920,6 +27922,13 @@ __metadata:
     has-symbols: ^1.0.3
     which-boxed-primitive: ^1.0.2
   checksum: b7a1cf5862b5e4b5deb091672ffa579aa274f648410009c81cca63fed3b62b610c4f3b773f912ce545bb4e31edc3138975b5bc777fc6e4817dca51affb6380e9
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: 3192ef6f3fd5df652f2dc1cd782b49d6ff14dc98e5dced492aa8a8c65425227da5da6aafe22523c67f035a272c599bb89cfe803c1db6311e44bed3042fc25487
   languageName: node
   linkType: hard
 
