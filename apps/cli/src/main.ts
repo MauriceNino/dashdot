@@ -13,7 +13,7 @@ const execpnoerr = async (cmd: string): Promise<string | undefined> => {
     .catch(() => undefined);
 };
 
-const inspectObj = (obj: any): string => {
+const inspectObj = (obj: unknown): string => {
   return inspect(obj, {
     showHidden: false,
     depth: null,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { StorageInfo, StorageLoad } from '@dash/common';
 import * as si from 'systeminformation';
 

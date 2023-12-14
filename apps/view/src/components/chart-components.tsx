@@ -9,6 +9,7 @@ import {
   Pie,
   PieChart,
   Sector,
+  SectorProps,
   Tooltip,
   TooltipProps,
   XAxis,
@@ -16,6 +17,7 @@ import {
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
 import { throttle } from 'throttle-debounce';
+import { ChartVal } from '../utils/types';
 import { ThemedText } from './text';
 
 type DefaultAreaChartProps = {
@@ -23,7 +25,7 @@ type DefaultAreaChartProps = {
   width: number;
   color: string;
   children: React.ReactNode;
-  data: any[];
+  data: ChartVal[];
   renderTooltip?: (point: TooltipProps<number, string>) => React.ReactNode;
 };
 
@@ -106,7 +108,7 @@ const getCoords = (
 
   return { top, left };
 };
-const renderActiveShape = (props: any) => {
+const renderActiveShape = (props: SectorProps & { outerRadius: number }) => {
   return <Sector {...props} outerRadius={props.outerRadius * 1.08} />;
 };
 
@@ -116,7 +118,10 @@ type DefaultPieChartProps = {
   width: number;
   color: string;
   children: React.ReactNode;
-  data: any[];
+  data: {
+    name: string;
+    value: number;
+  }[];
   hoverLabelRenderer: (label: string, value: number) => string;
 };
 export const DefaultPieChart: FC<DefaultPieChartProps> = ({
@@ -262,8 +267,13 @@ type DefaultVertBarChartProps = {
   height: number;
   width: number;
   children: React.ReactNode;
-  data: any[];
-  tooltipRenderer: (value: any) => React.ReactNode;
+  data: {
+    used: number;
+    available: number;
+  }[];
+  tooltipRenderer: (
+    value: TooltipProps<string | number | (string | number)[], string | number>
+  ) => React.ReactNode;
 };
 
 export const DefaultVertBarChart: FC<DefaultVertBarChartProps> = ({
