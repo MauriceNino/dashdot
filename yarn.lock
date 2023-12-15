@@ -9843,10 +9843,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/store@npm:2.0.2":
-  version: 2.0.2
-  resolution: "@types/store@npm:2.0.2"
-  checksum: aa548e117f9a1e2b1ff0263f3261ad7066b885ed32c05019832e4cbf91bf09f5f5891cccfb4e001a6cdc87d306b1d6376b20bdf8976dfced38b18db3c9c6fef3
+"@types/store@npm:2.0.5":
+  version: 2.0.5
+  resolution: "@types/store@npm:2.0.5"
+  checksum: 1768c51122c51adc4a629cbfd33a47ef48b9e02e8e94d24614b9da28baac0d0f0fbeaea4fd48ed97c8f9711f6de47630ae7d051f5176beeaf3283bed6e82aab6
   languageName: node
   linkType: hard
 
@@ -13784,7 +13784,7 @@ __metadata:
     "@types/react-dom": 18.2.9
     "@types/react-is": 18.2.4
     "@types/react-virtualized-auto-sizer": 1.0.4
-    "@types/store": 2.0.2
+    "@types/store": 2.0.5
     "@types/styled-components": 5.1.32
     "@types/throttle-debounce": 5.0.0
     "@typescript-eslint/eslint-plugin": 6.14.0
