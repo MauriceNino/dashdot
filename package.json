@@ -118,7 +118,7 @@
     "@types/react-is": "18.2.4",
     "@types/react-virtualized-auto-sizer": "1.0.4",
     "@types/store": "2.0.5",
-    "@types/styled-components": "5.1.32",
+    "@types/styled-components": "5.1.34",
     "@types/throttle-debounce": "5.0.0",
     "@typescript-eslint/eslint-plugin": "6.14.0",
     "@typescript-eslint/parser": "6.14.0",
