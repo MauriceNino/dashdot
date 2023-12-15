@@ -9850,14 +9850,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/styled-components@npm:5.1.32":
-  version: 5.1.32
-  resolution: "@types/styled-components@npm:5.1.32"
+"@types/styled-components@npm:5.1.34":
+  version: 5.1.34
+  resolution: "@types/styled-components@npm:5.1.34"
   dependencies:
     "@types/hoist-non-react-statics": "*"
     "@types/react": "*"
     csstype: ^3.0.2
-  checksum: c08909348aed553a710809c55c0cd0b26b7f0e364c99c5b21c7eca66cf8446bb4a57fff7ad0484646affa692acc181ff51061c9cd7b26bab468960c29eae1901
+  checksum: 7868066a15afe42d8b353953fc196a7f11a9918b1c980f51d21bb9b49e309c7fe2d730be2d3dc48e92ab4de20f44a3c9dfe6cc98b6ea4dd02655e6f8128171b6
   languageName: node
   linkType: hard
 
@@ -13785,7 +13785,7 @@ __metadata:
     "@types/react-is": 18.2.4
     "@types/react-virtualized-auto-sizer": 1.0.4
     "@types/store": 2.0.5
-    "@types/styled-components": 5.1.32
+    "@types/styled-components": 5.1.34
     "@types/throttle-debounce": 5.0.0
     "@typescript-eslint/eslint-plugin": 6.14.0
     "@typescript-eslint/parser": 6.14.0
