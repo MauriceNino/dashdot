@@ -55,7 +55,7 @@
     "framer-motion": "10.16.16",
     "parse-domain": "7.0.1",
     "prism-react-renderer": "^1",
-    "punycode": "2.3.0",
+    "punycode": "2.3.1",
     "qs": "6.11.2",
     "react": "18.2.0",
     "react-color": "2.19.3",
