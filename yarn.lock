@@ -10835,9 +10835,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:5.12.2":
-  version: 5.12.2
-  resolution: "antd@npm:5.12.2"
+"antd@npm:5.12.3":
+  version: 5.12.3
+  resolution: "antd@npm:5.12.3"
   dependencies:
     "@ant-design/colors": ^7.0.0
     "@ant-design/cssinjs": ^1.18.1
@@ -10861,7 +10861,7 @@ __metadata:
     rc-dropdown: ~4.1.0
     rc-field-form: ~1.41.0
     rc-image: ~7.5.1
-    rc-input: ~1.3.6
+    rc-input: ~1.3.11
     rc-input-number: ~8.4.0
     rc-mentions: ~2.9.1
     rc-menu: ~9.12.4
@@ -10890,7 +10890,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: de4daf00999b27a9414378c9c2d484ab5e99a0e344735ea45f7f938ba15565c939416308097cfcff19d24a90a7e780de965fa42cfb6258ac34f2f2e3a13161d3
+  checksum: 3a2e83be74e09ef633f93b9ae2165938a13698b7cb7652f9d76df7194957c94e64800a1dd69a31c30862a3285841d6736e0baa65faad14afe022bd4d4e0101ff
   languageName: node
   linkType: hard
 
@@ -13818,7 +13818,7 @@ __metadata:
     "@vitejs/plugin-react": 4.2.1
     "@vitest/coverage-c8": 0.32.4
     "@vitest/ui": 0.32.4
-    antd: 5.12.2
+    antd: 5.12.3
     axios: 1.6.2
     babel-jest: 29.5.0
     babel-plugin-styled-components: 2.1.4
@@ -23656,7 +23656,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-input@npm:~1.3.5, rc-input@npm:~1.3.6":
+"rc-input@npm:~1.3.11":
+  version: 1.3.11
+  resolution: "rc-input@npm:1.3.11"
+  dependencies:
+    "@babel/runtime": ^7.11.1
+    classnames: ^2.2.1
+    rc-util: ^5.18.1
+  peerDependencies:
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: e548f5e46c34058cb53baba3891e1d307cd8d6d2f01896cb14bf78dea84c179e7e05fb23829704f89a4610bbaf278e713702ea64ad9e94813c425d821c70502e
+  languageName: node
+  linkType: hard
+
+"rc-input@npm:~1.3.5":
   version: 1.3.6
   resolution: "rc-input@npm:1.3.6"
   dependencies:
