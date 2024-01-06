@@ -131,7 +131,7 @@ export class DynamicStorageMapper {
 
 export default async (): Promise<StorageLoad> => {
   const svInfo = getStaticServerInfo();
-  const [blocks, sizes] = await Promise.all([si.blockDevices(), si.fsSize()]);
+  const [sizes, blocks] = await Promise.all([si.fsSize(), si.blockDevices()]);
 
   return new DynamicStorageMapper(
     PLATFORM_IS_WINDOWS,
