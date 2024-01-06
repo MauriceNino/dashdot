@@ -1,3 +1,27 @@
+# [5.3.0](https://github.com/MauriceNino/dashdot/compare/v5.2.3...v5.3.0) (2024-01-06)
+
+
+### Bug Fixes
+
+* add back and fix arm/v8 ([4284cf2](https://github.com/MauriceNino/dashdot/commit/4284cf204db8d3b51ee15e1b870d5be95fe20e72))
+* bundling third party modules with cli package ([156ec72](https://github.com/MauriceNino/dashdot/commit/156ec72ab81780a2a913b0c36bedd763cbebefd5))
+* lint not working for view ([5849edd](https://github.com/MauriceNino/dashdot/commit/5849edda33dc775ee0d49572322b8af1f5c70fd9))
+* remove arm/v7 for now ([0ba25cd](https://github.com/MauriceNino/dashdot/commit/0ba25cd7fe99c79faebd3b462ec5afb32e9a2e31))
+* remove arm/v8 for now ([6408997](https://github.com/MauriceNino/dashdot/commit/6408997bf74720615a3d45c68f093dcd8ca58456))
+* testing errors ([f2937fd](https://github.com/MauriceNino/dashdot/commit/f2937fd15c4ba064fcaabad87308bb31c71ebbcd))
+
+
+### Features
+
+* [gpu] allow to filter-out some controller ([9651122](https://github.com/MauriceNino/dashdot/commit/96511226e70c9c050cbd6efb67341d6ff5062bde))
+* **cpu widget:** allow user to switch (default) processor core view ([4def64e](https://github.com/MauriceNino/dashdot/commit/4def64ee0d340a2234ebf604b373dbb136b01abd))
+* render network and gpu widgets individually instead of as pair ([#886](https://github.com/MauriceNino/dashdot/issues/886)) ([df59729](https://github.com/MauriceNino/dashdot/commit/df597292478c0ddcfa185702c190c111be34a9a0))
+
+
+### Performance Improvements
+
+* fix windows cpu 100% usage ([9c23e93](https://github.com/MauriceNino/dashdot/commit/9c23e937130cc81fd2100928bfa17614c525133a))
+
 ## [5.2.3](https://github.com/MauriceNino/dashdot/compare/v5.2.2...v5.2.3) (2023-08-23)
 
 ## [5.2.2](https://github.com/MauriceNino/dashdot/compare/v5.2.1...v5.2.2) (2023-08-23)
