@@ -10,6 +10,8 @@
 # misc
 **.DS_Store
 .prettierignore
+tmp
 
 # Auto generated
 /.github/CHANGELOG.md
+/.nx/cache

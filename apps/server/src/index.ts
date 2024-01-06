@@ -17,7 +17,7 @@ import { CONFIG } from './config';
 import getNetworkInfo from './data/network';
 import { getDynamicServerInfo } from './dynamic-info';
 import { environment } from './environments/environment';
-import { setupNetworking, setupOsVersion } from './setup';
+import { setupNetworking, setupOsVersion, setupHostSpecific, tearDownHostSpecific } from './setup';
 import {
   getStaticServerInfo,
   getStaticServerInfoObs,
@@ -91,6 +91,7 @@ if (!CONFIG.disable_integrations) {
 server.listen(CONFIG.port, async () => {
   console.log('listening on *:' + CONFIG.port);
 
+  await setupHostSpecific();
   await setupNetworking();
   await setupOsVersion();
   await loadStaticServerInfo();
@@ -190,10 +191,12 @@ server.on('error', console.error);
 
 process.on('uncaughtException', e => {
   console.error(e);
+  tearDownHostSpecific();
   process.exit(1);
 });
 
 process.on('unhandledRejection', e => {
   console.error(e);
+  tearDownHostSpecific();
   process.exit(1);
 });

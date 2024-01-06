@@ -1,7 +1,7 @@
 import { Config, CpuInfo, CpuLoad } from '@dash/common';
 import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
 import { Variants } from 'framer-motion';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
@@ -184,8 +184,16 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
   const isMobile = useIsMobile();
   const override = config.override;
 
-  const [multiCore, setMulticore] = useSetting('multiCore', false);
+  const [multiCore, setMultiCore] = useSetting('multiCore', false);
   const frequency = override.cpu_frequency ?? data.frequency;
+
+  useEffect(() => {
+    if (config.cpu_cores_toggle_mode === 'multi-core') {
+      setMultiCore(true);
+    } else if (config.cpu_cores_toggle_mode === 'average') {
+      setMultiCore(false);
+    }
+  }, [config.cpu_cores_toggle_mode, setMultiCore]);
 
   return (
     <HardwareInfoContainer
@@ -210,11 +218,13 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       infosPerPage={7}
       icon={faMicrochip}
       extraContent={
-        <WidgetSwitch
-          label='Show All Cores'
-          checked={multiCore}
-          onChange={() => setMulticore(!multiCore)}
-        />
+        config.cpu_cores_toggle_mode === 'toggle' ? (
+          <WidgetSwitch
+            label='Show All Cores'
+            checked={multiCore}
+            onChange={() => setMultiCore(!multiCore)}
+          />
+        ) : undefined
       }
     >
       <CpuChart

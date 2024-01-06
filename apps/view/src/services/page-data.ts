@@ -7,8 +7,8 @@ import {
   StorageLoad,
 } from '@dash/common';
 import { useEffect, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
-import { environment } from '../environments/environment';
+import { Socket, io } from 'socket.io-client';
+import { environment } from '../environment';
 
 export const usePageData = () => {
   const [pageLoaded, setPageLoaded] = useState(false);

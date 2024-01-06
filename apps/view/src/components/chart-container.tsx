@@ -77,10 +77,7 @@ type ChartContainerProps = {
   textRight?: string;
   textOffset?: string;
   textSize?: string;
-  renderChart: (size: {
-    width: number;
-    height: number;
-  }) => React.ReactElement<any>;
+  renderChart: (size: { width: number; height: number }) => ReactElement;
 };
 
 export const ChartContainer = motion(

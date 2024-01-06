@@ -40,6 +40,7 @@ const Container = styled.div<{ radius?: string; gap?: string }>`
   }
 `;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Graph<T extends ComponentType<any>> = {
   Component: T;
   props: Omit<ComponentProps<T>, 'showPercentages'>;
@@ -117,6 +118,7 @@ export const SingleWidgetChart: FC = () => {
     },
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const compConfig = configs[query.graph] as Graph<any>;
 
   if (!compConfig) return null;
