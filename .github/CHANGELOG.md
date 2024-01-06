@@ -1,3 +1,11 @@
+## [5.3.1](https://github.com/MauriceNino/dashdot/compare/v5.3.0...v5.3.1) (2024-01-06)
+
+
+### Bug Fixes
+
+* filter out zram devices ([6d265d3](https://github.com/MauriceNino/dashdot/commit/6d265d3d58f217572da8967a2c6225e9278d7876)), closes [#981](https://github.com/MauriceNino/dashdot/issues/981)
+* refactor storage load gathering; remove outdated tests ([390def6](https://github.com/MauriceNino/dashdot/commit/390def62a029ad63a097afe8c33f0f35a599f7cf)), closes [#883](https://github.com/MauriceNino/dashdot/issues/883)
+
 # [5.3.0](https://github.com/MauriceNino/dashdot/compare/v5.2.3...v5.3.0) (2024-01-06)
 
 
