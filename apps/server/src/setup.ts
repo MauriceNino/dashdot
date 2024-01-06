@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as si from 'systeminformation';
 import { promisify } from 'util';
 import { CONFIG } from './config';
-import { platformIsWindows } from './utils';
+import { PLATFORM_IS_WINDOWS } from './utils';
 
 const exec = promisify(exaca);
 
@@ -104,15 +104,15 @@ export const setupOsVersion = async () => {
 };
 
 export const setupHostSpecific = async () => {
-  if (platformIsWindows) {
-    console.log('Acquiring Windows Persistent Powershell')
-    si.powerShellStart()
+  if (PLATFORM_IS_WINDOWS) {
+    console.log('Acquiring Windows Persistent Powershell');
+    si.powerShellStart();
   }
 };
 
 export const tearDownHostSpecific = () => {
-  if (platformIsWindows) {
-    console.log('Releasing Windows Persistent Powershell')
-    si.powerShellRelease()
+  if (PLATFORM_IS_WINDOWS) {
+    console.log('Releasing Windows Persistent Powershell');
+    si.powerShellRelease();
   }
 };

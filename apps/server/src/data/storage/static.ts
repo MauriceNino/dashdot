@@ -1,8 +1,7 @@
 import { RaidType, StorageInfo } from '@dash/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
-import { getStaticServerInfo } from '../../static-info';
-import { platformIsWindows } from '../../utils';
+import { PLATFORM_IS_WINDOWS } from '../../utils';
 
 type Block = si.Systeminformation.BlockDevicesData;
 type Disk = si.Systeminformation.DiskLayoutData;
@@ -161,17 +160,11 @@ export const mapToStorageLayout = (
 };
 
 export default async (): Promise<StorageInfo> => {
-  const svInfo = getStaticServerInfo();
   const [disks, blocks, sizes] = await Promise.all([
     si.diskLayout(),
     si.blockDevices(),
     si.fsSize(),
   ]);
 
-  return mapToStorageLayout(
-    platformIsWindows(svInfo.os.platform),
-    disks,
-    blocks,
-    sizes
-  );
+  return mapToStorageLayout(PLATFORM_IS_WINDOWS, disks, blocks, sizes);
 };
