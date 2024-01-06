@@ -105,6 +105,7 @@ export const SingleWidgetChart: FC = () => {
         load: networkLoad,
         data: serverInfo.network,
         config: config,
+        filter: query.filter,
       },
     },
     gpu: {
@@ -112,6 +113,7 @@ export const SingleWidgetChart: FC = () => {
       props: {
         load: gpuLoad,
         index: 0,
+        filter: query.filter,
       },
     },
   };

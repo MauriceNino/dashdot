@@ -24,6 +24,7 @@ type QueryResult =
       overrideThemeSurface?: string;
       radius?: string;
       gap?: string;
+      filter?: string;
     };
 
 const sizeRegex = /^\d+\D+$/;
@@ -49,6 +50,7 @@ export const useQuery = (): QueryResult => {
       overrideThemeSurface: query['surface'] as string,
       radius: extractSizeValue(query['innerRadius'] as string),
       gap: extractSizeValue(query['gap'] as string),
+      filter: ((query['filter'] as string) ?? "").toLowerCase(),
     };
   }
 
