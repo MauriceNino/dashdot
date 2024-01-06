@@ -24,6 +24,7 @@ export const WidgetPreview = () => {
     url: [isDev ? 'localhost:3000' : 'dash.mauz.dev'],
     widget: ['cpu'],
     multiView: [false],
+    filterGraph: ['both'],
     showPercentage: [false],
     primaryColor: [''],
     surfaceColor: [''],
@@ -37,6 +38,13 @@ export const WidgetPreview = () => {
 
   const multiViewAllowed =
     controls.widget.value === 'cpu' || controls.widget.value === 'storage';
+  const filterGraphAllowed =
+    controls.widget.value === 'network' || controls.widget.value === 'gpu';
+
+  const filterGraphOptions =
+    controls.widget.value === 'network'
+      ? ['both', 'up', 'down']
+      : ['both', 'load', 'memory'];
 
   const multiViewPart = multiViewAllowed
     ? getPart('multiView', controls.multiView)
@@ -49,6 +57,10 @@ export const WidgetPreview = () => {
   const gapPart = getPart('gap', controls.gap);
   const textSizePart = getPart('textSize', controls.textSize);
   const textOffsetPart = getPart('textOffset', controls.textOffset);
+  const filterPart =
+    filterGraphAllowed && controls.filterGraph.value !== 'both'
+      ? getPart('filter', controls.filterGraph)
+      : '';
 
   const protocol = controls.protocol.value;
   const url = controls.url.value;
@@ -56,9 +68,9 @@ export const WidgetPreview = () => {
   const outerRadius = controls.outerRadius.value;
 
   const finalUrl = encodeURI(
-    `${protocol}://${url}?graph=${widget}${multiViewPart}${showPercentagePart}` +
-      `${themePart}${primaryColorPart}${surfaceColorPart}${innerRadiusPart}` +
-      `${gapPart}${textSizePart}${textOffsetPart}`
+    `${protocol}://${url}?graph=${widget}${multiViewPart}${filterPart}` +
+      `${showPercentagePart}${themePart}${primaryColorPart}${surfaceColorPart}` +
+      `${innerRadiusPart}${gapPart}${textSizePart}${textOffsetPart}`
   );
 
   const code = `<iframe
@@ -124,6 +136,17 @@ export const WidgetPreview = () => {
                   { value: 'true', label: 'True' },
                   { value: 'false', label: 'False' },
                 ]}
+              />
+            )}
+            {filterGraphAllowed && (
+              <Select
+                label='Filter Graph'
+                value={controls.filterGraph.value.toString()}
+                onChange={e => controls.filterGraph.setValue(e)}
+                data={filterGraphOptions.map(e => ({
+                  value: e,
+                  label: e.charAt(0).toUpperCase() + e.slice(1),
+                }))}
               />
             )}
             <Select

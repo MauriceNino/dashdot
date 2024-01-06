@@ -21,6 +21,7 @@ type NetworkChartProps = {
   showPercentages: boolean;
   textOffset?: string;
   textSize?: string;
+  filter?: string;
 };
 
 export const NetworkChart: FC<NetworkChartProps> = ({
@@ -30,6 +31,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
   showPercentages,
   textOffset,
   textSize,
+  filter,
 }) => {
   const theme = useTheme();
 
@@ -55,69 +57,81 @@ export const NetworkChart: FC<NetworkChartProps> = ({
     ...chartDataDown.map(d => d.y as number)
   );
 
-  return (
-    <MultiChartContainer columns={2}>
-      <ChartContainer
-        contentLoaded={chartDataUp.length > 1}
-        textLeft={
-          showPercentages
-            ? `↑ ${bpsPrettyPrint(
-                ((chartDataUp.at(-1)?.y as number) ?? 0) * 8
-              )}`
-            : '↑'
-        }
-        textOffset={textOffset}
-        textSize={textSize}
-        renderChart={size => (
-          <DefaultAreaChart
-            data={chartDataUp}
-            height={size.height}
-            width={size.width}
-            color={theme.colors.networkPrimary}
-            renderTooltip={val =>
-              bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8)
-            }
-          >
-            <YAxis
-              hide={true}
-              type='number'
-              domain={[maxUp * -0.1, maxUp * 1.1]}
-            />
-          </DefaultAreaChart>
-        )}
-      ></ChartContainer>
-
-      <ChartContainer
-        contentLoaded={chartDataDown.length > 1}
-        textLeft={
-          showPercentages
-            ? `↓ ${bpsPrettyPrint(
-                ((chartDataDown.at(-1)?.y as number) ?? 0) * 8
-              )}`
-            : '↓'
-        }
-        textOffset={textOffset}
-        textSize={textSize}
-        renderChart={size => (
-          <DefaultAreaChart
-            data={chartDataDown}
-            height={size.height}
-            width={size.width}
-            color={theme.colors.networkPrimary}
-            renderTooltip={val =>
-              bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8)
-            }
-          >
-            <YAxis
-              hide={true}
-              type='number'
-              domain={[maxDown * -0.1, maxDown * 1.1]}
-            />
-          </DefaultAreaChart>
-        )}
-      ></ChartContainer>
-    </MultiChartContainer>
+  const chartUp = (
+    <ChartContainer
+      contentLoaded={chartDataUp.length > 1}
+      textLeft={
+        showPercentages
+          ? `↑ ${bpsPrettyPrint(
+            ((chartDataUp.at(-1)?.y as number) ?? 0) * 8
+          )}`
+          : '↑'
+      }
+      textOffset={textOffset}
+      textSize={textSize}
+      renderChart={size => (
+        <DefaultAreaChart
+          data={chartDataUp}
+          height={size.height}
+          width={size.width}
+          color={theme.colors.networkPrimary}
+          renderTooltip={val =>
+            bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8)
+          }
+        >
+          <YAxis
+            hide={true}
+            type='number'
+            domain={[maxUp * -0.1, maxUp * 1.1]}
+          />
+        </DefaultAreaChart>
+      )}
+    ></ChartContainer>
   );
+
+  const chartDown = (
+    <ChartContainer
+      contentLoaded={chartDataDown.length > 1}
+      textLeft={
+        showPercentages
+          ? `↓ ${bpsPrettyPrint(
+            ((chartDataDown.at(-1)?.y as number) ?? 0) * 8
+          )}`
+          : '↓'
+      }
+      textOffset={textOffset}
+      textSize={textSize}
+      renderChart={size => (
+        <DefaultAreaChart
+          data={chartDataDown}
+          height={size.height}
+          width={size.width}
+          color={theme.colors.networkPrimary}
+          renderTooltip={val =>
+            bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8)
+          }
+        >
+          <YAxis
+            hide={true}
+            type='number'
+            domain={[maxDown * -0.1, maxDown * 1.1]}
+          />
+        </DefaultAreaChart>
+      )}
+    ></ChartContainer>
+  );
+
+  if (filter == "up")
+    return <MultiChartContainer columns={1}>{chartUp}</MultiChartContainer>;
+  else if (filter == "down")
+    return <MultiChartContainer columns={1}>{chartDown}</MultiChartContainer>;
+  else
+    return (
+      <MultiChartContainer columns={2}>
+        {chartUp}
+        {chartDown}
+      </MultiChartContainer>
+    );
 };
 
 type NetworkWidgetProps = {
