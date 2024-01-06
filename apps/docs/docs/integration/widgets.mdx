@@ -37,6 +37,13 @@ These can be shown, by passing this parameter.
 
 - type: `boolean`
 
+### `filter`
+
+For views with multiple graphs, filter the view to just a single graph.
+
+- type (when `graph=network`): `string` (`up`, `down`)
+- type (when `graph=gpu`): `string` (`load`, `memory`)
+
 ### `showPercentage`
 
 Show a label with the current percentage of the graph.
@@ -75,13 +82,6 @@ like the network graph. If you want to add a bigger `border-radius` to the whole
 This changes the `gap` between the graphs. This is mainly needed on views with multiple graphs, like the network graph.
 
 - type: `string`
-
-### `filter`
-
-For views with multiple graphs, filter the view to just a single graph. 
-
-- type (when `graph=network`): `string` (`up`, `down`)
-- type (when `graph=gpu`): `string` (`load`, `memory`)
 
 ### `textSize`
 
