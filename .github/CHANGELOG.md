@@ -1,3 +1,19 @@
+## [5.2.3](https://github.com/MauriceNino/dashdot/compare/v5.2.2...v5.2.3) (2023-08-23)
+
+## [5.2.2](https://github.com/MauriceNino/dashdot/compare/v5.2.1...v5.2.2) (2023-08-23)
+
+
+### Bug Fixes
+
+* **api:** calculation for cpus with E/P cores not working ([3386923](https://github.com/MauriceNino/dashdot/commit/33869236ae7dd45795d2d8200901f511f65cd054)), closes [#706](https://github.com/MauriceNino/dashdot/issues/706)
+* checksum for typescript ([6a14829](https://github.com/MauriceNino/dashdot/commit/6a1482931a2a0faa447a6f12f6777662588a403a))
+* **speedtest:** not working on windows install ([#731](https://github.com/MauriceNino/dashdot/issues/731)) ([423837b](https://github.com/MauriceNino/dashdot/commit/423837b2f957fe5736818fec4a4c2c113df28214)), closes [#729](https://github.com/MauriceNino/dashdot/issues/729)
+
+
+### Reverts
+
+* upgrade prism-react-renderer to v2 ([6d60009](https://github.com/MauriceNino/dashdot/commit/6d60009d5cf1e350a323a723613845c29b80ac25))
+
 ## [5.2.1](https://github.com/MauriceNino/dashdot/compare/v5.2.0...v5.2.1) (2023-04-29)
 
 # [5.2.0](https://github.com/MauriceNino/dashdot/compare/v5.1.3...v5.2.0) (2023-04-29)

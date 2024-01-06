@@ -43,6 +43,13 @@ jobs:
           [ ! -z "${package_version}" ] || exit 1
 
       # DEPLOY
+      # fix oom issues (https://github.com/orgs/community/discussions/26351)
+      - run: |
+          df -h
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo apt clean
+          df -h
       - uses: docker/metadata-action@v4
         id: meta
         with:
