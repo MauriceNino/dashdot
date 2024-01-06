@@ -54,8 +54,11 @@ export class DynamicStorageMapper {
       )
     );
   }
-  private getBlocksForRaid(raidName: string) {
-    return this.blocks.filter(({ name }) => name.startsWith(raidName));
+  private getBlocksForRaid(raidLabel: string, raidName: string) {
+    return this.blocks.filter(
+      ({ label, name }) =>
+        label.startsWith(raidLabel) || name.startsWith(raidName)
+    );
   }
   private getBlocksForXfs(parts: Block[]) {
     return this.blocks.filter(
@@ -73,34 +76,6 @@ export class DynamicStorageMapper {
     );
   }
 
-  private blocksHaveMounts(deviceBlocks: Block[]) {
-    return deviceBlocks.some(
-      ({ mount }) =>
-        mount != null &&
-        this.validSizes.some(s => s.mount === mount) &&
-        (this.hostWin32 || mount.startsWith(fromHost('/')))
-    );
-  }
-
-  // Get sizes of all unmapped sizes, including the host
-  // because this function will only run, if there is no explicit host
-  private getSizesOfAllUnmapped() {
-    const hostMountUsed = unwrapUsed(
-      this.validSizes.find(
-        ({ mount, type }) => type !== 'squashfs' && this.isRootMount(mount)
-      ) ?? this.sizes.find(({ mount }) => mount === '/')
-    );
-    const unclaimedSpace = this.validSizes
-      .filter(
-        ({ mount }) =>
-          !this.isRootMount(mount) &&
-          !this.validBlocks.some(part => part.mount === mount)
-      )
-      .reduce((acc, { used }) => acc + used, 0);
-
-    return hostMountUsed + unclaimedSpace;
-  }
-
   // Get the size of the explicit host
   private getHostSize(deviceBlocks: Block[]) {
     const hasNoExplicitMount = !deviceBlocks.some(
@@ -113,25 +88,24 @@ export class DynamicStorageMapper {
 
   // Get size of the mounts of the partitions/disks of device
   private getSizeForBlocks(deviceBlocks: Block[]) {
-    return deviceBlocks.reduce(
-      (acc, curr) =>
-        acc +
-        unwrapUsed(
-          this.validSizes.find(
-            ({ mount }) =>
-              mount &&
-              (curr.mount === mount ||
-                mount.endsWith(`dev-disk-by-uuid-${curr.uuid}`))
-          )
-        ),
-      0
+    const sizes = this.validSizes.filter(size =>
+      deviceBlocks.some(block => {
+        const matchedByMount =
+          size.mount &&
+          (block.mount === size.mount ||
+            size.mount.endsWith(`dev-disk-by-uuid-${block.uuid}`));
+        const matchedByDevice =
+          block.device && size.fs.startsWith(block.device);
+
+        return matchedByMount || matchedByDevice;
+      })
     );
+
+    return sizes.reduce((acc, size) => acc + unwrapUsed(size), 0);
   }
 
   public getMappedLayout() {
-    let hostFound = false;
-
-    return this.layout.map(({ disks, virtual, raidName }) => {
+    return this.layout.map(({ disks, virtual, raidLabel, raidName }) => {
       if (virtual) {
         const size = this.sizes.find(s => s.fs === disks[0].device);
         return size?.used ?? 0;
@@ -139,27 +113,15 @@ export class DynamicStorageMapper {
 
       const deviceParts = this.getBlocksForDisks(disks);
       const deviceBlocks = deviceParts
-        .concat(this.getBlocksForRaid(raidName))
+        .concat(this.getBlocksForRaid(raidLabel, raidName))
         .concat(this.getBlocksForXfs(deviceParts));
 
-      const isExplicitHost = this.getIsExplicitHost(deviceBlocks);
-      const hasMounts = this.blocksHaveMounts(deviceBlocks);
+      const isHost = deviceBlocks.some(({ mount }) => this.isRootMount(mount));
 
-      if (isExplicitHost) {
-        hostFound = true;
+      if (isHost) {
         return (
           this.getSizeForBlocks(deviceBlocks) + this.getHostSize(deviceBlocks)
         );
-      }
-
-      const assignAllUnmapped =
-        !this.hasExplicitHost &&
-        !hostFound &&
-        (!hasMounts || this.layout.length === 1);
-
-      if (assignAllUnmapped) {
-        hostFound = true;
-        return this.getSizesOfAllUnmapped();
       }
 
       return this.getSizeForBlocks(deviceBlocks);
