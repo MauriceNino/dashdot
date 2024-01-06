@@ -5279,12 +5279,8 @@ export const TEST_CASE_18 = {
       disks: [{ brand: 'INTEL SS', device: 'sde', type: 'HD' }],
       size: 240057409536,
     },
-    {
-      disks: [{ brand: 'zram0', device: 'zram0', type: 'SSD' }],
-      size: 8341528576,
-    },
   ],
-  output: [1071917584384, 91657261056, 11036561408, 0],
+  output: [1071917584384, 91657261056, 11036561408],
 } as any as TestCase;
 
 export const TEST_CASE_19 = {
