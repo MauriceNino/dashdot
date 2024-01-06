@@ -3,12 +3,14 @@ sidebar_position: 4
 description: How to install dashdot using helm chart
 tags:
   - Installation
-  - Helm chart
+  - Configuration
+  - Helm
 ---
-
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
+# Helm chart
 
 ## Installation using Helm
 
@@ -37,7 +39,7 @@ To install Dashdot using Helm chart, please follow this steps.
   </TabItem>
 </Tabs>
 
-###### Example using override values :
+#### Example using override values:
 
 ```bash
 helm install dashdot oben01/dashdot --namespace dashdot --create-namespace -f override.yaml
@@ -46,7 +48,7 @@ helm install dashdot oben01/dashdot --namespace dashdot --create-namespace -f ov
 ```yml title="override.yaml"
 ingress:
   enabled: true
-  className: "traefik"
+  className: 'traefik'
   annotations:
   # Add any additional annotations as needed
   hosts:
@@ -56,14 +58,14 @@ ingress:
           pathType: ImplementationSpecific
   tls:
     - hosts:
-        - "dashdot.homelab.dev"
-        - "www.dashdot.homelab.dev"
+        - 'dashdot.homelab.dev'
+        - 'www.dashdot.homelab.dev'
       secretName: homelab-dev-tls
 ```
 
 All available values are listed on the [artifacthub](https://artifacthub.io/packages/helm/oben01/dashdot?modal=values). If you find any issue please open an issue on [github](https://github.com/oben01/charts/issues/new?assignees=oben01&labels=bug&template=bug_report.yaml&name=dashdot)
 
-### Uninstalling the Chart
+## Uninstalling the Chart
 
 To uninstall the `Dashdot` deployment
 
