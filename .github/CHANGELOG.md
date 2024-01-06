@@ -1,3 +1,10 @@
+## [5.3.2](https://github.com/MauriceNino/dashdot/compare/v5.3.1...v5.3.2) (2024-01-06)
+
+
+### Bug Fixes
+
+* dynamic storage info slow on windows ([#993](https://github.com/MauriceNino/dashdot/issues/993)) ([64655f1](https://github.com/MauriceNino/dashdot/commit/64655f1bf0db52e0a10051f9a3523b594ef148fd))
+
 ## [5.3.1](https://github.com/MauriceNino/dashdot/compare/v5.3.0...v5.3.1) (2024-01-06)
 
 
