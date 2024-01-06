@@ -5,16 +5,14 @@ import * as si from 'systeminformation';
 import { promisify } from 'util';
 import { CONFIG } from '../config';
 import { NET_INTERFACE_PATH } from '../setup';
-import { getStaticServerInfo } from '../static-info';
-import { platformIsWindows } from '../utils';
+import { PLATFORM_IS_WINDOWS } from '../utils';
 
 const exec = promisify(cexec);
 
 const commandExists = async (command: string): Promise<boolean> => {
   try {
-    const svInfo = getStaticServerInfo();
     const { stdout, stderr } = await exec(
-      `${platformIsWindows(svInfo.os.platform) ? 'where' : 'which'} ${command}`
+      `${PLATFORM_IS_WINDOWS ? 'where' : 'which'} ${command}`
     );
     return stderr === '' && stdout.trim() !== '';
   } catch (e) {

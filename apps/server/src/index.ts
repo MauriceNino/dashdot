@@ -17,7 +17,12 @@ import { CONFIG } from './config';
 import getNetworkInfo from './data/network';
 import { getDynamicServerInfo } from './dynamic-info';
 import { environment } from './environments/environment';
-import { setupNetworking, setupOsVersion, setupHostSpecific, tearDownHostSpecific } from './setup';
+import {
+  setupHostSpecific,
+  setupNetworking,
+  setupOsVersion,
+  tearDownHostSpecific,
+} from './setup';
 import {
   getStaticServerInfo,
   getStaticServerInfoObs,

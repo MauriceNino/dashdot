@@ -1,3 +1,4 @@
+import os from 'os';
 import { join } from 'path';
 import { CONFIG } from './config';
 
@@ -6,5 +7,4 @@ export const fromHost = (path: string): string => {
   return CONFIG.running_in_docker ? pathInDocker : path;
 };
 
-export const platformIsWindows = (platform: string) =>
-  platform === 'Windows' || platform === 'win32';
+export const PLATFORM_IS_WINDOWS = os.platform() === 'win32';
