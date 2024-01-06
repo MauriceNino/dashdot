@@ -24,7 +24,7 @@
     "build:prod": "nx run-many --target=build --configuration=production --projects=server,view,cli --parallel=true --verbose",
     "serve": "nx run-many --target=serve --projects=server,view,docs --parallel=true",
     "dev": "docker compose -p dashdot_dev -f ./docker-compose.yml up --remove-orphans",
-    "test": "nx run-many --target=test --all=true --parallel=true",
+    "test": "nx run-many --target=test --all=true --parallel=true --skipNxCache",
     "postinstall": "husky install",
     "commit": "git-cz",
     "clean": "rm -rf dist apps/docs/.docusaurus node_modules/.cache"
