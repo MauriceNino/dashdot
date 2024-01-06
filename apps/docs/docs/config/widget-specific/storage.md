@@ -12,7 +12,7 @@ title: Storage
 
 <!-- markdownlint-enable -->
 
-## `DASHDOT_STORAGE_ITEMS_PER_PAGE`
+## `DASHDOT_STORAGE_WIDGET_ITEMS_PER_PAGE`
 
 To adjust the number of items per page in the Storage view, when multiple disks are
 present.
