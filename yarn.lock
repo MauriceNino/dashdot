@@ -9035,90 +9035,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-darwin-arm64@npm:1.3.101"
+"@swc/core-darwin-arm64@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-darwin-arm64@npm:1.3.102"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-darwin-x64@npm:1.3.101"
+"@swc/core-darwin-x64@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-darwin-x64@npm:1.3.102"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.101"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.102"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.101"
+"@swc/core-linux-arm64-gnu@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.102"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.101"
+"@swc/core-linux-arm64-musl@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.102"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.101"
+"@swc/core-linux-x64-gnu@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.102"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.101"
+"@swc/core-linux-x64-musl@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.102"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.101"
+"@swc/core-win32-arm64-msvc@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.102"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.101"
+"@swc/core-win32-ia32-msvc@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.102"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.101"
+"@swc/core-win32-x64-msvc@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.102"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:1.3.101":
-  version: 1.3.101
-  resolution: "@swc/core@npm:1.3.101"
+"@swc/core@npm:1.3.102":
+  version: 1.3.102
+  resolution: "@swc/core@npm:1.3.102"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.101
-    "@swc/core-darwin-x64": 1.3.101
-    "@swc/core-linux-arm-gnueabihf": 1.3.101
-    "@swc/core-linux-arm64-gnu": 1.3.101
-    "@swc/core-linux-arm64-musl": 1.3.101
-    "@swc/core-linux-x64-gnu": 1.3.101
-    "@swc/core-linux-x64-musl": 1.3.101
-    "@swc/core-win32-arm64-msvc": 1.3.101
-    "@swc/core-win32-ia32-msvc": 1.3.101
-    "@swc/core-win32-x64-msvc": 1.3.101
+    "@swc/core-darwin-arm64": 1.3.102
+    "@swc/core-darwin-x64": 1.3.102
+    "@swc/core-linux-arm-gnueabihf": 1.3.102
+    "@swc/core-linux-arm64-gnu": 1.3.102
+    "@swc/core-linux-arm64-musl": 1.3.102
+    "@swc/core-linux-x64-gnu": 1.3.102
+    "@swc/core-linux-x64-musl": 1.3.102
+    "@swc/core-win32-arm64-msvc": 1.3.102
+    "@swc/core-win32-ia32-msvc": 1.3.102
+    "@swc/core-win32-x64-msvc": 1.3.102
     "@swc/counter": ^0.1.1
     "@swc/types": ^0.1.5
   peerDependencies:
@@ -9147,7 +9147,7 @@ __metadata:
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: d9db5cc3306dc48e3f9fda4597c702de99851156a904be1974d69684589b52c73918270dbef06568e2ba5f9efb17a92333b361a79d1e138fad19a386c0f8c2c1
+  checksum: 45c0edb06f87a811e28fb3ed587fbe6b7ca67ff2440fe15666d43729788903a4af61e3b57842aecc0b2b70e3c9981b698d8233746ba94dfb5a19e1c62eea33ad
   languageName: node
   linkType: hard
 
@@ -9766,12 +9766,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.10.5":
-  version: 20.10.5
-  resolution: "@types/node@npm:20.10.5"
+"@types/node@npm:20.10.6":
+  version: 20.10.6
+  resolution: "@types/node@npm:20.10.6"
   dependencies:
     undici-types: ~5.26.4
-  checksum: e216b679f545a8356960ce985a0e53c3a58fff0eacd855e180b9e223b8db2b5bd07b744a002b8c1f0c37f9194648ab4578533b5c12df2ec10cc02f61d20948d2
+  checksum: ada40e4ccbda3697dca88f8d13f4c996c493be6fbc15f5f5d3b91096d56bd700786a2c148a92a2b4c5d1f133379e63f754a786b3aebfc6a7d09fc7ea16dc017b
   languageName: node
   linkType: hard
 
@@ -9833,10 +9833,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qs@npm:6.9.10":
-  version: 6.9.10
-  resolution: "@types/qs@npm:6.9.10"
-  checksum: 3e479ee056bd2b60894baa119d12ecd33f20a25231b836af04654e784c886f28a356477630430152a86fba253da65d7ecd18acffbc2a8877a336e75aa0272c67
+"@types/qs@npm:6.9.11":
+  version: 6.9.11
+  resolution: "@types/qs@npm:6.9.11"
+  checksum: 620ca1628bf3da65662c54ed6ebb120b18a3da477d0bfcc872b696685a9bb1893c3c92b53a1190a8f54d52eaddb6af8b2157755699ac83164604329935e8a7f2
   languageName: node
   linkType: hard
 
@@ -14148,7 +14148,7 @@ __metadata:
     "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
     "@swc/cli": 0.1.63
-    "@swc/core": 1.3.101
+    "@swc/core": 1.3.102
     "@swc/helpers": 0.5.3
     "@testing-library/react": 14.1.2
     "@types/chai": 4.3.11
@@ -14156,8 +14156,8 @@ __metadata:
     "@types/cors": 2.8.17
     "@types/express": 4.17.21
     "@types/jest": 29.5.4
-    "@types/node": 20.10.5
-    "@types/qs": 6.9.10
+    "@types/node": 20.10.6
+    "@types/qs": 6.9.11
     "@types/react": 18.2.45
     "@types/react-color": 3.0.10
     "@types/react-dom": 18.2.18
