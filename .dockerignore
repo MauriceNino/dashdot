@@ -18,6 +18,7 @@
 **/*.md
 
 # docker
+.git
 .dockerignore
 Dockerfile
 Dockerfile.dev

@@ -1,4 +1,4 @@
-import { deploy } from '@docusaurus/core/lib/commands/deploy';
+const { deploy } = require('@docusaurus/core/lib/commands/deploy');
 
 deploy(__dirname, {
   skipBuild: true,
