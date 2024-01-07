@@ -82,9 +82,9 @@
   },
   "devDependencies": {
     "@babel/core": "7.22.11",
-    "@commitlint/cli": "18.4.3",
-    "@commitlint/config-conventional": "18.4.3",
-    "@commitlint/cz-commitlint": "18.4.3",
+    "@commitlint/cli": "18.4.4",
+    "@commitlint/config-conventional": "18.4.4",
+    "@commitlint/cz-commitlint": "18.4.4",
     "@docusaurus/module-type-aliases": "2.4.3",
     "@nx-plus/docusaurus": "15.0.0-rc.0",
     "@nx/cypress": "17.2.8",
