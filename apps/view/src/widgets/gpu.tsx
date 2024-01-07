@@ -44,53 +44,53 @@ export const GpuChart: FC<GpuChartProps> = ({
 
   const chartLoad = (
     <ChartContainer
-    contentLoaded={chartDataLoad.length > 1}
-    textLeft={
-      showPercentages
-        ? `%: ${(chartDataLoad.at(-1)?.y as number)?.toFixed(1)} (Load)`
-        : undefined
-    }
-    textOffset={textOffset}
-    textSize={textSize}
-    renderChart={size => (
-      <DefaultAreaChart
-        data={chartDataLoad}
-        height={size.height}
-        width={size.width}
-        color={theme.colors.gpuPrimary}
-        renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
-      >
-        <YAxis hide={true} type='number' domain={[-5, 105]} />
-      </DefaultAreaChart>
-    )}
-  ></ChartContainer>
+      contentLoaded={chartDataLoad.length > 1}
+      textLeft={
+        showPercentages
+          ? `%: ${(chartDataLoad.at(-1)?.y as number)?.toFixed(1)} (Load)`
+          : undefined
+      }
+      textOffset={textOffset}
+      textSize={textSize}
+      renderChart={size => (
+        <DefaultAreaChart
+          data={chartDataLoad}
+          height={size.height}
+          width={size.width}
+          color={theme.colors.gpuPrimary}
+          renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
+        >
+          <YAxis hide={true} type='number' domain={[-5, 105]} />
+        </DefaultAreaChart>
+      )}
+    ></ChartContainer>
   );
 
   const chartMemory = (
     <ChartContainer
-    contentLoaded={chartDataMemory.length > 1}
-    textLeft={`%: ${(chartDataMemory.at(-1)?.y as number)?.toFixed(
-      1
-    )} (Memory)`}
-    textOffset={textOffset}
-    textSize={textSize}
-    renderChart={size => (
-      <DefaultAreaChart
-        data={chartDataMemory}
-        height={size.height}
-        width={size.width}
-        color={theme.colors.gpuPrimary}
-        renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
-      >
-        <YAxis hide={true} type='number' domain={[-5, 105]} />
-      </DefaultAreaChart>
-    )}
-  ></ChartContainer>
+      contentLoaded={chartDataMemory.length > 1}
+      textLeft={`%: ${(chartDataMemory.at(-1)?.y as number)?.toFixed(
+        1
+      )} (Memory)`}
+      textOffset={textOffset}
+      textSize={textSize}
+      renderChart={size => (
+        <DefaultAreaChart
+          data={chartDataMemory}
+          height={size.height}
+          width={size.width}
+          color={theme.colors.gpuPrimary}
+          renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
+        >
+          <YAxis hide={true} type='number' domain={[-5, 105]} />
+        </DefaultAreaChart>
+      )}
+    ></ChartContainer>
   );
 
-  if (filter == "load")
+  if (filter === 'load')
     return <MultiChartContainer columns={1}>{chartLoad}</MultiChartContainer>;
-  else if (filter == "memory")
+  else if (filter === 'memory')
     return <MultiChartContainer columns={1}>{chartMemory}</MultiChartContainer>;
   else
     return (

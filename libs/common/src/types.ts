@@ -105,6 +105,7 @@ export type Config = {
   custom_host?: string;
   page_title: string;
   use_imperial: boolean;
+  network_speed_as_bytes: boolean;
   enable_cpu_temps: boolean;
   always_show_percentages: boolean;
 
