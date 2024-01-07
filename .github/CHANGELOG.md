@@ -1,3 +1,17 @@
+# [5.4.0](https://github.com/MauriceNino/dashdot/compare/v5.3.2...v5.4.0) (2024-01-07)
+
+
+### Bug Fixes
+
+* add pre-allocated space of drive to current usage ([7f7050a](https://github.com/MauriceNino/dashdot/commit/7f7050a0b68b13e3526b8a2f8ac98a9090a1dd89)), closes [#882](https://github.com/MauriceNino/dashdot/issues/882)
+
+
+### Features
+
+* add custom scrollbar to main container ([9eacee2](https://github.com/MauriceNino/dashdot/commit/9eacee2da0e2b052538ec7b7c94da03e10e647cd)), closes [#922](https://github.com/MauriceNino/dashdot/issues/922)
+* add option DASHDOT_NETWORK_SPEED_AS_BYTES to switch network speed to bytes per second ([56bd9d8](https://github.com/MauriceNino/dashdot/commit/56bd9d839a48637c23ad9c6ed19524a8f9f33a1e)), closes [#930](https://github.com/MauriceNino/dashdot/issues/930)
+* add timestamp of last speedtest run on hover ([3c73ee4](https://github.com/MauriceNino/dashdot/commit/3c73ee4f93d9ceb3a5469d580fad4dce22dcda3f)), closes [#915](https://github.com/MauriceNino/dashdot/issues/915)
+
 ## [5.3.2](https://github.com/MauriceNino/dashdot/compare/v5.3.1...v5.3.2) (2024-01-06)
 
 
