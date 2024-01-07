@@ -45,6 +45,7 @@ export const CONFIG: Config = {
   custom_host: penv('CUSTOM_HOST'),
   page_title: penv('PAGE_TITLE') ?? 'dash.',
   use_imperial: penv('USE_IMPERIAL') === 'true',
+  network_speed_as_bytes: penv('NETWORK_SPEED_AS_BYTES') === 'true',
   always_show_percentages: penv('ALWAYS_SHOW_PERCENTAGES') === 'true',
 
   widget_list: lst(

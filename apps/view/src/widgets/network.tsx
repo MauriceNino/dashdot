@@ -38,6 +38,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
   const override = config.override;
   const speedUp = override.network_speed_up ?? data.speedUp;
   const speedDown = override.network_speed_down ?? data.speedDown;
+  const asBytes = config.network_speed_as_bytes;
 
   const chartDataDown = load.map((load, i) => ({
     x: i,
@@ -63,8 +64,9 @@ export const NetworkChart: FC<NetworkChartProps> = ({
       textLeft={
         showPercentages
           ? `↑ ${bpsPrettyPrint(
-            ((chartDataUp.at(-1)?.y as number) ?? 0) * 8
-          )}`
+              ((chartDataUp.at(-1)?.y as number) ?? 0) * 8,
+              asBytes
+            )}`
           : '↑'
       }
       textOffset={textOffset}
@@ -76,7 +78,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
           width={size.width}
           color={theme.colors.networkPrimary}
           renderTooltip={val =>
-            bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8)
+            bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8, asBytes)
           }
         >
           <YAxis
@@ -95,8 +97,9 @@ export const NetworkChart: FC<NetworkChartProps> = ({
       textLeft={
         showPercentages
           ? `↓ ${bpsPrettyPrint(
-            ((chartDataDown.at(-1)?.y as number) ?? 0) * 8
-          )}`
+              ((chartDataDown.at(-1)?.y as number) ?? 0) * 8,
+              asBytes
+            )}`
           : '↓'
       }
       textOffset={textOffset}
@@ -108,7 +111,7 @@ export const NetworkChart: FC<NetworkChartProps> = ({
           width={size.width}
           color={theme.colors.networkPrimary}
           renderTooltip={val =>
-            bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8)
+            bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8, asBytes)
           }
         >
           <YAxis
@@ -121,9 +124,9 @@ export const NetworkChart: FC<NetworkChartProps> = ({
     ></ChartContainer>
   );
 
-  if (filter == "up")
+  if (filter === 'up')
     return <MultiChartContainer columns={1}>{chartUp}</MultiChartContainer>;
-  else if (filter == "down")
+  else if (filter === 'down')
     return <MultiChartContainer columns={1}>{chartDown}</MultiChartContainer>;
   else
     return (
@@ -155,6 +158,7 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
   const interfaceSpeed =
     override.network_interface_speed ?? data.interfaceSpeed;
   const publicIp = override.network_public_ip ?? data.publicIp;
+  const asBytes = config.network_speed_as_bytes;
 
   return (
     <HardwareInfoContainer
@@ -164,11 +168,11 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
         type: { label: 'Type', value: type },
         speed_up: {
           label: 'Speed (Up)',
-          value: speedUp ? bpsPrettyPrint(speedUp) : undefined,
+          value: speedUp ? bpsPrettyPrint(speedUp, asBytes) : undefined,
         },
         speed_down: {
           label: 'Speed (Down)',
-          value: speedDown ? bpsPrettyPrint(speedDown) : undefined,
+          value: speedDown ? bpsPrettyPrint(speedDown, asBytes) : undefined,
         },
         interface_speed: {
           label: 'Interface Speed',
