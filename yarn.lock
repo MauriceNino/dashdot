@@ -14265,8 +14265,8 @@ __metadata:
     sass: 1.63.6
     semantic-release-plus: 20.0.0
     simplebar-react: 3.2.4
-    socket.io: 4.7.2
-    socket.io-client: 4.7.2
+    socket.io: 4.7.3
+    socket.io-client: 4.7.3
     store: 2.0.12
     styled-components: 6.1.1
     systeminformation: 5.21.20
@@ -26869,15 +26869,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io-client@npm:4.7.2":
-  version: 4.7.2
-  resolution: "socket.io-client@npm:4.7.2"
+"socket.io-client@npm:4.7.3":
+  version: 4.7.3
+  resolution: "socket.io-client@npm:4.7.3"
   dependencies:
     "@socket.io/component-emitter": ~3.1.0
     debug: ~4.3.2
     engine.io-client: ~6.5.2
     socket.io-parser: ~4.2.4
-  checksum: 8f0ab6b623e014d889bae0cd847ef7826658e8f131bd9367ee5ae4404bb52a6d7b1755b8fbe8e68799b60e92149370a732b381f913b155e40094facb135cd088
+  checksum: fd27f2e64db7a137eb2cf256ea1bde8625f127f208be69c28c5d6f2d8c8c4a6af736fb0f8b23317353b00ccf4637dbb72a59d4066d9e5bb171b7ffd0f18c5b93
   languageName: node
   linkType: hard
 
@@ -26891,9 +26891,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io@npm:4.7.2":
-  version: 4.7.2
-  resolution: "socket.io@npm:4.7.2"
+"socket.io@npm:4.7.3":
+  version: 4.7.3
+  resolution: "socket.io@npm:4.7.3"
   dependencies:
     accepts: ~1.3.4
     base64id: ~2.0.0
@@ -26902,7 +26902,7 @@ __metadata:
     engine.io: ~6.5.2
     socket.io-adapter: ~2.5.2
     socket.io-parser: ~4.2.4
-  checksum: 2dfac8983a75e100e889c3dafc83b21b75a9863d0d1ee79cdc60c4391d5d9dffcf3a86fc8deca7568032bc11c2572676335fd2e469c7982f40d19f1141d4b266
+  checksum: c6e5dcc9195f3ee1e11a9a5557bdde0eb372da0363de776fff785421786eb6b9e80bd1d82d9a8c484e9fb88339932e97c8f0c9235fa79f2fbabf44d86f3ad0ca
   languageName: node
   linkType: hard
 
