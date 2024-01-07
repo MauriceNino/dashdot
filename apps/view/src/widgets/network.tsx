@@ -159,6 +159,8 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
     override.network_interface_speed ?? data.interfaceSpeed;
   const publicIp = override.network_public_ip ?? data.publicIp;
   const asBytes = config.network_speed_as_bytes;
+  const lastSpeedTest = new Date(data.lastSpeedTest);
+  const lastSpeedTestString = `Last ran on ${lastSpeedTest.toLocaleDateString()}, at ${lastSpeedTest.toLocaleTimeString()}`;
 
   return (
     <HardwareInfoContainer
@@ -169,10 +171,12 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
         speed_up: {
           label: 'Speed (Up)',
           value: speedUp ? bpsPrettyPrint(speedUp, asBytes) : undefined,
+          tooltip: lastSpeedTestString,
         },
         speed_down: {
           label: 'Speed (Down)',
           value: speedDown ? bpsPrettyPrint(speedDown, asBytes) : undefined,
+          tooltip: lastSpeedTestString,
         },
         interface_speed: {
           label: 'Interface Speed',

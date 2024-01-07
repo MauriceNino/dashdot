@@ -46,6 +46,7 @@ export type NetworkInfo = {
   interfaceSpeed: number;
   speedDown: number;
   speedUp: number;
+  lastSpeedTest: number;
   type: string;
   publicIp: string;
 };
