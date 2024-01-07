@@ -76,18 +76,12 @@ export class DynamicStorageMapper {
     );
   }
 
-  // Get the size of the explicit host
-  private getHostSize(deviceBlocks: Block[]) {
-    const hasNoExplicitMount = !deviceBlocks.some(
-      d => d.mount === fromHost('/')
-    );
-    return hasNoExplicitMount
-      ? unwrapUsed(this.validSizes.find(({ mount }) => mount === fromHost('/')))
-      : 0;
-  }
-
   // Get size of the mounts of the partitions/disks of device
-  private getSizeForBlocks(deviceBlocks: Block[]) {
+  private getSizeForBlocks(
+    deviceBlocks: Block[],
+    diskSize: number,
+    isHost: boolean
+  ) {
     const sizes = this.validSizes.filter(size =>
       deviceBlocks.some(block => {
         const matchedByMount =
@@ -96,16 +90,22 @@ export class DynamicStorageMapper {
             size.mount.endsWith(`dev-disk-by-uuid-${block.uuid}`));
         const matchedByDevice =
           block.device && size.fs.startsWith(block.device);
+        const matchedByHost = isHost && this.isRootMount(size.mount);
 
-        return matchedByMount || matchedByDevice;
+        return matchedByMount || matchedByDevice || matchedByHost;
       })
     );
 
-    return sizes.reduce((acc, size) => acc + unwrapUsed(size), 0);
+    const totalAvailable = sizes.reduce((acc, size) => acc + size.size, 0);
+    const preAllocated = Math.max(0, diskSize - totalAvailable);
+
+    return (
+      sizes.reduce((acc, size) => acc + unwrapUsed(size), 0) + preAllocated
+    );
   }
 
   public getMappedLayout() {
-    return this.layout.map(({ disks, virtual, raidLabel, raidName }) => {
+    return this.layout.map(({ size, disks, virtual, raidLabel, raidName }) => {
       if (virtual) {
         const size = this.sizes.find(s => s.fs === disks[0].device);
         return size?.used ?? 0;
@@ -118,13 +118,7 @@ export class DynamicStorageMapper {
 
       const isHost = deviceBlocks.some(({ mount }) => this.isRootMount(mount));
 
-      if (isHost) {
-        return (
-          this.getSizeForBlocks(deviceBlocks) + this.getHostSize(deviceBlocks)
-        );
-      }
-
-      return this.getSizeForBlocks(deviceBlocks);
+      return this.getSizeForBlocks(deviceBlocks, size, isHost);
     });
   }
 }

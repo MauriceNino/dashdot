@@ -1,6 +1,8 @@
 import { Transient } from '@dash/common';
 import { motion, Variants } from 'framer-motion';
 import { FC, useEffect } from 'react';
+import SimpleBar from 'simplebar-react';
+import 'simplebar-react/dist/simplebar.min.css';
 import { default as styled } from 'styled-components';
 import { GlassPane } from '../components/glass-pane';
 import { useIsMobile } from '../services/mobile';
@@ -33,12 +35,19 @@ const itemVariants: Variants = {
   },
 };
 
-const FlexContainer = styled(motion.div)<Transient<{ mobile: boolean }>>`
-  width: ${({ $mobile }) => ($mobile ? 'calc(100vw - 50px)' : '92vw')};
-  min-height: ${({ $mobile }) => ($mobile ? 'calc(100vh - 50px)' : '86vh')};
-  margin: ${({ $mobile }) => ($mobile ? '50px' : '7vh')} auto
-    ${({ $mobile }) => ($mobile ? '50px' : '7vh')} auto;
+const ContentContainer = styled.div<Transient<{ mobile: boolean }>>`
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh;
+  /* prettier-ignore */
+  padding: ${({ $mobile }) => ($mobile ? '50px' : '7vh')} ${({ $mobile }) =>
+    $mobile ? '25px' : '4vw'};
+  display: flex;
+`;
 
+const FlexContainer = styled(motion.div)<Transient<{ mobile: boolean }>>`
+  width: 100%;
+  min-height: 100%;
   display: flex;
   flex-flow: row wrap;
   column-gap: 40px;
@@ -46,11 +55,8 @@ const FlexContainer = styled(motion.div)<Transient<{ mobile: boolean }>>`
 `;
 
 const ErrorContainer = styled(motion.div)<Transient<{ mobile: boolean }>>`
-  width: ${({ $mobile }) => ($mobile ? 'calc(100vw - 50px)' : '92vw')};
-  min-height: ${({ $mobile }) => ($mobile ? 'calc(100vh - 50px)' : '86vh')};
-  margin: ${({ $mobile }) => ($mobile ? '50px' : '7vh')} auto
-    ${({ $mobile }) => ($mobile ? '50px' : '7vh')} auto;
-
+  width: 100%;
+  min-height: 100%;
   display: flex;
   flex-flow: row wrap;
   column-gap: 40px;
@@ -90,17 +96,21 @@ export const MainWidgetContainer: FC = () => {
 
   if (error) {
     return (
-      <ErrorContainer
-        variants={containerVariants}
-        initial='initial'
-        animate='animate'
-        exit='exit'
-        $mobile={isMobile}
-      >
-        <GlassPane variants={itemVariants} grow={0} minWidth={500}>
-          <ErrorWidget errorText={error.text} />
-        </GlassPane>
-      </ErrorContainer>
+      <SimpleBar style={{ height: '100%' }}>
+        <ContentContainer $mobile={isMobile}>
+          <ErrorContainer
+            variants={containerVariants}
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            $mobile={isMobile}
+          >
+            <GlassPane variants={itemVariants} grow={0} minWidth={500}>
+              <ErrorWidget errorText={error.text} />
+            </GlassPane>
+          </ErrorContainer>
+        </ContentContainer>
+      </SimpleBar>
     );
   }
 
@@ -151,48 +161,50 @@ export const MainWidgetContainer: FC = () => {
   };
 
   return (
-    <>
-      <FlexContainer
-        $mobile={isMobile}
-        variants={containerVariants}
-        initial='initial'
-        animate='animate'
-        exit='exit'
-      >
-        {config.widget_list.map(widget => {
-          const currentConfig = configs[widget];
-
-          return (
-            <GlassPane
-              key={widget}
-              variants={itemVariants}
-              layoutId={`widget_${widget}`}
-              grow={currentConfig.grow}
-              minWidth={currentConfig.minWidth}
-            >
-              <currentConfig.Widget
-                // @ts-ignore
-                data={currentConfig.data}
-                // @ts-ignore
-                load={currentConfig.load}
-                config={config}
-              />
-            </GlassPane>
-          );
-        })}
-      </FlexContainer>
-
-      {config.show_dash_version === 'bottom_right' && (
-        <ThemedText
-          style={{
-            position: 'fixed',
-            right: '10px',
-            bottom: '10px',
-          }}
+    <SimpleBar style={{ height: '100%' }}>
+      <ContentContainer $mobile={isMobile}>
+        <FlexContainer
+          $mobile={isMobile}
+          variants={containerVariants}
+          initial='initial'
+          animate='animate'
+          exit='exit'
         >
-          {osData?.dash_version}
-        </ThemedText>
-      )}
-    </>
+          {config.widget_list.map(widget => {
+            const currentConfig = configs[widget];
+
+            return (
+              <GlassPane
+                key={widget}
+                variants={itemVariants}
+                layoutId={`widget_${widget}`}
+                grow={currentConfig.grow}
+                minWidth={currentConfig.minWidth}
+              >
+                <currentConfig.Widget
+                  // @ts-ignore
+                  data={currentConfig.data}
+                  // @ts-ignore
+                  load={currentConfig.load}
+                  config={config}
+                />
+              </GlassPane>
+            );
+          })}
+        </FlexContainer>
+
+        {config.show_dash_version === 'bottom_right' && (
+          <ThemedText
+            style={{
+              position: 'fixed',
+              right: '10px',
+              bottom: '10px',
+            }}
+          >
+            {osData?.dash_version}
+          </ThemedText>
+        )}
+      </ContentContainer>
+    </SimpleBar>
   );
 };

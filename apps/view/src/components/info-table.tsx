@@ -1,3 +1,4 @@
+import { Tooltip } from 'antd';
 import { motion, Variants } from 'framer-motion';
 import { FC } from 'react';
 import styled from 'styled-components';
@@ -73,9 +74,13 @@ export const InfoTable: FC<
         >
           <InfoTextLabel>{info.label}</InfoTextLabel>
           <InfoTextValue>
-            {info.value == null || info.value.trim().length === 0
-              ? '/'
-              : info.value}
+            {info.value == null || info.value.trim().length === 0 ? (
+              '/'
+            ) : info.tooltip ? (
+              <Tooltip title={info.tooltip}>{info.value}</Tooltip>
+            ) : (
+              info.value
+            )}
           </InfoTextValue>
         </InfoTextRow>
       ))}

@@ -2,13 +2,21 @@ export const toCommas = (num: number, commas = 1): number => {
   return Math.round(num * Math.pow(10, commas)) / Math.pow(10, commas);
 };
 
-export const bpsPrettyPrint = (bits: number) => {
+export const bpsPrettyPrint = (bits: number, asBytes = false) => {
   return bits >= 1000 * 1000 * 1000
-    ? `${(bits / 1000 / 1000 / 1000).toFixed(1)} Gb/s`
+    ? asBytes
+      ? `${(bits / 1000 / 1000 / 1000 / 8).toFixed(1)} GB/s`
+      : `${(bits / 1000 / 1000 / 1000).toFixed(1)} Gb/s`
     : bits >= 1000 * 1000
-    ? `${(bits / 1000 / 1000).toFixed(1)} Mb/s`
+    ? asBytes
+      ? `${(bits / 1000 / 1000 / 8).toFixed(1)} MB/s`
+      : `${(bits / 1000 / 1000).toFixed(1)} Mb/s`
     : bits >= 1000
-    ? `${(bits / 1000).toFixed(1)} Kb/s`
+    ? asBytes
+      ? `${(bits / 1000 / 8).toFixed(1)} KB/s`
+      : `${(bits / 1000).toFixed(1)} Kb/s`
+    : asBytes
+    ? `${(bits / 8).toFixed(1)} B/s`
     : `${bits.toFixed(1)} b/s`;
 };
 
