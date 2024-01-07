@@ -111,9 +111,13 @@ export const CpuChart: FC<CpuChartProps> = ({
 
     chartData = [chartValues];
   }
-  const averageTemp =
+  const averageTemp = () =>
     latestLoad?.reduce((acc, { temp }) => acc + (temp ?? 0), 0) /
     latestLoad?.length;
+  const maxTemp = () =>
+    Math.max(...(latestLoad?.map(({ temp }) => temp ?? 0) ?? []));
+
+  const finalTemp = config.cpu_temps_mode === 'max' ? maxTemp() : averageTemp();
 
   return (
     <MultiChartContainer
@@ -141,16 +145,16 @@ export const CpuChart: FC<CpuChartProps> = ({
               : undefined
           }
           textLeft={
-            multiView || !showPercentages
-              ? undefined
-              : `%: ${((chart.at(-1)?.y as number) ?? 0)?.toFixed(1)}`
+            showPercentages && !multiView
+              ? `%: ${((chart.at(-1)?.y as number) ?? 0)?.toFixed(1)}`
+              : undefined
           }
           textRight={
-            config.enable_cpu_temps && !multiView && chart.length > 1
-              ? `Ø: ${
+            config.enable_cpu_temps && chart.length > 1 && !multiView
+              ? `${
                   (config.use_imperial
-                    ? celsiusToFahrenheit(averageTemp).toFixed(1)
-                    : averageTemp.toFixed(1)) || '?'
+                    ? celsiusToFahrenheit(finalTemp).toFixed(1)
+                    : finalTemp.toFixed(1)) || '?'
                 } ${config.use_imperial ? '°F' : '°C'}`
               : undefined
           }

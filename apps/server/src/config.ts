@@ -47,6 +47,8 @@ export const CONFIG: Config = {
   use_imperial: penv('USE_IMPERIAL') === 'true',
   network_speed_as_bytes: penv('NETWORK_SPEED_AS_BYTES') === 'true',
   always_show_percentages: penv('ALWAYS_SHOW_PERCENTAGES') === 'true',
+  enable_cpu_temps: penv('ENABLE_CPU_TEMPS') === 'true',
+  cpu_temps_mode: (penv('CPU_TEMPS_MODE') as any) ?? 'avg',
 
   widget_list: lst(
     penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network'
@@ -69,12 +71,11 @@ export const CONFIG: Config = {
   os_widget_grow: numNull(penv('OS_WIDGET_GROW')) ?? 2.5,
   os_widget_min_width: numNull(penv('OS_WIDGET_MIN_WIDTH')) ?? 300,
 
-  enable_cpu_temps: penv('ENABLE_CPU_TEMPS') === 'true',
   cpu_widget_grow: numNull(penv('CPU_WIDGET_GROW')) ?? 4,
   cpu_widget_min_width: numNull(penv('CPU_WIDGET_MIN_WIDTH')) ?? 500,
   cpu_shown_datapoints: numNull(penv('CPU_SHOWN_DATAPOINTS')) ?? 20,
   cpu_poll_interval: numNull(penv('CPU_POLL_INTERVAL')) ?? 1000,
-  cpu_cores_toggle_mode: penv('CPU_CORES_TOGGLE_MODE') ?? ('toggle' as any),
+  cpu_cores_toggle_mode: (penv('CPU_CORES_TOGGLE_MODE') as any) ?? 'toggle',
 
   storage_widget_items_per_page:
     numNull(penv('STORAGE_WIDGET_ITEMS_PER_PAGE')) ?? 3,

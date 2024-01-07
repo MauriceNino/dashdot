@@ -107,8 +107,9 @@ export type Config = {
   page_title: string;
   use_imperial: boolean;
   network_speed_as_bytes: boolean;
-  enable_cpu_temps: boolean;
   always_show_percentages: boolean;
+  enable_cpu_temps: boolean;
+  cpu_temps_mode: 'max' | 'avg';
 
   // Widgets, Labels
   widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network' | 'gpu')[];

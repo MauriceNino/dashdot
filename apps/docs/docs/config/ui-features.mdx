@@ -51,6 +51,15 @@ If you want to show the CPU temperature in the graph. This will probably not wor
 | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | <img src="/img/cpu_view_normal.png" alt="CPU widget normal" style={{maxHeight: "250px"}} /> | <img src="/img/cpu_view_temps.png" alt="CPU widget with temps" style={{maxHeight: "250px"}} /> |
 
+## `DASHDOT_CPU_TEMPS_MODE`
+
+To choose between average and max CPU temperature (accross all cores). Needs [`DASHDOT_ENABLE_CPU_TEMPS`](./ui-features#dashdot_enable_cpu_temps) enabled to work.
+
+The available options are: `avg`, `max`.
+
+- type: `string`
+- default: `avg`
+
 ## `DASHDOT_USE_IMPERIAL`
 
 Shows any units in the imperial system, instead of the default metric.
