@@ -1,9 +1,9 @@
 import { ConfigProvider } from 'antd';
 import { FC, useMemo } from 'react';
 import {
-  createGlobalStyle,
   DefaultTheme,
   ThemeProvider,
+  createGlobalStyle,
 } from 'styled-components';
 import { useColorScheme } from 'use-color-scheme';
 import { MainWidgetContainer } from './components/main-widget-container';
@@ -53,12 +53,13 @@ const GlobalStyle = createGlobalStyle<{ noBg: boolean }>`
   body {
     background-color: ${({ theme, noBg }) =>
       noBg ? 'transparent' : theme.colors.background};
+    height: 100vh;
+    width: 100vw;
   }
 
   #root {
-    overflow-x: hidden;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
 
     background: ${({ theme, noBg }) =>
       noBg

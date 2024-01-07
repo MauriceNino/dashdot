@@ -136,9 +136,3 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
-html,
-body {
-  height: unset !important;
-  width: unset !important;
-}
