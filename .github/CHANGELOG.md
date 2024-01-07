@@ -1,3 +1,10 @@
+# [5.5.0](https://github.com/MauriceNino/dashdot/compare/v5.4.0...v5.5.0) (2024-01-07)
+
+
+### Features
+
+* add option DASHDOT_CPU_TEMPS_MODE to switch between max and avg cpu temp readings ([2ec1e0f](https://github.com/MauriceNino/dashdot/commit/2ec1e0f46c942404f834a9da2e097c2f434e19a2)), closes [#932](https://github.com/MauriceNino/dashdot/issues/932)
+
 # [5.4.0](https://github.com/MauriceNino/dashdot/compare/v5.3.2...v5.4.0) (2024-01-07)
 
 
