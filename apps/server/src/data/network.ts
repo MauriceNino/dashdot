@@ -108,6 +108,7 @@ export default {
   speedTest: async (printResult = false): Promise<Partial<NetworkInfo>> => {
     let usedRunner: string;
     let result: Partial<NetworkInfo>;
+    const startMsSinceEpoch = Date.now().valueOf();
 
     if (CONFIG.speed_test_from_path) {
       usedRunner = 'file';
@@ -172,6 +173,8 @@ export default {
     if (printResult) {
       console.log(`Speed-test completed successfully [${usedRunner}]`, result);
     }
+
+    result.lastSpeedTest = startMsSinceEpoch;
 
     return result;
   },

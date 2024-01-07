@@ -39,6 +39,7 @@ const STATIC_INFO = new BehaviorSubject<HardwareInfo>({
     interfaceSpeed: 0,
     speedDown: 0,
     speedUp: 0,
+    lastSpeedTest: 0,
     type: '',
     publicIp: '',
   },
@@ -47,7 +48,7 @@ const STATIC_INFO = new BehaviorSubject<HardwareInfo>({
   },
 });
 
-const promIf = (condition: boolean, func: () => Promise<any>): Promise<any> => {
+const promIf = <T>(condition: boolean, func: () => Promise<T>): Promise<T> => {
   return condition ? func() : Promise.resolve(null);
 };
 
