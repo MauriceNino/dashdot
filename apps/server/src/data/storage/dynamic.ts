@@ -1,4 +1,4 @@
-import { StorageInfo, StorageLoad } from '@dash/common';
+import { StorageInfo, StorageLoad, sumUp } from '@dash/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
 import { getStaticServerInfo } from '../../static-info';
@@ -6,8 +6,6 @@ import { PLATFORM_IS_WINDOWS, fromHost } from '../../utils';
 
 type Block = si.Systeminformation.BlockDevicesData;
 type Size = si.Systeminformation.FsSizeData;
-
-const unwrapUsed = (size?: Size) => size?.used ?? 0;
 
 export class DynamicStorageMapper {
   private validSizes: Size[];
@@ -96,12 +94,17 @@ export class DynamicStorageMapper {
       })
     );
 
-    const totalAvailable = sizes.reduce((acc, size) => acc + size.size, 0);
+    const calculatedSize = sumUp(sizes, 'used');
+    const isLvm = deviceBlocks.some(({ fsType }) => fsType === 'LVM2_member');
+
+    if (isLvm) {
+      return calculatedSize;
+    }
+
+    const totalAvailable = sumUp(sizes, 'size');
     const preAllocated = Math.max(0, diskSize - totalAvailable);
 
-    return (
-      sizes.reduce((acc, size) => acc + unwrapUsed(size), 0) + preAllocated
-    );
+    return calculatedSize + preAllocated;
   }
 
   public getMappedLayout() {
