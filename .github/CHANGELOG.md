@@ -1,3 +1,10 @@
+## [5.5.1](https://github.com/MauriceNino/dashdot/compare/v5.5.0...v5.5.1) (2024-01-09)
+
+
+### Bug Fixes
+
+* avoid adding pre-allocated space to lvm disks ([f1949b4](https://github.com/MauriceNino/dashdot/commit/f1949b474dca8a1b10883d45021ef9cbd0011cab))
+
 # [5.5.0](https://github.com/MauriceNino/dashdot/compare/v5.4.0...v5.5.0) (2024-01-07)
 
 
