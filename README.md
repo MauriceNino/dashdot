@@ -68,17 +68,31 @@ In case you want to financially support this project, you can visit my
 - [Contributing](./.github/CONTRIBUTING.md)
 - [Changelog](./.github/CHANGELOG.md)
 
-## Quick Install (Docker)
+## Quick Install (Docker & Docker-Compose)
 
 Images are hosted on [DockerHub](https://hub.docker.com/r/mauricenino/dashdot),
 and are available for both AMD64 and ARM devices.
 
+### Docker
 ```bash
 docker container run -it \
   -p 80:3001 \
   -v /:/mnt/host:ro \
   --privileged \
   mauricenino/dashdot
+```
+### Docker Compose
+```bash
+version: "3.9"
+services:
+  dashdot:
+    image: mauricenino/dashdot
+    privileged: true
+    volumes:
+      - /:/mnt/host:ro
+    ports:
+      - "80:3001"
+
 ```
 
 To get more information on why which flag is needed, or if you want to use other
