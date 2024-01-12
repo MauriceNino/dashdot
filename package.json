@@ -129,7 +129,7 @@
     "babel-jest": "29.5.0",
     "babel-plugin-styled-components": "2.1.4",
     "babel-plugin-syntax-jsx": "6.18.0",
-    "chai": "4.3.10",
+    "chai": "4.4.1",
     "commitizen": "4.3.0",
     "dotenv": "16.3.1",
     "esbuild": "^0.19.2",
