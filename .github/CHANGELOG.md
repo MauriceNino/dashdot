@@ -1,3 +1,10 @@
+## [5.5.2](https://github.com/MauriceNino/dashdot/compare/v5.5.1...v5.5.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* filter sizes array for only rw ones ([e031e35](https://github.com/MauriceNino/dashdot/commit/e031e35950c8eb92c2f8a3d2789f8a6447ba66c1)), closes [#1008](https://github.com/MauriceNino/dashdot/issues/1008)
+
 ## [5.5.1](https://github.com/MauriceNino/dashdot/compare/v5.5.0...v5.5.1) (2024-01-09)
 
 
