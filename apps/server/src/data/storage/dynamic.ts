@@ -26,9 +26,10 @@ export class DynamicStorageMapper {
   // Setup local values
   private getValidSizes() {
     return this.sizes.filter(
-      ({ mount, type }) =>
+      ({ mount, type, rw }) =>
         (this.hostWin32 || mount.startsWith(fromHost('/'))) &&
-        !CONFIG.fs_type_filter.includes(type)
+        !CONFIG.fs_type_filter.includes(type) &&
+        rw
     );
   }
 
