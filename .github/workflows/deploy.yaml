@@ -84,7 +84,7 @@ jobs:
           cache-to: type=gha,mode=max
       # DEPLOY GPU supported image
       - uses: docker/metadata-action@v4
-        id: meta_gpu
+        id: meta_nvidia
         with:
           flavor: |
             latest=false
@@ -99,11 +99,11 @@ jobs:
             org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
             org.opencontainers.image.licenses=MIT
           tags: |
-            type=semver,pattern={{version}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=gpu-
-            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=gpu-
-            type=semver,pattern={{major}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=gpu-
-            type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=gpu-
-            type=raw,value=gpu,enable=${{ github.ref_name == 'main' }}
+            type=semver,pattern={{version}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
+            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
+            type=semver,pattern={{major}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
+            type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=nvidia-
+            type=raw,value=nvidia,enable=${{ github.ref_name == 'main' }}
       - uses: docker/build-push-action@v4
         with:
           context: .
@@ -113,8 +113,8 @@ jobs:
           build-args: |
             VERSION=${{ github.ref_name == 'main' && env.package_version || format('0.0.0-{0}', github.ref_name) }}
             BUILDHASH=${{ github.sha }}
-          labels: ${{ steps.meta_gpu.outputs.labels }}
-          tags: ${{ steps.meta_gpu.outputs.tags }}
+          labels: ${{ steps.meta_nvidia.outputs.labels }}
+          tags: ${{ steps.meta_nvidia.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - if: ${{ github.ref_name == 'main' }}

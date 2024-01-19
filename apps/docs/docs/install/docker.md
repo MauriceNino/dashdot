@@ -42,5 +42,5 @@ docker container run -it \
   --privileged \
   --gpus all \
   --env DASHDOT_WIDGET_LIST="os,cpu,storage,ram,network,gpu"
-  mauricenino/dashdot:gpu
+  mauricenino/dashdot:nvidia
 ```

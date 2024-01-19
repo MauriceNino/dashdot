@@ -47,7 +47,7 @@ version: '3.5'
 
 services:
   dash:
-    image: mauricenino/dashdot:gpu
+    image: mauricenino/dashdot:nvidia
     restart: unless-stopped
     privileged: true
     deploy:
