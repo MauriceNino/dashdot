@@ -42,7 +42,7 @@ export default {
       ecores: cpuInfo.efficiencyCores,
       pcores: cpuInfo.performanceCores,
       threads: cpuInfo.cores,
-      frequency: cpuInfo.speed,
+      frequency: cpuInfo.speedMax,
     };
   },
 };
