@@ -1,3 +1,11 @@
+## [5.6.1](https://github.com/MauriceNino/dashdot/compare/v5.6.0...v5.6.1) (2024-01-19)
+
+
+### Bug Fixes
+
+* filter out ram sticks without a size ([0bf79fa](https://github.com/MauriceNino/dashdot/commit/0bf79fa28fe3889d6013af4c5a595015a29e9733))
+* use max cpu frequency for static data instead of current ([a1da8ad](https://github.com/MauriceNino/dashdot/commit/a1da8ad60d65f12023ccfab844efee2016ab74f7))
+
 # [5.6.0](https://github.com/MauriceNino/dashdot/compare/v5.5.2...v5.6.0) (2024-01-19)
 
 
