@@ -1,3 +1,15 @@
+# [5.6.0](https://github.com/MauriceNino/dashdot/compare/v5.5.2...v5.6.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* change default version display to icon_hover ([fdc89a3](https://github.com/MauriceNino/dashdot/commit/fdc89a371c7dee449f08b737ca2547acafb83c31))
+
+
+### Features
+
+* add visual indication for disks with no valid mounts ([4f81ab6](https://github.com/MauriceNino/dashdot/commit/4f81ab60f105fbb9e21ab99f9c41a150e52bf50e)), closes [#1001](https://github.com/MauriceNino/dashdot/issues/1001)
+
 ## [5.5.2](https://github.com/MauriceNino/dashdot/compare/v5.5.1...v5.5.2) (2024-01-18)
 
 
