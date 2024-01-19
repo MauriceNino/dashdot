@@ -1,4 +1,4 @@
-import { StorageInfo, StorageLoad } from '@dash/common';
+import { StorageInfo, StorageLoad, sumUp } from '@dash/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
 import { getStaticServerInfo } from '../../static-info';
@@ -7,12 +7,9 @@ import { PLATFORM_IS_WINDOWS, fromHost } from '../../utils';
 type Block = si.Systeminformation.BlockDevicesData;
 type Size = si.Systeminformation.FsSizeData;
 
-const unwrapUsed = (size?: Size) => size?.used ?? 0;
-
 export class DynamicStorageMapper {
   private validSizes: Size[];
   private validBlocks: Block[];
-  private hasExplicitHost = false;
 
   constructor(
     private hostWin32: boolean,
@@ -22,28 +19,20 @@ export class DynamicStorageMapper {
   ) {
     this.validSizes = this.getValidSizes();
     this.validBlocks = this.getValidBlocks();
-    this.hasExplicitHost = this.getHasExplicitHost();
   }
 
   // Setup local values
   private getValidSizes() {
     return this.sizes.filter(
-      ({ mount, type }) =>
+      ({ mount, type, rw }) =>
         (this.hostWin32 || mount.startsWith(fromHost('/'))) &&
-        !CONFIG.fs_type_filter.includes(type)
+        !CONFIG.fs_type_filter.includes(type) &&
+        rw
     );
   }
 
   private getValidBlocks() {
     return this.blocks.filter(({ type }) => type === 'part' || type === 'disk');
-  }
-
-  private getIsExplicitHost(deviceBlocks: Block[]) {
-    return deviceBlocks.some(({ mount }) => this.isRootMount(mount));
-  }
-
-  private getHasExplicitHost() {
-    return this.getIsExplicitHost(this.validBlocks);
   }
 
   // Helpers
@@ -96,12 +85,21 @@ export class DynamicStorageMapper {
       })
     );
 
-    const totalAvailable = sizes.reduce((acc, size) => acc + size.size, 0);
+    if (sizes.length === 0) {
+      return -1;
+    }
+
+    const calculatedSize = sumUp(sizes, 'used');
+    const isLvm = deviceBlocks.some(({ fsType }) => fsType === 'LVM2_member');
+
+    if (isLvm) {
+      return calculatedSize;
+    }
+
+    const totalAvailable = sumUp(sizes, 'size');
     const preAllocated = Math.max(0, diskSize - totalAvailable);
 
-    return (
-      sizes.reduce((acc, size) => acc + unwrapUsed(size), 0) + preAllocated
-    );
+    return calculatedSize + preAllocated;
   }
 
   public getMappedLayout() {

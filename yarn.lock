@@ -9789,6 +9789,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node-cron@npm:3.0.11":
+  version: 3.0.11
+  resolution: "@types/node-cron@npm:3.0.11"
+  checksum: a73f69bcca52a5f3b1671cfb00a8e4a1d150d0aef36a611564a2f94e66b6981bade577e267ceeeca6fcee241768902d55eb8cf3a81f9ef4ed767a23112fdb16d
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:>=12":
   version: 17.0.38
   resolution: "@types/node@npm:17.0.38"
@@ -13591,6 +13598,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cronstrue@npm:2.47.0":
+  version: 2.47.0
+  resolution: "cronstrue@npm:2.47.0"
+  bin:
+    cronstrue: bin/cli.js
+  checksum: a6752c8873fec30cabab4c5b92abde3a625cb5ef1797d9360f762b9e0bb9c0607a09744340faccdbf5b97eaeb5df0ebe9b5c424043fdba9b39799c82404076ec
+  languageName: node
+  linkType: hard
+
 "cross-fetch@npm:^3.1.5":
   version: 3.1.5
   resolution: "cross-fetch@npm:3.1.5"
@@ -14209,6 +14225,7 @@ __metadata:
     "@types/express": 4.17.21
     "@types/jest": 29.5.4
     "@types/node": 20.10.7
+    "@types/node-cron": 3.0.11
     "@types/qs": 6.9.11
     "@types/react": 18.2.47
     "@types/react-color": 3.0.11
@@ -14234,6 +14251,7 @@ __metadata:
     compression: 1.7.4
     core-js: 3.31.0
     cors: 2.8.5
+    cronstrue: 2.47.0
     docusaurus-plugin-image-zoom: 1.0.1
     docusaurus-plugin-sass: 0.2.5
     dotenv: 16.3.1
@@ -14252,6 +14270,7 @@ __metadata:
     jest: 29.5.0
     jest-environment-node: 29.5.0
     jsdom: 22.1.0
+    node-cron: 3.0.3
     nx: 17.2.8
     parse-domain: 7.0.1
     prettier: 2.8.8
@@ -21424,6 +21443,15 @@ __metadata:
   version: 3.0.1
   resolution: "node-abort-controller@npm:3.0.1"
   checksum: 2b3d75c65249fea99e8ba22da3a8bc553f034f44dd12f5f4b38b520f718b01c88718c978f0c24c2a460fc01de9a80b567028f547b94440cb47adeacfeb82c2ee
+  languageName: node
+  linkType: hard
+
+"node-cron@npm:3.0.3":
+  version: 3.0.3
+  resolution: "node-cron@npm:3.0.3"
+  dependencies:
+    uuid: 8.3.2
+  checksum: 351c37491ebf717d0ae69cc941465de118e5c2ef5d48bc3f87c98556241b060f100402c8a618c7b86f9f626b44756b20d8b5385b70e52f80716f21e55db0f1c5
   languageName: node
   linkType: hard
 
@@ -29198,7 +29226,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^8.3.2":
+"uuid@npm:8.3.2, uuid@npm:^8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:

@@ -40,7 +40,6 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-/speedtest_result
 
 # System Files
 .DS_Store

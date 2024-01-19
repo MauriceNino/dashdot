@@ -1,4 +1,5 @@
-import { interval, mergeMap, Observable, ReplaySubject } from 'rxjs';
+import cron from 'node-cron';
+import { interval, mergeMap, Observable, ReplaySubject, Subject } from 'rxjs';
 import { inspect } from 'util';
 import { CONFIG } from './config';
 import getCpuInfo from './data/cpu';
@@ -84,13 +85,25 @@ export const getDynamicServerInfo = () => {
     getGpuInfo.dynamic
   );
 
-  const speedTestObs = CONFIG.widget_list.includes('network')
-    ? interval(CONFIG.speed_test_interval * 60 * 1000).pipe(
+  let speedTestObs = new Observable();
+
+  if (CONFIG.widget_list.includes('network')) {
+    if (CONFIG.speed_test_interval_cron) {
+      const subject = new Subject();
+
+      cron.schedule(CONFIG.speed_test_interval_cron, async () => {
+        subject.next(await loadInfo('network', getNetworkInfo.speedTest, true));
+      });
+
+      speedTestObs = subject.asObservable();
+    } else {
+      speedTestObs = interval(CONFIG.speed_test_interval * 60 * 1000).pipe(
         mergeMap(
           async () => await loadInfo('network', getNetworkInfo.speedTest, true)
         )
-      )
-    : new Observable();
+      );
+    }
+  }
 
   return {
     cpu: cpuObs,

@@ -12,6 +12,8 @@ import {
   TEST_CASE_21,
   TEST_CASE_22,
   TEST_CASE_23,
+  TEST_CASE_24,
+  TEST_CASE_25,
   TestCase,
 } from './test-cases';
 
@@ -68,6 +70,14 @@ describe('Static Info', () => {
     it('Test Case 23', () => {
       const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_23));
       expect(output).to.deep.equal(TEST_CASE_23.layout);
+    });
+    it('Test Case 24', () => {
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_24));
+      expect(output).to.deep.equal(TEST_CASE_24.layout);
+    });
+    it('Test Case 25', () => {
+      const output = mapToStorageLayout(false, ...toStorageInp(TEST_CASE_25));
+      expect(output).to.deep.equal(TEST_CASE_25.layout);
     });
   });
 });

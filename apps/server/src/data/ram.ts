@@ -12,11 +12,13 @@ export default {
 
     return {
       size: memInfo.total,
-      layout: memLayout.map(({ manufacturer, type, clockSpeed }) => ({
-        brand: manufacturer,
-        type: type,
-        frequency: clockSpeed ?? undefined,
-      })),
+      layout: memLayout
+        .filter(({ size }) => size !== 0)
+        .map(({ manufacturer, type, clockSpeed }) => ({
+          brand: manufacturer,
+          type: type,
+          frequency: clockSpeed ?? undefined,
+        })),
     };
   },
 };
