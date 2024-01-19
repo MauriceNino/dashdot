@@ -1,3 +1,10 @@
+# [5.7.0](https://github.com/MauriceNino/dashdot/compare/v5.6.1...v5.7.0) (2024-01-19)
+
+
+### Features
+
+* add option to run speedtest at cron interval ([d05c39c](https://github.com/MauriceNino/dashdot/commit/d05c39ce62f5e7261c2c0f7c5102ae01651c0f4f)), closes [#889](https://github.com/MauriceNino/dashdot/issues/889)
+
 ## [5.6.1](https://github.com/MauriceNino/dashdot/compare/v5.6.0...v5.6.1) (2024-01-19)
 
 
