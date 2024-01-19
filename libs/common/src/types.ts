@@ -151,6 +151,7 @@ export type Config = {
 
   // Network Widget
   speed_test_interval: number;
+  speed_test_interval_cron?: string;
   network_widget_grow: number;
   network_widget_min_width: number;
   network_shown_datapoints: number;

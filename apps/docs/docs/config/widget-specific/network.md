@@ -19,6 +19,16 @@ At which interval the network speed-test should be rerun (in minutes).
 - type: `number`
 - default: `240` (every 4 hours)
 
+## `DASHDOT_SPEED_TEST_INTERVAL_CRON`
+
+At which interval the network speed-test should be rerun, passed as a cron string.
+This setting overrides `DASHDOT_SPEED_TEST_INTERVAL` if set.
+
+Example: `0 0 * * *` (every day at midnight)
+
+- type: `string`
+- default: `unset`
+
 ## `DASHDOT_NETWORK_WIDGET_GROW`
 
 To adjust the relative size of the Network widget.
