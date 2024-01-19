@@ -47,7 +47,7 @@
     "axios": "1.6.5",
     "clsx": "1.2.1",
     "compression": "1.7.4",
-    "core-js": "3.31.0",
+    "core-js": "3.35.0",
     "cors": "2.8.5",
     "cronstrue": "2.47.0",
     "docusaurus-plugin-image-zoom": "1.0.1",
