@@ -1,4 +1,4 @@
-import { RaidType, StorageInfo } from '@dash/common';
+import { RaidType, StorageInfo, sumUp } from '@dash/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
 import { PLATFORM_IS_WINDOWS } from '../../utils';
@@ -94,7 +94,7 @@ const getRaidInfo = (blocks: Block[], diskBlock: Block, hostWin32: boolean) => {
     label,
     type: raidBlocks.current[0].type === 'raid0' ? RaidType.ZERO : RaidType.ONE,
     name: raidBlocks.current[0].name,
-    size: raidBlocks.current.reduce((acc, curr) => acc + curr.size, 0),
+    size: sumUp(raidBlocks.current, 'size'),
   };
 };
 

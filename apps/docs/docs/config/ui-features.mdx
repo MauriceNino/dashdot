@@ -24,10 +24,10 @@ If you want to show the host part in the server widget (e.g. `dash.` -> `dash.ma
 
 If you want to show the version number of your dash. instance on the bottom right of the page, or alternatively on the GitHub icon (hover).
 
-The available options are: `bottom_right`, `icon_hover`.
+The available options are: `bottom_right`, `icon_hover` and `none`.
 
 - type: `string`
-- default: `unset`
+- default: `icon_hover`
 
 | `bottom_right`                                                                                            | `icon_hover`                                                                                                      |
 | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
@@ -50,6 +50,26 @@ If you want to show the CPU temperature in the graph. This will probably not wor
 | `false`                                                                                     | `true`                                                                                         |
 | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | <img src="/img/cpu_view_normal.png" alt="CPU widget normal" style={{maxHeight: "250px"}} /> | <img src="/img/cpu_view_temps.png" alt="CPU widget with temps" style={{maxHeight: "250px"}} /> |
+
+## `DASHDOT_CPU_TEMPS_MODE`
+
+To choose between average and max CPU temperature (accross all cores). Needs [`DASHDOT_ENABLE_CPU_TEMPS`](./ui-features#dashdot_enable_cpu_temps) enabled to work.
+
+The available options are: `avg`, `max`.
+
+- type: `string`
+- default: `avg`
+
+## `DASHDOT_CPU_CORES_TOGGLE_MODE`
+
+Switches the Processor core view depending on the selected option. The `toggle`
+option allows you to switch the view from the dashboard, other options hide the
+toggle from the dashboard.
+
+The available options are: `toggle`, `multi-core`, `average`.
+
+- type: `string`
+- default: `toggle`
 
 ## `DASHDOT_USE_IMPERIAL`
 

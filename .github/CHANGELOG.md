@@ -1,3 +1,104 @@
+# [5.7.0](https://github.com/MauriceNino/dashdot/compare/v5.6.1...v5.7.0) (2024-01-19)
+
+
+### Features
+
+* add option to run speedtest at cron interval ([d05c39c](https://github.com/MauriceNino/dashdot/commit/d05c39ce62f5e7261c2c0f7c5102ae01651c0f4f)), closes [#889](https://github.com/MauriceNino/dashdot/issues/889)
+
+## [5.6.1](https://github.com/MauriceNino/dashdot/compare/v5.6.0...v5.6.1) (2024-01-19)
+
+
+### Bug Fixes
+
+* filter out ram sticks without a size ([0bf79fa](https://github.com/MauriceNino/dashdot/commit/0bf79fa28fe3889d6013af4c5a595015a29e9733))
+* use max cpu frequency for static data instead of current ([a1da8ad](https://github.com/MauriceNino/dashdot/commit/a1da8ad60d65f12023ccfab844efee2016ab74f7))
+
+# [5.6.0](https://github.com/MauriceNino/dashdot/compare/v5.5.2...v5.6.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* change default version display to icon_hover ([fdc89a3](https://github.com/MauriceNino/dashdot/commit/fdc89a371c7dee449f08b737ca2547acafb83c31))
+
+
+### Features
+
+* add visual indication for disks with no valid mounts ([4f81ab6](https://github.com/MauriceNino/dashdot/commit/4f81ab60f105fbb9e21ab99f9c41a150e52bf50e)), closes [#1001](https://github.com/MauriceNino/dashdot/issues/1001)
+
+## [5.5.2](https://github.com/MauriceNino/dashdot/compare/v5.5.1...v5.5.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* filter sizes array for only rw ones ([e031e35](https://github.com/MauriceNino/dashdot/commit/e031e35950c8eb92c2f8a3d2789f8a6447ba66c1)), closes [#1008](https://github.com/MauriceNino/dashdot/issues/1008)
+
+## [5.5.1](https://github.com/MauriceNino/dashdot/compare/v5.5.0...v5.5.1) (2024-01-09)
+
+
+### Bug Fixes
+
+* avoid adding pre-allocated space to lvm disks ([f1949b4](https://github.com/MauriceNino/dashdot/commit/f1949b474dca8a1b10883d45021ef9cbd0011cab))
+
+# [5.5.0](https://github.com/MauriceNino/dashdot/compare/v5.4.0...v5.5.0) (2024-01-07)
+
+
+### Features
+
+* add option DASHDOT_CPU_TEMPS_MODE to switch between max and avg cpu temp readings ([2ec1e0f](https://github.com/MauriceNino/dashdot/commit/2ec1e0f46c942404f834a9da2e097c2f434e19a2)), closes [#932](https://github.com/MauriceNino/dashdot/issues/932)
+
+# [5.4.0](https://github.com/MauriceNino/dashdot/compare/v5.3.2...v5.4.0) (2024-01-07)
+
+
+### Bug Fixes
+
+* add pre-allocated space of drive to current usage ([7f7050a](https://github.com/MauriceNino/dashdot/commit/7f7050a0b68b13e3526b8a2f8ac98a9090a1dd89)), closes [#882](https://github.com/MauriceNino/dashdot/issues/882)
+
+
+### Features
+
+* add custom scrollbar to main container ([9eacee2](https://github.com/MauriceNino/dashdot/commit/9eacee2da0e2b052538ec7b7c94da03e10e647cd)), closes [#922](https://github.com/MauriceNino/dashdot/issues/922)
+* add option DASHDOT_NETWORK_SPEED_AS_BYTES to switch network speed to bytes per second ([56bd9d8](https://github.com/MauriceNino/dashdot/commit/56bd9d839a48637c23ad9c6ed19524a8f9f33a1e)), closes [#930](https://github.com/MauriceNino/dashdot/issues/930)
+* add timestamp of last speedtest run on hover ([3c73ee4](https://github.com/MauriceNino/dashdot/commit/3c73ee4f93d9ceb3a5469d580fad4dce22dcda3f)), closes [#915](https://github.com/MauriceNino/dashdot/issues/915)
+
+## [5.3.2](https://github.com/MauriceNino/dashdot/compare/v5.3.1...v5.3.2) (2024-01-06)
+
+
+### Bug Fixes
+
+* dynamic storage info slow on windows ([#993](https://github.com/MauriceNino/dashdot/issues/993)) ([64655f1](https://github.com/MauriceNino/dashdot/commit/64655f1bf0db52e0a10051f9a3523b594ef148fd))
+
+## [5.3.1](https://github.com/MauriceNino/dashdot/compare/v5.3.0...v5.3.1) (2024-01-06)
+
+
+### Bug Fixes
+
+* filter out zram devices ([6d265d3](https://github.com/MauriceNino/dashdot/commit/6d265d3d58f217572da8967a2c6225e9278d7876)), closes [#981](https://github.com/MauriceNino/dashdot/issues/981)
+* refactor storage load gathering; remove outdated tests ([390def6](https://github.com/MauriceNino/dashdot/commit/390def62a029ad63a097afe8c33f0f35a599f7cf)), closes [#883](https://github.com/MauriceNino/dashdot/issues/883)
+
+# [5.3.0](https://github.com/MauriceNino/dashdot/compare/v5.2.3...v5.3.0) (2024-01-06)
+
+
+### Bug Fixes
+
+* add back and fix arm/v8 ([4284cf2](https://github.com/MauriceNino/dashdot/commit/4284cf204db8d3b51ee15e1b870d5be95fe20e72))
+* bundling third party modules with cli package ([156ec72](https://github.com/MauriceNino/dashdot/commit/156ec72ab81780a2a913b0c36bedd763cbebefd5))
+* lint not working for view ([5849edd](https://github.com/MauriceNino/dashdot/commit/5849edda33dc775ee0d49572322b8af1f5c70fd9))
+* remove arm/v7 for now ([0ba25cd](https://github.com/MauriceNino/dashdot/commit/0ba25cd7fe99c79faebd3b462ec5afb32e9a2e31))
+* remove arm/v8 for now ([6408997](https://github.com/MauriceNino/dashdot/commit/6408997bf74720615a3d45c68f093dcd8ca58456))
+* testing errors ([f2937fd](https://github.com/MauriceNino/dashdot/commit/f2937fd15c4ba064fcaabad87308bb31c71ebbcd))
+
+
+### Features
+
+* [gpu] allow to filter-out some controller ([9651122](https://github.com/MauriceNino/dashdot/commit/96511226e70c9c050cbd6efb67341d6ff5062bde))
+* **cpu widget:** allow user to switch (default) processor core view ([4def64e](https://github.com/MauriceNino/dashdot/commit/4def64ee0d340a2234ebf604b373dbb136b01abd))
+* render network and gpu widgets individually instead of as pair ([#886](https://github.com/MauriceNino/dashdot/issues/886)) ([df59729](https://github.com/MauriceNino/dashdot/commit/df597292478c0ddcfa185702c190c111be34a9a0))
+
+
+### Performance Improvements
+
+* fix windows cpu 100% usage ([9c23e93](https://github.com/MauriceNino/dashdot/commit/9c23e937130cc81fd2100928bfa17614c525133a))
+
 ## [5.2.3](https://github.com/MauriceNino/dashdot/compare/v5.2.2...v5.2.3) (2023-08-23)
 
 ## [5.2.2](https://github.com/MauriceNino/dashdot/compare/v5.2.1...v5.2.2) (2023-08-23)
