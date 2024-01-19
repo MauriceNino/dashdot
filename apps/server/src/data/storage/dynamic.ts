@@ -10,7 +10,6 @@ type Size = si.Systeminformation.FsSizeData;
 export class DynamicStorageMapper {
   private validSizes: Size[];
   private validBlocks: Block[];
-  private hasExplicitHost = false;
 
   constructor(
     private hostWin32: boolean,
@@ -20,7 +19,6 @@ export class DynamicStorageMapper {
   ) {
     this.validSizes = this.getValidSizes();
     this.validBlocks = this.getValidBlocks();
-    this.hasExplicitHost = this.getHasExplicitHost();
   }
 
   // Setup local values
@@ -35,14 +33,6 @@ export class DynamicStorageMapper {
 
   private getValidBlocks() {
     return this.blocks.filter(({ type }) => type === 'part' || type === 'disk');
-  }
-
-  private getIsExplicitHost(deviceBlocks: Block[]) {
-    return deviceBlocks.some(({ mount }) => this.isRootMount(mount));
-  }
-
-  private getHasExplicitHost() {
-    return this.getIsExplicitHost(this.validBlocks);
   }
 
   // Helpers
@@ -94,6 +84,10 @@ export class DynamicStorageMapper {
         return matchedByMount || matchedByDevice || matchedByHost;
       })
     );
+
+    if (sizes.length === 0) {
+      return -1;
+    }
 
     const calculatedSize = sumUp(sizes, 'used');
     const isLvm = deviceBlocks.some(({ fsType }) => fsType === 'LVM2_member');

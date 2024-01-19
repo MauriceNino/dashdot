@@ -91,25 +91,31 @@ export const StorageChart: FC<StorageChartProps> = ({
 
   const shownData = useDataWithOverrides(data, config);
   const layoutNoVirtual = shownData.filter(l => !l.virtual);
+  const loadNoVirtual = load?.slice(0, layoutNoVirtual.length) ?? [];
 
   const totalSize = layoutNoVirtual.reduce((acc, s) => (acc = acc + s.size), 0);
   const totalUsed =
-    load
-      ?.slice(0, layoutNoVirtual.length)
-      .reduce((acc, curr) => acc + curr, 0) ?? 0;
-  const totalAvailable = Math.max(0, totalSize - totalUsed);
+    loadNoVirtual.reduce((acc, curr) => acc + (curr >= 0 ? curr : 0), 0) ?? 0;
+  const totalInvalid =
+    loadNoVirtual.reduce(
+      (acc, curr, i) => acc + (curr === -1 ? layoutNoVirtual[i].size : 0),
+      0
+    ) ?? 0;
+  const totalAvailable = Math.max(0, totalSize - totalUsed - totalInvalid);
 
   const usageArr = useMemo(() => {
     if (!multiView) return [];
 
     return shownData.map((d, i) => {
-      const used = load?.[i] ?? 0;
+      const invalid = load?.[i] === -1;
+      const used = invalid ? 0 : load?.[i] ?? 0;
       const available = d.size - used;
       const realPercent = used / d.size,
         usedPercent = Math.min(realPercent, 1);
 
       return {
         used,
+        invalid,
         available,
         realPercent,
         usedPercent,
@@ -117,6 +123,15 @@ export const StorageChart: FC<StorageChartProps> = ({
       };
     });
   }, [shownData, load, multiView]);
+
+  const activeUsageArr =
+    index != null
+      ? usageArr.slice(
+          index * config.storage_widget_items_per_page,
+          index * config.storage_widget_items_per_page +
+            config.storage_widget_items_per_page
+        )
+      : usageArr;
 
   return (
     <MultiChartContainer layout>
@@ -132,15 +147,7 @@ export const StorageChart: FC<StorageChartProps> = ({
             <DefaultVertBarChart
               width={size.width}
               height={size.height}
-              data={
-                index != null
-                  ? usageArr.slice(
-                      index * config.storage_widget_items_per_page,
-                      index * config.storage_widget_items_per_page +
-                        config.storage_widget_items_per_page
-                    )
-                  : usageArr
-              }
+              data={activeUsageArr}
               tooltipRenderer={x => {
                 const value = x.payload?.[0]?.payload as
                   | (typeof usageArr)[0]
@@ -149,6 +156,9 @@ export const StorageChart: FC<StorageChartProps> = ({
                 if (!value) {
                   return <ThemedText>? % Used</ThemedText>;
                 }
+
+                if (value.invalid)
+                  return <ThemedText>No mount found</ThemedText>;
 
                 return (
                   <>
@@ -190,11 +200,32 @@ export const StorageChart: FC<StorageChartProps> = ({
               <Bar
                 dataKey='availablePercent'
                 stackId='stack'
-                fill={theme.colors.text}
-                style={{ stroke: theme.colors.surface, strokeWidth: 4 }}
                 opacity={0.2}
                 radius={10}
-              />
+              >
+                {activeUsageArr.map((entry, index) => (
+                  <Cell
+                    fill={
+                      entry.invalid ? theme.colors.surface : theme.colors.text
+                    }
+                    style={
+                      entry.invalid
+                        ? {
+                            //TODO: Find out how to make the stroke width inset
+                            stroke: theme.colors.text,
+                            strokeWidth: 2,
+                            paintOrder: 'fill',
+                            strokeDasharray: '10',
+                          }
+                        : {
+                            stroke: theme.colors.surface,
+                            strokeWidth: 4,
+                          }
+                    }
+                    key={`cell-${index}`}
+                  />
+                ))}
+              </Bar>
             </DefaultVertBarChart>
           )}
         ></ChartContainer>
@@ -224,6 +255,10 @@ export const StorageChart: FC<StorageChartProps> = ({
                   name: 'Free',
                   value: totalAvailable,
                 },
+                {
+                  name: 'No mount found',
+                  value: totalInvalid,
+                },
               ]}
               width={size.width}
               height={size.height}
@@ -250,6 +285,19 @@ export const StorageChart: FC<StorageChartProps> = ({
                 style={{
                   transition: 'all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                 }}
+              />
+              <Cell
+                key='cell-invalid'
+                fill={theme.colors.surface}
+                style={{
+                  //TODO: Find out how to make the stroke width inset
+                  stroke: theme.colors.text,
+                  strokeWidth: 2,
+                  paintOrder: 'fill',
+                  strokeDasharray: '10',
+                  transition: 'all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                }}
+                opacity={0.2}
               />
             </DefaultPieChart>
           )}
