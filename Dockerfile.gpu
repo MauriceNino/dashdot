@@ -1,0 +1,79 @@
+# BASE #
+FROM nvidia/cuda:12.2.0-base-ubuntu20.04 AS base
+
+WORKDIR /app
+ARG TARGETPLATFORM
+ENV DASHDOT_RUNNING_IN_DOCKER=true
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
+
+RUN \
+  /bin/echo ">> installing dependencies" &&\
+  apt-get update &&\
+  apt-get install -y \
+    curl \
+    wget \
+    mdadm \
+    dmidecode \
+    util-linux \
+    pciutils \
+    lm-sensors \
+    speedtest-cli &&\
+  curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
+  apt-get install -y nodejs &&\
+  npm i -g yarn &&\
+  wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-x86_64.tgz \
+    | tar xmoz -C /usr/bin speedtest;
+
+RUN \
+  /bin/echo -e ">> clean-up" &&\
+  apt-get clean && \
+  rm -rf /tmp/* /var/tmp/*
+
+# DEV #
+FROM base AS dev
+
+EXPOSE 3001
+EXPOSE 3000
+
+RUN \
+  /bin/echo -e ">> installing dependencies (dev)" &&\
+  apt-get install -y \
+    git &&\
+  git config --global --add safe.directory /app
+
+# BUILD #
+FROM base as build
+
+ARG BUILDHASH
+ARG VERSION
+
+RUN \
+  /bin/echo -e ">> installing dependencies (build)" &&\
+  apt-get install -y \
+    git \
+    make \
+    clang \
+    build-essential &&\
+  git config --global --add safe.directory /app &&\
+  /bin/echo -e "{\"version\":\"$VERSION\",\"buildhash\":\"$BUILDHASH\"}" > /app/version.json
+
+COPY . ./
+
+RUN \
+  yarn --immutable --immutable-cache &&\
+  yarn build:prod
+
+# PROD #
+FROM base as prod
+
+EXPOSE 3001
+
+COPY --from=build /app/package.json .
+COPY --from=build /app/version.json .
+COPY --from=build /app/.yarn/releases/ .yarn/releases/
+COPY --from=build /app/dist/apps/server dist/apps/server
+COPY --from=build /app/dist/apps/cli dist/apps/cli
+COPY --from=build /app/dist/apps/view dist/apps/view
+
+CMD ["yarn", "start"]

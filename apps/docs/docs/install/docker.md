@@ -28,3 +28,18 @@ docker container run -it \
   --env DASHDOT_ENABLE_CPU_TEMPS="true" \
   # ...
 ```
+
+## GPU Support
+
+GPU support is available with another image tag and a slightly different command.
+
+> **Note:** GPU support is not available on ARM devices.
+
+```bash
+docker container run -it \
+  -p 80:3001 \
+  --privileged \
+  --gpus all \
+  -v /:/mnt/host:ro \
+  mauricenino/dashdot:gpu
+```
