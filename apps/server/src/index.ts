@@ -1,8 +1,10 @@
 import compression from 'compression';
 import cors from 'cors';
+import cronParser from 'cronstrue';
 import express from 'express';
 import { readFileSync } from 'fs';
 import http from 'http';
+import cron from 'node-cron';
 import path from 'path';
 import {
   debounceTime,
@@ -181,6 +183,21 @@ server.listen(CONFIG.port, async () => {
   if (CONFIG.widget_list.includes('network')) {
     try {
       console.log('Running speed-test (this may take a few minutes)...');
+
+      if (CONFIG.speed_test_interval_cron) {
+        if (cron.validate(CONFIG.speed_test_interval_cron)) {
+          console.log(
+            `Speed-test interval cron expression: ${
+              CONFIG.speed_test_interval_cron
+            } (${cronParser.toString(CONFIG.speed_test_interval_cron)})`
+          );
+        } else {
+          console.warn(
+            `Invalid cron expression: ${CONFIG.speed_test_interval_cron}`
+          );
+        }
+      }
+
       await loadInfo('network', () => getNetworkInfo.speedTest(true), true);
     } catch (e) {
       console.warn(e);
