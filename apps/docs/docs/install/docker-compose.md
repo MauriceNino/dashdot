@@ -60,4 +60,6 @@ services:
       - '80:3001'
     volumes:
       - /:/mnt/host:ro
+    environment:
+      DASHDOT_WIDGET_LIST: 'os,cpu,storage,ram,network,gpu'
 ```

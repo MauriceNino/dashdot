@@ -12,8 +12,8 @@ tags:
 ```bash
 docker container run -it \
   -p 80:3001 \
-  --privileged \
   -v /:/mnt/host:ro \
+  --privileged \
   mauricenino/dashdot
 ```
 
@@ -38,8 +38,9 @@ GPU support is available with another image tag and a slightly different command
 ```bash
 docker container run -it \
   -p 80:3001 \
+  -v /:/mnt/host:ro \
   --privileged \
   --gpus all \
-  -v /:/mnt/host:ro \
+  --env DASHDOT_WIDGET_LIST="os,cpu,storage,ram,network,gpu"
   mauricenino/dashdot:gpu
 ```
