@@ -39,12 +39,3 @@ Read the Processor load every x milliseconds.
 
 - type: `number`
 - default: `1000`
-
-## `DASHDOT_CPU_CORES_TOGGLE_MODE`
-
-Switches the Processor core view depending on the selected option. The `toggle` option allows you to switch the view from the dashboard, other options hide the toggle from the dashboard.
-
-The available options are: `toggle`, `multi-core`, `average`. `average` shows a single graph with the average load across all cores. `multi-core` shows every core load graph individually.
-
-- type: `string`
-- default: `toggle`
