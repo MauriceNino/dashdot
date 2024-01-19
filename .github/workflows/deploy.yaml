@@ -68,7 +68,6 @@ jobs:
             type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }}
             type=semver,pattern={{major}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }}
             type=ref,event=branch,enable=${{ github.ref_name != 'main' }}
-            type=sha
       - uses: docker/build-push-action@v4
         with:
           context: .
