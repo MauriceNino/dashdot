@@ -50,6 +50,7 @@ jobs:
           sudo rm -f /swapfile
           sudo apt clean
           df -h
+      # DEPLOY normal image
       - uses: docker/metadata-action@v4
         id: meta
         with:
@@ -79,6 +80,42 @@ jobs:
             BUILDHASH=${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      # DEPLOY GPU supported image
+      - uses: docker/metadata-action@v4
+        id: meta_nvidia
+        with:
+          flavor: |
+            latest=false
+          images: |
+            ghcr.io/mauricenino/dashdot
+            mauricenino/dashdot
+          labels: |
+            org.opencontainers.image.title="dash."
+            org.opencontainers.image.description="dash. - a modern server dashboard"
+            org.opencontainers.image.authors="MauriceNino <mauriceprivat98@gmail.com>"
+            org.opencontainers.image.url=https://github.com/MauriceNino/dashdot
+            org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
+            org.opencontainers.image.licenses=MIT
+          tags: |
+            type=semver,pattern={{version}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
+            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
+            type=semver,pattern={{major}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
+            type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=nvidia-
+            type=raw,value=nvidia,enable=${{ github.ref_name == 'main' }}
+      - uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: Dockerfile.nvidia
+          platforms: linux/amd64,linux/arm64/v8
+          target: prod
+          push: true
+          build-args: |
+            VERSION=${{ github.ref_name == 'main' && env.package_version || format('0.0.0-{0}', github.ref_name) }}
+            BUILDHASH=${{ github.sha }}
+          labels: ${{ steps.meta_nvidia.outputs.labels }}
+          tags: ${{ steps.meta_nvidia.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - if: ${{ github.ref_name == 'main' }}

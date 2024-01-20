@@ -12,8 +12,8 @@ tags:
 ```bash
 docker container run -it \
   -p 80:3001 \
-  --privileged \
   -v /:/mnt/host:ro \
+  --privileged \
   mauricenino/dashdot
 ```
 
@@ -27,4 +27,18 @@ flag.
 docker container run -it \
   --env DASHDOT_ENABLE_CPU_TEMPS="true" \
   # ...
+```
+
+## GPU Support
+
+GPU support is available with another image tag and a slightly different command.
+
+```bash
+docker container run -it \
+  -p 80:3001 \
+  -v /:/mnt/host:ro \
+  --privileged \
+  --gpus all \
+  --env DASHDOT_WIDGET_LIST="os,cpu,storage,ram,network,gpu"
+  mauricenino/dashdot:nvidia
 ```
