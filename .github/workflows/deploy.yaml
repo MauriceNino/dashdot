@@ -32,7 +32,7 @@ jobs:
           echo "package_version=$(yarn semantic-release -d | sed -n 's/.*next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p')" >> "$GITHUB_OUTPUT"
       - if: ${{ github.ref_name == 'main' }}
         run: |
-          [ ! -z "${package_version}" ] || exit 1
+          [ ! -z "${{ steps.version.outputs.package_version }}" ] || exit 1
 
   deploy:
     runs-on: ubuntu-latest
@@ -158,6 +158,13 @@ jobs:
     needs: [deploy, deploy_nvidia]
 
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+      - if: ${{ github.ref_name == 'main' }}
+        run: yarn --immutable --immutable-cache
       - if: ${{ github.ref_name == 'main' }}
         env:
           GIT_USER: github-actions
