@@ -116,7 +116,7 @@
     "@types/node": "20.10.7",
     "@types/node-cron": "3.0.11",
     "@types/qs": "6.9.11",
-    "@types/react": "18.2.47",
+    "@types/react": "18.2.48",
     "@types/react-color": "3.0.11",
     "@types/react-dom": "18.2.18",
     "@types/react-is": "18.2.4",
