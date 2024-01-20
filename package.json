@@ -65,7 +65,7 @@
     "react-form-ctl": "2.0.1",
     "react-is": "18.2.0",
     "react-spinners-kit": "1.9.1",
-    "react-virtualized-auto-sizer": "1.0.20",
+    "react-virtualized-auto-sizer": "1.0.21",
     "recharts": "2.7.3",
     "regenerator-runtime": "0.13.11",
     "rxjs": "7.8.1",
