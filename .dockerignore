@@ -22,4 +22,5 @@
 .dockerignore
 Dockerfile
 Dockerfile.dev
+Dockerfile.nvidia
 docker-compose.yml

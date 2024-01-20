@@ -7,10 +7,10 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 const execp = promisify(exec);
-const execpnoerr = async (cmd: string): Promise<string | undefined> => {
+const execpnoerr = async (cmd: string) => {
   return execp(cmd)
-    .then(({ stdout }) => stdout)
-    .catch(() => undefined);
+    .then(({ stdout }) => stdout.trim())
+    .catch(() => '');
 };
 
 const inspectObj = (obj: unknown): string => {
@@ -49,8 +49,8 @@ yargs(hideBin(process.argv))
         removePad`
           INFO
           =========
-          Yarn: ${yarnVersion.trim()}
-          Node: ${nodeVersion.trim()}
+          Yarn: ${yarnVersion}
+          Node: ${nodeVersion}
           Dash: ${version}
 
           Cwd: ${process.cwd()}
