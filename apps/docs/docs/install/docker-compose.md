@@ -35,3 +35,29 @@ services:
       DASHDOT_ENABLE_CPU_TEMPS: 'true'
     # ...
 ```
+
+## GPU Support
+
+GPU support is available with another image tag and a slightly different config.
+
+```yml
+version: '3.5'
+
+services:
+  dash:
+    image: mauricenino/dashdot:nvidia
+    restart: unless-stopped
+    privileged: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+                - gpu
+    ports:
+      - '80:3001'
+    volumes:
+      - /:/mnt/host:ro
+    environment:
+      DASHDOT_WIDGET_LIST: 'os,cpu,storage,ram,network,gpu'
+```

@@ -222,3 +222,8 @@ process.on('unhandledRejection', e => {
   tearDownHostSpecific();
   process.exit(1);
 });
+
+process.on('SIGINT', () => {
+  console.info('SIGINT signal received.');
+  process.exit(0);
+});

@@ -1,21 +1,28 @@
 # BASE #
-FROM node:20-alpine AS base
+FROM nvidia/cuda:12.2.0-base-ubuntu20.04 AS base
 
 WORKDIR /app
 ARG TARGETPLATFORM
-ENV DASHDOT_IMAGE=base
+ENV DASHDOT_IMAGE=nvidia
 ENV DASHDOT_RUNNING_IN_DOCKER=true
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 
 RUN \
   /bin/echo ">> installing dependencies" &&\
-  apk update &&\
-  apk --no-cache add \
-    lsblk \
+  apt-get update &&\
+  apt-get install -y \
+    curl \
+    wget \
     mdadm \
     dmidecode \
     util-linux \
+    pciutils \
     lm-sensors \
     speedtest-cli &&\
+  curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
+  apt-get install -y nodejs &&\
+  corepack enable &&\
   if [ "$TARGETPLATFORM" = "linux/amd64" ] || [ "$(uname -m)" = "x86_64" ]; \
     then \
       /bin/echo ">> installing dependencies (amd64)" &&\
@@ -25,16 +32,17 @@ RUN \
     then \
       /bin/echo ">> installing dependencies (arm64)" &&\
       wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-aarch64.tgz \
-        | tar xmoz -C /usr/bin speedtest &&\
-      apk --no-cache add raspberrypi; \
+        | tar xmoz -C /usr/bin speedtest; \
   elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; \
     then \
       /bin/echo ">> installing dependencies (arm/v7)" &&\
       wget -qO- https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-armhf.tgz \
-        | tar xmoz -C /usr/bin speedtest &&\
-      apk --no-cache add raspberrypi; \
+        | tar xmoz -C /usr/bin speedtest; \
   else /bin/echo "Unsupported platform"; exit 1; \
-  fi
+  fi &&\
+  /bin/echo -e ">> clean-up" &&\
+  apt-get clean && \
+  rm -rf /tmp/* /var/tmp/*
 
 # DEV #
 FROM base AS dev
@@ -44,7 +52,7 @@ EXPOSE 3000
 
 RUN \
   /bin/echo -e ">> installing dependencies (dev)" &&\
-  apk --no-cache add \
+  apt-get install -y \
     git &&\
   git config --global --add safe.directory /app
 
@@ -54,15 +62,13 @@ FROM base as build
 ARG BUILDHASH
 ARG VERSION
 
-ENV NX_DAEMON=false
-
 RUN \
   /bin/echo -e ">> installing dependencies (build)" &&\
-  apk --no-cache add \
+  apt-get install -y \
     git \
     make \
     clang \
-    build-base &&\
+    build-essential &&\
   git config --global --add safe.directory /app &&\
   /bin/echo -e "{\"version\":\"$VERSION\",\"buildhash\":\"$BUILDHASH\"}" > /app/version.json
 
