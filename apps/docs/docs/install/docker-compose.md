@@ -40,8 +40,6 @@ services:
 
 GPU support is available with another image tag and a slightly different config.
 
-> **Note:** GPU support is not available on ARM devices.
-
 ```yml
 version: '3.5'
 

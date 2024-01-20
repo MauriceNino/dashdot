@@ -33,8 +33,6 @@ docker container run -it \
 
 GPU support is available with another image tag and a slightly different command.
 
-> **Note:** GPU support is not available on ARM devices.
-
 ```bash
 docker container run -it \
   -p 80:3001 \
