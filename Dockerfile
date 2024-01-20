@@ -3,6 +3,7 @@ FROM node:20-alpine AS base
 
 WORKDIR /app
 ARG TARGETPLATFORM
+ENV DASHDOT_IMAGE=base
 ENV DASHDOT_RUNNING_IN_DOCKER=true
 
 RUN \
@@ -69,18 +70,22 @@ COPY . ./
 
 RUN \
   yarn --immutable --immutable-cache &&\
-  yarn build:prod
+  yarn build:prod &&\
+  node scripts/strip_package_json.js
 
 # PROD #
 FROM base as prod
 
 EXPOSE 3001
 
-COPY --from=build /app/package.json .
 COPY --from=build /app/version.json .
-COPY --from=build /app/.yarn/releases/ .yarn/releases/
+COPY --from=build /app/.yarn/releases .yarn/releases
+COPY --from=build /app/.yarnrc.yml .yarnrc.yml
 COPY --from=build /app/dist/apps/server dist/apps/server
 COPY --from=build /app/dist/apps/cli dist/apps/cli
 COPY --from=build /app/dist/apps/view dist/apps/view
+COPY --from=build /app/dist/package.json package.json
 
-CMD ["yarn", "start"]
+RUN yarn
+
+CMD ["node", "."]

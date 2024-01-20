@@ -3,6 +3,7 @@ FROM nvidia/cuda:12.2.0-base-ubuntu20.04 AS base
 
 WORKDIR /app
 ARG TARGETPLATFORM
+ENV DASHDOT_IMAGE=nvidia
 ENV DASHDOT_RUNNING_IN_DOCKER=true
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
@@ -10,7 +11,6 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 RUN \
   /bin/echo ">> installing dependencies" &&\
   apt-get update &&\
-  curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
   apt-get install -y \
     curl \
     wget \
@@ -19,8 +19,9 @@ RUN \
     util-linux \
     pciutils \
     lm-sensors \
-    speedtest-cli \
-    nodejs &&\
+    speedtest-cli &&\
+  curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
+  apt-get install -y nodejs &&\
   corepack enable &&\
   if [ "$TARGETPLATFORM" = "linux/amd64" ] || [ "$(uname -m)" = "x86_64" ]; \
     then \
@@ -75,18 +76,22 @@ COPY . ./
 
 RUN \
   yarn --immutable --immutable-cache &&\
-  yarn build:prod
+  yarn build:prod &&\
+  node scripts/strip_package_json.js
 
 # PROD #
 FROM base as prod
 
 EXPOSE 3001
 
-COPY --from=build /app/package.json .
 COPY --from=build /app/version.json .
-COPY --from=build /app/.yarn/releases/ .yarn/releases/
+COPY --from=build /app/.yarn/releases .yarn/releases
+COPY --from=build /app/.yarnrc.yml .yarnrc.yml
 COPY --from=build /app/dist/apps/server dist/apps/server
 COPY --from=build /app/dist/apps/cli dist/apps/cli
 COPY --from=build /app/dist/apps/view dist/apps/view
+COPY --from=build /app/dist/package.json package.json
 
-CMD ["yarn", "start"]
+RUN yarn
+
+CMD ["node", "."]

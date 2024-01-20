@@ -35,10 +35,12 @@ yargs(hideBin(process.argv))
       const nodeVersion = await execpnoerr('node --version');
       const buildInfoJson = await execpnoerr('cat version.json');
       const gitHash = await execpnoerr('git log -1 --format="%H"');
+      const platform = await execpnoerr('uname -a');
 
       const runningInDocker = await execpnoerr(
         'echo $DASHDOT_RUNNING_IN_DOCKER'
       );
+      const image = await execpnoerr('echo $DASHDOT_IMAGE');
       const buildInfo = JSON.parse(buildInfoJson ?? '{}');
       const version = buildInfo.version ?? 'unknown';
       const buildhash = buildInfo.buildhash ?? gitHash;
@@ -53,9 +55,11 @@ yargs(hideBin(process.argv))
 
           Cwd: ${process.cwd()}
           Hash: ${buildhash}
+          Platform: ${platform}
+          Docker image: ${image}
           In Docker: ${isDocker}
-          In Podman: ${isPodman}
-          In Docker (env): ${runningInDocker}`
+          In Docker (env): ${runningInDocker}
+          In Podman: ${isPodman}`
       );
     }
   )
