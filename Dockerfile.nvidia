@@ -21,7 +21,6 @@ RUN \
     lm-sensors \
     speedtest-cli \
     nodejs &&\
-  npm i -g yarn &&\
   corepack enable &&\
   if [ "$TARGETPLATFORM" = "linux/amd64" ] || [ "$(uname -m)" = "x86_64" ]; \
     then \
