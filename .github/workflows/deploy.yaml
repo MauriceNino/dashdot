@@ -10,11 +10,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  version:
     runs-on: ubuntu-latest
+    outputs:
+      package_version: ${{ steps.version.outputs.package_version }}
 
     steps:
       # SETUP
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+      - if: ${{ github.ref_name == 'main' }}
+        run: yarn --immutable --immutable-cache
+      - if: ${{ github.ref_name == 'main' }}
+        id: version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "package_version=$(yarn semantic-release -d | sed -n 's/.*next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p')" >> "$GITHUB_OUTPUT"
+      - if: ${{ github.ref_name == 'main' }}
+        run: |
+          [ ! -z "${package_version}" ] || exit 1
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: version
+
+    steps:
       - uses: actions/checkout@v3
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
@@ -27,22 +51,7 @@ jobs:
         with:
           username: mauricenino
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20.x'
-          cache: 'yarn'
-      - if: ${{ github.ref_name == 'main' }}
-        run: yarn --immutable --immutable-cache
-      - if: ${{ github.ref_name == 'main' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "package_version=$(yarn semantic-release -d | sed -n 's/.*next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p')" >> "$GITHUB_ENV"
-      - if: ${{ github.ref_name == 'main' }}
-        run: |
-          [ ! -z "${package_version}" ] || exit 1
 
-      # DEPLOY
       # fix oom issues (https://github.com/orgs/community/discussions/26351)
       - run: |
           df -h
@@ -50,7 +59,6 @@ jobs:
           sudo rm -f /swapfile
           sudo apt clean
           df -h
-      # DEPLOY normal image
       - uses: docker/metadata-action@v4
         id: meta
         with:
@@ -65,9 +73,9 @@ jobs:
             org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
             org.opencontainers.image.licenses=MIT
           tags: |
-            type=semver,pattern={{version}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }}
-            type=semver,pattern={{major}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }}
+            type=semver,pattern={{version}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }}
+            type=semver,pattern={{major}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }}
             type=ref,event=branch,enable=${{ github.ref_name != 'main' }}
       - uses: docker/build-push-action@v4
         with:
@@ -76,13 +84,38 @@ jobs:
           target: prod
           push: true
           build-args: |
-            VERSION=${{ github.ref_name == 'main' && env.package_version || format('0.0.0-{0}', github.ref_name) }}
+            VERSION=${{ github.ref_name == 'main' && needs.version.outputs.package_version || format('0.0.0-{0}', github.ref_name) }}
             BUILDHASH=${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      # DEPLOY GPU supported image
+
+  deploy_nvidia:
+    runs-on: ubuntu-latest
+    needs: version
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/login-action@v2
+        with:
+          username: mauricenino
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # fix oom issues (https://github.com/orgs/community/discussions/26351)
+      - run: |
+          df -h
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo apt clean
+          df -h
       - uses: docker/metadata-action@v4
         id: meta_nvidia
         with:
@@ -99,9 +132,9 @@ jobs:
             org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
             org.opencontainers.image.licenses=MIT
           tags: |
-            type=semver,pattern={{version}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
-            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
-            type=semver,pattern={{major}},value=${{ format('v{0}', env.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
+            type=semver,pattern={{version}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
+            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
+            type=semver,pattern={{major}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
             type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=nvidia-
             type=raw,value=nvidia,enable=${{ github.ref_name == 'main' }}
       - uses: docker/build-push-action@v4
@@ -112,12 +145,19 @@ jobs:
           target: prod
           push: true
           build-args: |
-            VERSION=${{ github.ref_name == 'main' && env.package_version || format('0.0.0-{0}', github.ref_name) }}
+            VERSION=${{ github.ref_name == 'main' && needs.version.outputs.package_version || format('0.0.0-{0}', github.ref_name) }}
             BUILDHASH=${{ github.sha }}
           labels: ${{ steps.meta_nvidia.outputs.labels }}
           tags: ${{ steps.meta_nvidia.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  # Update deployment on rex
+  release:
+    runs-on: ubuntu-latest
+    needs: [deploy, deploy_nvidia]
+
+    steps:
       - if: ${{ github.ref_name == 'main' }}
         env:
           GIT_USER: github-actions
@@ -132,6 +172,12 @@ jobs:
           yarn nx build docs
           yarn nx deploy docs
 
+  # Update deployment on rex
+  rex:
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    steps:
       - if: ${{ github.ref_name == 'main' }}
         run: curl --get --data-urlencode "service=dashdot" --data-urlencode "image=mauricenino/dashdot:latest" --data-urlencode "secret=${{ secrets.REX_TOKEN }}" https://rex.mauz.dev/deploy
       - if: ${{ github.ref_name == 'dev' }}
