@@ -10,6 +10,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 RUN \
   /bin/echo ">> installing dependencies" &&\
   apt-get update &&\
+  curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
   apt-get install -y \
     curl \
     wget \
@@ -18,10 +19,10 @@ RUN \
     util-linux \
     pciutils \
     lm-sensors \
-    speedtest-cli &&\
-  curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
-  apt-get install -y nodejs &&\
+    speedtest-cli \
+    nodejs &&\
   npm i -g yarn &&\
+  corepack enable &&\
   if [ "$TARGETPLATFORM" = "linux/amd64" ] || [ "$(uname -m)" = "x86_64" ]; \
     then \
       /bin/echo ">> installing dependencies (amd64)" &&\
