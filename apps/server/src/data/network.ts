@@ -167,7 +167,7 @@ export default {
         using DASHDOT_SPEEDTEST_FROM_PATH.
   
         For more help on how to setup dashdot, look here:
-        https://getdashdot.com/docs/install/from-source
+        https://getdashdot.com/docs/installation/from-source
       `);
     }
 

@@ -30,11 +30,14 @@ const HomepageHeader = () => {
       <div className={styles.buttons}>
         <Link
           className='button button--secondary button--lg'
-          to='/docs/install'
+          to='/docs/installation'
         >
           Installation
         </Link>
-        <Link className='button button--secondary button--lg' to='/docs/config'>
+        <Link
+          className='button button--secondary button--lg'
+          to='/docs/configuration/basic'
+        >
           Configuration
         </Link>
       </div>
