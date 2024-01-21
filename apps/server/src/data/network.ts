@@ -1,5 +1,6 @@
-import { capFirst, NetworkInfo, NetworkLoad, removePad } from '@dash/common';
+import { capFirst, NetworkInfo, NetworkLoad } from '@dash/common';
 import { exec as cexec } from 'child_process';
+import dedent from 'dedent';
 import fs from 'fs';
 import * as si from 'systeminformation';
 import { promisify } from 'util';
@@ -157,7 +158,7 @@ export default {
           : undefined,
       };
     } else {
-      throw new Error(removePad`
+      throw new Error(dedent`
         There is no speedtest module installed - please use one of the following:
         - speedtest: https://www.speedtest.net/apps/cli
         - speedtest-cli: https://github.com/sivel/speedtest-cli

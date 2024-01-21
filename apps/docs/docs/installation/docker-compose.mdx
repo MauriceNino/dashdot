@@ -1,0 +1,65 @@
+---
+sidebar_position: 2
+description: How to install and configure dash. using docker-compose
+tags:
+  - Installation
+  - Configuration
+  - Docker
+  - Docker-Compose
+---
+
+import CodeBlock from '@theme/CodeBlock';
+
+# Docker-Compose
+
+```yaml
+version: '3.5'
+
+services:
+  dash:
+    image: mauricenino/dashdot:latest
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - '80:3001'
+    volumes:
+      - /:/mnt/host:ro
+```
+
+## Configuration
+
+Config options can optionally set, by using the [environment](https://docs.docker.com/compose/compose-file/#environment) field.
+
+```yaml
+services:
+  dash:
+    environment:
+      DASHDOT_ENABLE_CPU_TEMPS: 'true'
+    # ...
+```
+
+## GPU Support
+
+GPU support is available with another image tag and a slightly different config.
+
+```yaml
+version: '3.5'
+
+services:
+  dash:
+    image: mauricenino/dashdot:nvidia
+    restart: unless-stopped
+    privileged: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+                - gpu
+    ports:
+      - '80:3001'
+    volumes:
+      - /:/mnt/host:ro
+    environment:
+      DASHDOT_WIDGET_LIST: 'os,cpu,storage,ram,network,gpu'
+```

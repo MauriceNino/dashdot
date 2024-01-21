@@ -1,7 +1,8 @@
 // @ts-check
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const { themes } = require('prism-react-renderer');
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -44,7 +45,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'install/index',
+            docId: 'installation/index',
             position: 'left',
             label: 'Documentation',
           },
@@ -73,11 +74,11 @@ const config = {
             items: [
               {
                 label: 'Installation',
-                to: '/docs/install',
+                to: '/docs/installation',
               },
               {
                 label: 'Configuration',
-                to: '/docs/config',
+                to: '/docs/configuration',
               },
               {
                 label: 'Changelog',
@@ -103,6 +104,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['bash', 'json', 'yaml'],
       },
       colorMode: {
         defaultMode: 'dark',

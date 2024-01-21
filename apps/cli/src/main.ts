@@ -1,5 +1,5 @@
-import { removePad } from '@dash/common';
 import { exec } from 'child_process';
+import dedent from 'dedent';
 import { existsSync } from 'fs';
 import * as si from 'systeminformation';
 import { inspect, promisify } from 'util';
@@ -41,12 +41,12 @@ yargs(hideBin(process.argv))
         'echo $DASHDOT_RUNNING_IN_DOCKER'
       );
       const image = await execpnoerr('echo $DASHDOT_IMAGE');
-      const buildInfo = JSON.parse(buildInfoJson ?? '{}');
+      const buildInfo = JSON.parse(buildInfoJson || '{}');
       const version = buildInfo.version ?? 'unknown';
       const buildhash = buildInfo.buildhash ?? gitHash;
 
       console.log(
-        removePad`
+        dedent`
           INFO
           =========
           Yarn: ${yarnVersion}
@@ -99,7 +99,7 @@ yargs(hideBin(process.argv))
         }),
     async args => {
       console.log(
-        removePad`
+        dedent`
           If you were asked to paste the output of this command, please post only the following:
 
           - On GitHub: Everything between (and excluding) the lines
@@ -152,7 +152,7 @@ yargs(hideBin(process.argv))
       }
 
       console.log(
-        removePad`
+        dedent`
           \`\`\`
           
           </details>

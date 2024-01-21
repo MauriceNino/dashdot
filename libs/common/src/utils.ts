@@ -19,25 +19,6 @@ export const findLastIndex = <T>(
 
 export const isFilledLine = (s: string): boolean => /^\s*$/.test(s) === false;
 
-export const removePad = (strings: TemplateStringsArray, ...content: any[]) => {
-  const complete = strings.reduce(
-    (acc, s, i) => `${acc}${s}${content[i] ?? ''}`,
-    ''
-  );
-
-  const lines = complete.split('\n');
-  const trimmed = lines.slice(
-    lines.findIndex(isFilledLine),
-    findLastIndex(lines, isFilledLine) + 1
-  );
-
-  const shortestPad = Math.min(
-    ...trimmed.filter(isFilledLine).map(s => /(?!\s)/.exec(s)!.index)
-  );
-
-  return trimmed.map(s => s.substring(shortestPad)).join('\n');
-};
-
 export const capFirst = (str: string) => {
   return str[0].toUpperCase() + str.slice(1);
 };

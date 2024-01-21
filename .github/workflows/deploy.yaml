@@ -34,7 +34,7 @@ jobs:
         run: |
           [ ! -z "${{ steps.version.outputs.package_version }}" ] || exit 1
 
-  deploy:
+  build:
     runs-on: ubuntu-latest
     needs: version
 
@@ -91,7 +91,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  deploy_nvidia:
+  build_nvidia:
     runs-on: ubuntu-latest
     needs: version
 
@@ -155,7 +155,7 @@ jobs:
   # Update deployment on rex
   release:
     runs-on: ubuntu-latest
-    needs: [deploy, deploy_nvidia]
+    needs: [build, build_nvidia]
 
     steps:
       - uses: actions/checkout@v3
@@ -182,7 +182,7 @@ jobs:
   # Update deployment on rex
   rex:
     runs-on: ubuntu-latest
-    needs: deploy
+    needs: build
 
     steps:
       - if: ${{ github.ref_name == 'main' }}

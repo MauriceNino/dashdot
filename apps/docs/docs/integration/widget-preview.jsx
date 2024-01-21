@@ -131,7 +131,7 @@ export const WidgetPreview = () => {
               <Select
                 label='Multi-View'
                 value={controls.multiView.value.toString()}
-                onChange={e => controls.multiView.setValue(Boolean(e))}
+                onChange={e => controls.multiView.setValue(e === 'true')}
                 data={[
                   { value: 'true', label: 'True' },
                   { value: 'false', label: 'False' },
@@ -152,7 +152,7 @@ export const WidgetPreview = () => {
             <Select
               label='Show Percentage'
               value={controls.showPercentage.value.toString()}
-              onChange={e => controls.showPercentage.setValue(Boolean(e))}
+              onChange={e => controls.showPercentage.setValue(e === 'true')}
               data={[
                 { value: 'true', label: 'True' },
                 { value: 'false', label: 'False' },
@@ -234,8 +234,6 @@ export const WidgetPreview = () => {
               width: '100%',
               maxWidth: '300px',
             }}
-            frameBorder='0'
-            allowTransparency
           ></iframe>
         </Stack>
       </Stack>
