@@ -74,11 +74,11 @@ const config = {
             items: [
               {
                 label: 'Installation',
-                to: '/docs/installation',
+                to: 'docs/installation',
               },
               {
                 label: 'Configuration',
-                to: '/docs/configuration',
+                to: 'docs/configuration/basic',
               },
               {
                 label: 'Changelog',
