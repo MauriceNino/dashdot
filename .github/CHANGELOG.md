@@ -1,3 +1,10 @@
+# [5.8.0](https://github.com/MauriceNino/dashdot/compare/v5.7.0...v5.8.0) (2024-01-21)
+
+
+### Features
+
+* add separate image for nvidia gpu support ([#1010](https://github.com/MauriceNino/dashdot/issues/1010)) ([319120d](https://github.com/MauriceNino/dashdot/commit/319120df3f636a7902e8ad1427264ec35db049fd)), closes [#290](https://github.com/MauriceNino/dashdot/issues/290)
+
 # [5.7.0](https://github.com/MauriceNino/dashdot/compare/v5.6.1...v5.7.0) (2024-01-19)
 
 
