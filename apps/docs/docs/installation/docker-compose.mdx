@@ -8,9 +8,11 @@ tags:
   - Docker-Compose
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+
 # Docker-Compose
 
-```yml
+```yaml
 version: '3.5'
 
 services:
@@ -28,7 +30,7 @@ services:
 
 Config options can optionally set, by using the [environment](https://docs.docker.com/compose/compose-file/#environment) field.
 
-```yml
+```yaml
 services:
   dash:
     environment:
@@ -40,7 +42,7 @@ services:
 
 GPU support is available with another image tag and a slightly different config.
 
-```yml
+```yaml
 version: '3.5'
 
 services:

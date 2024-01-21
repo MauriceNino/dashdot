@@ -25,7 +25,7 @@ docker container run -it \
 
 - The volume mounts on `/:/mnt/host:ro` is needed to read the usage stats of all drives,
   read the network usage and read the os version of the host. If you don't like to use this
-  mount, feel free to check out the [help page](../help.md#qa) to find a guide on how to set it up manually.
+  mount, feel free to check out the [help page](/docs/help#can-you-use-dash-without-mounting-the-whole-host-drive) to find a guide on how to set it up manually.
 
 :::
 
@@ -34,14 +34,14 @@ docker container run -it \
 The speed testing feature can consume significant amounts of bandwidth, which can pose
 problems if your usage is metered (say, by a VPS provider).
 
-Setting the environment variable [`DASHDOT_SPEED_TEST_INTERVAL`](./config/widget-specific/network#dashdot_speed_test_interval)
+Setting the environment variable [`DASHDOT_SPEED_TEST_INTERVAL`](/docs/configuration/network#dashdot_speed_test_interval)
 to a higher number can mitigate this concern.
 
 :::
 
 ## Windows / MacOS
 
-If you want to install Dash. on Windows or MacOS, you will have to use the [from source](./install/from-source)
+If you want to install Dash. on Windows or MacOS, you will have to use the [from source](/docs/installation/from-source)
 installation, as Docker Desktop is technologically impossible to support.
 
 ## Installation Options

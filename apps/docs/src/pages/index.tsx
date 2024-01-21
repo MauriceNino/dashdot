@@ -3,11 +3,13 @@ import { useColorMode } from '@docusaurus/theme-common';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import CodeBlock from '@theme/CodeBlock';
 import Layout from '@theme/Layout';
+import dedent from 'dedent';
 import React from 'react';
 import styles from './index.module.scss';
 
 const HomepageHeader = () => {
   const { siteConfig } = useDocusaurusContext();
+
   return (
     <div className={styles.banner}>
       <div className={styles.header}>
@@ -16,11 +18,13 @@ const HomepageHeader = () => {
       </div>
 
       <CodeBlock className={`language-bash ${styles.bannerCode}`}>
-        {`docker container run -it \\
-  -p 80:3001 \\
-  -v /:/mnt/host:ro \\
-  --privileged \\
-  mauricenino/dashdot`}
+        {dedent.withOptions({ escapeSpecialCharacters: false })`
+          docker container run -it \
+            -p 80:3001 \
+            -v /:/mnt/host:ro \
+            --privileged \
+            mauricenino/dashdot
+        `}
       </CodeBlock>
 
       <div className={styles.buttons}>
