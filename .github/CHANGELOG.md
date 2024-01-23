@@ -1,3 +1,10 @@
+## [5.8.3](https://github.com/MauriceNino/dashdot/compare/v5.8.2...v5.8.3) (2024-01-23)
+
+
+### Bug Fixes
+
+* filter out autofs from sizes ([f7ac272](https://github.com/MauriceNino/dashdot/commit/f7ac2728b89a6c75502c9c736c46a94ff386889b))
+
 ## [5.8.2](https://github.com/MauriceNino/dashdot/compare/v5.8.1...v5.8.2) (2024-01-21)
 
 ## [5.8.1](https://github.com/MauriceNino/dashdot/compare/v5.8.0...v5.8.1) (2024-01-21)
