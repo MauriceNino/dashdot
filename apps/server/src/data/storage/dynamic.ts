@@ -9,7 +9,6 @@ type Size = si.Systeminformation.FsSizeData;
 
 export class DynamicStorageMapper {
   private validSizes: Size[];
-  private validBlocks: Block[];
 
   constructor(
     private hostWin32: boolean,
@@ -18,21 +17,15 @@ export class DynamicStorageMapper {
     private sizes: Size[]
   ) {
     this.validSizes = this.getValidSizes();
-    this.validBlocks = this.getValidBlocks();
   }
 
   // Setup local values
   private getValidSizes() {
     return this.sizes.filter(
-      ({ mount, type, rw }) =>
+      ({ mount, type }) =>
         (this.hostWin32 || mount.startsWith(fromHost('/'))) &&
-        !CONFIG.fs_type_filter.includes(type) &&
-        rw
+        !CONFIG.fs_type_filter.includes(type)
     );
-  }
-
-  private getValidBlocks() {
-    return this.blocks.filter(({ type }) => type === 'part' || type === 'disk');
   }
 
   // Helpers
