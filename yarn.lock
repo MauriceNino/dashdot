@@ -15393,7 +15393,7 @@ __metadata:
     vite-plugin-eslint: 1.8.1
     vite-tsconfig-paths: 4.2.3
     vitest: 0.32.4
-    web-vitals: 3.3.2
+    web-vitals: 3.5.2
     yargs: 17.7.2
   languageName: unknown
   linkType: soft
@@ -33187,10 +33187,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:3.3.2":
-  version: 3.3.2
-  resolution: "web-vitals@npm:3.3.2"
-  checksum: 76e832341d213d5de6f6767fef7f8c02163ab94326912a6355bbf6e194d930196ca5094b0d0d493b4c194acaaabcc96f0adc87870b913a7b9a51b225807abccf
+"web-vitals@npm:3.5.2":
+  version: 3.5.2
+  resolution: "web-vitals@npm:3.5.2"
+  checksum: 4c208bb9384073c772055e9265a4cad4560dbbaeb111ec615ee23e71bbb952aacdf4e6bb8ffbfbe02b23540ac4f08d569d49fc0cd1e5d29c6c0ced566965320a
   languageName: node
   linkType: hard
 
