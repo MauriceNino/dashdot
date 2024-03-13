@@ -157,7 +157,7 @@
     "typescript": "5.2.2",
     "vite": "5.0.12",
     "vite-plugin-eslint": "1.8.1",
-    "vite-tsconfig-paths": "4.2.3",
+    "vite-tsconfig-paths": "4.3.2",
     "vitest": "0.32.4"
   },
   "config": {
