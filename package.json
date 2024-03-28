@@ -52,7 +52,7 @@
     "cronstrue": "2.47.0",
     "docusaurus-plugin-image-zoom": "1.0.1",
     "docusaurus-plugin-sass": "0.2.5",
-    "express": "4.18.2",
+    "express": "4.19.2",
     "framer-motion": "10.18.0",
     "node-cron": "3.0.3",
     "parse-domain": "7.0.1",
