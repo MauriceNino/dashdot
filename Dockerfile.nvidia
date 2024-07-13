@@ -1,5 +1,5 @@
 # BASE #
-FROM nvidia/cuda:12.2.0-base-ubuntu20.04 AS base
+FROM nvidia/cuda:12.5.1-base-ubuntu20.04 AS base
 
 WORKDIR /app
 ARG TARGETPLATFORM
