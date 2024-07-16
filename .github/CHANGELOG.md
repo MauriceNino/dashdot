@@ -1,3 +1,10 @@
+## [5.8.4](https://github.com/MauriceNino/dashdot/compare/v5.8.3...v5.8.4) (2024-07-16)
+
+
+### Bug Fixes
+
+* missing backslash in GPU support docs ([#1053](https://github.com/MauriceNino/dashdot/issues/1053)) ([4e36d12](https://github.com/MauriceNino/dashdot/commit/4e36d12610245da4c7365e7deacf120216c7c7b6))
+
 ## [5.8.3](https://github.com/MauriceNino/dashdot/compare/v5.8.2...v5.8.3) (2024-01-23)
 
 
