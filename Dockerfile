@@ -13,6 +13,7 @@ RUN \
     lsblk \
     mdadm \
     dmidecode \
+    coreutils \
     util-linux \
     lm-sensors \
     speedtest-cli &&\
