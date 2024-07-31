@@ -1,3 +1,10 @@
+## [5.8.6](https://github.com/MauriceNino/dashdot/compare/v5.8.5...v5.8.6) (2024-07-31)
+
+
+### Bug Fixes
+
+* install coreutils in base image ([#1057](https://github.com/MauriceNino/dashdot/issues/1057)) ([59985d3](https://github.com/MauriceNino/dashdot/commit/59985d3c2976afbc09ea5649440cd050392bb126))
+
 ## [5.8.5](https://github.com/MauriceNino/dashdot/compare/v5.8.4...v5.8.5) (2024-07-16)
 
 ## [5.8.4](https://github.com/MauriceNino/dashdot/compare/v5.8.3...v5.8.4) (2024-07-16)
