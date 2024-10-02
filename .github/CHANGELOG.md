@@ -1,3 +1,10 @@
+# [5.9.0](https://github.com/MauriceNino/dashdot/compare/v5.8.6...v5.9.0) (2024-10-02)
+
+
+### Features
+
+* add debian logo ([696233f](https://github.com/MauriceNino/dashdot/commit/696233f6378f4af6c45bf88144dcec4edb38f8ba))
+
 ## [5.8.6](https://github.com/MauriceNino/dashdot/compare/v5.8.5...v5.8.6) (2024-07-31)
 
 
