@@ -2,6 +2,7 @@ import { Config, OsInfo, Transient } from '@dash/common';
 import {
   faApple,
   faCentos,
+  faDebian,
   faFedora,
   faGithub,
   faLinux,
@@ -121,6 +122,8 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
 
   if (os.includes('ubuntu')) {
     icon = faUbuntu;
+  } else if (os.includes('debian')){
+    icon = faDebian
   } else if (os.includes('suse')) {
     icon = faSuse;
   } else if (os.includes('redhat')) {
