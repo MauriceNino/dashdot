@@ -27,7 +27,7 @@ export const usePageData = () => {
   useEffect(() => {
     const { origin: wlOrigin, pathname: wlPathname } = window.location;
     const socket = io(environment.backendUrl, {
-      path: new URL(Path.join(wlOrigin, wlPathname, '/socket')).pathname,
+      path: new URL(Path.join(wlPathname, '/socket'), wlOrigin).pathname,
     });
     let localConfig: ServerInfo['config'];
 
