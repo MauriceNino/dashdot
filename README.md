@@ -74,7 +74,7 @@ Images are hosted on [DockerHub](https://hub.docker.com/r/mauricenino/dashdot),
 and are available for both AMD64 and ARM devices.
 
 ```bash
-docker container run -it \
+docker container run -d \
   -p 80:3001 \
   -v /:/mnt/host:ro \
   --privileged \
