@@ -11501,9 +11501,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commitizen@npm:4.3.0":
-  version: 4.3.0
-  resolution: "commitizen@npm:4.3.0"
+"commitizen@npm:4.3.1":
+  version: 4.3.1
+  resolution: "commitizen@npm:4.3.1"
   dependencies:
     cachedir: 2.3.0
     cz-conventional-changelog: 3.3.0
@@ -11523,7 +11523,7 @@ __metadata:
     commitizen: bin/commitizen
     cz: bin/git-cz
     git-cz: bin/git-cz
-  checksum: 5a54f81ab7f24b74dd7791ae408796b0ac9ae6675cbe85db71047cee131e627ed5bfb9365de8b5777bedfbcdee1bccf15e5da5dae8b09b3fce93b551baa2cb63
+  checksum: bcb42ee0cf04eae1b8df616553d841d86f0f6ff2f1b6f1f9941b016c021a4068ce0088aca61f4c955e47df1dfcf72378741bd54b5a7975f7297ffd4fa2bbcf04
   languageName: node
   linkType: hard
 
@@ -12762,7 +12762,7 @@ __metadata:
     babel-plugin-syntax-jsx: 6.18.0
     chai: 4.4.1
     clsx: 1.2.1
-    commitizen: 4.3.0
+    commitizen: 4.3.1
     compression: 1.7.4
     core-js: 3.35.0
     cors: 2.8.5
