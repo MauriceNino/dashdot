@@ -69,7 +69,7 @@
     "react-virtualized-auto-sizer": "1.0.21",
     "recharts": "2.7.3",
     "regenerator-runtime": "0.14.1",
-    "rxjs": "7.8.1",
+    "rxjs": "7.8.2",
     "sass": "1.63.6",
     "simplebar-react": "3.2.4",
     "socket.io": "4.7.4",
