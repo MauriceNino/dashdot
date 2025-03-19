@@ -86,3 +86,15 @@ install options instead (`docker-compose`, or from source), have a look at the
 [installation options](https://getdashdot.com/docs/installation).
 
 To read more about configuration options, you can visit the [configuration options](https://getdashdot.com/docs/configuration).
+
+## Developer Notice
+
+> Note: Due to the consistently growing size of the `.git` folder, which was
+> caused by a combination of [yarn offline mirror](https://yarnpkg.com/features/caching#offline-mirror)
+> and [dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide)
+> changes, I had to rewrite the entire history and remove the `.yarn/cache` folder.
+> You can read more about this problem [here](https://github.com/yarnpkg/berry/issues/180)
+>
+> This resulted in a loss of all forks, which were created before the 18th of
+> March 2025. If you are one of the affected forks, I am sorry for the inconvenience.
+> Please consider re-forking the repository.
