@@ -29,19 +29,6 @@ with:
 yarn dev
 ```
 
-### Network
-
-If you want to have a speedtest result in your network graph, create a file at the root
-of the project named `speedtest_result`, with the following content and then restart your backend.
-
-```json
-{
-  "unit": "byte",
-  "speedDown": 150000000,
-  "speedUp": 50000000
-}
-```
-
 ## Git
 
 Development is done on the `dev` branch, so please use that as the base branch in your work.

@@ -122,8 +122,8 @@ const ServerIcon: FC<{ os: string } & Omit<FontAwesomeIconProps, 'icon'>> = ({
 
   if (os.includes('ubuntu')) {
     icon = faUbuntu;
-  } else if (os.includes('debian')){
-    icon = faDebian
+  } else if (os.includes('debian')) {
+    icon = faDebian;
   } else if (os.includes('suse')) {
     icon = faSuse;
   } else if (os.includes('redhat')) {
@@ -169,7 +169,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
   useEffect(() => {
     const uptime = data.uptime ?? 0;
 
-    let interval: any;
+    let interval: NodeJS.Timeout;
     if (uptime > 0) {
       const startTime = Date.now();
 
