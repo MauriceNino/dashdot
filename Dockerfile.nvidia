@@ -75,7 +75,7 @@ RUN \
 COPY . ./
 
 RUN \
-  yarn --immutable --immutable-cache &&\
+  yarn --immutable &&\
   yarn build:prod &&\
   node scripts/strip_package_json.js
 

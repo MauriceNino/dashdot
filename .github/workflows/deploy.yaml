@@ -23,7 +23,7 @@ jobs:
           node-version: '20.x'
           cache: 'yarn'
       - if: ${{ github.ref_name == 'main' }}
-        run: yarn --immutable --immutable-cache
+        run: yarn --immutable
       - if: ${{ github.ref_name == 'main' }}
         id: version
         env:
@@ -164,7 +164,7 @@ jobs:
           node-version: '20.x'
           cache: 'yarn'
       - if: ${{ github.ref_name == 'main' }}
-        run: yarn --immutable --immutable-cache
+        run: yarn --immutable
       - if: ${{ github.ref_name == 'main' }}
         env:
           GIT_USER: github-actions
