@@ -156,7 +156,7 @@
     "ts-jest": "29.1.1",
     "ts-node": "10.9.2",
     "typescript": "5.2.2",
-    "vite": "5.0.13",
+    "vite": "5.4.12",
     "vite-plugin-eslint": "1.8.1",
     "vite-tsconfig-paths": "4.2.3",
     "vitest": "0.32.4"
