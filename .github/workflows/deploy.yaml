@@ -17,8 +17,10 @@ jobs:
 
     steps:
       # SETUP
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - if: ${{ github.ref_name == 'main' }}
+        uses: actions/checkout@v4
+      - if: ${{ github.ref_name == 'main' }}
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: 'yarn'
@@ -39,7 +41,7 @@ jobs:
     needs: version
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
       - uses: docker/login-action@v2
@@ -96,7 +98,7 @@ jobs:
     needs: version
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
       - uses: docker/login-action@v2
@@ -152,21 +154,20 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # Update deployment on rex
-  release:
+  # Run semantic release
+  semantic_release:
+    if: ${{ github.ref_name == 'main' }}
     runs-on: ubuntu-latest
     needs: [build, build_nvidia]
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: 'yarn'
-      - if: ${{ github.ref_name == 'main' }}
-        run: yarn --immutable
-      - if: ${{ github.ref_name == 'main' }}
-        env:
+      - run: yarn --immutable
+      - env:
           GIT_USER: github-actions
           GIT_AUTHOR_NAME: github-actions
           GIT_COMMITTER_NAME: github-actions
@@ -176,6 +177,29 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn semantic-release
+
+  # Update docs
+  update_docs:
+    if: ${{ github.ref_name == 'main' }}
+    runs-on: ubuntu-latest
+    needs: [build, build_nvidia]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+      - run: yarn --immutable
+      - env:
+          GIT_USER: github-actions
+          GIT_AUTHOR_NAME: github-actions
+          GIT_COMMITTER_NAME: github-actions
+          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
           yarn nx build docs
           yarn nx deploy docs
 
