@@ -229,6 +229,7 @@
         "@semantic-release/github",
         {
           "successComment": ":tada: This issue has been resolved in version ${nextRelease.version}\n\nPlease check the [changelog](https://github.com/MauriceNino/dashdot/blob/main/.github/CHANGELOG.md) for more details.",
+          "successCommentCondition": "<% return issue.user.type !== 'Bot'; %>",
           "failComment": false,
           "failTitle": false,
           "labels": false,

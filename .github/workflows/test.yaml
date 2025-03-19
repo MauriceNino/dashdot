@@ -12,17 +12,17 @@ jobs:
 
     steps:
       # SETUP
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: 'yarn'
 
       # TEST
       - if: ${{ github.event_name != 'pull_request' }}
-        run: yarn --immutable --immutable-cache
+        run: yarn --immutable
       - if: ${{ github.event_name == 'pull_request' }}
-        run: yarn --immutable --immutable-cache --check-cache
+        run: yarn --immutable
       - run: |
           yarn test --skipNxCache
           yarn build:prod --skipNxCache
