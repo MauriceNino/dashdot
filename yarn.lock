@@ -12769,7 +12769,7 @@ __metadata:
     cronstrue: 2.47.0
     dedent: 1.5.1
     docusaurus-plugin-image-zoom: 1.0.1
-    docusaurus-plugin-sass: 0.2.5
+    docusaurus-plugin-sass: 0.2.6
     dotenv: 16.3.2
     esbuild: ^0.25.0
     eslint: 8.56.0
@@ -13324,15 +13324,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-sass@npm:0.2.5":
-  version: 0.2.5
-  resolution: "docusaurus-plugin-sass@npm:0.2.5"
+"docusaurus-plugin-sass@npm:0.2.6":
+  version: 0.2.6
+  resolution: "docusaurus-plugin-sass@npm:0.2.6"
   dependencies:
-    sass-loader: ^10.1.1
+    sass-loader: ^16.0.2
   peerDependencies:
     "@docusaurus/core": ^2.0.0-beta || ^3.0.0-alpha
     sass: ^1.30.0
-  checksum: db17a8c87a344330717962fe195c94089e32281dc7f79b66bf99587254ebad71353b8588c5b74feb1c2841c6183e59b20259f5fb1a5c74026903557cbb113a68
+  checksum: 2eee1eb06d0679f5963bd41a487d3deb65cc9e392d4635b75f131b1d47ae3b7b978b9ad8df288c091ae2aac2d199b1c7b0690366450aabcf23cf60222878e722
   languageName: node
   linkType: hard
 
@@ -26316,31 +26316,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^10.1.1":
-  version: 10.2.1
-  resolution: "sass-loader@npm:10.2.1"
-  dependencies:
-    klona: ^2.0.4
-    loader-utils: ^2.0.0
-    neo-async: ^2.6.2
-    schema-utils: ^3.0.0
-    semver: ^7.3.2
-  peerDependencies:
-    fibers: ">= 3.1.0"
-    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0
-    sass: ^1.3.0
-    webpack: ^4.36.0 || ^5.0.0
-  peerDependenciesMeta:
-    fibers:
-      optional: true
-    node-sass:
-      optional: true
-    sass:
-      optional: true
-  checksum: e5bc4a230bfb9103dbd05f72e936e9e31cb35d09922fe90541ad71d0a64abce238b54069cfe51e67c045870093a8e9a218aff63d66468e36dc1cc3d5db4ee83b
-  languageName: node
-  linkType: hard
-
 "sass-loader@npm:^12.2.0":
   version: 12.6.0
   resolution: "sass-loader@npm:12.6.0"
@@ -26363,6 +26338,32 @@ __metadata:
     sass-embedded:
       optional: true
   checksum: 5d73a428588150f704016aa27397941bb9246cecd2ee083b573e95d969fc080ac6a16f2fe1cc64aca08f6e70da6f3c586ee68f0efc9f527fecc360e5f1c299ec
+  languageName: node
+  linkType: hard
+
+"sass-loader@npm:^16.0.2":
+  version: 16.0.5
+  resolution: "sass-loader@npm:16.0.5"
+  dependencies:
+    neo-async: ^2.6.2
+  peerDependencies:
+    "@rspack/core": 0.x || 1.x
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+    sass: ^1.3.0
+    sass-embedded: "*"
+    webpack: ^5.0.0
+  peerDependenciesMeta:
+    "@rspack/core":
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    webpack:
+      optional: true
+  checksum: ede9659200011e4dea51de16446a45f11e570bbca66be6cd94dc0b2b73ab17dcdc88dde3247a1869d94a5793c2d1bc07650bada15103e3351eef13a70f2b1f07
   languageName: node
   linkType: hard
 
