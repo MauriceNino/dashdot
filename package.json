@@ -118,7 +118,7 @@
     "@types/node-cron": "3.0.11",
     "@types/qs": "6.9.11",
     "@types/react": "18.2.48",
-    "@types/react-color": "3.0.11",
+    "@types/react-color": "3.0.13",
     "@types/react-dom": "18.2.18",
     "@types/react-is": "18.2.4",
     "@types/react-virtualized-auto-sizer": "1.0.4",
