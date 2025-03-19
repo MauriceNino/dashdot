@@ -42,6 +42,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      # Getting dependencies before the build to speed up the ARM build
+      # This a bit of a workaround, but it shouldn't be a problem, as yarn loads the dependencies in all formats needed
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+      - run: |
+          yarn config set nodeLinker pnp
+          yarn --immutable
+          yarn config set nodeLinker node-modules
+          rm -rf .yarn/unplugged .pnp.cjs .pnp.loader.mjs
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
       - uses: docker/login-action@v2
@@ -53,14 +64,6 @@ jobs:
         with:
           username: mauricenino
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # fix oom issues (https://github.com/orgs/community/discussions/26351)
-      - run: |
-          df -h
-          sudo swapoff -a
-          sudo rm -f /swapfile
-          sudo apt clean
-          df -h
       - uses: docker/metadata-action@v4
         id: meta
         with:
@@ -99,6 +102,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+      - run: |
+          yarn config set nodeLinker pnp
+          yarn --immutable
+          yarn config set nodeLinker node-modules
+          rm -rf .yarn/unplugged .pnp.cjs .pnp.loader.mjs
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
       - uses: docker/login-action@v2
@@ -110,14 +122,6 @@ jobs:
         with:
           username: mauricenino
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # fix oom issues (https://github.com/orgs/community/discussions/26351)
-      - run: |
-          df -h
-          sudo swapoff -a
-          sudo rm -f /swapfile
-          sudo apt clean
-          df -h
       - uses: docker/metadata-action@v4
         id: meta_nvidia
         with:
