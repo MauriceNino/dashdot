@@ -50,7 +50,7 @@
     "core-js": "3.35.0",
     "cors": "2.8.5",
     "cronstrue": "2.47.0",
-    "dedent": "1.5.1",
+    "dedent": "1.5.3",
     "docusaurus-plugin-image-zoom": "1.0.1",
     "docusaurus-plugin-sass": "0.2.5",
     "express": "4.20.0",

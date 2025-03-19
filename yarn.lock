@@ -12767,7 +12767,7 @@ __metadata:
     core-js: 3.35.0
     cors: 2.8.5
     cronstrue: 2.47.0
-    dedent: 1.5.1
+    dedent: 1.5.3
     docusaurus-plugin-image-zoom: 1.0.1
     docusaurus-plugin-sass: 0.2.5
     dotenv: 16.3.2
@@ -12960,7 +12960,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dedent@npm:1.5.1, dedent@npm:^1.0.0":
+"dedent@npm:1.5.3":
+  version: 1.5.3
+  resolution: "dedent@npm:1.5.3"
+  peerDependencies:
+    babel-plugin-macros: ^3.1.0
+  peerDependenciesMeta:
+    babel-plugin-macros:
+      optional: true
+  checksum: 045b595557b2a8ea2eb9b0b4623d764e9a87326486fe2b61191b4342ed93dc01245644d8a09f3108a50c0ee7965f1eedd92e4a3a503ed89ea8e810566ea27f9a
+  languageName: node
+  linkType: hard
+
+"dedent@npm:^1.0.0":
   version: 1.5.1
   resolution: "dedent@npm:1.5.1"
   peerDependencies:
