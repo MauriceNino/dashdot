@@ -7801,9 +7801,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:14.1.2":
-  version: 14.1.2
-  resolution: "@testing-library/react@npm:14.1.2"
+"@testing-library/react@npm:14.3.1":
+  version: 14.3.1
+  resolution: "@testing-library/react@npm:14.3.1"
   dependencies:
     "@babel/runtime": ^7.12.5
     "@testing-library/dom": ^9.0.0
@@ -7811,7 +7811,7 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 0269903e53412cf96fddb55c8a97a9987a89c3308d71fa1418fe61c47d275445e7044c5387f57cf39b8cda319a41623dbad2cce7a17016aed3a9e85185aac75a
+  checksum: b057d4c9db5a523acfc24d7bc4665a924ab8d6f252c7f51eecf7dd30f1239413e1134925fd5cc9cbdef80496af64c04e6719b2081f89fe05ba87e8c6305bcc16
   languageName: node
   linkType: hard
 
@@ -12954,7 +12954,7 @@ __metadata:
     "@swc/cli": 0.1.63
     "@swc/core": 1.3.104
     "@swc/helpers": 0.5.3
-    "@testing-library/react": 14.1.2
+    "@testing-library/react": 14.3.1
     "@types/chai": 4.3.11
     "@types/compression": 1.7.5
     "@types/cors": 2.8.17
