@@ -5476,7 +5476,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:3.0.0, @mdx-js/react@npm:^3.0.0":
+"@mdx-js/react@npm:3.1.0":
+  version: 3.1.0
+  resolution: "@mdx-js/react@npm:3.1.0"
+  dependencies:
+    "@types/mdx": ^2.0.0
+  peerDependencies:
+    "@types/react": ">=16"
+    react: ">=16"
+  checksum: c5a9c495f43f498ece24a768762a1743abe2be33d050d7eab731beb754e631700547f039198c6262c998d9a443906bd78811c3fa38bc2fb37659848161dac331
+  languageName: node
+  linkType: hard
+
+"@mdx-js/react@npm:^3.0.0":
   version: 3.0.0
   resolution: "@mdx-js/react@npm:3.0.0"
   dependencies:
@@ -12934,7 +12946,7 @@ __metadata:
     "@fortawesome/react-fontawesome": 0.2.0
     "@mantine/core": 6.0.22
     "@mantine/hooks": 6.0.22
-    "@mdx-js/react": 3.0.0
+    "@mdx-js/react": 3.1.0
     "@nx-plus/docusaurus": 15.0.0-rc.0
     "@nx/cypress": 17.2.8
     "@nx/esbuild": 17.2.8

@@ -41,7 +41,7 @@
     "@fortawesome/react-fontawesome": "0.2.0",
     "@mantine/core": "6.0.22",
     "@mantine/hooks": "6.0.22",
-    "@mdx-js/react": "3.0.0",
+    "@mdx-js/react": "3.1.0",
     "@swc/helpers": "0.5.3",
     "antd": "5.13.2",
     "axios": "1.8.4",
