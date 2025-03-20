@@ -12798,7 +12798,7 @@ __metadata:
     store: 2.0.12
     styled-components: 6.1.16
     systeminformation: 5.23.8
-    throttle-debounce: 5.0.0
+    throttle-debounce: 5.0.2
     ts-jest: 29.1.1
     ts-node: 10.9.2
     tslib: 2.6.2
@@ -28323,7 +28323,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"throttle-debounce@npm:5.0.0, throttle-debounce@npm:^5.0.0":
+"throttle-debounce@npm:5.0.2":
+  version: 5.0.2
+  resolution: "throttle-debounce@npm:5.0.2"
+  checksum: 90d026691bfedf692d9a5addd1d5b30460c6a87a9c588ae05779402e3bfd042bad2bf828edb05512f2e9e601566e8663443d929cf963a998207e193fb1d7eff8
+  languageName: node
+  linkType: hard
+
+"throttle-debounce@npm:^5.0.0":
   version: 5.0.0
   resolution: "throttle-debounce@npm:5.0.0"
   checksum: aa8bf25828b4f8645ce863589de05d6807ea3debc147ce7d89624638ff8a16792d6d0baa0f8a32a260f0b163444d74020c6087b713ae561fde594b97b6e51f28
