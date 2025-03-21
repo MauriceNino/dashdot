@@ -30,8 +30,8 @@
     "clean": "rm -rf dist apps/docs/.docusaurus node_modules/.cache"
   },
   "dependencies": {
-    "@docusaurus/core": "3.1.0",
-    "@docusaurus/preset-classic": "3.1.0",
+    "@docusaurus/core": "3.7.0",
+    "@docusaurus/preset-classic": "3.7.0",
     "@easyops-cn/docusaurus-search-local": "0.49.1",
     "@emotion/memoize": "0.9.0",
     "@emotion/react": "11.14.0",
@@ -89,7 +89,7 @@
     "@commitlint/cli": "18.6.1",
     "@commitlint/config-conventional": "18.6.3",
     "@commitlint/cz-commitlint": "18.6.1",
-    "@docusaurus/module-type-aliases": "3.1.0",
+    "@docusaurus/module-type-aliases": "3.7.0",
     "@nx-plus/docusaurus": "15.0.0-rc.0",
     "@nx/cypress": "17.2.8",
     "@nx/esbuild": "17.2.8",
