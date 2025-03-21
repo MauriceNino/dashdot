@@ -47,7 +47,7 @@
     "axios": "1.8.4",
     "clsx": "1.2.1",
     "compression": "1.7.4",
-    "core-js": "3.35.0",
+    "core-js": "3.41.0",
     "cors": "2.8.5",
     "cronstrue": "2.56.0",
     "dedent": "1.5.3",
