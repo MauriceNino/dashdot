@@ -12287,12 +12287,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cronstrue@npm:2.47.0":
-  version: 2.47.0
-  resolution: "cronstrue@npm:2.47.0"
+"cronstrue@npm:2.56.0":
+  version: 2.56.0
+  resolution: "cronstrue@npm:2.56.0"
   bin:
     cronstrue: bin/cli.js
-  checksum: a6752c8873fec30cabab4c5b92abde3a625cb5ef1797d9360f762b9e0bb9c0607a09744340faccdbf5b97eaeb5df0ebe9b5c424043fdba9b39799c82404076ec
+  checksum: f6c173e0956163eb633f6ff442de76cfa100a05e958ea9b0c57c2d0307253ef6298d80ee7a93a9c42668aed4802e2c890cbdf018baac05941b87f0314f60e8f3
   languageName: node
   linkType: hard
 
@@ -13007,7 +13007,7 @@ __metadata:
     compression: 1.7.4
     core-js: 3.35.0
     cors: 2.8.5
-    cronstrue: 2.47.0
+    cronstrue: 2.56.0
     dedent: 1.5.3
     docusaurus-plugin-image-zoom: 1.0.1
     docusaurus-plugin-sass: 0.2.6
