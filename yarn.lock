@@ -14059,7 +14059,7 @@ __metadata:
     nx: 17.3.2
     parse-domain: 7.0.1
     prettier: 2.8.8
-    prism-react-renderer: 2.3.1
+    prism-react-renderer: 2.4.1
     prop-types: 15.8.1
     punycode: 2.3.1
     qs: 6.11.2
@@ -25701,7 +25701,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prism-react-renderer@npm:2.3.1, prism-react-renderer@npm:^2.3.0":
+"prism-react-renderer@npm:2.4.1":
+  version: 2.4.1
+  resolution: "prism-react-renderer@npm:2.4.1"
+  dependencies:
+    "@types/prismjs": ^1.26.0
+    clsx: ^2.0.0
+  peerDependencies:
+    react: ">=16.0.0"
+  checksum: ddd5490a1335629addde9535db7872f0aee8dbce048818dd6e4c3972c779780af13d669c12d3f2fbb54c5b22d1578e50945099ef1a24dd445f33774e87d85e6e
+  languageName: node
+  linkType: hard
+
+"prism-react-renderer@npm:^2.3.0":
   version: 2.3.1
   resolution: "prism-react-renderer@npm:2.3.1"
   dependencies:
