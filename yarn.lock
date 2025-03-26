@@ -9556,22 +9556,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash-es@npm:^4.17.6":
-  version: 4.17.12
-  resolution: "@types/lodash-es@npm:4.17.12"
-  dependencies:
-    "@types/lodash": "*"
-  checksum: 990a99e2243bebe9505cb5ad19fbc172beb4a8e00f9075c99fc06c46c2801ffdb40bc2867271cf580d5f48994fc9fb076ec92cd60a20e621603bf22114e5b077
-  languageName: node
-  linkType: hard
-
-"@types/lodash@npm:*":
-  version: 4.14.202
-  resolution: "@types/lodash@npm:4.14.202"
-  checksum: a91acf3564a568c6f199912f3eb2c76c99c5a0d7e219394294213b3f2d54f672619f0fde4da22b29dc5d4c31457cd799acc2e5cb6bd90f9af04a1578483b6ff7
-  languageName: node
-  linkType: hard
-
 "@types/mdast@npm:^4.0.0, @types/mdast@npm:^4.0.2":
   version: 4.0.3
   resolution: "@types/mdast@npm:4.0.3"
@@ -12443,13 +12427,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"can-use-dom@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "can-use-dom@npm:0.1.0"
-  checksum: 488fc94c40f2fcce46ebd41abf17ef0449acf0d6b145116036cd592a8e977e5729918d4b3b7c642ce7b1f5b83d330ade39a172cf6b6ef91093785991a868b308
-  languageName: node
-  linkType: hard
-
 "caniuse-api@npm:^3.0.0":
   version: 3.0.0
   resolution: "caniuse-api@npm:3.0.0"
@@ -14419,7 +14396,7 @@ __metadata:
     rxjs: 7.8.2
     sass: 1.86.0
     semantic-release-plus: 20.0.0
-    simplebar-react: 3.2.4
+    simplebar-react: 3.3.0
     socket.io: 4.8.1
     socket.io-client: 4.8.1
     store: 2.0.12
@@ -21642,7 +21619,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.15, lodash-es@npm:^4.17.21":
+"lodash-es@npm:^4.17.15":
   version: 4.17.21
   resolution: "lodash-es@npm:4.17.21"
   checksum: 05cbffad6e2adbb331a4e16fbd826e7faee403a1a04873b82b42c0f22090f280839f85b95393f487c1303c8a3d2a010048bf06151a6cbe03eee4d388fb0a12d2
@@ -29295,26 +29272,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simplebar-core@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "simplebar-core@npm:1.2.4"
+"simplebar-core@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "simplebar-core@npm:1.3.0"
   dependencies:
-    "@types/lodash-es": ^4.17.6
-    can-use-dom: ^0.1.0
     lodash: ^4.17.21
-    lodash-es: ^4.17.21
-  checksum: 9bef0a29cc2ddba488776bc05eac6cbf3daa6e72fbcb54ff288cbbb2e64cadf22cc378ac3627f86c32c29ddf9f63d7accf8772e4013318aaba353625869ae866
+  checksum: dbe9ffc9e439c2f19db3ac5042f8a391f720803542a022ad6f836b90d9db16f95a3ade143098049c44285c00033057b69881ee00826a88125cbe805df38fa07c
   languageName: node
   linkType: hard
 
-"simplebar-react@npm:3.2.4":
-  version: 3.2.4
-  resolution: "simplebar-react@npm:3.2.4"
+"simplebar-react@npm:3.3.0":
+  version: 3.3.0
+  resolution: "simplebar-react@npm:3.3.0"
   dependencies:
-    simplebar-core: ^1.2.4
+    simplebar-core: ^1.3.0
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 0355a7ccb99114de99c84c7e548058f299c716d3fb2ac769bdb83138da19e75936f84698b9f4134d17be84322845a4290093f37b2f3c3ee2299e3bd8863c6196
+  checksum: 0db5c341bcd0d13259edb5799ba05d679073b743669bfb10415ae0bb02cf80c68848131622787b6883e5a7c5685c066a8dd228e85c9bcb60f248c26264866e91
   languageName: node
   linkType: hard
 
