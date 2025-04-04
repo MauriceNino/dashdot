@@ -1,3 +1,16 @@
+# [6.0.0](https://github.com/MauriceNino/dashdot/compare/v5.9.2...v6.0.0) (2025-04-04)
+
+
+### Bug Fixes
+
+* flip bytes and bit in the static speedtest file ([a197130](https://github.com/MauriceNino/dashdot/commit/a1971306eb13538fdceb8817f6c832f275169d3a)), closes [#1091](https://github.com/MauriceNino/dashdot/issues/1091)
+* os distro/version not reporting correctly ([30f6167](https://github.com/MauriceNino/dashdot/commit/30f616736eaf0beae71ff78bcd0a17a48b589d06)), closes [#1168](https://github.com/MauriceNino/dashdot/issues/1168)
+
+
+### BREAKING CHANGES
+
+* The unit in the speedtest-file was flipped. This has been fixed and therefore needs to be manually flipped by the users to match the correct unit
+
 ## [5.9.2](https://github.com/MauriceNino/dashdot/compare/v5.9.1...v5.9.2) (2025-03-19)
 
 ## [5.9.1](https://github.com/MauriceNino/dashdot/compare/v5.9.0...v5.9.1) (2025-03-19)
