@@ -86,17 +86,21 @@ export const setupNetworking = async () => {
   }
 };
 
-const LOCAL_OS_PATH = '/etc/os-release';
+const LOCAL_OS_PATHS = ['/etc/os-release', '/usr/lib/os-release'];
 const MNT_OS_PATH = '/mnt/host/etc/os-release';
 
 export const setupOsVersion = async () => {
   try {
     if (CONFIG.running_in_docker && fs.existsSync(MNT_OS_PATH)) {
-      await exec(`ln -sf ${MNT_OS_PATH} ${LOCAL_OS_PATH}`);
+      for (const LOCAL_OS_PATH of LOCAL_OS_PATHS) {
+        if (fs.existsSync(LOCAL_OS_PATH)) {
+          await exec(`ln -sf ${MNT_OS_PATH} ${LOCAL_OS_PATH}`);
+        }
+      }
 
       console.log(`Using host os version from "${MNT_OS_PATH}"`);
     } else {
-      console.log(`Using host os version from "${LOCAL_OS_PATH}"`);
+      console.log(`Using host os version from ${LOCAL_OS_PATHS.map(p => `"${p}"`).join(' and ')}`);
     }
   } catch (e) {
     console.warn(e);

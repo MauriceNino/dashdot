@@ -125,8 +125,8 @@ export default {
         );
 
       result = {
-        speedDown: json.speedDown * (unit === 'bit' ? 8 : 1),
-        speedUp: json.speedUp * (unit === 'bit' ? 8 : 1),
+        speedDown: json.speedDown * (unit === 'bit' ? 1 : 8),
+        speedUp: json.speedUp * (unit === 'bit' ? 1 : 8),
         publicIp: CONFIG.network_label_list.includes('public_ip')
           ? json.publicIp
           : undefined,

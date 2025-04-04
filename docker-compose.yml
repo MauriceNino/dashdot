@@ -1,16 +1,12 @@
 # !! Attention !!
 # This is a docker-compose file used ONLY for the dev environment and can not be used for production.
 # If you need instructions on how to run dashdot, please have a look at the README.md file in the root of the project.
-version: '3.5'
-
 services:
   dash:
     build:
       context: .
       dockerfile: Dockerfile
       target: dev
-    user: '1000'
-    working_dir: /app
     tty: true
     command: yarn run serve
     restart: unless-stopped

@@ -19,10 +19,6 @@ jobs:
           cache: 'yarn'
 
       # TEST
-      - if: ${{ github.event_name != 'pull_request' }}
-        run: yarn --immutable
-      - if: ${{ github.event_name == 'pull_request' }}
-        run: yarn --immutable
-      - run: |
-          yarn test --skipNxCache
-          yarn build:prod --skipNxCache
+      - run: yarn --immutable
+      - run: yarn test --skipNxCache
+      - run: yarn build --skipNxCache --verbose

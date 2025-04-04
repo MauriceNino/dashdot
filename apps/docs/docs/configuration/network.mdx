@@ -48,12 +48,15 @@ The file that is being read, should have the following format (you will need to 
 
 ```json
 {
-  "unit": "byte", // can either be "bit" or "byte"
-  "speedDown": 150000000, // values need to be in the unit provided above
+  "unit": "bit",
+  "speedDown": 150000000,
   "speedUp": 50000000,
-  "publicIp": "123.123.123.123" // optional
+  "publicIp": "123.123.123.123"
 }
 ```
+
+The values can be passed in bit (e.g. `100000000` for 100 Mb/s, because it is `100 * 1000 * 1000`)
+or in bytes (e.g. `100000000` for 800 Mb/s, because it is `8 * 100 * 1000 * 1000`).
 
 :::note
 
