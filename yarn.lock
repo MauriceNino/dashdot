@@ -9612,12 +9612,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-virtualized-auto-sizer@npm:1.0.4":
-  version: 1.0.4
-  resolution: "@types/react-virtualized-auto-sizer@npm:1.0.4"
+"@types/react-virtualized-auto-sizer@npm:1.0.8":
+  version: 1.0.8
+  resolution: "@types/react-virtualized-auto-sizer@npm:1.0.8"
   dependencies:
-    "@types/react": "*"
-  checksum: e0d41ac6cf0f48dfef45c0cd70146578f42ad83dad90911aa0dfe72b0e1ea62ca9ff56d4f43f322ec6dae2e7cb4d025aefe0e85241f7782c249aeface1050512
+    react-virtualized-auto-sizer: "*"
+  checksum: faddd1ee92e87e0b621a5be4eb510b010437375b6c85cf72d764f52506c59fad93d79c159aad251677e4e2fb548ad4a7e76c59f5a701a517bcf5552a9929c4af
   languageName: node
   linkType: hard
 
@@ -14098,7 +14098,7 @@ __metadata:
     "@types/react-color": 3.0.13
     "@types/react-dom": 18.2.18
     "@types/react-is": 18.2.4
-    "@types/react-virtualized-auto-sizer": 1.0.4
+    "@types/react-virtualized-auto-sizer": 1.0.8
     "@types/store": 2.0.5
     "@types/styled-components": 5.1.34
     "@types/throttle-debounce": 5.0.2
@@ -14152,7 +14152,7 @@ __metadata:
     react-form-ctl: 2.0.1
     react-is: 18.2.0
     react-spinners-kit: 1.9.1
-    react-virtualized-auto-sizer: 1.0.25
+    react-virtualized-auto-sizer: 1.0.26
     recharts: 2.7.3
     regenerator-runtime: 0.14.1
     rxjs: 7.8.2
@@ -27095,13 +27095,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-virtualized-auto-sizer@npm:1.0.25":
-  version: 1.0.25
-  resolution: "react-virtualized-auto-sizer@npm:1.0.25"
+"react-virtualized-auto-sizer@npm:*, react-virtualized-auto-sizer@npm:1.0.26":
+  version: 1.0.26
+  resolution: "react-virtualized-auto-sizer@npm:1.0.26"
   peerDependencies:
     react: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 1d325db5bf78fd4a6a8df90fccc9a50b29c648d899d2ce779159903c7eaba2a98254e6436ca6d366b89c44c8b2de7042425dd36d17874d2b51a2455557423c3a
+  checksum: bbfecf2bc8546b350a948a3e1a3be445bf04c46400f8e33771795aa8fafbc4e8f436d2ab461e8476b89ec4b7efe3c194bfaf31f5f6b3cf043276c4f7d3705b52
   languageName: node
   linkType: hard
 
