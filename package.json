@@ -107,7 +107,7 @@
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@swc/cli": "0.6.0",
-    "@swc/core": "1.11.13",
+    "@swc/core": "1.11.18",
     "@testing-library/react": "16.2.0",
     "@types/chai": "4.3.20",
     "@types/compression": "1.7.5",
