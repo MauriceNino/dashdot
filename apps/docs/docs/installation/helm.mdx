@@ -42,7 +42,7 @@ To install Dashdot using Helm chart, please follow this steps.
 #### Example using override values:
 
 ```bash
-helm install dashdot oben01/dashdot --namespace dashdot --create-namespace -f override.yaml
+helm upgrade --install dashdot oci://ghcr.io/oben01/charts/dashdot --namespace dashdot --create-namespace -f override.yaml
 ```
 
 ```yml title="override.yaml"
