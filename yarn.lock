@@ -14158,7 +14158,7 @@ __metadata:
     rxjs: 7.8.2
     sass: 1.86.3
     semantic-release-plus: 20.0.0
-    simplebar-react: 3.3.0
+    simplebar-react: 3.3.1
     socket.io: 4.8.1
     socket.io-client: 4.8.1
     store: 2.0.12
@@ -21362,7 +21362,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.15":
+"lodash-es@npm:^4.17.15, lodash-es@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash-es@npm:4.17.21"
   checksum: 05cbffad6e2adbb331a4e16fbd826e7faee403a1a04873b82b42c0f22090f280839f85b95393f487c1303c8a3d2a010048bf06151a6cbe03eee4d388fb0a12d2
@@ -28953,23 +28953,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simplebar-core@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "simplebar-core@npm:1.3.0"
+"simplebar-core@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "simplebar-core@npm:1.3.1"
   dependencies:
     lodash: ^4.17.21
-  checksum: dbe9ffc9e439c2f19db3ac5042f8a391f720803542a022ad6f836b90d9db16f95a3ade143098049c44285c00033057b69881ee00826a88125cbe805df38fa07c
+    lodash-es: ^4.17.21
+  checksum: 0b31edc1e44b554b61dca48bd072cad6ffa28ba9d893098cfe0292369f583eff6fc0c016d612609aeddff093eb04b7c29250ec57cf3067a1e4fdc3cfe18c6ceb
   languageName: node
   linkType: hard
 
-"simplebar-react@npm:3.3.0":
-  version: 3.3.0
-  resolution: "simplebar-react@npm:3.3.0"
+"simplebar-react@npm:3.3.1":
+  version: 3.3.1
+  resolution: "simplebar-react@npm:3.3.1"
   dependencies:
-    simplebar-core: ^1.3.0
+    simplebar-core: ^1.3.1
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 0db5c341bcd0d13259edb5799ba05d679073b743669bfb10415ae0bb02cf80c68848131622787b6883e5a7c5685c066a8dd228e85c9bcb60f248c26264866e91
+  checksum: bbde967dba2591ef2734beb43c5781714bb08bab331ef808b7204360f915d1f18fcd49f23ff28d8509888e7d435d2d2dbce6631f0d09becd51a45c9296bee493
   languageName: node
   linkType: hard
 
