@@ -14162,7 +14162,7 @@ __metadata:
     socket.io: 4.8.1
     socket.io-client: 4.8.1
     store: 2.0.12
-    styled-components: 6.1.17
+    styled-components: 6.1.18
     systeminformation: 5.25.11
     throttle-debounce: 5.0.2
     ts-jest: 29.3.1
@@ -29843,9 +29843,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:6.1.17":
-  version: 6.1.17
-  resolution: "styled-components@npm:6.1.17"
+"styled-components@npm:6.1.18":
+  version: 6.1.18
+  resolution: "styled-components@npm:6.1.18"
   dependencies:
     "@emotion/is-prop-valid": 1.2.2
     "@emotion/unitless": 0.8.1
@@ -29859,7 +29859,7 @@ __metadata:
   peerDependencies:
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
-  checksum: 417d5d4ec5250fa39771b57a1e10eb5c0dd54c0c425746f1b0813616d1d6844c7666dc5b14862fc7d9b9d26ff49c54ef748d69403e67014e3e9892763210d1d4
+  checksum: f6dfc215634c7974210fc235c7e543bbc45b316a23ce3c3ee4e5aa6d27952167d6a2bf8ace222122920707daa0241a0bf5e4d27a857d129c59f993c80333cc1f
   languageName: node
   linkType: hard
 
