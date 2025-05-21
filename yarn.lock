@@ -9458,12 +9458,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.17.30":
-  version: 20.17.30
-  resolution: "@types/node@npm:20.17.30"
+"@types/node@npm:20.17.50":
+  version: 20.17.50
+  resolution: "@types/node@npm:20.17.50"
   dependencies:
     undici-types: ~6.19.2
-  checksum: 40253bc4a3f6adc5dc286824c1fc72a398280a7f6e76cfc22a9d68e42c70edb04c4af53c5709030b90d439bb4bbb29ad62e937d0b04ce2019b3297698bad55ef
+  checksum: ec59f1ea051109497793c1e63c6a3a8d71512cc696b8f10ca214b5065bd5801cc80f3562bfe970410fe88e444f8d70ba1667b68b21f19752078ad0a68bb1478b
   languageName: node
   linkType: hard
 
@@ -14091,7 +14091,7 @@ __metadata:
     "@types/cors": 2.8.18
     "@types/express": 4.17.22
     "@types/jest": 29.5.14
-    "@types/node": 20.17.30
+    "@types/node": 20.17.50
     "@types/node-cron": 3.0.11
     "@types/qs": 6.9.18
     "@types/react": 18.2.48
