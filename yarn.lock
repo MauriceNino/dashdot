@@ -14171,7 +14171,7 @@ __metadata:
     typescript: 5.8.3
     use-color-scheme: 1.1.3
     util: 0.12.5
-    vite: 5.4.17
+    vite: 5.4.19
     vite-plugin-eslint: 1.8.1
     vite-tsconfig-paths: 4.3.2
     vitest: 0.34.6
@@ -31803,7 +31803,50 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:5.4.17, vite@npm:^3.0.0 || ^4.0.0 || ^5.0.0-0, vite@npm:^3.1.0 || ^4.0.0 || ^5.0.0-0":
+"vite@npm:5.4.19":
+  version: 5.4.19
+  resolution: "vite@npm:5.4.19"
+  dependencies:
+    esbuild: ^0.21.3
+    fsevents: ~2.3.3
+    postcss: ^8.4.43
+    rollup: ^4.20.0
+  peerDependencies:
+    "@types/node": ^18.0.0 || >=20.0.0
+    less: "*"
+    lightningcss: ^1.21.0
+    sass: "*"
+    sass-embedded: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.4.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: c15af65f2370b59e674c5fab22d8e05ec5c7f8f0345ed99ffec155c77feb5636b4e0680dbd096a6f06d7c386b259dc0b9c67c4f1ec08486a2f2a677c9ea6971b
+  languageName: node
+  linkType: hard
+
+"vite@npm:^3.0.0 || ^4.0.0 || ^5.0.0-0, vite@npm:^3.1.0 || ^4.0.0 || ^5.0.0-0":
   version: 5.4.17
   resolution: "vite@npm:5.4.17"
   dependencies:
