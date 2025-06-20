@@ -67,7 +67,7 @@
     "react-is": "18.2.0",
     "react-spinners-kit": "1.9.1",
     "react-virtualized-auto-sizer": "1.0.26",
-    "recharts": "2.7.3",
+    "recharts": "2.15.4",
     "regenerator-runtime": "0.14.1",
     "rxjs": "7.8.2",
     "sass": "1.86.3",
