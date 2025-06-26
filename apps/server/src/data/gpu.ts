@@ -1,5 +1,6 @@
 import { GpuInfo, GpuLoad } from '@dash/common';
 import * as si from 'systeminformation';
+import { CONFIG } from '../config';
 
 const normalizeGpuBrand = (brand: string) => {
   return brand ? brand.replace(/(corporation)/gi, '').trim() : undefined;
@@ -19,12 +20,19 @@ const isValidController = (controller: si.Systeminformation.GraphicsControllerDa
   return blacklist.every( w => ! model.includes(w) );
 };
 
+const isInBrandFilter = (controller: si.Systeminformation.GraphicsControllerData) => {
+  return (
+    CONFIG.gpu_brand_filter.length == 0
+    || CONFIG.gpu_brand_filter.includes(normalizeGpuBrand(controller.vendor))
+  );
+};
+
 export default {
   dynamic: async (): Promise<GpuLoad> => {
     const gpuInfo = await si.graphics();
 
     return {
-      layout: gpuInfo.controllers.filter(isValidController).map(controller => ({
+      layout: gpuInfo.controllers.filter(isValidController).filter(isInBrandFilter).map(controller => ({
         load: controller.utilizationGpu ?? 0,
         memory: controller.utilizationMemory ?? 0,
       })),
@@ -34,7 +42,7 @@ export default {
     const gpuInfo = await si.graphics();
 
     return {
-      layout: gpuInfo.controllers.filter(isValidController).map(controller => ({
+      layout: gpuInfo.controllers.filter(isValidController).filter(isInBrandFilter).map(controller => ({
         brand: normalizeGpuBrand(controller.vendor),
         model:
           normalizeGpuName(controller.name) ??
