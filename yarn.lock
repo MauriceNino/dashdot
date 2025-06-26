@@ -14405,7 +14405,7 @@ __metadata:
     dedent: 1.5.3
     docusaurus-plugin-image-zoom: 1.0.1
     docusaurus-plugin-sass: 0.2.6
-    dotenv: 16.4.7
+    dotenv: 16.6.0
     esbuild: ^0.25.0
     eslint: 8.57.1
     eslint-config-prettier: 9.1.0
@@ -15176,10 +15176,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:16.4.7":
-  version: 16.4.7
-  resolution: "dotenv@npm:16.4.7"
-  checksum: c27419b5875a44addcc56cc69b7dc5b0e6587826ca85d5b355da9303c6fc317fc9989f1f18366a16378c9fdd9532d14117a1abe6029cc719cdbbef6eaef2cea4
+"dotenv@npm:16.6.0":
+  version: 16.6.0
+  resolution: "dotenv@npm:16.6.0"
+  checksum: ee594a60af62850fd28db49c14d08de54261ac138c9b7c2eeaf6b691b256ae54fe920729ccabd2a2d2f5a67223c218e9cd006f103dec5d54ce61ecd856633996
   languageName: node
   linkType: hard
 
