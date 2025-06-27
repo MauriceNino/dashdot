@@ -9358,13 +9358,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/compression@npm:1.8.0":
-  version: 1.8.0
-  resolution: "@types/compression@npm:1.8.0"
+"@types/compression@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@types/compression@npm:1.8.1"
   dependencies:
     "@types/express": "*"
     "@types/node": "*"
-  checksum: d1bef38f830c909e2f8378f6cfff528e94258239e3eb3d8dae000943a3e433a8fc6fa7b105b369b50ec5b9fa22e83666765d95934b84228367bffc5f8a7f0b30
+  checksum: f3fc76d6a1fdc61985d4d2cb42c17031fa992f8202e11f7e63fb01d01276b18fa812066d40e35b6600fbe5b2b04776cf29c244d97461943fc12eff1754db5fe0
   languageName: node
   linkType: hard
 
@@ -14419,7 +14419,7 @@ __metadata:
     "@swc/helpers": 0.5.15
     "@testing-library/react": 16.3.0
     "@types/chai": 4.3.20
-    "@types/compression": 1.8.0
+    "@types/compression": 1.8.1
     "@types/cors": 2.8.18
     "@types/express": 4.17.22
     "@types/jest": 29.5.14
