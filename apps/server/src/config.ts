@@ -50,6 +50,7 @@ export const CONFIG: Config = {
   enable_cpu_temps: penv('ENABLE_CPU_TEMPS') === 'true',
   cpu_temps_mode: (penv('CPU_TEMPS_MODE') as any) ?? 'avg',
   gpu_brand_filter: lst(penv('GPU_BRAND_FILTER') ?? ''),
+  gpu_model_filter: lst(penv('GPU_MODEL_FILTER') ?? ''),
 
   widget_list: lst(
     penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network'
