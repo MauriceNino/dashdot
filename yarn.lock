@@ -9585,15 +9585,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:4.17.22":
-  version: 4.17.22
-  resolution: "@types/express@npm:4.17.22"
+"@types/express@npm:4.17.23":
+  version: 4.17.23
+  resolution: "@types/express@npm:4.17.23"
   dependencies:
     "@types/body-parser": "*"
     "@types/express-serve-static-core": ^4.17.33
     "@types/qs": "*"
     "@types/serve-static": "*"
-  checksum: 977b1da93765983d823c32898c74c159f30b98341f4fd9400724f18196913fe0a07fa12eaa4efdad3cc8cf31e4036e06a16a88d43e9e1f78bbbb84365026aab0
+  checksum: f1a020c6ad6dc0169a3277199605d60649d463a72c920673e0f230ab1e76f2d3aa23daabd25ef8e62eda314e26b879306c58ec806e669e1e40ca37a4b73a44b0
   languageName: node
   linkType: hard
 
@@ -14421,7 +14421,7 @@ __metadata:
     "@types/chai": 4.3.20
     "@types/compression": 1.8.1
     "@types/cors": 2.8.19
-    "@types/express": 4.17.22
+    "@types/express": 4.17.23
     "@types/jest": 29.5.14
     "@types/node": 20.17.51
     "@types/node-cron": 3.0.11
