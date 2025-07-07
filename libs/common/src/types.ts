@@ -110,6 +110,8 @@ export type Config = {
   always_show_percentages: boolean;
   enable_cpu_temps: boolean;
   cpu_temps_mode: 'max' | 'avg';
+  gpu_brand_filter: string[];
+  gpu_model_filter: string[];
 
   // Widgets, Labels
   widget_list: ('os' | 'cpu' | 'storage' | 'ram' | 'network' | 'gpu')[];

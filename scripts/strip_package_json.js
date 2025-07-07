@@ -1,5 +1,5 @@
-const packageJson = require('../package.json')
-const fs = require('fs')
+const packageJson = require('../package.json');
+const fs = require('fs');
 
 const newPackageJson = {
   name: packageJson.name,
@@ -9,7 +9,7 @@ const newPackageJson = {
   main: packageJson.main,
   scripts: {
     cli: 'node dist/apps/cli/main.js',
-  }
-}
+  },
+};
 
-fs.writeFileSync('dist/package.json', JSON.stringify(newPackageJson, null, 2))
+fs.writeFileSync('dist/package.json', JSON.stringify(newPackageJson, null, 2));

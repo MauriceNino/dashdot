@@ -50,7 +50,7 @@ RUN \
   git config --global --add safe.directory /app
 
 # BUILD #
-FROM base as build
+FROM base AS build
 
 ARG BUILDHASH
 ARG VERSION
@@ -75,7 +75,7 @@ RUN \
   node scripts/strip_package_json.js
 
 # PROD #
-FROM base as prod
+FROM base AS prod
 
 EXPOSE 3001
 

@@ -1,7 +1,7 @@
 import { ConfigProvider } from 'antd';
-import { FC, useMemo } from 'react';
+import { type FC, useLayoutEffect, useMemo } from 'react';
 import {
-  DefaultTheme,
+  type DefaultTheme,
   ThemeProvider,
   createGlobalStyle,
 } from 'styled-components';
@@ -124,6 +124,13 @@ export const App: FC = () => {
 
     return baseTheme;
   }, [darkMode, query]);
+
+  useLayoutEffect(() => {
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    if (meta) {
+      meta.setAttribute('content', theme.dark ? 'dark' : 'light');
+    }
+  }, [theme.dark]);
 
   return (
     <ThemeProvider theme={theme}>

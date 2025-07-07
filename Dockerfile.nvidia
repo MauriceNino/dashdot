@@ -1,5 +1,5 @@
 # BASE #
-FROM nvidia/cuda:12.2.0-base-ubuntu20.04 AS base
+FROM nvidia/cuda:12.8.1-base-ubuntu20.04 AS base
 
 WORKDIR /app
 ARG TARGETPLATFORM
@@ -57,7 +57,7 @@ RUN \
   git config --global --add safe.directory /app
 
 # BUILD #
-FROM base as build
+FROM base AS build
 
 ARG BUILDHASH
 ARG VERSION
@@ -80,7 +80,7 @@ RUN \
   node scripts/strip_package_json.js
 
 # PROD #
-FROM base as prod
+FROM base AS prod
 
 EXPOSE 3001
 
