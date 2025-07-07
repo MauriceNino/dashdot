@@ -1,3 +1,11 @@
+# [6.1.0](https://github.com/MauriceNino/dashdot/compare/v6.0.0...v6.1.0) (2025-07-07)
+
+
+### Features
+
+* add GPU filter by brand name ([#1212](https://github.com/MauriceNino/dashdot/issues/1212)) ([082ef5d](https://github.com/MauriceNino/dashdot/commit/082ef5d0fe3c3ef0d26d4ca0eedc3a0dc3cad1ab))
+* add meta color-scheme to document ([3d6f8f5](https://github.com/MauriceNino/dashdot/commit/3d6f8f51a54c4a790aee310aab78f8faaad77f78))
+
 # [6.0.0](https://github.com/MauriceNino/dashdot/compare/v5.9.2...v6.0.0) (2025-04-04)
 
 
