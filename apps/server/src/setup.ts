@@ -100,7 +100,11 @@ export const setupOsVersion = async () => {
 
       console.log(`Using host os version from "${MNT_OS_PATH}"`);
     } else {
-      console.log(`Using host os version from ${LOCAL_OS_PATHS.map(p => `"${p}"`).join(' and ')}`);
+      console.log(
+        `Using host os version from ${LOCAL_OS_PATHS.map(p => `"${p}"`).join(
+          ' and '
+        )}`
+      );
     }
   } catch (e) {
     console.warn(e);
