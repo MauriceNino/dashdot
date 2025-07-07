@@ -3905,7 +3905,7 @@ function generateUUID() {
 var lunr = __webpack_require__(1336);
 var lunr_default = /*#__PURE__*/__webpack_require__.n(lunr);
 ;// CONCATENATED MODULE: ./apps/docs/.docusaurus/@easyops-cn/docusaurus-search-local/default/generated-constants.js
-const removeDefaultStopWordFilter=false;const language=["en"];const searchIndexUrl="search-index{dir}.json?_=d472ade3";const searchResultLimits=8;const fuzzyMatchingDistance=1;
+const removeDefaultStopWordFilter=[];const language=["en"];const searchIndexUrl="search-index{dir}.json?_=4c5fc350";const searchResultLimits=8;const fuzzyMatchingDistance=1;
 ;// CONCATENATED MODULE: ./node_modules/@easyops-cn/docusaurus-search-local/dist/client/client/utils/proxiedGeneratedConstants.js
 // This file is auto generated while building.
 
@@ -3966,7 +3966,7 @@ const terms=[];function combine(index,carry){if(index===tokenTerms.length||carry
 return[{tokens,term:tokens.map(value=>({value,presence:(lunr_default()).Query.presence.REQUIRED,wildcard:(lunr_default()).Query.wildcard.LEADING|(lunr_default()).Query.wildcard.TRAILING}))}];}// The last token of a term maybe incomplete while user is typing.
 for(const term of terms){term[term.length-1].maybeTyping=true;}// Try to append terms without stop words,
 // since they are removed in the index.
-const stopWordPipelines=[];for(const lang of language){if(lang==="en"){if(!removeDefaultStopWordFilter){stopWordPipelines.unshift((lunr_default()).stopWordFilter);}}else{const lunrLang=(lunr_default())[lang];if(lunrLang.stopWordFilter){stopWordPipelines.unshift(lunrLang.stopWordFilter);}}}let refinedTerms;if(stopWordPipelines.length>0){const pipe=term=>stopWordPipelines.reduce((term,p)=>term.filter(item=>p(item.value)),term);refinedTerms=[];const newTerms=[];for(const term of terms){const filteredTerm=pipe(term);refinedTerms.push(filteredTerm);// Add extra terms only if some stop words are removed,
+const stopWordPipelines=[];for(const lang of language){if(lang==="en"){if(!removeDefaultStopWordFilter.includes(lang)){stopWordPipelines.unshift((lunr_default()).stopWordFilter);}}else{const lunrLang=(lunr_default())[lang];if(lunrLang.stopWordFilter&&!removeDefaultStopWordFilter.includes(lang)){stopWordPipelines.unshift(lunrLang.stopWordFilter);}}}let refinedTerms;if(stopWordPipelines.length>0){const pipe=term=>stopWordPipelines.reduce((term,p)=>term.filter(item=>p(item.value)),term);refinedTerms=[];const newTerms=[];for(const term of terms){const filteredTerm=pipe(term);refinedTerms.push(filteredTerm);// Add extra terms only if some stop words are removed,
 // and some non-stop-words exist too.
 if(filteredTerm.length<term.length&&filteredTerm.length>0){newTerms.push(filteredTerm);}}terms.push(...newTerms);}else{refinedTerms=terms.slice();}// Also try to add extra terms which miss one of the searched tokens,
 // when the term contains 3 or more tokens,
