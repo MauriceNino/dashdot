@@ -92,6 +92,7 @@ export type HardwareInfo = {
 export type Config = {
   // General
   port: number;
+  routing_path: string;
   running_in_docker: boolean;
   use_network_interface?: string;
   speed_test_from_path?: string;

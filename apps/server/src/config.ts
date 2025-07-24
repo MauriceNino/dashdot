@@ -28,6 +28,7 @@ const kv = <T extends boolean>(
 
 export const CONFIG: Config = {
   port: numNull(penv('PORT')) ?? 3001,
+  routing_path: penv('ROUTING_PATH') ?? '/',
   running_in_docker: penv('RUNNING_IN_DOCKER') === 'true',
   accept_ookla_eula: penv('ACCEPT_OOKLA_EULA') === 'true',
   use_network_interface: penv('USE_NETWORK_INTERFACE'),

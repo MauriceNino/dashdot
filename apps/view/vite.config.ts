@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
@@ -17,7 +18,12 @@ export default defineConfig({
     host: '0.0.0.0',
   },
 
-  plugins: [react(), nxViteTsPaths()],
+  plugins: [
+    react(), nxViteTsPaths(),
+    nodePolyfills({
+      include: ['url', 'path']
+    })
+  ],
 
   //@ts-ignore
   test: {
