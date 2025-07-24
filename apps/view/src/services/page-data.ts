@@ -7,8 +7,17 @@ import {
   StorageLoad,
 } from '@dash/common';
 import { useEffect, useState } from 'react';
+import { URL } from 'url';
+import Path from 'path';
 import { Socket, io } from 'socket.io-client';
 import { environment } from '../environment';
+
+const getFullyQualifiedSocket = (): Socket => {
+    const { origin: wlOrigin, pathname: wlPathname } = window.location;
+    return io(environment.backendUrl, {
+      path: new URL(Path.join(wlOrigin, wlPathname, '/socket')).pathname,
+    });
+}
 
 export const usePageData = () => {
   const [pageLoaded, setPageLoaded] = useState(false);
@@ -23,7 +32,7 @@ export const usePageData = () => {
   const config = serverInfo?.config;
 
   useEffect(() => {
-    const socket = io(environment.backendUrl);
+    const socket = getFullyQualifiedSocket();
 
     socket.on('static-info', data => {
       setServerInfo(data);
@@ -45,7 +54,7 @@ export const usePageData = () => {
   useEffect(() => {
     let socket: Socket | undefined;
     if (config) {
-      socket = io(environment.backendUrl);
+      socket = getFullyQualifiedSocket();
 
       socket.on('cpu-load', data => {
         setCpuLoad(oldData => {
