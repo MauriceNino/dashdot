@@ -44,7 +44,27 @@ export const resolveSymlink = async (
     stat = await lstat(p);
     console.debug("stat", stat)
   } catch (err) {
-    throw new Error(`lstat failed for ${p}: ${(err as Error).message}`);
+    const parts: string[] = [];
+    let probe = p;
+    while (probe !== '/') {
+      const parent = path.dirname(probe);
+      parts.unshift(path.basename(probe));
+      if (parent === probe) throw err;
+      probe = parent;
+      try {
+        stat = await lstat(probe);
+        break;
+      } catch (e) {
+        // Intentionally ignore errors while probing parent directories
+      }
+    }
+
+    if (!stat.isSymbolicLink()) {
+      throw new Error(`lstat failed for ${p}: ${(err as Error).message}`);
+    }
+
+    const resolved = await resolveSymlink(probe, seen, maxDepth);
+    return resolveSymlink(join(resolved, ...parts), seen, maxDepth);
   }
 
   if (!stat.isSymbolicLink()) {

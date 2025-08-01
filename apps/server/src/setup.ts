@@ -102,10 +102,11 @@ export const setupOsVersion = async () => {
       if (hostPath) {
         await refreshHostOsRelease();
 
-        const realFile = await resolveSymlink(hostPath);
-        const arrow = hostPath === realFile ? '' : ` → "${realFile}"`;
+        // const realFile = await resolveSymlink(hostPath);
+        // const arrow = hostPath === realFile ? '' : ` → "${realFile}"`;
 
-        console.log(`Using host os-release from "${hostPath}"${arrow}`);
+        console.log(`Using host os-release from "${hostPath}"`);
+        // console.log(`Using host os-release from "${hostPath}"${arrow}`);
         return;
       }
     }
@@ -118,6 +119,12 @@ export const setupOsVersion = async () => {
     );
   } catch (e) {
     console.warn(e);
+    console.log(
+      `Using host os-release from ${LOCAL_OS_PATHS
+        .filter(p => fs.existsSync(p))
+        .map(p => `"${p}"`)
+        .join(' or ')}`
+    );
   }
 };
 
