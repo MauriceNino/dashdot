@@ -32,6 +32,14 @@ The port where the express backend is running (the backend serves the frontend, 
 - type: `number`
 - default: `3001`
 
+## `DASHDOT_ROUTING_PATH`
+
+The path where dash. is being served. This is useful if you want to run dash. behind a reverse proxy on a sub-path
+(e.g `https://example.com/dashdot` would need a value of `/dashdot`).
+
+- type: `string`
+- default: `/`
+
 ## `DASHDOT_PAGE_TITLE`
 
 If you want to show a custom string in the browser page title.
