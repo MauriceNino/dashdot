@@ -5,8 +5,11 @@ import * as fs from 'fs';
 import { lstat, readlink, rm, symlink } from 'fs/promises';
 
 export const fromHost = (path: string): string => {
-  const pathInDocker = path === '/' ? '/mnt/host' : join('/mnt/host', path);
-  return CONFIG.running_in_docker ? pathInDocker : path;
+  const dockerMountPoint = '/mnt/host';
+  if (!CONFIG.running_in_docker) return path;
+  if (path.startsWith(dockerMountPoint)) return path;
+  const pathInDocker = path === '/' ? dockerMountPoint : join(dockerMountPoint, path);
+  return pathInDocker;
 };
 
 export const PLATFORM_IS_WINDOWS = os.platform() === 'win32';
@@ -25,6 +28,7 @@ export const resolveSymlink = async (
   maxDepth = 32,
 ): Promise<string> => {
   p = path.resolve(p);
+  console.debug("p", p)
 
   if (seen.has(p)) {
     throw new Error(`Symlink loop detected at ${p}`);
@@ -33,24 +37,29 @@ export const resolveSymlink = async (
     throw new Error(`Symlink chain longer than ${maxDepth}: ${[...seen, p].join(' → ')}`);
   }
   seen.add(p);
+  console.debug("seen", seen)
 
   let stat: fs.Stats;
   try {
     stat = await lstat(p);
+    console.debug("stat", stat)
   } catch (err) {
     throw new Error(`lstat failed for ${p}: ${(err as Error).message}`);
   }
 
   if (!stat.isSymbolicLink()) {
+    console.debug("stat is not a symbolic link")
     return p;
   }
 
   let target = await readlink(p);
   if (!path.isAbsolute(target)) {
+    console.debug("relative target", target)
     target = path.resolve(path.dirname(p), target);
   }
 
   target = fromHost(target);
+  console.debug("target", target)
 
   return resolveSymlink(target, seen, maxDepth);
 }
@@ -68,9 +77,11 @@ export const refreshHostOsRelease = async(): Promise<void> => {
   if (!hostPath) return;
 
   const realFile = await resolveSymlink(hostPath);
+  console.debug("realFile", realFile)
 
   for (const local of LOCAL_OS_PATHS) {
     if (fs.existsSync(local)) {
+      console.debug("local", local)
       // Recurse in case os-release is a directory for some reason
       await rm(local, { recursive: true, force: true });
       await symlink(realFile, local, 'file');
