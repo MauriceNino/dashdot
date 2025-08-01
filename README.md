@@ -64,7 +64,7 @@ In case you want to financially support this project, you can visit my
 ## Documentation
 
 - [Installation Options](https://getdashdot.com/docs/installation)
-- [Configuration Options](https://getdashdot.com/docs/configuration)
+- [Configuration Options](https://getdashdot.com/docs/configuration/basic)
 - [Contributing](./.github/CONTRIBUTING.md)
 - [Changelog](./.github/CHANGELOG.md)
 
