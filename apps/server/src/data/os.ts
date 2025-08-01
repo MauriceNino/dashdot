@@ -2,11 +2,17 @@ import { OsInfo } from '@dash/common';
 import { exec } from 'child_process';
 import * as si from 'systeminformation';
 import { promisify } from 'util';
+import { refreshHostOsRelease } from '../utils';
 
 const execp = promisify(exec);
 
 export default {
   static: async (): Promise<OsInfo> => {
+    try {
+      await refreshHostOsRelease();
+    } catch (err) {
+      console.warn('Cannot refresh /etc/os-release (os results may be outdated):', err);
+    }
     const osInfo = await si.osInfo();
 
     const buildInfo = JSON.parse(
