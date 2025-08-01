@@ -73,7 +73,7 @@ const HOST_OS_CANDIDATES = [
 export const refreshHostOsRelease = async(): Promise<void> => {
   if (!CONFIG.running_in_docker) return;
 
-  const hostPath = HOST_OS_CANDIDATES.find(p => fs.existsSync(p));
+  const hostPath = HOST_OS_CANDIDATES.find(p => fs.lstatSync(p));
   if (!hostPath) return;
 
   const realFile = await resolveSymlink(hostPath);

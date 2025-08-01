@@ -96,7 +96,7 @@ export const setupOsVersion = async () => {
   try {
     if (CONFIG.running_in_docker) {
       console.debug("CONFIG.running_in_docker", CONFIG.running_in_docker)
-      const hostPath = MNT_OS_PATH_CANDIDATES.find(p => fs.existsSync(p));
+      const hostPath = MNT_OS_PATH_CANDIDATES.find(p => fs.lstatSync(p));
       console.debug("hostPath", hostPath)
 
       if (hostPath) {
