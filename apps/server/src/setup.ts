@@ -95,32 +95,26 @@ const MNT_OS_PATH_CANDIDATES = [
 export const setupOsVersion = async () => {
   try {
     if (CONFIG.running_in_docker) {
-      console.debug("CONFIG.running_in_docker", CONFIG.running_in_docker)
       const hostPath = MNT_OS_PATH_CANDIDATES.find(p => fs.lstatSync(p));
-      console.debug("hostPath", hostPath)
 
       if (hostPath) {
         await refreshHostOsRelease();
 
-        // const realFile = await resolveSymlink(hostPath);
-        // const arrow = hostPath === realFile ? '' : ` → "${realFile}"`;
+        const realFile = await resolveSymlink(hostPath);
+        const arrow = hostPath === realFile ? '' : ` → "${realFile}"`;
 
-        console.log(`Using host os-release from "${hostPath}"`);
-        // console.log(`Using host os-release from "${hostPath}"${arrow}`);
+        console.log(`Bound "${hostPath}"${arrow} to ${LOCAL_OS_PATHS
+        .filter(p => fs.existsSync(p))
+        .map(p => `"${p}"`)
+        .join(' and ')}`);
         return;
       }
     }
-
-    console.log(
-      `Using os-release from ${LOCAL_OS_PATHS
-        .filter(p => fs.existsSync(p))
-        .map(p => `"${p}"`)
-        .join(' or ')}`
-    );
   } catch (e) {
     console.warn(e);
+  } finally {
     console.log(
-      `Using host os-release from ${LOCAL_OS_PATHS
+      `Using os-release from ${LOCAL_OS_PATHS
         .filter(p => fs.existsSync(p))
         .map(p => `"${p}"`)
         .join(' or ')}`
