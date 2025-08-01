@@ -5733,15 +5733,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/react-fontawesome@npm:0.2.2":
-  version: 0.2.2
-  resolution: "@fortawesome/react-fontawesome@npm:0.2.2"
+"@fortawesome/react-fontawesome@npm:0.2.3":
+  version: 0.2.3
+  resolution: "@fortawesome/react-fontawesome@npm:0.2.3"
   dependencies:
     prop-types: ^15.8.1
   peerDependencies:
-    "@fortawesome/fontawesome-svg-core": ~1 || ~6
-    react: ">=16.3"
-  checksum: e4bed35bfb7fc88b5bcf2305d08ee1835b82fa7705945c4d310df33bb747b05ef07a33ac9db643c8870ca4f835228978290d84d82f2c6c6a70b9ab4c886731a6
+    "@fortawesome/fontawesome-svg-core": ~1 || ~6 || ~7
+    react: ^16.3 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 6e32ce71c72d91fbb8323c108868421fcadc4a166850e3296c785440615eb7e5c249100951d4ad252afbb68570ffe5acf6e48e07dea05cff64787823c42f38ea
   languageName: node
   linkType: hard
 
@@ -14708,7 +14708,7 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": 6.7.2
     "@fortawesome/free-brands-svg-icons": 6.7.2
     "@fortawesome/free-solid-svg-icons": 6.7.2
-    "@fortawesome/react-fontawesome": 0.2.2
+    "@fortawesome/react-fontawesome": 0.2.3
     "@mantine/core": 6.0.22
     "@mantine/hooks": 6.0.22
     "@mdx-js/react": 3.1.0
