@@ -14778,7 +14778,7 @@ __metadata:
     dotenv: 16.6.1
     esbuild: ^0.25.0
     eslint: 8.57.1
-    eslint-config-prettier: 9.1.0
+    eslint-config-prettier: 9.1.2
     eslint-plugin-cypress: 2.15.2
     eslint-plugin-import: 2.31.0
     eslint-plugin-jsx-a11y: 6.10.2
@@ -16439,14 +16439,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:9.1.0":
-  version: 9.1.0
-  resolution: "eslint-config-prettier@npm:9.1.0"
+"eslint-config-prettier@npm:9.1.2":
+  version: 9.1.2
+  resolution: "eslint-config-prettier@npm:9.1.2"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: 9229b768c879f500ee54ca05925f31b0c0bafff3d9f5521f98ff05127356de78c81deb9365c86a5ec4efa990cb72b74df8612ae15965b14136044c73e1f6a907
+  checksum: e786b767331094fd024cb1b0899964a9da0602eaf4ebd617d6d9794752ccd04dbe997e3c14c17f256c97af20bee1c83c9273f69b74cb2081b6f514580d62408f
   languageName: node
   linkType: hard
 
