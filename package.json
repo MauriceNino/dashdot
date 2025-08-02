@@ -46,7 +46,7 @@
     "antd": "5.24.6",
     "axios": "1.11.0",
     "clsx": "2.1.1",
-    "compression": "1.8.0",
+    "compression": "1.8.1",
     "core-js": "3.43.0",
     "cors": "2.8.5",
     "cronstrue": "2.61.0",
