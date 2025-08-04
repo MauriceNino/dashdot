@@ -13844,10 +13844,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.43.0":
-  version: 3.43.0
-  resolution: "core-js@npm:3.43.0"
-  checksum: b6da4099d9556ce23f8ada331c8cdc4a6803089a4de837126d52058ec05b74be1c6019e00ff2cf17635989d16562ddddf13cc6fa189d254914b4a42eb4960322
+"core-js@npm:3.45.0":
+  version: 3.45.0
+  resolution: "core-js@npm:3.45.0"
+  checksum: 05706def467637c0392cb3d37d9e29714070d53feceea2715b4c805f9d55a62caac5d9f40c679a5f56e7fed4198a0e923392c704140fd617c111b239968d5bf1
   languageName: node
   linkType: hard
 
@@ -14769,7 +14769,7 @@ __metadata:
     clsx: 2.1.1
     commitizen: 4.3.1
     compression: 1.8.1
-    core-js: 3.43.0
+    core-js: 3.45.0
     cors: 2.8.5
     cronstrue: 2.61.0
     dedent: 1.6.0
