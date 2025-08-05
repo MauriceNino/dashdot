@@ -14763,7 +14763,7 @@ __metadata:
     recharts: 2.7.3
     regenerator-runtime: 0.14.1
     rxjs: 7.8.2
-    sass: 1.86.3
+    sass: 1.89.2
     semantic-release-plus: 20.0.0
     simplebar-react: 3.3.2
     socket.io: 4.8.1
@@ -29329,9 +29329,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.86.3":
-  version: 1.86.3
-  resolution: "sass@npm:1.86.3"
+"sass@npm:1.89.2":
+  version: 1.89.2
+  resolution: "sass@npm:1.89.2"
   dependencies:
     "@parcel/watcher": ^2.4.1
     chokidar: ^4.0.0
@@ -29342,7 +29342,7 @@ __metadata:
       optional: true
   bin:
     sass: sass.js
-  checksum: 743091217d4f72d261177409d2aa592ca6be49e95c84c8bd06c3ff06ee0113b8532ad6b30c95d923cc1b3470241989983bdeb3b0710b1570ffed0768aa4e5227
+  checksum: 192a97ffe801d9377d10c0a8a129befe637438c5aa979a56db18fd95da2aa32b656715fa8a2959bfaf059b490792a783e605a94449d44fbbf44d8155aa981490
   languageName: node
   linkType: hard
 
