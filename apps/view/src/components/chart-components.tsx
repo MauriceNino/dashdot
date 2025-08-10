@@ -11,7 +11,7 @@ import {
   Sector,
   SectorProps,
   Tooltip,
-  TooltipProps,
+  TooltipContentProps,
   XAxis,
   YAxis,
 } from 'recharts';
@@ -26,7 +26,7 @@ type DefaultAreaChartProps = {
   color: string;
   children: React.ReactNode;
   data: ChartVal[];
-  renderTooltip?: (point: TooltipProps<number, string>) => React.ReactNode;
+  renderTooltip?: (point: TooltipContentProps<number, string>) => React.ReactNode;
 };
 
 export const DefaultAreaChart: FC<DefaultAreaChartProps> = ({
@@ -199,20 +199,15 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
           fill={color}
           strokeWidth={5}
           stroke={theme.colors.surface}
-          activeIndex={activeSegment}
-          onMouseEnter={(_, i) => {
-            setActiveSegment(i);
-          }}
           onMouseLeave={() => {
-            setActiveSegment(undefined);
             setLabel(undefined);
           }}
           onMouseMove={(data, _, event) => {
             const rect = (
               document.querySelector(`#${id}`) as HTMLElement
             ).getBoundingClientRect();
-            const label = data.payload.payload.name;
-            const value = data.payload.payload.value;
+            const label = data.name;
+            const value = data.value;
 
             throttledSetLabel({
               label: hoverLabelRenderer(label, value),
@@ -220,7 +215,7 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
               y: event.clientY - rect.top,
             });
           }}
-          activeShape={renderActiveShape}
+          activeShape={renderActiveShape as SectorProps}
           labelLine={false}
         >
           {children}
@@ -272,7 +267,7 @@ type DefaultVertBarChartProps = {
     available: number;
   }[];
   tooltipRenderer: (
-    value: TooltipProps<string | number | (string | number)[], string | number>
+    value: TooltipContentProps<string | number | (string | number)[], string | number>
   ) => React.ReactNode;
 };
 

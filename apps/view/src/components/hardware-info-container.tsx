@@ -84,7 +84,7 @@ type HardwareInfoProps = {
   color: string;
   heading: string;
   icon: IconProp;
-  extraContent?: JSX.Element;
+  extraContent?: ReactNode;
   children?: ReactNode;
   infosPerPage: number;
   onPageChange?: (page: number) => void;
