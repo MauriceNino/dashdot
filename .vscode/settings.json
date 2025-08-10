@@ -2,5 +2,6 @@
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
-  }
+  },
+  "biome.enabled": false
 }

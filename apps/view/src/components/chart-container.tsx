@@ -2,9 +2,9 @@ import { Transient } from '@dash/common';
 import { motion } from 'framer-motion';
 import { forwardRef, ReactElement } from 'react';
 import { SwapSpinner } from 'react-spinners-kit';
-import ReactVirtualizedAutoSizer from 'react-virtualized-auto-sizer';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
+import { AutoSizer } from './auto-sizer';
 
 type ContainerProps = Transient<{
   edges: [boolean, boolean, boolean, boolean];
@@ -106,10 +106,8 @@ export const ChartContainer = motion(
             >
               {props.textRight}
             </StatText>
-            <ReactVirtualizedAutoSizer
+            <AutoSizer
               style={{
-                height: '100%',
-                width: '100%',
                 overflow: 'hidden',
               }}
             >
@@ -119,7 +117,7 @@ export const ChartContainer = motion(
                   height: size.height ?? 0,
                 })
               }
-            </ReactVirtualizedAutoSizer>
+            </AutoSizer>
           </>
         ) : (
           <SwapSpinner
