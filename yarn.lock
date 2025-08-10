@@ -15044,7 +15044,6 @@ __metadata:
     react-form-ctl: "npm:2.0.1"
     react-is: "npm:19.1.1"
     react-spinners-kit: "npm:1.9.1"
-    react-virtualized-auto-sizer: "npm:1.0.26"
     recharts: "npm:3.1.2"
     regenerator-runtime: "npm:0.14.1"
     rxjs: "npm:7.8.2"
@@ -28371,7 +28370,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-virtualized-auto-sizer@npm:*, react-virtualized-auto-sizer@npm:1.0.26":
+"react-virtualized-auto-sizer@npm:*":
   version: 1.0.26
   resolution: "react-virtualized-auto-sizer@npm:1.0.26"
   peerDependencies:
