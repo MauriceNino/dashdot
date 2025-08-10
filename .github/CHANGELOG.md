@@ -1,3 +1,17 @@
+# [6.2.0](https://github.com/MauriceNino/dashdot/compare/v6.1.0...v6.2.0) (2025-08-10)
+
+
+### Bug Fixes
+
+* auto sizing for chart not working on load ([6b88601](https://github.com/MauriceNino/dashdot/commit/6b88601f27962ff512a541e2cc1a4edaf1d6506b))
+* **docs:** update configuration url in readme  ([#1227](https://github.com/MauriceNino/dashdot/issues/1227)) ([1941c26](https://github.com/MauriceNino/dashdot/commit/1941c26ee51045a4b97f189add40678c2bdc10b7)), closes [#1091](https://github.com/MauriceNino/dashdot/issues/1091) [#1168](https://github.com/MauriceNino/dashdot/issues/1168) [#1212](https://github.com/MauriceNino/dashdot/issues/1212)
+* report host os instead of container os ([#1233](https://github.com/MauriceNino/dashdot/issues/1233)) ([508c832](https://github.com/MauriceNino/dashdot/commit/508c83297fced763cd7ad1f4f3bee04603f423d5)), closes [#1232](https://github.com/MauriceNino/dashdot/issues/1232)
+
+
+### Features
+
+* added sub/root/base path routing ([#1229](https://github.com/MauriceNino/dashdot/issues/1229)) ([70c26d0](https://github.com/MauriceNino/dashdot/commit/70c26d0dcafcda6dbb97fbbe64816602323ab63b))
+
 # [6.1.0](https://github.com/MauriceNino/dashdot/compare/v6.0.0...v6.1.0) (2025-07-07)
 
 
