@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as si from 'systeminformation';
 import { promisify } from 'util';
 import { CONFIG } from './config';
-import { PLATFORM_IS_WINDOWS } from './utils';
+import { PLATFORM_IS_WINDOWS, refreshHostOsRelease, resolveSymlink } from './utils';
 
 const exec = promisify(exaca);
 
@@ -87,27 +87,38 @@ export const setupNetworking = async () => {
 };
 
 const LOCAL_OS_PATHS = ['/etc/os-release', '/usr/lib/os-release'];
-const MNT_OS_PATH = '/mnt/host/etc/os-release';
+const MNT_OS_PATH_CANDIDATES = [
+  '/mnt/host/etc/os-release',
+  '/mnt/host/usr/lib/os-release',
+];
 
 export const setupOsVersion = async () => {
   try {
-    if (CONFIG.running_in_docker && fs.existsSync(MNT_OS_PATH)) {
-      for (const LOCAL_OS_PATH of LOCAL_OS_PATHS) {
-        if (fs.existsSync(LOCAL_OS_PATH)) {
-          await exec(`ln -sf ${MNT_OS_PATH} ${LOCAL_OS_PATH}`);
-        }
-      }
+    if (CONFIG.running_in_docker) {
+      const hostPath = MNT_OS_PATH_CANDIDATES.find(p => fs.lstatSync(p));
 
-      console.log(`Using host os version from "${MNT_OS_PATH}"`);
-    } else {
-      console.log(
-        `Using host os version from ${LOCAL_OS_PATHS.map(p => `"${p}"`).join(
-          ' and '
-        )}`
-      );
+      if (hostPath) {
+        await refreshHostOsRelease();
+
+        const realFile = await resolveSymlink(hostPath);
+        const arrow = hostPath === realFile ? '' : ` → "${realFile}"`;
+
+        console.log(`Bound "${hostPath}"${arrow} to ${LOCAL_OS_PATHS
+        .filter(p => fs.existsSync(p))
+        .map(p => `"${p}"`)
+        .join(' and ')}`);
+        return;
+      }
     }
   } catch (e) {
     console.warn(e);
+  } finally {
+    console.log(
+      `Using os-release from ${LOCAL_OS_PATHS
+        .filter(p => fs.existsSync(p))
+        .map(p => `"${p}"`)
+        .join(' or ')}`
+    );
   }
 };
 
