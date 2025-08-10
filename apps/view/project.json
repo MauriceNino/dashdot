@@ -10,7 +10,7 @@
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/view",
-        "base": "/",
+        "base": "./",
         "sourcemap": true
       },
       "configurations": {
