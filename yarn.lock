@@ -10248,12 +10248,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:19.1.9":
-  version: 19.1.9
-  resolution: "@types/react@npm:19.1.9"
+"@types/react@npm:19.1.10":
+  version: 19.1.10
+  resolution: "@types/react@npm:19.1.10"
   dependencies:
     csstype: "npm:^3.0.2"
-  checksum: 10/b1032eae52e3b4f2a8b9ea6aac936385a78b7eff55cad4ff4f0d7e726c6ea87c1f287a1ba0e57a76a8e4456d3fb918b4f97a01e71686fdc11a65b26b8d296be4
+  checksum: 10/2c2f98e4a36144cddc9300483d0b14a0721dbb3b2fc2242e3841391589570dd344cde0c901eb291dba597a8efdb70543b0dbbae6cc2bef2061eb185c4ca55522
   languageName: node
   linkType: hard
 
@@ -14986,7 +14986,7 @@ __metadata:
     "@types/node": "npm:24.2.1"
     "@types/node-cron": "npm:3.0.11"
     "@types/qs": "npm:6.14.0"
-    "@types/react": "npm:19.1.9"
+    "@types/react": "npm:19.1.10"
     "@types/react-color": "npm:3.0.13"
     "@types/react-dom": "npm:19.1.7"
     "@types/react-is": "npm:19.0.0"
