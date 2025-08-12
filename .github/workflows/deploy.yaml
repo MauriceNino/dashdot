@@ -18,7 +18,7 @@ jobs:
     steps:
       # SETUP
       - if: ${{ github.ref_name == 'main' }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - if: ${{ github.ref_name == 'main' }}
         uses: actions/setup-node@v4
         with:
@@ -41,7 +41,7 @@ jobs:
     needs: version
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       # Getting dependencies before the build to speed up the ARM build
       # This a bit of a workaround, but it shouldn't be a problem, as yarn loads the dependencies in all formats needed
       - uses: actions/setup-node@v4
@@ -101,7 +101,7 @@ jobs:
     needs: version
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
@@ -165,7 +165,7 @@ jobs:
     needs: [build, build_nvidia]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
@@ -189,7 +189,7 @@ jobs:
     needs: [build, build_nvidia]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
