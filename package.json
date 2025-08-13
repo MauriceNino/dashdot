@@ -137,7 +137,7 @@
     "dotenv": "17.2.1",
     "esbuild": "^0.25.0",
     "eslint": "8.57.1",
-    "eslint-config-prettier": "9.1.2",
+    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "2.15.2",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
