@@ -144,7 +144,7 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
     "husky": "9.1.7",
-    "inquirer": "12.9.1",
+    "inquirer": "12.9.2",
     "jest": "30.0.5",
     "jest-environment-node": "30.0.5",
     "jsdom": "22.1.0",
