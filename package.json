@@ -155,7 +155,7 @@
     "ts-jest": "29.4.1",
     "ts-node": "10.9.2",
     "typescript": "5.9.2",
-    "vite": "5.4.19",
+    "vite": "5.4.20",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-node-polyfills": "0.24.0",
     "vite-tsconfig-paths": "4.3.2",
