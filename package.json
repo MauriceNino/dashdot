@@ -152,7 +152,7 @@
     "prettier": "2.8.8",
     "prop-types": "15.8.1",
     "semantic-release-plus": "20.0.0",
-    "ts-jest": "29.4.1",
+    "ts-jest": "29.4.5",
     "ts-node": "10.9.2",
     "typescript": "5.9.2",
     "vite": "5.4.21",
