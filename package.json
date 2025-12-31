@@ -51,7 +51,7 @@
     "cors": "2.8.5",
     "cronstrue": "3.2.0",
     "dedent": "1.6.0",
-    "docusaurus-plugin-image-zoom": "1.0.1",
+    "docusaurus-plugin-image-zoom": "3.0.1",
     "docusaurus-plugin-sass": "0.2.6",
     "express": "4.21.2",
     "framer-motion": "12.23.24",

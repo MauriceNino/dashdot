@@ -15614,7 +15614,7 @@ __metadata:
     cors: "npm:2.8.5"
     cronstrue: "npm:3.2.0"
     dedent: "npm:1.6.0"
-    docusaurus-plugin-image-zoom: "npm:1.0.1"
+    docusaurus-plugin-image-zoom: "npm:3.0.1"
     docusaurus-plugin-sass: "npm:0.2.6"
     dotenv: "npm:17.2.3"
     esbuild: "npm:^0.25.0"
@@ -16223,15 +16223,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-image-zoom@npm:1.0.1":
-  version: 1.0.1
-  resolution: "docusaurus-plugin-image-zoom@npm:1.0.1"
+"docusaurus-plugin-image-zoom@npm:3.0.1":
+  version: 3.0.1
+  resolution: "docusaurus-plugin-image-zoom@npm:3.0.1"
   dependencies:
-    medium-zoom: "npm:^1.0.6"
+    medium-zoom: "npm:^1.1.0"
     validate-peer-dependencies: "npm:^2.2.0"
   peerDependencies:
-    "@docusaurus/theme-classic": ">=2.2.0"
-  checksum: 10/546269ddb63ab8893a35591808f128eb6318d89c8cd072df5ad5e098eb1dcff79d2359ca0e70aaf71d3de46c89beca3b10596c3c765bb1d634cdeedb64befca2
+    "@docusaurus/theme-classic": ">=3.0.0"
+  checksum: 10/860ceb43f45ebc520114d55fe26ff3c77e22d1c3886c38a30aee8e5dae96f55ca7fe918bdd80b8cfde6980f6dcb3ff04db1c1979efe9ea8e7782409bd1a2f301
   languageName: node
   linkType: hard
 
@@ -23849,10 +23849,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"medium-zoom@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "medium-zoom@npm:1.0.6"
-  checksum: 10/d2eee0dc4089ab1362073e22e22aa3763199b8fcd5bf58adeeafbc7e7d7dfa2adbf4d96623d8c230ba9d7d175c27bd65d0517ad8b3d04dac502e3bfdf91a511a
+"medium-zoom@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "medium-zoom@npm:1.1.0"
+  checksum: 10/e27692851ce65f03877a1c9f56de16a2c10ea720278b47f06b8a0ff503cef91762e683790d2b7bd3e9136fff36bf4f583e677173f0f0c4070a391a5d849ebbcd
   languageName: node
   linkType: hard
 
