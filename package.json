@@ -44,7 +44,7 @@
     "@mdx-js/react": "3.1.1",
     "@swc/helpers": "0.5.17",
     "antd": "5.24.6",
-    "axios": "1.11.0",
+    "axios": "1.12.0",
     "clsx": "2.1.1",
     "compression": "1.8.1",
     "core-js": "3.45.1",
