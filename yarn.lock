@@ -15620,7 +15620,7 @@ __metadata:
     esbuild: "npm:^0.25.0"
     eslint: "npm:8.57.1"
     eslint-config-prettier: "npm:10.1.8"
-    eslint-plugin-cypress: "npm:2.15.2"
+    eslint-plugin-cypress: "npm:5.2.0"
     eslint-plugin-import: "npm:2.32.0"
     eslint-plugin-jsx-a11y: "npm:6.10.2"
     eslint-plugin-react: "npm:7.37.5"
@@ -17348,14 +17348,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-cypress@npm:2.15.2":
-  version: 2.15.2
-  resolution: "eslint-plugin-cypress@npm:2.15.2"
+"eslint-plugin-cypress@npm:5.2.0":
+  version: 5.2.0
+  resolution: "eslint-plugin-cypress@npm:5.2.0"
   dependencies:
-    globals: "npm:^13.20.0"
+    globals: "npm:^16.2.0"
   peerDependencies:
-    eslint: ">= 3.2.1"
-  checksum: 10/a01c88f6dcefa1414b188a6121c22d346a145dbba7d70d22d1ee2f9575551e6004fcddd234df8758b4796b43b129a87c41bf380461800d822b020be318ce0b83
+    eslint: ">=9"
+  checksum: 10/4701b3e6b6bfba21fdfdabb3551e066d683faf1e0f38d943cb51a2faa409a1bce4e489c6dbcac2bf2a8e498f96059da3c61d41193a0a4d792269fd9c2728f42f
   languageName: node
   linkType: hard
 
@@ -19183,12 +19183,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^13.20.0":
-  version: 13.24.0
-  resolution: "globals@npm:13.24.0"
-  dependencies:
-    type-fest: "npm:^0.20.2"
-  checksum: 10/62c5b1997d06674fc7191d3e01e324d3eda4d65ac9cc4e78329fa3b5c4fd42a0e1c8722822497a6964eee075255ce21ccf1eec2d83f92ef3f06653af4d0ee28e
+"globals@npm:^16.2.0":
+  version: 16.5.0
+  resolution: "globals@npm:16.5.0"
+  checksum: 10/f9e8a2a13f50222c127030a619e283e7bbfe32966316bdde0715af1d15a7e40cb9c24ff52cad59671f97762ed8b515353c2f8674f560c63d9385f19ee26735a6
   languageName: node
   linkType: hard
 
