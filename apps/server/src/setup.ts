@@ -86,39 +86,56 @@ export const setupNetworking = async () => {
   }
 };
 
-const LOCAL_OS_PATHS = ['/etc/os-release', '/usr/lib/os-release'];
-const MNT_OS_PATH_CANDIDATES = [
-  '/mnt/host/etc/os-release',
-  '/mnt/host/usr/lib/os-release',
-];
-
 export const setupOsVersion = async () => {
-  try {
-    if (CONFIG.running_in_docker) {
-      const hostPath = MNT_OS_PATH_CANDIDATES.find(p => fs.lstatSync(p));
+  // Establish initial links (no-op when not in Docker)
+  await refreshHostOsRelease();
 
-      if (hostPath) {
-        await refreshHostOsRelease();
+  const OS_CANDIDATES = [
+    '/etc/lsb-release',
+    '/etc/os-release',
+    '/usr/lib/os-release',
+    '/etc/openwrt_release',
+  ];
 
-        const realFile = await resolveSymlink(hostPath);
-        const arrow = hostPath === realFile ? '' : ` → "${realFile}"`;
+  const reports: string[] = [];
 
-        console.log(`Bound "${hostPath}"${arrow} to ${LOCAL_OS_PATHS
-        .filter(p => fs.existsSync(p))
-        .map(p => `"${p}"`)
-        .join(' and ')}`);
-        return;
+  for (const p of OS_CANDIDATES) {
+    let stat: fs.Stats | undefined;
+    try {
+      stat = fs.lstatSync(p);
+    } catch (e) {
+      const code = (e as NodeJS.ErrnoException)?.code;
+      if (code === 'ENOENT' || code === 'ENOTDIR') {
+        reports.push(`${p} [missing]`);
+        continue;
+      }
+      // Other errors (e.g. permission) – try to resolve anyway as best effort
+    }
+
+    if (stat?.isSymbolicLink()) {
+      try {
+        const target = await resolveSymlink(p);
+        const arrow = p === target ? '' : ` -> "${target}"`;
+        reports.push(`${p}${arrow}`);
+      } catch (err) {
+        reports.push(`${p} -> [unresolved: ${(err as Error).message}]`);
+      }
+    } else if (stat) {
+      reports.push(`${p} (file)`);
+    } else {
+      try {
+        const target = await resolveSymlink(p);
+        const arrow = p === target ? '' : ` -> "${target}"`;
+        reports.push(`${p}${arrow}`);
+      } catch (err) {
+        reports.push(`${p} [unresolved: ${(err as Error).message}]`);
       }
     }
-  } catch (e) {
-    console.warn(e);
-  } finally {
-    console.log(
-      `Using os-release from ${LOCAL_OS_PATHS
-        .filter(p => fs.existsSync(p))
-        .map(p => `"${p}"`)
-        .join(' or ')}`
-    );
+  }
+
+  if (reports.length) {
+    console.log('OS metadata files:');
+    for (const line of reports) console.log(`  ${line}`);
   }
 };
 
