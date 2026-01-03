@@ -1,6 +1,6 @@
-import { Transient } from '@dash/common';
-import { motion, Variants } from 'framer-motion';
-import { FC, useEffect } from 'react';
+import type { Transient } from '@dashdot/common';
+import { motion, type Variants } from 'framer-motion';
+import { type FC, useEffect } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import { default as styled } from 'styled-components';
@@ -100,9 +100,9 @@ export const MainWidgetContainer: FC = () => {
         <ContentContainer $mobile={isMobile}>
           <ErrorContainer
             variants={containerVariants}
-            initial='initial'
-            animate='animate'
-            exit='exit'
+            initial="initial"
+            animate="animate"
+            exit="exit"
             $mobile={isMobile}
           >
             <GlassPane variants={itemVariants} grow={0} minWidth={500}>
@@ -166,11 +166,11 @@ export const MainWidgetContainer: FC = () => {
         <FlexContainer
           $mobile={isMobile}
           variants={containerVariants}
-          initial='initial'
-          animate='animate'
-          exit='exit'
+          initial="initial"
+          animate="animate"
+          exit="exit"
         >
-          {config.widget_list.map(widget => {
+          {config.widget_list.map((widget) => {
             const currentConfig = configs[widget];
 
             return (
@@ -182,9 +182,9 @@ export const MainWidgetContainer: FC = () => {
                 minWidth={currentConfig.minWidth}
               >
                 <currentConfig.Widget
-                  // @ts-ignore
+                  // @ts-expect-error
                   data={currentConfig.data}
-                  // @ts-ignore
+                  // @ts-expect-error
                   load={currentConfig.load}
                   config={config}
                 />

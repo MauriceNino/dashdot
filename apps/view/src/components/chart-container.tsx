@@ -1,7 +1,7 @@
-import { Transient } from '@dash/common';
+import type { Transient } from '@dashdot/common';
 import { motion } from 'framer-motion';
-import { forwardRef, ReactElement } from 'react';
-import { SwapSpinner } from 'react-spinners-kit';
+import { forwardRef, type ReactElement } from 'react';
+import { BeatLoader } from 'react-spinners';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
 import { AutoSizer } from './auto-sizer';
@@ -93,14 +93,14 @@ export const ChartContainer = motion(
         {props.contentLoaded ? (
           <>
             <StatText
-              $float='left'
+              $float="left"
               $offset={props.textOffset}
               $size={props.textSize}
             >
               {props.textLeft}
             </StatText>
             <StatText
-              $float='right'
+              $float="right"
               $offset={props.textOffset}
               $size={props.textSize}
             >
@@ -111,7 +111,7 @@ export const ChartContainer = motion(
                 overflow: 'hidden',
               }}
             >
-              {size =>
+              {(size) =>
                 props.renderChart({
                   width: size.width ?? 0,
                   height: size.height ?? 0,
@@ -120,15 +120,11 @@ export const ChartContainer = motion(
             </AutoSizer>
           </>
         ) : (
-          <SwapSpinner
-            size={70}
-            color={theme.colors.background}
-            loading={true}
-          />
+          <BeatLoader color={theme.colors.background} />
         )}
       </Container>
     );
-  })
+  }),
 );
 
 type MultiChartContainerProps = {
@@ -174,6 +170,6 @@ export const MultiChartContainer = motion(
           <div>{children}</div>
         </SMultiChartContainer>
       );
-    }
-  )
+    },
+  ),
 );

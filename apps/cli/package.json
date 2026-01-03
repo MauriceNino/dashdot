@@ -1,0 +1,17 @@
+{
+  "name": "@dashdot/cli",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --sourcemap"
+  },
+  "dependencies": {
+    "@dashdot/typescript-config": "*",
+    "dedent": "1.7.1",
+    "systeminformation": "5.28.10",
+    "yargs": "17.7.2"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.2"
+  }
+}
