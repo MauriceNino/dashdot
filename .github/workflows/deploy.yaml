@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: ['main', 'dev', 'feature/**']
+    branches: ["main", "dev", "feature/**"]
   workflow_dispatch:
 
 concurrency:
@@ -22,8 +22,8 @@ jobs:
       - if: ${{ github.ref_name == 'main' }}
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          cache: 'yarn'
+          node-version: "25.x"
+          cache: "yarn"
       - if: ${{ github.ref_name == 'main' }}
         run: yarn --immutable
       - if: ${{ github.ref_name == 'main' }}
@@ -42,17 +42,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      # Getting dependencies before the build to speed up the ARM build
-      # This a bit of a workaround, but it shouldn't be a problem, as yarn loads the dependencies in all formats needed
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'yarn'
-      - run: |
-          yarn config set nodeLinker pnp
-          yarn --immutable
-          yarn config set nodeLinker node-modules
-          rm -rf .yarn/unplugged .pnp.cjs .pnp.loader.mjs
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
@@ -102,15 +91,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'yarn'
-      - run: |
-          yarn config set nodeLinker pnp
-          yarn --immutable
-          yarn config set nodeLinker node-modules
-          rm -rf .yarn/unplugged .pnp.cjs .pnp.loader.mjs
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
@@ -168,8 +148,8 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          cache: 'yarn'
+          node-version: "25.x"
+          cache: "yarn"
       - run: yarn --immutable
       - env:
           GIT_USER: github-actions
@@ -192,8 +172,8 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          cache: 'yarn'
+          node-version: "20.x"
+          cache: "yarn"
       - run: yarn --immutable
       - env:
           GIT_USER: github-actions
@@ -204,8 +184,8 @@ jobs:
           GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn nx build docs
-          yarn nx deploy docs
+          yarn turbo run @dashdot/docs#build
+          yarn turbo run @dashdot/docs#deploy
 
   # Update deployment on rex
   rex:

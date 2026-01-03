@@ -14,26 +14,26 @@ const createBufferedInterval = <R>(
   enabled: boolean,
   bufferSize: number,
   intervalMs: number,
-  factory: () => Promise<R>
+  factory: () => Promise<R>,
 ): Observable<R> => {
   const buffer = new ReplaySubject<R>(bufferSize);
 
   if (enabled) {
     // Instantly load first value
     factory()
-      .then(value => {
+      .then((value) => {
         console.log(
           `First measurement [${name}]:`,
           inspect(value, {
             showHidden: false,
             depth: null,
             colors: true,
-          })
+          }),
         );
 
         buffer.next(value);
       })
-      .catch(err => buffer.error(err));
+      .catch((err) => buffer.error(err));
 
     // Load values every intervalMs
     interval(intervalMs).pipe(mergeMap(factory)).subscribe(buffer);
@@ -50,7 +50,7 @@ export const getDynamicServerInfo = () => {
     CONFIG.widget_list.includes('cpu'),
     CONFIG.cpu_shown_datapoints,
     CONFIG.cpu_poll_interval,
-    getCpuInfo.dynamic
+    getCpuInfo.dynamic,
   );
 
   const ramObs = createBufferedInterval(
@@ -58,7 +58,7 @@ export const getDynamicServerInfo = () => {
     CONFIG.widget_list.includes('ram'),
     CONFIG.ram_shown_datapoints,
     CONFIG.ram_poll_interval,
-    getRamInfo.dynamic
+    getRamInfo.dynamic,
   );
 
   const storageObs = createBufferedInterval(
@@ -66,7 +66,7 @@ export const getDynamicServerInfo = () => {
     CONFIG.widget_list.includes('storage'),
     1,
     CONFIG.storage_poll_interval,
-    getStorageInfo.dynamic
+    getStorageInfo.dynamic,
   );
 
   const networkObs = createBufferedInterval(
@@ -74,7 +74,7 @@ export const getDynamicServerInfo = () => {
     CONFIG.widget_list.includes('network'),
     CONFIG.network_shown_datapoints,
     CONFIG.network_poll_interval,
-    getNetworkInfo.dynamic
+    getNetworkInfo.dynamic,
   );
 
   const gpuObs = createBufferedInterval(
@@ -82,7 +82,7 @@ export const getDynamicServerInfo = () => {
     CONFIG.widget_list.includes('gpu'),
     CONFIG.gpu_shown_datapoints,
     CONFIG.gpu_poll_interval,
-    getGpuInfo.dynamic
+    getGpuInfo.dynamic,
   );
 
   let speedTestObs = new Observable();
@@ -99,8 +99,8 @@ export const getDynamicServerInfo = () => {
     } else {
       speedTestObs = interval(CONFIG.speed_test_interval * 60 * 1000).pipe(
         mergeMap(
-          async () => await loadInfo('network', getNetworkInfo.speedTest, true)
-        )
+          async () => await loadInfo('network', getNetworkInfo.speedTest, true),
+        ),
       );
     }
   }

@@ -1,4 +1,4 @@
-import { OsInfo } from '@dash/common';
+import type { OsInfo } from '@dashdot/common';
 import { exec } from 'child_process';
 import * as si from 'systeminformation';
 import { promisify } from 'util';
@@ -11,14 +11,17 @@ export default {
     try {
       await refreshHostOsRelease();
     } catch (err) {
-      console.warn('Cannot refresh /etc/os-release (os results may be outdated):', err);
+      console.warn(
+        'Cannot refresh /etc/os-release (os results may be outdated):',
+        err,
+      );
     }
     const osInfo = await si.osInfo();
 
     const buildInfo = JSON.parse(
       (await execp('cat version.json')
         .then(({ stdout }) => stdout)
-        .catch(() => undefined)) ?? '{}'
+        .catch(() => undefined)) ?? '{}',
     );
     const gitHash = await execp('git log -1 --format="%H"')
       .then(({ stdout }) => stdout.trim())

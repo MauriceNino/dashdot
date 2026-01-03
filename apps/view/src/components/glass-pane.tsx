@@ -1,4 +1,4 @@
-import { Transient } from '@dash/common';
+import type { Transient } from '@dashdot/common';
 import { motion } from 'framer-motion';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
@@ -46,5 +46,5 @@ export const GlassPane = motion(
         {props.children}
       </Container>
     );
-  })
+  }),
 );

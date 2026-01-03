@@ -1,6 +1,6 @@
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FC } from 'react';
+import type { FC } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { ThemedText } from '../components/text';
 
@@ -25,7 +25,7 @@ export const ErrorWidget: FC<ErrorWidgetProps> = ({ errorText }) => {
       <FontAwesomeIcon
         icon={faExclamationTriangle}
         color={theme.colors.text}
-        size='5x'
+        size="5x"
       />
       <ThemedText>{errorText}</ThemedText>
     </Content>

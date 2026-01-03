@@ -9,9 +9,9 @@ export const toInfoTable = <T extends Array<string>>(
   mappings: Record<
     T[number],
     { label: string; value?: string | number; tooltip?: string }
-  >
+  >,
 ): InfoTableArr =>
-  order.map(key => {
+  order.map((key) => {
     const { label, tooltip, value } = mappings[key as T[number]];
 
     return {

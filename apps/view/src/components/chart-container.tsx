@@ -1,6 +1,6 @@
-import { Transient } from '@dash/common';
+import type { Transient } from '@dashdot/common';
 import { motion } from 'framer-motion';
-import { forwardRef, ReactElement } from 'react';
+import { forwardRef, type ReactElement } from 'react';
 import { SwapSpinner } from 'react-spinners-kit';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
@@ -93,14 +93,14 @@ export const ChartContainer = motion(
         {props.contentLoaded ? (
           <>
             <StatText
-              $float='left'
+              $float="left"
               $offset={props.textOffset}
               $size={props.textSize}
             >
               {props.textLeft}
             </StatText>
             <StatText
-              $float='right'
+              $float="right"
               $offset={props.textOffset}
               $size={props.textSize}
             >
@@ -111,7 +111,7 @@ export const ChartContainer = motion(
                 overflow: 'hidden',
               }}
             >
-              {size =>
+              {(size) =>
                 props.renderChart({
                   width: size.width ?? 0,
                   height: size.height ?? 0,
@@ -128,7 +128,7 @@ export const ChartContainer = motion(
         )}
       </Container>
     );
-  })
+  }),
 );
 
 type MultiChartContainerProps = {
@@ -174,6 +174,6 @@ export const MultiChartContainer = motion(
           <div>{children}</div>
         </SMultiChartContainer>
       );
-    }
-  )
+    },
+  ),
 );
