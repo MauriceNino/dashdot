@@ -43,7 +43,7 @@
     "semantic-release": "25.0.2",
     "semantic-release-plus": "19.0.2",
     "turbo": "^2.7.2",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3"
   },
   "commitlint": {
     "extends": [
