@@ -1,0 +1,12 @@
+{
+  "name": "@dashdot/common",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "@dashdot/typescript-config": "*"
+  }
+}

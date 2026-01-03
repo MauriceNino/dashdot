@@ -4,7 +4,7 @@ import CodeBlock from '@theme/CodeBlock';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { debounce } from 'throttle-debounce';
 
-const getDataFromUrl = url => {
+const getDataFromUrl = (url) => {
   const [data, setData] = useState({
     error: null,
     data: null,
@@ -14,7 +14,7 @@ const getDataFromUrl = url => {
   const requestCallback = useRef();
   const doRequest = useMemo(
     () => debounce(400, () => requestCallback.current()),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const getDataFromUrl = url => {
     };
 
     doRequest();
-  }, [url]);
+  }, [url, doRequest]);
 
   return data;
 };
@@ -65,11 +65,11 @@ export const ApiPreview = () => {
   const networkLoad = getDataFromUrl(baseUrl + '/load/network');
   const gpuLoad = getDataFromUrl(baseUrl + '/load/gpu');
 
-  const formatOutput = data => {
+  const formatOutput = (data) => {
     return !data.loading
       ? !data.error
         ? JSON.stringify(data.data, null, 2)
-        : data.error.message ?? 'Error'
+        : (data.error.message ?? 'Error')
       : 'Loading ...';
   };
 
@@ -95,7 +95,7 @@ export const ApiPreview = () => {
             alignItems: 'center',
           }}
         >
-          <Input.Wrapper label='URL'>
+          <Input.Wrapper label="URL">
             <div
               style={{
                 display: 'flex',
@@ -105,13 +105,13 @@ export const ApiPreview = () => {
               <Select
                 style={{ width: '100px' }}
                 value={protocol}
-                onChange={e => setProtocol(e)}
+                onChange={(e) => setProtocol(e)}
                 data={[
                   { value: 'https', label: 'https://' },
                   { value: 'http', label: 'http://' },
                 ]}
               />
-              <Input value={url} onChange={e => setUrl(e.target.value)} />
+              <Input value={url} onChange={(e) => setUrl(e.target.value)} />
             </div>
           </Input.Wrapper>
         </div>

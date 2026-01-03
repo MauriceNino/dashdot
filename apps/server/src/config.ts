@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Config } from '@dash/common';
+import type { Config } from '@dashdot/common';
 
 const numNull = (val: string | undefined): number | undefined => {
   if (val === undefined || val === '') {
@@ -10,20 +9,20 @@ const numNull = (val: string | undefined): number | undefined => {
 
 const penv = (key: string): string | undefined => process.env[`DASHDOT_${key}`];
 const lst = (item: string): string[] => (item === '' ? [] : item.split(','));
-const numlst = (item: string): number[] => lst(item).map(numNull);
+const numlst = (item: string): number[] => lst(item).map((item) => +item);
 const kv = <T extends boolean>(
   inp: string[],
-  toNum: T
+  toNum: T,
 ): Record<string, T extends true ? number : string> =>
   Object.fromEntries(
-    inp.map(p => {
+    inp.map((p) => {
       const [key, value] = p.split('=');
       if (toNum) {
-        return [key, +value];
+        return [key, numNull(value)];
       } else {
         return [key, value];
       }
-    })
+    }),
   );
 
 export const CONFIG: Config = {
@@ -36,7 +35,7 @@ export const CONFIG: Config = {
   fs_device_filter: lst(penv('FS_DEVICE_FILTER') ?? ''),
   fs_type_filter: lst(
     penv('FS_TYPE_FILTER') ??
-      'cifs,9p,fuse.rclone,fuse.mergerfs,nfs4,iso9660,fuse.shfs,autofs'
+      'cifs,9p,fuse.rclone,fuse.mergerfs,nfs4,iso9660,fuse.shfs,autofs',
   ),
   fs_virtual_mounts: lst(penv('FS_VIRTUAL_MOUNTS') ?? ''),
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
@@ -54,20 +53,20 @@ export const CONFIG: Config = {
   gpu_model_filter: lst(penv('GPU_MODEL_FILTER') ?? ''),
 
   widget_list: lst(
-    penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network'
+    penv('WIDGET_LIST') ?? 'os,cpu,storage,ram,network',
   ) as any[],
   os_label_list: lst(penv('OS_LABEL_LIST') ?? 'os,arch,up_since') as any[],
   cpu_label_list: lst(
-    penv('CPU_LABEL_LIST') ?? 'brand,model,cores,threads,frequency'
+    penv('CPU_LABEL_LIST') ?? 'brand,model,cores,threads,frequency',
   ) as any[],
   storage_label_list: lst(
-    penv('STORAGE_LABEL_LIST') ?? 'brand,type,size,raid'
+    penv('STORAGE_LABEL_LIST') ?? 'brand,type,size,raid',
   ) as any[],
   ram_label_list: lst(
-    penv('RAM_LABEL_LIST') ?? 'brand,type,size,frequency'
+    penv('RAM_LABEL_LIST') ?? 'brand,type,size,frequency',
   ) as any[],
   network_label_list: lst(
-    penv('NETWORK_LABEL_LIST') ?? 'type,speed_up,speed_down,interface_speed'
+    penv('NETWORK_LABEL_LIST') ?? 'type,speed_up,speed_down,interface_speed',
   ) as any[],
   gpu_label_list: lst(penv('GPU_LABEL_LIST') ?? 'brand,model,memory') as any[],
 

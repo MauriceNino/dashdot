@@ -1,20 +1,8 @@
 {
-  "extends": "../../tsconfig.base.json",
+  // This file is not used in compilation. It is here just for a nice editor experience.
+  "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "allowJs": true,
-    "esModuleInterop": true,
-    "jsx": "react",
-    "lib": ["DOM"],
-    "noEmit": true,
-    "noImplicitAny": false,
-    "types": [
-      "node",
-      "@docusaurus/module-type-aliases",
-      "@docusaurus/theme-classic"
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@site/*": ["./*"]
-    }
-  }
+    "baseUrl": "."
+  },
+  "exclude": [".docusaurus", "build"]
 }

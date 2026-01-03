@@ -70,7 +70,7 @@ export const WidgetPreview = () => {
   const finalUrl = encodeURI(
     `${protocol}://${url}?graph=${widget}${multiViewPart}${filterPart}` +
       `${showPercentagePart}${themePart}${primaryColorPart}${surfaceColorPart}` +
-      `${innerRadiusPart}${gapPart}${textSizePart}${textOffsetPart}`
+      `${innerRadiusPart}${gapPart}${textSizePart}${textOffsetPart}`,
   );
 
   const code = `<iframe
@@ -90,11 +90,11 @@ export const WidgetPreview = () => {
         colorScheme: colorMode === 'dark' ? 'dark' : 'light',
       }}
     >
-      <Stack spacing='xl'>
-        <Stack spacing='xs'>
+      <Stack spacing="xl">
+        <Stack spacing="xs">
           <h3 style={{ marginBottom: 0 }}>General</h3>
           <Group>
-            <Input.Wrapper label='URL'>
+            <Input.Wrapper label="URL">
               <div
                 style={{
                   display: 'flex',
@@ -104,7 +104,7 @@ export const WidgetPreview = () => {
                 <Select
                   style={{ width: '100px' }}
                   value={controls.protocol.value}
-                  onChange={e => controls.protocol.setValue(e)}
+                  onChange={(e) => controls.protocol.setValue(e)}
                   data={[
                     { value: 'https', label: 'https://' },
                     { value: 'http', label: 'http://' },
@@ -115,9 +115,9 @@ export const WidgetPreview = () => {
             </Input.Wrapper>
 
             <Select
-              label='Widget'
+              label="Widget"
               value={controls.widget.value}
-              onChange={e => controls.widget.setValue(e)}
+              onChange={(e) => controls.widget.setValue(e)}
               data={[
                 { value: 'cpu', label: 'CPU' },
                 { value: 'storage', label: 'Storage' },
@@ -129,9 +129,9 @@ export const WidgetPreview = () => {
 
             {multiViewAllowed && (
               <Select
-                label='Multi-View'
+                label="Multi-View"
                 value={controls.multiView.value.toString()}
-                onChange={e => controls.multiView.setValue(e === 'true')}
+                onChange={(e) => controls.multiView.setValue(e === 'true')}
                 data={[
                   { value: 'true', label: 'True' },
                   { value: 'false', label: 'False' },
@@ -140,19 +140,19 @@ export const WidgetPreview = () => {
             )}
             {filterGraphAllowed && (
               <Select
-                label='Filter Graph'
+                label="Filter Graph"
                 value={controls.filterGraph.value.toString()}
-                onChange={e => controls.filterGraph.setValue(e)}
-                data={filterGraphOptions.map(e => ({
+                onChange={(e) => controls.filterGraph.setValue(e)}
+                data={filterGraphOptions.map((e) => ({
                   value: e,
                   label: e.charAt(0).toUpperCase() + e.slice(1),
                 }))}
               />
             )}
             <Select
-              label='Show Percentage'
+              label="Show Percentage"
               value={controls.showPercentage.value.toString()}
-              onChange={e => controls.showPercentage.setValue(e === 'true')}
+              onChange={(e) => controls.showPercentage.setValue(e === 'true')}
               data={[
                 { value: 'true', label: 'True' },
                 { value: 'false', label: 'False' },
@@ -161,73 +161,74 @@ export const WidgetPreview = () => {
           </Group>
         </Stack>
 
-        <Stack spacing='xs'>
+        <Stack spacing="xs">
           <h3 style={{ marginBottom: 0 }}>Theming</h3>
           <Group>
             <Select
-              label='Theme'
+              label="Theme"
               value={controls.theme.value}
-              onChange={e => controls.theme.setValue(e)}
+              onChange={(e) => controls.theme.setValue(e)}
               data={[
                 { value: '', label: 'Inherit' },
                 { value: 'light', label: 'Light' },
                 { value: 'dark', label: 'Dark' },
               ]}
             />
-            <Input.Wrapper label='Primary Color'>
-              <Input icon='#' {...controls.primaryColor.inputProps()} />
+            <Input.Wrapper label="Primary Color">
+              <Input icon="#" {...controls.primaryColor.inputProps()} />
             </Input.Wrapper>
-            <Input.Wrapper label='Surface Color'>
-              <Input icon='#' {...controls.surfaceColor.inputProps()} />
+            <Input.Wrapper label="Surface Color">
+              <Input icon="#" {...controls.surfaceColor.inputProps()} />
             </Input.Wrapper>
 
-            <Input.Wrapper label='Outer Radius'>
+            <Input.Wrapper label="Outer Radius">
               <Input
-                rightSection='px'
-                type='number'
+                rightSection="px"
+                type="number"
                 {...controls.outerRadius.numberInputProps()}
               />
             </Input.Wrapper>
-            <Input.Wrapper label='Inner Radius'>
+            <Input.Wrapper label="Inner Radius">
               <Input
-                rightSection='px'
-                type='number'
-                placeholder='10'
+                rightSection="px"
+                type="number"
+                placeholder="10"
                 {...controls.innerRadius.numberInputProps()}
               />
             </Input.Wrapper>
-            <Input.Wrapper label='Gap'>
+            <Input.Wrapper label="Gap">
               <Input
-                rightSection='px'
-                type='number'
-                placeholder='12'
+                rightSection="px"
+                type="number"
+                placeholder="12"
                 {...controls.gap.numberInputProps()}
               />
             </Input.Wrapper>
-            <Input.Wrapper label='Text Size'>
+            <Input.Wrapper label="Text Size">
               <Input
-                rightSection='px'
-                type='number'
-                placeholder='16'
+                rightSection="px"
+                type="number"
+                placeholder="16"
                 {...controls.textSize.numberInputProps()}
               />
             </Input.Wrapper>
-            <Input.Wrapper label='Text Offset'>
+            <Input.Wrapper label="Text Offset">
               <Input
-                rightSection='px'
-                type='number'
-                placeholder='24'
+                rightSection="px"
+                type="number"
+                placeholder="24"
                 {...controls.textOffset.numberInputProps()}
               />
             </Input.Wrapper>
           </Group>
         </Stack>
 
-        <Stack spacing='xs'>
+        <Stack spacing="xs">
           <h3 style={{ marginBottom: 0 }}>Result</h3>
           <CodeBlock className={`language-html`}>{code}</CodeBlock>
 
           <iframe
+            title="Preview"
             src={finalUrl}
             style={{
               borderRadius: (outerRadius ?? 0) + 'px',

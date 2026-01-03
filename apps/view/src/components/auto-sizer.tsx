@@ -1,13 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 type AutoSizerProps = {
   children: (size: { width: number; height: number }) => React.ReactNode;
 } & Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
 
-export const AutoSizer = ({
-  children,
-  ...divProps
-}: AutoSizerProps) => {
+export const AutoSizer = ({ children, ...divProps }: AutoSizerProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({
     width: 0,
@@ -19,7 +16,7 @@ export const AutoSizer = ({
       if (!ref.current) return;
       setDimensions({
         height: ref.current.clientHeight,
-        width: ref.current.clientWidth
+        width: ref.current.clientWidth,
       });
     });
   }, []);
@@ -38,10 +35,10 @@ export const AutoSizer = ({
   return (
     <div
       {...divProps}
-      style={{ width: "100%", height: "100%", ...divProps.style }}
+      style={{ width: '100%', height: '100%', ...divProps.style }}
       ref={ref}
     >
       {children(dimensions)}
     </div>
   );
-}
+};

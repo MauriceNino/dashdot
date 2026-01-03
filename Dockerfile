@@ -55,7 +55,7 @@ FROM base AS build
 ARG BUILDHASH
 ARG VERSION
 
-ENV NX_DAEMON=false
+ENV NODE_ENV=production
 
 RUN \
   /bin/echo -e ">> installing dependencies (build)" &&\
@@ -77,16 +77,18 @@ RUN \
 # PROD #
 FROM base AS prod
 
+ENV NODE_ENV=production
+
 EXPOSE 3001
 
 COPY --from=build /app/version.json .
 COPY --from=build /app/.yarn/releases .yarn/releases
 COPY --from=build /app/.yarnrc.yml .yarnrc.yml
-COPY --from=build /app/dist/apps/server dist/apps/server
-COPY --from=build /app/dist/apps/cli dist/apps/cli
-COPY --from=build /app/dist/apps/view dist/apps/view
+COPY --from=build /app/apps/server/dist server/dist
+COPY --from=build /app/apps/view/dist view/dist
+COPY --from=build /app/apps/cli/dist cli/dist
 COPY --from=build /app/dist/package.json package.json
 
 RUN yarn
 
-CMD ["node", "."]
+CMD ["node", "server/dist/index.cjs"]

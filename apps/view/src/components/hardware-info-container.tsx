@@ -1,12 +1,12 @@
-import { Transient } from '@dash/common';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import type { Transient } from '@dashdot/common';
+import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FC, ReactNode, useState } from 'react';
+import { type FC, type ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { useIsMobile } from '../services/mobile';
-import { InfoTable, InfoTableProps } from './info-table';
+import { InfoTable, type InfoTableProps } from './info-table';
 import { ThemedText } from './text';
 
 const Container = styled.div`
@@ -44,14 +44,14 @@ const InfoIcon = styled.div<Transient<{ color: string }>>`
   top: -10px;
   left: 20px;
 
-  background-color: ${props => props.$color};
+  background-color: ${(props) => props.$color};
   border-radius: 10px;
   box-shadow: 13px 13px 35px 0px rgba(0, 0, 0, 0.15);
 
   transition: background-color 0.5s ease;
 
   svg {
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
   }
 `;
 
@@ -74,7 +74,7 @@ const Controls = styled.div`
 
   svg {
     cursor: pointer;
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
   }
 `;
 
@@ -90,7 +90,7 @@ type HardwareInfoProps = {
   onPageChange?: (page: number) => void;
 } & InfoTableProps;
 
-export const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
+export const HardwareInfoContainer: FC<HardwareInfoProps> = (props) => {
   const isMobile = useIsMobile();
   const [page, setPage] = useState(0);
 
@@ -102,7 +102,7 @@ export const HardwareInfoContainer: FC<HardwareInfoProps> = props => {
   return (
     <Container>
       <InfoIcon $color={props.color}>
-        <FontAwesomeIcon icon={props.icon} size='2x' />
+        <FontAwesomeIcon icon={props.icon} size="2x" />
       </InfoIcon>
 
       <ContentContainer $mobile={isMobile}>

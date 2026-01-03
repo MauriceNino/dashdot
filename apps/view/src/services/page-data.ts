@@ -1,23 +1,27 @@
-import {
+import type {
   CpuLoad,
   GpuLoad,
   NetworkLoad,
   RamLoad,
   ServerInfo,
   StorageLoad,
-} from '@dash/common';
+} from '@dashdot/common';
 import { useEffect, useState } from 'react';
-import { URL } from 'url';
-import Path from 'path';
-import { Socket, io } from 'socket.io-client';
+import { io, type Socket } from 'socket.io-client';
 import { environment } from '../environment';
 
+const urlJoin = (...args: string[]) =>
+  args
+    .map((part) => (part.endsWith('/') ? part.slice(0, -1) : part))
+    .filter(Boolean)
+    .join('/');
+
 const getFullyQualifiedSocket = (): Socket => {
-    const { origin: wlOrigin, pathname: wlPathname } = window.location;
-    return io(environment.backendUrl, {
-      path: new URL(Path.join(wlOrigin, wlPathname, '/socket')).pathname,
-    });
-}
+  const { origin, pathname } = window.location;
+  return io(environment.backendUrl, {
+    path: new URL(urlJoin(origin, pathname, 'socket')).pathname,
+  });
+};
 
 export const usePageData = () => {
   const [pageLoaded, setPageLoaded] = useState(false);
@@ -34,7 +38,7 @@ export const usePageData = () => {
   useEffect(() => {
     const socket = getFullyQualifiedSocket();
 
-    socket.on('static-info', data => {
+    socket.on('static-info', (data) => {
       setServerInfo(data);
     });
 
@@ -56,8 +60,8 @@ export const usePageData = () => {
     if (config) {
       socket = getFullyQualifiedSocket();
 
-      socket.on('cpu-load', data => {
-        setCpuLoad(oldData => {
+      socket.on('cpu-load', (data) => {
+        setCpuLoad((oldData) => {
           if (oldData.length >= (config.cpu_shown_datapoints ?? 0)) {
             return [...oldData.slice(1), data];
           } else {
@@ -66,8 +70,8 @@ export const usePageData = () => {
         });
       });
 
-      socket.on('ram-load', data => {
-        setRamLoad(oldData => {
+      socket.on('ram-load', (data) => {
+        setRamLoad((oldData) => {
           if (oldData.length >= (config.ram_shown_datapoints ?? 0)) {
             return [...oldData.slice(1), data];
           } else {
@@ -76,8 +80,8 @@ export const usePageData = () => {
         });
       });
 
-      socket.on('network-load', data => {
-        setNetworkLoad(oldData => {
+      socket.on('network-load', (data) => {
+        setNetworkLoad((oldData) => {
           if (oldData.length >= (config.network_shown_datapoints ?? 0)) {
             return [...oldData.slice(1), data];
           } else {
@@ -86,8 +90,8 @@ export const usePageData = () => {
         });
       });
 
-      socket.on('gpu-load', data => {
-        setGpuLoad(oldData => {
+      socket.on('gpu-load', (data) => {
+        setGpuLoad((oldData) => {
           if (oldData.length >= (config.gpu_shown_datapoints ?? 0)) {
             return [...oldData.slice(1), data];
           } else {
@@ -96,7 +100,7 @@ export const usePageData = () => {
         });
       });
 
-      socket.on('storage-load', data => {
+      socket.on('storage-load', (data) => {
         setStorageLoad(data);
       });
     }
@@ -116,7 +120,7 @@ export const usePageData = () => {
       text: 'Unable to connect to backend!',
     },
   ];
-  const error = errors.find(e => e.condition && pageLoaded === true);
+  const error = errors.find((e) => e.condition && pageLoaded === true);
 
   return {
     pageLoaded,

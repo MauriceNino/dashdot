@@ -8,8 +8,12 @@ const newPackageJson = {
   packageManager: packageJson.packageManager,
   main: packageJson.main,
   scripts: {
-    cli: 'node dist/apps/cli/main.js',
+    cli: 'node cli/dist/index.cjs',
   },
 };
+
+if (!fs.existsSync('dist')) {
+  fs.mkdirSync('dist');
+}
 
 fs.writeFileSync('dist/package.json', JSON.stringify(newPackageJson, null, 2));
