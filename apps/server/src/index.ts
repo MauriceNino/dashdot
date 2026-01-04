@@ -7,12 +7,7 @@ import http from 'http';
 import cron from 'node-cron';
 import path from 'path';
 import {
-  debounceTime,
-  lastValueFrom,
-  Observable,
-  Subscription,
-  take,
-  timeout,
+  Unsubscribable,
 } from 'rxjs';
 import { Server } from 'socket.io';
 import Path from 'path';
@@ -110,38 +105,26 @@ server.listen(CONFIG.port, async () => {
 
   // Allow integrations
   if (!CONFIG.disable_integrations) {
-    const getCurrentValue = async <T>(
-      subj: Observable<T>
-    ): Promise<T | undefined> => {
-      try {
-        return await lastValueFrom(
-          subj.pipe(debounceTime(0), timeout(20), take(1))
-        );
-      } catch (e) {
-        return undefined;
-      }
-    };
-
     router.get('/load/cpu', async (_, res) => {
-      res.send(await getCurrentValue(obs.cpu));
+      res.send(await obs.cpu.getCurrentValue());
     });
     router.get('/load/ram', async (_, res) => {
-      res.send({ load: await getCurrentValue(obs.ram) });
+      res.send({ load: await obs.ram.getCurrentValue() });
     });
     router.get('/load/storage', async (_, res) => {
-      res.send(await getCurrentValue(obs.storage));
+      res.send(await obs.storage.getCurrentValue());
     });
     router.get('/load/network', async (_, res) => {
-      res.send(await getCurrentValue(obs.network));
+      res.send(await obs.network.getCurrentValue());
     });
     router.get('/load/gpu', async (_, res) => {
-      res.send(await getCurrentValue(obs.gpu));
+      res.send(await obs.gpu.getCurrentValue());
     });
   }
 
   // Send current system status
   io.on('connection', socket => {
-    const subscriptions: Subscription[] = [];
+    const subscriptions: Unsubscribable[] = [];
 
     subscriptions.push(
       getStaticServerInfoObs().subscribe(staticInfo => {
@@ -178,7 +161,6 @@ server.listen(CONFIG.port, async () => {
         socket.emit('gpu-load', gpu);
       })
     );
-
     socket.on('disconnect', () => {
       subscriptions.forEach(sub => sub.unsubscribe());
     });
