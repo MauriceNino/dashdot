@@ -186,7 +186,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn turbo run @dashdot/docs#build
-          yarn turbo run @dashdot/docs#deploy
+          yarn workspace @dashdot/docs deploy
 
   # Update deployment on rex
   rex:
