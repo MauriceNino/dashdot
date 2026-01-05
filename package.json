@@ -40,7 +40,7 @@
     "commitizen": "4.3.1",
     "cross-env": "10.1.0",
     "husky": "9.1.7",
-    "inquirer": "9.3.8",
+    "inquirer": "13.1.0",
     "semantic-release": "25.0.2",
     "semantic-release-plus": "19.0.2",
     "turbo": "^2.7.2",
