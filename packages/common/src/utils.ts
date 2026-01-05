@@ -28,3 +28,10 @@ export const isFilledLine = (s: string): boolean => /^\s*$/.test(s) === false;
 export const capFirst = (str: string) => {
   return str[0]?.toUpperCase() + str.slice(1);
 };
+
+export const urlJoin = (...parts: string[]) => {
+  return parts
+    .map((part) => part.replace(/^\/+|\/+$/g, '')) // Remove leading/trailing slashes
+    .filter((part) => part.length > 0) // Remove empty parts
+    .join('/');
+};
