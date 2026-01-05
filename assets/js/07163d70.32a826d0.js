@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdashdot=self.webpackChunkdashdot||[]).push([[457],{2154:s=>{s.exports=JSON.parse('{"label":"Helm","permalink":"/docs/tags/helm","allTagsPath":"/docs/tags","count":1,"items":[{"id":"installation/helm","title":"Helm chart","description":"How to install dashdot using helm chart","permalink":"/docs/installation/helm"}],"unlisted":false}')}}]);
