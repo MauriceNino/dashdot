@@ -1,3 +1,10 @@
+## [6.2.4](https://github.com/MauriceNino/dashdot/compare/v6.2.3...v6.2.4) (2026-01-05)
+
+
+### Bug Fixes
+
+* url joining of socket path breaking on windows ([ad8b5c8](https://github.com/MauriceNino/dashdot/commit/ad8b5c800a15e8f5bd8e675643a9e5d338b2e83b)), closes [#1284](https://github.com/MauriceNino/dashdot/issues/1284)
+
 ## [6.2.3](https://github.com/MauriceNino/dashdot/compare/v6.2.2...v6.2.3) (2026-01-05)
 
 ## [6.2.2](https://github.com/MauriceNino/dashdot/compare/v6.2.1...v6.2.2) (2026-01-05)
