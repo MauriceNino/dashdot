@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { StorageInfo, StorageLoad } from '@dash/common';
-import * as si from 'systeminformation';
+import type { StorageInfo, StorageLoad } from '@dashdot/common';
+import type * as si from 'systeminformation';
 
 export type TestCase = {
   disks: si.Systeminformation.DiskLayoutData[];

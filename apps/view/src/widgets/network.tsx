@@ -1,6 +1,6 @@
-import { Config, NetworkInfo, NetworkLoad } from '@dash/common';
+import type { Config, NetworkInfo, NetworkLoad } from '@dashdot/common';
 import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
@@ -12,7 +12,7 @@ import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { useIsMobile } from '../services/mobile';
 import { bpsPrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
-import { ChartVal } from '../utils/types';
+import type { ChartVal } from '../utils/types';
 
 type NetworkChartProps = {
   load: NetworkLoad[];
@@ -51,11 +51,11 @@ export const NetworkChart: FC<NetworkChartProps> = ({
 
   const maxUp = Math.max(
     (speedUp ?? 0) / 8,
-    ...chartDataUp.map(u => u.y as number)
+    ...chartDataUp.map((u) => u.y as number),
   );
   const maxDown = Math.max(
     (speedDown ?? 0) / 8,
-    ...chartDataDown.map(d => d.y as number)
+    ...chartDataDown.map((d) => d.y as number),
   );
 
   const chartUp = (
@@ -65,25 +65,25 @@ export const NetworkChart: FC<NetworkChartProps> = ({
         showPercentages
           ? `↑ ${bpsPrettyPrint(
               ((chartDataUp.at(-1)?.y as number) ?? 0) * 8,
-              asBytes
+              asBytes,
             )}`
           : '↑'
       }
       textOffset={textOffset}
       textSize={textSize}
-      renderChart={size => (
+      renderChart={(size) => (
         <DefaultAreaChart
           data={chartDataUp}
           height={size.height}
           width={size.width}
           color={theme.colors.networkPrimary}
-          renderTooltip={val =>
+          renderTooltip={(val) =>
             bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8, asBytes)
           }
         >
           <YAxis
             hide={true}
-            type='number'
+            type="number"
             domain={[maxUp * -0.1, maxUp * 1.1]}
           />
         </DefaultAreaChart>
@@ -98,25 +98,25 @@ export const NetworkChart: FC<NetworkChartProps> = ({
         showPercentages
           ? `↓ ${bpsPrettyPrint(
               ((chartDataDown.at(-1)?.y as number) ?? 0) * 8,
-              asBytes
+              asBytes,
             )}`
           : '↓'
       }
       textOffset={textOffset}
       textSize={textSize}
-      renderChart={size => (
+      renderChart={(size) => (
         <DefaultAreaChart
           data={chartDataDown}
           height={size.height}
           width={size.width}
           color={theme.colors.networkPrimary}
-          renderTooltip={val =>
+          renderTooltip={(val) =>
             bpsPrettyPrint((val.payload?.[0]?.value ?? 0) * 8, asBytes)
           }
         >
           <YAxis
             hide={true}
-            type='number'
+            type="number"
             domain={[maxDown * -0.1, maxDown * 1.1]}
           />
         </DefaultAreaChart>
@@ -165,7 +165,7 @@ export const NetworkWidget: FC<NetworkWidgetProps> = ({
   return (
     <HardwareInfoContainer
       color={theme.colors.networkPrimary}
-      heading='Network'
+      heading="Network"
       infos={toInfoTable(config.network_label_list, {
         type: { label: 'Type', value: type },
         speed_up: {

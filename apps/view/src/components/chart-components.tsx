@@ -1,23 +1,23 @@
-import { clamp } from '@dash/common';
+import { clamp } from '@dashdot/common';
 import { motion } from 'framer-motion';
-import { FC, useMemo, useRef, useState } from 'react';
+import { type FC, useMemo, useRef, useState } from 'react';
 import {
   Area,
   AreaChart,
   BarChart,
-  LabelProps,
+  type LabelProps,
   Pie,
   PieChart,
   Sector,
-  SectorProps,
+  type SectorProps,
   Tooltip,
-  TooltipContentProps,
+  type TooltipContentProps,
   XAxis,
   YAxis,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
 import { throttle } from 'throttle-debounce';
-import { ChartVal } from '../utils/types';
+import type { ChartVal } from '../utils/types';
 import { ThemedText } from './text';
 
 type DefaultAreaChartProps = {
@@ -26,7 +26,9 @@ type DefaultAreaChartProps = {
   color: string;
   children: React.ReactNode;
   data: ChartVal[];
-  renderTooltip?: (point: TooltipContentProps<number, string>) => React.ReactNode;
+  renderTooltip?: (
+    point: TooltipContentProps<number, string>,
+  ) => React.ReactNode;
 };
 
 export const DefaultAreaChart: FC<DefaultAreaChartProps> = ({
@@ -45,14 +47,14 @@ export const DefaultAreaChart: FC<DefaultAreaChartProps> = ({
       margin={{ left: 0, top: 0, right: 0, bottom: 0 }}
     >
       <defs>
-        <linearGradient id={`gradient_${color}`} x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='0%' stopColor={color} stopOpacity={0.2} />
-          <stop offset='95%' stopColor={color} stopOpacity={0} />
+        <linearGradient id={`gradient_${color}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity={0.2} />
+          <stop offset="95%" stopColor={color} stopOpacity={0} />
         </linearGradient>
       </defs>
       <Area
-        type='monotone'
-        dataKey='y'
+        type="monotone"
+        dataKey="y"
         stroke={color}
         strokeWidth={3}
         fillOpacity={1}
@@ -61,7 +63,7 @@ export const DefaultAreaChart: FC<DefaultAreaChartProps> = ({
       />
       {renderTooltip && (
         <Tooltip<number, string>
-          content={x => <ThemedText>{renderTooltip(x)}</ThemedText>}
+          content={(x) => <ThemedText>{renderTooltip(x)}</ThemedText>}
           wrapperStyle={{ outline: 'none' }}
         />
       )}
@@ -71,7 +73,7 @@ export const DefaultAreaChart: FC<DefaultAreaChartProps> = ({
 };
 
 const HoverLabel = styled(motion.p)`
-  color: ${props => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
   position: absolute;
   z-index: 999;
   pointer-events: none;
@@ -83,7 +85,7 @@ const HoverLabel = styled(motion.p)`
 const getCoords = (
   pos: { x: number; y: number },
   parent: { width: number; height: number },
-  label: { width: number; height: number }
+  label: { width: number; height: number },
 ): { top: number; left: number } => {
   const { width: parentWidth, height: parentHeight } = parent;
   const { width: labelWidth, height: labelHeight } = label;
@@ -139,9 +141,6 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
 
   const labelRef = useRef<HTMLParagraphElement>(null);
 
-  const [activeSegment, setActiveSegment] = useState<number | undefined>(
-    undefined
-  );
   const [label, setLabel] = useState<
     | {
         label: string;
@@ -152,7 +151,7 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
   >(undefined);
   const throttledSetLabel = useMemo(
     () => throttle(100, setLabel, { noTrailing: true }),
-    []
+    [],
   );
 
   const minSize = Math.min(height, width);
@@ -163,7 +162,7 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
     ? getCoords(
         label,
         { width, height },
-        { width: labelWidth, height: labelHeight }
+        { width: labelWidth, height: labelHeight },
       )
     : undefined;
 
@@ -188,10 +187,10 @@ export const DefaultPieChart: FC<DefaultPieChartProps> = ({
         <Pie
           data={data}
           isAnimationActive={false}
-          dataKey='value'
-          nameKey='name'
-          cx='50%'
-          cy='50%'
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
           innerRadius={minSize / 2 - 30 - minSize / 4.5}
           outerRadius={minSize / 2 - 30}
           cornerRadius={minSize / 18}
@@ -237,7 +236,7 @@ export const VertBarStartLabel: FC<
   LabelProps & {
     labelRenderer: (value: number) => string;
   }
-> = props => {
+> = (props) => {
   const theme = useTheme();
 
   return (
@@ -247,11 +246,11 @@ export const VertBarStartLabel: FC<
       width={props.width}
       height={props.height}
       offset={props.offset}
-      className='recharts-text recharts-label'
-      text-anchor='start'
+      className="recharts-text recharts-label"
+      text-anchor="start"
       fill={theme.colors.text}
     >
-      <tspan x={(props.x as number) + (props.offset as number)} dy='0.355em'>
+      <tspan x={(props.x as number) + (props.offset as number)} dy="0.355em">
         {props.labelRenderer(props.value as number)}
       </tspan>
     </text>
@@ -267,7 +266,10 @@ type DefaultVertBarChartProps = {
     available: number;
   }[];
   tooltipRenderer: (
-    value: TooltipContentProps<string | number | (string | number)[], string | number>
+    value: TooltipContentProps<
+      string | number | (string | number)[],
+      string | number
+    >,
   ) => React.ReactNode;
 };
 
@@ -297,12 +299,14 @@ export const DefaultVertBarChart: FC<DefaultVertBarChartProps> = ({
       }}
       barSize={barSize}
     >
-      <XAxis type='number' hide />
-      <YAxis type='category' hide />
+      <XAxis type="number" hide />
+      <YAxis type="category" hide />
 
       <Tooltip
         cursor={false}
-        content={x => <ToolTipContainer>{tooltipRenderer(x)}</ToolTipContainer>}
+        content={(x) => (
+          <ToolTipContainer>{tooltipRenderer(x as any)}</ToolTipContainer>
+        )}
         wrapperStyle={{ outline: 'none' }}
       />
       {children}

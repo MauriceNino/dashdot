@@ -1,4 +1,4 @@
-import { CpuInfo, CpuLoad } from '@dash/common';
+import type { CpuInfo, CpuLoad } from '@dashdot/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../config';
 import { getStaticServerInfo } from '../static-info';
@@ -21,7 +21,7 @@ export default {
       const cpuTemp = await si.cpuTemperature();
       const threadsPerCore = (cpu.threads - cpu.ecores) / cpu.pcores;
       temps = cpuTemp.cores.flatMap((temp, i) =>
-        i < cpu.pcores ? Array(threadsPerCore).fill(temp) : temp
+        i < cpu.pcores ? Array(threadsPerCore).fill(temp) : temp,
       );
       mainTemp = cpuTemp.main; // AVG temp of all cores, in case no per-core data is found
     }
@@ -39,8 +39,8 @@ export default {
       brand: cpuInfo.manufacturer,
       model: normalizeCpuModel(cpuInfo.brand),
       cores: cpuInfo.physicalCores,
-      ecores: cpuInfo.efficiencyCores,
-      pcores: cpuInfo.performanceCores,
+      ecores: cpuInfo.efficiencyCores ?? 0,
+      pcores: cpuInfo.performanceCores ?? 0,
       threads: cpuInfo.cores,
       frequency: cpuInfo.speedMax,
     };

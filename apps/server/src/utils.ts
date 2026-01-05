@@ -1,14 +1,15 @@
-import os from 'os';
-import path, { join } from 'path';
+import * as fs from 'node:fs';
+import { lstat, readlink, rm, symlink } from 'node:fs/promises';
+import os from 'node:os';
+import path, { join } from 'node:path';
 import { CONFIG } from './config';
-import * as fs from 'fs';
-import { lstat, readlink, rm, symlink } from 'fs/promises';
 
 export const fromHost = (path: string): string => {
   const dockerMountPoint = '/mnt/host';
   if (!CONFIG.running_in_docker) return path;
   if (path.startsWith(dockerMountPoint)) return path;
-  const pathInDocker = path === '/' ? dockerMountPoint : join(dockerMountPoint, path);
+  const pathInDocker =
+    path === '/' ? dockerMountPoint : join(dockerMountPoint, path);
   return pathInDocker;
 };
 
@@ -33,7 +34,9 @@ export const resolveSymlink = async (
     throw new Error(`Symlink loop detected at ${p}`);
   }
   if (seen.size >= maxDepth) {
-    throw new Error(`Symlink chain longer than ${maxDepth}: ${[...seen, p].join(' → ')}`);
+    throw new Error(
+      `Symlink chain longer than ${maxDepth}: ${[...seen, p].join(' → ')}`,
+    );
   }
   seen.add(p);
 
@@ -51,11 +54,12 @@ export const resolveSymlink = async (
       try {
         stat = await lstat(probe);
         break;
-      } catch (e) {
+      } catch (_e) {
         // Intentionally ignore errors while probing parent directories
       }
     }
 
+    //@ts-expect-error
     if (!stat.isSymbolicLink()) {
       throw new Error(`lstat failed for ${p}: ${(err as Error).message}`);
     }
@@ -76,7 +80,7 @@ export const resolveSymlink = async (
   target = fromHost(target);
 
   return resolveSymlink(target, seen, maxDepth);
-}
+};
 
 const LOCAL_OS_PATHS = ['/etc/os-release', '/usr/lib/os-release'];
 const HOST_OS_CANDIDATES = [
@@ -84,10 +88,10 @@ const HOST_OS_CANDIDATES = [
   '/mnt/host/usr/lib/os-release',
 ];
 
-export const refreshHostOsRelease = async(): Promise<void> => {
+export const refreshHostOsRelease = async (): Promise<void> => {
   if (!CONFIG.running_in_docker) return;
 
-  const hostPath = HOST_OS_CANDIDATES.find(p => fs.lstatSync(p));
+  const hostPath = HOST_OS_CANDIDATES.find((p) => fs.lstatSync(p));
   if (!hostPath) return;
 
   const realFile = await resolveSymlink(hostPath);
@@ -99,4 +103,4 @@ export const refreshHostOsRelease = async(): Promise<void> => {
       await symlink(realFile, local, 'file');
     }
   }
-}
+};

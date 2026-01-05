@@ -1,4 +1,4 @@
-import { ComponentProps, ComponentType, FC } from 'react';
+import type { ComponentProps, ComponentType, FC } from 'react';
 import styled from 'styled-components';
 import { usePageData } from '../services/page-data';
 import { useQuery } from '../services/query-params';

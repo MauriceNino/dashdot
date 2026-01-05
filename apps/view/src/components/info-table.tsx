@@ -1,8 +1,8 @@
 import { Tooltip } from 'antd';
-import { motion, Variants } from 'framer-motion';
-import { FC } from 'react';
+import { motion, type Variants } from 'framer-motion';
+import type { FC } from 'react';
 import styled from 'styled-components';
-import { InfoTableArr } from '../utils/format';
+import type { InfoTableArr } from '../utils/format';
 import { ThemedText } from './text';
 
 const itemVariants: Variants = {
@@ -19,7 +19,7 @@ const itemVariants: Variants = {
 export const InfoTextContainer = styled.div<{ noPadding?: boolean }>`
   display: table;
   padding: 30px 30px 15px 30px;
-  color: ${props => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
 `;
 
 const InfoTextRow = styled(motion.div)`
@@ -55,11 +55,11 @@ export const InfoTable: FC<
     page: number;
     itemsPerPage: number;
   }
-> = props => {
+> = (props) => {
   const itemsStart = props.page * props.itemsPerPage;
   const items = props.infos.slice(
     itemsStart,
-    Math.min(itemsStart + props.itemsPerPage, props.infos.length)
+    Math.min(itemsStart + props.itemsPerPage, props.infos.length),
   );
 
   return (
@@ -68,9 +68,9 @@ export const InfoTable: FC<
         <InfoTextRow
           key={(itemsStart + i).toString()}
           variants={itemVariants}
-          initial='initial'
-          animate='animate'
-          exit='initial'
+          initial="initial"
+          animate="animate"
+          exit="initial"
         >
           <InfoTextLabel>{info.label}</InfoTextLabel>
           <InfoTextValue>

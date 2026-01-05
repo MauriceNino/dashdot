@@ -1,4 +1,4 @@
-import { RamInfo, RamLoad } from '@dash/common';
+import type { RamInfo, RamLoad } from '@dashdot/common';
 import * as si from 'systeminformation';
 
 export default {
