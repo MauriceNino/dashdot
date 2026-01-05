@@ -15,7 +15,7 @@
     "@fortawesome/free-brands-svg-icons": "7.1.0",
     "@fortawesome/free-solid-svg-icons": "7.1.0",
     "@fortawesome/react-fontawesome": "0.2.3",
-    "antd": "5.24.6",
+    "antd": "6.1.4",
     "framer-motion": "12.23.26",
     "parse-domain": "8.2.2",
     "punycode": "2.3.1",
