@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
+import { urlJoin } from '@dashdot/common';
 import compression from 'compression';
 import cors from 'cors';
 import cronParser from 'cronstrue';
@@ -41,7 +42,7 @@ const io = new Server(server, {
     : {
         origin: '*',
       },
-  path: path.join(CONFIG.routing_path, '/socket'),
+  path: `/${urlJoin(CONFIG.routing_path, '/socket')}`,
 });
 
 if (!CONFIG.disable_integrations) {

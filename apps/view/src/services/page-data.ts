@@ -1,20 +1,15 @@
-import type {
-  CpuLoad,
-  GpuLoad,
-  NetworkLoad,
-  RamLoad,
-  ServerInfo,
-  StorageLoad,
+import {
+  type CpuLoad,
+  type GpuLoad,
+  type NetworkLoad,
+  type RamLoad,
+  type ServerInfo,
+  type StorageLoad,
+  urlJoin,
 } from '@dashdot/common';
 import { useEffect, useState } from 'react';
 import { io, type Socket } from 'socket.io-client';
 import { environment } from '../environment';
-
-const urlJoin = (...args: string[]) =>
-  args
-    .map((part) => (part.endsWith('/') ? part.slice(0, -1) : part))
-    .filter(Boolean)
-    .join('/');
 
 const getFullyQualifiedSocket = (): Socket => {
   const { origin, pathname } = window.location;
