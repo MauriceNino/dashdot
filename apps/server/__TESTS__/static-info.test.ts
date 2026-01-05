@@ -15,7 +15,7 @@ import {
   TEST_CASE_24,
   TEST_CASE_25,
   TEST_CASE_26,
-  TestCase,
+  type TestCase,
 } from './test-cases';
 
 const toStorageInp = (inp: TestCase) =>

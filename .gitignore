@@ -39,12 +39,13 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+.turbo
 
 # System Files
 .DS_Store
 Thumbs.db
 
-# Generated Docusaurus files
-.docusaurus/
-.cache-loader/
-.nx/cache
+# Build outputs
+dist
+build
+.docusaurus

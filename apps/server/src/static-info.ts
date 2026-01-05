@@ -1,7 +1,7 @@
-import { HardwareInfo, ServerInfo } from '@dash/common';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { inspect } from 'node:util';
+import type { HardwareInfo, ServerInfo } from '@dashdot/common';
+import { BehaviorSubject, map, type Observable } from 'rxjs';
 import * as si from 'systeminformation';
-import { inspect } from 'util';
 import { CONFIG } from './config';
 import getCpuInfo from './data/cpu';
 import getGpuInfo from './data/gpu';
@@ -48,19 +48,22 @@ const STATIC_INFO = new BehaviorSubject<HardwareInfo>({
   },
 });
 
-const promIf = <T>(condition: boolean, func: () => Promise<T>): Promise<T> => {
+const promIf = <T>(
+  condition: boolean,
+  func: () => Promise<T>,
+): Promise<T | null> => {
   return condition ? func() : Promise.resolve(null);
 };
 
 export const loadInfo = <
   T extends 'os' | 'cpu' | 'storage' | 'ram' | 'network' | 'gpu',
-  B extends boolean
+  B extends boolean,
 >(
   info: T,
   loader: () => Promise<
     B extends true ? Partial<HardwareInfo[T]> : HardwareInfo[T]
   >,
-  append: B
+  append: B,
 ) => {
   return promIf(CONFIG.widget_list.includes(info), async () => {
     STATIC_INFO.next({
@@ -89,7 +92,7 @@ export const loadStaticServerInfo = async (): Promise<void> => {
       showHidden: false,
       depth: null,
       colors: true,
-    })
+    }),
   );
 };
 
@@ -106,13 +109,13 @@ export const getStaticServerInfo = (): ServerInfo => {
 
 export const getStaticServerInfoObs = (): Observable<ServerInfo> => {
   return STATIC_INFO.pipe(
-    map(info => ({
+    map((info) => ({
       ...info,
       os: {
         ...info.os,
         uptime: +si.time().uptime,
       },
       config: CONFIG,
-    }))
+    })),
   );
 };

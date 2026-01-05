@@ -1,4 +1,4 @@
-import { RaidType, StorageInfo, sumUp } from '@dash/common';
+import { RaidType, type StorageInfo, sumUp } from '@dashdot/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
 import { PLATFORM_IS_WINDOWS } from '../../utils';
@@ -9,12 +9,12 @@ type Size = si.Systeminformation.FsSizeData;
 
 const getDiskBlocks = (blocks: Block[]) =>
   blocks.filter(
-    block =>
+    (block) =>
       block.type === 'disk' &&
       block.size > 0 &&
       !/^zram\d+$/.test(block.name) &&
       !CONFIG.fs_device_filter.includes(block.name) &&
-      !CONFIG.fs_type_filter.includes(block.fsType)
+      !CONFIG.fs_type_filter.includes(block.fsType),
   );
 
 const getDiskParts = (blocks: Block[], diskBlock: Block, hostWin32: boolean) =>
@@ -23,12 +23,12 @@ const getDiskParts = (blocks: Block[], diskBlock: Block, hostWin32: boolean) =>
       type === 'part' &&
       (hostWin32
         ? diskBlock.device === device
-        : name.startsWith(diskBlock.name))
+        : name.startsWith(diskBlock.name)),
   );
 
 const getNativeDisk = (
   disks: Disk[],
-  block: Block
+  block: Block,
 ): {
   vendor: string;
   size: number;
@@ -36,8 +36,9 @@ const getNativeDisk = (
   interfaceType?: string;
 } =>
   disks.find(
-    d =>
-      d.device === block.device || (block.model != '' && d.name === block.model)
+    (d) =>
+      d.device === block.device ||
+      (block.model !== '' && d.name === block.model),
   ) ?? {
     vendor: block.name,
     size: block.size,
@@ -46,8 +47,8 @@ const getNativeDisk = (
 
 const getVirtualMountsLayout = (sizes: Size[]) =>
   CONFIG.fs_virtual_mounts
-    .map(mount => {
-      const size = sizes.find(s => s.fs === mount);
+    .map((mount) => {
+      const size = sizes.find((s) => s.fs === mount);
 
       return size
         ? {
@@ -63,10 +64,10 @@ const getVirtualMountsLayout = (sizes: Size[]) =>
           }
         : undefined;
     })
-    .filter(d => d != null);
+    .filter((d) => d != null);
 
 const getRaidInfo = (blocks: Block[], diskBlock: Block, hostWin32: boolean) => {
-  const allRaidBlocks = blocks.filter(block => block.type.startsWith('raid'));
+  const allRaidBlocks = blocks.filter((block) => block.type.startsWith('raid'));
   const partBlocks = [diskBlock, ...getDiskParts(blocks, diskBlock, hostWin32)];
   const raidBlocks = allRaidBlocks.reduce(
     (acc, curr) => {
@@ -77,12 +78,13 @@ const getRaidInfo = (blocks: Block[], diskBlock: Block, hostWin32: boolean) => {
       }
       return acc;
     },
-    { current: [] as Block[], other: [] as Block[] }
+    { current: [] as Block[], other: [] as Block[] },
   );
 
-  if (raidBlocks.current.length === 0) return;
-
   const firstRaidBlock = raidBlocks.current[0];
+
+  if (!firstRaidBlock) return;
+
   const splitLabel = firstRaidBlock.label.split(':')[0];
   const label = firstRaidBlock.label.includes(':')
     ? raidBlocks.other.some(({ label }) => label.startsWith(`${splitLabel}:`))
@@ -92,8 +94,8 @@ const getRaidInfo = (blocks: Block[], diskBlock: Block, hostWin32: boolean) => {
 
   return {
     label,
-    type: raidBlocks.current[0].type === 'raid0' ? RaidType.ZERO : RaidType.ONE,
-    name: raidBlocks.current[0].name,
+    type: firstRaidBlock.type === 'raid0' ? RaidType.ZERO : RaidType.ONE,
+    name: firstRaidBlock.name,
     size: sumUp(raidBlocks.current, 'size'),
   };
 };
@@ -106,7 +108,7 @@ export const mapToStorageLayout = (
   hostWin32: boolean,
   disks: Disk[],
   blocks: Block[],
-  sizes: Size[]
+  sizes: Size[],
 ): StorageInfo => {
   const diskBlocks = getDiskBlocks(blocks);
 
@@ -116,13 +118,13 @@ export const mapToStorageLayout = (
     const raidInfo = getRaidInfo(blocks, diskBlock, hostWin32);
 
     const disk: StorageInfo[number]['disks'][number] = {
-      device: hostWin32 ? diskBlock.device : device,
+      device: hostWin32 ? (diskBlock.device ?? '') : device,
       brand: nativeDisk.vendor,
       type: getDiskType(nativeDisk.type, nativeDisk.interfaceType),
     };
 
     if (raidInfo != null) {
-      const existingRaid = acc.find(r => r.raidName === raidInfo.name);
+      const existingRaid = acc.find((r) => r.raidName === raidInfo.name);
       if (existingRaid) {
         existingRaid.disks.push(disk);
       } else {
@@ -147,7 +149,7 @@ export const mapToStorageLayout = (
   const blockLayout = (
     hostWin32
       ? diskBlocks.reduce((acc, curr) => {
-          if (curr.device && !acc.some(b => b.device === curr.device)) {
+          if (curr.device && !acc.some((b) => b.device === curr.device)) {
             acc.push(curr);
           }
           return acc;

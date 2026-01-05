@@ -1,9 +1,9 @@
-import { capFirst, NetworkInfo, NetworkLoad } from '@dash/common';
-import { exec as cexec } from 'child_process';
+import { exec as cexec } from 'node:child_process';
+import fs from 'node:fs';
+import { promisify } from 'node:util';
+import { capFirst, type NetworkInfo, type NetworkLoad } from '@dashdot/common';
 import dedent from 'dedent';
-import fs from 'fs';
 import * as si from 'systeminformation';
-import { promisify } from 'util';
 import { CONFIG } from '../config';
 import { NET_INTERFACE_PATH } from '../setup';
 import { PLATFORM_IS_WINDOWS } from '../utils';
@@ -13,10 +13,10 @@ const exec = promisify(cexec);
 const commandExists = async (command: string): Promise<boolean> => {
   try {
     const { stdout, stderr } = await exec(
-      `${PLATFORM_IS_WINDOWS ? 'where' : 'which'} ${command}`
+      `${PLATFORM_IS_WINDOWS ? 'where' : 'which'} ${command}`,
     );
     return stderr === '' && stdout.trim() !== '';
-  } catch (e) {
+  } catch (_e) {
     return false;
   }
 };
@@ -28,11 +28,15 @@ export default {
     if (NET_INTERFACE_PATH) {
       const { stdout } = await exec(
         `cat ${NET_INTERFACE_PATH}/statistics/rx_bytes;` +
-          `cat ${NET_INTERFACE_PATH}/statistics/tx_bytes;`
+          `cat ${NET_INTERFACE_PATH}/statistics/tx_bytes;`,
       );
       const [rx, tx] = stdout.split('\n').map(Number);
       const thisTs = performance.now();
       const dividend = (thisTs - lastTs) / 1000;
+
+      if (!rx || !tx) {
+        throw new Error('Could not get network stats');
+      }
 
       const result =
         lastTs === 0
@@ -53,6 +57,10 @@ export default {
     } else {
       const networkStats = (await si.networkStats())[0];
 
+      if (!networkStats) {
+        throw new Error('Could not get network stats');
+      }
+
       return {
         up: networkStats.tx_sec,
         down: networkStats.rx_sec,
@@ -70,12 +78,12 @@ export default {
         type: isWireless
           ? 'Wireless'
           : isBridge
-          ? 'Bridge'
-          : isBond
-          ? 'Bond'
-          : isTap
-          ? 'TAP'
-          : 'Wired',
+            ? 'Bridge'
+            : isBond
+              ? 'Bond'
+              : isTap
+                ? 'TAP'
+                : 'Wired',
       };
 
       // Wireless networks have no fixed Interface speed
@@ -85,7 +93,7 @@ export default {
           const numValue = Number(stdout.trim());
 
           net.interfaceSpeed =
-            isNaN(numValue) || numValue === -1 ? 0 : numValue;
+            Number.isNaN(numValue) || numValue === -1 ? 0 : numValue;
         } catch (e) {
           console.warn(e);
 
@@ -96,13 +104,15 @@ export default {
       return net;
     } else {
       const networkInfo = await si.networkInterfaces();
-      //@ts-ignore
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const defaultNet = networkInfo.find(net => net.default)!;
+      const defaultNet = networkInfo.find((net) => net.default);
+
+      if (!defaultNet) {
+        throw new Error('Could not get network info');
+      }
 
       return {
         type: capFirst(defaultNet.type),
-        interfaceSpeed: defaultNet.speed,
+        interfaceSpeed: defaultNet.speed ?? undefined,
       };
     }
   },
@@ -114,14 +124,14 @@ export default {
     if (CONFIG.speed_test_from_path) {
       usedRunner = 'file';
       const json = JSON.parse(
-        fs.readFileSync(CONFIG.speed_test_from_path, 'utf-8')
+        fs.readFileSync(CONFIG.speed_test_from_path, 'utf-8'),
       );
 
       const unit = json.unit ?? 'bit';
 
       if (unit !== 'bit' && unit !== 'byte')
         throw new Error(
-          "You can only use 'bit' or 'byte' as a unit for your speed-test results"
+          "You can only use 'bit' or 'byte' as a unit for your speed-test results",
         );
 
       result = {
@@ -134,7 +144,7 @@ export default {
     } else if (CONFIG.accept_ookla_eula && (await commandExists('speedtest'))) {
       usedRunner = 'ookla';
       const { stdout } = await exec(
-        'speedtest --accept-license --accept-gdpr -f json'
+        'speedtest --accept-license --accept-gdpr -f json',
       );
       const json = JSON.parse(stdout);
 

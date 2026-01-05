@@ -3,5 +3,9 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "biome.enabled": false
+  "biome.enabled": true,
+  "cSpell.words": ["dashdot"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit"
+  }
 }

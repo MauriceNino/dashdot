@@ -1,0 +1,48 @@
+{
+  "name": "@dashdot/docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "docusaurus start --port 3002",
+    "build": "docusaurus build",
+    "deploy": "docusaurus deploy"
+  },
+  "dependencies": {
+    "@docusaurus/core": "3.9.2",
+    "@docusaurus/preset-classic": "3.9.2",
+    "@docusaurus/theme-classic": "3.9.2",
+    "@mantine/core": "8.3.10",
+    "@mantine/hooks": "8.3.10",
+    "@mdx-js/react": "3.1.1",
+    "clsx": "^2.0.0",
+    "docusaurus-plugin-image-zoom": "3.0.1",
+    "docusaurus-plugin-sass": "0.2.6",
+    "prism-react-renderer": "^2.3.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-form-ctl": "2.0.1",
+    "sass": "1.97.1"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "3.9.2",
+    "@docusaurus/tsconfig": "3.9.2",
+    "@docusaurus/types": "3.9.2",
+    "@types/react": "^19",
+    "typescript": "5.9.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=20.0"
+  }
+}

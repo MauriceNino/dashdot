@@ -1,13 +1,13 @@
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-display: swap;
-  src: url(/Inter.ttf) format('woff2');
+  src: url(/Inter.ttf) format("woff2");
 }
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -129,7 +129,6 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
   content: none;
 }
 table {

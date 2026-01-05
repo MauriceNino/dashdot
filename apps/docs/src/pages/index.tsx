@@ -4,7 +4,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import CodeBlock from '@theme/CodeBlock';
 import Layout from '@theme/Layout';
 import dedent from 'dedent';
-import React from 'react';
+// @ts-expect-error
 import styles from './index.module.scss';
 
 const HomepageHeader = () => {
@@ -29,14 +29,14 @@ const HomepageHeader = () => {
 
       <div className={styles.buttons}>
         <Link
-          className='button button--secondary button--lg'
-          to='/docs/installation'
+          className="button button--secondary button--lg"
+          to="/docs/installation/docker"
         >
           Installation
         </Link>
         <Link
-          className='button button--secondary button--lg'
-          to='/docs/configuration/basic'
+          className="button button--secondary button--lg"
+          to="/docs/configuration/basic"
         >
           Configuration
         </Link>
@@ -53,9 +53,9 @@ const HomePageInfo = () => {
       <div className={styles.infoSection}>
         <h2>dash. is beautiful</h2>
         {colorMode === 'dark' ? (
-          <img src='./img/screenshot_darkmode.png' alt='Dark-Mode' />
+          <img src="./img/screenshot_darkmode.png" alt="Dark-Mode" />
         ) : (
-          <img src='./img/screenshot_lightmode.png' alt='Light-Mode' />
+          <img src="./img/screenshot_lightmode.png" alt="Light-Mode" />
         )}
       </div>
 
@@ -74,11 +74,11 @@ const HomePageInfo = () => {
   );
 };
 
-export default function Home(): JSX.Element {
+export default function Home() {
   return (
     <Layout
       title={`Home`}
-      description='dash. is a modern and responsive dashboard for your server'
+      description="dash. is a modern and responsive dashboard for your server"
     >
       <HomepageHeader />
       <HomePageInfo />

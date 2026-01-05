@@ -1,7 +1,6 @@
 # dependencies
-/node_modules
+**/node_modules
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
@@ -9,7 +8,9 @@
 !.yarn/versions
 
 # production
-/dist
+**/dist
+**/build
+**/.docusaurus
 
 # misc
 **.DS_Store
@@ -20,7 +21,4 @@
 # docker
 .git
 .dockerignore
-Dockerfile
-Dockerfile.dev
-Dockerfile.nvidia
-docker-compose.yml
+docker

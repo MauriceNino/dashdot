@@ -1,0 +1,37 @@
+# !! Attention !!
+# This is a docker-compose file used ONLY for the dev environment and can not be used for production.
+# If you need instructions on how to run dashdot, please have a look at the README.md file in the root of the project.
+services:
+  dash:
+    # image: mauricenino/dashdot:dev
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    tty: true
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - DASHDOT_ENABLE_CPU_TEMPS=true
+      - DASHDOT_SPEED_TEST_FROM_PATH=/app/speedtest_result
+      - DASHDOT_SHOW_DASH_VERSION=none
+    expose:
+      - 3001
+    volumes:
+      - ../speedtest_result:/app/speedtest_result
+      - /:/mnt/host:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashdot.rule=Host(`dash-dev.com`)" # for this to work, you will have to add an entry to /etc/hosts
+
+  traefik:
+    image: traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
