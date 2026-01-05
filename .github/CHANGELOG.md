@@ -1,3 +1,10 @@
+## [6.2.2](https://github.com/MauriceNino/dashdot/compare/v6.2.1...v6.2.2) (2026-01-05)
+
+
+### Bug Fixes
+
+* incorrect frontend assets path when using ROUTING_PATH ([#1258](https://github.com/MauriceNino/dashdot/issues/1258)) ([ea3f392](https://github.com/MauriceNino/dashdot/commit/ea3f392a9f6c58cf6ea83920c07fb2b9f0f81b86))
+
 ## [6.2.1](https://github.com/MauriceNino/dashdot/compare/v6.2.0...v6.2.1) (2026-01-05)
 
 # [6.2.0](https://github.com/MauriceNino/dashdot/compare/v6.1.0...v6.2.0) (2025-08-10)
