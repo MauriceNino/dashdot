@@ -3284,7 +3284,7 @@ __metadata:
     "@types/throttle-debounce": "npm:^5"
     "@vitejs/plugin-react": "npm:^5.1.1"
     antd: "npm:5.29.3"
-    framer-motion: "npm:12.24.8"
+    framer-motion: "npm:12.24.10"
     globals: "npm:^17.0.0"
     parse-domain: "npm:8.2.2"
     punycode: "npm:2.3.1"
@@ -12794,12 +12794,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:12.24.8":
-  version: 12.24.8
-  resolution: "framer-motion@npm:12.24.8"
+"framer-motion@npm:12.24.10":
+  version: 12.24.10
+  resolution: "framer-motion@npm:12.24.10"
   dependencies:
-    motion-dom: "npm:^12.24.8"
-    motion-utils: "npm:^12.23.28"
+    motion-dom: "npm:^12.24.10"
+    motion-utils: "npm:^12.24.10"
     tslib: "npm:^2.4.0"
   peerDependencies:
     "@emotion/is-prop-valid": "*"
@@ -12812,7 +12812,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/5879db074e566c28e09377e95d3085d6d8a219256fcd42fbdd88b793677788ce69074c96babc445636ff685ee4a7dde452028b5eca1edffcd3ef4cd95eb4cb20
+  checksum: 10/a42347a5875178dc6d8f258124f16ce942d68337b98f5512ce2621ffcdaf5df8a1d1d293a27ed312b36b0e4135f7655c10bb73f4abd90b83f9966196f5c01560
   languageName: node
   linkType: hard
 
@@ -17808,19 +17808,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion-dom@npm:^12.24.8":
-  version: 12.24.8
-  resolution: "motion-dom@npm:12.24.8"
+"motion-dom@npm:^12.24.10":
+  version: 12.24.10
+  resolution: "motion-dom@npm:12.24.10"
   dependencies:
-    motion-utils: "npm:^12.23.28"
-  checksum: 10/09d643caa5d699af3125852856e59b495a8ae765f7e78ae8d088ffd8a77341c505bdd74681f84c4c6d668ecf885099091161082bda5c2c6d3ee17e455ed1e910
+    motion-utils: "npm:^12.24.10"
+  checksum: 10/f6603a628ebd4723a86f835cbaac9930378c92d0c5b1054a56d16999fabef46aa9929bd5d1d03983cb84c5f8cc0219c0bc0c8697347bc637e1cc0a631ee2383d
   languageName: node
   linkType: hard
 
-"motion-utils@npm:^12.23.28":
-  version: 12.23.28
-  resolution: "motion-utils@npm:12.23.28"
-  checksum: 10/2d481eb26134f282019e0117abae7b5788e89504a88113d7f53e94c5a6aae34e552d3b14a804ebc5d46596946839190963a3fb8189c55b5b38cf82fb16069a77
+"motion-utils@npm:^12.24.10":
+  version: 12.24.10
+  resolution: "motion-utils@npm:12.24.10"
+  checksum: 10/b023223fe617a32d2ade933b6a505caa11252eb2094f0ea65eda6db35d463a7b3cc766708141a7828405ab8d5c3651bb71fbf6e8e63769ef7d36e7d77b755b58
   languageName: node
   linkType: hard
 
