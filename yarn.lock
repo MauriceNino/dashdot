@@ -3284,7 +3284,7 @@ __metadata:
     "@types/throttle-debounce": "npm:^5"
     "@vitejs/plugin-react": "npm:^5.1.1"
     antd: "npm:5.29.3"
-    framer-motion: "npm:12.24.7"
+    framer-motion: "npm:12.24.8"
     globals: "npm:^17.0.0"
     parse-domain: "npm:8.2.2"
     punycode: "npm:2.3.1"
@@ -12794,11 +12794,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:12.24.7":
-  version: 12.24.7
-  resolution: "framer-motion@npm:12.24.7"
+"framer-motion@npm:12.24.8":
+  version: 12.24.8
+  resolution: "framer-motion@npm:12.24.8"
   dependencies:
-    motion-dom: "npm:^12.24.3"
+    motion-dom: "npm:^12.24.8"
     motion-utils: "npm:^12.23.28"
     tslib: "npm:^2.4.0"
   peerDependencies:
@@ -12812,7 +12812,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/8062f24f872b47c468eb7776afbf94ccbc2ad6cc4ae4f92202270f0d7a522ed89db971dd1c7c59adb9dc644210f1a13ae565f21dcf312ee7cb23293324977d35
+  checksum: 10/5879db074e566c28e09377e95d3085d6d8a219256fcd42fbdd88b793677788ce69074c96babc445636ff685ee4a7dde452028b5eca1edffcd3ef4cd95eb4cb20
   languageName: node
   linkType: hard
 
@@ -17808,12 +17808,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion-dom@npm:^12.24.3":
-  version: 12.24.3
-  resolution: "motion-dom@npm:12.24.3"
+"motion-dom@npm:^12.24.8":
+  version: 12.24.8
+  resolution: "motion-dom@npm:12.24.8"
   dependencies:
     motion-utils: "npm:^12.23.28"
-  checksum: 10/6de28bef1326e8e10cdabf4528df0287453cd7e78c8c28a6f474ab03e65922a73863845c3683c639c75a8570d2f5aa54c693e28a26067197e35111bb5e7285a5
+  checksum: 10/09d643caa5d699af3125852856e59b495a8ae765f7e78ae8d088ffd8a77341c505bdd74681f84c4c6d668ecf885099091161082bda5c2c6d3ee17e455ed1e910
   languageName: node
   linkType: hard
 
