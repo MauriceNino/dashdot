@@ -3259,8 +3259,8 @@ __metadata:
     "@docusaurus/theme-classic": "npm:3.9.2"
     "@docusaurus/tsconfig": "npm:3.9.2"
     "@docusaurus/types": "npm:3.9.2"
-    "@mantine/core": "npm:8.3.11"
-    "@mantine/hooks": "npm:8.3.11"
+    "@mantine/core": "npm:8.3.12"
+    "@mantine/hooks": "npm:8.3.12"
     "@mdx-js/react": "npm:3.1.1"
     "@types/react": "npm:^19"
     clsx: "npm:^2.0.0"
@@ -5152,9 +5152,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:8.3.11":
-  version: 8.3.11
-  resolution: "@mantine/core@npm:8.3.11"
+"@mantine/core@npm:8.3.12":
+  version: 8.3.12
+  resolution: "@mantine/core@npm:8.3.12"
   dependencies:
     "@floating-ui/react": "npm:^0.27.16"
     clsx: "npm:^2.1.1"
@@ -5163,19 +5163,19 @@ __metadata:
     react-textarea-autosize: "npm:8.5.9"
     type-fest: "npm:^4.41.0"
   peerDependencies:
-    "@mantine/hooks": 8.3.11
+    "@mantine/hooks": 8.3.12
     react: ^18.x || ^19.x
     react-dom: ^18.x || ^19.x
-  checksum: 10/473acb3304de90972bb4605f42da397eda6dcfa2064425d4e5b859556fffdf5281a0157489c04709993009d56ab127d812a969b1453b8bc626072b24fa6ff69c
+  checksum: 10/6e0bbb5a2627682779b7362a4a1a6d8db96523f34a60bd1f1a8e20a071a6e6c50f613caffc002ca5ece4d8ff72ce419a9d6f86b3564a26f40ac005d789e58e55
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:8.3.11":
-  version: 8.3.11
-  resolution: "@mantine/hooks@npm:8.3.11"
+"@mantine/hooks@npm:8.3.12":
+  version: 8.3.12
+  resolution: "@mantine/hooks@npm:8.3.12"
   peerDependencies:
     react: ^18.x || ^19.x
-  checksum: 10/b3d55ddfbbf69d10a5ef6abf5ee3d0269d8377c24d1799c660a773a503eb53a3eab474b76b38f38a7089c9d33263eb3b04ccfe761925e22cd58b6b2b796a5754
+  checksum: 10/b04393c08fd29b76ff96bf16dcb8a69a9ff4838c48cac8041e32b21b8504efd50bf40a2854d863c4d7324b12eaa5e911fa6590fe69543f0badd8b1f236ed95c7
   languageName: node
   linkType: hard
 
