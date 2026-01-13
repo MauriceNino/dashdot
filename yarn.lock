@@ -3287,7 +3287,7 @@ __metadata:
     "@types/express": "npm:^5"
     "@types/jest": "npm:30.0.0"
     "@types/mime-types": "npm:^3"
-    "@types/node": "npm:25.0.6"
+    "@types/node": "npm:25.0.7"
     chai: "npm:6.2.2"
     compression: "npm:1.8.1"
     concurrently: "npm:9.2.1"
@@ -7589,12 +7589,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:25.0.6, @types/node@npm:>=10.0.0":
+"@types/node@npm:*, @types/node@npm:>=10.0.0":
   version: 25.0.6
   resolution: "@types/node@npm:25.0.6"
   dependencies:
     undici-types: "npm:~7.16.0"
   checksum: 10/19d6dcaccc49b8d9efd987d6e7573f84cf3665fbe88adc0eb08e87d3682a36a4a6997a5ead2a11c79eb891c0e0c5260caef23bd262e5772708d95330d5b7ddf1
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:25.0.7":
+  version: 25.0.7
+  resolution: "@types/node@npm:25.0.7"
+  dependencies:
+    undici-types: "npm:~7.16.0"
+  checksum: 10/1bf778bd087160903bca1d1d0ed9e0c25abd12ac9322a4d58a6918d110c8a3eaa2f5dc1437e0009b57bfa2791c2b409ebdb4bb4dc0c2e8f096db07e285e63578
   languageName: node
   linkType: hard
 
