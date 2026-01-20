@@ -7714,11 +7714,11 @@ __metadata:
   linkType: hard
 
 "@types/react@npm:*, @types/react@npm:^19":
-  version: 19.2.8
-  resolution: "@types/react@npm:19.2.8"
+  version: 19.2.9
+  resolution: "@types/react@npm:19.2.9"
   dependencies:
     csstype: "npm:^3.2.2"
-  checksum: 10/688e7605876e2729c25fdfd2c131d7080cb8e98db528aedccab89005bcbca097a6149fa6e137ae4f1807bdc44220e0c5c7b4a968b5b681dadb7761968bac6de5
+  checksum: 10/580a4acf91cb596edfcf280e3d94380bd5bc675fdce257787432cc77ab67440374fd17a1abde869f3bd47ec1705bf2d66e442a9e9e371603f628e34f9d5790a6
   languageName: node
   linkType: hard
 
