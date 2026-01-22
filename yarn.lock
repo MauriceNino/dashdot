@@ -3291,7 +3291,7 @@ __metadata:
     chai: "npm:6.2.2"
     compression: "npm:1.8.1"
     concurrently: "npm:9.2.1"
-    cors: "npm:2.8.5"
+    cors: "npm:2.8.6"
     cronstrue: "npm:3.9.0"
     dedent: "npm:1.7.1"
     esbuild: "npm:0.27.2"
@@ -10645,7 +10645,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cors@npm:2.8.5, cors@npm:~2.8.5":
+"cors@npm:2.8.6":
+  version: 2.8.6
+  resolution: "cors@npm:2.8.6"
+  dependencies:
+    object-assign: "npm:^4"
+    vary: "npm:^1"
+  checksum: 10/aa7174305b21ceb90f9c84f4eaa32f04432d333addbfdc0d1eb7310393c48902e5364aada5ac2f5d054528d63b3179238444475426fcb74e1e345077de485727
+  languageName: node
+  linkType: hard
+
+"cors@npm:~2.8.5":
   version: 2.8.5
   resolution: "cors@npm:2.8.5"
   dependencies:
