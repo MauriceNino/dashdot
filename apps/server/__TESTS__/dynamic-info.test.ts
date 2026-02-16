@@ -15,7 +15,7 @@ import {
   TEST_CASE_24,
   TEST_CASE_25,
   TEST_CASE_26,
-  TestCase,
+  type TestCase,
 } from './test-cases';
 
 const toStorageInp = (inp: TestCase) =>
@@ -31,7 +31,7 @@ describe('Dynamic Info', () => {
     it('Test Case 14', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_14)
+        ...toStorageInp(TEST_CASE_14),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_14.output);
     });
@@ -39,7 +39,7 @@ describe('Dynamic Info', () => {
       CONFIG.running_in_docker = false;
       const output = new DynamicStorageMapper(
         true,
-        ...toStorageInp(TEST_CASE_15)
+        ...toStorageInp(TEST_CASE_15),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_15.output);
     });
@@ -47,21 +47,21 @@ describe('Dynamic Info', () => {
       CONFIG.running_in_docker = false;
       const output = new DynamicStorageMapper(
         true,
-        ...toStorageInp(TEST_CASE_16)
+        ...toStorageInp(TEST_CASE_16),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_16.output);
     });
     it('Test Case 17', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_17)
+        ...toStorageInp(TEST_CASE_17),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_17.output);
     });
     it('Test Case 18', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_18)
+        ...toStorageInp(TEST_CASE_18),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_18.output);
     });
@@ -69,56 +69,56 @@ describe('Dynamic Info', () => {
       CONFIG.fs_device_filter = ['sda'];
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_19)
+        ...toStorageInp(TEST_CASE_19),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_19.output);
     });
     it('Test Case 20', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_20)
+        ...toStorageInp(TEST_CASE_20),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_20.output);
     });
     it('Test Case 21', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_21)
+        ...toStorageInp(TEST_CASE_21),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_21.output);
     });
     it('Test Case 22', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_22)
+        ...toStorageInp(TEST_CASE_22),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_22.output);
     });
     it('Test Case 23', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_23)
+        ...toStorageInp(TEST_CASE_23),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_23.output);
     });
     it('Test Case 24', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_24)
+        ...toStorageInp(TEST_CASE_24),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_24.output);
     });
     it('Test Case 25', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_25)
+        ...toStorageInp(TEST_CASE_25),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_25.output);
     });
     it('Test Case 26', () => {
       const output = new DynamicStorageMapper(
         false,
-        ...toStorageInp(TEST_CASE_26)
+        ...toStorageInp(TEST_CASE_26),
       ).getMappedLayout();
       expect(output).to.deep.equal(TEST_CASE_26.output);
     });

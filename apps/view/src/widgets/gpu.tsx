@@ -1,6 +1,6 @@
-import { Config, GpuInfo, GpuLoad } from '@dash/common';
+import type { Config, GpuInfo, GpuLoad } from '@dashdot/common';
 import { faDesktop } from '@fortawesome/free-solid-svg-icons';
-import { FC, useMemo, useState } from 'react';
+import { type FC, useMemo, useState } from 'react';
 import { YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
@@ -12,7 +12,7 @@ import { HardwareInfoContainer } from '../components/hardware-info-container';
 import { useIsMobile } from '../services/mobile';
 import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
-import { ChartVal } from '../utils/types';
+import type { ChartVal } from '../utils/types';
 
 type GpuChartProps = {
   load: GpuLoad[];
@@ -52,15 +52,15 @@ export const GpuChart: FC<GpuChartProps> = ({
       }
       textOffset={textOffset}
       textSize={textSize}
-      renderChart={size => (
+      renderChart={(size) => (
         <DefaultAreaChart
           data={chartDataLoad}
           height={size.height}
           width={size.width}
           color={theme.colors.gpuPrimary}
-          renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
+          renderTooltip={(val) => `${val.payload?.[0]?.value?.toFixed(1)} %`}
         >
-          <YAxis hide={true} type='number' domain={[-5, 105]} />
+          <YAxis hide={true} type="number" domain={[-5, 105]} />
         </DefaultAreaChart>
       )}
     ></ChartContainer>
@@ -70,19 +70,19 @@ export const GpuChart: FC<GpuChartProps> = ({
     <ChartContainer
       contentLoaded={chartDataMemory.length > 1}
       textLeft={`%: ${(chartDataMemory.at(-1)?.y as number)?.toFixed(
-        1
+        1,
       )} (Memory)`}
       textOffset={textOffset}
       textSize={textSize}
-      renderChart={size => (
+      renderChart={(size) => (
         <DefaultAreaChart
           data={chartDataMemory}
           height={size.height}
           width={size.width}
           color={theme.colors.gpuPrimary}
-          renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
+          renderTooltip={(val) => `${val.payload?.[0]?.value?.toFixed(1)} %`}
         >
-          <YAxis hide={true} type='number' domain={[-5, 105]} />
+          <YAxis hide={true} type="number" domain={[-5, 105]} />
         </DefaultAreaChart>
       )}
     ></ChartContainer>
@@ -135,13 +135,13 @@ export const GpuWidget: FC<GpuWidgetProps> = ({ load, data, config }) => {
       override.gpu_brands,
       override.gpu_memories,
       override.gpu_models,
-    ]
+    ],
   );
 
   return (
     <HardwareInfoContainer
       color={theme.colors.gpuPrimary}
-      heading='Graphics'
+      heading="Graphics"
       infos={infos}
       infosPerPage={config.gpu_label_list.length}
       icon={faDesktop}

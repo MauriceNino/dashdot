@@ -1,16 +1,8 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
-  ],
+  "extends": "@dashdot/typescript-config/node.json",
   "compilerOptions": {
     "esModuleInterop": true
-  }
+  },
+  "include": ["src", "__TESTS__"],
+  "exclude": ["node_modules", "dist"]
 }

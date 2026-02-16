@@ -1,7 +1,7 @@
-import { Config, CpuInfo, CpuLoad } from '@dash/common';
+import type { Config, CpuInfo, CpuLoad } from '@dashdot/common';
 import { faMicrochip } from '@fortawesome/free-solid-svg-icons';
-import { Variants } from 'framer-motion';
-import { FC } from 'react';
+import type { Variants } from 'framer-motion';
+import type { FC } from 'react';
 import { YAxis } from 'recharts';
 import { useTheme } from 'styled-components';
 import { DefaultAreaChart } from '../components/chart-components';
@@ -15,7 +15,7 @@ import { useIsMobile } from '../services/mobile';
 import { useSetting } from '../services/settings';
 import { celsiusToFahrenheit } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
-import { ChartVal } from '../utils/types';
+import type { ChartVal } from '../utils/types';
 
 const containerVariants = {
   animate: {
@@ -93,7 +93,7 @@ export const CpuChart: FC<CpuChartProps> = ({
       },
       {} as {
         [key: number]: ChartVal[];
-      }
+      },
     );
 
     chartData = Object.entries(coresWithValues).map(([_, value]) => value);
@@ -125,9 +125,9 @@ export const CpuChart: FC<CpuChartProps> = ({
       gap={8}
       layout
       variants={containerVariants}
-      initial='initial'
-      animate='animate'
-      exit='exit'
+      initial="initial"
+      animate="animate"
+      exit="exit"
     >
       {chartData.map((chart, chartI) => (
         <ChartContainer
@@ -160,15 +160,17 @@ export const CpuChart: FC<CpuChartProps> = ({
           }
           textOffset={textOffset}
           textSize={textSize}
-          renderChart={size => (
+          renderChart={(size) => (
             <DefaultAreaChart
               data={chart}
               height={size.height}
               width={size.width}
               color={theme.colors.cpuPrimary}
-              renderTooltip={val => `${val.payload?.[0]?.value?.toFixed(1)} %`}
+              renderTooltip={(val) =>
+                `${val.payload?.[0]?.value?.toFixed(1)} %`
+              }
             >
-              <YAxis hide={true} type='number' domain={[-5, 105]} />
+              <YAxis hide={true} type="number" domain={[-5, 105]} />
             </DefaultAreaChart>
           )}
         ></ChartContainer>
@@ -194,14 +196,14 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
     config.cpu_cores_toggle_mode === 'multi-core'
       ? true
       : config.cpu_cores_toggle_mode === 'average'
-      ? false
-      : multiCore;
+        ? false
+        : multiCore;
   const frequency = override.cpu_frequency ?? data.frequency;
 
   return (
     <HardwareInfoContainer
       color={theme.colors.cpuPrimary}
-      heading='Processor'
+      heading="Processor"
       infos={toInfoTable(config.cpu_label_list, {
         brand: { label: 'Brand', value: override.cpu_brand ?? data.brand },
         model: { label: 'Model', value: override.cpu_model ?? data.model },
@@ -223,7 +225,7 @@ export const CpuWidget: FC<CpuWidgetProps> = ({ load, data, config }) => {
       extraContent={
         showToggle ? (
           <WidgetSwitch
-            label='Show All Cores'
+            label="Show All Cores"
             checked={multiCore}
             onChange={() => setMultiCore(!multiCore)}
           />

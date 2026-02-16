@@ -1,7 +1,7 @@
-import { Config, StorageInfo, StorageLoad } from '@dash/common';
+import type { Config, StorageInfo, StorageLoad } from '@dashdot/common';
 import { faHdd } from '@fortawesome/free-solid-svg-icons';
-import { Variants } from 'framer-motion';
-import { FC, useMemo, useState } from 'react';
+import type { Variants } from 'framer-motion';
+import { type FC, useMemo, useState } from 'react';
 import { Bar, Cell, LabelList } from 'recharts';
 import { useTheme } from 'styled-components';
 import {
@@ -47,9 +47,9 @@ const removeDuplicates = (arr: string[]): string => {
 const useDataWithOverrides = (data: StorageInfo, config: Config): StorageInfo =>
   useMemo(
     () =>
-      data.map(entry => {
+      data.map((entry) => {
         const sizeDevice = entry.disks.find(
-          disk => config.override.storage_sizes[disk.device] != null
+          (disk) => config.override.storage_sizes[disk.device] != null,
         )?.device;
 
         return {
@@ -57,14 +57,14 @@ const useDataWithOverrides = (data: StorageInfo, config: Config): StorageInfo =>
           size: sizeDevice
             ? config.override.storage_sizes[sizeDevice]
             : entry.size,
-          disks: entry.disks.map(disk => ({
+          disks: entry.disks.map((disk) => ({
             ...disk,
             brand: config.override.storage_brands[disk.device] ?? disk.brand,
             type: config.override.storage_types[disk.device] ?? disk.type,
           })),
         };
       }),
-    [data, config]
+    [data, config],
   );
 
 type StorageChartProps = {
@@ -90,16 +90,16 @@ export const StorageChart: FC<StorageChartProps> = ({
   const theme = useTheme();
 
   const shownData = useDataWithOverrides(data, config);
-  const layoutNoVirtual = shownData.filter(l => !l.virtual);
+  const layoutNoVirtual = shownData.filter((l) => !l.virtual);
   const loadNoVirtual = load?.slice(0, layoutNoVirtual.length) ?? [];
 
-  const totalSize = layoutNoVirtual.reduce((acc, s) => (acc = acc + s.size), 0);
+  const totalSize = layoutNoVirtual.reduce((acc, s) => acc + s.size, 0);
   const totalUsed =
     loadNoVirtual.reduce((acc, curr) => acc + (curr >= 0 ? curr : 0), 0) ?? 0;
   const totalInvalid =
     loadNoVirtual.reduce(
       (acc, curr, i) => acc + (curr === -1 ? layoutNoVirtual[i].size : 0),
-      0
+      0,
     ) ?? 0;
   const totalAvailable = Math.max(0, totalSize - totalUsed - totalInvalid);
 
@@ -108,7 +108,7 @@ export const StorageChart: FC<StorageChartProps> = ({
 
     return shownData.map((d, i) => {
       const invalid = load?.[i] === -1;
-      const used = invalid ? 0 : load?.[i] ?? 0;
+      const used = invalid ? 0 : (load?.[i] ?? 0);
       const available = d.size - used;
       const realPercent = used / d.size,
         usedPercent = Math.min(realPercent, 1);
@@ -129,7 +129,7 @@ export const StorageChart: FC<StorageChartProps> = ({
       ? usageArr.slice(
           index * config.storage_widget_items_per_page,
           index * config.storage_widget_items_per_page +
-            config.storage_widget_items_per_page
+            config.storage_widget_items_per_page,
         )
       : usageArr;
 
@@ -138,17 +138,17 @@ export const StorageChart: FC<StorageChartProps> = ({
       {multiView ? (
         <ChartContainer
           variants={itemVariants}
-          initial='initial'
-          animate='animate'
-          exit='exit'
-          key='storage-chart-multi'
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          key="storage-chart-multi"
           contentLoaded={load != null}
-          renderChart={size => (
+          renderChart={(size) => (
             <DefaultVertBarChart
               width={size.width}
               height={size.height}
               data={activeUsageArr}
-              tooltipRenderer={x => {
+              tooltipRenderer={(x) => {
                 const value = x.payload?.[0]?.payload as
                   | (typeof usageArr)[0]
                   | undefined;
@@ -175,8 +175,8 @@ export const StorageChart: FC<StorageChartProps> = ({
               }}
             >
               <Bar
-                dataKey='usedPercent'
-                stackId='stack'
+                dataKey="usedPercent"
+                stackId="stack"
                 fill={theme.colors.storagePrimary}
                 style={{ stroke: theme.colors.surface, strokeWidth: 4 }}
                 radius={10}
@@ -184,12 +184,12 @@ export const StorageChart: FC<StorageChartProps> = ({
               >
                 {showPercentages && (
                   <LabelList
-                    position='insideLeft'
+                    position="insideLeft"
                     offset={15}
-                    dataKey='realPercent'
+                    dataKey="realPercent"
                     content={
                       <VertBarStartLabel
-                        labelRenderer={value =>
+                        labelRenderer={(value) =>
                           `%: ${(value * 100).toFixed(1)}`
                         }
                       />
@@ -198,8 +198,8 @@ export const StorageChart: FC<StorageChartProps> = ({
                 )}
               </Bar>
               <Bar
-                dataKey='availablePercent'
-                stackId='stack'
+                dataKey="availablePercent"
+                stackId="stack"
                 opacity={0.2}
                 radius={10}
               >
@@ -222,6 +222,7 @@ export const StorageChart: FC<StorageChartProps> = ({
                             strokeWidth: 4,
                           }
                     }
+                    // biome-ignore lint/suspicious/noArrayIndexKey: No better key available
                     key={`cell-${index}`}
                   />
                 ))}
@@ -239,12 +240,12 @@ export const StorageChart: FC<StorageChartProps> = ({
           textOffset={textOffset}
           textSize={textSize}
           variants={itemVariants}
-          initial='initial'
-          animate='animate'
-          exit='exit'
-          key='storage-chart-single'
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          key="storage-chart-single"
           contentLoaded={load != null}
-          renderChart={size => (
+          renderChart={(size) => (
             <DefaultPieChart
               data={[
                 {
@@ -265,21 +266,21 @@ export const StorageChart: FC<StorageChartProps> = ({
               color={theme.colors.storagePrimary}
               hoverLabelRenderer={(label, value) =>
                 `${((value / totalSize) * 100).toFixed(
-                  1
+                  1,
                 )} % ${label}\n${bytePrettyPrint(value)} / ${bytePrettyPrint(
-                  totalSize
+                  totalSize,
                 )}`
               }
             >
               <Cell
-                key='cell-used'
+                key="cell-used"
                 fill={theme.colors.storagePrimary}
                 style={{
                   transition: 'all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                 }}
               />
               <Cell
-                key='cell-free'
+                key="cell-free"
                 fill={theme.colors.text}
                 opacity={0.2}
                 style={{
@@ -287,7 +288,7 @@ export const StorageChart: FC<StorageChartProps> = ({
                 }}
               />
               <Cell
-                key='cell-invalid'
+                key="cell-invalid"
                 fill={theme.colors.surface}
                 style={{
                   //TODO: Find out how to make the stroke width inset
@@ -333,18 +334,18 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       const sizeShown = config.storage_label_list.includes('size');
       const raidShown = config.storage_label_list.includes('raid');
 
-      return shownData.map(s => {
+      return shownData.map((s) => {
         const brand = s.virtual
           ? s.disks[0].brand
           : removeDuplicates(
-              s.disks.map(d =>
+              s.disks.map((d) =>
                 [
                   brandShown ? d.brand : undefined,
                   typeShown ? d.type : undefined,
                 ]
-                  .filter(x => x)
-                  .join(' ')
-              )
+                  .filter((x) => x)
+                  .join(' '),
+              ),
             );
         const size = s.size;
         const raidGroup = s.raidLabel;
@@ -353,36 +354,36 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
           label: s.virtual
             ? 'VIRT'
             : raidGroup
-            ? `RAID${raidShown ? `\n=> ${raidGroup}` : ''}`
-            : 'Drive',
+              ? `RAID${raidShown ? `\n=> ${raidGroup}` : ''}`
+              : 'Drive',
           value: [
             brandShown || typeShown ? brand : undefined,
             sizeShown ? bytePrettyPrint(size) : undefined,
           ]
-            .filter(x => x)
+            .filter((x) => x)
             .join('\n=> '),
         };
       });
     } else {
       const brand = removeDuplicates(
-        shownData[0]?.disks?.map(({ brand }) => brand)
+        shownData[0]?.disks?.map(({ brand }) => brand),
       );
       const size = shownData[0]?.size;
       const type = removeDuplicates(
-        shownData[0]?.disks?.map(({ type }) => type)
+        shownData[0]?.disks?.map(({ type }) => type),
       );
       const isRaid = shownData[0]?.raidLabel != null;
 
       return toInfoTable(
         isRaid
           ? config.storage_label_list
-          : config.storage_label_list.filter(x => x !== 'raid'),
+          : config.storage_label_list.filter((x) => x !== 'raid'),
         {
           brand: { label: 'Brand', value: brand },
           size: { label: 'Size', value: size ? bytePrettyPrint(size) : '' },
           type: { label: 'Type', value: type },
           raid: { label: 'Raid', value: shownData[0]?.raidLabel },
-        }
+        },
       );
     }
   }, [config.storage_label_list, shownData]);
@@ -390,7 +391,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
   return (
     <HardwareInfoContainer
       color={theme.colors.storagePrimary}
-      heading='Storage'
+      heading="Storage"
       infos={infos}
       infosPerPage={
         shownData.length > 1 ? config.storage_widget_items_per_page : 7
@@ -399,7 +400,7 @@ export const StorageWidget: FC<StorageWidgetProps> = ({
       extraContent={
         canHaveSplitView ? (
           <WidgetSwitch
-            label='Split View'
+            label="Split View"
             checked={splitView}
             onChange={() => setSplitView(!splitView)}
           />

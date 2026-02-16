@@ -1,6 +1,6 @@
+import { inspect } from 'node:util';
 import cron from 'node-cron';
 import { debounceTime, interval, lastValueFrom, mergeMap, Observable, Observer, ReplaySubject, Subject, Subscribable, take, takeUntil, timeout, Unsubscribable } from 'rxjs';
-import { inspect } from 'util';
 import { CONFIG } from './config';
 import getCpuInfo from './data/cpu';
 import getGpuInfo from './data/gpu';
@@ -75,18 +75,17 @@ class LazyObservable<T> implements Subscribable<T> {
     const buffer = new ReplaySubject<T>(this.bufferSize);
 
     this.dataFactory()
-      .then(value => {
         console.log(
           `First measurement [${this.name}]:`,
           inspect(value, {
             showHidden: false,
             depth: null,
             colors: true,
-          })
+          }),
         );
         buffer.next(value);
       })
-      .catch(err => buffer.error(err));
+      .catch((err) => buffer.error(err));
 
     interval(this.intervalMs)
       .pipe(mergeMap(this.dataFactory), takeUntil(this.stop))
@@ -115,7 +114,7 @@ export const getDynamicServerInfo = () => {
     runInBackground,
     CONFIG.cpu_shown_datapoints,
     CONFIG.cpu_poll_interval,
-    getCpuInfo.dynamic
+    getCpuInfo.dynamic,
   );
 
   const ramObs = new LazyObservable(
@@ -124,7 +123,7 @@ export const getDynamicServerInfo = () => {
     runInBackground,
     CONFIG.ram_shown_datapoints,
     CONFIG.ram_poll_interval,
-    getRamInfo.dynamic
+    getRamInfo.dynamic,
   );
 
   const storageObs = new LazyObservable(
@@ -133,7 +132,7 @@ export const getDynamicServerInfo = () => {
     runInBackground,
     1,
     CONFIG.storage_poll_interval,
-    getStorageInfo.dynamic
+    getStorageInfo.dynamic,
   );
 
   const networkObs = new LazyObservable(
@@ -142,7 +141,7 @@ export const getDynamicServerInfo = () => {
     runInBackground,
     CONFIG.network_shown_datapoints,
     CONFIG.network_poll_interval,
-    getNetworkInfo.dynamic
+    getNetworkInfo.dynamic,
   );
 
   const gpuObs = new LazyObservable(
@@ -151,7 +150,7 @@ export const getDynamicServerInfo = () => {
     runInBackground,
     CONFIG.gpu_shown_datapoints,
     CONFIG.gpu_poll_interval,
-    getGpuInfo.dynamic
+    getGpuInfo.dynamic,
   );
 
   let speedTestObs = new Observable();
@@ -168,8 +167,8 @@ export const getDynamicServerInfo = () => {
     } else {
       speedTestObs = interval(CONFIG.speed_test_interval * 60 * 1000).pipe(
         mergeMap(
-          async () => await loadInfo('network', getNetworkInfo.speedTest, true)
-        )
+          async () => await loadInfo('network', getNetworkInfo.speedTest, true),
+        ),
       );
     }
   }

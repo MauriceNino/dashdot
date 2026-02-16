@@ -1,4 +1,4 @@
-import { Config, OsInfo, Transient } from '@dash/common';
+import type { Config, OsInfo, Transient } from '@dashdot/common';
 import {
   faApple,
   faCentos,
@@ -10,17 +10,17 @@ import {
   faSuse,
   faUbuntu,
   faWindows,
-  IconDefinition,
+  type IconDefinition,
 } from '@fortawesome/free-brands-svg-icons';
 import { faServer } from '@fortawesome/free-solid-svg-icons';
 import {
   FontAwesomeIcon,
-  FontAwesomeIconProps,
+  type FontAwesomeIconProps,
 } from '@fortawesome/react-fontawesome';
 import { Button, Tooltip } from 'antd';
-import { fromUrl, parseDomain, ParseResultType } from 'parse-domain';
+import { fromUrl, ParseResultType, parseDomain } from 'parse-domain';
 import { toUnicode } from 'punycode';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { type FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { InfoTable } from '../components/info-table';
 import { ThemedText } from '../components/text';
@@ -68,7 +68,7 @@ const Appendix = styled.span`
 const ServerName = styled.span`
   font-weight: bold;
   text-decoration: underline;
-  text-decoration-color: ${props => props.theme.colors.primary};
+  text-decoration-color: ${(props) => props.theme.colors.primary};
   position: relative;
   bottom: -3px;
   margin-top: 32px;
@@ -89,11 +89,11 @@ const Link = styled(Button)`
 
   &:active {
     > svg {
-      color: ${props => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.primary};
     }
   }
   > svg {
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
   }
 `;
 
@@ -209,11 +209,11 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
   const ghBtn = (
     <Link
       ghost
-      shape='circle'
+      shape="circle"
       icon={<FontAwesomeIcon icon={faGithub} />}
-      href='https://github.com/MauriceNino/dashdot'
-      target='_blank'
-      aria-label='GitHub Link'
+      href="https://github.com/MauriceNino/dashdot"
+      target="_blank"
+      aria-label="GitHub Link"
     />
   );
 
@@ -221,7 +221,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
     <Container>
       <ButtonsContainer>
         {config.show_dash_version === 'icon_hover' ? (
-          <Tooltip placement='right' title={data.dash_version}>
+          <Tooltip placement="right" title={data.dash_version}>
             {ghBtn}
           </Tooltip>
         ) : (
@@ -230,7 +230,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
       </ButtonsContainer>
 
       <WidgetSwitch
-        label='Dark Mode'
+        label="Dark Mode"
         checked={darkMode}
         onChange={() => setDarkMode(!darkMode)}
       />
@@ -260,7 +260,7 @@ export const ServerWidget: FC<ServerWidgetProps> = ({ data, config }) => {
 
       <ServerIcon
         os={(override.os ?? distro + platform).toLowerCase()}
-        size='2x'
+        size="2x"
       />
     </Container>
   );

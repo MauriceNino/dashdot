@@ -1,8 +1,8 @@
-import { StorageInfo, StorageLoad, sumUp } from '@dash/common';
+import { type StorageInfo, type StorageLoad, sumUp } from '@dashdot/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../../config';
 import { getStaticServerInfo } from '../../static-info';
-import { PLATFORM_IS_WINDOWS, fromHost } from '../../utils';
+import { fromHost, PLATFORM_IS_WINDOWS } from '../../utils';
 
 type Block = si.Systeminformation.BlockDevicesData;
 type Size = si.Systeminformation.FsSizeData;
@@ -14,7 +14,7 @@ export class DynamicStorageMapper {
     private hostWin32: boolean,
     private layout: StorageInfo,
     private blocks: Block[],
-    private sizes: Size[]
+    private sizes: Size[],
   ) {
     this.validSizes = this.getValidSizes();
   }
@@ -24,22 +24,23 @@ export class DynamicStorageMapper {
     return this.sizes.filter(
       ({ mount, type }) =>
         (this.hostWin32 || mount.startsWith(fromHost('/'))) &&
-        !CONFIG.fs_type_filter.includes(type)
+        !CONFIG.fs_type_filter.includes(type),
     );
   }
 
   // Helpers
   private getBlocksForDisks(disks: StorageInfo[number]['disks']) {
     return this.blocks.filter(({ name, device }) =>
-      disks.some(d =>
-        this.hostWin32 ? d.device === device : name.startsWith(d.device)
-      )
+      disks.some((d) =>
+        this.hostWin32 ? d.device === device : name.startsWith(d.device),
+      ),
     );
   }
-  private getBlocksForRaid(raidLabel: string, raidName: string) {
+  private getBlocksForRaid(raidLabel?: string, raidName?: string) {
     return this.blocks.filter(
       ({ label, name }) =>
-        label.startsWith(raidLabel) || name.startsWith(raidName)
+        (raidLabel && label.startsWith(raidLabel)) ||
+        (raidName && name.startsWith(raidName)),
     );
   }
   private getBlocksForXfs(parts: Block[]) {
@@ -47,7 +48,7 @@ export class DynamicStorageMapper {
       ({ uuid, type, fsType }) =>
         type === 'md' &&
         fsType === 'xfs' &&
-        parts.some(part => part.uuid === uuid)
+        parts.some((part) => part.uuid === uuid),
     );
   }
 
@@ -62,10 +63,10 @@ export class DynamicStorageMapper {
   private getSizeForBlocks(
     deviceBlocks: Block[],
     diskSize: number,
-    isHost: boolean
+    isHost: boolean,
   ) {
-    const sizes = this.validSizes.filter(size =>
-      deviceBlocks.some(block => {
+    const sizes = this.validSizes.filter((size) =>
+      deviceBlocks.some((block) => {
         const matchedByMount =
           size.mount &&
           (block.mount === size.mount ||
@@ -75,7 +76,7 @@ export class DynamicStorageMapper {
         const matchedByHost = isHost && this.isRootMount(size.mount);
 
         return matchedByMount || matchedByDevice || matchedByHost;
-      })
+      }),
     );
 
     if (sizes.length === 0) {
@@ -98,7 +99,7 @@ export class DynamicStorageMapper {
   public getMappedLayout() {
     return this.layout.map(({ size, disks, virtual, raidLabel, raidName }) => {
       if (virtual) {
-        const size = this.sizes.find(s => s.fs === disks[0].device);
+        const size = this.sizes.find((s) => s.fs === disks[0]?.device);
         return size?.used ?? 0;
       }
 
@@ -122,6 +123,6 @@ export default async (): Promise<StorageLoad> => {
     PLATFORM_IS_WINDOWS,
     svInfo.storage,
     blocks,
-    sizes
+    sizes,
   ).getMappedLayout();
 };

@@ -1,0 +1,25 @@
+# !! Attention !!
+# This is a docker-compose file used ONLY for the dev environment and can not be used for production.
+# If you need instructions on how to run dashdot, please have a look at the README.md file in the root of the project.
+services:
+  dash:
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    tty: true
+    command: yarn run dev
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - DASHDOT_ENABLE_CPU_TEMPS=true
+      - DASHDOT_SPEED_TEST_FROM_PATH=/app/speedtest_result
+      - DASHDOT_SHOW_DASH_VERSION=none
+    ports:
+      - 3000:3000 # view
+      - 3001:3001 # server
+      - 3002:3002 # docs
+    volumes:
+      - ../:/app
+      - /:/mnt/host:ro
+    user: 1000:1000

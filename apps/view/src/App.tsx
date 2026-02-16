@@ -1,9 +1,9 @@
 import { ConfigProvider } from 'antd';
 import { type FC, useLayoutEffect, useMemo } from 'react';
 import {
+  createGlobalStyle,
   type DefaultTheme,
   ThemeProvider,
-  createGlobalStyle,
 } from 'styled-components';
 import { useColorScheme } from 'use-color-scheme';
 import { MainWidgetContainer } from './components/main-widget-container';
@@ -65,8 +65,8 @@ const GlobalStyle = createGlobalStyle<{ noBg: boolean }>`
       noBg
         ? 'transparent'
         : theme.dark
-        ? getDarkGradient(theme)
-        : getLightGradient(theme)};
+          ? getDarkGradient(theme)
+          : getLightGradient(theme)};
 
     transition: background 0.5s ease;
     background-attachment: fixed;
@@ -85,7 +85,7 @@ const GlobalStyle = createGlobalStyle<{ noBg: boolean }>`
 
 const overrideColor = (
   colors: (typeof darkTheme)['colors'],
-  query: ReturnType<typeof useQuery>
+  query: ReturnType<typeof useQuery>,
 ) => {
   if (query.singleWidget) {
     if (query.overrideThemeColor) {
