@@ -11,9 +11,9 @@ import { loadInfo } from './static-info';
 
 class LazyObservable<T> implements Subscribable<T> {
 
-  private observers = [];
+  private observers = new Array();
 
-  private currentBuffer: Observable<T>;
+  private currentBuffer: Observable<T> | null = null;
 
   private stop = new Subject<any>();
 
@@ -36,7 +36,7 @@ class LazyObservable<T> implements Subscribable<T> {
       return new LazyUnsubscribe();
     }
     this.tryStart();
-    var subscription = this.currentBuffer.subscribe(observer);
+    var subscription = this.currentBuffer!.subscribe(observer);
     this.observers.push(observer);
 
     return new LazyUnsubscribe(() => {
@@ -71,10 +71,11 @@ class LazyObservable<T> implements Subscribable<T> {
     }
   }
 
-  private createBuffer() {
+  private createBuffer(): Observable<T> {
     const buffer = new ReplaySubject<T>(this.bufferSize);
 
     this.dataFactory()
+    .then(value=>{
         console.log(
           `First measurement [${this.name}]:`,
           inspect(value, {
@@ -95,7 +96,7 @@ class LazyObservable<T> implements Subscribable<T> {
 }
 
 class LazyUnsubscribe implements Unsubscribable {
-  constructor(private callback: () => void = null) { }
+  constructor(private callback: (() => void) | null = null) { }
   unsubscribe(): void {
     if (this.callback)
       this.callback();
