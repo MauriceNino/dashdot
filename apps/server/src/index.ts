@@ -8,9 +8,7 @@ import cronParser from 'cronstrue';
 import express from 'express';
 import { lookup as mimeLookup } from 'mime-types';
 import cron from 'node-cron';
-import {
-  Unsubscribable,
-} from 'rxjs';
+import type { Unsubscribable } from 'rxjs';
 import { Server } from 'socket.io';
 import { CONFIG } from './config';
 import getNetworkInfo from './data/network';

@@ -39,7 +39,8 @@ export const CONFIG: Config = {
   ),
   fs_virtual_mounts: lst(penv('FS_VIRTUAL_MOUNTS') ?? ''),
   disable_integrations: penv('DISABLE_INTEGRATIONS') === 'true',
-  disable_background_stats_collection: penv('DISABLE_BACKGROUND_STATS_COLLECTION') === 'true',
+  disable_background_stats_collection:
+    penv('DISABLE_BACKGROUND_STATS_COLLECTION') === 'true',
 
   show_dash_version: (penv('SHOW_DASH_VERSION') as any) ?? 'icon_hover',
   show_host: penv('SHOW_HOST') === 'true',

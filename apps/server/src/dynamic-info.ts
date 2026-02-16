@@ -1,6 +1,20 @@
 import { inspect } from 'node:util';
 import cron from 'node-cron';
-import { debounceTime, interval, lastValueFrom, mergeMap, Observable, Observer, ReplaySubject, Subject, Subscribable, take, takeUntil, timeout, Unsubscribable } from 'rxjs';
+import {
+  debounceTime,
+  interval,
+  lastValueFrom,
+  mergeMap,
+  Observable,
+  type Observer,
+  ReplaySubject,
+  Subject,
+  type Subscribable,
+  take,
+  takeUntil,
+  timeout,
+  type Unsubscribable,
+} from 'rxjs';
 import { CONFIG } from './config';
 import getCpuInfo from './data/cpu';
 import getGpuInfo from './data/gpu';
@@ -10,8 +24,8 @@ import getStorageInfo from './data/storage';
 import { loadInfo } from './static-info';
 
 class LazyObservable<T> implements Subscribable<T> {
-
-  private observers = new Array();
+  private observers: Array<Partial<Observer<any>> | ((value: any) => void)> =
+    [];
 
   private currentBuffer: Observable<T> | null = null;
 
@@ -23,42 +37,45 @@ class LazyObservable<T> implements Subscribable<T> {
     private runInBackground: boolean,
     private bufferSize: number,
     private intervalMs: number,
-    private dataFactory: () => Promise<T>) {
-
+    private dataFactory: () => Promise<T>,
+  ) {
     if (this.runInBackground) {
       this.tryStart();
     }
-
   }
 
-  public subscribe(observer: Partial<Observer<T>> | ((value: T) => void)): Unsubscribable {
+  public subscribe(
+    observer: Partial<Observer<T>> | ((value: T) => void),
+  ): Unsubscribable {
     if (!this.enabled) {
       return new LazyUnsubscribe();
     }
     this.tryStart();
-    var subscription = this.currentBuffer!.subscribe(observer);
+    var subscription = this.currentBuffer?.subscribe(observer);
     this.observers.push(observer);
 
     return new LazyUnsubscribe(() => {
-      this.observers = this.observers.filter(x => x != observer);
+      this.observers = this.observers.filter((x) => x !== observer);
       this.tryComplete();
-      subscription.unsubscribe();
+      subscription?.unsubscribe();
     });
   }
 
   public async getCurrentValue(): Promise<T | undefined> {
     try {
       if (this.currentBuffer) {
-        return await lastValueFrom(this.currentBuffer.pipe(debounceTime(0), timeout(20), take(1)))
+        return await lastValueFrom(
+          this.currentBuffer.pipe(debounceTime(0), timeout(20), take(1)),
+        );
       }
-      return this.dataFactory();;
-    } catch (e) {
+      return this.dataFactory();
+    } catch (_e) {
       return undefined;
     }
-  };
+  }
 
   private tryComplete() {
-    if (!this.runInBackground && this.observers.length == 0) {
+    if (!this.runInBackground && this.observers.length === 0) {
       this.stop.next(1);
       this.stop = new Subject();
       this.currentBuffer = null;
@@ -75,7 +92,7 @@ class LazyObservable<T> implements Subscribable<T> {
     const buffer = new ReplaySubject<T>(this.bufferSize);
 
     this.dataFactory()
-    .then(value=>{
+      .then((value) => {
         console.log(
           `First measurement [${this.name}]:`,
           inspect(value, {
@@ -96,15 +113,13 @@ class LazyObservable<T> implements Subscribable<T> {
 }
 
 class LazyUnsubscribe implements Unsubscribable {
-  constructor(private callback: (() => void) | null = null) { }
+  constructor(private callback: (() => void) | null = null) {}
   unsubscribe(): void {
-    if (this.callback)
-      this.callback();
+    if (this.callback) this.callback();
   }
 }
 
 export const getDynamicServerInfo = () => {
-
   // if not disabled, we collect stats in the background
   // this was the default behavior until now. keeping it as is
   const runInBackground = !CONFIG.disable_background_stats_collection;
