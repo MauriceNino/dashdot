@@ -24,7 +24,7 @@
     "react-dom": "19.2.4",
     "react-is": "19.2.4",
     "react-spinners": "0.17.0",
-    "recharts": "3.6.0",
+    "recharts": "3.7.0",
     "simplebar-react": "3.3.2",
     "socket.io-client": "4.8.3",
     "store": "2.0.12",
