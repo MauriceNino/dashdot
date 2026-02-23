@@ -101,6 +101,7 @@ export type Config = {
   fs_type_filter: string[];
   fs_virtual_mounts: string[];
   disable_integrations: boolean;
+  disable_background_stats_collection: boolean;
 
   show_dash_version?: 'icon_hover' | 'bottom_right';
   show_host: boolean;

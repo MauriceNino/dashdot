@@ -8,14 +8,7 @@ import cronParser from 'cronstrue';
 import express from 'express';
 import { lookup as mimeLookup } from 'mime-types';
 import cron from 'node-cron';
-import {
-  debounceTime,
-  lastValueFrom,
-  type Observable,
-  type Subscription,
-  take,
-  timeout,
-} from 'rxjs';
+import type { Unsubscribable } from 'rxjs';
 import { Server } from 'socket.io';
 import { CONFIG } from './config';
 import getNetworkInfo from './data/network';
@@ -110,38 +103,26 @@ server.listen(CONFIG.port, async () => {
 
   // Allow integrations
   if (!CONFIG.disable_integrations) {
-    const getCurrentValue = async <T>(
-      subj: Observable<T>,
-    ): Promise<T | undefined> => {
-      try {
-        return await lastValueFrom(
-          subj.pipe(debounceTime(0), timeout(20), take(1)),
-        );
-      } catch (_e) {
-        return undefined;
-      }
-    };
-
     router.get('/load/cpu', async (_, res) => {
-      res.send(await getCurrentValue(obs.cpu));
+      res.send(await obs.cpu.getCurrentValue());
     });
     router.get('/load/ram', async (_, res) => {
-      res.send({ load: await getCurrentValue(obs.ram) });
+      res.send({ load: await obs.ram.getCurrentValue() });
     });
     router.get('/load/storage', async (_, res) => {
-      res.send(await getCurrentValue(obs.storage));
+      res.send(await obs.storage.getCurrentValue());
     });
     router.get('/load/network', async (_, res) => {
-      res.send(await getCurrentValue(obs.network));
+      res.send(await obs.network.getCurrentValue());
     });
     router.get('/load/gpu', async (_, res) => {
-      res.send(await getCurrentValue(obs.gpu));
+      res.send(await obs.gpu.getCurrentValue());
     });
   }
 
   // Send current system status
   io.on('connection', (socket) => {
-    const subscriptions: Subscription[] = [];
+    const subscriptions: Unsubscribable[] = [];
 
     subscriptions.push(
       getStaticServerInfoObs().subscribe((staticInfo) => {
@@ -178,7 +159,6 @@ server.listen(CONFIG.port, async () => {
         socket.emit('gpu-load', gpu);
       }),
     );
-
     socket.on('disconnect', () => {
       subscriptions.forEach((sub) => {
         sub.unsubscribe();
