@@ -3384,7 +3384,7 @@ __metadata:
     dedent: "npm:1.7.1"
     esbuild: "npm:0.27.3"
     systeminformation: "npm:5.31.1"
-    yargs: "npm:17.7.2"
+    yargs: "npm:18.0.0"
   languageName: unknown
   linkType: soft
 
@@ -26562,6 +26562,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"yargs@npm:18.0.0, yargs@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "yargs@npm:18.0.0"
+  dependencies:
+    cliui: "npm:^9.0.1"
+    escalade: "npm:^3.1.1"
+    get-caller-file: "npm:^2.0.5"
+    string-width: "npm:^7.2.0"
+    y18n: "npm:^5.0.5"
+    yargs-parser: "npm:^22.0.0"
+  checksum: 10/5af36234871390386b31cac99f00e79fcbc2ead858a61b30a8ca381c5fde5df8af0b407c36b000d3f774bcbe4aec5833f2f1c915f6ddc49ce97b78176b651801
+  languageName: node
+  linkType: hard
+
 "yargs@npm:^16.0.0, yargs@npm:^16.2.0":
   version: 16.2.0
   resolution: "yargs@npm:16.2.0"
@@ -26589,20 +26603,6 @@ __metadata:
     y18n: "npm:^5.0.5"
     yargs-parser: "npm:^21.0.0"
   checksum: 10/2453d52e3403ca86ca9c4279a90da3cbc351b50c7a13cc259bebf2d396530800e53261d9d9c7e2d4b7c049aa16c770f2553bdb04d52c2dbb37271d6cecbdcf2a
-  languageName: node
-  linkType: hard
-
-"yargs@npm:^18.0.0":
-  version: 18.0.0
-  resolution: "yargs@npm:18.0.0"
-  dependencies:
-    cliui: "npm:^9.0.1"
-    escalade: "npm:^3.1.1"
-    get-caller-file: "npm:^2.0.5"
-    string-width: "npm:^7.2.0"
-    y18n: "npm:^5.0.5"
-    yargs-parser: "npm:^22.0.0"
-  checksum: 10/5af36234871390386b31cac99f00e79fcbc2ead858a61b30a8ca381c5fde5df8af0b407c36b000d3f774bcbe4aec5833f2f1c915f6ddc49ce97b78176b651801
   languageName: node
   linkType: hard
 
