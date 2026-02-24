@@ -1,3 +1,15 @@
+# [6.3.0](https://github.com/MauriceNino/dashdot/compare/v6.2.4...v6.3.0) (2026-02-24)
+
+
+### Bug Fixes
+
+* sanitize css inputs for widgets ([a92f6e0](https://github.com/MauriceNino/dashdot/commit/a92f6e06da1ad77c6f13c54569b7c04044fc9ce6)), closes [#1378](https://github.com/MauriceNino/dashdot/issues/1378)
+
+
+### Features
+
+* added the ability to disable background stats collection ([#1286](https://github.com/MauriceNino/dashdot/issues/1286)) ([066b7ea](https://github.com/MauriceNino/dashdot/commit/066b7ea70cb180a8f62d6de4964413db0578780b))
+
 ## [6.2.4](https://github.com/MauriceNino/dashdot/compare/v6.2.3...v6.2.4) (2026-01-05)
 
 
