@@ -6,6 +6,8 @@
   "biome.enabled": true,
   "cSpell.words": ["dashdot"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit"
+    "source.fixAll.biome": "explicit",
+    "source.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
   }
 }

@@ -1,0 +1,97 @@
+---
+title: GPU
+tags:
+  - Configuration
+  - Styles
+---
+
+<Callout title="Note" type="warn">
+- To use the GPU widget, make sure to include it in the [`DASHDOT_WIDGET_LIST`](./basic#dashdot_widget_list).
+- Also, if you are running the docker image, make sure to use the `nvidia` tag (see [Installation with Docker](../installation/docker#gpu-support)).
+</Callout>
+
+## Options
+
+### `DASHDOT_GPU_LABEL_LIST`
+
+Selects which data is shown in the gpu widget.
+
+The available options are: `brand`, `model`, `memory`.
+
+- type: `string (comma separated list)`
+- default: `brand, model, memory`
+
+### `DASHDOT_GPU_BRAND_FILTER`
+
+A comma-separated list of brands to show in the gpu widget. This is case sensitive.
+
+To find out the exact brand name - run the widget without filtering and look at the "Brand" label.
+
+- type: `string (comma separated list)`
+- default: `unset`
+
+### `DASHDOT_GPU_MODEL_FILTER`
+
+A comma-separated list of models to show in the gpu widget. This is case sensitive.
+
+To find out the exact model name - run the widget without filtering and look at the "Model" label.
+
+- type: `string (comma separated list)`
+- default: `unset`
+
+## Styles
+
+### `DASHDOT_GPU_WIDGET_GROW`
+
+To adjust the relative size of the GPU widget.
+
+- type: `number`
+- default: `6`
+
+### `DASHDOT_GPU_WIDGET_MIN_WIDTH`
+
+To adjust the minimum width of the GPU widget (in px).
+
+- type: `number`
+- default: `700`
+
+### `DASHDOT_GPU_SHOWN_DATAPOINTS`
+
+The amount of datapoints in the GPU graph.
+
+- type: `number`
+- default: `20`
+
+### `DASHDOT_GPU_POLL_INTERVAL`
+
+Read the GPU load every x milliseconds.
+
+- type: `number`
+- default: `1000`
+
+## Overrides
+
+You can use overrides to manually set statically gathered data. This is useful
+if you want to use dashdot on a VPS or a system where the data cannot be
+gathered automatically.
+
+### `DASHDOT_OVERRIDE_GPU_BRANDS`
+
+Pass a comma-separated list of brands of your GPUs. You can skip correct GPUs, by passing empty values for it (e.g. `Intel,,Nvidia` would result in `Intel` for GPU 1 and `Nvidia` for GPU 3).
+
+- type: `string`
+- default: `unset`
+
+### `DASHDOT_OVERRIDE_GPU_MODELS`
+
+Pass a comma-separated list of models of your GPUs. You can skip correct GPUs, by passing empty values for it (e.g. `CometLake-H GT2,,GeForce GTX 1650 Ti` would result in `CometLake-H GT2` for GPU 1 and `GeForce GTX 1650 Ti` for GPU 3).
+
+- type: `string`
+- default: `unset`
+
+### `DASHDOT_OVERRIDE_GPU_MEMORIES`
+
+Pass a comma-separated list of memory-sizes of your GPUs. You can skip correct GPUs, by passing empty values for it (e.g. `4096,,256` would result in `4 GiB` for GPU 1 and `256 MiB` for GPU 3).
+
+- type: `string`
+- default: `unset`

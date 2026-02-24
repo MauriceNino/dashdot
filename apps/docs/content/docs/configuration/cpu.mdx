@@ -1,0 +1,118 @@
+---
+title: CPU
+tags:
+  - Configuration
+  - Styles
+---
+
+## Options
+
+### `DASHDOT_CPU_LABEL_LIST`
+
+Selects which data is shown in the CPU widget.
+
+The available options are: `brand`, `model`, `cores`, `threads`, `frequency`.
+
+- type: `string (comma separated list)`
+- default: `brand,model,cores,threads,frequency`
+
+### `DASHDOT_ENABLE_CPU_TEMPS`
+
+If you want to show the CPU temperature in the graph.
+This will probably not work on a VPS, so you need to try it on your own if this works.
+For home servers it might work just fine.
+
+- type: `boolean`
+- default: `false`
+
+| `false`                                                                                     | `true`                                                                                         |
+| ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| ![CPU widget normal](/img/cpu_view_normal.png)                                              | ![CPU widget with temps](/img/cpu_view_temps.png)                                                                                     |
+
+<Callout title="Note" type="info">
+If you want to show the data using imperial units, you need to set the
+[`DASHDOT_USE_IMPERIAL`](./basic#dashdot_use_imperial) option to `true`.
+</Callout>
+
+### `DASHDOT_CPU_TEMPS_MODE`
+
+To choose between average and max CPU temperature (accross all cores). Needs [`DASHDOT_ENABLE_CPU_TEMPS`](./cpu#dashdot_enable_cpu_temps) enabled to work.
+
+The available options are: `avg`, `max`.
+
+- type: `string`
+- default: `avg`
+
+### `DASHDOT_CPU_CORES_TOGGLE_MODE`
+
+Switches the Processor core view depending on the selected option. The `toggle`
+option allows you to switch the view from the dashboard, other options hide the
+toggle from the dashboard.
+
+The available options are: `toggle`, `multi-core`, `average`.
+
+- type: `string`
+- default: `toggle`
+
+## Styles
+
+### `DASHDOT_CPU_WIDGET_GROW`
+
+To adjust the relative size of the Processor widget.
+
+- type: `number`
+- default: `4`
+
+### `DASHDOT_CPU_WIDGET_MIN_WIDTH`
+
+To adjust the minimum width of the Processor widget (in px).
+
+- type: `number`
+- default: `500`
+
+### `DASHDOT_CPU_SHOWN_DATAPOINTS`
+
+The amount of datapoints in the Processor graph.
+
+- type: `number`
+- default: `20`
+
+### `DASHDOT_CPU_POLL_INTERVAL`
+
+Read the Processor load every x milliseconds.
+
+- type: `number`
+- default: `1000`
+
+## Overrides
+
+You can use overrides to manually set statically gathered data. This is useful
+if you want to use dashdot on a VPS or a system where the data cannot be
+gathered automatically.
+
+### `DASHDOT_OVERRIDE_CPU_BRAND`
+
+- type: `string`
+- default: `unset`
+
+### `DASHDOT_OVERRIDE_CPU_MODEL`
+
+- type: `string`
+- default: `unset`
+
+### `DASHDOT_OVERRIDE_CPU_CORES`
+
+- type: `number`
+- default: `unset`
+
+### `DASHDOT_OVERRIDE_CPU_THREADS`
+
+- type: `number`
+- default: `unset`
+
+### `DASHDOT_OVERRIDE_CPU_FREQUENCY`
+
+Number needs to be passed in GHz (e.g. `2.8`)
+
+- type: `number`
+- default: `unset`
