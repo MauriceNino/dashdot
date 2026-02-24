@@ -8,10 +8,10 @@
   "dependencies": {
     "@dashdot/typescript-config": "*",
     "dedent": "1.7.1",
-    "systeminformation": "5.29.1",
+    "systeminformation": "5.31.0",
     "yargs": "17.7.2"
   },
   "devDependencies": {
-    "esbuild": "0.27.2"
+    "esbuild": "0.27.3"
   }
 }
