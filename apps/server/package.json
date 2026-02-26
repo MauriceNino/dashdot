@@ -15,7 +15,7 @@
     "@dashdot/typescript-config": "*",
     "compression": "1.8.1",
     "cors": "2.8.6",
-    "cronstrue": "3.9.0",
+    "cronstrue": "3.13.0",
     "dedent": "1.7.1",
     "express": "5.2.1",
     "mime-types": "3.0.2",
