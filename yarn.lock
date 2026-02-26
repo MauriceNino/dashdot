@@ -3439,7 +3439,7 @@ __metadata:
     compression: "npm:1.8.1"
     concurrently: "npm:9.2.1"
     cors: "npm:2.8.6"
-    cronstrue: "npm:3.9.0"
+    cronstrue: "npm:3.13.0"
     dedent: "npm:1.7.1"
     esbuild: "npm:0.27.3"
     express: "npm:5.2.1"
@@ -11068,12 +11068,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cronstrue@npm:3.9.0":
-  version: 3.9.0
-  resolution: "cronstrue@npm:3.9.0"
+"cronstrue@npm:3.13.0":
+  version: 3.13.0
+  resolution: "cronstrue@npm:3.13.0"
   bin:
     cronstrue: bin/cli.js
-  checksum: 10/893bfa958b79806b67f154acd0ca934a80256404d622a8ee4257e742a5e6e6598134d515986ee20c69cd0041ba2eeebd39e1a5dfa192d7e1e55cd2799051d115
+  checksum: 10/36044742ca6e1435f132cdd94aa1b203bddb9af6f79a6763c521ca829ebdcc965fc705fc62aa81610176fc16644b48abbdf0beeec7043248af4e6e0466a79e43
   languageName: node
   linkType: hard
 
