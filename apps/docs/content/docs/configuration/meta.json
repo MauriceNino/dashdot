@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "basic",
+    "server",
+    "cpu",
+    "storage",
+    "ram",
+    "network",
+    "gpu"
+  ]
+}

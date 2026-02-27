@@ -1,0 +1,99 @@
+---
+title: Widgets
+description: Show dash. graphs on your page
+tags:
+  - Integration
+---
+
+import { WidgetPreview } from '@/components/widget-preview';
+
+## Manual
+
+You can implement your running dash. instance on your websites and personal dashboards, via iframes that
+can be configured using query parameters.
+
+```html
+<iframe
+  src="https://<YOUR_SERVER_URL>/?graph=cpu&multiView=true"
+  style="border-radius: 20px"
+  allowtransparency="true"
+  frameborder="0"
+></iframe>
+```
+
+## Parameters
+
+### `graph`
+
+Select the specific graph that you want to show.
+
+- type: `string` (`cpu`, `storage`, `ram`, `network`, `gpu`)
+- required: `true`
+
+### `multiView`
+
+For the `cpu` and `storage` widgets, there are multi-device views.
+These can be shown, by passing this parameter.
+
+- type: `boolean`
+
+### `filter`
+
+For views with multiple graphs, filter the view to just a single graph.
+
+- type (when `graph=network`): `string` (`up`, `down`)
+- type (when `graph=gpu`): `string` (`load`, `memory`)
+
+### `showPercentage`
+
+Show a label with the current percentage of the graph.
+
+- type: `boolean`
+
+### `theme`
+
+To override the theme of the graph. If this is not passed, the default theme of the users browser is used.
+
+- type: `string` (`dark`, `light`)
+
+### `color`
+
+To override the color of the graph, passed as a hex string. If this is not passed, the default color of the widget is used.
+The color needs to be passed _without_ the trailing `#`.
+
+- type: `string`
+
+### `surface`
+
+To override the background color, passed as a hex string. If this is not passed, the default color of the theme is used.
+The color needs to be passed _without_ the trailing `#`.
+
+- type: `string`
+
+### `innerRadius`
+
+This changes the `border-radius` on the graphs. This is mainly needed to add `border-radius` on views with multiple graphs,
+like the network graph. If you want to add a bigger `border-radius` to the whole container, just add it to the iframe's styles.
+
+- type: `string`
+
+### `gap`
+
+This changes the `gap` between the graphs. This is mainly needed on views with multiple graphs, like the network graph.
+
+- type: `string`
+
+### `textSize`
+
+This changes the `font-size` of the texts (e.g. percentage) in your graph.
+
+- type: `string`
+
+### `textOffset`
+
+This changes the `margin` of the texts (e.g. percentage) in your graph.
+
+- type: `string`
+
+## Widget Creator
+<WidgetPreview />

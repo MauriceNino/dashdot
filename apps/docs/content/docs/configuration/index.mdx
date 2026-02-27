@@ -1,0 +1,57 @@
+---
+title: Configuration
+---
+
+import { CpuIcon, SettingsIcon, HardDriveIcon, ServerIcon, MemoryStickIcon, NetworkIcon, GpuIcon } from 'lucide-react';
+
+<Cards>
+  <Card
+    href="configuration/basic"
+    icon={<SettingsIcon />}
+    title="Basic Configuration"
+  >
+    Configure general settings like theme, port, sub-path routing, and more.
+  </Card>
+  <Card
+    href="configuration/server"
+    icon={<ServerIcon />}
+    title="Server Configuration"
+  >
+    Override host os information, customize the show url, and more.
+  </Card>
+  <Card
+    href="configuration/cpu"
+    icon={<CpuIcon />}
+    title="CPU Configuration"
+  >
+    Enable CPU temperature monitoring, set default layout, and more.
+  </Card>
+  <Card
+    href="configuration/storage"
+    icon={<HardDriveIcon />}
+    title="Storage Configuration"
+  >
+    Configure ignored devices, filters, mounts, and more.
+  </Card>
+  <Card
+    href="configuration/memory"
+    icon={<MemoryStickIcon />}
+    title="Memory Configuration"
+  >
+    General settings for design, layout, and more.
+  </Card>
+  <Card
+    href="configuration/network"
+    icon={<NetworkIcon />}
+    title="Network Configuration"
+  >
+    Configure default network interface, speedtest settings, units, and more.
+  </Card>
+  <Card
+    href="configuration/gpu"
+    icon={<GpuIcon />}
+    title="GPU Configuration"
+  >
+    General settings for design, layout, and more.
+  </Card>
+</Cards>

@@ -6,7 +6,12 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "env": ["NODE_ENV"],
-      "outputs": ["dist/**", "build/**"]
+      "outputs": ["dist/**", "build/**", "out/**"]
+    },
+    "start": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
     },
     "test": {
       "dependsOn": ["^test"]
@@ -14,6 +19,10 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "deploy": {
+      "dependsOn": ["build"],
+      "cache": false
     }
   }
 }
