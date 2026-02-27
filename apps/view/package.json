@@ -19,7 +19,7 @@
     "framer-motion": "12.34.3",
     "parse-domain": "8.2.2",
     "punycode": "2.3.1",
-    "qs": "6.14.2",
+    "qs": "6.15.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-is": "19.2.4",

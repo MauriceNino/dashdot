@@ -1,0 +1,67 @@
+---
+title: Integrations
+tags:
+  - Integration
+---
+
+## Manual Embedding
+
+You can embed Dash. into any webpage by using either the api or the iframe widget.
+This allows you to integrate Dash. into your custom homelab dashboard.
+
+<Cards>
+  <Card
+    href="integration/api"
+    title="API Integration"
+  >
+    Use the API to fetch data and display it in your custom dashboard.
+  </Card>
+  <Card
+    href="integration/widgets"
+    title="Widget Integration"
+  >
+    Use the iframe widget to embed Dash. into any webpage.
+  </Card>
+</Cards>
+
+Alternatively, you can also use one of the pre-built integrations for popular dashboard tools like Heimdall and Homarr.
+
+## Homarr
+
+### Preview
+
+<img
+  src='/img/homarr_integration.png'
+  alt='Homarr screenshot with dash. integration'
+  style={{ maxHeight: '350px' }}
+/>
+
+### Setup
+
+Website: [https://homarr.dev](https://homarr.dev)
+
+1. Install and setup Homarr [according to the docs](https://homarr.dev/docs/getting-started/)
+2. Enter the edit mode
+3. Add the Dash. widget from the header menu
+4. Drag your widget to your desired location on the dashboard
+5. Click the three dots and edit the `Dash. URL` field to your Dash. instance.
+6. Click save and exit the edit mode
+
+## Heimdall
+
+### Preview
+
+<img
+  src='/img/heimdall_integration.png'
+  alt='Heimdall screenshot with dash. integration'
+  style={{ maxHeight: '350px' }}
+/>
+
+### Setup
+
+Website: [https://heimdall.site](https://heimdall.site)
+
+1. Install and setup Heimdall [according to the docs](https://github.com/linuxserver/Heimdall/discussions/778)
+2. Add a new service from the application list
+3. Click on "Application Type" and select `Dashdot`
+4. Optionally: Change the title to "Dash."
