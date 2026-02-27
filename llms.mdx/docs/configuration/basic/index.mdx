@@ -1,0 +1,104 @@
+# Basic
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DASHDOT_WIDGET_LIST [#dashdot_widget_list]
+
+Selects which widgets to show on the dashboard.
+
+The available options are: `os`, `cpu`, `storage`, `ram`, `network`, `gpu`.
+
+* type: `string (comma separated list)`
+* default: `os,cpu,storage,ram,network`
+
+| `os,cpu,storage,ram,network`                                            | `ram,cpu,storage,network`                                                  |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| <img alt="Dashboard in normal order" src={__img0} placeholder="blur" /> | <img alt="Dashboard in alternate order" src={__img1} placeholder="blur" /> |
+
+DASHDOT_PORT [#dashdot_port]
+
+The port where the express backend is running (the backend serves the frontend, so it is the same port for both).
+
+* type: `number`
+* default: `3001`
+
+DASHDOT_ROUTING_PATH [#dashdot_routing_path]
+
+The path where dash. is being served. This is useful if you want to run dash. behind a reverse proxy on a sub-path
+(e.g `https://example.com/dashdot` would need a value of `/dashdot`).
+
+* type: `string`
+* default: `/`
+
+DASHDOT_PAGE_TITLE [#dashdot_page_title]
+
+If you want to show a custom string in the browser page title.
+
+* type: `string`
+* default: `dash.`
+
+DASHDOT_DISABLE_INTEGRATIONS [#dashdot_disable_integrations]
+
+Disables support for integrations. This does two things: disable CORS and disable open API endpoints.
+
+* type: `boolean`
+* default: `false`
+
+DASHDOT_DISABLE_BACKGROUND_STATS_COLLECTION [#dashdot_disable_background_stats_collection]
+
+Disables background collection of metrics.
+
+* type: `boolean`
+* default: `false`
+
+DASHDOT_SHOW_DASH_VERSION [#dashdot_show_dash_version]
+
+If you want to show the version number of your dash. instance on the bottom right of the page, or alternatively on the GitHub icon (hover).
+
+The available options are: `bottom_right`, `icon_hover` and `none`.
+
+* type: `string`
+* default: `icon_hover`
+
+| `bottom_right`                                                           | `icon_hover`                                                                     |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| <img alt="Dash. version bottom right" src={__img2} placeholder="blur" /> | <img alt="Dash. version on GitHub icon hover" src={__img3} placeholder="blur" /> |
+
+DASHDOT_USE_IMPERIAL [#dashdot_use_imperial]
+
+Shows any units in the imperial system, instead of the default metric.
+
+* type: `boolean`
+* default: `false`
+
+| `false`                                                                        | `true`                                                                            |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| <img alt="CPU widget with temps in celsius" src={__img4} placeholder="blur" /> | <img alt="CPU widget with temps in fahrenheit" src={__img5} placeholder="blur" /> |
+
+DASHDOT_ALWAYS_SHOW_PERCENTAGES [#dashdot_always_show_percentages]
+
+To always show the current percentage of each graph in the top-left corner. Without enabling this,
+they will only be shown on lower resolution devices (mobile phones).
+
+* type: `boolean`
+* default: `false`
+
+| `false`                                                                      | `true`                                                                   |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| <img alt="Dashboard iwith no percentages" src={__img6} placeholder="blur" /> | <img alt="Dashboard with percentages" src={__img7} placeholder="blur" /> |

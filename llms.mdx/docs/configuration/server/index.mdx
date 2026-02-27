@@ -1,0 +1,64 @@
+# Server
+
+
+
+
+
+
+
+Options [#options]
+
+DASHDOT_OS_LABEL_LIST [#dashdot_os_label_list]
+
+Selects which data is shown in the server widget.
+
+The available options are: `os`, `arch`, `up_since`, `dash_version`.
+
+* type: `string (comma separated list)`
+* default: `os,arch,up_since`
+
+DASHDOT_SHOW_HOST [#dashdot_show_host]
+
+If you want to show the host part in the server widget (e.g. `dash.` -> `dash.mauz.dev`).
+
+* type: `boolean`
+* default: `false`
+
+| `false`                                                            | `true`                                                                |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| <img alt="Server widget normal" src={__img0} placeholder="blur" /> | <img alt="Server widget with host" src={__img1} placeholder="blur" /> |
+
+DASHDOT_CUSTOM_HOST [#dashdot_custom_host]
+
+If you want to show a custom host in the server widget (needs [`DASHDOT_SHOW_HOST`](#dashdot_show_host) enabled to work).
+
+* type: `string`
+* default: `unset`
+
+Styles [#styles]
+
+DASHDOT_OS_WIDGET_GROW [#dashdot_os_widget_grow]
+
+To adjust the relative size of the OS widget.
+
+* type: `number`
+* default: `2.5`
+
+DASHDOT_OS_WIDGET_MIN_WIDTH [#dashdot_os_widget_min_width]
+
+To adjust the minimum width of the OS widget (in px).
+
+* type: `number`
+* default: `300`
+
+Overrides [#overrides]
+
+DASHDOT_OVERRIDE_OS [#dashdot_override_os]
+
+* type: `string`
+* default: `unset`
+
+DASHDOT_OVERRIDE_ARCH [#dashdot_override_arch]
+
+* type: `string`
+* default: `unset`

@@ -1,0 +1,126 @@
+# From Source
+
+
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+  <Step>
+    Prerequisites [#prerequisites]
+
+    To run this repository from source, you need to have the following installed:
+
+    * [node.js](https://nodejs.org/) (recommended version 20.x)
+    * [yarn](https://yarnpkg.com/)
+    * [git](https://git-scm.com/)
+    * [speedtest](https://www.speedtest.net/apps/cli) (recommended)
+      * or alternatively: [speedtest-cli](https://github.com/sivel/speedtest-cli)
+      * or alternatively: [use local file](../configuration/network#dashdot_speed_test_from_path)
+  </Step>
+
+  <Step>
+    Setup [#setup]
+
+    After that, download and build the project (might take a few minutes)
+
+    <Tabs items={['Linux', 'Windows (Cmd)']} groupId="os">
+      <Tab value="Linux">
+        ```bash
+        git clone https://github.com/MauriceNino/dashdot \
+          && cd dashdot \
+          && yarn \
+          && yarn build:prod
+        ```
+      </Tab>
+
+      <Tab value="Windows (Cmd)">
+        ```bash
+        git clone https://github.com/MauriceNino/dashdot ^
+          && cd dashdot ^
+          && yarn ^
+          && yarn build:prod
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step>
+    Start [#start]
+
+    When done, you can run the dashboard by executing:
+
+    <Tabs items={['Linux', 'Windows (Cmd)']} groupId="os">
+      <Tab value="Linux">
+        ```bash
+        sudo -E yarn start
+        ```
+      </Tab>
+
+      <Tab value="Windows (Cmd)">
+        For the most accurate results, it is recommended to start the Cmd as an Admin.
+
+        ```bash
+        yarn start
+        ```
+      </Tab>
+    </Tabs>
+
+    <Callout title="Note" type="info">
+      In case you get a speedtest related error, you might have to accept the license
+      before being able to start your dashboard.
+
+      For this, run the following in your terminal:
+
+      ```bash
+      speedtest --accept-license
+      ```
+    </Callout>
+  </Step>
+
+  <Step>
+    Configuration [#configuration]
+
+    Config options can optionally passed using environment variables.
+
+    <Tabs items={['Linux', 'Windows (Cmd)']} groupId="os">
+      <Tab value="Linux">
+        ```bash
+        export DASHDOT_PORT="8080" \
+          && sudo -E yarn start
+        ```
+      </Tab>
+
+      <Tab value="Windows (Cmd)">
+        ```bash
+        set DASHDOT_PORT="8080" ^
+          && yarn start
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step>
+    Update [#update]
+
+    You can update your Dash. instance, by stopping your instance, then
+    running the following commands and in the end, restart your instance.
+
+    <Tabs items={['Linux', 'Windows (Cmd)']} groupId="os">
+      <Tab value="Linux">
+        ```bash
+        git pull --rebase \
+          && yarn \
+          && yarn build:prod
+        ```
+      </Tab>
+
+      <Tab value="Windows (Cmd)">
+        ```bash
+        git pull --rebase ^
+          && yarn ^
+          && yarn build:prod
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
