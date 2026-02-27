@@ -1,8 +1,6 @@
-# Help
+# FAQ
 
 
-
-Q&A [#qa]
 
 How can I make the percentage labels in the top left corner stay? [#how-can-i-make-the-percentage-labels-in-the-top-left-corner-stay]
 
@@ -55,6 +53,46 @@ If you need further help, please [join our Discord](https://discord.gg/3teHFBNQ9
 
 # Documentation
 
+
+
+What is Dash.? [#what-is-dash]
+
+At its core, Dashdot is a monitoring tool that gathers system information and presents
+it through a beautiful, reactive web interface.
+Whether you are running a small Raspberry Pi homelab or a beefy dedicated root server,
+Dashdot gives you an instant overview of:
+
+* **CPU:** Usage, model, and core-specific performance.
+* **Memory:** Real-time RAM utilization.
+* **Storage:** Disk space across all mounted drives.
+* **Network:** Up/Down speeds and total data transferred.
+* **GPU:** Support for monitoring modern graphics cards (only NVIDIA via Docker).
+
+Configuration [#configuration]
+
+Dashdot is designed to be highly plug-and-play, but it offers extensive customization via **Environment Variables**.
+These allow you to tweak the behavior and appearance without touching the source code.
+
+You can find more details on how to set these variables in our [Configuration Section](docs/configuration).
+
+Useful Links [#useful-links]
+
+Need more info or want to see it in action? Check out these resources:
+
+* **[Live Demo](https://dash.mauz.dev/)** - See a real-world instance of Dashdot running.
+* **[Frequently Asked Questions](docs/faq)** - Common troubleshooting steps and "how-to" guides.
+* **[GitHub Repository](https://github.com/MauriceNino/dashdot)** - View the source code, report bugs, or contribute.
+
+Get in Touch [#get-in-touch]
+
+Have questions that aren't answered in the docs? Join our community!
+
+* **[Discord Server](https://discord.gg/S7YmU3B)** - Join our Discord for support, to share your setup,
+  or to discuss new features with the developers and other users.
+
+<br />
+
+<iframe src="https://discord.com/widget?id=986251291577688064&theme=dark" width="400" height="300" allowtransparency="true" frameBorder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" />
 
 
 # Basic
@@ -378,6 +416,43 @@ Pass a comma-separated list of memory-sizes of your GPUs. You can skip correct G
 
 * type: `string`
 * default: `unset`
+
+
+# Configuration
+
+
+
+import { CpuIcon, SettingsIcon, HardDriveIcon, ServerIcon, MemoryStickIcon, NetworkIcon, GpuIcon } from 'lucide-react';
+
+<Cards>
+  <Card href="configuration/basic" icon={<SettingsIcon />} title="Basic Configuration">
+    Configure general settings like theme, port, sub-path routing, and more.
+  </Card>
+
+  <Card href="configuration/server" icon={<ServerIcon />} title="Server Configuration">
+    Override host os information, customize the show url, and more.
+  </Card>
+
+  <Card href="configuration/cpu" icon={<CpuIcon />} title="CPU Configuration">
+    Enable CPU temperature monitoring, set default layout, and more.
+  </Card>
+
+  <Card href="configuration/storage" icon={<HardDriveIcon />} title="Storage Configuration">
+    Configure ignored devices, filters, mounts, and more.
+  </Card>
+
+  <Card href="configuration/memory" icon={<MemoryStickIcon />} title="Memory Configuration">
+    General settings for design, layout, and more.
+  </Card>
+
+  <Card href="configuration/network" icon={<NetworkIcon />} title="Network Configuration">
+    Configure default network interface, speedtest settings, units, and more.
+  </Card>
+
+  <Card href="configuration/gpu" icon={<GpuIcon />} title="GPU Configuration">
+    General settings for design, layout, and more.
+  </Card>
+</Cards>
 
 
 # Network
@@ -996,7 +1071,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
       <Tab value="Windows (Cmd)">
         ```bash
-        set DASHDOT_PORT="8080" ^
+        set DASHDOT_PORT=8080 ^
           && yarn start
         ```
       </Tab>
@@ -1098,6 +1173,29 @@ helm uninstall dashdot
 The command removes all the Kubernetes components associated with the chart including persistent volumes and deletes the release.
 
 
+# Installation
+
+
+
+<Cards>
+  <Card href="installation/docker" title="Docker Installation">
+    The recommended way to run Dash. is using Docker. Follow this guide for a quick and easy setup.
+  </Card>
+
+  <Card href="installation/docker-compose" title="Docker Compose Installation">
+    Use Docker Compose to manage your Dash. instance along with other services in your homelab.
+  </Card>
+
+  <Card href="installation/from-source" title="From Source Installation">
+    Install Dash. from source code for advanced users who want to build and run it manually.
+  </Card>
+
+  <Card href="installation/helm" title="Helm Chart Installation">
+    Deploy Dash. on Kubernetes using our Helm chart for easy management and scalability.
+  </Card>
+</Cards>
+
+
 # API Endpoints
 
 
@@ -1144,6 +1242,23 @@ URL Preview [#url-preview]
 # Integrations
 
 
+
+Manual Embedding [#manual-embedding]
+
+You can embed Dash. into any webpage by using either the api or the iframe widget.
+This allows you to integrate Dash. into your custom homelab dashboard.
+
+<Cards>
+  <Card href="integration/api" title="API Integration">
+    Use the API to fetch data and display it in your custom dashboard.
+  </Card>
+
+  <Card href="integration/widgets" title="Widget Integration">
+    Use the iframe widget to embed Dash. into any webpage.
+  </Card>
+</Cards>
+
+Alternatively, you can also use one of the pre-built integrations for popular dashboard tools like Heimdall and Homarr.
 
 Homarr [#homarr]
 

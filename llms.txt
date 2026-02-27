@@ -1,10 +1,11 @@
 # Documentation
 
-- [Help](/docs/help): Frequently Asked Questions and Support
+- [FAQ](/docs/faq): Frequently Asked Questions and Support
 - [Documentation](/docs): The official documentation for dash.
 - [Basic](/docs/configuration/basic): undefined
 - [CPU](/docs/configuration/cpu): undefined
 - [GPU](/docs/configuration/gpu): undefined
+- [Configuration](/docs/configuration): undefined
 - [Network](/docs/configuration/network): undefined
 - [RAM](/docs/configuration/ram): undefined
 - [Server](/docs/configuration/server): undefined
@@ -13,6 +14,7 @@
 - [Docker](/docs/installation/docker): How to install and configure dash. using docker
 - [From Source](/docs/installation/from-source): How to install and configure dash. from source
 - [Helm Chart](/docs/installation/helm): How to install dashdot using helm chart
+- [Installation](/docs/installation): undefined
 - [API Endpoints](/docs/integration/api): Query information about the dash. installation
 - [Integrations](/docs/integration): undefined
 - [Widgets](/docs/integration/widgets): Show dash. graphs on your page
