@@ -1582,7 +1582,7 @@ __metadata:
     dedent: "npm:1.7.1"
     fumadocs-core: "npm:16.6.7"
     fumadocs-mdx: "npm:14.2.8"
-    fumadocs-ui: "npm:16.6.5"
+    fumadocs-ui: "npm:16.6.7"
     gh-pages: "npm:6.3.0"
     lucide-react: "npm:0.575.0"
     next: "npm:16.1.6"
@@ -11405,9 +11405,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fumadocs-ui@npm:16.6.5":
-  version: 16.6.5
-  resolution: "fumadocs-ui@npm:16.6.5"
+"fumadocs-ui@npm:16.6.7":
+  version: 16.6.7
+  resolution: "fumadocs-ui@npm:16.6.7"
   dependencies:
     "@fumadocs/tailwind": "npm:0.0.2"
     "@radix-ui/react-accordion": "npm:^1.2.12"
@@ -11421,19 +11421,19 @@ __metadata:
     "@radix-ui/react-slot": "npm:^1.2.4"
     "@radix-ui/react-tabs": "npm:^1.1.13"
     class-variance-authority: "npm:^0.7.1"
-    lucide-react: "npm:^0.570.0"
-    motion: "npm:^12.34.0"
+    lucide-react: "npm:^0.575.0"
+    motion: "npm:^12.34.3"
     next-themes: "npm:^0.4.6"
-    react-medium-image-zoom: "npm:^5.4.0"
+    react-medium-image-zoom: "npm:^5.4.1"
     react-remove-scroll: "npm:^2.7.2"
     rehype-raw: "npm:^7.0.0"
     scroll-into-view-if-needed: "npm:^3.1.0"
-    tailwind-merge: "npm:^3.4.1"
+    tailwind-merge: "npm:^3.5.0"
     unist-util-visit: "npm:^5.1.0"
   peerDependencies:
     "@takumi-rs/image-response": ^0.68.17
     "@types/react": "*"
-    fumadocs-core: 16.6.5
+    fumadocs-core: 16.6.7
     next: 16.x.x
     react: ^19.2.0
     react-dom: ^19.2.0
@@ -11444,7 +11444,7 @@ __metadata:
       optional: true
     next:
       optional: true
-  checksum: 10/74cb7320617cf3f443a886eabba1ec0a84e3becd539292e559597f04894b79d1c111eff7e1f8710de3c063a78f82d78f0224ef4e360f1bed88c1a53a94b29fb0
+  checksum: 10/deb34d0484c3df2c5ff0c4f983d394dd79af88cb6a041a5bc0bf20f5c8379b30f2abb00856fcf10bf1fe028a9b7bb9e1c760b51f9ac277376d25ca623c92e0cb
   languageName: node
   linkType: hard
 
@@ -14523,21 +14523,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:0.575.0":
+"lucide-react@npm:0.575.0, lucide-react@npm:^0.575.0":
   version: 0.575.0
   resolution: "lucide-react@npm:0.575.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10/2d0d11451ad099ced530de327c3954dee85e1a68186a56ec2b2294fe651853d6eb9463e2646434d137a7ee8d97b7050da5e8cbfc9a32ee3a3992f6dbce23430c
-  languageName: node
-  linkType: hard
-
-"lucide-react@npm:^0.570.0":
-  version: 0.570.0
-  resolution: "lucide-react@npm:0.570.0"
-  peerDependencies:
-    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10/d2b91c0a36e54ec997c10ad39e7dc410d8bbd9756cf38dd4760dc3fbfbae684aa0aa8275ded820c82089cd0d1fe31ca297b5f5826283176d8a3f4ae55d087af9
   languageName: node
   linkType: hard
 
@@ -15890,7 +15881,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion@npm:^12.34.0":
+"motion@npm:^12.34.3":
   version: 12.34.3
   resolution: "motion@npm:12.34.3"
   dependencies:
@@ -18602,7 +18593,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-medium-image-zoom@npm:^5.4.0":
+"react-medium-image-zoom@npm:^5.4.1":
   version: 5.4.1
   resolution: "react-medium-image-zoom@npm:5.4.1"
   peerDependencies:
@@ -20831,7 +20822,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:3.5.0, tailwind-merge@npm:^3.0.1, tailwind-merge@npm:^3.4.1":
+"tailwind-merge@npm:3.5.0, tailwind-merge@npm:^3.0.1, tailwind-merge@npm:^3.5.0":
   version: 3.5.0
   resolution: "tailwind-merge@npm:3.5.0"
   checksum: 10/888861e2fc685dc282e6c0d735a2ca7656c3f13da6947896401f50aea924e481ab6dc7629b6f6a28125505f1b06ee97381ad792849204f34ee1ede375b119e0c
