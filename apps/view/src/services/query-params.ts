@@ -29,8 +29,7 @@ type QueryResult =
 
 const sizeRegex = /^\d+(\.\d+)?(px|rem|em|%|vh|vw|ch|ex)$/i;
 const onlyNumbersRegex = /^\d+(\.\d+)?$/;
-const colorRegex =
-  /^#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$|^rgb\(\s*\d+\s*(,\s*\d+\s*){2}\)$|^rgba\(\s*\d+\s*(,\s*\d+\s*){3}\)$|^hsl\(\s*\d+\s*(,\s*\d+%\s*){2}\)$|^hsla\(\s*\d+\s*(,\s*\d+%\s*){2},\s*[\d.]+\s*\)$/i;
+const colorRegex = /^([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/i;
 
 const extractSizeValue = (input?: string) => {
   if (input == null) return undefined;
@@ -50,6 +49,8 @@ const extractColorValue = (input?: string) => {
 export const useQuery = (): QueryResult =>
   useMemo(() => {
     const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+
+    console.log(query);
 
     if (query.graph != null) {
       return {

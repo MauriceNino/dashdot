@@ -1580,9 +1580,9 @@ __metadata:
     class-variance-authority: "npm:0.7.1"
     clsx: "npm:2.1.1"
     dedent: "npm:1.7.1"
-    fumadocs-core: "npm:16.6.5"
+    fumadocs-core: "npm:16.6.7"
     fumadocs-mdx: "npm:14.2.8"
-    fumadocs-ui: "npm:16.6.5"
+    fumadocs-ui: "npm:16.6.7"
     gh-pages: "npm:6.3.0"
     lucide-react: "npm:0.575.0"
     next: "npm:16.1.6"
@@ -6075,88 +6075,88 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shikijs/core@npm:3.22.0":
-  version: 3.22.0
-  resolution: "@shikijs/core@npm:3.22.0"
+"@shikijs/core@npm:3.23.0":
+  version: 3.23.0
+  resolution: "@shikijs/core@npm:3.23.0"
   dependencies:
-    "@shikijs/types": "npm:3.22.0"
+    "@shikijs/types": "npm:3.23.0"
     "@shikijs/vscode-textmate": "npm:^10.0.2"
     "@types/hast": "npm:^3.0.4"
     hast-util-to-html: "npm:^9.0.5"
-  checksum: 10/fc716bb042accd5061d0de142ee28c20b6e6d489f6516b901ee4db9ed5d802f59c9033106d8140c111a909b761d79523fced92c1367a6f97c4f0e0dad0f29bc9
+  checksum: 10/b692850d79d36f90cb92d517de60c3739e888a3ce0b49450090fa954166eae6655ae1884dbbb971e254b907644cc6aa7757fa84fc2437c45208e09143d4f75ab
   languageName: node
   linkType: hard
 
-"@shikijs/engine-javascript@npm:3.22.0":
-  version: 3.22.0
-  resolution: "@shikijs/engine-javascript@npm:3.22.0"
+"@shikijs/engine-javascript@npm:3.23.0":
+  version: 3.23.0
+  resolution: "@shikijs/engine-javascript@npm:3.23.0"
   dependencies:
-    "@shikijs/types": "npm:3.22.0"
+    "@shikijs/types": "npm:3.23.0"
     "@shikijs/vscode-textmate": "npm:^10.0.2"
     oniguruma-to-es: "npm:^4.3.4"
-  checksum: 10/2fcadb897d0220ca70cc63d697e474ce13addc462a387249a852c882a58b9a1e7d6f9b42f694d324403c4acde8486dd54823228602f5ff4270e4298a43c10f51
+  checksum: 10/0ca854fb05a14a97fc83c6a54291af6b387fb1c319bd09426eeca3e0ed597bb0b81a79459838c65d0fadce012ba3f166bebb587828d0cc5511b943c743eae2be
   languageName: node
   linkType: hard
 
-"@shikijs/engine-oniguruma@npm:3.22.0":
-  version: 3.22.0
-  resolution: "@shikijs/engine-oniguruma@npm:3.22.0"
+"@shikijs/engine-oniguruma@npm:3.23.0":
+  version: 3.23.0
+  resolution: "@shikijs/engine-oniguruma@npm:3.23.0"
   dependencies:
-    "@shikijs/types": "npm:3.22.0"
+    "@shikijs/types": "npm:3.23.0"
     "@shikijs/vscode-textmate": "npm:^10.0.2"
-  checksum: 10/611654868bc2538ab4d7c3770ad2829a623fcf354ce5c09ba8fde29ecc106b5e4a6270de7d970da4524c1ad00d4f7ed3e5afef2be2ff0b94f8bb8541d0775320
+  checksum: 10/edd8983be86f6b055793813e80ecf31c3cefdd896f3742797ae03f2cbb9f467ac736c4b152d4a5c42dbd17da17d24ff798a15d37bcf6205d7f8cd8f44e2a11e0
   languageName: node
   linkType: hard
 
-"@shikijs/langs@npm:3.22.0":
-  version: 3.22.0
-  resolution: "@shikijs/langs@npm:3.22.0"
+"@shikijs/langs@npm:3.23.0":
+  version: 3.23.0
+  resolution: "@shikijs/langs@npm:3.23.0"
   dependencies:
-    "@shikijs/types": "npm:3.22.0"
-  checksum: 10/091cdaeda7763e1170a6a289315a8371f07af541ad4d8fe17a247b45c4a3be82dc9d321a1e4589cdc8464a694692a5c8bfdd1909372b6ec52b0caa53d69e4a1f
+    "@shikijs/types": "npm:3.23.0"
+  checksum: 10/115b1afb9eb4eb300eb68b146e442f7e6d196878798c5b9d75dd53a6ef1e1c3b27e325353a10973e3fa47d88630e937b8a3cf3b37b6eef80bf2aec3d51657bb3
   languageName: node
   linkType: hard
 
-"@shikijs/rehype@npm:^3.22.0":
-  version: 3.22.0
-  resolution: "@shikijs/rehype@npm:3.22.0"
+"@shikijs/rehype@npm:^3.23.0":
+  version: 3.23.0
+  resolution: "@shikijs/rehype@npm:3.23.0"
   dependencies:
-    "@shikijs/types": "npm:3.22.0"
+    "@shikijs/types": "npm:3.23.0"
     "@types/hast": "npm:^3.0.4"
     hast-util-to-string: "npm:^3.0.1"
-    shiki: "npm:3.22.0"
+    shiki: "npm:3.23.0"
     unified: "npm:^11.0.5"
     unist-util-visit: "npm:^5.1.0"
-  checksum: 10/58b8c7c5c65ba9be2ed11b201a97ebc336c25978f782cbd4087f9520bb3c3a682a04fb83181859bd0bf3303bf00793f18dff03f9bf4d0c57435e02ffe672c41e
+  checksum: 10/bf59d2a3b10b27fa37c5d047cd878907fe1007d36c237838f3786976269d4f7b8f9d1ed09d24b06b2638b98270745a097c6d3abe598e7f5d01284df225a6cf0f
   languageName: node
   linkType: hard
 
-"@shikijs/themes@npm:3.22.0":
-  version: 3.22.0
-  resolution: "@shikijs/themes@npm:3.22.0"
+"@shikijs/themes@npm:3.23.0":
+  version: 3.23.0
+  resolution: "@shikijs/themes@npm:3.23.0"
   dependencies:
-    "@shikijs/types": "npm:3.22.0"
-  checksum: 10/ba60849b4056ea4e243e2c2047382312e504d10f8e1ee09d73041d9de54bce30e28c79168406d8a8e3b7a7ab19d0f9c610e3469679f96145aa975460ac7e1407
+    "@shikijs/types": "npm:3.23.0"
+  checksum: 10/741987380445b788aea6cc1e03492bc06950f1a0461edf45083bd226889c5ba78c7ed1af9724afacab7d6471777f0c0e8871577183dfb2cfbceb255663374835
   languageName: node
   linkType: hard
 
-"@shikijs/transformers@npm:^3.22.0":
-  version: 3.22.0
-  resolution: "@shikijs/transformers@npm:3.22.0"
+"@shikijs/transformers@npm:^3.23.0":
+  version: 3.23.0
+  resolution: "@shikijs/transformers@npm:3.23.0"
   dependencies:
-    "@shikijs/core": "npm:3.22.0"
-    "@shikijs/types": "npm:3.22.0"
-  checksum: 10/782569a5a8a09dae18402162ad10bba36d8c4e4b6f01c613ccc8151071b06872c9bc32f06bb31147bb58b545b034cd5340d21b1c80c2862cef3983fac6eaef3c
+    "@shikijs/core": "npm:3.23.0"
+    "@shikijs/types": "npm:3.23.0"
+  checksum: 10/d3c86e75668254beda1d1bbd34a00995f684dffd4efdaf60edaa8284ecc9130255c7615c7bca9400a1c50724dd0cd0133469b6e75ffe2033613fd64dcfca5821
   languageName: node
   linkType: hard
 
-"@shikijs/types@npm:3.22.0":
-  version: 3.22.0
-  resolution: "@shikijs/types@npm:3.22.0"
+"@shikijs/types@npm:3.23.0":
+  version: 3.23.0
+  resolution: "@shikijs/types@npm:3.23.0"
   dependencies:
     "@shikijs/vscode-textmate": "npm:^10.0.2"
     "@types/hast": "npm:^3.0.4"
-  checksum: 10/c5abd9050d4645bbf9f6c9af1a3df31d24d823d21c232e47b171cc68bd4865adab20533503a5c97ffb9e87eae2f88e7a3835d64a0a8aa11a69dbfd45aabd58bf
+  checksum: 10/18b5703d445d53dd6782a3e2c7332009302c6c046f301d9cd99f1a26b9c8329b3e502b096894bffac61f78835c533827bab2ce78a39666ab87b78f8d7ca11f7b
   languageName: node
   linkType: hard
 
@@ -7037,7 +7037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:25.3.2, @types/node@npm:>=10.0.0":
+"@types/node@npm:*, @types/node@npm:25.3.2, @types/node@npm:>=10.0.0, @types/node@npm:^25.2.3":
   version: 25.3.2
   resolution: "@types/node@npm:25.3.2"
   dependencies:
@@ -7052,15 +7052,6 @@ __metadata:
   dependencies:
     undici-types: "npm:~7.16.0"
   checksum: 10/e6be2220f59a8776f4c8facb3f809bcc6ddb4051752bf86e935178eca58ba7841ce51871442616fcf1c419bf03b1a091dab4c9888ea5c063c9569a34382a5263
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^25.2.3":
-  version: 25.3.0
-  resolution: "@types/node@npm:25.3.0"
-  dependencies:
-    undici-types: "npm:~7.18.0"
-  checksum: 10/061b00c8de070a606a052afaa4c45dca5f8d6a8e7e39c0c3e196bb650ee37e986bbb161991ea39076a05aada102f36b13c974528448a09efd8d36bdfee75de4b
   languageName: node
   linkType: hard
 
@@ -11276,14 +11267,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fumadocs-core@npm:16.6.5":
-  version: 16.6.5
-  resolution: "fumadocs-core@npm:16.6.5"
+"fumadocs-core@npm:16.6.7":
+  version: 16.6.7
+  resolution: "fumadocs-core@npm:16.6.7"
   dependencies:
     "@formatjs/intl-localematcher": "npm:^0.8.1"
     "@orama/orama": "npm:^3.1.18"
-    "@shikijs/rehype": "npm:^3.22.0"
-    "@shikijs/transformers": "npm:^3.22.0"
+    "@shikijs/rehype": "npm:^3.23.0"
+    "@shikijs/transformers": "npm:^3.23.0"
     estree-util-value-to-estree: "npm:^3.5.0"
     github-slugger: "npm:^2.0.0"
     hast-util-to-estree: "npm:^3.1.3"
@@ -11298,7 +11289,7 @@ __metadata:
     remark-gfm: "npm:^4.0.1"
     remark-rehype: "npm:^11.1.2"
     scroll-into-view-if-needed: "npm:^3.1.0"
-    shiki: "npm:^3.22.0"
+    shiki: "npm:^3.23.0"
     tinyglobby: "npm:^0.2.15"
     unified: "npm:^11.0.5"
     unist-util-visit: "npm:^5.1.0"
@@ -11356,7 +11347,7 @@ __metadata:
       optional: true
     zod:
       optional: true
-  checksum: 10/5d6bc4959a6854f53d02aba8ba9999f060999c7a9f3bd3e6d0edd1ebdbc1a617d1ad8c8ec90e2e7b3d4e4267e97f2aac1f71e615ecae04dca66ba9dc3c53d548
+  checksum: 10/beede793c75a2acc8a4fbcec00e57b71e20f555abb2f4dc1ef2691e12d9737d5835b49f213211079a2e4037f6518064619fd79cc4117ca91e56545a4b803789c
   languageName: node
   linkType: hard
 
@@ -11414,9 +11405,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fumadocs-ui@npm:16.6.5":
-  version: 16.6.5
-  resolution: "fumadocs-ui@npm:16.6.5"
+"fumadocs-ui@npm:16.6.7":
+  version: 16.6.7
+  resolution: "fumadocs-ui@npm:16.6.7"
   dependencies:
     "@fumadocs/tailwind": "npm:0.0.2"
     "@radix-ui/react-accordion": "npm:^1.2.12"
@@ -11430,19 +11421,19 @@ __metadata:
     "@radix-ui/react-slot": "npm:^1.2.4"
     "@radix-ui/react-tabs": "npm:^1.1.13"
     class-variance-authority: "npm:^0.7.1"
-    lucide-react: "npm:^0.570.0"
-    motion: "npm:^12.34.0"
+    lucide-react: "npm:^0.575.0"
+    motion: "npm:^12.34.3"
     next-themes: "npm:^0.4.6"
-    react-medium-image-zoom: "npm:^5.4.0"
+    react-medium-image-zoom: "npm:^5.4.1"
     react-remove-scroll: "npm:^2.7.2"
     rehype-raw: "npm:^7.0.0"
     scroll-into-view-if-needed: "npm:^3.1.0"
-    tailwind-merge: "npm:^3.4.1"
+    tailwind-merge: "npm:^3.5.0"
     unist-util-visit: "npm:^5.1.0"
   peerDependencies:
     "@takumi-rs/image-response": ^0.68.17
     "@types/react": "*"
-    fumadocs-core: 16.6.5
+    fumadocs-core: 16.6.7
     next: 16.x.x
     react: ^19.2.0
     react-dom: ^19.2.0
@@ -11453,7 +11444,7 @@ __metadata:
       optional: true
     next:
       optional: true
-  checksum: 10/74cb7320617cf3f443a886eabba1ec0a84e3becd539292e559597f04894b79d1c111eff7e1f8710de3c063a78f82d78f0224ef4e360f1bed88c1a53a94b29fb0
+  checksum: 10/deb34d0484c3df2c5ff0c4f983d394dd79af88cb6a041a5bc0bf20f5c8379b30f2abb00856fcf10bf1fe028a9b7bb9e1c760b51f9ac277376d25ca623c92e0cb
   languageName: node
   linkType: hard
 
@@ -14532,21 +14523,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:0.575.0":
+"lucide-react@npm:0.575.0, lucide-react@npm:^0.575.0":
   version: 0.575.0
   resolution: "lucide-react@npm:0.575.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10/2d0d11451ad099ced530de327c3954dee85e1a68186a56ec2b2294fe651853d6eb9463e2646434d137a7ee8d97b7050da5e8cbfc9a32ee3a3992f6dbce23430c
-  languageName: node
-  linkType: hard
-
-"lucide-react@npm:^0.570.0":
-  version: 0.570.0
-  resolution: "lucide-react@npm:0.570.0"
-  peerDependencies:
-    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10/d2b91c0a36e54ec997c10ad39e7dc410d8bbd9756cf38dd4760dc3fbfbae684aa0aa8275ded820c82089cd0d1fe31ca297b5f5826283176d8a3f4ae55d087af9
   languageName: node
   linkType: hard
 
@@ -15899,7 +15881,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion@npm:^12.34.0":
+"motion@npm:^12.34.3":
   version: 12.34.3
   resolution: "motion@npm:12.34.3"
   dependencies:
@@ -18611,7 +18593,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-medium-image-zoom@npm:^5.4.0":
+"react-medium-image-zoom@npm:^5.4.1":
   version: 5.4.1
   resolution: "react-medium-image-zoom@npm:5.4.1"
   peerDependencies:
@@ -19950,19 +19932,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki@npm:3.22.0, shiki@npm:^3.22.0":
-  version: 3.22.0
-  resolution: "shiki@npm:3.22.0"
+"shiki@npm:3.23.0, shiki@npm:^3.23.0":
+  version: 3.23.0
+  resolution: "shiki@npm:3.23.0"
   dependencies:
-    "@shikijs/core": "npm:3.22.0"
-    "@shikijs/engine-javascript": "npm:3.22.0"
-    "@shikijs/engine-oniguruma": "npm:3.22.0"
-    "@shikijs/langs": "npm:3.22.0"
-    "@shikijs/themes": "npm:3.22.0"
-    "@shikijs/types": "npm:3.22.0"
+    "@shikijs/core": "npm:3.23.0"
+    "@shikijs/engine-javascript": "npm:3.23.0"
+    "@shikijs/engine-oniguruma": "npm:3.23.0"
+    "@shikijs/langs": "npm:3.23.0"
+    "@shikijs/themes": "npm:3.23.0"
+    "@shikijs/types": "npm:3.23.0"
     "@shikijs/vscode-textmate": "npm:^10.0.2"
     "@types/hast": "npm:^3.0.4"
-  checksum: 10/f9977e75f666253cc679e74b774af2afdfa48d52c631ab1448f47a90cd97f2290bcf50356f5b0d01a282da7f9e9f7e1938d585b213688e0d842fcba4a785f870
+  checksum: 10/4c2751cac9dbcd61b6c80aed6c97ea4954b083c0cdf0d29fab71dbf90042c82b29f104c2843b24ea593e6d56608973b7c153dd3c05520ae001bc2f294651e398
   languageName: node
   linkType: hard
 
@@ -20840,7 +20822,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:3.5.0, tailwind-merge@npm:^3.0.1, tailwind-merge@npm:^3.4.1":
+"tailwind-merge@npm:3.5.0, tailwind-merge@npm:^3.0.1, tailwind-merge@npm:^3.5.0":
   version: 3.5.0
   resolution: "tailwind-merge@npm:3.5.0"
   checksum: 10/888861e2fc685dc282e6c0d735a2ca7656c3f13da6947896401f50aea924e481ab6dc7629b6f6a28125505f1b06ee97381ad792849204f34ee1ede375b119e0c
@@ -21379,58 +21361,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:2.8.11":
-  version: 2.8.11
-  resolution: "turbo-darwin-64@npm:2.8.11"
+"turbo-darwin-64@npm:2.8.12":
+  version: 2.8.12
+  resolution: "turbo-darwin-64@npm:2.8.12"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:2.8.11":
-  version: 2.8.11
-  resolution: "turbo-darwin-arm64@npm:2.8.11"
+"turbo-darwin-arm64@npm:2.8.12":
+  version: 2.8.12
+  resolution: "turbo-darwin-arm64@npm:2.8.12"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:2.8.11":
-  version: 2.8.11
-  resolution: "turbo-linux-64@npm:2.8.11"
+"turbo-linux-64@npm:2.8.12":
+  version: 2.8.12
+  resolution: "turbo-linux-64@npm:2.8.12"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:2.8.11":
-  version: 2.8.11
-  resolution: "turbo-linux-arm64@npm:2.8.11"
+"turbo-linux-arm64@npm:2.8.12":
+  version: 2.8.12
+  resolution: "turbo-linux-arm64@npm:2.8.12"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:2.8.11":
-  version: 2.8.11
-  resolution: "turbo-windows-64@npm:2.8.11"
+"turbo-windows-64@npm:2.8.12":
+  version: 2.8.12
+  resolution: "turbo-windows-64@npm:2.8.12"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:2.8.11":
-  version: 2.8.11
-  resolution: "turbo-windows-arm64@npm:2.8.11"
+"turbo-windows-arm64@npm:2.8.12":
+  version: 2.8.12
+  resolution: "turbo-windows-arm64@npm:2.8.12"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
 "turbo@npm:^2.7.2":
-  version: 2.8.11
-  resolution: "turbo@npm:2.8.11"
+  version: 2.8.12
+  resolution: "turbo@npm:2.8.12"
   dependencies:
-    turbo-darwin-64: "npm:2.8.11"
-    turbo-darwin-arm64: "npm:2.8.11"
-    turbo-linux-64: "npm:2.8.11"
-    turbo-linux-arm64: "npm:2.8.11"
-    turbo-windows-64: "npm:2.8.11"
-    turbo-windows-arm64: "npm:2.8.11"
+    turbo-darwin-64: "npm:2.8.12"
+    turbo-darwin-arm64: "npm:2.8.12"
+    turbo-linux-64: "npm:2.8.12"
+    turbo-linux-arm64: "npm:2.8.12"
+    turbo-windows-64: "npm:2.8.12"
+    turbo-windows-arm64: "npm:2.8.12"
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -21446,7 +21428,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10/5ac765e3f35b69ad9daf398a35c44b5db237640f17a234bbbd344594e4b1da014ed592dbc0e87d908548a8c6ad72037c2526baba57091e99765160b14ed4cd2a
+  checksum: 10/1ad9859f0976f3a0dbe4d4473cccd280950899b9ba1dde234dc342de890eec14ea86861efff56cc2ef3f547fa8b3dd31e11e36233158c3852cc3b79a962eebc3
   languageName: node
   linkType: hard
 
