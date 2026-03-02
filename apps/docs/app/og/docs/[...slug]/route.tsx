@@ -17,7 +17,8 @@ export async function GET(
     <DefaultImage
       title={page.data.title}
       description={page.data.description}
-      site="My App"
+      site="Dash."
+      primaryColor="oklab(0.557992 0.153961 -0.243355 / 0.5)"
     />,
     {
       width: 1200,
