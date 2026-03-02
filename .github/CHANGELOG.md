@@ -1,3 +1,10 @@
+## [6.3.3](https://github.com/MauriceNino/dashdot/compare/v6.3.2...v6.3.3) (2026-03-02)
+
+
+### Bug Fixes
+
+* widget colors not being passed correctly through regex ([2200857](https://github.com/MauriceNino/dashdot/commit/22008571fbc2549d4bd2d2d17d23c48a56a9dc92))
+
 ## [6.3.2](https://github.com/MauriceNino/dashdot/compare/v6.3.1...v6.3.2) (2026-02-27)
 
 ## [6.3.1](https://github.com/MauriceNino/dashdot/compare/v6.3.0...v6.3.1) (2026-02-27)
