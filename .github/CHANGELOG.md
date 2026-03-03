@@ -1,3 +1,5 @@
+## [6.3.4](https://github.com/MauriceNino/dashdot/compare/v6.3.3...v6.3.4) (2026-03-03)
+
 ## [6.3.3](https://github.com/MauriceNino/dashdot/compare/v6.3.2...v6.3.3) (2026-03-02)
 
 
