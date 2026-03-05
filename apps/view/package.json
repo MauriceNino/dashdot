@@ -28,7 +28,7 @@
     "simplebar-react": "3.3.2",
     "socket.io-client": "4.8.3",
     "store": "2.0.12",
-    "styled-components": "6.1.19",
+    "styled-components": "6.3.11",
     "throttle-debounce": "5.0.2",
     "use-color-scheme": "1.1.3"
   },
