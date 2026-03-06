@@ -10,35 +10,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  version:
-    runs-on: ubuntu-latest
-    outputs:
-      package_version: ${{ steps.version.outputs.package_version }}
-
-    steps:
-      # SETUP
-      - if: ${{ github.ref_name == 'main' }}
-        uses: actions/checkout@v6
-      - if: ${{ github.ref_name == 'main' }}
-        uses: actions/setup-node@v6
-        with:
-          node-version: "25.x"
-          cache: "yarn"
-      - if: ${{ github.ref_name == 'main' }}
-        run: yarn --immutable
-      - if: ${{ github.ref_name == 'main' }}
-        id: version
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "package_version=$(yarn semantic-release -d | sed -n 's/.*next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\)/\1/p')" >> "$GITHUB_OUTPUT"
-      - if: ${{ github.ref_name == 'main' }}
-        run: |
-          [ ! -z "${{ steps.version.outputs.package_version }}" ] || exit 1
-
   build:
     runs-on: ubuntu-latest
-    needs: version
 
     steps:
       - uses: actions/checkout@v6
@@ -62,9 +35,7 @@ jobs:
             org.opencontainers.image.source=https://github.com/KeesTucker/dashdot
             org.opencontainers.image.licenses=MIT
           tags: |
-            type=semver,pattern={{version}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }}
-            type=semver,pattern={{major}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }}
+            type=raw,value=latest,enable=${{ github.ref_name == 'main' }}
             type=ref,event=branch,enable=${{ github.ref_name != 'main' }}
       - uses: docker/build-push-action@v6
         with:
@@ -74,7 +45,7 @@ jobs:
           target: prod
           push: true
           build-args: |
-            VERSION=${{ github.ref_name == 'main' && needs.version.outputs.package_version || format('0.0.0-{0}', github.ref_name) }}
+            VERSION=0.0.0-${{ github.ref_name }}
             BUILDHASH=${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
@@ -83,7 +54,6 @@ jobs:
 
   build_nvidia:
     runs-on: ubuntu-latest
-    needs: version
 
     steps:
       - uses: actions/checkout@v6
@@ -109,11 +79,8 @@ jobs:
             org.opencontainers.image.source=https://github.com/KeesTucker/dashdot
             org.opencontainers.image.licenses=MIT
           tags: |
-            type=semver,pattern={{version}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
-            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
-            type=semver,pattern={{major}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=nvidia-
-            type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=nvidia-
             type=raw,value=nvidia,enable=${{ github.ref_name == 'main' }}
+            type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=nvidia-
       - uses: docker/build-push-action@v6
         with:
           context: .
@@ -122,7 +89,7 @@ jobs:
           target: prod
           push: true
           build-args: |
-            VERSION=${{ github.ref_name == 'main' && needs.version.outputs.package_version || format('0.0.0-{0}', github.ref_name) }}
+            VERSION=0.0.0-${{ github.ref_name }}
             BUILDHASH=${{ github.sha }}
           labels: ${{ steps.meta_nvidia.outputs.labels }}
           tags: ${{ steps.meta_nvidia.outputs.tags }}
@@ -131,7 +98,6 @@ jobs:
 
   build_arc:
     runs-on: ubuntu-latest
-    needs: version
 
     steps:
       - uses: actions/checkout@v6
@@ -157,11 +123,8 @@ jobs:
             org.opencontainers.image.source=https://github.com/KeesTucker/dashdot
             org.opencontainers.image.licenses=MIT
           tags: |
-            type=semver,pattern={{version}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=arc-
-            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=arc-
-            type=semver,pattern={{major}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=arc-
-            type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=arc-
             type=raw,value=arc,enable=${{ github.ref_name == 'main' }}
+            type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=arc-
       - uses: docker/build-push-action@v6
         with:
           context: .
@@ -170,56 +133,9 @@ jobs:
           target: prod
           push: true
           build-args: |
-            VERSION=${{ github.ref_name == 'main' && needs.version.outputs.package_version || format('0.0.0-{0}', github.ref_name) }}
+            VERSION=0.0.0-${{ github.ref_name }}
             BUILDHASH=${{ github.sha }}
           labels: ${{ steps.meta_arc.outputs.labels }}
           tags: ${{ steps.meta_arc.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-  # Run semantic release
-  semantic_release:
-    if: ${{ github.ref_name == 'main' }}
-    runs-on: ubuntu-latest
-    needs: [build, build_nvidia, build_arc]
-
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "25.x"
-          cache: "yarn"
-      - run: yarn --immutable
-      - env:
-          GIT_USER: github-actions
-          GIT_AUTHOR_NAME: github-actions
-          GIT_COMMITTER_NAME: github-actions
-          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
-          GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
-          GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          yarn semantic-release
-
-  # Update docs
-  update_docs:
-    if: ${{ github.ref_name == 'main' }}
-    runs-on: ubuntu-latest
-    needs: [build, build_nvidia, build_arc]
-
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "20.x"
-          cache: "yarn"
-      - run: yarn --immutable
-      - env:
-          GIT_AUTHOR_NAME: github-actions
-          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git config user.email $GIT_AUTHOR_EMAIL
-          git config user.name $GIT_AUTHOR_NAME
-          yarn turbo run @dashdot/docs#deploy
