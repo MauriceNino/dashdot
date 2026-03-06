@@ -40,3 +40,17 @@ docker container run -it \
   --env DASHDOT_WIDGET_LIST="os,cpu,storage,ram,network,gpu" \
   mauricenino/dashdot:nvidia
 ```
+
+### Intel Arc
+
+GPU support for Intel Arc is available with another image tag. The `/dev/dri` device must be passed through to the container.
+
+```bash
+docker container run -it \
+  -p 80:3001 \
+  -v /:/mnt/host:ro \
+  --privileged \
+  --device /dev/dri:/dev/dri \
+  --env DASHDOT_WIDGET_LIST="os,cpu,storage,ram,network,gpu" \
+  mauricenino/dashdot:arc
+```
