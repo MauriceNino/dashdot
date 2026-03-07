@@ -1,5 +1,6 @@
 import { exec as execCb } from 'node:child_process';
-import { readdirSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, realpathSync, statSync } from 'node:fs';
+import path from 'node:path';
 import { promisify } from 'node:util';
 import type { GpuInfo, GpuLoad } from '@dashdot/common';
 import * as si from 'systeminformation';
@@ -50,16 +51,24 @@ const isInFilter = (
   return isInBrandFilter && isInModelFilter;
 };
 
-const findIntelDrmCards = (): string[] => {
+const findIntelArcDrmCards = (): string[] => {
   try {
-    return readdirSync('/sys/class/drm')
+    return readdirSync('/dev/dri')
       .filter((e) => /^card\d+$/.test(e))
       .filter((e) => {
         try {
-          return (
-            readFileSync(`/sys/class/drm/${e}/device/vendor`, 'utf8').trim() ===
-            '0x8086'
-          );
+          const { rdev } = statSync(`/dev/dri/${e}`);
+          // Extract major/minor (DRM always uses small values, simple shift works)
+          const major = (rdev >> 8) & 0xff;
+          const minor = rdev & 0xff;
+          // /sys/dev/char/major:minor is a symlink into the sysfs device tree
+          const sysPath = realpathSync(`/sys/dev/char/${major}:${minor}`);
+          // sysPath = .../drm/cardN — go up two levels to reach PCI device dir
+          const devicePath = path.resolve(sysPath, '../..');
+          const vendor = readFileSync(`${devicePath}/vendor`, 'utf8').trim();
+          // 0x030200 = PCI 3D controller (discrete GPU); iGPUs are 0x030000 (VGA)
+          const pciClass = readFileSync(`${devicePath}/class`, 'utf8').trim();
+          return vendor === '0x8086' && pciClass === '0x030200';
         } catch {
           return false;
         }
@@ -104,7 +113,7 @@ export default {
 
     let intelCardData: { load: number; memory: number }[] = [];
     if (hasIntel) {
-      const intelCards = findIntelDrmCards();
+      const intelCards = findIntelArcDrmCards();
       intelCardData = await Promise.all(intelCards.map(getIntelGpuTopLoad));
     }
 
