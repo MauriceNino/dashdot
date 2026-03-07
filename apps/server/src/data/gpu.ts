@@ -82,7 +82,7 @@ const findIntelArcDrmCards = (): string[] => {
 
 const getIntelGpuTopLoad = async (
   device: string,
-): Promise<{ load: number; memory: number }> => {
+): Promise<{ load: number; memory: number; engines?: Record<string, number> }> => {
   try {
     const { stdout } = await exec(
       `intel_gpu_top -J -s 100 -c 1 -d drm:${device}`,
@@ -90,11 +90,15 @@ const getIntelGpuTopLoad = async (
     );
     const parsed = JSON.parse(stdout.trim());
     const entry = Array.isArray(parsed) ? parsed[0] : parsed;
-    const engines: Record<string, { busy: number }> = entry?.engines ?? {};
-    const renderKey = Object.keys(engines).find((k) =>
-      k.startsWith('Render/3D'),
-    );
-    return { load: renderKey ? (engines[renderKey]?.busy ?? 0) : 0, memory: 0 };
+    const rawEngines: Record<string, { busy: number }> = entry?.engines ?? {};
+    // Normalize names: strip trailing instance suffix e.g. "Render/3D/0" -> "Render/3D"
+    const engines: Record<string, number> = {};
+    for (const [key, val] of Object.entries(rawEngines)) {
+      const name = key.replace(/\/\d+$/, '');
+      engines[name] = Math.max(engines[name] ?? 0, val.busy ?? 0);
+    }
+    const load = engines['Render/3D'] ?? 0;
+    return { load, memory: 0, engines };
   } catch {
     return { load: 0, memory: 0 };
   }
@@ -111,7 +115,7 @@ export default {
       (c.vendor ?? '').toLowerCase().includes('intel'),
     );
 
-    let intelCardData: { load: number; memory: number }[] = [];
+    let intelCardData: { load: number; memory: number; engines?: Record<string, number> }[] = [];
     if (hasIntel) {
       const intelCards = findIntelArcDrmCards();
       intelCardData = await Promise.all(intelCards.map(getIntelGpuTopLoad));

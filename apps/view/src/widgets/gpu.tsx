@@ -33,6 +33,52 @@ export const GpuChart: FC<GpuChartProps> = ({
 }) => {
   const theme = useTheme();
 
+  const engineNames = useMemo(() => {
+    const engines = load.at(-1)?.layout[index]?.engines;
+    return engines ? Object.keys(engines) : null;
+  }, [load, index]);
+
+  if (engineNames && engineNames.length > 0) {
+    const engineCharts = engineNames.map((name) => {
+      const chartData = load.map((l, i) => ({
+        x: i,
+        y: l.layout[index]?.engines?.[name] ?? 0,
+      })) as ChartVal[];
+      return (
+        <ChartContainer
+          key={name}
+          contentLoaded={chartData.length > 1}
+          textLeft={
+            showPercentages
+              ? `%: ${(chartData.at(-1)?.y as number)?.toFixed(1)} (${name})`
+              : undefined
+          }
+          textOffset={textOffset}
+          textSize={textSize}
+          renderChart={(size) => (
+            <DefaultAreaChart
+              data={chartData}
+              height={size.height}
+              width={size.width}
+              color={theme.colors.gpuPrimary}
+              renderTooltip={(val) =>
+                `${val.payload?.[0]?.value?.toFixed(1)} %`
+              }
+            >
+              <YAxis hide={true} type="number" domain={[-5, 105]} />
+            </DefaultAreaChart>
+          )}
+        />
+      );
+    });
+
+    return (
+      <MultiChartContainer columns={engineNames.length}>
+        {engineCharts}
+      </MultiChartContainer>
+    );
+  }
+
   const chartDataLoad = load.map((load, i) => ({
     x: i,
     y: load.layout[index].load,

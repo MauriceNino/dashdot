@@ -66,6 +66,7 @@ export type GpuLoad = {
   layout: {
     load: number;
     memory: number;
+    engines?: Record<string, number>;
   }[];
 };
 
