@@ -73,7 +73,7 @@ export const GpuChart: FC<GpuChartProps> = ({
     });
 
     return (
-      <MultiChartContainer columns={engineNames.length}>
+      <MultiChartContainer columns={engineCharts.length}>
         {engineCharts}
       </MultiChartContainer>
     );

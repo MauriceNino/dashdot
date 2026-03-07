@@ -77,7 +77,7 @@ const findIntelArcDrmCards = (): string[] => {
 
 const parseIntelGpuTopJson = (
   stdout: string,
-): { load: number; memory: number } | null => {
+): { load: number; memory: number; engines: Record<string, number> } | null => {
   // intel_gpu_top -J outputs an unclosed JSON array; extract the last complete object
   let lastObj: any = null;
   let depth = 0;
@@ -99,10 +99,17 @@ const parseIntelGpuTopJson = (
     }
   }
   if (!lastObj?.engines) return null;
-  const busyValues = Object.values(lastObj.engines as Record<string, any>)
-    .map((e: any) => (typeof e.busy === 'number' ? e.busy : 0));
+  const engines: Record<string, number> = {};
+  const busyValues: number[] = [];
+  for (const [name, val] of Object.entries(
+    lastObj.engines as Record<string, any>,
+  )) {
+    const busy = typeof val.busy === 'number' ? val.busy : 0;
+    engines[name] = busy;
+    busyValues.push(busy);
+  }
   if (busyValues.length === 0) return null;
-  return { load: Math.max(...busyValues), memory: 0 };
+  return { load: Math.max(...busyValues), memory: 0, engines };
 };
 
 const getIntelGpuTopLoad = async (
