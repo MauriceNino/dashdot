@@ -53,8 +53,9 @@ const isInFilter = (
 
 const findIntelArcDrmCards = (): string[] => {
   try {
-    return readdirSync('/dev/dri')
-      .filter((e) => /^card\d+$/.test(e))
+    const cards = readdirSync('/dev/dri').filter((e) => /^card\d+$/.test(e));
+    console.log('[GPU] DRI cards found:', cards);
+    return cards
       .filter((e) => {
         try {
           const { rdev } = statSync(`/dev/dri/${e}`);
@@ -68,14 +69,17 @@ const findIntelArcDrmCards = (): string[] => {
           const vendor = readFileSync(`${devicePath}/vendor`, 'utf8').trim();
           // 0x030200 = PCI 3D controller (discrete GPU); iGPUs are 0x030000 (VGA)
           const pciClass = readFileSync(`${devicePath}/class`, 'utf8').trim();
+          console.log(`[GPU] ${e}: vendor=${vendor}, class=${pciClass}`);
           return vendor === '0x8086' && pciClass === '0x030200';
-        } catch {
+        } catch (err) {
+          console.warn(`[GPU] Failed to inspect /dev/dri/${e}:`, err);
           return false;
         }
       })
       .sort()
       .map((e) => `/dev/dri/${e}`);
-  } catch {
+  } catch (err) {
+    console.warn('[GPU] Failed to read /dev/dri:', err);
     return [];
   }
 };
@@ -99,7 +103,8 @@ const getIntelGpuTopLoad = async (
     }
     const load = engines['Render/3D'] ?? 0;
     return { load, memory: 0, engines };
-  } catch {
+  } catch (err) {
+    console.warn(`[GPU] intel_gpu_top failed for ${device}:`, err);
     return { load: 0, memory: 0 };
   }
 };
