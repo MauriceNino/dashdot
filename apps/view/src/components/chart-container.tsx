@@ -1,6 +1,6 @@
 import type { Transient } from '@dashdot/common';
 import { motion } from 'framer-motion';
-import { forwardRef, type ReactElement } from 'react';
+import React, { forwardRef, type ReactElement } from 'react';
 import { BeatLoader } from 'react-spinners';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
@@ -77,6 +77,7 @@ type ChartContainerProps = {
   textRight?: string;
   textOffset?: string;
   textSize?: string;
+  style?: React.CSSProperties;
   renderChart: (size: { width: number; height: number }) => ReactElement;
 };
 
@@ -89,6 +90,7 @@ export const ChartContainer = motion(
         ref={ref}
         $edges={props.edges ?? [true, true, true, true]}
         $loading={!props.contentLoaded}
+        style={props.style}
       >
         {props.contentLoaded ? (
           <>
@@ -129,6 +131,8 @@ export const ChartContainer = motion(
 
 type MultiChartContainerProps = {
   columns?: number;
+  rows?: number;
+  gridTemplateColumns?: string;
   gap?: number;
   children: ReactElement | ReactElement[];
 };
@@ -143,7 +147,9 @@ export const SMultiChartContainer = styled.div<
 
   > div {
     display: grid;
-    grid-template-columns: repeat(${({ columns }) => columns ?? 1}, 1fr);
+    grid-template-columns: ${({ gridTemplateColumns, columns }) =>
+      gridTemplateColumns ?? `repeat(${columns ?? 1}, 1fr)`};
+    grid-template-rows: ${({ rows }) => (rows ? `repeat(${rows}, 1fr)` : 'auto')};
     grid-auto-flow: row;
     gap: ${({ gap }) => gap ?? 20}px;
     justify-items: stretch;

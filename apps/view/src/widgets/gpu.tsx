@@ -39,7 +39,16 @@ export const GpuChart: FC<GpuChartProps> = ({
   }, [load, index]);
 
   if (engineNames && engineNames.length > 0) {
-    const engineCharts = engineNames.map((name) => {
+    const useFeaturedLayout = engineNames.length === 5;
+    const featuredName = useFeaturedLayout
+      ? (engineNames.includes('Video') ? 'Video' : engineNames[0])
+      : null;
+    const sortedNames = featuredName
+      ? [featuredName, ...engineNames.filter((n) => n !== featuredName)]
+      : engineNames;
+
+    const engineCharts = sortedNames.map((name, idx) => {
+      const isFeatured = useFeaturedLayout && idx === 0;
       const chartData = load.map((l, i) => ({
         x: i,
         y: l.layout[index]?.engines?.[name] ?? 0,
@@ -51,10 +60,11 @@ export const GpuChart: FC<GpuChartProps> = ({
           textLeft={
             showPercentages
               ? `%: ${(chartData.at(-1)?.y as number)?.toFixed(1)} (${name})`
-              : undefined
+              : name
           }
           textOffset={textOffset}
-          textSize={textSize}
+          textSize={isFeatured ? textSize : '0.8em'}
+          style={isFeatured ? { gridRow: 'span 2' } : undefined}
           renderChart={(size) => (
             <DefaultAreaChart
               data={chartData}
@@ -71,6 +81,17 @@ export const GpuChart: FC<GpuChartProps> = ({
         />
       );
     });
+
+    if (useFeaturedLayout) {
+      return (
+        <MultiChartContainer
+          gridTemplateColumns="2fr 1fr 1fr"
+          rows={2}
+        >
+          {engineCharts}
+        </MultiChartContainer>
+      );
+    }
 
     return (
       <MultiChartContainer columns={engineCharts.length}>
