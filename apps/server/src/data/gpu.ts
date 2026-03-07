@@ -54,59 +54,82 @@ const isInFilter = (
 const findIntelArcDrmCards = (): string[] => {
   try {
     const cards = readdirSync('/dev/dri').filter((e) => /^card\d+$/.test(e));
-    console.log('[GPU] DRI cards found:', cards);
     return cards
       .filter((e) => {
         try {
           const { rdev } = statSync(`/dev/dri/${e}`);
-          // Extract major/minor (DRM always uses small values, simple shift works)
           const major = (rdev >> 8) & 0xff;
           const minor = rdev & 0xff;
-          // /sys/dev/char/major:minor is a symlink into the sysfs device tree
           const sysPath = realpathSync(`/sys/dev/char/${major}:${minor}`);
-          // sysPath = .../drm/cardN — go up two levels to reach PCI device dir
           const devicePath = path.resolve(sysPath, '../..');
           const vendor = readFileSync(`${devicePath}/vendor`, 'utf8').trim();
-          // 0x030200 = PCI 3D controller (discrete GPU); iGPUs are 0x030000 (VGA)
-          const pciClass = readFileSync(`${devicePath}/class`, 'utf8').trim();
-          console.log(`[GPU] ${e}: vendor=${vendor}, class=${pciClass}`);
-          return vendor === '0x8086' && pciClass === '0x030200';
-        } catch (err) {
-          console.warn(`[GPU] Failed to inspect /dev/dri/${e}:`, err);
+          return vendor === '0x8086';
+        } catch {
           return false;
         }
       })
       .sort()
       .map((e) => `/dev/dri/${e}`);
-  } catch (err) {
-    console.warn('[GPU] Failed to read /dev/dri:', err);
+  } catch {
     return [];
   }
+};
+
+const parseIntelGpuTopCsv = (
+  stdout: string,
+): { load: number; memory: number; engines: Record<string, number> } | null => {
+  const lines = stdout.trim().split('\n').filter((l) => l.trim());
+  if (lines.length < 2) return null;
+  const headers = lines[0].split(',').map((h) => h.trim());
+  // Find the last complete data row (process may be killed mid-write)
+  let values: string[] | null = null;
+  for (let i = lines.length - 1; i >= 1; i--) {
+    const row = lines[i].split(',');
+    if (row.length === headers.length) {
+      values = row;
+      break;
+    }
+  }
+  if (!values) return null;
+  const engines: Record<string, number> = {};
+  for (let i = 0; i < headers.length; i++) {
+    if (headers[i].endsWith(' %')) {
+      const name = headers[i].slice(0, -2).trim();
+      const val = parseFloat(values[i]);
+      engines[name] = isNaN(val) ? 0 : val;
+    }
+  }
+  if (Object.keys(engines).length === 0) return null;
+  const load = engines['RCS'] ?? 0;
+  return { load, memory: 0, engines };
 };
 
 const getIntelGpuTopLoad = async (
   device: string,
 ): Promise<{ load: number; memory: number; engines?: Record<string, number> }> => {
+  let stdout = '';
   try {
-    const { stdout } = await exec(
-      `intel_gpu_top -J -s 100 -c 1 -d drm:${device}`,
+    const result = await exec(
+      `intel_gpu_top -s 500 -d drm:${device}`,
       { timeout: 3000 },
     );
-    const parsed = JSON.parse(stdout.trim());
-    const entry = Array.isArray(parsed) ? parsed[0] : parsed;
-    const rawEngines: Record<string, { busy: number }> = entry?.engines ?? {};
-    // Normalize names: strip trailing instance suffix e.g. "Render/3D/0" -> "Render/3D"
-    const engines: Record<string, number> = {};
-    for (const [key, val] of Object.entries(rawEngines)) {
-      const name = key.replace(/\/\d+$/, '');
-      engines[name] = Math.max(engines[name] ?? 0, val.busy ?? 0);
+    stdout = result.stdout;
+  } catch (err: any) {
+    // Process killed by timeout (SIGTERM) — stdout may still have usable data
+    if (err?.stdout) {
+      stdout = err.stdout as string;
+    } else {
+      console.warn(`[GPU] intel_gpu_top failed for ${device}:`, err);
+      return { load: 0, memory: 0 };
     }
-    const load = engines['Render/3D'] ?? 0;
-    return { load, memory: 0, engines };
-  } catch (err) {
-    console.warn(`[GPU] intel_gpu_top failed for ${device}:`, err);
-    return { load: 0, memory: 0 };
   }
+
+  if (!stdout.trim()) return { load: 0, memory: 0 };
+
+  const result = parseIntelGpuTopCsv(stdout);
+  if (result) return result;
+  console.warn(`[GPU] intel_gpu_top: could not parse output for ${device}`);
+  return { load: 0, memory: 0 };
 };
 
 export default {
@@ -120,7 +143,7 @@ export default {
       (c.vendor ?? '').toLowerCase().includes('intel'),
     );
 
-    let intelCardData: { load: number; memory: number; engines?: Record<string, number> }[] = [];
+    let intelCardData: Awaited<ReturnType<typeof getIntelGpuTopLoad>>[] = [];
     if (hasIntel) {
       const intelCards = findIntelArcDrmCards();
       intelCardData = await Promise.all(intelCards.map(getIntelGpuTopLoad));
