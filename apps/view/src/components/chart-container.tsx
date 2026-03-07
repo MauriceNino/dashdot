@@ -1,6 +1,6 @@
 import type { Transient } from '@dashdot/common';
 import { motion } from 'framer-motion';
-import React, { forwardRef, type ReactElement } from 'react';
+import { type CSSProperties, forwardRef, type ReactElement } from 'react';
 import { BeatLoader } from 'react-spinners';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile } from '../services/mobile';
@@ -77,7 +77,7 @@ type ChartContainerProps = {
   textRight?: string;
   textOffset?: string;
   textSize?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   renderChart: (size: { width: number; height: number }) => ReactElement;
 };
 

@@ -58,7 +58,7 @@ const findIntelArcDrmCards = (): string[] => {
       .filter((e) => {
         try {
           const { rdev } = statSync(`/dev/dri/${e}`);
-          const major = (rdev >> 8) & 0xff;
+          const major = (rdev >> 8) & 0xfff;
           const minor = rdev & 0xff;
           const sysPath = realpathSync(`/sys/dev/char/${major}:${minor}`);
           const devicePath = path.resolve(sysPath, '../..');
@@ -157,6 +157,8 @@ export default {
       intelCardData = await Promise.all(intelCards.map(getIntelGpuTopLoad));
     }
 
+    // intelCardData is sorted by /dev/dri/cardN; controllers by PCI order.
+    // These agree for a single Arc GPU but could mismatch with multiple.
     let intelIdx = 0;
     return {
       layout: controllers.map((controller) => {

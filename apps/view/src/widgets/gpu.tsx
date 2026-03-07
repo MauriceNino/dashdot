@@ -39,16 +39,16 @@ export const GpuChart: FC<GpuChartProps> = ({
   }, [load, index]);
 
   if (engineNames && engineNames.length > 0) {
-    const useFeaturedLayout = engineNames.length === 5;
-    const featuredName = useFeaturedLayout
-      ? (engineNames.includes('Video') ? 'Video' : engineNames[0])
-      : null;
-    const sortedNames = featuredName
+    const isFeaturedLayout = engineNames.length === 5;
+    const featuredName = engineNames.includes('Video')
+      ? 'Video'
+      : engineNames[0];
+    const sortedNames = isFeaturedLayout
       ? [featuredName, ...engineNames.filter((n) => n !== featuredName)]
       : engineNames;
 
     const engineCharts = sortedNames.map((name, idx) => {
-      const isFeatured = useFeaturedLayout && idx === 0;
+      const isFeatured = isFeaturedLayout && idx === 0;
       const chartData = load.map((l, i) => ({
         x: i,
         y: l.layout[index]?.engines?.[name] ?? 0,
@@ -82,7 +82,14 @@ export const GpuChart: FC<GpuChartProps> = ({
       );
     });
 
-    if (useFeaturedLayout) {
+    if (filter) {
+      const featuredChart = engineCharts[sortedNames.indexOf(featuredName)];
+      return (
+        <MultiChartContainer columns={1}>{featuredChart}</MultiChartContainer>
+      );
+    }
+
+    if (isFeaturedLayout) {
       return (
         <MultiChartContainer
           gridTemplateColumns="2fr 1fr 1fr"
