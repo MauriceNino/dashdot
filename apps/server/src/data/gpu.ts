@@ -1,12 +1,10 @@
-import { exec as execCb } from 'node:child_process';
+import { spawn } from 'node:child_process';
+import type { ChildProcess } from 'node:child_process';
 import { readdirSync, readFileSync, realpathSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { promisify } from 'node:util';
 import type { GpuInfo, GpuLoad } from '@dashdot/common';
 import * as si from 'systeminformation';
 import { CONFIG } from '../config';
-
-const exec = promisify(execCb);
 
 const normalizeGpuBrand = (brand: string) => {
   return brand ? brand.replace(/(corporation)/gi, '').trim() : undefined;
@@ -75,34 +73,27 @@ const findIntelArcDrmCards = (): string[] => {
   }
 };
 
-const parseIntelGpuTopJson = (
-  stdout: string,
-): { load: number; memory: number; engines: Record<string, number> } | null => {
-  // intel_gpu_top -J outputs an unclosed JSON array; extract the last complete object
-  let lastObj: any = null;
-  let depth = 0;
-  let start = -1;
-  for (let i = 0; i < stdout.length; i++) {
-    if (stdout[i] === '{') {
-      if (depth === 0) start = i;
-      depth++;
-    } else if (stdout[i] === '}') {
-      depth--;
-      if (depth === 0 && start !== -1) {
-        try {
-          lastObj = JSON.parse(stdout.slice(start, i + 1));
-        } catch {
-          // incomplete object, keep looking
-        }
-        start = -1;
-      }
-    }
-  }
-  if (!lastObj?.engines) return null;
+type IntelGpuResult = {
+  load: number;
+  memory: number;
+  engines: Record<string, number>;
+};
+
+type IntelArcState = {
+  process: ChildProcess | null;
+  latestResult: IntelGpuResult | null;
+  buffer: string;
+  restarting: boolean;
+};
+
+const intelArcStates = new Map<string, IntelArcState>();
+
+const extractResultFromObj = (obj: any): IntelGpuResult | null => {
+  if (!obj?.engines) return null;
   const engines: Record<string, number> = {};
   const busyValues: number[] = [];
   for (const [name, val] of Object.entries(
-    lastObj.engines as Record<string, any>,
+    obj.engines as Record<string, any>,
   )) {
     const busy = typeof val.busy === 'number' ? val.busy : 0;
     engines[name] = busy;
@@ -112,32 +103,112 @@ const parseIntelGpuTopJson = (
   return { load: Math.max(...busyValues), memory: 0, engines };
 };
 
-const getIntelGpuTopLoad = async (
-  device: string,
-): Promise<{ load: number; memory: number; engines?: Record<string, number> }> => {
-  let stdout = '';
-  try {
-    const result = await exec(
-      `intel_gpu_top -J -s 500 -d drm:${device} -o -`,
-      { timeout: 3000 },
-    );
-    stdout = result.stdout;
-  } catch (err: any) {
-    // Process killed by timeout (SIGTERM) — stdout may still have usable data
-    if (err?.stdout) {
-      stdout = err.stdout as string;
-    } else {
-      console.warn(`[GPU] intel_gpu_top failed for ${device}:`, err);
-      return { load: 0, memory: 0 };
+const processBuffer = (state: IntelArcState): void => {
+  let searchFrom = 0;
+  while (true) {
+    let depth = 0;
+    let start = -1;
+    let foundEnd = -1;
+    for (let i = searchFrom; i < state.buffer.length; i++) {
+      if (state.buffer[i] === '{') {
+        if (depth === 0) start = i;
+        depth++;
+      } else if (state.buffer[i] === '}') {
+        depth--;
+        if (depth === 0 && start !== -1) {
+          foundEnd = i;
+          break;
+        }
+      }
     }
+    if (foundEnd === -1) break;
+
+    try {
+      const obj = JSON.parse(state.buffer.slice(start, foundEnd + 1));
+      const result = extractResultFromObj(obj);
+      if (result) state.latestResult = result;
+    } catch {
+      // malformed object, skip
+    }
+
+    searchFrom = foundEnd + 1;
   }
 
-  if (!stdout.trim()) return { load: 0, memory: 0 };
+  // Keep only unprocessed data; guard against unbounded growth
+  state.buffer = state.buffer.slice(searchFrom);
+  if (state.buffer.length > 50_000) {
+    state.buffer = '';
+  }
+};
 
-  const result = parseIntelGpuTopJson(stdout);
-  if (result) return result;
-  console.warn(`[GPU] intel_gpu_top: could not parse output for ${device}`);
-  return { load: 0, memory: 0 };
+const startIntelGpuTopProcess = (device: string): void => {
+  const state = intelArcStates.get(device);
+  if (!state || state.restarting) return;
+
+  const proc = spawn(
+    'intel_gpu_top',
+    ['-J', '-s', '500', '-d', `drm:${device}`, '-o', '-'],
+    { stdio: ['ignore', 'pipe', 'pipe'] },
+  );
+
+  state.process = proc;
+  state.buffer = '';
+
+  proc.stdout!.on('data', (chunk: Buffer) => {
+    state.buffer += chunk.toString();
+    processBuffer(state);
+  });
+
+  proc.on('error', (err) => {
+    console.warn(`[GPU] intel_gpu_top process error for ${device}:`, err);
+  });
+
+  proc.on('exit', (code, signal) => {
+    state.process = null;
+    // Intentional kill (e.g. SIGTERM on server shutdown) — do not restart
+    if (signal === 'SIGTERM' || signal === 'SIGKILL') return;
+    console.warn(
+      `[GPU] intel_gpu_top exited for ${device} (code ${code}), restarting in 5s`,
+    );
+    state.restarting = true;
+    setTimeout(() => {
+      state.restarting = false;
+      startIntelGpuTopProcess(device);
+    }, 5000);
+  });
+};
+
+// Cache Intel Arc cards since hardware doesn't change at runtime
+let cachedIntelCards: string[] | null = null;
+
+const getIntelArcCards = (): string[] => {
+  if (cachedIntelCards !== null) return cachedIntelCards;
+
+  cachedIntelCards = findIntelArcDrmCards();
+  for (const device of cachedIntelCards) {
+    intelArcStates.set(device, {
+      process: null,
+      latestResult: null,
+      buffer: '',
+      restarting: false,
+    });
+    startIntelGpuTopProcess(device);
+  }
+
+  // Clean up child processes on server exit
+  process.once('exit', () => {
+    for (const state of intelArcStates.values()) {
+      state.process?.kill('SIGTERM');
+    }
+  });
+
+  return cachedIntelCards;
+};
+
+const getIntelGpuTopLoad = (
+  device: string,
+): { load: number; memory: number; engines?: Record<string, number> } => {
+  return intelArcStates.get(device)?.latestResult ?? { load: 0, memory: 0 };
 };
 
 export default {
@@ -151,19 +222,13 @@ export default {
       (c.vendor ?? '').toLowerCase().includes('intel'),
     );
 
-    let intelCardData: Awaited<ReturnType<typeof getIntelGpuTopLoad>>[] = [];
-    if (hasIntel) {
-      const intelCards = findIntelArcDrmCards();
-      intelCardData = await Promise.all(intelCards.map(getIntelGpuTopLoad));
-    }
+    const intelCards = hasIntel ? getIntelArcCards() : [];
 
-    // intelCardData is sorted by /dev/dri/cardN; controllers by PCI order.
-    // These agree for a single Arc GPU but could mismatch with multiple.
     let intelIdx = 0;
     return {
       layout: controllers.map((controller) => {
         if ((controller.vendor ?? '').toLowerCase().includes('intel')) {
-          return intelCardData[intelIdx++] ?? { load: 0, memory: 0 };
+          return getIntelGpuTopLoad(intelCards[intelIdx++] ?? '');
         }
         return {
           load: controller.utilizationGpu ?? 0,
