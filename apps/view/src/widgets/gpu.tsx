@@ -40,6 +40,7 @@ export const GpuChart: FC<GpuChartProps> = ({
 
   if (engineNames && engineNames.length > 0) {
     const isFeaturedLayout = engineNames.length === 5;
+    const isGridLayout = engineNames.length === 4;
     const featuredName = engineNames.includes('Video')
       ? 'Video'
       : engineNames[0];
@@ -95,6 +96,14 @@ export const GpuChart: FC<GpuChartProps> = ({
           gridTemplateColumns="2fr 1fr 1fr"
           rows={2}
         >
+          {engineCharts}
+        </MultiChartContainer>
+      );
+    }
+
+    if (isGridLayout) {
+      return (
+        <MultiChartContainer gridTemplateColumns="1fr 1fr" rows={2}>
           {engineCharts}
         </MultiChartContainer>
       );
