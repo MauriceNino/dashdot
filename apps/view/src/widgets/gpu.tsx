@@ -14,6 +14,19 @@ import { bytePrettyPrint } from '../utils/calculations';
 import { toInfoTable } from '../utils/format';
 import type { ChartVal } from '../utils/types';
 
+type EngineGridLayout = {
+  columns?: number;
+  rows?: number;
+  gridTemplateColumns?: string;
+};
+
+const ENGINE_GRID_LAYOUTS: Record<number, EngineGridLayout> = {
+  2: { columns: 2 },
+  3: { columns: 3 },
+  4: { gridTemplateColumns: '1fr 1fr', rows: 2 },
+  5: { gridTemplateColumns: '2fr 1fr 1fr', rows: 2 },
+};
+
 type GpuChartProps = {
   load: GpuLoad[];
   index: number;
@@ -50,13 +63,7 @@ export const GpuChart: FC<GpuChartProps> = ({
       ? [featuredName, ...engineNames.filter((n) => n !== featuredName)]
       : engineNames;
 
-    const gridProps = (() => {
-      switch (engineNames.length) {
-        case 5: return { gridTemplateColumns: '2fr 1fr 1fr', rows: 2 };
-        case 4: return { gridTemplateColumns: '1fr 1fr', rows: 2 };
-        default: return { columns: engineNames.length };
-      }
-    })();
+    const gridProps = ENGINE_GRID_LAYOUTS[engineNames.length] ?? { columns: engineNames.length };
 
     const engineCharts = sortedNames.map((name, idx) => {
       const isFeatured = idx === 0 && featuredName !== null;
