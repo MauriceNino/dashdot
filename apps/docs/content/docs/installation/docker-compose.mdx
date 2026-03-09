@@ -60,16 +60,16 @@ services:
       DASHDOT_WIDGET_LIST: 'os,cpu,storage,ram,network,gpu'
 ```
 
-### Intel Arc
+### Intel GPU
 
-GPU support for Intel Arc is available with another image tag. The `/dev/dri` device must be passed through to the container.
+GPU support for Intel GPUs is available with another image tag. The `/dev/dri` device must be passed through to the container.
 
 ```yaml
 version: '3.5'
 
 services:
   dash:
-    image: mauricenino/dashdot:arc
+    image: mauricenino/dashdot:intel
     restart: unless-stopped
     privileged: true
     devices:

@@ -139,7 +139,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  build_arc:
+  build_intel:
     runs-on: ubuntu-latest
     needs: version
 
@@ -157,7 +157,7 @@ jobs:
           username: mauricenino
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - uses: docker/metadata-action@v5
-        id: meta_arc
+        id: meta_intel
         with:
           flavor: |
             latest=false
@@ -172,23 +172,23 @@ jobs:
             org.opencontainers.image.source=https://github.com/MauriceNino/dashdot
             org.opencontainers.image.licenses=MIT
           tags: |
-            type=semver,pattern={{version}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=arc-
-            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=arc-
-            type=semver,pattern={{major}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=arc-
-            type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=arc-
-            type=raw,value=arc,enable=${{ github.ref_name == 'main' }}
+            type=semver,pattern={{version}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=intel-
+            type=semver,pattern={{major}}.{{minor}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=intel-
+            type=semver,pattern={{major}},value=${{ format('v{0}', needs.version.outputs.package_version) }},enable=${{ github.ref_name == 'main' }},prefix=intel-
+            type=ref,event=branch,enable=${{ github.ref_name != 'main' }},prefix=intel-
+            type=raw,value=intel,enable=${{ github.ref_name == 'main' }}
       - uses: docker/build-push-action@v6
         with:
           context: .
-          file: docker/Dockerfile.arc
+          file: docker/Dockerfile.intel
           platforms: linux/amd64
           target: prod
           push: true
           build-args: |
             VERSION=${{ github.ref_name == 'main' && needs.version.outputs.package_version || format('0.0.0-{0}', github.ref_name) }}
             BUILDHASH=${{ github.sha }}
-          labels: ${{ steps.meta_arc.outputs.labels }}
-          tags: ${{ steps.meta_arc.outputs.tags }}
+          labels: ${{ steps.meta_intel.outputs.labels }}
+          tags: ${{ steps.meta_intel.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -196,7 +196,7 @@ jobs:
   semantic_release:
     if: ${{ github.ref_name == 'main' }}
     runs-on: ubuntu-latest
-    needs: [build, build_nvidia, build_arc]
+    needs: [build, build_nvidia, build_intel]
 
     steps:
       - uses: actions/checkout@v6
@@ -220,7 +220,7 @@ jobs:
   update_docs:
     if: ${{ github.ref_name == 'main' }}
     runs-on: ubuntu-latest
-    needs: [build, build_nvidia, build_arc]
+    needs: [build, build_nvidia, build_intel]
 
     steps:
       - uses: actions/checkout@v6
