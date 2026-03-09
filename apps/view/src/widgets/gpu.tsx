@@ -50,12 +50,13 @@ export const GpuChart: FC<GpuChartProps> = ({
       ? [featuredName, ...engineNames.filter((n) => n !== featuredName)]
       : engineNames;
 
-    const gridProps =
-      engineNames.length === 5
-        ? { gridTemplateColumns: '2fr 1fr 1fr', rows: 2 }
-        : engineNames.length === 4
-          ? { gridTemplateColumns: '1fr 1fr', rows: 2 }
-          : { columns: engineNames.length };
+    const gridProps = (() => {
+      switch (engineNames.length) {
+        case 5: return { gridTemplateColumns: '2fr 1fr 1fr', rows: 2 };
+        case 4: return { gridTemplateColumns: '1fr 1fr', rows: 2 };
+        default: return { columns: engineNames.length };
+      }
+    })();
 
     const engineCharts = sortedNames.map((name, idx) => {
       const isFeatured = idx === 0 && featuredName !== null;
