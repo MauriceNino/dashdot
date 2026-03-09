@@ -59,3 +59,25 @@ services:
     environment:
       DASHDOT_WIDGET_LIST: 'os,cpu,storage,ram,network,gpu'
 ```
+
+### Intel GPU
+
+GPU support for Intel GPUs is available with another image tag. The `/dev/dri` device must be passed through to the container.
+
+```yaml
+version: '3.5'
+
+services:
+  dash:
+    image: mauricenino/dashdot:intel
+    restart: unless-stopped
+    privileged: true
+    devices:
+      - /dev/dri:/dev/dri
+    ports:
+      - '80:3001'
+    volumes:
+      - /:/mnt/host:ro
+    environment:
+      DASHDOT_WIDGET_LIST: 'os,cpu,storage,ram,network,gpu'
+```
