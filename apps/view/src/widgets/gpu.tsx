@@ -39,17 +39,26 @@ export const GpuChart: FC<GpuChartProps> = ({
   }, [load, index]);
 
   if (engineNames && engineNames.length > 0) {
-    const isFeaturedLayout = engineNames.length === 5;
-    const isGridLayout = engineNames.length === 4;
-    const featuredName = engineNames.includes('Video')
-      ? 'Video'
-      : engineNames[0];
-    const sortedNames = isFeaturedLayout
+    const featuredName =
+      engineNames.length === 5
+        ? engineNames.includes('Video')
+          ? 'Video'
+          : engineNames[0]
+        : null;
+
+    const sortedNames = featuredName
       ? [featuredName, ...engineNames.filter((n) => n !== featuredName)]
       : engineNames;
 
+    const gridProps =
+      engineNames.length === 5
+        ? { gridTemplateColumns: '2fr 1fr 1fr', rows: 2 }
+        : engineNames.length === 4
+          ? { gridTemplateColumns: '1fr 1fr', rows: 2 }
+          : { columns: engineNames.length };
+
     const engineCharts = sortedNames.map((name, idx) => {
-      const isFeatured = isFeaturedLayout && idx === 0;
+      const isFeatured = idx === 0 && featuredName !== null;
       const chartData = load.map((l, i) => ({
         x: i,
         y: l.layout[index]?.engines?.[name] ?? 0,
@@ -84,35 +93,14 @@ export const GpuChart: FC<GpuChartProps> = ({
     });
 
     if (filter) {
-      const featuredChart = engineCharts[sortedNames.indexOf(featuredName)];
+      const primaryChart = engineCharts[sortedNames.indexOf(featuredName ?? sortedNames[0])];
       return (
-        <MultiChartContainer columns={1}>{featuredChart}</MultiChartContainer>
-      );
-    }
-
-    if (isFeaturedLayout) {
-      return (
-        <MultiChartContainer
-          gridTemplateColumns="2fr 1fr 1fr"
-          rows={2}
-        >
-          {engineCharts}
-        </MultiChartContainer>
-      );
-    }
-
-    if (isGridLayout) {
-      return (
-        <MultiChartContainer gridTemplateColumns="1fr 1fr" rows={2}>
-          {engineCharts}
-        </MultiChartContainer>
+        <MultiChartContainer columns={1}>{primaryChart}</MultiChartContainer>
       );
     }
 
     return (
-      <MultiChartContainer columns={engineCharts.length}>
-        {engineCharts}
-      </MultiChartContainer>
+      <MultiChartContainer {...gridProps}>{engineCharts}</MultiChartContainer>
     );
   }
 
