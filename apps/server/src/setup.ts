@@ -21,10 +21,14 @@ export let NET_INTERFACE_PATH: string | undefined;
 export const NET_INTERFACE_PATHS: string[] = [];
 
 export const parseNetworkInterfaces = (ifaceStr: string): string[] =>
-  ifaceStr
-    .split(/[\n,]/)
-    .map((iface) => iface.trim())
-    .filter((iface) => iface !== '');
+  Array.from(
+    new Set(
+      ifaceStr
+        .split(/[\n,]/)
+        .map((iface) => iface.trim())
+        .filter((iface) => iface !== ''),
+    ),
+  );
 
 const getDefaultIface = async (): Promise<string[]> => {
   if (CONFIG.use_network_interface != null) {

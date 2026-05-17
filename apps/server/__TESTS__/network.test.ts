@@ -18,6 +18,12 @@ describe('Network', () => {
         'wlan0',
       ]);
     });
+
+    it('deduplicates repeated interface names in order', () => {
+      expect(
+        parseNetworkInterfaces('eth0,wlan0,eth0\nbr0,wlan0'),
+      ).to.deep.equal(['eth0', 'wlan0', 'br0']);
+    });
   });
 
   describe('mergeNetworkInterfaceInfo', () => {
