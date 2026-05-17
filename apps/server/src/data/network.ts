@@ -134,12 +134,17 @@ const readNetworkInterfaceInfo = async (
 export const mergeNetworkInterfaceInfo = (
   interfaces: NetworkInterfaceInfo[],
 ): Partial<NetworkInfo> => {
+  const isMultiInterface = interfaces.length > 1;
   const interfaceSpeeds = interfaces
     .map((iface) => iface.interfaceSpeed)
     .filter((speed): speed is number => speed != null);
 
   return {
-    type: interfaces.map((iface) => `${iface.name} (${iface.type})`).join(', '),
+    type: interfaces
+      .map((iface) =>
+        isMultiInterface ? `${iface.name} (${iface.type})` : iface.type,
+      )
+      .join(', '),
     interfaceSpeed:
       interfaceSpeeds.length > 0
         ? interfaceSpeeds.reduce((sum, speed) => sum + speed, 0)

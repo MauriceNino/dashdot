@@ -21,6 +21,17 @@ describe('Network', () => {
   });
 
   describe('mergeNetworkInterfaceInfo', () => {
+    it('keeps the original type label for a single selected interface', () => {
+      expect(
+        mergeNetworkInterfaceInfo([
+          { name: 'eth0', type: 'Wired', interfaceSpeed: 1000 },
+        ]),
+      ).to.deep.equal({
+        type: 'Wired',
+        interfaceSpeed: 1000,
+      });
+    });
+
     it('lists multiple selected interfaces in the type label', () => {
       expect(
         mergeNetworkInterfaceInfo([
