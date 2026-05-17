@@ -27,8 +27,10 @@ When passing this flag, you accept Ooklas: [EULA](https://www.speedtest.net/abou
 ### `DASHDOT_USE_NETWORK_INTERFACE`
 
 If dash. detects the wrong gateway as your default interface, you can provide a name here that is used instead.
+You can also provide multiple interface names as a comma-separated list. When multiple interfaces are set, dash.
+aggregates their live transfer rates in the network widget and shows each selected interface in the type label.
 
-- type: `string`
+- type: `string (comma separated list)`
 - default: `unset`
 
 ### `DASHDOT_SPEED_TEST_FROM_PATH`
