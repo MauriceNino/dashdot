@@ -17,11 +17,15 @@ const NET_PATH = CONFIG.running_in_docker
 const NET_PATH_INTERNAL = '/internal_mnt/host_sys/class/net/';
 
 const NS_NET = '/mnt/host/proc/1/ns/net';
-export let NET_INTERFACE_PATH: string;
+export let NET_INTERFACE_PATHS: string[] = [];
 
-const getDefaultIface = async (): Promise<string | undefined> => {
+const getDefaultIfaces = async (): Promise<string[] | undefined> => {
   if (CONFIG.use_network_interface != null) {
-    return CONFIG.use_network_interface;
+    // Support comma-separated interface names for multi-interface monitoring
+    return CONFIG.use_network_interface
+      .split(',')
+      .map((i) => i.trim())
+      .filter((i) => i !== '');
   }
 
   try {
@@ -46,46 +50,48 @@ const getDefaultIface = async (): Promise<string | undefined> => {
         )}], using "${iface}"`,
       );
     }
-    return iface;
+    return iface ? [iface] : undefined;
   } catch (_e) {
     console.error('Could not get default iface path');
     return undefined;
   }
 };
 
-const setupIfacePath = async (defaultIface: string) => {
-  if (fs.existsSync(`${NET_PATH}${defaultIface}`)) {
-    NET_INTERFACE_PATH = `${NET_PATH}${defaultIface}`;
-    console.log(`Using default network interface "${defaultIface}"`);
-  } else if (CONFIG.running_in_docker) {
-    const mountpoint = `${NET_PATH_INTERNAL}${defaultIface}`;
+const setupIfacePath = async (iface: string): Promise<string | undefined> => {
+  if (fs.existsSync(`${NET_PATH}${iface}`)) {
+    console.log(`Using network interface "${iface}"`);
+    return `${NET_PATH}${iface}`;
+  }
+
+  if (CONFIG.running_in_docker) {
+    const mountpoint = `${NET_PATH_INTERNAL}${iface}`;
     await exec(`mkdir -p /internal_mnt/host_sys/`);
     await exec(
       `mountpoint -q /internal_mnt/host_sys || nsenter --net=${NS_NET} mount -t sysfs nodevice /internal_mnt/host_sys`,
     );
 
     if (fs.existsSync(mountpoint)) {
-      NET_INTERFACE_PATH = mountpoint;
-      console.log(
-        `Using internally mounted network interface "${defaultIface}"`,
-      );
-    } else {
-      console.warn(
-        `Network interface "${defaultIface}" not successfully mounted`,
-      );
+      console.log(`Using internally mounted network interface "${iface}"`);
+      return mountpoint;
     }
-  } else {
-    console.warn(`No path for iface "${defaultIface}" found`);
+    console.warn(`Network interface "${iface}" not successfully mounted`);
+    return undefined;
   }
+
+  console.warn(`No path for iface "${iface}" found`);
+  return undefined;
 };
 
 export const setupNetworking = async () => {
-  const iface = await getDefaultIface();
-  if (iface) {
-    await setupIfacePath(iface);
+  const ifaces = await getDefaultIfaces();
+  if (ifaces && ifaces.length > 0) {
+    const paths = await Promise.all(
+      ifaces.map((iface) => setupIfacePath(iface)),
+    );
+    NET_INTERFACE_PATHS = paths.filter((p): p is string => p !== undefined);
   }
 
-  if (!NET_INTERFACE_PATH) {
+  if (NET_INTERFACE_PATHS.length === 0) {
     console.log('Using default network interface with no modifications');
   }
 };
