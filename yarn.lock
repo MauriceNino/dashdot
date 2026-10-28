@@ -1662,8 +1662,8 @@ __metadata:
     "@types/throttle-debounce": "npm:^5"
     "@vitejs/plugin-react": "npm:^5.1.1"
     antd: "npm:5.29.3"
-    framer-motion: "npm:12.34.3"
     globals: "npm:^17.0.0"
+    motion: "npm:12.34.3"
     parse-domain: "npm:8.2.2"
     punycode: "npm:2.3.1"
     qs: "npm:6.15.2"
@@ -11144,7 +11144,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:12.34.3, framer-motion@npm:^12.34.3":
+"framer-motion@npm:^12.34.3":
   version: 12.34.3
   resolution: "framer-motion@npm:12.34.3"
   dependencies:
@@ -15904,7 +15904,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion@npm:^12.34.3":
+"motion@npm:12.34.3, motion@npm:^12.34.3":
   version: 12.34.3
   resolution: "motion@npm:12.34.3"
   dependencies:
