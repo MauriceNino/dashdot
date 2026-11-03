@@ -16,7 +16,7 @@
     "compression": "1.8.2",
     "cors": "2.8.6",
     "cronstrue": "3.13.0",
-    "dedent": "1.7.1",
+    "dedent": "1.7.2",
     "express": "5.2.1",
     "mime-types": "3.0.2",
     "node-cron": "4.2.1",
