@@ -1630,7 +1630,7 @@ __metadata:
     "@types/node": "npm:25.3.2"
     chai: "npm:6.2.2"
     compression: "npm:1.8.2"
-    concurrently: "npm:9.2.1"
+    concurrently: "npm:9.2.5"
     cors: "npm:2.8.6"
     cronstrue: "npm:3.13.0"
     dedent: "npm:1.7.1"
@@ -9483,20 +9483,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"concurrently@npm:9.2.1":
-  version: 9.2.1
-  resolution: "concurrently@npm:9.2.1"
+"concurrently@npm:9.2.5":
+  version: 9.2.5
+  resolution: "concurrently@npm:9.2.5"
   dependencies:
     chalk: "npm:4.1.2"
     rxjs: "npm:7.8.2"
-    shell-quote: "npm:1.8.3"
+    shell-quote: "npm:1.12.0"
     supports-color: "npm:8.1.1"
     tree-kill: "npm:1.2.2"
     yargs: "npm:17.7.2"
   bin:
     conc: dist/bin/concurrently.js
     concurrently: dist/bin/concurrently.js
-  checksum: 10/2a6b1acbcdbeb478926b80fd81d0b7e075fa16d78a76ceb43f0478b8aeea1c70781379be2f7d6a2528e51fac48ce4ebb686ae2328e4b35e0b1d17234f121c700
+  checksum: 10/f8a0ce235ac781df0e6bfa7d95c747cbbdd7d2e1203882d1b43399a03dfd6820fba363a01a5103e9407523dec5b6fafbf2962cffcac4220e9006cb5e96f4e849
   languageName: node
   linkType: hard
 
@@ -20288,10 +20288,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shell-quote@npm:1.8.3":
-  version: 1.8.3
-  resolution: "shell-quote@npm:1.8.3"
-  checksum: 10/5473e354637c2bd698911224129c9a8961697486cff1fb221f234d71c153fc377674029b0223d1d3c953a68d451d79366abfe53d1a0b46ee1f28eb9ade928f4c
+"shell-quote@npm:1.12.0":
+  version: 1.12.0
+  resolution: "shell-quote@npm:1.12.0"
+  checksum: 10/18b3e382272804e79fd3187c18877cfd4e736b5afb576bf1ab66a561b0a0e26eada4b7c8eb45473d1f17268ffcf12d0aaa90b9235132123eb673df5d0a5df943
   languageName: node
   linkType: hard
 
