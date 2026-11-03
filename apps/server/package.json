@@ -34,7 +34,7 @@
     "@types/node": "25.3.2",
     "chai": "6.2.2",
     "concurrently": "9.2.5",
-    "esbuild": "0.28.1",
+    "esbuild": "0.28.2",
     "jest": "30.2.0",
     "nodemon": "3.1.14",
     "ts-jest": "29.4.6",
