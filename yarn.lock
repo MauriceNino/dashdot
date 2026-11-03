@@ -1564,7 +1564,7 @@ __metadata:
   resolution: "@dashdot/cli@workspace:apps/cli"
   dependencies:
     "@dashdot/typescript-config": "npm:*"
-    dedent: "npm:1.7.1"
+    dedent: "npm:1.7.2"
     esbuild: "npm:0.28.1"
     systeminformation: "npm:5.31.7"
     yargs: "npm:17.7.2"
@@ -1593,7 +1593,7 @@ __metadata:
     "@types/react-dom": "npm:^19.2.3"
     class-variance-authority: "npm:0.7.1"
     clsx: "npm:2.1.1"
-    dedent: "npm:1.7.1"
+    dedent: "npm:1.7.2"
     fumadocs-core: "npm:16.6.7"
     fumadocs-mdx: "npm:14.2.8"
     fumadocs-ui: "npm:16.6.7"
@@ -1633,7 +1633,7 @@ __metadata:
     concurrently: "npm:9.2.5"
     cors: "npm:2.8.6"
     cronstrue: "npm:3.13.0"
-    dedent: "npm:1.7.1"
+    dedent: "npm:1.7.2"
     esbuild: "npm:0.28.1"
     express: "npm:5.2.1"
     jest: "npm:30.2.0"
@@ -10160,7 +10160,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dedent@npm:1.7.1, dedent@npm:^1.6.0":
+"dedent@npm:1.7.2":
+  version: 1.7.2
+  resolution: "dedent@npm:1.7.2"
+  peerDependencies:
+    babel-plugin-macros: ^3.1.0
+  peerDependenciesMeta:
+    babel-plugin-macros:
+      optional: true
+  checksum: 10/30b9062290dca72b0f5a6cd3667633448cef8cd0dec602eab61015741269ad49df90cabf0521f9a32d134ceab4e21aa7f097258c55cc3baadef94874686d6480
+  languageName: node
+  linkType: hard
+
+"dedent@npm:^1.6.0":
   version: 1.7.1
   resolution: "dedent@npm:1.7.1"
   peerDependencies:
