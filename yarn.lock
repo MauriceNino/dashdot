@@ -1628,7 +1628,7 @@ __metadata:
     "@types/jest": "npm:30.0.0"
     "@types/mime-types": "npm:^3"
     "@types/node": "npm:25.3.2"
-    chai: "npm:6.2.2"
+    chai: "npm:6.3.0"
     compression: "npm:1.8.2"
     concurrently: "npm:9.2.5"
     cors: "npm:2.8.6"
@@ -8627,10 +8627,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:6.2.2":
-  version: 6.2.2
-  resolution: "chai@npm:6.2.2"
-  checksum: 10/13cda42cc40aa46da04a41cf7e5c61df6b6ae0b4e8a8c8b40e04d6947e4d7951377ea8c14f9fa7fe5aaa9e8bd9ba414f11288dc958d4cee6f5221b9436f2778f
+"chai@npm:6.3.0":
+  version: 6.3.0
+  resolution: "chai@npm:6.3.0"
+  checksum: 10/8798b98c6df6ad8d880239e8d6a2de8a1472c4dd19430e712bd1d846433679be8217427a2ceb9344af2db108a99030a6eaee689aa19baed7f917fa90354a50fa
   languageName: node
   linkType: hard
 
