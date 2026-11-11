@@ -1566,7 +1566,7 @@ __metadata:
     "@dashdot/typescript-config": "npm:*"
     dedent: "npm:1.7.2"
     esbuild: "npm:0.28.2"
-    systeminformation: "npm:5.31.7"
+    systeminformation: "npm:5.33.16"
     yargs: "npm:17.7.3"
   languageName: unknown
   linkType: soft
@@ -1642,7 +1642,7 @@ __metadata:
     nodemon: "npm:3.1.14"
     rxjs: "npm:7.8.2"
     socket.io: "npm:4.8.4"
-    systeminformation: "npm:5.31.7"
+    systeminformation: "npm:5.33.16"
     ts-jest: "npm:29.4.15"
     ts-node: "npm:10.9.2"
     typescript: "npm:5.9.3"
@@ -20887,12 +20887,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:5.31.7":
-  version: 5.31.7
-  resolution: "systeminformation@npm:5.31.7"
+"systeminformation@npm:5.33.16":
+  version: 5.33.16
+  resolution: "systeminformation@npm:5.33.16"
   bin:
     systeminformation: lib/cli.js
-  checksum: 10/087924ee90d54c0175af0b5b88a0586d84b9aadfd19c23de8ae4a80dac14e2b414432d57721518a366bfd115092c32d71a170fc0aee49dd7ee74ba8b88d29904
+  checksum: 10/f2c41bebab5e864e781f0f30ab5fc48ddc65e6781da60d2027a2bba33adf16ebcecf450d8d62aa6a831afc4203a545eabece45eeea86c96b80fcc5125577ac14
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
