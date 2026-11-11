@@ -9,7 +9,7 @@
     "@dashdot/typescript-config": "*",
     "dedent": "1.7.2",
     "systeminformation": "5.31.7",
-    "yargs": "17.7.3"
+    "yargs": "18.2.0"
   },
   "devDependencies": {
     "esbuild": "0.28.2"
