@@ -5,7 +5,7 @@ import { capFirst, type NetworkInfo, type NetworkLoad } from '@dashdot/common';
 import dedent from 'dedent';
 import * as si from 'systeminformation';
 import { CONFIG } from '../config';
-import { NET_INTERFACE_PATH } from '../setup';
+import { NET_INTERFACE_PATHS } from '../setup';
 import { PLATFORM_IS_WINDOWS } from '../utils';
 
 const exec = promisify(cexec);
@@ -23,14 +23,50 @@ const commandExists = async (command: string): Promise<boolean> => {
 
 let [lastRx, lastTx, lastTs] = [0, 0, 0];
 
+/**
+ * Parse the raw stdout from concatenated `cat rx_bytes; cat tx_bytes;` calls
+ * across one or more network interfaces, summing the total rx and tx bytes.
+ *
+ * For a single interface the output looks like:
+ *   "12345\n67890\n"
+ * For two interfaces:
+ *   "12345\n67890\n11111\n22222\n"
+ *
+ * Values alternate: rx0, tx0, rx1, tx1, ...
+ */
+export const aggregateInterfaceStats = (
+  stdout: string,
+): {
+  rx: number;
+  tx: number;
+} => {
+  const values = stdout
+    .split('\n')
+    .filter((v) => v !== '')
+    .map(Number);
+
+  let rx = 0;
+  let tx = 0;
+  for (let i = 0; i < values.length; i += 2) {
+    rx += values[i] || 0;
+    tx += values[i + 1] || 0;
+  }
+  return { rx, tx };
+};
+
 export default {
   dynamic: async (): Promise<NetworkLoad> => {
-    if (NET_INTERFACE_PATH) {
-      const { stdout } = await exec(
-        `cat ${NET_INTERFACE_PATH}/statistics/rx_bytes;` +
-          `cat ${NET_INTERFACE_PATH}/statistics/tx_bytes;`,
-      );
-      const [rx, tx] = stdout.split('\n').map(Number);
+    if (NET_INTERFACE_PATHS.length > 0) {
+      // Read rx_bytes and tx_bytes from all monitored interfaces,
+      // then sum them for combined throughput.
+      const commands = NET_INTERFACE_PATHS.map(
+        (p) =>
+          `cat ${p}/statistics/rx_bytes;` + `cat ${p}/statistics/tx_bytes;`,
+      ).join('');
+      const { stdout } = await exec(commands);
+
+      const { rx, tx } = aggregateInterfaceStats(stdout);
+
       const thisTs = performance.now();
       const dividend = (thisTs - lastTs) / 1000;
 
@@ -68,11 +104,13 @@ export default {
     }
   },
   static: async (): Promise<Partial<NetworkInfo>> => {
-    if (NET_INTERFACE_PATH) {
-      const isWireless = fs.existsSync(`${NET_INTERFACE_PATH}/wireless`);
-      const isBridge = fs.existsSync(`${NET_INTERFACE_PATH}/bridge`);
-      const isBond = fs.existsSync(`${NET_INTERFACE_PATH}/bonding`);
-      const isTap = fs.existsSync(`${NET_INTERFACE_PATH}/tun_flags`);
+    if (NET_INTERFACE_PATHS.length > 0) {
+      // Use the primary (first) interface for type and speed detection
+      const primaryPath = NET_INTERFACE_PATHS[0];
+      const isWireless = fs.existsSync(`${primaryPath}/wireless`);
+      const isBridge = fs.existsSync(`${primaryPath}/bridge`);
+      const isBond = fs.existsSync(`${primaryPath}/bonding`);
+      const isTap = fs.existsSync(`${primaryPath}/tun_flags`);
 
       const net: Partial<NetworkInfo> = {
         type: isWireless
@@ -89,7 +127,7 @@ export default {
       // Wireless networks have no fixed Interface speed
       if (!isWireless) {
         try {
-          const { stdout } = await exec(`cat ${NET_INTERFACE_PATH}/speed`);
+          const { stdout } = await exec(`cat ${primaryPath}/speed`);
           const numValue = Number(stdout.trim());
 
           net.interfaceSpeed =
